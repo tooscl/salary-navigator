@@ -1,7 +1,7 @@
 {
   "reviewer": "gpt-6.1-terra",
   "scope": "Замороженная выдача spb_picker_20261029_all; часть _02 содержит последние 196 из 496 ID.",
-  "conclusion": "По сохранённому наблюдению интерфейса на странице 30 при выбранном фильтре Комплектовщик и географии Санкт-Петербург активного перехода далее не обнаружено. Это экспертный вывод о границе доступной интерфейсной выдачи на момент наблюдения.",
+  "conclusion": "При дополнительном наблюдении точного URL сохранённой страницы 30 интерфейс показывал текущую страницу 30 и отключённый переход далее при фильтре Комплектовщик и географии Санкт-Петербург. Это экспертный вывод о границе доступной интерфейсной выдачи на момент дополнительного наблюдения.",
   "limitations": "Вывод не подтверждает полноту всех объявлений сайта или отсутствие серверного ограничения. Счётчик сайта не равен числу доступных ID. Скриншот сохраняется только локально и не заменяет DOM-наблюдение пагинации; extractor end_confirmed остаётся false.",
   "evidence": {
     "observed_at_utc": "2026-10-28T23:10:43.687499+00:00",
@@ -19,6 +19,14 @@
     "published_page30_sha256": "892d4a789dd24609a5665379e95cfd1fcf2f2db02ffbff6391dc4d0b130dbb01",
     "parent_plan_sha256": "0d22a52c098375375e67f35ed3347e5cd4769d88ad3cbe409d200e1937247d34",
     "parent_queue_sha256": "206572fbaa16e499e5adcf3e6e1d052fe652943cdba946243442636a60548461",
-    "child_plan_sha256": "e4d8344b235c5c87f9902c1ca8c81c0465922ca0587e98d329d58bffed6897b0"
-  }
+    "child_plan_sha256": "e4d8344b235c5c87f9902c1ca8c81c0465922ca0587e98d329d58bffed6897b0",
+    "verified_at_utc": "2026-10-28T23:39:22.950Z",
+    "verified_url": "https://www.avito.ru/sankt-peterburg/vakansii/komplektovshhik-ASgBAgICAUTUzBG264YD?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6IkZZS0JHeXJBelF4RXR3eFIiO31NEAM1JgAAAA&p=30",
+    "current_page_aria_current": "page",
+    "next_aria_disabled": "true",
+    "v2_dom_sha256": "f92852d909ea31dac612dae7bd5b16c9ce5800b26f987588661a9f2a2f4b27ea",
+    "v2_snapshot_sha256": "097664a3f834f61036e227158a2ec5f03016bccbe3f9eb28f81fe560648f2c9b",
+    "v2_pagination_screenshot_sha256": "592c6fa046b25a8640c2360d266f0de0544e2ed5cbfa6d55beb9db4a159025a6"
+  },
+  "correction": "Дополнительное наблюдение, описанное в review части _01, использовало URL с опечаткой в slug. Оно не является доказательством точного URL замороженной страницы. Новое наблюдение ниже выполнено по source_url сохранённой страницы 0030; исходный review _01 неизменён."
 }
