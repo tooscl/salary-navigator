@@ -8,7 +8,7 @@
     "source": "title",
     "policy": "keyword_signal_not_exclusion"
   },
-  "rows": 4796,
+  "rows": 4848,
   "columns": [
     "source",
     "id",
@@ -126,7 +126,7 @@
     "enriched_fields",
     "enrichment_version"
   ],
-  "sha256": "d66dab14bde67470f8e370e097762fb1727089e203685646b9635a0431698d2e",
+  "sha256": "49eded52a7b7d7b973858cd5b4d70bbcb106b26de7ea22e60e942c257173eec2",
   "inputs": [
     {
       "run_id": "20261028-spb-50-all",
@@ -485,6 +485,34 @@
         }
       },
       "rows": 300
+    },
+    {
+      "run_id": "ekb_loader_20261029_batch_02",
+      "source": "avito",
+      "path": "Data/avito_runs/ekb_loader_20261029_batch_02/exports/vacancies_flat.csv",
+      "sha256": "1bd3cc7127854c8840ed9d8e0f3947898a9c0a35e5cfc40d96cfb48eb77c109c",
+      "placement_regions": {
+        "Екатеринбург": "Свердловская область"
+      },
+      "enrichment_status": "not_run",
+      "unknown_city_placements": {
+        "8450658382": {
+          "region": "Свердловская область",
+          "evidence": "Свердловская обл., Екатеринбург, пр. Горнистов, 16 р-н Октябрьский",
+          "region_unknown": false
+        },
+        "8172454324": {
+          "region": "Свердловская область",
+          "evidence": "Свердловская обл., муниципальное образование Екатеринбург, Чкаловский район Ботаническая 21–30 мин. Чкаловская от 31 мин.",
+          "region_unknown": false
+        },
+        "8391343256": {
+          "region": "Свердловская область",
+          "evidence": "Свердловская обл., муниципальное образование Екатеринбург, пос. Совхозный р-н Ленинский",
+          "region_unknown": false
+        }
+      },
+      "rows": 52
     },
     {
       "run_id": "first5_2026-10-28_01",
