@@ -27,7 +27,7 @@ from failure_log import ensure_allowed, record as record_failure, succeeded, Hum
 from preflight import find_aside, aside_command
 from utils.dataset_pr import validate_automation_changes
 
-VERSION = '1.7.25'
+VERSION = '1.7.26'
 AUTOMATION_FILES = ['Scraper/skills/collect-avito/references/top-professions.json', 'utils/title_flags.py', 'Scraper/extract.js', 'Scraper/skills/collect-avito/SKILL.md'] + [
     'Scraper/skills/collect-avito/scripts/' + name for name in ('run.py', 'browser_batch.js', 'check_capture.py', 'failure_log.py', 'preflight.py')]
 
@@ -466,6 +466,44 @@ def reselect(args):
     print('Original freeze archived; failure history and retry budget preserved. Freeze the corrected observed listing.')
 
 
+def continuation(args):
+    """Seed a new freeze from immutable saved pages and the parent's observed Next."""
+    parent_out, parent_service, parent_diag = paths(ROOT, args.parent_run_id)
+    out, service, diag = paths(ROOT, args.run_id)
+    ensure_allowed(parent_diag, 'continuation')
+    if out.exists() or service.exists() or args.run_id == args.parent_run_id:
+        raise ValueError('Continuation requires a new run ID')
+    plan = read(parent_service/'plan.json')
+    validate_plan_profession(plan, parent_out/'listing.json')
+    queue = read(parent_out/'queue.json')
+    pages = [read(parent_out/p['file']) for p in plan['listing_pages']]
+    if not plan.get('requested_all_pages') or not pages or queue_from_pages(pages, None) != queue:
+        raise ValueError('Continuation requires a complete saved all-pages parent queue')
+    next_url = pages[-1].get('pagination', {}).get('next_url')
+    if not next_url or any(same_observed_url(next_url, page['source_url']) for page in pages):
+        raise ValueError('Parent has no unvisited observed Next')
+    avito_url(next_url)
+    request = read(parent_diag/'freeze_request.json')
+    with locked(parent_diag):
+        save_failures(parent_diag, load_failures(parent_diag))
+    out.mkdir(parents=True); diag.mkdir(parents=True)
+    for page in plan['listing_pages']:
+        target = out/page['file']; target.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copy2(parent_out/page['file'], target)
+    provenance = out/'continuation-provenance'; provenance.mkdir()
+    shutil.copy2(parent_service/'plan.json', provenance/'parent-plan.json')
+    shutil.copy2(parent_out/'queue.json', provenance/'parent-queue.json')
+    write(diag/'freeze_request.json', request)
+    write(diag/'shared-ledger.json', {'parent_run_id': args.parent_run_id})
+    for name in ('automation_changes.json', 'aside-target.local.json'):
+        if (parent_diag/name).exists():
+            shutil.copy2(parent_diag/name, diag/name)
+    info = dict(parent_run_id=args.parent_run_id, parent_plan_sha256=sha(provenance/'parent-plan.json'),
+                parent_queue_sha256=sha(provenance/'parent-queue.json'), parent_page_count=len(pages), next_url=next_url)
+    write(diag/'continuation.json', info)
+    print(json.dumps(dict(run_id=args.run_id, continuation=info, request=request), ensure_ascii=False))
+
+
 def freeze(args):
     out, service, diag = paths(ROOT, args.run_id)
     existing = out.exists() or (service/'plan.json').exists() or (diag/'freeze_request.json').exists()
@@ -521,12 +559,9 @@ def freeze(args):
         if not target or target >= args.limit:
             raise ValueError('Saved pages must contain a nonempty incomplete selection')
     while not pages or target is None or len(queue_from_pages(pages, target, False)) < target:
-        if len(pages) > 1 and pages[-1].get('items') and {i['id'] for i in pages[-1]['items']} <= {i['id'] for p in pages[:-1] for i in p.get('items', [])}:
-            listing_end_reason = 'no_new_ids'
-            break
         url = args.url if not pages else pages[-1].get('pagination', {}).get('next_url')
         if not url:
-            listing_end_reason = 'no_next_link'
+            listing_end_reason = 'confirmed_end' if pages[-1].get('pagination', {}).get('end_confirmed') else 'no_next_link'
             break
         avito_url(url)
         if any(same_observed_url(url, p['source_url']) for p in pages):
@@ -568,7 +603,21 @@ def freeze(args):
     if candidate_limit is not None and candidate_limit < args.limit:
         raise ValueError('Candidate limit must be at least the target limit')
     queue = queue_from_pages(pages, target, require_full=False)
+    continuation_info = read(diag/'continuation.json') if (diag/'continuation.json').exists() else None
+    if continuation_info:
+        provenance = out/'continuation-provenance'
+        if sha(provenance/'parent-plan.json') != continuation_info['parent_plan_sha256'] or sha(provenance/'parent-queue.json') != continuation_info['parent_queue_sha256']:
+            raise ValueError('Continuation parent provenance changed')
+        original = read(provenance/'parent-queue.json')
+        if queue[:len(original)] != original:
+            raise ValueError('Continuation parent queue differs from saved pages')
+        queue = queue[len(original):]
     if not queue:
+        if continuation_info and listing_end_reason:
+            write(service/'continuation-empty.json', dict(continuation=continuation_info, listing_end_reason=listing_end_reason,
+                available_listing_exhausted=listing_end_reason == 'confirmed_end', listing_pages=[dict(file=str(p.relative_to(out)), sha256=sha(p)) for p in page_paths]))
+            print(json.dumps({'state': 'EMPTY', 'listing_end_reason': listing_end_reason}))
+            return
         raise ValueError('No vacancies were observed; cannot create an empty capture queue')
     write(out / 'listing.json', listing)
     write(out / 'queue.json', queue)
@@ -583,7 +632,7 @@ def freeze(args):
         selection_mode='saved_incomplete_listing' if accept_saved else ('first_N_remote_parameter_matches' if candidate_limit is not None else 'first_N_unique_on_frozen_listing'), limit=args.limit if candidate_limit is not None else len(queue), requested_all_pages=all_pages,
         saved_selection_authorization={'instruction': instruction, 'at': datetime.now(timezone.utc).isoformat(), 'original_request': request} if accept_saved else None,
         requested_limit=args.limit, available_unique=len(queue),
-        listing_end_reason=listing_end_reason, available_listing_exhausted=listing_end_reason is not None,
+        listing_end_reason=listing_end_reason, available_listing_exhausted=listing_end_reason == 'confirmed_end', continuation=continuation_info,
         candidate_limit=candidate_limit,
         created_at=datetime.now(timezone.utc).isoformat(), instruction_version=VERSION,
         extractor_sha256=sha(ROOT / 'Scraper/extract.js'), instruction_sha256=sha(SCRIPTS.parent / 'SKILL.md'),
@@ -597,7 +646,7 @@ def freeze(args):
     print(json.dumps({'state': 'READY', 'queued': len(queue), 'heading': listing.get('heading'),
                       'selected_controls': listing.get('selected_controls'),
                       'requested_limit': args.limit, 'listing_end_reason': listing_end_reason,
-                      'message': 'Все доступные вакансии выдачи включены в очередь' if listing_end_reason else 'Запрошенная очередь готова'}, ensure_ascii=False))
+                      'message': 'Конец выдачи подтверждён' if listing_end_reason == 'confirmed_end' else 'Обход остановлен с ограничением' if listing_end_reason else 'Запрошенная очередь готова'}, ensure_ascii=False))
 
 
 CLOSED_MARKERS = ('Объявление закрыто.', 'Объявление снято с публикации.')
@@ -920,7 +969,27 @@ def validate_partition(out, service):
     plan = read(service/'plan.json')
     info = plan.get('partition')
     if not info:
-        if (service/'diagnostics'/'shared-ledger.json').exists():
+        continuation_info = plan.get('continuation')
+        if continuation_info:
+            provenance = out/'continuation-provenance'
+            if sha(provenance/'parent-plan.json') != continuation_info['parent_plan_sha256'] or sha(provenance/'parent-queue.json') != continuation_info['parent_queue_sha256']:
+                raise ValueError('Continuation parent provenance changed')
+            parent = read(provenance/'parent-plan.json')
+            original = read(provenance/'parent-queue.json')
+            pages = [read(out/p['file']) for p in plan['listing_pages']]
+            count = continuation_info['parent_page_count']
+            if count != len(parent['listing_pages']) or plan['listing_pages'][:count] != parent['listing_pages']:
+                raise ValueError('Continuation pages differ from parent provenance')
+            if not pages or pages[count-1].get('pagination', {}).get('next_url') != continuation_info['next_url']:
+                raise ValueError('Continuation Next differs from saved parent')
+            if count >= len(pages) or not same_observed_url(continuation_info['next_url'], pages[count]['source_url']):
+                raise ValueError('Continuation did not follow the saved Next')
+            combined = queue_from_pages(pages, None)
+            if combined[:len(original)] != original or combined[len(original):] != read(out/'queue.json'):
+                raise ValueError('Continuation queue differs from listing or parent')
+            if read(service/'diagnostics'/'shared-ledger.json') != {'parent_run_id': continuation_info['parent_run_id']}:
+                raise ValueError('Continuation shared ledger pointer changed')
+        elif (service/'diagnostics'/'shared-ledger.json').exists():
             raise ValueError('Shared ledger child is missing partition metadata')
         if (service/'partition.json').exists():
             raise ValueError('Parent queue is partitioned; use its child runs')
@@ -957,7 +1026,7 @@ def partition(args):
     if args.batch_size < 1:
         raise ValueError('Partition size must be positive')
     plan = read(parent_service/'plan.json')
-    if plan.get('selection_mode') != 'first_N_unique_on_frozen_listing' or plan.get('partition'):
+    if plan.get('selection_mode') != 'first_N_unique_on_frozen_listing' or plan.get('partition') or plan.get('continuation'):
         raise ValueError('Partition supports an ordinary frozen parent queue only')
     if (parent_service/'manifest.json').exists() or (parent_service/'partition.json').exists() or any((parent_out/'raw').glob('*.json')):
         raise ValueError('Partition requires an unpartitioned, uncaptured parent')
@@ -1456,7 +1525,7 @@ def publish(args):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     commands = parser.add_subparsers(dest='command', required=True)
-    for name in ['archive-partial-listing', 'partition', 'freeze', 'capture', 'finalize', 'publish', 'reselect', 'standing-unavailable-policy', 'closed-policy', 'review-policy', 'blocked-listing-policy', 'salary-review-policy', 'review-salary-line', 'mark-unavailable', 'preserve-stopped-observation', 'note-change', 'record-error', 'check-stage', 'stage-ok', 'resume-offline', 'resume-browser']:
+    for name in ['archive-partial-listing', 'partition', 'continuation', 'freeze', 'capture', 'finalize', 'publish', 'reselect', 'standing-unavailable-policy', 'closed-policy', 'review-policy', 'blocked-listing-policy', 'salary-review-policy', 'review-salary-line', 'mark-unavailable', 'preserve-stopped-observation', 'note-change', 'record-error', 'check-stage', 'stage-ok', 'resume-offline', 'resume-browser']:
         command = commands.add_parser(name)
         command.add_argument('--run-id', required=True)
         if name in ('freeze', 'capture'):
@@ -1467,6 +1536,8 @@ def main():
         elif name == 'partition':
             command.add_argument('--batch-size', type=int, required=True)
             command.add_argument('--prefix', required=True)
+        elif name == 'continuation':
+            command.add_argument('--parent-run-id', required=True)
         elif name == 'freeze':
             command.add_argument('--retry-reason')
             command.add_argument('--resume', action='store_true', help='Recover an interrupted freeze with identical inputs')
@@ -1540,8 +1611,9 @@ def main():
         parser.error('batch-size must be positive')
     with ExitStack() as stack:
         try:
-            if args.command in ('archive-partial-listing', 'partition', 'freeze', 'capture', 'finalize', 'publish', 'reselect', 'standing-unavailable-policy', 'closed-policy', 'review-policy', 'blocked-listing-policy', 'salary-review-policy', 'review-salary-line', 'mark-unavailable', 'preserve-stopped-observation', 'record-error', 'stage-ok', 'resume-browser', 'resume-offline'):
-                stack.enter_context(operation_locked(paths(ROOT, args.run_id)[2]))
+            if args.command in ('archive-partial-listing', 'partition', 'continuation', 'freeze', 'capture', 'finalize', 'publish', 'reselect', 'standing-unavailable-policy', 'closed-policy', 'review-policy', 'blocked-listing-policy', 'salary-review-policy', 'review-salary-line', 'mark-unavailable', 'preserve-stopped-observation', 'record-error', 'stage-ok', 'resume-browser', 'resume-offline'):
+                lock_run_id = args.parent_run_id if args.command == 'continuation' else args.run_id
+                stack.enter_context(operation_locked(paths(ROOT, lock_run_id)[2]))
             globals()[args.command.replace('-', '_')](args)
             if args.command in ('freeze', 'capture', 'finalize', 'publish'):
                 _, _, diag = paths(ROOT, args.run_id)
