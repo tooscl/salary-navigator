@@ -143,3 +143,5 @@ avito_runs/<название_сбора>/
 - [ekb_loader_20261029_batch_02](avito_runs/ekb_loader_20261029_batch_02/exports/vacancies_flat.csv): 52 вакансий.
 
 - [moscow_picker_20261029_b_01](avito_runs/moscow_picker_20261029_b_01/exports/vacancies_flat.csv): 299 вакансий.
+
+- [moscow_picker_20261029_b_02](avito_runs/moscow_picker_20261029_b_02/exports/vacancies_flat.csv): 293 вакансий.
