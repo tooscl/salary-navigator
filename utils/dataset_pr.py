@@ -39,6 +39,8 @@ def validate_automation_changes(changes, code_paths):
     missing = set(code_paths) - noted
     if missing:
         raise ValueError('Record collector changes for every source/test/skill file: ' + ', '.join(sorted(missing)))
+    if not any(Path(path).suffix.lower() in {'.py', '.js'} for path in code_paths):
+        return
     if not any(path and (Path(path).name.startswith('test_') or '/tests/' in path) for path in noted):
         raise ValueError('Collector fix requires a recorded regression test')
     if 'Scraper/skills/collect-avito/SKILL.md' not in noted:

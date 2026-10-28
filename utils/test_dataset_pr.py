@@ -4,6 +4,12 @@ from utils.dataset_pr import browser_evidence, render, validate_automation_chang
 
 
 class PublicationTests(unittest.TestCase):
+    def test_documentation_only_requires_notes_but_no_regression_test(self):
+        path = 'Scraper/skills/collect-avito/SKILL.md'
+        validate_automation_changes([dict(file=path, reason='Уточнение', validation='Проверено')], [path])
+        with self.assertRaisesRegex(ValueError, 'every source'):
+            validate_automation_changes([], [path])
+
     def test_automation_notes_cover_every_file_test_and_skill(self):
         def note(path):
             return dict(file=path, reason='Новый шаблон', validation='Тест пройден')
