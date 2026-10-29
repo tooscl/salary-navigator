@@ -112,14 +112,18 @@
   const next = [...document.querySelectorAll('a,[role="link"],button')].filter(visible).find(e =>
     e.getAttribute('rel') === 'next' || e.getAttribute('aria-label') === 'Следующая страница' ||
     text(e) === 'Следующая страница');
-  const disabled = next && (next.hasAttribute('disabled') || next.getAttribute('aria-disabled') === 'true');
-  const nextHref = next?.getAttribute('href');
+  // Avito renders the disabled Next as an unlabeled button inside its next-arrow list item.
+  // Scope both the pager and arrow direction; disabled ellipses and Previous are not Next.
+  const disabledNext = [...document.querySelectorAll('[data-marker="pagination-button"] li[class*="listItem_arrow_next-"] > button[aria-disabled="true"]')].filter(visible).find(e => e.querySelector('svg[data-icon-name="arrowright"]'));
+  const effectiveNext = next || disabledNext;
+  const disabled = effectiveNext && (effectiveNext.hasAttribute('disabled') || effectiveNext.getAttribute('aria-disabled') === 'true');
+  const nextHref = effectiveNext?.getAttribute('href');
   const nextURL = nextHref ? new URL(nextHref, location.href).href : null;
   // Missing Next alone may be a render delay. A truncated numeric pager
   // (even current == max visible) is not positive evidence of the end.
   const current_pages = [...document.querySelectorAll('[aria-current="page"]')].filter(visible).map(e => text(e)).filter(t => /^[1-9]\d*$/.test(t));
   const pagination = {current_pages, next_url: !disabled ? nextURL : null, end_confirmed: !!disabled,
-    evidence: next ? {text: text(next), label: next.getAttribute('aria-label'), href: nextHref, disabled: !!disabled} : null,
+    evidence: effectiveNext ? {text: text(effectiveNext), label: effectiveNext.getAttribute('aria-label'), href: nextHref, disabled: !!disabled, direction: effectiveNext === disabledNext ? 'next_arrowright' : null} : null,
     limitation: 'End requires an explicitly disabled Next; missing Next alone is not proof; infinite loading and server-side result caps are not covered'};
   return {...base, heading: text(document.querySelector('h1')), selected_controls: controls, profession_filter, items, listing_item_audit, pagination};
 })()
