@@ -217,3 +217,5 @@ avito_runs/<название_сбора>/
 - [filter16_moscow_truck_driver_20261029_b_04](avito_runs/filter16_moscow_truck_driver_20261029_b_04/exports/vacancies_flat.csv): 297 вакансий.
 
 - [filter16_moscow_truck_driver_20261029_b_05](avito_runs/filter16_moscow_truck_driver_20261029_b_05/exports/vacancies_flat.csv): 66 вакансий.
+
+- [20261029_sp_driver17_part_01](avito_runs/20261029_sp_driver17_part_01/exports/vacancies_flat.csv): 300 вакансий.
