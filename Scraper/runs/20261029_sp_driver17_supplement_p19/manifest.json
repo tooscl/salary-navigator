@@ -1,0 +1,448 @@
+{
+  "run_id": "20261029_sp_driver17_supplement_p19",
+  "dataset_id": "20261029_sp_driver17_supplement_p19",
+  "status": "complete",
+  "schema": {
+    "columns": [
+      "id",
+      "city",
+      "profession",
+      "segments",
+      "title",
+      "salary_raw",
+      "source_url",
+      "observed_at",
+      "description",
+      "location_observed",
+      "employer_name_observed",
+      "date_raw",
+      "views_total",
+      "views_today",
+      "listing_rank",
+      "listing_promoted",
+      "full_parameters_read",
+      "analysis_status",
+      "export_eligibility",
+      "read_status_parameters",
+      "read_status_description",
+      "read_status_location",
+      "read_limitations",
+      "enrichment_status",
+      "enriched_fields",
+      "enrichment_version",
+      "military",
+      "military_keywords",
+      "military_rule_version",
+      "city__source",
+      "city__evidence",
+      "city_anomaly",
+      "График",
+      "Занятость",
+      "Частота выплат",
+      "Сфера деятельности компании",
+      "Опыт работы",
+      "В том числе для кандидатов",
+      "Количество рабочих часов в день",
+      "Что получают работники",
+      "Способ оформления",
+      "Смены",
+      "Категория водительских прав",
+      "Длительность вахты",
+      "Бренд автомобиля",
+      "Техника",
+      "Медкнижка",
+      "Где предстоит работать",
+      "Стажировка",
+      "Навык мелкого ремонта автомобиля",
+      "Статус самозанятости",
+      "Компания предоставляет",
+      "Количество рабочих дней в неделю",
+      "Способ доставки",
+      "Стаж вождения",
+      "Можно заканчивать в 17:00",
+      "Режим работы",
+      "Возраст автомобиля"
+    ],
+    "unknown_policy": "empty_not_zero"
+  },
+  "collection": {
+    "run_id": "20261029_sp_driver17_supplement_p19",
+    "geography": "Санкт-Петербург",
+    "profession": "Водитель грузового транспорта",
+    "segments": "",
+    "filter_evidence": "UI: heading Вакансии по профессии Водитель грузового транспорта в Санкт-Петербурге; exact checkbox name=Водитель грузового транспорта value=22283175 checked=true; поиск по объявлениям empty; remaining filters default in initial and updated form snapshots.",
+    "listing_url": "https://www.avito.ru/sankt-peterburg/vakansii/voditel_gruzovogo_transporta-ASgBAgICAUTUzBHOjqAV?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6Im1KSHFhUkdjOFNDYng0S00iO33itrFFJgAAAA&p=19",
+    "listing_request_url": "https://www.avito.ru/sankt-peterburg/vakansii/voditel_gruzovogo_transporta-ASgBAgICAUTUzBHOjqAV?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6IjMwV3JiQVY2SllwRHoxOXgiO33dzutwJgAAAA&localPriority=0",
+    "selected_controls": [
+      {
+        "label": "Водитель грузового транспорта",
+        "marker": "params[144170]/checkbox/22283175",
+        "value": null
+      },
+      {
+        "label": "Водитель грузового транспорта",
+        "marker": "params[144170]/checkbox/toggle",
+        "value": "22283175"
+      },
+      {
+        "label": "Любой",
+        "marker": "params[196929]/all",
+        "value": null
+      },
+      {
+        "label": "Любой",
+        "marker": "params[196929]/toggle",
+        "value": "all"
+      },
+      {
+        "label": "Неважно",
+        "marker": "params[172815]/all",
+        "value": null
+      },
+      {
+        "label": "Неважно",
+        "marker": "params[172815]/toggle",
+        "value": "all"
+      },
+      {
+        "label": "Неважно",
+        "marker": null,
+        "value": "all"
+      },
+      {
+        "label": "Все",
+        "marker": null,
+        "value": "all"
+      }
+    ],
+    "listing_sha256": "db65bbe30bd84a2baa03a17ba8300613736d0454b79690c2da4310b698d5acad",
+    "profession_scope": null,
+    "profession_source": "observed_controls",
+    "listing_pages": [],
+    "selection_mode": "observed_supplement_new_ids",
+    "limit": 24,
+    "requested_all_pages": false,
+    "saved_selection_authorization": null,
+    "requested_limit": 24,
+    "available_unique": 24,
+    "listing_end_reason": null,
+    "available_listing_exhausted": false,
+    "continuation": null,
+    "candidate_limit": null,
+    "created_at": "2026-10-29T10:32:45.280640+00:00",
+    "instruction_version": "1.7.40",
+    "extractor_sha256": "bd17892bcc632a1c0bb3f14b91a0a1856ac96c1b2960f82597f41c4aa4723a41",
+    "instruction_sha256": "a80dfb28f96fa6df3721b3c029bd13541b82fcfd9cf1514c2a495d91476ae43f",
+    "code_git_commit": "63993f437c457845e01d1f6f5dc83f1a66a9fad4",
+    "setup_seconds": 0.03170991688966751,
+    "live_route_verified": false,
+    "execution_model": "gpt-6-luna",
+    "automation_sha256": {
+      "Scraper/skills/collect-avito/references/top-professions.json": "e3e72638b17b48f825ec6f2fefb963662494f679ae4b0cef1bebedba889610dd",
+      "utils/title_flags.py": "9c9456cb3fb0df5791630049c9c85987381091dbb9ba18bc3fb3314b8cccbeb6",
+      "Scraper/extract.js": "bd17892bcc632a1c0bb3f14b91a0a1856ac96c1b2960f82597f41c4aa4723a41",
+      "Scraper/skills/collect-avito/SKILL.md": "a80dfb28f96fa6df3721b3c029bd13541b82fcfd9cf1514c2a495d91476ae43f",
+      "Scraper/skills/collect-avito/scripts/run.py": "33bd17987943c550ecfe0150591c44d70c86ec5016c98339f3c977bcc7854a3a",
+      "Scraper/skills/collect-avito/scripts/browser_batch.js": "aa9ac31e38d07e72ee0737def2a35dda79b376166315b7388a7fd471f0e14136",
+      "Scraper/skills/collect-avito/scripts/check_capture.py": "aa746849317f9768af5aae08b394b9379539f6e268c1fc69e4ed13bd06a4657f",
+      "Scraper/skills/collect-avito/scripts/failure_log.py": "5a28324829d546ce87b662b9e6e4b48cc4ba5aa5d13114483975d2c407b293e6",
+      "Scraper/skills/collect-avito/scripts/preflight.py": "661708892946a68dec53c986df496e76dd67c314021af2567f760b740bb3ce3d"
+    },
+    "uncommitted_automation_files": [],
+    "partition": null,
+    "supplement": {
+      "parent_run_id": "20261029_sp_driver17",
+      "source_hashes": {
+        "parent-plan.json": "bfcf4bb27c422d3617b3f3b6110651fa89309377a8c43e83ff03b59b934eb23a",
+        "parent-queue.json": "841432e6e17d6bdf08016772f68cc8f204636383048455ab3b6bf186977905e2",
+        "observation.json": "db65bbe30bd84a2baa03a17ba8300613736d0454b79690c2da4310b698d5acad",
+        "evidence.json": "2bf613136f15d4747f7ec0eec96c92ba68a646c1bfca250c8da5dd67b907bc20"
+      }
+    },
+    "city_anomaly_policy": "blank"
+  },
+  "coverage": {
+    "planned": 24,
+    "accepted": 24,
+    "unavailable": [],
+    "unique_ids": [
+      "8423626247",
+      "8397972975",
+      "8470973580",
+      "8409017279",
+      "7483393191",
+      "8160293206",
+      "7311288875",
+      "8483815568",
+      "8387985189",
+      "8437195213",
+      "8427522952",
+      "7922583063",
+      "8398807104",
+      "8146272651",
+      "3989599273",
+      "8480165725",
+      "8256957145",
+      "4512354732",
+      "8417349737",
+      "8366699804",
+      "8467062618",
+      "539962282",
+      "8173608915",
+      "4112432208"
+    ],
+    "errors": [],
+    "partial": null,
+    "limitations": [
+      "Visible rendered parameters only; enrichment not run; placement on site; live route unverified"
+    ]
+  },
+  "timing": {
+    "setup_seconds": 0.03170991688966751,
+    "capture_seconds": 41.12413475103676,
+    "review_export_seconds": 1.065154999960214,
+    "publication_seconds": null
+  },
+  "review_model": "gpt-6.1-terra",
+  "automation_changes": [],
+  "profession_correction": null,
+  "post_capture_automation_sha256": {},
+  "files": {
+    "Data/avito_runs/20261029_sp_driver17_supplement_p19/exports/vacancies.json": {
+      "bytes": 100747,
+      "sha256": "3548893893fae9225770405286017f5a3581b653b4beaf932eafbe7869d05440"
+    },
+    "Data/avito_runs/20261029_sp_driver17_supplement_p19/exports/vacancies_flat.csv": {
+      "bytes": 72102,
+      "sha256": "7235bbbfa13a0d2c6ded61c344cd5162c284e122fa3d7fca36fc6dfe47ce8751"
+    },
+    "Data/avito_runs/20261029_sp_driver17_supplement_p19/exports/validation.json": {
+      "bytes": 152,
+      "sha256": "fe681119182f04400c0e5b971d15a1590c10c57ce20d445c31b352f59a1d876e"
+    },
+    "Data/avito_runs/20261029_sp_driver17_supplement_p19/listing.json": {
+      "bytes": 22272,
+      "sha256": "db65bbe30bd84a2baa03a17ba8300613736d0454b79690c2da4310b698d5acad"
+    },
+    "Data/avito_runs/20261029_sp_driver17_supplement_p19/queue.json": {
+      "bytes": 11934,
+      "sha256": "eba15266c3b8dbb8867223414048a6d0b3c70dcabbb9b8f32ae3818d8a83369f"
+    },
+    "Data/avito_runs/20261029_sp_driver17_supplement_p19/raw/3989599273.json": {
+      "bytes": 9752,
+      "sha256": "1be194020038770b6605456d9c951a548ea4a559ee42f905df42f27df9a691f5"
+    },
+    "Data/avito_runs/20261029_sp_driver17_supplement_p19/raw/4112432208.json": {
+      "bytes": 7485,
+      "sha256": "9a1aea0b9634e175cae36741a35ae996186bd4745a22e139251cfda9f8c845f5"
+    },
+    "Data/avito_runs/20261029_sp_driver17_supplement_p19/raw/4512354732.json": {
+      "bytes": 9497,
+      "sha256": "c4f2108a995db813fabc2a99325960a1d58fe318f64f4976503a805e93374d5d"
+    },
+    "Data/avito_runs/20261029_sp_driver17_supplement_p19/raw/539962282.json": {
+      "bytes": 20353,
+      "sha256": "1f54ccee4869cf37af654e65201439fceebfc4cf734bc43b10217d6172adf50a"
+    },
+    "Data/avito_runs/20261029_sp_driver17_supplement_p19/raw/7311288875.json": {
+      "bytes": 16276,
+      "sha256": "aaeb9ee09cef9c9be7e69788e6a20172088d631f527ff86413ed5af884e72189"
+    },
+    "Data/avito_runs/20261029_sp_driver17_supplement_p19/raw/7483393191.json": {
+      "bytes": 10558,
+      "sha256": "34ee901fceed325dd57fea42bc9eeda1b51555cd60741d71ae8bdf3c5b8022c2"
+    },
+    "Data/avito_runs/20261029_sp_driver17_supplement_p19/raw/7922583063.json": {
+      "bytes": 7488,
+      "sha256": "baa9ceb32862f98aae3b0be43ad590b698d7a63cc4dc9334161b4fe77e8fa0d4"
+    },
+    "Data/avito_runs/20261029_sp_driver17_supplement_p19/raw/8146272651.json": {
+      "bytes": 9601,
+      "sha256": "193981e87e8cd210b6b40787ec98131823997e5cfbe31ff6112c7cd8f1376d27"
+    },
+    "Data/avito_runs/20261029_sp_driver17_supplement_p19/raw/8160293206.json": {
+      "bytes": 9748,
+      "sha256": "1d71d8df7cfddc075fbd5a13a9d77a03e78167741fcdc8c161ac99651c093727"
+    },
+    "Data/avito_runs/20261029_sp_driver17_supplement_p19/raw/8173608915.json": {
+      "bytes": 11713,
+      "sha256": "1f0f0b96e1f43ee76abd62271ee29b71b850898fc6346974ae64c22acaccc761"
+    },
+    "Data/avito_runs/20261029_sp_driver17_supplement_p19/raw/8256957145.json": {
+      "bytes": 16440,
+      "sha256": "ed9fcdbda27c59bb6e5b7d7323c32dc978784f32d9bdd7d4d6a22044d9259241"
+    },
+    "Data/avito_runs/20261029_sp_driver17_supplement_p19/raw/8366699804.json": {
+      "bytes": 7700,
+      "sha256": "14cf7f9107494b20a865bc289da00f3575c33ff56d49a3b70b65164cfa8012b3"
+    },
+    "Data/avito_runs/20261029_sp_driver17_supplement_p19/raw/8387985189.json": {
+      "bytes": 10732,
+      "sha256": "b11ffa8f8da5231239058ead1842e717fa1ea10b9f1319854084917e9262c17e"
+    },
+    "Data/avito_runs/20261029_sp_driver17_supplement_p19/raw/8397972975.json": {
+      "bytes": 10649,
+      "sha256": "72ac757954702af0113c2ea6aa91b0da1b4018f05d8b42d42e0c9c970a75ce88"
+    },
+    "Data/avito_runs/20261029_sp_driver17_supplement_p19/raw/8398807104.json": {
+      "bytes": 9721,
+      "sha256": "24c0a17117014cc329bb4ce3e3884ef6330b0cccea69351857d35c6283fd3184"
+    },
+    "Data/avito_runs/20261029_sp_driver17_supplement_p19/raw/8409017279.json": {
+      "bytes": 7784,
+      "sha256": "ad1400c9a3a08197b2cc60be64abd584aadfb8e8f24558f25513537a188b51be"
+    },
+    "Data/avito_runs/20261029_sp_driver17_supplement_p19/raw/8417349737.json": {
+      "bytes": 16874,
+      "sha256": "91b19a1c22be125ab4fcb92edf0b99d75a2359d8df8eafd3a14cf6b3a03988df"
+    },
+    "Data/avito_runs/20261029_sp_driver17_supplement_p19/raw/8423626247.json": {
+      "bytes": 12760,
+      "sha256": "4e94612443b843b882f790ebc97a73641e85b7688e2c980f201979d04bd4efac"
+    },
+    "Data/avito_runs/20261029_sp_driver17_supplement_p19/raw/8427522952.json": {
+      "bytes": 16146,
+      "sha256": "43eb85a263ec346158f0e0fb7ee870779b58206172efdb1410327cc973c14738"
+    },
+    "Data/avito_runs/20261029_sp_driver17_supplement_p19/raw/8437195213.json": {
+      "bytes": 9468,
+      "sha256": "2b686156e1aaa3c0a171cdb363232cbc62571f51eb64b75dbd4721a6c1075f73"
+    },
+    "Data/avito_runs/20261029_sp_driver17_supplement_p19/raw/8467062618.json": {
+      "bytes": 8950,
+      "sha256": "d5dbc6efb83538ce99077b43474f8c0806f69d6ea0331ed0092c962e222bbfcc"
+    },
+    "Data/avito_runs/20261029_sp_driver17_supplement_p19/raw/8470973580.json": {
+      "bytes": 11460,
+      "sha256": "d7c03bba54d4703310ab0ea4a9ec75e016b1d40a1d2e0a455afa550a99187bf4"
+    },
+    "Data/avito_runs/20261029_sp_driver17_supplement_p19/raw/8480165725.json": {
+      "bytes": 10922,
+      "sha256": "e74f43d37a7d154d2110dd942781f9126d84d1a078672a759d05b8e3bbe34e8a"
+    },
+    "Data/avito_runs/20261029_sp_driver17_supplement_p19/raw/8483815568.json": {
+      "bytes": 10052,
+      "sha256": "94812de4f834b0849f99945660162fab590417f3d5ea31814e9373b68d81f687"
+    },
+    "Data/avito_runs/20261029_sp_driver17_supplement_p19/reviewed/3989599273.json": {
+      "bytes": 934,
+      "sha256": "ac635a9d21f50ad130432e42bc229406a3294687f437f0113909cc6410cb5348"
+    },
+    "Data/avito_runs/20261029_sp_driver17_supplement_p19/reviewed/4112432208.json": {
+      "bytes": 899,
+      "sha256": "16b7311eed077587d083bf29ebe031ad72ff8f51ee4797557408ba509777ccbb"
+    },
+    "Data/avito_runs/20261029_sp_driver17_supplement_p19/reviewed/4512354732.json": {
+      "bytes": 818,
+      "sha256": "426609884b3c921b3559c580ceda5fd74a5bfa19da92fec8016866a11ac01a3d"
+    },
+    "Data/avito_runs/20261029_sp_driver17_supplement_p19/reviewed/539962282.json": {
+      "bytes": 919,
+      "sha256": "205d4e174d663e681ffde701bbc7b153321973d824917e9626eed827d0acbeb8"
+    },
+    "Data/avito_runs/20261029_sp_driver17_supplement_p19/reviewed/7311288875.json": {
+      "bytes": 817,
+      "sha256": "52094c500705b1bedc1dd2e52a2f22d74c7ce26bc3483931d0565960dbb00ebc"
+    },
+    "Data/avito_runs/20261029_sp_driver17_supplement_p19/reviewed/7483393191.json": {
+      "bytes": 912,
+      "sha256": "c92a978fb294f4f24667a6ab6dfdc96bf0ec9ef94c592fc2409350dc5e250f21"
+    },
+    "Data/avito_runs/20261029_sp_driver17_supplement_p19/reviewed/7922583063.json": {
+      "bytes": 897,
+      "sha256": "54c4c82b37cd31f73a485428282cab0797e630330b2cbe20cdb9362d167e3b68"
+    },
+    "Data/avito_runs/20261029_sp_driver17_supplement_p19/reviewed/8146272651.json": {
+      "bytes": 821,
+      "sha256": "299d3d3ba3443252fa393c7d8e4a0efa72499afdb0821d5cc9e70e40ce4eb30b"
+    },
+    "Data/avito_runs/20261029_sp_driver17_supplement_p19/reviewed/8160293206.json": {
+      "bytes": 817,
+      "sha256": "3b5d4fe3a724a8f07b37d37222e1648b40a23b73b22b43a984d64a2e3db0a011"
+    },
+    "Data/avito_runs/20261029_sp_driver17_supplement_p19/reviewed/8173608915.json": {
+      "bytes": 928,
+      "sha256": "5493cec5f68972db1c1bd8f303df4645d4328f58ac1837953c26b7a0b81b87a4"
+    },
+    "Data/avito_runs/20261029_sp_driver17_supplement_p19/reviewed/8256957145.json": {
+      "bytes": 841,
+      "sha256": "434fef7468d7172b5e10833a58cc80a841b1e434cc9b4f3334ab676f9e720619"
+    },
+    "Data/avito_runs/20261029_sp_driver17_supplement_p19/reviewed/8366699804.json": {
+      "bytes": 828,
+      "sha256": "439658dd356ac3132b557ecbf84926f977062e5b7136b4d77e982aae6a95af44"
+    },
+    "Data/avito_runs/20261029_sp_driver17_supplement_p19/reviewed/8387985189.json": {
+      "bytes": 930,
+      "sha256": "691a6aaf3cded01a519cbebab333e2b5b1112769d0cf28d4ac47cbfb709a28f8"
+    },
+    "Data/avito_runs/20261029_sp_driver17_supplement_p19/reviewed/8397972975.json": {
+      "bytes": 817,
+      "sha256": "19c625f086481d80d630a793211292f3dbae933ba8112f5d8f28d0a05fe5bc78"
+    },
+    "Data/avito_runs/20261029_sp_driver17_supplement_p19/reviewed/8398807104.json": {
+      "bytes": 844,
+      "sha256": "2416a4239e8fa86454c9d48d5a99987e7d1df0b5bb64c08625f0bcbce978ea96"
+    },
+    "Data/avito_runs/20261029_sp_driver17_supplement_p19/reviewed/8409017279.json": {
+      "bytes": 896,
+      "sha256": "64d6fd0c835d974fc6c9ec94e342baa9028953de9d4b1daf9e7cfd01a284d1c1"
+    },
+    "Data/avito_runs/20261029_sp_driver17_supplement_p19/reviewed/8417349737.json": {
+      "bytes": 833,
+      "sha256": "a152d05603f4909897fcea5de447e1c3f93fdb569f790db3851cc072dbf432c4"
+    },
+    "Data/avito_runs/20261029_sp_driver17_supplement_p19/reviewed/8423626247.json": {
+      "bytes": 817,
+      "sha256": "8a3bc6f53e11fb80c69cd19510964f7052a07fd7260a488b3dfe77487658d5b1"
+    },
+    "Data/avito_runs/20261029_sp_driver17_supplement_p19/reviewed/8427522952.json": {
+      "bytes": 848,
+      "sha256": "d77fa7994c224a3ad0235fc500bbf0e33497de5d27d273bda687710d639d7b53"
+    },
+    "Data/avito_runs/20261029_sp_driver17_supplement_p19/reviewed/8437195213.json": {
+      "bytes": 896,
+      "sha256": "8c5e2a8b7364e39f79b1bc35e846a226967459e144910ec980b81e10756446ad"
+    },
+    "Data/avito_runs/20261029_sp_driver17_supplement_p19/reviewed/8467062618.json": {
+      "bytes": 839,
+      "sha256": "a4b22405b9f00e5020c05371ebb0ffde8041c2a184c924116b23bf95ce143eb9"
+    },
+    "Data/avito_runs/20261029_sp_driver17_supplement_p19/reviewed/8470973580.json": {
+      "bytes": 817,
+      "sha256": "0e06c8c089d733c793e312302e1be0bd43d4d4280e33ac9f7e292723010d67d9"
+    },
+    "Data/avito_runs/20261029_sp_driver17_supplement_p19/reviewed/8480165725.json": {
+      "bytes": 831,
+      "sha256": "f743b10fd882576c6e7a5827e7281e462b9259580cacc7fcfd352a3c81dc1dde"
+    },
+    "Data/avito_runs/20261029_sp_driver17_supplement_p19/reviewed/8483815568.json": {
+      "bytes": 828,
+      "sha256": "82105ea89e68c0a17bffa53e28645a4e47a3fe91c0f2df132d86ffe0b227122f"
+    },
+    "Data/avito_runs/20261029_sp_driver17_supplement_p19/standing_unavailable_policy.json": {
+      "bytes": 893,
+      "sha256": "6d31a29cad70ab7b3d7e8346f827e9bf30aec9ffc52e748df8ad3a813d80dc88"
+    },
+    "Data/avito_runs/20261029_sp_driver17_supplement_p19/supplement-provenance/evidence.json": {
+      "bytes": 1433,
+      "sha256": "2bf613136f15d4747f7ec0eec96c92ba68a646c1bfca250c8da5dd67b907bc20"
+    },
+    "Data/avito_runs/20261029_sp_driver17_supplement_p19/supplement-provenance/observation.json": {
+      "bytes": 22272,
+      "sha256": "db65bbe30bd84a2baa03a17ba8300613736d0454b79690c2da4310b698d5acad"
+    },
+    "Data/avito_runs/20261029_sp_driver17_supplement_p19/supplement-provenance/parent-plan.json": {
+      "bytes": 13057,
+      "sha256": "bfcf4bb27c422d3617b3f3b6110651fa89309377a8c43e83ff03b59b934eb23a"
+    },
+    "Data/avito_runs/20261029_sp_driver17_supplement_p19/supplement-provenance/parent-queue.json": {
+      "bytes": 456884,
+      "sha256": "841432e6e17d6bdf08016772f68cc8f204636383048455ab3b6bf186977905e2"
+    },
+    "Scraper/runs/20261029_sp_driver17_supplement_p19/plan.json": {
+      "bytes": 4526,
+      "sha256": "4fc4042cd1fa277695985e850b01d14a23a6858b3ed57d35ad891365ae6da437"
+    }
+  }
+}
