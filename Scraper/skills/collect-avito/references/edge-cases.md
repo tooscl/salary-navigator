@@ -71,9 +71,15 @@ python3 Scraper/skills/collect-avito/scripts/check_capture.py --raw <файл.js
 
 ## Публикация и конфликт main
 
-Перед публикацией выполните `git fetch origin` и подготовьте ветку
-`codex/<run_id>` от свежего `origin/main`. Если изменения уже находятся в своей
-ветке, включите свежий main и пересоберите производные файлы. Не сбрасывайте
+Сначала прочитайте [OUTPUT_CONTRACT.md](OUTPUT_CONTRACT.md): различия трёх
+служебных файлов, Windows-хеши и маршрут публикации из fork. Если человек
+отложил разрешение конфликта, сохраните текущий PR и остановитесь до merge.
+
+Перед публикацией получите свежий **командный** main: `git fetch origin main`
+в общем репозитории, `git fetch upstream main` при origin на личный fork.
+Подготовьте ветку `codex/<run_id>` от соответствующего origin/main или upstream/main.
+Если изменения уже находятся в своей ветке, включите свежий командный main
+и пересоберите производные файлы. Не сбрасывайте
 чужую работу и не переносите весь рабочий каталог. При загрязнённом checkout
 используйте отдельный checkout и только явно перечисленные файлы своего сбора.
 При праве записи работайте веткой общего репозитория; участник без права
@@ -97,7 +103,8 @@ python3 Scraper/skills/collect-avito/scripts/check_capture.py --raw <файл.js
 строка о CSV, raw JSON, плане/паспорте и проверке. Без длинных интерпретаций,
 пересказа переписки и истории настройки VPN; существенное ограничение кратко
 поместите в первый абзац, детали — в паспорт.
-Готовый текст формирует [dataset_pr.py](../../../../utils/dataset_pr.py), например:
+Готовый текст формирует [dataset_pr.py](../../../../utils/dataset_pr.py). Пример
+для командного origin (в fork замените --base на upstream/main):
 
 ```sh
 python3 utils/dataset_pr.py --run-id <run_id> --base origin/main \
@@ -107,14 +114,17 @@ python3 utils/dataset_pr.py --run-id <run_id> --base origin/main \
 
 Запустите после `git add`, до commit: утилита проверяет --check и блокирует
 публикацию staged снимков браузера. Посмотрите точный результат, затем используйте
-`gh pr create --body-file /tmp/dataset-pr.md`. Прикрепите PR к чату, если доступно.
-Перед merge проверьте актуальность относительно main, локальные тесты,
+`gh pr create --body-file /tmp/dataset-pr.md` в ветке общего репозитория. Для
+fork используйте prepare-only и явные --repo/--head по OUTPUT_CONTRACT.md,
+а не обычный publish. Прикрепите PR к чату, если доступно.
+Перед merge проверьте актуальность относительно свежего командного main, локальные тесты,
 `python3 utils/build_dataset.py --check`, отсутствие незавершённых обязательных
 проверок/reviews. Зафиксируйте проверенный head SHA и выполните обычное слияние
 с проверкой этого SHA (например, `gh pr merge --merge --match-head-commit <SHA>`).
 Не используйте force-push и admin bypass. Если GitHub требует review или
 не даёт merge, оставьте сохранённую ветку/PR и сообщите конкретное требование.
-После merge получите origin/main и в чистом временном checkout проверьте CSV,
+После merge получите командный main (origin/main или upstream/main) и в чистом
+временном checkout проверьте CSV,
 число уникальных ключей и --check. Только после этого сообщайте «данные в main».
 При недоступном GitHub сохраните локальные файлы и сообщите причину.
 

@@ -33,6 +33,7 @@ checkout. Версия инструкции, код и файлы данных �
 | `Data/avito_runs/<run_id>/` | Очередь, raw и `exports/vacancies_flat.csv` |
 | `Scraper/runs/<run_id>/` | План, паспорт и локальные diagnostics/failures.json |
 | `Data/dataset/README.md`, `utils/build_dataset.py` | Контракт и проверка общей таблицы |
+| `Scraper/skills/collect-avito/references/OUTPUT_CONTRACT.md` | Перед finalize/publish: единый результат, повторные ID, Windows и fork |
 
 ## Подготовка до агентов
 

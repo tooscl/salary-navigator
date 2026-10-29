@@ -11,6 +11,8 @@ description: Set up and run the T&L Avito collector in Claude Code, including lo
 1. [CLAUDE.md](../../../CLAUDE.md) и [AGENTS.md](../../../AGENTS.md).
 2. [Общий SKILL.md](../../../Scraper/skills/collect-avito/SKILL.md).
 3. [HOSTS.md](../../../Scraper/skills/collect-avito/references/HOSTS.md), раздел Claude Code.
+4. [OUTPUT_CONTRACT.md](../../../Scraper/skills/collect-avito/references/OUTPUT_CONTRACT.md):
+   обязательный формат результата и публикации, общий с Codex.
 
 Перед каждым запуском после остановки проверьте, создан ли plan.json пакета.
 Если плана/очереди/raw ещё нет, снова получите командный main и перечитайте
@@ -42,3 +44,7 @@ model ID и инструмент `collaboration.spawn_agent` в Claude Code.
 Окружение и preflight --probe-aside проверяет ведущий до запуска агентов:
 первый раз готовит и сохраняет настройки, далее повторно использует файлы.
 Не делегируйте первичную установку/запрос Happ JSON браузерному агенту.
+
+Ведущий передаёт avito-review базовый remote/ref командного main и требует
+сверку новых/повторных ID и изменённых полей. Пустое описание PR, ручной manifest
+или не вошедшие в diff исправления не считаются готовой публикацией.
