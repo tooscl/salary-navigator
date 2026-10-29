@@ -187,3 +187,5 @@ avito_runs/<название_сбора>/
 - [20261029_ekaterinburg_courier_part_01](avito_runs/20261029_ekaterinburg_courier_part_01/exports/vacancies_flat.csv): 299 вакансий.
 
 - [20261029_ekaterinburg_courier_part_02](avito_runs/20261029_ekaterinburg_courier_part_02/exports/vacancies_flat.csv): 258 вакансий.
+
+- [20261029_moscow_cashier_f13_01](avito_runs/20261029_moscow_cashier_f13_01/exports/vacancies_flat.csv): 299 вакансий.
