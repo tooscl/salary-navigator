@@ -99,6 +99,7 @@ try {
           typeof f.value === 'string' && f.value.trim());
       const validDescription = data.description == null || typeof data.description === 'string';
       const ready = data.state === 'DETAIL' && data.id === item.id &&
+        safeUrl(p.url()) === safeUrl(item.url) && safeUrl(data.source_url) === safeUrl(item.url) &&
         data.parameter_audit?.rendered_complete && typeof data.title === 'string' &&
         data.title.trim() && validFields && validDescription;
       if (!ready) {

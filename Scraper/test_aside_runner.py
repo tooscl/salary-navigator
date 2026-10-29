@@ -1,6 +1,7 @@
 """Offline collector regressions; no network, Aside or GitHub required."""
 import argparse
 import csv
+import hashlib
 import sys
 import importlib.util
 import json
@@ -37,6 +38,70 @@ def raw(identity='123'):
 
 
 class RunnerTests(unittest.TestCase):
+    def test_partition_url_guard_requires_explicit_audit(self):
+        guard = 'Scraper/skills/collect-avito/scripts/browser_batch.js'
+        plan = {'partition': {'index': 3}}
+        self.assertNotIn(guard, runner.allowed_capture_changes(plan, []))
+        self.assertNotIn(guard, runner.allowed_capture_changes(plan, [{'file':guard, 'reason':'other', 'validation':'passed'}]))
+        self.assertIn(guard, runner.allowed_capture_changes(plan, [{'file':guard, 'reason':'Audited URL identity guard', 'validation':'URL guard regression passed'}]))
+        self.assertNotIn(guard, runner.allowed_capture_changes({}, [{'file':guard, 'reason':'Audited URL identity guard', 'validation':'passed'}]))
+        with tempfile.TemporaryDirectory() as directory, patch.object(runner, 'ROOT', Path(directory)):
+            original = b"      const ready = data.state === 'DETAIL' && data.id === item.id &&\n"
+            target = runner.ROOT/guard; target.parent.mkdir(parents=True)
+            target.write_bytes(original + b'        safeUrl(p.url()) === safeUrl(item.url) && safeUrl(data.source_url) === safeUrl(item.url) &&\n')
+            plan.update(code_git_commit='frozen', automation_sha256={guard:hashlib.sha256(original).hexdigest()})
+            with patch.object(runner.subprocess, 'check_output', return_value=original):
+                runner.verify_partition_url_guard(plan, {guard})
+                target.write_bytes(target.read_bytes() + b'other change')
+                with self.assertRaises(ValueError): runner.verify_partition_url_guard(plan, {guard})
+
+    def test_capture_rejects_blank_or_mismatched_actual_url(self):
+        script = (SCRIPTS/'browser_batch.js').read_text()
+        candidate = item('123'); job = {'mode':'capture','queue':[candidate],'completed_ids':[],'close_tab':False}
+        body = script.replace('__JOB__', json.dumps(job), 1).replace('__EXTRACTOR__', '"extract"', 1)
+        for actual, source, expected in [('about:blank', candidate['url'], 'REVIEW_REQUIRED'), (candidate['url'], 'about:blank', 'REVIEW_REQUIRED'), (candidate['url'], candidate['url'], 'CAPTURED')]:
+            with self.subTest(actual=actual, source=source), tempfile.TemporaryDirectory() as directory:
+                harness = """const fs=require('fs').promises, pwd=process.cwd();
+const pg={url:()=>ACTUAL,evaluate:async()=>({state:'DETAIL',id:'123',title:'Job',source_url:SOURCE,parameter_audit:{rendered_complete:true},fields:[{name:'x',value:'y'}]})};
+const listBrowserTabs=async()=>[], openTab=async()=>pg, snapshot=async()=>({tree:'snapshot'});
+(async()=>{BODY; console.log('RESULT='+await fs.readFile('checkpoint.json','utf8'))})().catch(e=>{console.error(e);process.exit(1)});
+""".replace('ACTUAL',json.dumps(actual)).replace('SOURCE',json.dumps(source)).replace('BODY',body)
+                result = subprocess.run(['node','-e',harness],cwd=directory,capture_output=True,text=True,check=True)
+                self.assertEqual(json.loads(result.stdout.split('RESULT=')[-1])['state'],expected)
+
+    def test_partial_suffix_provenance_rejects_queue_tamper_and_wrong_ledger(self):
+        with tempfile.TemporaryDirectory() as directory, patch.object(runner, 'ROOT', Path(directory)):
+            out, service, diag = runner.paths(runner.ROOT, 'derived'); prov = out/'partial-provenance'
+            queue = [item('123'), item('456'), item('789')]
+            runner.write(prov/'plan.json', {'partition': {'parent_run_id': 'parent'}})
+            runner.write(prov/'queue.json', queue)
+            selection = {'accepted_ids':['123'], 'skipped_ids':[], 'unresolved_ids':['456','789'], 'plan_sha256':runner.sha(prov/'plan.json'), 'queue_sha256':runner.sha(prov/'queue.json')}
+            runner.write(prov/'selection.json', selection); runner.write(prov/'manifest.json', {'coverage':{'partial':selection}})
+            info = {'ledger_parent_run_id':'parent', 'source_hashes':{n:runner.sha(prov/n) for n in ('plan.json','queue.json','selection.json','manifest.json')}}
+            runner.write(service/'plan.json', {'partial_suffix':info}); runner.write(diag/'shared-ledger.json', {'parent_run_id':'parent'}); runner.write(out/'queue.json', queue[1:])
+            with patch.object(runner, 'validate_plan_profession'):
+                runner.validate_partition(out, service)
+                runner.write(out/'queue.json', [queue[2]])
+                with self.assertRaises(ValueError): runner.validate_partition(out, service)
+                runner.write(out/'queue.json', queue[1:]); runner.write(diag/'shared-ledger.json', {'parent_run_id':'other'})
+                with self.assertRaises(ValueError): runner.validate_partition(out, service)
+                runner.write(diag/'shared-ledger.json', {'parent_run_id':'parent'}); runner.write(prov/'selection.json', dict(selection, unresolved_ids=['789']))
+                with self.assertRaises(ValueError): runner.validate_partition(out, service)
+
+    def test_diagnostic_authorization_keeps_budget_and_rejects_replay(self):
+        with tempfile.TemporaryDirectory() as directory, patch.object(runner, 'ROOT', Path(directory)):
+            out, service, diag = runner.paths(runner.ROOT, 'suffix')
+            runner.write(service/'plan.json', {'partial_suffix': {'source_run_id':'partial'}})
+            runner.write(out/'queue.json', [item('123')]); runner.write(diag/'checkpoint.json', {'next_id':'123','completed_ids':[]})
+            runner.write(diag/'failures.json', {'state':'READY','failures':4,'events':[],'retry_limit':1,'retries_started':0,'budget_start_failures':4})
+            args = argparse.Namespace(run_id='suffix', authorization_id='auth', human_instruction='Одна диагностика ID 123')
+            with patch.object(runner, 'validate_partition'):
+                runner.diagnostic_authorization(args)
+                with self.assertRaises(ValueError): runner.diagnostic_authorization(args)
+            ledger = runner.read(diag/'failures.json')
+            self.assertEqual((ledger['failures'], ledger['retries_started'], ledger['budget_start_failures']), (4,0,4))
+            self.assertEqual(ledger['events'][-1]['authorization_id'], 'auth')
+
     def test_partial_partition_prefix_preserves_queue_and_rejects_gaps_and_bad_raw(self):
         with tempfile.TemporaryDirectory() as directory, patch.object(runner, 'ROOT', Path(directory)):
             out, service, diag = runner.paths(runner.ROOT, 'part')

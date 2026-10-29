@@ -191,3 +191,5 @@ avito_runs/<название_сбора>/
 - [20261029_moscow_cashier_f13_01](avito_runs/20261029_moscow_cashier_f13_01/exports/vacancies_flat.csv): 299 вакансий.
 
 - [20261029_moscow_cashier_f13_02](avito_runs/20261029_moscow_cashier_f13_02/exports/vacancies_flat.csv): 2 вакансий.
+
+- [20261029_moscow_cashier_f13_02_resume](avito_runs/20261029_moscow_cashier_f13_02_resume/exports/vacancies_flat.csv): 296 вакансий.
