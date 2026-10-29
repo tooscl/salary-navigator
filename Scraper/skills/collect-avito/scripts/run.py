@@ -388,14 +388,24 @@ def retain_repl(process, diag, sandbox, job):
         raise RuntimeError('Release marker collision; inspect diagnostics')
     code = """import os,select,sys,time
 inp,out,release=int(sys.argv[1]),int(sys.argv[2]),sys.argv[3]
-while not os.path.exists(release):
-    ready,_,_=select.select([out],[],[],1)
-    if ready and not os.read(out,65536): break
-os.close(inp); os.close(out)
+print("keeper_started", flush=True)
+try:
+    while not os.path.exists(release):
+        ready,_,_=select.select([out],[],[],1)
+        if ready and not os.read(out,65536):
+            print("repl_stdout_eof", flush=True); break
+    else:
+        print("release_marker_observed", flush=True)
+finally:
+    os.close(inp); os.close(out)
 """
-    keeper = subprocess.Popen([sys.executable, '-c', code, str(process.stdin.fileno()),
-        str(process.stdout.fileno()), str(release)], pass_fds=(process.stdin.fileno(), process.stdout.fileno()),
-        stdin=subprocess.DEVNULL, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, start_new_session=True)
+    log_path = diag / f'keeper-{process.pid}.local.log'
+    with log_path.open('ab', buffering=0) as log:
+        log.write(f'handoff_before repl_pid={process.pid} poll={process.poll()}\n'.encode())
+        keeper = subprocess.Popen([sys.executable, '-c', code, str(process.stdin.fileno()),
+            str(process.stdout.fileno()), str(release)], pass_fds=(process.stdin.fileno(), process.stdout.fileno()),
+            stdin=subprocess.DEVNULL, stdout=log, stderr=log, start_new_session=True)
+        log.write(f'handoff_after repl_pid={process.pid} poll={process.poll()} keeper_pid={keeper.pid} keeper_poll={keeper.poll()}\n'.encode())
     tab = read(sandbox/'browser-tab.json') if sandbox and (sandbox/'browser-tab.json').exists() else {}
     write(diag/'browser-session.local.json', dict(repl_pid=process.pid, keeper_pid=keeper.pid,
         sandbox=str(sandbox) if sandbox else None, tab=tab, release_marker=str(release)))
@@ -409,14 +419,17 @@ def release_browser(diag):
         path.rename(diag/'browser-session-released.local.json')
 
 
+def launch_repl(command, cwd):
+    return subprocess.Popen(command, stdin=subprocess.PIPE, stdout=subprocess.PIPE,
+                            stderr=subprocess.STDOUT, cwd=cwd, start_new_session=True)
+
 def browser(job, out, diag):
     # One-shot Aside buffers stdout until completion. An interactive handshake
     # records its sandbox BEFORE collection, so interruption cannot orphan raw.
     executable = find_aside()
     if not executable:
         raise RuntimeError('Aside CLI not found; follow collect-avito/references/FIRST_RUN.md')
-    process = subprocess.Popen(aside_command(executable) + ['repl'], stdin=subprocess.PIPE, stdout=subprocess.PIPE,
-                               stderr=subprocess.STDOUT, cwd=ROOT)
+    process = launch_repl(aside_command(executable) + ['repl'], ROOT)
     incoming, reader = pipe_chunks(process.stdout)
     chunks = bytearray()
     def until(pattern, timeout, offset=0):
@@ -1005,6 +1018,11 @@ def reviewed_capture(out, item):
     return data
 
 
+def salary_policy_direct_authorized(instruction):
+    lower = instruction.lower()
+    return 'продолж' in lower and ('исправ' in lower or all(term in lower for term in ('проверить', 'salary-review-policy', 'последующ', 'аналогич')))
+
+
 def salary_review_policy(args):
     out, service, diag = paths(ROOT, args.run_id)
     ledger = load_failures(diag); events = ledger['events']
@@ -1015,7 +1033,7 @@ def salary_review_policy(args):
         raise HumanRequired('Current browser authorization required')
     instruction = events[auth[-1]]['instruction']
     lower = instruction.lower()
-    direct = 'исправ' in lower and 'продолж' in lower
+    direct = salary_policy_direct_authorized(instruction)
     dialogue = re.search(r'вопрос пользователю:\s*«([^»]+)»\s*ответ пользователя:\s*«([^»]+)»', lower)
     contextual = False
     if dialogue:

@@ -318,6 +318,23 @@ const snapshot=async()=>({tree:'stopped'});const closeTab=async()=>{closed++};
                 self.assertNotIn('secret', data['result']['url'])
                 self.assertEqual(data['result']['target_id'], 'external-id' if external else 'new-id')
 
+    def test_launched_repl_is_detached_and_kept_after_error(self):
+        with tempfile.TemporaryDirectory() as directory:
+            diag = Path(directory)
+            proc = runner.launch_repl([sys.executable, '-u', '-c', 'import sys; print("REVIEW_REQUIRED", flush=True); sys.stdin.read()'], diag)
+            try:
+                self.assertEqual(os.getsid(proc.pid), proc.pid)
+                self.assertEqual(proc.stdout.readline().strip(), b'REVIEW_REQUIRED')
+                runner.retain_repl(proc, diag, None, {})
+                info = runner.read(diag/'browser-session.local.json')
+                proc.stdin.close(); proc.stdout.close()
+                self.assertIsNone(proc.poll())
+                Path(info['release_marker']).touch()
+                proc.wait(timeout=5)
+            finally:
+                if proc.poll() is None:
+                    proc.kill(); proc.wait()
+
     def test_parent_exits_with_live_repl_reader(self):
         with tempfile.TemporaryDirectory() as directory:
             script = """import importlib.util, pathlib, subprocess, sys
@@ -347,6 +364,8 @@ p.stdin.close()
                 self.assertIsNone(proc.poll())
                 Path(info['release_marker']).touch()
                 proc.wait(timeout=5)
+                log = diag / f"keeper-{info['repl_pid']}.local.log"
+                self.assertIn('release_marker_observed', log.read_text())
             finally:
                 if proc.poll() is None:
                     proc.kill(); proc.wait()
@@ -706,6 +725,12 @@ p.stdin.close()
             with self.assertRaisesRegex(ValueError, 'Frozen listing changed'):
                 runner.validate_plan_profession(plan, listing)
 
+    def test_explicit_salary_policy_requires_scope_and_continuation(self):
+        instruction = ('Координатор по постоянной инструкции пользователя разрешает проверить сохранённую активную карточку8471771462 с единственной строкой Оклад2 400 - 7 800 ₽ поддержанным review-salary-line, закрепить salary-review-policy для последующих строго аналогичных случаев и продолжить ту же очередь с checkpoint. Raw/историю/вкладку сохранить; недоступной карточку не считать')
+        self.assertTrue(runner.salary_policy_direct_authorized(instruction))
+        self.assertFalse(runner.salary_policy_direct_authorized(instruction.replace('последующих', 'текущих')))
+        self.assertFalse(runner.salary_policy_direct_authorized(instruction.replace('продолжить', 'остановить')))
+
     def test_offline_salary_review_preserves_raw_and_rejects_other_lines(self):
         with tempfile.TemporaryDirectory() as directory, patch.object(runner, 'ROOT', Path(directory)):
             out, service, diag = runner.paths(runner.ROOT, 'salary')
@@ -713,7 +738,7 @@ p.stdin.close()
             runner.write(out/'raw/123.json', data); before = (out/'raw/123.json').read_bytes()
             runner.write(out/'queue.json', [item('123'), item('456')]); runner.write(diag/'checkpoint.json', dict(state='REVIEW_REQUIRED', stop_reason='identity_or_template_review', next_id='123', completed_ids=[]))
             runner.record_failure(diag, 'capture', 'review', 'capture', immediate=True)
-            runner.authorize_browser(diag, 'Исправь ошибку вакансии 123 и продолжай', 'auth')
+            runner.authorize_browser(diag, 'Проверить карточку 123, закрепить salary-review-policy для последующих аналогичных случаев и продолжить', 'auth')
             args = argparse.Namespace(run_id='salary', id='123', authorization_id='auth')
             runner.review_salary_line(args)
             runner.salary_review_policy(args)
