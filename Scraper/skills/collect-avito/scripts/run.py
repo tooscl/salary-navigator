@@ -1112,6 +1112,23 @@ def review_salary_line(args):
 
 def validate_partition(out, service):
     plan = read(service/'plan.json')
+    suffix = plan.get('partial_suffix')
+    if suffix:
+        provenance = out/'partial-provenance'
+        for name, digest in suffix['source_hashes'].items():
+            if sha(provenance/name) != digest: raise ValueError('Partial source provenance changed')
+        source_plan = read(provenance/'plan.json'); source_queue = read(provenance/'queue.json')
+        selection = read(provenance/'selection.json'); manifest = read(provenance/'manifest.json')
+        ids = [x['id'] for x in source_queue]; unresolved = selection['unresolved_ids']; cut = len(ids)-len(unresolved)
+        if (not source_plan.get('partition') or not 0 < cut < len(ids) or ids[cut:] != unresolved
+                or selection['plan_sha256'] != sha(provenance/'plan.json') or selection['queue_sha256'] != sha(provenance/'queue.json')
+                or manifest.get('coverage', {}).get('partial') != selection or read(out/'queue.json') != source_queue[cut:]
+                or set(selection['accepted_ids']) | set(selection['skipped_ids']) != set(ids[:cut])):
+            raise ValueError('Derivative queue differs from partial source suffix')
+        if read(service/'diagnostics/shared-ledger.json') != {'parent_run_id': suffix['ledger_parent_run_id']} or suffix['ledger_parent_run_id'] != source_plan['partition']['parent_run_id']:
+            raise ValueError('Derivative shared ledger differs from frozen parent')
+        validate_plan_profession(source_plan, out/'listing.json')
+        return
     info = plan.get('partition')
     if not info:
         continuation_info = plan.get('continuation')
@@ -1163,6 +1180,34 @@ def validate_partition(out, service):
     marker = read(service/'diagnostics'/'shared-ledger.json')
     if marker != {'parent_run_id': info['parent_run_id']}:
         raise ValueError('Shared failure ledger pointer changed')
+
+
+def partial_suffix(args):
+    source_out, source_service, _ = paths(ROOT, args.source_run_id)
+    out, service, diag = paths(ROOT, args.run_id)
+    if out.exists() or service.exists(): raise ValueError('Derivative run already exists')
+    manifest = validate_completed_export(source_out, source_service)
+    selection = manifest['coverage'].get('partial')
+    if not selection or not selection.get('unresolved_ids'): raise ValueError('Source must be a finalized partial partition')
+    source_plan = read(source_service/'plan.json'); queue = read(source_out/'queue.json')
+    count = len(selection['unresolved_ids']); remaining = queue[-count:]
+    if [item['id'] for item in remaining] != selection['unresolved_ids']: raise ValueError('Source unresolved IDs are not the queue suffix')
+    out.mkdir(parents=True); diag.mkdir(parents=True); provenance = out/'partial-provenance'; provenance.mkdir()
+    source_files = {'plan.json': source_service/'plan.json', 'queue.json': source_out/'queue.json', 'selection.json': source_out/'exports/partial_selection.json', 'manifest.json': source_service/'manifest.json'}
+    for name, path in source_files.items(): shutil.copy2(path, provenance/name)
+    shutil.copy2(source_out/'listing.json', out/'listing.json')
+    for page in source_plan['listing_pages']:
+        target = out/page['file']; target.parent.mkdir(parents=True, exist_ok=True); shutil.copy2(source_out/page['file'], target)
+    write(out/'queue.json', remaining)
+    info = dict(source_run_id=args.source_run_id, ledger_parent_run_id=source_plan['partition']['parent_run_id'], source_hashes={name: sha(path) for name,path in source_files.items()})
+    plan = dict(source_plan, run_id=args.run_id, partition=None, partial_suffix=info, limit=count, requested_limit=count, available_unique=count,
+                instruction_version=instruction_version(SCRIPTS.parent/'SKILL.md'), instruction_sha256=sha(SCRIPTS.parent/'SKILL.md'),
+                code_git_commit=subprocess.check_output(['git','rev-parse','HEAD'], cwd=ROOT, text=True).strip(),
+                automation_sha256={file: sha(ROOT/file) for file in AUTOMATION_FILES}, uncommitted_automation_files=dirty_automation(ROOT))
+    write(service/'plan.json', plan); write(diag/'shared-ledger.json', {'parent_run_id': info['ledger_parent_run_id']})
+    write(diag/'checkpoint.json', dict(state='READY', completed_ids=[], next_id=remaining[0]['id'], capture_seconds=0))
+    validate_partition(out, service)
+    print(json.dumps({'run_id':args.run_id,'queued':count,'next_id':remaining[0]['id']}))
 
 
 def partition(args):
@@ -1219,6 +1264,26 @@ def partition(args):
     print(json.dumps(dict(children=ids, total=len(queue), batch_size=args.batch_size)))
 
 
+def allowed_capture_changes(plan, changes):
+    permitted = {'Scraper/skills/collect-avito/scripts/run.py', 'Scraper/skills/collect-avito/SKILL.md'}
+    guard = 'Scraper/skills/collect-avito/scripts/browser_batch.js'
+    if plan.get('partial_suffix') or (plan.get('partition') and any(c.get('file') == guard and c.get('reason') == 'Audited URL identity guard' and c.get('validation', '').strip() for c in changes)):
+        permitted.add(guard)
+    return permitted
+
+
+def verify_partition_url_guard(plan, changed):
+    guard = 'Scraper/skills/collect-avito/scripts/browser_batch.js'
+    if not plan.get('partition') or guard not in changed: return
+    original = subprocess.check_output(['git', 'show', plan['code_git_commit'] + ':' + guard], cwd=ROOT)
+    if hashlib.sha256(original).hexdigest() != plan['automation_sha256'][guard]:
+        raise ValueError('Frozen browser source does not match recorded hash')
+    before = b"      const ready = data.state === 'DETAIL' && data.id === item.id &&\n"
+    after = before + b'        safeUrl(p.url()) === safeUrl(item.url) && safeUrl(data.source_url) === safeUrl(item.url) &&\n'
+    if original.count(before) != 1 or (ROOT/guard).read_bytes() != original.replace(before, after, 1):
+        raise ValueError('Partition browser change is not the audited URL guard')
+
+
 def capture(args):
     out, service, diag = paths(ROOT, args.run_id)
     validate_partition(out, service)
@@ -1230,8 +1295,10 @@ def capture(args):
     preflight(getattr(args, 'config', None), diag)
     changed = {file for file, value in plan['automation_sha256'].items() if sha(ROOT/file) != value}
     changes = read(diag/'automation_changes.json') if (diag/'automation_changes.json').exists() else []
-    if changed - {'Scraper/skills/collect-avito/scripts/run.py', 'Scraper/skills/collect-avito/SKILL.md'}:
+    permitted = allowed_capture_changes(plan, changes)
+    if changed - permitted:
         raise ValueError('Unapproved collector source changed; preserve old run')
+    verify_partition_url_guard(plan, changed)
     validate_automation_changes(changes, changed)
     standing_unavailable_policy(argparse.Namespace(run_id=args.run_id, authorization_id=STANDING_UNAVAILABLE_ID,
         human_instruction=STANDING_UNAVAILABLE_INSTRUCTION))
@@ -1472,9 +1539,11 @@ def finalize(args):
     changes = read(diag / 'automation_changes.json') if (diag / 'automation_changes.json').exists() else []
     changed = {file for file,value in plan.get('automation_sha256', {}).items() if sha(ROOT/file) != value}
     reviewed_changes = {change['file'] for change in changes}
-    if changed - (reviewed_changes & {'Scraper/skills/collect-avito/scripts/run.py',
-            'Scraper/skills/collect-avito/scripts/failure_log.py', 'Scraper/skills/collect-avito/SKILL.md'}):
+    allowed_changes = {'Scraper/skills/collect-avito/scripts/run.py', 'Scraper/skills/collect-avito/scripts/failure_log.py', 'Scraper/skills/collect-avito/SKILL.md'}
+    allowed_changes |= allowed_capture_changes(plan, changes)
+    if changed - (reviewed_changes & allowed_changes):
         raise ValueError('Unregistered collector source changed after capture; use a new run')
+    verify_partition_url_guard(plan, changed)
     registry_path = ROOT / 'Data/dataset/sources.json'
     registry = read(registry_path)
     registered = [e for e in registry['exports'] if e['run_id'] == args.run_id]
@@ -1688,6 +1757,25 @@ def resume_browser(args):
     print('Human browser authorization recorded; history retained, bounded retry budget active')
 
 
+def diagnostic_authorization(args):
+    out, service, diag = paths(ROOT, args.run_id)
+    validate_partition(out, service)
+    plan = read(service/'plan.json'); cp = read(diag/'checkpoint.json'); queue = read(out/'queue.json')
+    if not plan.get('partial_suffix') or not queue or cp.get('completed_ids') or cp.get('next_id') != queue[0]['id']:
+        raise ValueError('Diagnostic authorization requires untouched derivative suffix')
+    if queue[0]['id'] not in args.human_instruction or not args.authorization_id.strip() or not args.human_instruction.strip():
+        raise ValueError('Diagnostic instruction must identify the pending ID')
+    with locked(diag):
+        ledger = load_failures(diag)
+        if ledger['state'] != 'READY': raise HumanRequired('Diagnostic authorization requires READY ledger')
+        if any(e.get('authorization_id') == args.authorization_id for e in ledger['events']):
+            raise ValueError('Authorization ID already recorded')
+        ledger['events'].append(dict(event='diagnostic_authorization', authorization_id=args.authorization_id,
+            instruction=args.human_instruction, run_id=args.run_id, next_id=queue[0]['id'], at=datetime.now(timezone.utc).isoformat()))
+        save_failures(diag, ledger)
+    print('Diagnostic instruction recorded; failure budget unchanged')
+
+
 def validate_completed_export(out, service):
     manifest = read(service/'manifest.json')
     if manifest.get('status') != 'complete':
@@ -1855,7 +1943,7 @@ def publish(args):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     commands = parser.add_subparsers(dest='command', required=True)
-    for name in ['archive-uncertain-freeze', 'archive-partial-listing', 'partition', 'continuation', 'freeze', 'capture', 'finalize', 'post-finalize-review', 'publish', 'reselect', 'standing-unavailable-policy', 'closed-policy', 'review-policy', 'blocked-listing-policy', 'salary-review-policy', 'review-salary-line', 'mark-unavailable', 'preserve-stopped-observation', 'note-change', 'record-error', 'check-stage', 'stage-ok', 'resume-offline', 'resume-browser']:
+    for name in ['archive-uncertain-freeze', 'archive-partial-listing', 'partition', 'partial-suffix', 'continuation', 'freeze', 'capture', 'finalize', 'post-finalize-review', 'publish', 'reselect', 'standing-unavailable-policy', 'closed-policy', 'review-policy', 'blocked-listing-policy', 'salary-review-policy', 'review-salary-line', 'mark-unavailable', 'preserve-stopped-observation', 'note-change', 'record-error', 'check-stage', 'stage-ok', 'resume-offline', 'resume-browser', 'diagnostic-authorization']:
         command = commands.add_parser(name)
         command.add_argument('--run-id', required=True)
         if name in ('freeze', 'capture'):
@@ -1868,6 +1956,8 @@ def main():
             command.add_argument('--prefix', required=True)
         elif name == 'continuation':
             command.add_argument('--parent-run-id', required=True)
+        elif name == 'partial-suffix':
+            command.add_argument('--source-run-id', required=True)
         elif name == 'freeze':
             command.add_argument('--retry-reason')
             command.add_argument('--ui-next', action='store_true', help='Click observed Next in explicit tab and verify landed page')
@@ -1934,9 +2024,9 @@ def main():
         elif name in ('check-stage', 'stage-ok'):
             command.add_argument('--stage', required=True)
             command.add_argument('--retry-reason' if name == 'check-stage' else '--evidence', required=name == 'stage-ok')
-        elif name in ('resume-offline', 'resume-browser'):
+        elif name in ('resume-offline', 'resume-browser', 'diagnostic-authorization'):
             command.add_argument('--human-instruction', required=True)
-            if name == 'resume-browser':
+            if name in ('resume-browser', 'diagnostic-authorization'):
                 command.add_argument('--authorization-id', required=True, help='Stable ID for this fresh human instruction; reuse on CLI retries')
         else:
             for flag in ['file', 'reason', 'validation']:
@@ -1946,8 +2036,8 @@ def main():
         parser.error('batch-size must be positive')
     with ExitStack() as stack:
         try:
-            if args.command in ('archive-uncertain-freeze', 'archive-partial-listing', 'partition', 'continuation', 'freeze', 'capture', 'finalize', 'post-finalize-review', 'publish', 'reselect', 'standing-unavailable-policy', 'closed-policy', 'review-policy', 'blocked-listing-policy', 'salary-review-policy', 'review-salary-line', 'mark-unavailable', 'preserve-stopped-observation', 'record-error', 'stage-ok', 'resume-browser', 'resume-offline'):
-                lock_run_id = args.parent_run_id if args.command == 'continuation' else args.run_id
+            if args.command in ('archive-uncertain-freeze', 'archive-partial-listing', 'partition', 'partial-suffix', 'continuation', 'freeze', 'capture', 'finalize', 'post-finalize-review', 'publish', 'reselect', 'standing-unavailable-policy', 'closed-policy', 'review-policy', 'blocked-listing-policy', 'salary-review-policy', 'review-salary-line', 'mark-unavailable', 'preserve-stopped-observation', 'record-error', 'stage-ok', 'resume-browser', 'resume-offline', 'diagnostic-authorization'):
+                lock_run_id = args.parent_run_id if args.command == 'continuation' else args.source_run_id if args.command == 'partial-suffix' else args.run_id
                 stack.enter_context(operation_locked(paths(ROOT, lock_run_id)[2]))
             globals()[args.command.replace('-', '_')](args)
             if args.command in ('freeze', 'capture', 'finalize', 'publish'):
