@@ -1120,8 +1120,93 @@ def review_salary_line(args):
     print(json.dumps({'reviewed': args.id, 'next_id': cp['next_id']}))
 
 
+def validate_supplement_observation(parent, page, evidence):
+    if (page.get('state') != 'LISTING' or page.get('heading') != evidence.get('heading')
+            or page.get('source_url') != evidence.get('actual_url')
+            or page.get('pagination', {}).get('current_pages') != evidence.get('current_pages')
+            or evidence.get('listing_state') != 'LISTING' or evidence.get('protection') != 'not_detected'
+            or evidence.get('visible_cards') != len(page.get('items', []))
+            or evidence.get('search') != {'present': True, 'value': ''}
+            or not evidence.get('profession', {}).get('checked')
+            or evidence.get('profession', {}).get('label') != parent['profession']
+            or not any(c.get('marker') == evidence.get('profession', {}).get('marker') and c.get('label') == parent['profession'] for c in page.get('selected_controls', []))
+            or selection_profession(page) != parent['profession']
+            or page.get('profession_filter', {}).get('observed') is not True
+            or page.get('profession_filter', {}).get('selected_count') != sum(1 for c in page.get('selected_controls', []) if (c.get('marker') or '').startswith('params[144170]/'))
+            or urlsplit(page['source_url']).path != urlsplit(parent['listing_url']).path):
+        raise ValueError('Supplement listing evidence differs from parent filters')
+    try:
+        observed_at = datetime.fromisoformat(page['observed_at'].replace('Z', '+00:00'))
+        evidence_at = datetime.fromisoformat(evidence['observed_at'].replace('Z', '+00:00'))
+        if observed_at.tzinfo is None or evidence_at.tzinfo is None or abs((observed_at - evidence_at).total_seconds()) > 120:
+            raise ValueError('Supplement evidence is not contemporaneous')
+    except (KeyError, TypeError) as error:
+        raise ValueError('Supplement observation times are required') from error
+    if (not same_observed_url(evidence['source_url'], page['source_url'])
+            or page.get('pagination', {}).get('current_pages') != [str(page_number(page['source_url']))]):
+        raise ValueError('Supplement page marker differs from source')
+
+
+def validate_supplement(out, service):
+    plan = read(service/'plan.json'); info = plan['supplement']
+    prov = out/'supplement-provenance'
+    if set(info.get('source_hashes', {})) != {'parent-plan.json', 'parent-queue.json', 'observation.json', 'evidence.json'}:
+        raise ValueError('Supplement provenance set differs')
+    for name, digest in info['source_hashes'].items():
+        if sha(prov/name) != digest:
+            raise ValueError('Supplement provenance changed')
+    parent = read(prov/'parent-plan.json'); original = read(prov/'parent-queue.json')
+    page = read(out/'listing.json'); evidence = read(prov/'evidence.json')
+    validate_supplement_observation(parent, page, evidence)
+    if sha(out/'listing.json') != info['source_hashes']['observation.json']:
+        raise ValueError('Supplement listing differs from observation')
+    expected = [x for x in queue_from_pages([page], None) if x['id'] not in {i['id'] for i in original}]
+    if read(out/'queue.json') != expected or not expected:
+        raise ValueError('Supplement queue is not the new-ID selection')
+    if read(service/'diagnostics/shared-ledger.json') != {'parent_run_id': info['parent_run_id']}:
+        raise ValueError('Supplement shared ledger differs')
+    validate_plan_profession(plan, out/'listing.json')
+
+
+def supplemental(args):
+    parent_out, parent_service, parent_diag = paths(ROOT, args.parent_run_id)
+    out, service, diag = paths(ROOT, args.run_id)
+    ensure_allowed(parent_diag, 'supplemental')
+    if out.exists() or service.exists() or args.run_id == args.parent_run_id:
+        raise ValueError('Supplement requires a new run ID')
+    parent = read(parent_service/'plan.json'); validate_plan_profession(parent, parent_out/'listing.json')
+    original = read(parent_out/'queue.json'); pages = [read(parent_out/x['file']) for x in parent['listing_pages']]
+    if queue_from_pages(pages, None) != original:
+        raise ValueError('Parent queue differs from frozen pages')
+    if Path(args.observation).name != args.observation or Path(args.evidence).name != args.evidence:
+        raise ValueError('Observation and evidence must be local diagnostic filenames')
+    observation = parent_diag/args.observation; evidence = parent_diag/args.evidence
+    page = read(observation); validate_supplement_observation(parent, page, read(evidence))
+    known = {x['id'] for x in original}
+    queue = [x for x in queue_from_pages([page], None) if x['id'] not in known]
+    if not queue: raise ValueError('No new IDs in observed listing')
+    out.mkdir(parents=True); diag.mkdir(parents=True); prov = out/'supplement-provenance'; prov.mkdir()
+    files = {'parent-plan.json': parent_service/'plan.json', 'parent-queue.json': parent_out/'queue.json', 'observation.json': observation, 'evidence.json': evidence}
+    for name, path in files.items(): shutil.copy2(path, prov/name)
+    shutil.copy2(observation, out/'listing.json'); write(out/'queue.json', queue)
+    info = dict(parent_run_id=args.parent_run_id, source_hashes={name: sha(path) for name, path in files.items()})
+    plan = dict(parent, run_id=args.run_id, listing_url=page['source_url'], listing_sha256=sha(out/'listing.json'), listing_pages=[],
+        selected_controls=page['selected_controls'], selection_mode='observed_supplement_new_ids', limit=len(queue), requested_limit=len(queue),
+        available_unique=len(queue), requested_all_pages=False, available_listing_exhausted=False, listing_end_reason=None,
+        partition=None, continuation=None, saved_selection_authorization=None, supplement=info, instruction_version=instruction_version(SCRIPTS.parent/'SKILL.md'),
+        instruction_sha256=sha(SCRIPTS.parent/'SKILL.md'), code_git_commit=subprocess.check_output(['git','rev-parse','HEAD'], cwd=ROOT, text=True).strip(),
+        automation_sha256={file: sha(ROOT/file) for file in AUTOMATION_FILES}, uncommitted_automation_files=dirty_automation(ROOT))
+    write(service/'plan.json', plan); write(diag/'shared-ledger.json', {'parent_run_id': args.parent_run_id})
+    write(diag/'checkpoint.json', dict(state='READY', completed_ids=[], next_id=queue[0]['id'], capture_seconds=0))
+    validate_supplement(out, service)
+    print(json.dumps({'run_id':args.run_id, 'queued':len(queue)}, ensure_ascii=False))
+
+
 def validate_partition(out, service):
     plan = read(service/'plan.json')
+    if plan.get('supplement'):
+        validate_supplement(out, service)
+        return
     suffix = plan.get('partial_suffix')
     if suffix:
         provenance = out/'partial-provenance'
@@ -2057,7 +2142,7 @@ def publish(args):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     commands = parser.add_subparsers(dest='command', required=True)
-    for name in ['archive-uncertain-freeze', 'archive-partial-listing', 'partition', 'partial-suffix', 'continuation', 'freeze', 'capture', 'finalize', 'post-finalize-review', 'publish', 'reselect', 'standing-unavailable-policy', 'closed-policy', 'review-policy', 'blocked-listing-policy', 'salary-review-policy', 'review-salary-line', 'mark-unavailable', 'preserve-stopped-observation', 'note-change', 'record-error', 'check-stage', 'stage-ok', 'resume-offline', 'resume-browser', 'diagnostic-authorization', 'external-threshold-authorization', 'diagnostic-pending-capture']:
+    for name in ['archive-uncertain-freeze', 'archive-partial-listing', 'partition', 'partial-suffix', 'continuation', 'supplemental', 'freeze', 'capture', 'finalize', 'post-finalize-review', 'publish', 'reselect', 'standing-unavailable-policy', 'closed-policy', 'review-policy', 'blocked-listing-policy', 'salary-review-policy', 'review-salary-line', 'mark-unavailable', 'preserve-stopped-observation', 'note-change', 'record-error', 'check-stage', 'stage-ok', 'resume-offline', 'resume-browser', 'diagnostic-authorization', 'external-threshold-authorization', 'diagnostic-pending-capture']:
         command = commands.add_parser(name)
         command.add_argument('--run-id', required=True)
         if name in ('freeze', 'capture', 'diagnostic-pending-capture'):
@@ -2068,6 +2153,10 @@ def main():
         elif name == 'partition':
             command.add_argument('--batch-size', type=int, required=True)
             command.add_argument('--prefix', required=True)
+        elif name == 'supplemental':
+            command.add_argument('--parent-run-id', required=True)
+            command.add_argument('--observation', required=True, help='Listing JSON filename in parent diagnostics')
+            command.add_argument('--evidence', required=True, help='Filter evidence JSON filename in parent diagnostics')
         elif name == 'continuation':
             command.add_argument('--parent-run-id', required=True)
         elif name == 'partial-suffix':
@@ -2155,8 +2244,8 @@ def main():
         parser.error('batch-size must be positive')
     with ExitStack() as stack:
         try:
-            if args.command in ('archive-uncertain-freeze', 'archive-partial-listing', 'partition', 'partial-suffix', 'continuation', 'freeze', 'capture', 'finalize', 'post-finalize-review', 'publish', 'reselect', 'standing-unavailable-policy', 'closed-policy', 'review-policy', 'blocked-listing-policy', 'salary-review-policy', 'review-salary-line', 'mark-unavailable', 'preserve-stopped-observation', 'record-error', 'stage-ok', 'resume-browser', 'resume-offline', 'diagnostic-authorization', 'external-threshold-authorization', 'diagnostic-pending-capture'):
-                lock_run_id = args.parent_run_id if args.command == 'continuation' else args.source_run_id if args.command == 'partial-suffix' else args.run_id
+            if args.command in ('archive-uncertain-freeze', 'archive-partial-listing', 'partition', 'partial-suffix', 'continuation', 'supplemental', 'freeze', 'capture', 'finalize', 'post-finalize-review', 'publish', 'reselect', 'standing-unavailable-policy', 'closed-policy', 'review-policy', 'blocked-listing-policy', 'salary-review-policy', 'review-salary-line', 'mark-unavailable', 'preserve-stopped-observation', 'record-error', 'stage-ok', 'resume-browser', 'resume-offline', 'diagnostic-authorization', 'external-threshold-authorization', 'diagnostic-pending-capture'):
+                lock_run_id = args.parent_run_id if args.command in ('continuation', 'supplemental') else args.source_run_id if args.command == 'partial-suffix' else args.run_id
                 stack.enter_context(operation_locked(paths(ROOT, lock_run_id)[2]))
             globals()[args.command.replace('-', '_')](args)
             if args.command in ('freeze', 'capture', 'finalize', 'publish'):
