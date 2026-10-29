@@ -22,10 +22,11 @@ const fs = {mkdir:async()=>{}, writeFile:async(name, data)=>files.set(name,data)
  rename:async(from,to)=>{files.set(to, files.get(from));files.delete(from);},
  readFile:async(name)=>files.get(name)};
 const pwd = '/memory';
-const p = {goto:async(id)=>{current=id;opened.push(id);}, evaluate:async()=>
+const p = {url:()=>current, goto:async(id)=>{current=id;opened.push(id);}, evaluate:async()=>
  current==='456' ? {state:'NEEDS_HUMAN', id:'456'} :
  {state:'DETAIL',id:current,title:'Курьер',description:null,location_raw:[],
  parameter_audit:{rendered_complete:true},fields:[{name:'График',value:'Гибкий'}], ...INVALID}};
+const listBrowserTabs = async()=>current ? [{targetId:'test-tab',url:current}] : [];
 const openTab = async(id)=>{await p.goto(id);return p;};
 const snapshot = async()=>({tree:'fixture'}); const closeTab = async()=>{};
 (async()=>{

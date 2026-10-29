@@ -117,7 +117,8 @@
   const nextURL = nextHref ? new URL(nextHref, location.href).href : null;
   // Missing Next alone may be a render delay. A truncated numeric pager
   // (even current == max visible) is not positive evidence of the end.
-  const pagination = {next_url: !disabled ? nextURL : null, end_confirmed: !!disabled,
+  const current_pages = [...document.querySelectorAll('[aria-current="page"]')].filter(visible).map(e => text(e)).filter(t => /^[1-9]\d*$/.test(t));
+  const pagination = {current_pages, next_url: !disabled ? nextURL : null, end_confirmed: !!disabled,
     evidence: next ? {text: text(next), label: next.getAttribute('aria-label'), href: nextHref, disabled: !!disabled} : null,
     limitation: 'End requires an explicitly disabled Next; missing Next alone is not proof; infinite loading and server-side result caps are not covered'};
   return {...base, heading: text(document.querySelector('h1')), selected_controls: controls, profession_filter, items, listing_item_audit, pagination};

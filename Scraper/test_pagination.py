@@ -36,8 +36,8 @@ class PaginationTests(unittest.TestCase):
                 if repeat_items and page == 2:
                     items = [item(str(i)) for i in range(1, 101)]
                 listing = dict(state='LISTING', source_url=url, heading='Вакансии',
-                    selected_controls=courier_controls() if page == 1 else [],
-                    items=items, pagination=dict(next_url=next_url, end_confirmed=confirmed_end and next_url is None))
+                    selected_controls=courier_controls() if page == 1 and scope != 'all' else [],
+                    profession_filter=dict(observed=True, selected_count=0), items=items, pagination=dict(next_url=next_url, end_confirmed=confirmed_end and next_url is None))
                 if blocked and page == 2:
                     cp = dict(state='NEEDS_HUMAN', completed_ids=[])
                 else:
@@ -177,6 +177,61 @@ class PaginationTests(unittest.TestCase):
             runner.write(tail_out/'continuation-provenance/parent-queue.json', [])
             with self.assertRaisesRegex(ValueError, 'provenance changed'):
                 runner.validate_partition(tail_out, tail_service)
+
+    def test_ui_transition_requires_landed_page_and_filters(self):
+        first_url = 'https://www.avito.ru/moskva/vakansii/prodavec?context=one'
+        href = 'https://www.avito.ru/moskva/vakansii?context=one&p=2'
+        landed = 'https://www.avito.ru/moskva/vakansii/prodavec?context=two&p=2'
+        first = dict(source_url=first_url, heading='Продавец', selected_controls=courier_controls(),
+                     pagination=dict(next_url=href, current_pages=['1']))
+        page = dict(source_url=landed, heading='Продавец', selected_controls=courier_controls(),
+                    pagination=dict(current_pages=['2']), ui_transition=dict(method='observed_ui_next', recovered=False, next_snapshot='Next', from_page=1, landed_page=2, from_url=first_url, next_href=href, landed_url=landed))
+        runner.validate_ui_transition(first, first, page)
+        for change in (dict(source_url=href), dict(heading='Все вакансии'), dict(selected_controls=[]),
+                       dict(pagination=dict(current_pages=['1'])), dict(ui_transition={})):
+            with self.assertRaises(ValueError): runner.validate_ui_transition(first, first, dict(page, **change))
+
+    def test_ui_next_click_and_recovery_with_browser_double(self):
+        script = r"""
+const nodefs = require('fs');
+const source = nodefs.readFileSync(process.argv[1], 'utf8');
+const url1='https://www.avito.ru/moskva/vakansii/prodavec';
+const href='https://www.avito.ru/moskva/vakansii?p=2';
+const url2=url1+'?p=2';
+const controls=[{marker:'params[144170]/checkbox/1',value:'1',label:'Продавец'}];
+const make=(url,n)=>({state:'LISTING',source_url:url,observed_at:String(Math.random()),heading:'Продавец',selected_controls:controls,items:[{id:'1'}],listing_item_audit:{malformed:0},pagination:{current_pages:[String(n)],next_url:href,evidence:{href:'/moskva/vakansii?p=2'}}});
+const first=make(url1,1);
+(async()=>{for(const scenario of ['click','recovery','delayed','broad','href_changed']) {
+ const recovering=scenario==='recovery'; let current=recovering ? make(url2,2) : first, clicks=0, polls=0; const writes={};
+ if(scenario==='href_changed') current={...first,pagination:{...first.pagination,next_url:href+'&changed=1',evidence:{href:'/moskva/vakansii?p=2&changed=1'}}};
+ global.pwd='sandbox'; global.fs={mkdir:async()=>{},writeFile:async(n,v)=>writes[n]=v,rename:async(a,b)=>writes[b]=writes[a],readFile:async(n)=>writes[n]};
+ global.attachBrowserTab=async()=>({url:()=>current.source_url,evaluate:async()=>{ if(clicks && scenario==='delayed' && ++polls===5) current=make(url2,2); return current; },locator:()=>({click:async()=>{clicks++; if(scenario==='broad') current=make(href,2); else if(scenario!=='delayed') current=make(url2,2)}})});
+ global.snapshot=async(_page, options)=>({tree:options.selector==='[aria-label="Следующая страница"]' ? '- link "Следующая страница" [ref=e7]' : '- truncated listing'});
+ global.sleep=async()=>{}; global.tlCollectorPage=null;
+ const job={mode:'freeze',url:href,completed_ids:[],tab_id:'tab',ui_next:true,previous:first,first};
+ await eval('(async()=>{'+source.replace('__JOB__',JSON.stringify(job)).replace('__EXTRACTOR__',JSON.stringify('extract'))+'})()');
+ const cp=JSON.parse(writes['checkpoint.json']);
+ if(scenario==='broad') { if(cp.state!=='BROWSER_ERROR' || writes['listing.json']) process.exit(3); continue; }
+ if(scenario==='href_changed') { const d=JSON.parse(writes['next-comparison.json']); if(cp.state!=='BROWSER_ERROR'||clicks||!d.ref_found||d.current_next===d.expected_next) process.exit(4); continue; }
+ const result=JSON.parse(writes['listing.json']);
+ if(clicks!==Number(!recovering)||result.source_url!==url2||result.ui_transition.next_href!==href||result.ui_transition.recovered!==recovering||cp.state!=='READY'||(scenario==='delayed' && polls<5)) process.exit(1);
+}})().catch(()=>process.exit(2));
+"""
+        subprocess.run(['node', '-e', script, str(runner.SCRIPTS/'browser_batch.js')], check=True, capture_output=True)
+
+    def test_archive_uncertain_pages_keeps_bytes_and_ledger(self):
+        with tempfile.TemporaryDirectory() as directory, patch.object(runner, 'ROOT', Path(directory)), patch.object(runner, 'AUTOMATION_FILES', []), patch.object(runner.subprocess, 'check_output', return_value='abc'):
+            out, service, diag = runner.paths(runner.ROOT, 'run')
+            page = out/'listing_pages/0001.json'; page.parent.mkdir(parents=True)
+            page.write_bytes(b'{"uncertain": true}\n')
+            runner.write(diag/'failures.json', {'state':'RECOVERED', 'stages':{'freeze':{'state':'RETRY_AVAILABLE'}}, 'events':[]})
+            original = (diag/'failures.json').read_bytes()
+            runner.archive_uncertain_freeze(argparse.Namespace(run_id='run', reason='mixed observation'))
+            archive = service/'uncertain-freeze'
+            self.assertEqual((archive/'data/listing_pages/0001.json').read_bytes(), b'{"uncertain": true}\n')
+            self.assertEqual((diag/'failures.json').read_bytes(), original)
+            self.assertEqual(runner.read(archive/'provenance.json')['files']['data/listing_pages/0001.json'], runner.sha(archive/'data/listing_pages/0001.json'))
+            self.assertFalse(page.exists())
 
     def test_extractor_observes_next_and_end(self):
         script = r'''
