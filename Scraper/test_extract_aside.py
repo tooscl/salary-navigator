@@ -35,7 +35,14 @@ class FixtureHandler(BaseHTTPRequestHandler):
             control = '' if self.path == '/listing-missing' else (
                 '<label ' + role + ' data-marker="params[144170]/checkbox/3201765">Курьер'
                 '<input type="checkbox" data-marker="other-marker" value="3201765" ' + checked + '></label>')
-            html = ('<html><body><h1>Работа и вакансии</h1>' + control +
+            pager = ''
+            if self.path.startswith('/listing-pager-'):
+                scenario = self.path.removeprefix('/listing-pager-')
+                next_button = ('<li class="listItem_arrow_next-test"><button aria-disabled="true"><svg data-icon-name="' + ('arrowleft' if scenario == 'wrong-direction' else 'arrowright') + '"></svg></button></li>' if scenario in ('disabled-next', 'wrong-direction') else '')
+                if scenario == 'active-next':
+                    next_button = '<li class="listItem_arrow_next-test"><a aria-label="Следующая страница" href="?p=25"><svg data-icon-name="arrowright"></svg></a></li>'
+                pager = ('<ul data-marker="pagination-button"><li class="listItem_arrow_prev-test"><button aria-disabled="true"><svg data-icon-name="arrowleft"></svg></button></li><li><span aria-disabled="true">•••</span></li><li><span aria-current="page">24</span></li>' + next_button + '</ul>')
+            html = ('<html><body><h1>Работа и вакансии</h1>' + control + pager +
                 '<label data-marker="params[999]/checkbox/1"><input type="checkbox" checked>Гибкий график</label>'
                 '<div data-marker="item"><a data-marker="item-title" href="/detail_123">Вакансия</a></div>'
                 '</body></html>')
@@ -110,6 +117,43 @@ console.log('TL_LISTINGS=' + JSON.stringify(results));
             self.assertFalse(missing['profession_filter']['observed'])
             with self.assertRaises(ValueError):
                 runner.profession_from_listing(missing)
+        finally:
+            server.shutdown(); server.server_close(); thread.join()
+
+    def test_listing_disabled_next_is_scoped_and_directional(self):
+        server = ThreadingHTTPServer(('127.0.0.1', 0), FixtureHandler)
+        thread = threading.Thread(target=server.serve_forever, daemon=True); thread.start()
+        runner = fixture_runner()
+        script = """
+var extractor = __EXTRACTOR__;
+var results = [];
+var p;
+try {
+  for (var scenario of ['previous-ellipsis', 'wrong-direction', 'active-next', 'disabled-next']) {
+    if (!p) p = await openTab(__ORIGIN__ + '/listing-pager-' + scenario);
+    else await p.goto(__ORIGIN__ + '/listing-pager-' + scenario);
+    await snapshot(p);
+    results.push(await p.evaluate(extractor));
+  }
+} finally { if (p) await closeTab(p); }
+console.log('TL_PAGINATION=' + JSON.stringify(results));
+""".replace('__EXTRACTOR__', json.dumps((ROOT/'Scraper/extract.js').read_text()))
+        script = script.replace('__ORIGIN__', json.dumps(f'http://127.0.0.1:{server.server_port}'))
+        try:
+            result = subprocess.run(runner.aside_command(runner.find_aside()) + ['repl', script], capture_output=True, text=True, timeout=90)
+            output = result.stdout + result.stderr
+            lines = [line[len('TL_PAGINATION='):] for line in output.splitlines() if line.startswith('TL_PAGINATION=')]
+            self.assertEqual(result.returncode, 0, output)
+            self.assertTrue(lines, output)
+            previous, wrong_direction, active, next_page = [x['pagination'] for x in json.loads(lines[0])]
+            self.assertFalse(previous['end_confirmed'])
+            self.assertIsNone(previous['evidence'])
+            self.assertFalse(wrong_direction['end_confirmed'])
+            self.assertFalse(active['end_confirmed'])
+            self.assertTrue(active['next_url'].endswith('?p=25'))
+            self.assertTrue(next_page['end_confirmed'])
+            self.assertEqual(next_page['evidence']['direction'], 'next_arrowright')
+            self.assertIsNone(next_page['next_url'])
         finally:
             server.shutdown(); server.server_close(); thread.join()
 
