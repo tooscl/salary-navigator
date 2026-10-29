@@ -8,7 +8,7 @@
     "source": "title",
     "policy": "keyword_signal_not_exclusion"
   },
-  "rows": 12280,
+  "rows": 12388,
   "columns": [
     "source",
     "id",
@@ -126,7 +126,7 @@
     "enriched_fields",
     "enrichment_version"
   ],
-  "sha256": "2eb6117c6a5bfb53ade175b9b37af08e54e46f91515d784abd57440dc3289da5",
+  "sha256": "90596ecd11f5b307fdae304f186d2760a83f016b2b303432618f82ee58b919f0",
   "inputs": [
     {
       "run_id": "20261028-spb-50-all",
@@ -7667,6 +7667,29 @@
         }
       },
       "rows": 299
+    },
+    {
+      "run_id": "filter15_02",
+      "source": "avito",
+      "path": "Data/avito_runs/filter15_02/exports/vacancies_flat.csv",
+      "sha256": "1dea7364cad27c5ec1fac7f79e98982a8ffc4f6ff4fe87c21b17c0a00ad1b0a4",
+      "placement_regions": {
+        "Екатеринбург": "Свердловская область"
+      },
+      "enrichment_status": "not_run",
+      "unknown_city_placements": {
+        "8484907452": {
+          "region": "Свердловская область",
+          "evidence": "Свердловская обл., Екатеринбург, пр. Решетникова, 7 Чкаловская от 31 мин. Ботаническая от 31 мин.",
+          "region_unknown": false
+        },
+        "8296630568": {
+          "region": "Свердловская область",
+          "evidence": "Свердловская обл., муниципальное образование Екатеринбург, пос. Мичуринский, Ручейная ул., 53 р-н Академический",
+          "region_unknown": false
+        }
+      },
+      "rows": 116
     },
     {
       "run_id": "first5_2026-10-28_01",
