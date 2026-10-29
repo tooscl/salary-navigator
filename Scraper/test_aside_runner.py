@@ -1111,6 +1111,38 @@ p.stdin.close()
                 self.assertFalse((service/'plan.json').exists())
                 self.assertTrue((diag/'pending_listing.json').exists())
 
+    def test_supplement_selects_only_new_ids_and_validates_provenance(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory); out, service, diag = runner.paths(root, 'parent')
+            for file in runner.AUTOMATION_FILES:
+                path = root/file; path.parent.mkdir(parents=True, exist_ok=True); path.write_bytes((runner.ROOT/file).read_bytes())
+            url = 'https://www.avito.ru/moskva/vakansii?p=19'
+            first = dict(state='LISTING', source_url=url, heading='Курьер', observed_at='2026-10-29T13:24:00Z', profession_filter={'observed':True, 'selected_count':2}, selected_controls=courier_controls(), items=[item('123')], pagination={'current_pages':['19']})
+            runner.write(out/'listing.json', first); runner.write(out/'listing_pages/0001.json', first)
+            runner.write(out/'queue.json', runner.queue_from_pages([first], None))
+            runner.write(service/'plan.json', dict(run_id='parent', profession='Курьер', profession_scope=None, listing_url=url, listing_sha256=runner.sha(out/'listing.json'), listing_pages=[dict(file='listing_pages/0001.json', sha256=runner.sha(out/'listing_pages/0001.json'), source_url=url)]))
+            fresh = dict(first, items=[item('123'), item('456')])
+            runner.write(diag/'observation.json', fresh)
+            runner.write(diag/'evidence.json', dict(heading='Курьер', observed_at='2026-10-29T13:23:00Z', actual_url=url, source_url=url, current_pages=['19'], listing_state='LISTING', visible_cards=2, protection='not_detected', search={'present':True,'value':''}, profession={'checked':True,'label':'Курьер','marker':'params[144170]/checkbox/3201765'}))
+            args=argparse.Namespace(parent_run_id='parent',run_id='supp',observation='observation.json',evidence='evidence.json')
+            with patch.object(runner,'ROOT',root), patch.object(runner,'dirty_automation',return_value=[]), patch.object(runner.subprocess,'check_output',return_value='abc'):
+                original_evidence = runner.read(diag/'evidence.json')
+                runner.write(diag/'evidence.json', dict(original_evidence, search={'present':True,'value':'wrong'}))
+                with self.assertRaisesRegex(ValueError, 'parent filters'):
+                    runner.supplemental(args)
+                self.assertFalse((root/'Data/avito_runs/supp').exists())
+                runner.write(diag/'evidence.json', dict(original_evidence, observed_at='2026-10-29T13:00:00Z'))
+                with self.assertRaisesRegex(ValueError, 'not contemporaneous'):
+                    runner.supplemental(args)
+                runner.write(diag/'evidence.json', original_evidence)
+                runner.supplemental(args)
+                child, child_service, _ = runner.paths(root,'supp')
+                self.assertEqual([x['id'] for x in runner.read(child/'queue.json')], ['456'])
+                runner.validate_partition(child,child_service)
+                runner.write(child/'queue.json', runner.queue_from_pages([fresh], None))
+                with self.assertRaisesRegex(ValueError,'new-ID selection'):
+                    runner.validate_partition(child,child_service)
+
     def test_freeze_resumes_even_if_interrupted_before_request_was_saved(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
