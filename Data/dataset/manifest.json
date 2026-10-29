@@ -8,7 +8,7 @@
     "source": "title",
     "policy": "keyword_signal_not_exclusion"
   },
-  "rows": 10566,
+  "rows": 10567,
   "columns": [
     "source",
     "id",
@@ -126,7 +126,7 @@
     "enriched_fields",
     "enrichment_version"
   ],
-  "sha256": "2530f20d372f0c61811bf0cb9bd757d235dee7b112a1d3ced777402a69d5967f",
+  "sha256": "8cde22039b67430dace585dcc94b6c8fef16a9ac5391a6d9e682b92653a90a50",
   "inputs": [
     {
       "run_id": "20261028-spb-50-all",
@@ -790,6 +790,24 @@
         }
       },
       "rows": 299
+    },
+    {
+      "run_id": "20261029_moscow_cashier_f13_02",
+      "source": "avito",
+      "path": "Data/avito_runs/20261029_moscow_cashier_f13_02/exports/vacancies_flat.csv",
+      "sha256": "013a254fed1cbb1f73b2ad244beda1ceae89afa54ec44204d14ccb64fc154de9",
+      "placement_regions": {
+        "Москва": "Москва"
+      },
+      "enrichment_status": "not_run",
+      "unknown_city_placements": {
+        "8366338285": {
+          "region": "Москва",
+          "evidence": "Москва, Хвалынский б-р, 7/11к1 Лермонтовский проспект до 5 мин. Косино 6–10 мин. Ухтомская 11–15 мин.",
+          "region_unknown": false
+        }
+      },
+      "rows": 2
     },
     {
       "run_id": "all_professions_first5_2026-10-27",
