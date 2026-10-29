@@ -37,6 +37,23 @@ def raw(identity='123'):
 
 
 class RunnerTests(unittest.TestCase):
+    def test_staged_diff_allows_text_separator_only_in_data(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            subprocess.run(['git', 'init', '-q', str(root)], check=True)
+            def staged(path, content):
+                subprocess.run(['git', 'reset', '-q'], cwd=root, check=True)
+                target = root/path; target.parent.mkdir(parents=True, exist_ok=True)
+                target.write_text(content)
+                subprocess.run(['git', 'add', '--', path], cwd=root, check=True)
+            staged('Data/sample.csv', 'description\n"first\u2028unicode separator\n======= АКЦИЯ ОТ КУПЕР=========\nlast"\n')
+            runner.check_staged_diff(root)
+            for path, marker in [('Data/sample.csv', '<<<<<<< ours'), ('Data/sample.csv', '======='),
+                                 ('Data/sample.csv', '>>>>>>> theirs'), ('notes.md', '======= АКЦИЯ')]:
+                staged(path, marker + '\n')
+                with self.assertRaises(ValueError):
+                    runner.check_staged_diff(root)
+
     def test_post_finalize_review_pins_code_and_appends_revision(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory); out, service, _ = runner.paths(root, 'review')
@@ -45,7 +62,7 @@ class RunnerTests(unittest.TestCase):
             runner.write(service/'manifest.json', {'status': 'complete'})
             name = runner.POST_FINALIZE_TESTED[0]
             manifest = {'collection': {'automation_sha256': {name: 'old-hash'}},
-                        'automation_changes': [{'file': f} for f in runner.POST_FINALIZE_TESTED]}
+                        'automation_changes': [{'file': f, 'reason': 'regression', 'validation': 'passed'} for f in runner.POST_FINALIZE_TESTED]}
             args = argparse.Namespace(run_id='review', reason='restore page validation')
             with patch.object(runner, 'ROOT', root), patch.object(runner, 'validate_completed_export', return_value=manifest), patch.object(runner.subprocess, 'run') as run:
                 runner.post_finalize_review(args)

@@ -1,9 +1,22 @@
 import unittest
 
-from utils.dataset_pr import browser_evidence, render, validate_automation_changes
+from utils.dataset_pr import browser_evidence, render, validate_automation_changes, review_changes
+from pathlib import Path
+import tempfile
+import json
 
 
 class PublicationTests(unittest.TestCase):
+    def test_review_changes_uses_latest_audit_and_manifest_fallback(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp); manifest = root/'Scraper/runs/example/manifest.json'
+            manifest.parent.mkdir(parents=True); manifest.write_text(json.dumps({'automation_changes': [{'file': 'old'}]}))
+            self.assertEqual(review_changes(root, 'example'), [{'file': 'old'}])
+            exports = root/'Data/avito_runs/example/exports'; exports.mkdir(parents=True)
+            (exports/'post_finalize_review.json').write_text(json.dumps({'automation_changes': [{'file': 'first'}]}))
+            (exports/'post_finalize_review_002.json').write_text(json.dumps({'automation_changes': [{'file': 'latest'}]}))
+            self.assertEqual(review_changes(root, 'example'), [{'file': 'latest'}])
+
     def test_documentation_only_requires_notes_but_no_regression_test(self):
         path = 'Scraper/skills/collect-avito/SKILL.md'
         validate_automation_changes([dict(file=path, reason='Уточнение', validation='Проверено')], [path])
