@@ -1,0 +1,3246 @@
+{
+  "run_id": "avito_f07_moscow_prodavets_20261029_b_03",
+  "dataset_id": "avito_f07_moscow_prodavets_20261029_b_03",
+  "status": "complete",
+  "schema": {
+    "columns": [
+      "id",
+      "city",
+      "profession",
+      "segments",
+      "title",
+      "salary_raw",
+      "source_url",
+      "observed_at",
+      "description",
+      "location_observed",
+      "employer_name_observed",
+      "date_raw",
+      "views_total",
+      "views_today",
+      "listing_rank",
+      "listing_promoted",
+      "full_parameters_read",
+      "analysis_status",
+      "export_eligibility",
+      "read_status_parameters",
+      "read_status_description",
+      "read_status_location",
+      "read_limitations",
+      "enrichment_status",
+      "enriched_fields",
+      "enrichment_version",
+      "military",
+      "military_keywords",
+      "military_rule_version",
+      "city__source",
+      "city__evidence",
+      "city_anomaly",
+      "График",
+      "Занятость",
+      "Способ оформления",
+      "Частота выплат",
+      "Сфера деятельности компании",
+      "Что получают работники",
+      "Ассортимент",
+      "Опыт работы",
+      "В том числе для кандидатов",
+      "Количество рабочих часов в день",
+      "Смены",
+      "Режим работы",
+      "Медкнижка",
+      "Количество рабочих дней в неделю",
+      "Тип предприятия",
+      "С чем надо работать"
+    ],
+    "unknown_policy": "empty_not_zero"
+  },
+  "collection": {
+    "run_id": "avito_f07_moscow_prodavets_20261029_b_03",
+    "geography": "Москва",
+    "profession": "Продавец",
+    "segments": "",
+    "filter_evidence": "Checked checkbox Продавец (params[144170]/checkbox/3235382) on observed Moscow /vakansii listing; heading identifies seller vacancies in Moscow; search input empty; no other filters selected.",
+    "listing_url": "https://www.avito.ru/moskva/vakansii/prodavec-ASgBAgICAUTUzBHs~IoD?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6IkRzMUJBRFNaN2lKSXMyeUwiO33EhlxTJgAAAA",
+    "listing_request_url": "https://www.avito.ru/moskva/vakansii/prodavec-ASgBAgICAUTUzBHs~IoD?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6IkRzMUJBRFNaN2lKSXMyeUwiO33EhlxTJgAAAA&localPriority=0",
+    "selected_controls": [
+      {
+        "label": "Продавец",
+        "marker": "params[144170]/checkbox/3235382",
+        "value": null
+      },
+      {
+        "label": "Продавец",
+        "marker": "params[144170]/checkbox/toggle",
+        "value": "3235382"
+      },
+      {
+        "label": "Любой",
+        "marker": "params[196929]/all",
+        "value": null
+      },
+      {
+        "label": "Любой",
+        "marker": "params[196929]/toggle",
+        "value": "all"
+      },
+      {
+        "label": "Неважно",
+        "marker": "params[172815]/all",
+        "value": null
+      },
+      {
+        "label": "Неважно",
+        "marker": "params[172815]/toggle",
+        "value": "all"
+      },
+      {
+        "label": "Неважно",
+        "marker": null,
+        "value": "all"
+      },
+      {
+        "label": "Все",
+        "marker": null,
+        "value": "all"
+      }
+    ],
+    "listing_sha256": "ec091f90ce3b99f2c8b73b2bd31c79900b0eb023b766e24f82e65dbee58d6e0b",
+    "profession_scope": null,
+    "profession_source": "observed_controls",
+    "listing_pages": [
+      {
+        "file": "listing_pages/0001.json",
+        "sha256": "ec091f90ce3b99f2c8b73b2bd31c79900b0eb023b766e24f82e65dbee58d6e0b",
+        "source_url": "https://www.avito.ru/moskva/vakansii/prodavec-ASgBAgICAUTUzBHs~IoD?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6IkRzMUJBRFNaN2lKSXMyeUwiO33EhlxTJgAAAA"
+      },
+      {
+        "file": "listing_pages/0002.json",
+        "sha256": "86945209e01ba8e3f0dd1b95bf5bc59e18f72c7e7a28e1b7c54013ee099687c5",
+        "source_url": "https://www.avito.ru/moskva/vakansii/prodavec-ASgBAgICAUTUzBHs~IoD?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6InFZclA0WWVQWWZKd0RCV2giO308dBmFJgAAAA&localPriority=0&p=2"
+      },
+      {
+        "file": "listing_pages/0003.json",
+        "sha256": "d2cb4d123b1fd64fa499e78e323b87cc8a0863e1b5610f9cf232b84d24df22bb",
+        "source_url": "https://www.avito.ru/moskva/vakansii/prodavec-ASgBAgICAUTUzBHs~IoD?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6InFZclA0WWVQWWZKd0RCV2giO308dBmFJgAAAA&localPriority=0&p=3"
+      },
+      {
+        "file": "listing_pages/0004.json",
+        "sha256": "b29b376f7b2a8fe5891394c713ad5c538528c567551cbf9f60bb6e836ed488cc",
+        "source_url": "https://www.avito.ru/moskva/vakansii/prodavec-ASgBAgICAUTUzBHs~IoD?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6InFZclA0WWVQWWZKd0RCV2giO308dBmFJgAAAA&localPriority=0&p=4"
+      },
+      {
+        "file": "listing_pages/0005.json",
+        "sha256": "dbe47d90d1fb89a2c74a1a52f949db2e4fdbcf44bbbcd2110207601366804814",
+        "source_url": "https://www.avito.ru/moskva/vakansii/prodavec-ASgBAgICAUTUzBHs~IoD?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6InFZclA0WWVQWWZKd0RCV2giO308dBmFJgAAAA&localPriority=0&p=5"
+      },
+      {
+        "file": "listing_pages/0006.json",
+        "sha256": "8f5d4d2e7727ce4f2289c6128f193db91d28879649908cc8333589702ecbb8b8",
+        "source_url": "https://www.avito.ru/moskva/vakansii/prodavec-ASgBAgICAUTUzBHs~IoD?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6InFZclA0WWVQWWZKd0RCV2giO308dBmFJgAAAA&localPriority=0&p=6"
+      },
+      {
+        "file": "listing_pages/0007.json",
+        "sha256": "cda19c3b7ba923ac7c0e819a1ba8b1c6a42e7e0cb2a8f6d342f1e5da43fbf253",
+        "source_url": "https://www.avito.ru/moskva/vakansii/prodavec-ASgBAgICAUTUzBHs~IoD?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6InFZclA0WWVQWWZKd0RCV2giO308dBmFJgAAAA&localPriority=0&p=7"
+      },
+      {
+        "file": "listing_pages/0008.json",
+        "sha256": "b801aa1617c0caebfd84f4e4532ea82856502b53fdbf432602e4b9898cc21d24",
+        "source_url": "https://www.avito.ru/moskva/vakansii/prodavec-ASgBAgICAUTUzBHs~IoD?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6InFZclA0WWVQWWZKd0RCV2giO308dBmFJgAAAA&localPriority=0&p=8"
+      },
+      {
+        "file": "listing_pages/0009.json",
+        "sha256": "9a65406744d28a36714f8584167e4a3c61ca6f376d28bfad17e0e252497ef5f7",
+        "source_url": "https://www.avito.ru/moskva/vakansii/prodavec-ASgBAgICAUTUzBHs~IoD?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6InFZclA0WWVQWWZKd0RCV2giO308dBmFJgAAAA&localPriority=0&p=9"
+      },
+      {
+        "file": "listing_pages/0010.json",
+        "sha256": "425a955ae8a1058f16ce5a9f5307ad51acb2a11e16dc94e09dd64052154d707d",
+        "source_url": "https://www.avito.ru/moskva/vakansii/prodavec-ASgBAgICAUTUzBHs~IoD?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6InFZclA0WWVQWWZKd0RCV2giO308dBmFJgAAAA&localPriority=0&p=10"
+      },
+      {
+        "file": "listing_pages/0011.json",
+        "sha256": "0dd71e89bfa855af0d053c74462f037f544cfc459e8f0ceb99b96bf0777cf28f",
+        "source_url": "https://www.avito.ru/moskva/vakansii/prodavec-ASgBAgICAUTUzBHs~IoD?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6InFZclA0WWVQWWZKd0RCV2giO308dBmFJgAAAA&localPriority=0&p=11"
+      },
+      {
+        "file": "listing_pages/0012.json",
+        "sha256": "09bbb08690f5b754fc2506cf917032f0e1f92dc788d4a93fff0b7ce1ecdd7063",
+        "source_url": "https://www.avito.ru/moskva/vakansii/prodavec-ASgBAgICAUTUzBHs~IoD?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6InFZclA0WWVQWWZKd0RCV2giO308dBmFJgAAAA&localPriority=0&p=12"
+      },
+      {
+        "file": "listing_pages/0013.json",
+        "sha256": "1e571b5215f4b4f0c46e6e2d93d4d5ddf787ae9ff2be0a7527d73ca6807aa83e",
+        "source_url": "https://www.avito.ru/moskva/vakansii/prodavec-ASgBAgICAUTUzBHs~IoD?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6InFZclA0WWVQWWZKd0RCV2giO308dBmFJgAAAA&localPriority=0&p=13"
+      },
+      {
+        "file": "listing_pages/0014.json",
+        "sha256": "4c87cdec3662a88773b5856d5ab4e0ccb6cab0ae4b0e6cdc2b61c22602c683cc",
+        "source_url": "https://www.avito.ru/moskva/vakansii/prodavec-ASgBAgICAUTUzBHs~IoD?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6InFZclA0WWVQWWZKd0RCV2giO308dBmFJgAAAA&localPriority=0&p=14"
+      },
+      {
+        "file": "listing_pages/0015.json",
+        "sha256": "24fe4fd10b794d615e3d65ea7df38292827cc3f389c2f29efec16b5647583458",
+        "source_url": "https://www.avito.ru/moskva/vakansii/prodavec-ASgBAgICAUTUzBHs~IoD?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6InFZclA0WWVQWWZKd0RCV2giO308dBmFJgAAAA&localPriority=0&p=15"
+      },
+      {
+        "file": "listing_pages/0016.json",
+        "sha256": "ef7866badfe8885bce10ad103b431f9d802bdcdcb8001c63c9533511bf1b4a8f",
+        "source_url": "https://www.avito.ru/moskva/vakansii/prodavec-ASgBAgICAUTUzBHs~IoD?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6InFZclA0WWVQWWZKd0RCV2giO308dBmFJgAAAA&localPriority=0&p=16"
+      },
+      {
+        "file": "listing_pages/0017.json",
+        "sha256": "07bf8dc7018e648b900a81c69135d9639b8ab8868dcdfbfc46d9d7cf6201337f",
+        "source_url": "https://www.avito.ru/moskva/vakansii/prodavec-ASgBAgICAUTUzBHs~IoD?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6InFZclA0WWVQWWZKd0RCV2giO308dBmFJgAAAA&localPriority=0&p=17"
+      },
+      {
+        "file": "listing_pages/0018.json",
+        "sha256": "38a129230dbf7152a872e5cceb92358e3d3706e3b86d106a418361fdf6bb6255",
+        "source_url": "https://www.avito.ru/moskva/vakansii/prodavec-ASgBAgICAUTUzBHs~IoD?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6InFZclA0WWVQWWZKd0RCV2giO308dBmFJgAAAA&localPriority=0&p=18"
+      },
+      {
+        "file": "listing_pages/0019.json",
+        "sha256": "6d49ed6abfe7558b2931a1baa6212f7148fb7759f973a6eaeb1bd71ee639f932",
+        "source_url": "https://www.avito.ru/moskva/vakansii/prodavec-ASgBAgICAUTUzBHs~IoD?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6InFZclA0WWVQWWZKd0RCV2giO308dBmFJgAAAA&localPriority=0&p=19"
+      },
+      {
+        "file": "listing_pages/0020.json",
+        "sha256": "4b1de5ea40a5133ed3fc2becdbd0d61e4b9e8c6a3774de7cc407eb9b7d90d614",
+        "source_url": "https://www.avito.ru/moskva/vakansii/prodavec-ASgBAgICAUTUzBHs~IoD?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6InFZclA0WWVQWWZKd0RCV2giO308dBmFJgAAAA&localPriority=0&p=20"
+      },
+      {
+        "file": "listing_pages/0021.json",
+        "sha256": "ed85e82e9eac60ec38bba635117abec2ba0c7bca4aa1f64db12b8e59e57157d7",
+        "source_url": "https://www.avito.ru/moskva/vakansii/prodavec-ASgBAgICAUTUzBHs~IoD?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6InFZclA0WWVQWWZKd0RCV2giO308dBmFJgAAAA&localPriority=0&p=21"
+      },
+      {
+        "file": "listing_pages/0022.json",
+        "sha256": "9071d0598659573293aba52bf0cd3543af63cbaa0d442df3aa7cc1c197bf88fe",
+        "source_url": "https://www.avito.ru/moskva/vakansii/prodavec-ASgBAgICAUTUzBHs~IoD?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6InFZclA0WWVQWWZKd0RCV2giO308dBmFJgAAAA&localPriority=0&p=22"
+      },
+      {
+        "file": "listing_pages/0023.json",
+        "sha256": "3d8aa80ad3a9aa2a5b92afc5409f5b8e0a8e62c99862f302bcfc8a4a0d032a64",
+        "source_url": "https://www.avito.ru/moskva/vakansii/prodavec-ASgBAgICAUTUzBHs~IoD?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6InFZclA0WWVQWWZKd0RCV2giO308dBmFJgAAAA&localPriority=0&p=23"
+      },
+      {
+        "file": "listing_pages/0024.json",
+        "sha256": "a142d7bdb80644c4f4f62287bcca67909f463a593eaaa50f5416f79c16fa52eb",
+        "source_url": "https://www.avito.ru/moskva/vakansii/prodavec-ASgBAgICAUTUzBHs~IoD?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6InFZclA0WWVQWWZKd0RCV2giO308dBmFJgAAAA&localPriority=0&p=24"
+      },
+      {
+        "file": "listing_pages/0025.json",
+        "sha256": "f34ce8c691d62141f2cb9093c0efc1f713ea73e65829b94f8b2ed1ed5d4c7500",
+        "source_url": "https://www.avito.ru/moskva/vakansii/prodavec-ASgBAgICAUTUzBHs~IoD?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6InFZclA0WWVQWWZKd0RCV2giO308dBmFJgAAAA&localPriority=0&p=25"
+      },
+      {
+        "file": "listing_pages/0026.json",
+        "sha256": "fafd53dd0617857282105a8677237843cb3376393813ec621b8e0e2b770fe747",
+        "source_url": "https://www.avito.ru/moskva/vakansii/prodavec-ASgBAgICAUTUzBHs~IoD?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6InFZclA0WWVQWWZKd0RCV2giO308dBmFJgAAAA&localPriority=0&p=26"
+      },
+      {
+        "file": "listing_pages/0027.json",
+        "sha256": "e561c7e7f788c95cc598bc03a31eefcf6216436f4ed64719389c83047270819f",
+        "source_url": "https://www.avito.ru/moskva/vakansii/prodavec-ASgBAgICAUTUzBHs~IoD?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6InFZclA0WWVQWWZKd0RCV2giO308dBmFJgAAAA&localPriority=0&p=27"
+      },
+      {
+        "file": "listing_pages/0028.json",
+        "sha256": "6dc20579fa3127ae7c72797083898d87e745ec5033c52c053a67747336aafd3a",
+        "source_url": "https://www.avito.ru/moskva/vakansii/prodavec-ASgBAgICAUTUzBHs~IoD?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6InFZclA0WWVQWWZKd0RCV2giO308dBmFJgAAAA&localPriority=0&p=28"
+      },
+      {
+        "file": "listing_pages/0029.json",
+        "sha256": "5c6002b41621cef574473cf1c480014c2b7d50a6fda1267257702ad21e95c89c",
+        "source_url": "https://www.avito.ru/moskva/vakansii/prodavec-ASgBAgICAUTUzBHs~IoD?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6InFZclA0WWVQWWZKd0RCV2giO308dBmFJgAAAA&localPriority=0&p=29"
+      },
+      {
+        "file": "listing_pages/0030.json",
+        "sha256": "6ebafeb3e0516da6bb68c513104fe15226ff17b0bde864553b66e73328616f07",
+        "source_url": "https://www.avito.ru/moskva/vakansii/prodavec-ASgBAgICAUTUzBHs~IoD?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6InFZclA0WWVQWWZKd0RCV2giO308dBmFJgAAAA&localPriority=0&p=30"
+      }
+    ],
+    "selection_mode": "first_N_unique_on_frozen_listing",
+    "limit": 300,
+    "requested_all_pages": true,
+    "saved_selection_authorization": null,
+    "requested_limit": 300,
+    "available_unique": 300,
+    "listing_end_reason": "no_next_link",
+    "available_listing_exhausted": false,
+    "continuation": null,
+    "candidate_limit": null,
+    "created_at": "2026-10-29T00:33:42.012492+00:00",
+    "instruction_version": "1.7.28",
+    "extractor_sha256": "2da2a09e0829e3af077297755b1eae9c4776da8261ca817d312703c418c23adb",
+    "instruction_sha256": "0b0a81776082a5b2c2a5a3b93df383b3298da90671513386c3fe98e8b57bb9be",
+    "code_git_commit": "968280fffb16e40258990a33f93670be7e607b72",
+    "setup_seconds": 145.01383708394133,
+    "live_route_verified": false,
+    "execution_model": "gpt-6-luna",
+    "automation_sha256": {
+      "Scraper/skills/collect-avito/references/top-professions.json": "e3e72638b17b48f825ec6f2fefb963662494f679ae4b0cef1bebedba889610dd",
+      "utils/title_flags.py": "9c9456cb3fb0df5791630049c9c85987381091dbb9ba18bc3fb3314b8cccbeb6",
+      "Scraper/extract.js": "2da2a09e0829e3af077297755b1eae9c4776da8261ca817d312703c418c23adb",
+      "Scraper/skills/collect-avito/SKILL.md": "0b0a81776082a5b2c2a5a3b93df383b3298da90671513386c3fe98e8b57bb9be",
+      "Scraper/skills/collect-avito/scripts/run.py": "f96e9e75a3eb218bd28b30957f6cfe96ea26594dd49bf1935864660faaf07205",
+      "Scraper/skills/collect-avito/scripts/browser_batch.js": "c3784622f80205387f7aa9599b69cbef3b8bddebc05874c984a2d3280b0eb625",
+      "Scraper/skills/collect-avito/scripts/check_capture.py": "aa746849317f9768af5aae08b394b9379539f6e268c1fc69e4ed13bd06a4657f",
+      "Scraper/skills/collect-avito/scripts/failure_log.py": "5a28324829d546ce87b662b9e6e4b48cc4ba5aa5d13114483975d2c407b293e6",
+      "Scraper/skills/collect-avito/scripts/preflight.py": "661708892946a68dec53c986df496e76dd67c314021af2567f760b740bb3ce3d"
+    },
+    "uncommitted_automation_files": [
+      "Scraper/extract.js",
+      "Scraper/skills/collect-avito/SKILL.md",
+      "Scraper/skills/collect-avito/scripts/run.py",
+      "Scraper/skills/collect-avito/scripts/browser_batch.js"
+    ],
+    "partition": {
+      "parent_run_id": "avito_f07_moscow_prodavets_20261029_all",
+      "parent_plan_sha256": "5a25e3b64e1087a16774f12f9c648250bdcf1f21804c44d6b5e71ec54c1cc1de",
+      "parent_queue_sha256": "f6a5a70f79cad35a7843db4949ebbc78dbd345768721cb66053c9dedc8fe261e",
+      "index": 3,
+      "batch_size": 300,
+      "start": 600,
+      "end": 900,
+      "total": 945,
+      "siblings": [
+        "avito_f07_moscow_prodavets_20261029_b_01",
+        "avito_f07_moscow_prodavets_20261029_b_02",
+        "avito_f07_moscow_prodavets_20261029_b_03",
+        "avito_f07_moscow_prodavets_20261029_b_04"
+      ]
+    },
+    "city_anomaly_policy": "blank"
+  },
+  "coverage": {
+    "planned": 300,
+    "accepted": 300,
+    "unavailable": [],
+    "unique_ids": [
+      "8300299049",
+      "8481960666",
+      "8440438788",
+      "8296612785",
+      "8423632937",
+      "8378247550",
+      "8368946833",
+      "8427343825",
+      "8405378737",
+      "8470982905",
+      "8220352111",
+      "8438540617",
+      "8511833791",
+      "8358576569",
+      "8493180702",
+      "8409766046",
+      "8372033408",
+      "8316022786",
+      "8283828258",
+      "8261198253",
+      "8437838081",
+      "8364468670",
+      "8399019727",
+      "8373788913",
+      "8441399008",
+      "8516833911",
+      "8426155579",
+      "8482145398",
+      "8338811067",
+      "8390118103",
+      "8491529597",
+      "8471247351",
+      "8207804954",
+      "8372901891",
+      "8458695285",
+      "8512323090",
+      "8390652936",
+      "8438811054",
+      "8480312020",
+      "8336763797",
+      "8405842234",
+      "8511751383",
+      "8525292889",
+      "8143823653",
+      "8459656383",
+      "8426456571",
+      "8408538665",
+      "8489722834",
+      "8377851880",
+      "8524944985",
+      "8485469038",
+      "8175436014",
+      "8512507705",
+      "8282195664",
+      "8218169885",
+      "8490602116",
+      "8368431968",
+      "8316529260",
+      "8511759792",
+      "8427034107",
+      "8404963347",
+      "8407978013",
+      "8413825784",
+      "8337489697",
+      "8334222319",
+      "8458994147",
+      "8306407258",
+      "8577079069",
+      "8078060771",
+      "8521366002",
+      "8444897882",
+      "8440760551",
+      "8466929273",
+      "8284362018",
+      "8451214743",
+      "8459575250",
+      "8525384070",
+      "8441118392",
+      "8338482697",
+      "8453343665",
+      "8408284325",
+      "8369155001",
+      "8068936044",
+      "8513101911",
+      "8339864495",
+      "8419987898",
+      "8458011609",
+      "8525802598",
+      "8408117099",
+      "8346751840",
+      "8332185333",
+      "8409656851",
+      "8368669020",
+      "8410143852",
+      "8365978087",
+      "8459064742",
+      "8388070759",
+      "8451149668",
+      "8373088443",
+      "8381247846",
+      "8466926543",
+      "8254197066",
+      "8419870064",
+      "8337579626",
+      "8378604789",
+      "8510844740",
+      "8543906578",
+      "8369084216",
+      "8316643178",
+      "8388029560",
+      "8489076421",
+      "8336291529",
+      "8409774915",
+      "8315243616",
+      "8514862448",
+      "8369226254",
+      "8482532602",
+      "8543508497",
+      "8378785475",
+      "8491360811",
+      "8315889971",
+      "8463493857",
+      "8405120870",
+      "8308602114",
+      "8372498261",
+      "8383940982",
+      "3781644486",
+      "8498926874",
+      "8368404047",
+      "8450823099",
+      "8390559180",
+      "8399341491",
+      "8369190236",
+      "8491522684",
+      "8439199303",
+      "8431200019",
+      "8543777536",
+      "8493078792",
+      "8413011238",
+      "8439862063",
+      "8467332047",
+      "8389054658",
+      "8316811211",
+      "8274387474",
+      "8525608293",
+      "8545413545",
+      "8335745122",
+      "8377919955",
+      "8439647985",
+      "8545323417",
+      "8406524946",
+      "8485465780",
+      "8513192990",
+      "8349296096",
+      "8295914779",
+      "8453182801",
+      "8453352193",
+      "8314984011",
+      "8485549981",
+      "8484930212",
+      "8466906257",
+      "8482989122",
+      "8431083188",
+      "8450513492",
+      "8343428245",
+      "8343733026",
+      "8207603944",
+      "8470591156",
+      "8543121368",
+      "8409258032",
+      "8544966739",
+      "7418503276",
+      "8340309978",
+      "8557681350",
+      "8511933380",
+      "8271244156",
+      "8557672062",
+      "8427715730",
+      "8338464129",
+      "8427076988",
+      "8467744216",
+      "8423805166",
+      "8328105282",
+      "8543054103",
+      "8413522400",
+      "8372489616",
+      "8431730897",
+      "7589869557",
+      "8404888913",
+      "8491570707",
+      "8438330255",
+      "8375894787",
+      "8271104104",
+      "8283623819",
+      "8309563737",
+      "8405638954",
+      "3764069326",
+      "8366075028",
+      "8286652054",
+      "8441596106",
+      "8485194560",
+      "8335927540",
+      "8557579511",
+      "8315575173",
+      "8326122148",
+      "8316369536",
+      "8336625686",
+      "8511284790",
+      "8355945608",
+      "8448633468",
+      "8511125930",
+      "7781199315",
+      "8372709954",
+      "7843854337",
+      "8346375433",
+      "8467253459",
+      "8493042338",
+      "8438674298",
+      "8401528767",
+      "8340552099",
+      "8437889574",
+      "8230125451",
+      "8544493910",
+      "8545125971",
+      "7813143318",
+      "8513063424",
+      "8350011827",
+      "8058465934",
+      "8511849704",
+      "8337555062",
+      "8430895217",
+      "8399449880",
+      "8391729292",
+      "8467650586",
+      "8545089478",
+      "8373447380",
+      "8481852326",
+      "8336874142",
+      "3782130353",
+      "8388392018",
+      "8248687811",
+      "8427398015",
+      "8348378661",
+      "8370452100",
+      "8375922827",
+      "8366775511",
+      "8358523288",
+      "8336032210",
+      "8295152916",
+      "8405780303",
+      "8447016175",
+      "8481919485",
+      "8451396334",
+      "8437604116",
+      "8457905425",
+      "8378614887",
+      "8353825484",
+      "8283782854",
+      "8482343942",
+      "8441721748",
+      "8440834325",
+      "8268048431",
+      "8230098987",
+      "8247508747",
+      "8456912452",
+      "8391487471",
+      "8284392931",
+      "8358175901",
+      "8525311669",
+      "8458033906",
+      "8318258798",
+      "8382135861",
+      "8345910353",
+      "8485733701",
+      "8575059038",
+      "8470456782",
+      "8556900149",
+      "8405526982",
+      "8438967474",
+      "3782500082",
+      "8513184653",
+      "8120341993",
+      "8300736102",
+      "8430988984",
+      "8439083930",
+      "7738231665",
+      "8410553689",
+      "8306592813",
+      "8376124195",
+      "8408825306",
+      "4474562473",
+      "8513080906",
+      "8511932629",
+      "8471460935",
+      "8390848258",
+      "8458313901",
+      "8101690156",
+      "8359334712",
+      "8445448370",
+      "8274092735"
+    ],
+    "errors": [],
+    "limitations": [
+      "Visible rendered parameters only; enrichment not run; placement on site; live route unverified"
+    ]
+  },
+  "timing": {
+    "setup_seconds": 145.01383708394133,
+    "capture_seconds": 511.13653854001313,
+    "review_export_seconds": 1.199587875045836,
+    "publication_seconds": null
+  },
+  "review_model": "gpt-6.1-terra",
+  "automation_changes": [
+    {
+      "file": "Scraper/extract.js",
+      "reason": "Observed Next href loses seller filter; click UI and verify landed listing, preserving uncertain freeze",
+      "validation": "48 focused runner and pagination tests passed; syntax checks passed"
+    },
+    {
+      "file": "Scraper/skills/collect-avito/scripts/run.py",
+      "reason": "Observed Next href loses seller filter; click UI and verify landed listing, preserving uncertain freeze",
+      "validation": "48 focused runner and pagination tests passed; syntax checks passed"
+    },
+    {
+      "file": "Scraper/skills/collect-avito/scripts/browser_batch.js",
+      "reason": "Observed Next href loses seller filter; click UI and verify landed listing, preserving uncertain freeze",
+      "validation": "48 focused runner and pagination tests passed; syntax checks passed"
+    },
+    {
+      "file": "Scraper/test_pagination.py",
+      "reason": "Observed Next href loses seller filter; click UI and verify landed listing, preserving uncertain freeze",
+      "validation": "48 focused runner and pagination tests passed; syntax checks passed"
+    },
+    {
+      "file": "Scraper/skills/collect-avito/SKILL.md",
+      "reason": "Observed Next href loses seller filter; click UI and verify landed listing, preserving uncertain freeze",
+      "validation": "48 focused runner and pagination tests passed; syntax checks passed"
+    },
+    {
+      "file": "Scraper/skills/collect-avito/scripts/browser_batch.js",
+      "reason": "Next ref must be read from scoped snapshot; preserve comparison before refusing a changed href",
+      "validation": "57 pagination and runner tests pass, including scoped ref and changed href refusal"
+    },
+    {
+      "file": "Scraper/skills/collect-avito/scripts/run.py",
+      "reason": "Import local Next comparison evidence from sandbox on failure",
+      "validation": "57 pagination and runner tests pass"
+    },
+    {
+      "file": "Scraper/test_pagination.py",
+      "reason": "Regression for scoped Next and changed href refusal",
+      "validation": "57 pagination and runner tests pass"
+    },
+    {
+      "file": "Scraper/skills/collect-avito/SKILL.md",
+      "reason": "Document scoped Next evidence and unsupported UI continuation and profession correction",
+      "validation": "57 pagination and runner tests pass"
+    },
+    {
+      "file": "Scraper/test_batch_optional_fields.py",
+      "reason": "Restore browser double methods required by existing HEAD runner",
+      "validation": "Optional fields JS batch tests pass (2 tests, 4 scenarios)"
+    }
+  ],
+  "profession_correction": null,
+  "post_capture_automation_sha256": {},
+  "files": {
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/exports/vacancies.json": {
+      "bytes": 1356512,
+      "sha256": "d92adcf925c1bb2fa3c9356029626112d0b08ad1df6c39ebc8458f09feec4a3f"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/exports/vacancies_flat.csv": {
+      "bytes": 1000718,
+      "sha256": "eaafca4be7adcaaaa173e5d7fb8db3d107926db40c497005bb2830b9dc7d70ed"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/exports/validation.json": {
+      "bytes": 155,
+      "sha256": "796254a22ea31c19ac59ee5651b46ba59bca70c638e198b072a8fb1831cb288b"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/listing.json": {
+      "bytes": 26246,
+      "sha256": "ec091f90ce3b99f2c8b73b2bd31c79900b0eb023b766e24f82e65dbee58d6e0b"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/listing_pages/0001.json": {
+      "bytes": 26246,
+      "sha256": "ec091f90ce3b99f2c8b73b2bd31c79900b0eb023b766e24f82e65dbee58d6e0b"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/listing_pages/0002.json": {
+      "bytes": 26689,
+      "sha256": "86945209e01ba8e3f0dd1b95bf5bc59e18f72c7e7a28e1b7c54013ee099687c5"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/listing_pages/0003.json": {
+      "bytes": 27061,
+      "sha256": "d2cb4d123b1fd64fa499e78e323b87cc8a0863e1b5610f9cf232b84d24df22bb"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/listing_pages/0004.json": {
+      "bytes": 26810,
+      "sha256": "b29b376f7b2a8fe5891394c713ad5c538528c567551cbf9f60bb6e836ed488cc"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/listing_pages/0005.json": {
+      "bytes": 27223,
+      "sha256": "dbe47d90d1fb89a2c74a1a52f949db2e4fdbcf44bbbcd2110207601366804814"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/listing_pages/0006.json": {
+      "bytes": 26880,
+      "sha256": "8f5d4d2e7727ce4f2289c6128f193db91d28879649908cc8333589702ecbb8b8"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/listing_pages/0007.json": {
+      "bytes": 26610,
+      "sha256": "cda19c3b7ba923ac7c0e819a1ba8b1c6a42e7e0cb2a8f6d342f1e5da43fbf253"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/listing_pages/0008.json": {
+      "bytes": 26559,
+      "sha256": "b801aa1617c0caebfd84f4e4532ea82856502b53fdbf432602e4b9898cc21d24"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/listing_pages/0009.json": {
+      "bytes": 25902,
+      "sha256": "9a65406744d28a36714f8584167e4a3c61ca6f376d28bfad17e0e252497ef5f7"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/listing_pages/0010.json": {
+      "bytes": 26568,
+      "sha256": "425a955ae8a1058f16ce5a9f5307ad51acb2a11e16dc94e09dd64052154d707d"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/listing_pages/0011.json": {
+      "bytes": 26675,
+      "sha256": "0dd71e89bfa855af0d053c74462f037f544cfc459e8f0ceb99b96bf0777cf28f"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/listing_pages/0012.json": {
+      "bytes": 26120,
+      "sha256": "09bbb08690f5b754fc2506cf917032f0e1f92dc788d4a93fff0b7ce1ecdd7063"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/listing_pages/0013.json": {
+      "bytes": 25999,
+      "sha256": "1e571b5215f4b4f0c46e6e2d93d4d5ddf787ae9ff2be0a7527d73ca6807aa83e"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/listing_pages/0014.json": {
+      "bytes": 26682,
+      "sha256": "4c87cdec3662a88773b5856d5ab4e0ccb6cab0ae4b0e6cdc2b61c22602c683cc"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/listing_pages/0015.json": {
+      "bytes": 26448,
+      "sha256": "24fe4fd10b794d615e3d65ea7df38292827cc3f389c2f29efec16b5647583458"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/listing_pages/0016.json": {
+      "bytes": 25562,
+      "sha256": "ef7866badfe8885bce10ad103b431f9d802bdcdcb8001c63c9533511bf1b4a8f"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/listing_pages/0017.json": {
+      "bytes": 25586,
+      "sha256": "07bf8dc7018e648b900a81c69135d9639b8ab8868dcdfbfc46d9d7cf6201337f"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/listing_pages/0018.json": {
+      "bytes": 25498,
+      "sha256": "38a129230dbf7152a872e5cceb92358e3d3706e3b86d106a418361fdf6bb6255"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/listing_pages/0019.json": {
+      "bytes": 25753,
+      "sha256": "6d49ed6abfe7558b2931a1baa6212f7148fb7759f973a6eaeb1bd71ee639f932"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/listing_pages/0020.json": {
+      "bytes": 25555,
+      "sha256": "4b1de5ea40a5133ed3fc2becdbd0d61e4b9e8c6a3774de7cc407eb9b7d90d614"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/listing_pages/0021.json": {
+      "bytes": 26137,
+      "sha256": "ed85e82e9eac60ec38bba635117abec2ba0c7bca4aa1f64db12b8e59e57157d7"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/listing_pages/0022.json": {
+      "bytes": 26145,
+      "sha256": "9071d0598659573293aba52bf0cd3543af63cbaa0d442df3aa7cc1c197bf88fe"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/listing_pages/0023.json": {
+      "bytes": 26261,
+      "sha256": "3d8aa80ad3a9aa2a5b92afc5409f5b8e0a8e62c99862f302bcfc8a4a0d032a64"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/listing_pages/0024.json": {
+      "bytes": 25843,
+      "sha256": "a142d7bdb80644c4f4f62287bcca67909f463a593eaaa50f5416f79c16fa52eb"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/listing_pages/0025.json": {
+      "bytes": 25855,
+      "sha256": "f34ce8c691d62141f2cb9093c0efc1f713ea73e65829b94f8b2ed1ed5d4c7500"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/listing_pages/0026.json": {
+      "bytes": 26044,
+      "sha256": "fafd53dd0617857282105a8677237843cb3376393813ec621b8e0e2b770fe747"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/listing_pages/0027.json": {
+      "bytes": 26434,
+      "sha256": "e561c7e7f788c95cc598bc03a31eefcf6216436f4ed64719389c83047270819f"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/listing_pages/0028.json": {
+      "bytes": 27199,
+      "sha256": "6dc20579fa3127ae7c72797083898d87e745ec5033c52c053a67747336aafd3a"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/listing_pages/0029.json": {
+      "bytes": 27296,
+      "sha256": "5c6002b41621cef574473cf1c480014c2b7d50a6fda1267257702ad21e95c89c"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/listing_pages/0030.json": {
+      "bytes": 26400,
+      "sha256": "6ebafeb3e0516da6bb68c513104fe15226ff17b0bde864553b66e73328616f07"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/provenance/parent-plan.json": {
+      "bytes": 14019,
+      "sha256": "5a25e3b64e1087a16774f12f9c648250bdcf1f21804c44d6b5e71ec54c1cc1de"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/provenance/parent-queue.json": {
+      "bytes": 448286,
+      "sha256": "f6a5a70f79cad35a7843db4949ebbc78dbd345768721cb66053c9dedc8fe261e"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/queue.json": {
+      "bytes": 140213,
+      "sha256": "a0b8b1952485ef1b7398b1797d3d3f501d5f69e31131b056b492f3d24dee3390"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/3764069326.json": {
+      "bytes": 13518,
+      "sha256": "a7b86468e481693a23dbf9eae5587168db8b189215955af8454d7c6a03083990"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/3781644486.json": {
+      "bytes": 11451,
+      "sha256": "ce568fbfd8d2b52568e5ae9503ce1fff0dadfb15966ff7551d4b84b6e16c003f"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/3782130353.json": {
+      "bytes": 11685,
+      "sha256": "f92866e9baaa9b4752aee0a17a351bf09bfadf7086e33957119b17b4212892b4"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/3782500082.json": {
+      "bytes": 11703,
+      "sha256": "004f570514c3946729aecfc519534f028a3dcbdafab03be186390a39b2571c96"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/4474562473.json": {
+      "bytes": 16485,
+      "sha256": "5357055f5ca0a26439f828ca39f3eb481f9e4e99828113d30caf23f9a7b272b5"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/7418503276.json": {
+      "bytes": 16809,
+      "sha256": "9630c2861b32650bb78ee94eced1f9181913f5ca1de8bfb13bb6de471a4e95ed"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/7589869557.json": {
+      "bytes": 11896,
+      "sha256": "6acd2e70c45a241772c791fd1605ea593c7f99d19d0b2e85fc2c99fbe3fbcd49"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/7738231665.json": {
+      "bytes": 16506,
+      "sha256": "5f8cc6b7706bc0b2c949086d32109d030ae7d93809dbf5313faa8b2f2c1267a4"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/7781199315.json": {
+      "bytes": 10534,
+      "sha256": "4bdd231877138c15f7b2534abe0990fad3e3dacb840ae16bb94d17347c81addb"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/7813143318.json": {
+      "bytes": 13034,
+      "sha256": "cd5e9e42254072d8ac53709c965c36f6a088d68a47403b50e412896fb95c1b9d"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/7843854337.json": {
+      "bytes": 13558,
+      "sha256": "148bfd76ae04cf0d57c9d960251d567a376a2047d9fb3bb04f52078377cdfa38"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8058465934.json": {
+      "bytes": 18190,
+      "sha256": "c295e218c46a4db3e89b4a88c3cc5cebd68cf114bc9309c9fb5338d83f858336"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8068936044.json": {
+      "bytes": 13413,
+      "sha256": "0823e33f37008b79f6ca8e3bad350bb1296a9c684bb68b752177781f56332071"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8078060771.json": {
+      "bytes": 11666,
+      "sha256": "1fc61a0e006abcd4065117a7094e8eff7964b175a83616b86cc92cec8943a981"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8101690156.json": {
+      "bytes": 12677,
+      "sha256": "0b9a384cd8e298ac15b37433aa40c69e53783c58887efe622de600b5a3f1210b"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8120341993.json": {
+      "bytes": 16427,
+      "sha256": "fe9359afb65e503c1a95bd26cb9465fdf7174971ec09b3c50aa75a9d9abfd338"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8143823653.json": {
+      "bytes": 15302,
+      "sha256": "2806dcc46233857b31e310aef839a3e74bb74d840fb853e957cc7c09db5f16cf"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8175436014.json": {
+      "bytes": 15059,
+      "sha256": "604558925675df63ff3d7d06adb1f17bf8275de5cdf5560f82a6a99534a573da"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8207603944.json": {
+      "bytes": 16335,
+      "sha256": "6c20d75bdaab54756e00e521b1782d116a67ac531ddc46574ded26a2d2583273"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8207804954.json": {
+      "bytes": 14905,
+      "sha256": "9df90be4efda212779526edf52b74cca325f030d0b030368120df999edef1a93"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8218169885.json": {
+      "bytes": 17500,
+      "sha256": "e3d47b4f465ed10e05db4875ef2f90ba2a1335887cf943eaa9d0c929dcbed07f"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8220352111.json": {
+      "bytes": 15606,
+      "sha256": "35dec3be0bb0b06e2bbc7b0759907d8965c85385c33653ad59674fde49073967"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8230098987.json": {
+      "bytes": 11985,
+      "sha256": "89c726251dead048cd09d5c1aeac84115564909f66cd4ca1d5fda1e7c1e36789"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8230125451.json": {
+      "bytes": 11048,
+      "sha256": "899c494ba9ac07bfb61759711e66e3d0e214c194f97417bc85567c1d48625dac"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8247508747.json": {
+      "bytes": 15932,
+      "sha256": "e882c25074728f13dbe62bd042a73fd22d3cd1e5507f7bdeedfb727553f4bd5c"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8248687811.json": {
+      "bytes": 16731,
+      "sha256": "46809530b19ece9b629c2de13d468581a24509a2669674318c735dd7d508778b"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8254197066.json": {
+      "bytes": 15598,
+      "sha256": "eaf8b4f07b2985a88928a48bc6a718e808fa4eceadb8e722f154660bc3a8b322"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8261198253.json": {
+      "bytes": 11973,
+      "sha256": "17087f78dff85531a150572bca64648f600c36d147c0e42f6e6e03318fb5508f"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8268048431.json": {
+      "bytes": 15284,
+      "sha256": "511516d70b4ca3e6a776b77adf2c3e4919d04e296029bbbd62a9930f282bdf5d"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8271104104.json": {
+      "bytes": 15601,
+      "sha256": "f6374b41c4330d5a4febcdbf2005a7fefb5d24756850fe5d98320d20fb22ca27"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8271244156.json": {
+      "bytes": 15645,
+      "sha256": "bd171765c0d569ecbb77f8a59ec79803c1d6c82c439ee0bb175ac209156736b9"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8274092735.json": {
+      "bytes": 15575,
+      "sha256": "211847293b832b9cc424fb52057384dae9f3d9bf2cb35bdd80014501690efd4f"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8274387474.json": {
+      "bytes": 16707,
+      "sha256": "4a7ea7b0966bb82ee6cd3e9c0cc595640175601e086ec5261db5cb749ce68fe9"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8282195664.json": {
+      "bytes": 18034,
+      "sha256": "5a8b1fbbd0e270afa6d020b6179062d990f451d2f686a4265420248e860b7252"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8283623819.json": {
+      "bytes": 11583,
+      "sha256": "c062e3b2cd7f795dac4d954c337caff840fe053cf82f07d17aa46e8dec3a2751"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8283782854.json": {
+      "bytes": 15210,
+      "sha256": "0c6dc84e445ddc06af7c63789910bbb682ddf561f484f5c8a9e86463a4b678f3"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8283828258.json": {
+      "bytes": 11320,
+      "sha256": "3bcf94a4cab3080579049295d0a3e3c145175afe0f75fe379649374232b8b62b"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8284362018.json": {
+      "bytes": 13482,
+      "sha256": "687300ad6b5f31bd6ad2b2be0cdc28e4049cdd395aeedbc8f11ff25390712bc3"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8284392931.json": {
+      "bytes": 10974,
+      "sha256": "1656eb1696bf67c6ecfbfb30c6225647a36bd0f6a4964ef2debcc271aa9340d0"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8286652054.json": {
+      "bytes": 18442,
+      "sha256": "41c9a6a09be59341544633eda17fee13cab77d2c892a21e337a572016eecb81c"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8295152916.json": {
+      "bytes": 15613,
+      "sha256": "a91f0facb81e53a92d0bfba0132fff5bbf23017fb606d5e70c51977e8491c451"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8295914779.json": {
+      "bytes": 10024,
+      "sha256": "1cf4fa2f11535e00fa84e1ad0dd16cd827a7c2eb412fdeec1bc4e5f06981ec9e"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8296612785.json": {
+      "bytes": 10469,
+      "sha256": "0d1dc8d43cbc13f43b76dcc2f58bf9de8c909ede55e6d517939aaaeb1372ddf8"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8300299049.json": {
+      "bytes": 11573,
+      "sha256": "3266a7f7e2467be83b4b4de029095f9fe7f53fd33b5bdb6159d771e360b94331"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8300736102.json": {
+      "bytes": 13392,
+      "sha256": "ca1ad598a3325b5f601a95221bde41f39be351ddeb15af44d19cad1a6d18b4eb"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8306407258.json": {
+      "bytes": 10792,
+      "sha256": "8a047c9565424da365badeda9278d7538178b718df237a7b63d50be0d976f813"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8306592813.json": {
+      "bytes": 10831,
+      "sha256": "0598f58adffafcda440fc840b587c595daec1921a4a88fb6a23e4f3ce86f6fb3"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8308602114.json": {
+      "bytes": 10598,
+      "sha256": "726764bb4245d54c1c9f969d783501b360848b28714996bf145b861ff312ffaa"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8309563737.json": {
+      "bytes": 15584,
+      "sha256": "23fdfa80dff0298481267a5b4eef136475c6cc0e8e72c261cf7a907599e43d35"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8314984011.json": {
+      "bytes": 10409,
+      "sha256": "402c1b539bc3898e80c748438fab1a664d29ca41fc9f39ea125707f3e15be80e"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8315243616.json": {
+      "bytes": 10423,
+      "sha256": "4869013978925b11fe6075ef999ff62c9e30802787449066f6ad8473f77f2b5a"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8315575173.json": {
+      "bytes": 10431,
+      "sha256": "4b7e8f8516151e6c8589f1003b633f54a2730ed309dca75779e06def06f7b3c5"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8315889971.json": {
+      "bytes": 12427,
+      "sha256": "c091b9abf3c177c9e98ec4544874a6037b3153106669a57eb0bb0d2305f227b4"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8316022786.json": {
+      "bytes": 11804,
+      "sha256": "6a18c85ce959abccd91301824f3fc6d890c071801330f9551f4e0343fa9af5cf"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8316369536.json": {
+      "bytes": 10415,
+      "sha256": "1009c74de90edfd4cbc0bf99fc002f9f0918ed93482cd877d7930e03b14ae64c"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8316529260.json": {
+      "bytes": 17994,
+      "sha256": "9c57eb1066ea7a09af840e4ec7599cde2143828878490c923a8985d96f8b49b4"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8316643178.json": {
+      "bytes": 13791,
+      "sha256": "3d4835bbe5370bd8ac5a806735fcbac91c2a65fb249b04a609d019b85331e761"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8316811211.json": {
+      "bytes": 10526,
+      "sha256": "28b0f945b6869aca4103ebcc1a69ff3c477e939790ce3244ad326a1b042503f3"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8318258798.json": {
+      "bytes": 15267,
+      "sha256": "a82edb6a71249ed3db5c12214094991da45e7151afc7fc2a15769adfee824537"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8326122148.json": {
+      "bytes": 15258,
+      "sha256": "d924d8ad0a1e19b1cfb4528b52967a98479e4a8cc2fca4750239688f8ea071f6"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8328105282.json": {
+      "bytes": 10417,
+      "sha256": "6582a574b89abf2a6e4741186e7aea530ddba91b0f32e4ec4b241c3db5047b94"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8332185333.json": {
+      "bytes": 10747,
+      "sha256": "2511a3f1f537bbbeba8329f8ba3a0f2b2dfaf848987c8f5a9e6ec48d32447aaa"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8334222319.json": {
+      "bytes": 13332,
+      "sha256": "a93c235554e349fe53d28ba08d974dd9254c428dad5609983e8a91cd26ad0040"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8335745122.json": {
+      "bytes": 16277,
+      "sha256": "39e555a06c96e6a4b0721b206b5eacd4945a398a18074bfc76af3d1f571bb914"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8335927540.json": {
+      "bytes": 11524,
+      "sha256": "0d2bbc5919b11badac82d2da75c858837cd69212239079dc85bc5e9eda3ccaa4"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8336032210.json": {
+      "bytes": 11296,
+      "sha256": "0ac44b9c75543d3b5a94b973f6445d5add31b6954f746e17f72e466fdb9ac4af"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8336291529.json": {
+      "bytes": 11233,
+      "sha256": "ad7c96e1b1c8ce796115ccf8093aadc9d4736729ead69e125c7875c9dfafb391"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8336625686.json": {
+      "bytes": 11278,
+      "sha256": "7a6bf9fc249e919a30997a2be2deb7e555b83c79fcdea49948b5ae23481a1464"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8336763797.json": {
+      "bytes": 14308,
+      "sha256": "acadb0f2f3155cc91611668e64b10b5b4d27ae04597a55a23836f49b31d3dfe1"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8336874142.json": {
+      "bytes": 15200,
+      "sha256": "9597a41aaf9bf60ac8cdcb77e8702724278e6c79dee97ec47d52ceba48334894"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8337489697.json": {
+      "bytes": 13386,
+      "sha256": "2a81476700ad0d906a94b79e4ccc90898f0ad069d3e972f03c942a12821d9bc7"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8337555062.json": {
+      "bytes": 11423,
+      "sha256": "744deae90948a2a48bd54ac3403b801f8e2115c4548604669c3248841184a7c8"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8337579626.json": {
+      "bytes": 10459,
+      "sha256": "1ede1365ef8de7ebc86b53a7131370df697c88ea5436730548d714bb7ba809b8"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8338464129.json": {
+      "bytes": 10558,
+      "sha256": "9098cfdbd2c96e09e2a5ba2d7bfba9083a22ef112eec203a2f30360e1d49c3f7"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8338482697.json": {
+      "bytes": 15066,
+      "sha256": "3fd86d4fdd3ffd70847bda0dd095be4f884938ae23a12f875e7f958d3935e866"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8338811067.json": {
+      "bytes": 14517,
+      "sha256": "ff8c3e2022bf4cd8e49a52283d5bcfe08ecaaaf387311ca3670698810cd70aab"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8339864495.json": {
+      "bytes": 10473,
+      "sha256": "a5437483fb06f99a2967cf9dc7ced41c13fa083873b28dfad480351dc285f321"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8340309978.json": {
+      "bytes": 10477,
+      "sha256": "13b2f3ebf6797489213184b0f9f156009b8d5b6bd25c51072606b0058e78ed9e"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8340552099.json": {
+      "bytes": 10684,
+      "sha256": "24b9855e8bc87f911ba80ab678d28ff2ce7a65d3b6e0762d68834d157d60df3b"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8343428245.json": {
+      "bytes": 13600,
+      "sha256": "a3276d1c5e4fa2f2c3afcea0fc475dd5ebb9bca8cf312f616dc3d65dad1da77c"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8343733026.json": {
+      "bytes": 13256,
+      "sha256": "deedd49dc656733bd256e6e8391c1b568add03f651dc4e0f17397df1449a61e2"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8345910353.json": {
+      "bytes": 10772,
+      "sha256": "4f341c87f3ebce480d2c2e18a5c47873b196738ef7c9794678ee66d905a1aa97"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8346375433.json": {
+      "bytes": 15849,
+      "sha256": "eb264a654936ef470c33b82d8f83c12364c26928646438b87e0f36fb3eab858d"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8346751840.json": {
+      "bytes": 13426,
+      "sha256": "465046aaad2ea60fa5a5f24d83523e838346829424172bf6169613c24b837257"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8348378661.json": {
+      "bytes": 10829,
+      "sha256": "999d47f4621fbe705633651221b6af9f0a77c507507ca70db52f47d3bf5aa505"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8349296096.json": {
+      "bytes": 18444,
+      "sha256": "3b2a298b455fd4b1f6541164137e99687a67840b7f481fb80533232b7e2d14c0"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8350011827.json": {
+      "bytes": 13820,
+      "sha256": "4c18c73bdca54d3eb8bc96af93140edde40a632f21d8168f7f4ade902a0689e2"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8353825484.json": {
+      "bytes": 11348,
+      "sha256": "05922050af35b67a34ce349f580e1283b3ccc7f31dfc2a6700b5b8d5308d99ea"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8355945608.json": {
+      "bytes": 10538,
+      "sha256": "e5889132a7309a9e367ae1631219be32c6273a2346c0bbe49ba806cd38b1ce0c"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8358175901.json": {
+      "bytes": 11622,
+      "sha256": "9bfebf1e9ca50f756827b804a830de96e148e0c4d0658851d4c5d51efec325d4"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8358523288.json": {
+      "bytes": 11308,
+      "sha256": "2862dbf4dad5f10707a9dc68561cb5ccbf6f0f6d93dace5c507d868228684724"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8358576569.json": {
+      "bytes": 11273,
+      "sha256": "e98f72aeaeabc69c2f2f82a433adfcc6b5d65c8b3febcb8eaee336765a910ac2"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8359334712.json": {
+      "bytes": 15285,
+      "sha256": "8bf83219604239725bfafe46922deae0d99b355d634afcde68fc4031831c9122"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8364468670.json": {
+      "bytes": 15679,
+      "sha256": "42d629936f22d6dd3ce202c9926c422bcafe2a12783fd2f07ae08012decddbe2"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8365978087.json": {
+      "bytes": 15324,
+      "sha256": "7e5d19008eb34ac70acdf3317028983e2f723d95f5eb83087b5dc3a3f912659e"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8366075028.json": {
+      "bytes": 17551,
+      "sha256": "c7fbec3f9dcde43c9f3d34653fbf9384ae956d994af1574c5bc1c6ba28e5b4dc"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8366775511.json": {
+      "bytes": 10451,
+      "sha256": "489a2d5ee88834876fe295e43343c11350684c1d97d97844da9246c1ffac735c"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8368404047.json": {
+      "bytes": 10450,
+      "sha256": "5aa35c39fecd3b82155ad5251dcb3921d9fb0e8a2a237b474d62fc6c5341c9ab"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8368431968.json": {
+      "bytes": 10445,
+      "sha256": "5c2768dfae3008925e57e14e3c0e37b0a3a1571c509e643d5c2d5e6e84c957cf"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8368669020.json": {
+      "bytes": 10401,
+      "sha256": "f65fe037a2840cc759622920592dfbb5d57f21f71b7009a38a0d283a3a7f47a0"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8368946833.json": {
+      "bytes": 10431,
+      "sha256": "12bdf932a144e8deff7275155caac835b576f8c1c37e472ef5d456e3e0bd2030"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8369084216.json": {
+      "bytes": 10739,
+      "sha256": "e2186f08ad0c339d20f25053d322e829cbc0e8df369f9790a7bf051d42babace"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8369155001.json": {
+      "bytes": 17828,
+      "sha256": "c7bbe63b40b661dd7858ded19cd544ddbccc95ff711388ab257f561ea31c5d04"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8369190236.json": {
+      "bytes": 10780,
+      "sha256": "8d744cb998177ad7a16528cdae49c0bbf707335875e7ec77f3f9b10cf4ef67df"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8369226254.json": {
+      "bytes": 10291,
+      "sha256": "18830fd7410fdba01df39368c2b4e2d9dce9f2a8edf1dc0be6179170893a42fb"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8370452100.json": {
+      "bytes": 10409,
+      "sha256": "98e35bca06fac2e9e104ca3733a2b7af3d440042264894134142a826915e16d3"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8372033408.json": {
+      "bytes": 14750,
+      "sha256": "979ae72a5d2dfcc99f60b9863b1fdae954b624e4722592642379b85852df0b2d"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8372489616.json": {
+      "bytes": 11319,
+      "sha256": "57615181eebca9933778cbd9b51dd45da2d01c86f488172f338d785456d9bc65"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8372498261.json": {
+      "bytes": 10421,
+      "sha256": "a961c74dc79f039a2adb6b89f8f01f8a363844c3af7875f6ee5ce5a94d4bf9e6"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8372709954.json": {
+      "bytes": 10682,
+      "sha256": "5d529bc7e90bee84018dfc8a8be37c30c9d4122db45cb97cd15b1cd2f126d7f7"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8372901891.json": {
+      "bytes": 13314,
+      "sha256": "05776ac3ed980de15d04eb902e3bd2e601dfc51cfe140476f73ce5a535e5ba9b"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8373088443.json": {
+      "bytes": 10974,
+      "sha256": "0a4f5c7e9342538d37c632a3b041412882cab7553c55178ec37a27ab924039c1"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8373447380.json": {
+      "bytes": 10574,
+      "sha256": "af01c16e1fdd6dab496e0b397ad4f8f90f97780706b90d7a13ec9839352afe19"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8373788913.json": {
+      "bytes": 10714,
+      "sha256": "0bd95d9faffa64abe8e172a28e54aef5d763764b8b2e413c84fccf6965e15932"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8375894787.json": {
+      "bytes": 13470,
+      "sha256": "1558103417fef6909483dc160e2f5f297d1653827c759d7e8064eac4c3081ca7"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8375922827.json": {
+      "bytes": 11264,
+      "sha256": "e76e3d1881afe36b604656bcf5f1c2b3be4d768959127a7847db8a20e4ccd8ce"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8376124195.json": {
+      "bytes": 11023,
+      "sha256": "fce24fb90b3bbbe3ec67b2cad4a381849e521e7b47fb876ce3c60917a52fd0b9"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8377851880.json": {
+      "bytes": 10840,
+      "sha256": "5e05fd0e4d1a5dc40def2bec8ec6290c919f7d3817b887478c423073f587fcf7"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8377919955.json": {
+      "bytes": 15402,
+      "sha256": "0207c0c8423d6c84675171379741b27a0461b2ac190a98b0b0db4decc03d7f33"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8378247550.json": {
+      "bytes": 10465,
+      "sha256": "962b57b6f027559ea96c1f19dca1b1843ef00540c8bafae11a80a2c3165e5912"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8378604789.json": {
+      "bytes": 9943,
+      "sha256": "81f0a5cfdfb51f48971e834f1104a8ad1600aa7b233a4afdb896f5d17a51e313"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8378614887.json": {
+      "bytes": 14577,
+      "sha256": "2aa33c5339eff4a2cffe63e529ecd16e5a6da1e079988d9549307430d4af9f2e"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8378785475.json": {
+      "bytes": 12510,
+      "sha256": "b7b47ca72dc20bd5a12082e899c03f1887f50ac5d9c2b7a6f05b0349c342d929"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8381247846.json": {
+      "bytes": 10527,
+      "sha256": "ae0b7f27bbab5ed7203e16855f08edb0dab635a1da20924f0fd4b63052ebe70b"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8382135861.json": {
+      "bytes": 10933,
+      "sha256": "dbe15365fdf221651f5bcee67fa6c56d89aeace752661de65a168923307c0efd"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8383940982.json": {
+      "bytes": 13016,
+      "sha256": "bd4b13617f68c7878b6901947ad22703de8d684176769ad6d2dce07268ec190a"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8388029560.json": {
+      "bytes": 11339,
+      "sha256": "54acb3badbc40ecb288a6e79734137b78debce405e3802e04b128726da9c863b"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8388070759.json": {
+      "bytes": 13881,
+      "sha256": "202279cc727fe77ac9640c6d7ca9061fa29277e8352e04d417f72044fab682ac"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8388392018.json": {
+      "bytes": 14263,
+      "sha256": "5215a112ed4f98f72933fcd2e614dffe8247bd3c68badbee5960439bb7d73db7"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8389054658.json": {
+      "bytes": 13367,
+      "sha256": "ebbbb69b055eee35d4cdc6cd4c9b2f6ca1edaf61f5b73c2cfada5648ae75f841"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8390118103.json": {
+      "bytes": 10399,
+      "sha256": "a964c8624987edefd2dfabcaefec4175b885f60c4f90c0ab62868b7f723e902c"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8390559180.json": {
+      "bytes": 11303,
+      "sha256": "4225195fbc8ebc782afba5488bcb53161b73268a557cd9321c7ac565caaeccbd"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8390652936.json": {
+      "bytes": 13849,
+      "sha256": "6a2927b22bb994389b0b03db699ff4d95569de89c0bfb782ec75d0c6d6670c0e"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8390848258.json": {
+      "bytes": 11806,
+      "sha256": "2fc4cd0fe3668d7b83553cf94fd0ee0244676a125424b40d6ba5f0a464cc0b41"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8391487471.json": {
+      "bytes": 17650,
+      "sha256": "bab8cef4bd1dd0bd3cccfdf288037cffe990db426b5f6defe4d55bd904f246df"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8391729292.json": {
+      "bytes": 10479,
+      "sha256": "f5a2fd1828b931b314a0b408756f4b02e42564b0848e12a26da457e15a839a85"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8399019727.json": {
+      "bytes": 13508,
+      "sha256": "f3d0680c9f8bc61fd2fbf442b202e5b19ec4a867cce1d04a1fdfc070157ce366"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8399341491.json": {
+      "bytes": 11375,
+      "sha256": "bdab1424c80287a752c5cb89a31ede35d80edbcb418573325b0b7d8c43f07318"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8399449880.json": {
+      "bytes": 10431,
+      "sha256": "f9a8a6580d1d2f80c1f61131eeae410a5783a6b9e23e3f79048a65272633d9da"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8401528767.json": {
+      "bytes": 10375,
+      "sha256": "fad970997e2e70247eb83a4173ef0b9ccbc081c6f9bdde1eeef5a1069d3e9703"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8404888913.json": {
+      "bytes": 19094,
+      "sha256": "0561933d3775f57ae9ad6f60b7eab386dd0e2f284f14ed3acc75351e38e7f9ef"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8404963347.json": {
+      "bytes": 9983,
+      "sha256": "93d5b21d8572195eaaf6524d240b9df11c107ee054ba9ef6ff07f05146d33fbb"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8405120870.json": {
+      "bytes": 10415,
+      "sha256": "8d7d69ce414163ca92afbdde44a8612c4fe2d14928de46249b1a6694dc44505a"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8405378737.json": {
+      "bytes": 17588,
+      "sha256": "c02bd31e10d5e5554c2c3f6b229bb40db2f9b6b4e95d3a5afd17d71d7e625770"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8405526982.json": {
+      "bytes": 11018,
+      "sha256": "5614ada6129ff5af3a2cf85bcd44b557d1665c52da1133deea5bbfc1862be3fd"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8405638954.json": {
+      "bytes": 10425,
+      "sha256": "08e8d07f1dbdc888edf5ed14d11c3ee75d6feaef961971019ecf83e708977585"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8405780303.json": {
+      "bytes": 10455,
+      "sha256": "da88c03a51b603038caa530ecd969917db84ada9c5c7e2f0d275741ed7a30a6d"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8405842234.json": {
+      "bytes": 11540,
+      "sha256": "b6d88f7839fd7247e6c6e01739383aec6cad616f10f8b1084a54718bc7ef9902"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8406524946.json": {
+      "bytes": 13398,
+      "sha256": "a6c282920305b841372306c6cc5a7aec2b663ee631a340e978b701504a1eb402"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8407978013.json": {
+      "bytes": 13793,
+      "sha256": "5172f0adcedf25a633033827330400d815892665d04aeab62f3a0a2b08c0cf64"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8408117099.json": {
+      "bytes": 10449,
+      "sha256": "ead35feb8eade4ad2af89dbbe6a4be2676bbeca327ba41ec724bc30065193141"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8408284325.json": {
+      "bytes": 15320,
+      "sha256": "269cc870a6c5ab0989ed4a974e3550e454683a0770ecdc65ab65d42472ddbe0d"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8408538665.json": {
+      "bytes": 10709,
+      "sha256": "245332b228ba767f5df5396cf7a23a8323d1d4630c24390fff51c9dd9763fec9"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8408825306.json": {
+      "bytes": 11396,
+      "sha256": "c1d1e0232c75b71025273a43a2517780e7e338af96b1e4bde175ba1fa557459a"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8409258032.json": {
+      "bytes": 11798,
+      "sha256": "22abb14d5bdfc35f70df2ffe1df532766b48349294db32b92116c0cf46ef241c"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8409656851.json": {
+      "bytes": 11846,
+      "sha256": "2bb02539720f648c3f3efdd761cc63cbb42194e99bcb50d142f4cd2265068bb4"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8409766046.json": {
+      "bytes": 10417,
+      "sha256": "cb96dcc2c3fee1729e98148c86d5480c37566a5e682b9ac8c75ce3be9355a905"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8409774915.json": {
+      "bytes": 13822,
+      "sha256": "be613996625597ef145d7476c50485330cf1b352ef9e9485c95af435de5e58d2"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8410143852.json": {
+      "bytes": 14425,
+      "sha256": "b888cd8d34c8db6b04919b20aacd6387264a1304a011c73153c45eda968f91ff"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8410553689.json": {
+      "bytes": 16780,
+      "sha256": "cded7ac5659201aa208d34edf5dd211412f6446dd541736b2508bd230a63e658"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8413011238.json": {
+      "bytes": 11810,
+      "sha256": "70aec280384301bcf0e572f618da6558bf94b366fafd652ca94ea77c00da50a7"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8413522400.json": {
+      "bytes": 10507,
+      "sha256": "ac6c3244ee6053d2eb860330d8f4d5357af2b50626ec54bbb797d6c184c0ffe1"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8413825784.json": {
+      "bytes": 17907,
+      "sha256": "69d7501298b72f0ccd81b067524cf8e5f86f299b34c924f6f778810286bf4894"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8419870064.json": {
+      "bytes": 10503,
+      "sha256": "7f6a8ba73e2e21c91e931d58729f8ac066c4c9d9b6e5ec0ebda9c1e16fcf61fe"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8419987898.json": {
+      "bytes": 14748,
+      "sha256": "c3e2b28886b20f18cdd333b0f4c948ada8dd67b8b2b6685d448c84ad030eca4f"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8423632937.json": {
+      "bytes": 11226,
+      "sha256": "b4df1d023b631a8b255caa9184959624865a835026fcc6953b7de9fcc778bb89"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8423805166.json": {
+      "bytes": 11211,
+      "sha256": "a2f1e6d3d418355ce8406e75769f75e495700536e2e7d4e9415c2d1ba78ae3d0"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8426155579.json": {
+      "bytes": 13956,
+      "sha256": "7f7e512f7cf0411aa5f7bf4a847bf68c442caa00281369d13d5039ec2049202a"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8426456571.json": {
+      "bytes": 13348,
+      "sha256": "4746800ee18539a44df0cebe051b1912be4fdb32c8b1f01ec9af5426a3f057c7"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8427034107.json": {
+      "bytes": 15480,
+      "sha256": "8ed82fc7e8ddce13355174b28e4135eabbd6e6c01ac3a3fb8a9e286b6323a822"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8427076988.json": {
+      "bytes": 13334,
+      "sha256": "a0c4c16a984d9abb1788fa288bac8edeafc08cc39b04faa28f2aa2fbba982e86"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8427343825.json": {
+      "bytes": 15198,
+      "sha256": "c13e6ba913a93a6d2089a82cb6a4d0db373a9a628b9b80879ccc82de46369d5a"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8427398015.json": {
+      "bytes": 18808,
+      "sha256": "df2cb340e7c7b80e7cb5562359975d7d697f7e9d749088d603e448f2b0e28063"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8427715730.json": {
+      "bytes": 13394,
+      "sha256": "87022ad01b01701f99a797e9fc47b4d2a08138fe917bf1bbd6b2c8d92c23c5dd"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8430895217.json": {
+      "bytes": 15282,
+      "sha256": "e53f4fc8bfeef6d693be9fdace033a65cab2293bd9afcdeb8528784db6d964bc"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8430988984.json": {
+      "bytes": 10431,
+      "sha256": "2fb570ed23ee44e35331334bbee58c78da6371ed317acde27b1ca3b714b8bee3"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8431083188.json": {
+      "bytes": 17006,
+      "sha256": "6c28a9130dc1b975ff796d7285c2eb724b08300c6051b03d2a32adf82a3785ab"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8431200019.json": {
+      "bytes": 10598,
+      "sha256": "62f1a5ed9e63a3bdfb8a8ad7bf8cf4e481e8a68f1065653c1c3c143396cff033"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8431730897.json": {
+      "bytes": 10477,
+      "sha256": "bd8f58bca0e1c70491e294b0e0a6817ab2fdbad5dbe9d502cd775a0f2eb3151b"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8437604116.json": {
+      "bytes": 10329,
+      "sha256": "1342965ba3f9430d9def6c2d2a50f9e0bc8460a13c26ee0e2bf09c86f879b87e"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8437838081.json": {
+      "bytes": 17988,
+      "sha256": "a8334cbbc6c2434a809bb5c2cc595fbd045dc6dfd993c4495487dce1bf6cef39"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8437889574.json": {
+      "bytes": 10443,
+      "sha256": "4eca091198bac1f73c28117ad82dd7976620a1d3a6c43f5fc5a028abf336aaaa"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8438330255.json": {
+      "bytes": 10487,
+      "sha256": "b2ea7a4a1f3835b9a074be543b3078c3e10f0c87e4c7cc0fe502752c206b37c6"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8438540617.json": {
+      "bytes": 13851,
+      "sha256": "ad17112f7bf88a8e3c41f9938f0c2a25747047bab48abc0546c60aa8d2bcc0b6"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8438674298.json": {
+      "bytes": 10392,
+      "sha256": "73e06611e4c68fca4b23e0cd71220edf55e61f3f665dc2153fae1849598e6a72"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8438811054.json": {
+      "bytes": 11364,
+      "sha256": "eb1426c9d7b763d152b568e65b74e9ccf5059a2f72237f90fc73af1520590b9b"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8438967474.json": {
+      "bytes": 15308,
+      "sha256": "affe354e23f8ec4b315fcf7b8c5d5b05eb081fb800df5f4de2cf1fab95e1c17b"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8439083930.json": {
+      "bytes": 10981,
+      "sha256": "8f98eec72e7abe8e9a0afd9d9de3122bfad03821d99988ca7a2b98fdebd735ad"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8439199303.json": {
+      "bytes": 14245,
+      "sha256": "f072b647dad944e8dc5ef969d737f637b3df6707c105ab9a1ffe6f73cbaf6d73"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8439647985.json": {
+      "bytes": 11786,
+      "sha256": "f1b09a800ae57169f0088ed88ffd45dacb0e9ec5be5465ff355a1c78dce9d7ac"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8439862063.json": {
+      "bytes": 14776,
+      "sha256": "10c7280810f1dd9fef2b81d1f886fd9db8ecdc16e90757b115b68ddfaf15fb39"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8440438788.json": {
+      "bytes": 10431,
+      "sha256": "f9402d2a8d3e5c71d41f037fa3091a3a1c2065eaa9f38c90ac1906fc09c8e61a"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8440760551.json": {
+      "bytes": 15525,
+      "sha256": "8327357277c6e97cbb19f18c2692d7a565e87eb64bba5f02a7491bfe581e52d4"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8440834325.json": {
+      "bytes": 10992,
+      "sha256": "8cb5e9537d6c14d7d9d4ec92e3c1e46cf436657dd6d6b5c146036e53579f0ca1"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8441118392.json": {
+      "bytes": 14780,
+      "sha256": "cdff50dd864ae113d7c14ff9b2e2061083dc93bea557e230e5d3f4e26d700092"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8441399008.json": {
+      "bytes": 14116,
+      "sha256": "b9b3fd001051486a7141f5f8afed907187fb2facc419f61854bc8af0054e3c27"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8441596106.json": {
+      "bytes": 10435,
+      "sha256": "0e1603ef2e742a197f21acb0d9daac6988db6fca1a1a5cdbc30647ebbaab5fc4"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8441721748.json": {
+      "bytes": 13667,
+      "sha256": "49519f0bf8d22e6a3de92372dd1160d6054b6f3e5f55f9b1af91ea5db3558bc7"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8444897882.json": {
+      "bytes": 10735,
+      "sha256": "4f1b2707c55f71fe12623efcab4462659a332190261880d751bc9eeade0772e2"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8445448370.json": {
+      "bytes": 10431,
+      "sha256": "6a265613c2da57bdda6e3c3198f724a3d92c6d0a838fdd082665ab3807c1e35c"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8447016175.json": {
+      "bytes": 18450,
+      "sha256": "30e57dd1ff246fbb286fe7886824f654be9915daa5482e091120adffba1b62e0"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8448633468.json": {
+      "bytes": 14697,
+      "sha256": "fdf2a0ce05fff32f91c9cf7b6b1fc8a83ec4484cba0c408f02777594dca8eed3"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8450513492.json": {
+      "bytes": 10034,
+      "sha256": "6ff17a643f814df054aa2bc6fd673a19984ec75681b73a518bd9d2daf5139a12"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8450823099.json": {
+      "bytes": 10408,
+      "sha256": "336f63f59d9aa62aa7080a456a35d8536236630c82f7a7bfe39548e8124ab5e9"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8451149668.json": {
+      "bytes": 10952,
+      "sha256": "0379c8b02339b55c823028dfd86cef69875f229756391431cebaa083215d90cc"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8451214743.json": {
+      "bytes": 11256,
+      "sha256": "6b415c422eab87736748d2f477d1ad34ceba6de978dd0b0c4411adeb6070af72"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8451396334.json": {
+      "bytes": 11760,
+      "sha256": "1aef871f5bcc5d1c39079cd88e4a2b07eb5112c168d671e018fdf4bd2a297b49"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8453182801.json": {
+      "bytes": 10335,
+      "sha256": "8e7124dfb6d6b4329fb13fad47868148e6800be6a307c0d97980eb8d48f562c3"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8453343665.json": {
+      "bytes": 10913,
+      "sha256": "0e985bdb7d396fa519efa6452e8645260e0ee971478c476ead17c0e3465d451d"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8453352193.json": {
+      "bytes": 13488,
+      "sha256": "c3a7e65de1ba0b04656d6fee5ea347bf19f0e273f22481ec35df77d2aa258c99"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8456912452.json": {
+      "bytes": 10480,
+      "sha256": "4aa7a0c2e378ca4d0d44ff0d3e7f73d2cc5dc18c575dea8df4e947856a290ca2"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8457905425.json": {
+      "bytes": 15152,
+      "sha256": "aebc67cc3d602957729bea8e48c0b68502c530ed1189176fe71b9e68fbc1c684"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8458011609.json": {
+      "bytes": 14722,
+      "sha256": "d2783998e25cda5687eaab256d9564c1424a886149bee8cbf74c4e11b17c879b"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8458033906.json": {
+      "bytes": 14585,
+      "sha256": "29698b7b7492ac7e5fa65655d4759dd3ae461ba7fc7262c8af4d0e08cad0ba6f"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8458313901.json": {
+      "bytes": 11778,
+      "sha256": "57ff280fe8cdffd0dd6e8160995270afcc91bc174387819fb5ef711a4a4c5f1a"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8458695285.json": {
+      "bytes": 10369,
+      "sha256": "5f529768b609ca5f3d498294b874a9a81fc59e0a72f6b1521569a56a799bcb76"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8458994147.json": {
+      "bytes": 10408,
+      "sha256": "d6e07ff9b13de800700753c8b1df5993c767b1a485d99e86d8abd72a96e235a8"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8459064742.json": {
+      "bytes": 13013,
+      "sha256": "ff88cfd3a337a5f74f8a4a8ecc83315f672e6ac71a4697a1f11e2ba09fb951ec"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8459575250.json": {
+      "bytes": 13383,
+      "sha256": "2e77db067468bdc3c59b59dc266a6d065634a63d82a1ec0e3dcf1298e6741940"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8459656383.json": {
+      "bytes": 11788,
+      "sha256": "7015fd6d6217f8e17585e86b960c1246047710458352953dbd5bcc1d7fc24beb"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8463493857.json": {
+      "bytes": 14642,
+      "sha256": "32c70a2d82d5f5aae2ee7f2659a9752fa84aa2b00b5bef826caeef5e1bc8382d"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8466906257.json": {
+      "bytes": 10771,
+      "sha256": "95d0bb1745e80969574a7c7babd853b4ecd199cd534a95a3942c1f5420c960f0"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8466926543.json": {
+      "bytes": 10869,
+      "sha256": "fe91ff2ab7bbc297c6bceb246b31ca523cac5d7c21bfeeeee19b443f3b4c9ba5"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8466929273.json": {
+      "bytes": 9697,
+      "sha256": "3a47f7fb98f09a39362291d4657424ebd9d10c7b4d216407a5a7e01fee38d1c1"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8467253459.json": {
+      "bytes": 11602,
+      "sha256": "345e894aa4e65c2637723f8ff12fec100f8c6f79960b380c0aee2cc6a8662ce5"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8467332047.json": {
+      "bytes": 11416,
+      "sha256": "dc6d86dab2fb3c4592891315b4d4a0f8086bb1c0463d48f2dd15963b0402c776"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8467650586.json": {
+      "bytes": 10417,
+      "sha256": "9e1f7255067c31f9b8fc67717f0f0997d11e7bd2682671b861fad99b498eeceb"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8467744216.json": {
+      "bytes": 10427,
+      "sha256": "7a5c36eb0eefff78e7a029106ec6e1d5380b0b27f3971f2ab366480761b31f22"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8470456782.json": {
+      "bytes": 10447,
+      "sha256": "279e6fcd0058a9f75e2e1c540dc2402ed2000f692efc589ba74c4d1e1b5edc90"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8470591156.json": {
+      "bytes": 14651,
+      "sha256": "9c4d2602b40c7bf8296f0c12e529048beed8f7f7e72f4dae02b9e70c9aefcfc9"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8470982905.json": {
+      "bytes": 17952,
+      "sha256": "b0a67d17fdcec97a592e3acbc1d5fc953f9e0d041258b8e686aa1dd95c620149"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8471247351.json": {
+      "bytes": 10435,
+      "sha256": "be5760808e870dfe962bd3e7bedefbe38b0d9c47918a663b8fc2d55435ef3919"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8471460935.json": {
+      "bytes": 16921,
+      "sha256": "806aef2ead49a93f0e95031db742bcea80f96da54221099aacce7e2411f021b1"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8480312020.json": {
+      "bytes": 11254,
+      "sha256": "4c55fe8bd8b62b72db39f464dc183ea94264f64bd0558c06ac89cdad062fa73c"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8481852326.json": {
+      "bytes": 10874,
+      "sha256": "75a3b25b9a850c7e6931987a6f40e5029122085f7a56d8045df1cba9c223bcc0"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8481919485.json": {
+      "bytes": 10483,
+      "sha256": "ff6636c5edce54194723781a88b745d8aca020035024cb3f0fc16a5459df7944"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8481960666.json": {
+      "bytes": 10425,
+      "sha256": "b098471e216a3c59a71291a9638afb8b43da3c43ae9ddb569041aad4239bb7fd"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8482145398.json": {
+      "bytes": 11550,
+      "sha256": "d56ee7cf87a5fb61dad6c264b9b0480f4538a1659570499ee48dc984bae5ac13"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8482343942.json": {
+      "bytes": 10722,
+      "sha256": "373c92d41993e4ba0b42179e000f31f75ec27c4ea7ebdb5a223530a4b88cea23"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8482532602.json": {
+      "bytes": 10478,
+      "sha256": "8a77e86f5ebe9aa650d684c540cfe97eb24ce905aa4dcfc1d2a7d536eb3be502"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8482989122.json": {
+      "bytes": 10427,
+      "sha256": "474d74838535798aaa0fcda84b188935a2c94e4925eb272baacddc0fb9f1e23a"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8484930212.json": {
+      "bytes": 9501,
+      "sha256": "ad6c3312e677516123db636c9193905cef0180a3b797de80cfec777c35dc894e"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8485194560.json": {
+      "bytes": 18989,
+      "sha256": "c6f27a80a9823abdaea808419a74ef5223200c232e5d787e41ed5334907f6716"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8485465780.json": {
+      "bytes": 17683,
+      "sha256": "e6afd012db1ba0e65f6aa1ab73ce757cbefb59c90bdf0ebaa1887f5beb15a47c"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8485469038.json": {
+      "bytes": 10907,
+      "sha256": "ff2813d5025d0f61a1fe00830f30ac9c043b7236855eb0f79a43a972b9e058af"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8485549981.json": {
+      "bytes": 10399,
+      "sha256": "b98d8ea2fc63fc6d3843097c4049cf76e9089315e094168350f45240407a9054"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8485733701.json": {
+      "bytes": 10445,
+      "sha256": "aef34699b9ebc6dae38e52f345f17182ec53cbe71c910c77783be5f60dc9967d"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8489076421.json": {
+      "bytes": 10233,
+      "sha256": "e2345caa3a505bd687098ce43de818dca2242a02f9842b97d8ca24b3ad58494d"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8489722834.json": {
+      "bytes": 10443,
+      "sha256": "0d0188888384c17dddd0696885e8571ec5f61fd4c41faad4434d2507cdce8301"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8490602116.json": {
+      "bytes": 18460,
+      "sha256": "e10401357c6c002c5a329ee034aeca97f9cd6fc3cebcd2c0c6cd584238d50a15"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8491360811.json": {
+      "bytes": 10746,
+      "sha256": "04e1b8600cfa650160f68b6ba39275847d3d09debbfb1c2e61c20168588ae67d"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8491522684.json": {
+      "bytes": 13718,
+      "sha256": "90049f09ebaf9e7740424ef16e6e5477f38ca999bbd997c3b4ef66714cc41386"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8491529597.json": {
+      "bytes": 10455,
+      "sha256": "faf56c3ee49534b64179b1a345e817687cd69da46b4b2a3a494d16f7324410e2"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8491570707.json": {
+      "bytes": 10461,
+      "sha256": "8bb60d2948c102302bfed67b25ef3179fc4242e5d484358aef2870188230058e"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8493042338.json": {
+      "bytes": 11265,
+      "sha256": "8d69a313b9432af125250aa8b76df068a733636f073494b3c56776b60102d6b4"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8493078792.json": {
+      "bytes": 13398,
+      "sha256": "0aa306d8cb4e1276192223653b37a1105307bf3df31c66280438a9f78884a9e7"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8493180702.json": {
+      "bytes": 13360,
+      "sha256": "fc298b3eeb631c2de776a060181616b82a6bd8675d561d2bde895a3c2712d8f1"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8498926874.json": {
+      "bytes": 11438,
+      "sha256": "f6c5921e4121c4ea62a25c0a773118bbed671aa63bf50ab57492ceae794abd56"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8510844740.json": {
+      "bytes": 13426,
+      "sha256": "1d149ebfd66bbe505a58cdd95250c7d2712aa8aaad023fff0b12b8352af4a294"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8511125930.json": {
+      "bytes": 11276,
+      "sha256": "9c0af23d2da50b09f380e005ae4558617262872cf0b94054e3ccbb7fcceda5c5"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8511284790.json": {
+      "bytes": 10551,
+      "sha256": "e03170d0c050cfe983e0a60febb116368aa90d86e2471a254d453692a3ceb13e"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8511751383.json": {
+      "bytes": 14292,
+      "sha256": "293f79d6222edd5515caf7f697fade6daa3d48e6b0f388d8235ed0dc168e0dd3"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8511759792.json": {
+      "bytes": 13952,
+      "sha256": "dddc106d0a8dd07c287354e1ffa585160e5ac1b7387646be7688e8f942019ee9"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8511833791.json": {
+      "bytes": 11039,
+      "sha256": "2deb5283114daab0b234f0bd25e392939b565e9b0189d1cecae842d02d846a4d"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8511849704.json": {
+      "bytes": 10539,
+      "sha256": "79fc9525eadf7b04e9e0543e8a8815caddc99bf9a54d76b79045ad27593128f1"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8511932629.json": {
+      "bytes": 17681,
+      "sha256": "9fa16906e1f38067a5dcc87860a4c2c3710975ef2034ba176d86c0faaaaf34ad"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8511933380.json": {
+      "bytes": 10899,
+      "sha256": "2dc009cc9a8ab973eb19b159064a35f0c5e64dd6924157ed86380183e1ba2fa1"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8512323090.json": {
+      "bytes": 14482,
+      "sha256": "0b8acb6c126a0a265582cba49ba302b7c5161fa0e2af519e8553f53d7bdb6e85"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8512507705.json": {
+      "bytes": 11762,
+      "sha256": "ffe538ffb1f76363be5ed9ae7eda55929b4f1d6c30fe07a701752db00dd964a7"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8513063424.json": {
+      "bytes": 11802,
+      "sha256": "94b0548d10aa54d1c3f4f145e5b3ce03a2a3e8eb047fc84fd33d4cead3d41be2"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8513080906.json": {
+      "bytes": 10175,
+      "sha256": "39ed11c556ee2b6ad0365785027c7cdd792a53a2700540c1091d24f2e2c13d1e"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8513101911.json": {
+      "bytes": 13924,
+      "sha256": "cce53e9c4a1062ddefe36d72e9ecaa84e4a510ffee2026f32905ac78998e6ed9"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8513184653.json": {
+      "bytes": 13492,
+      "sha256": "b03dc57ecfa9a2a929a742d9f1587648314eb6eb565887aa7ef26eaf52d7ed5a"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8513192990.json": {
+      "bytes": 13954,
+      "sha256": "0f93c493c4374325b2895947a6642fb663864e03f7449c846c736124320ef7da"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8514862448.json": {
+      "bytes": 14760,
+      "sha256": "6c3aa2421c55ebe5f8e9b308c74c67e38edca4f62be9404a48f71a2144f3c5f4"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8516833911.json": {
+      "bytes": 14744,
+      "sha256": "853e1e4df3b66476b8f400058723f82d0d49417b3aeae60dd380b6b8fe0cc1bb"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8521366002.json": {
+      "bytes": 14762,
+      "sha256": "90ad29d5b902c4197aa7f98236757463ad9f1b7e0bc96dd09e6cbe4872335324"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8524944985.json": {
+      "bytes": 13775,
+      "sha256": "858e030fee1d31e80ff55d9f43a381f858ad4d2cdcb0b0597781d6ca1615be5d"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8525292889.json": {
+      "bytes": 10425,
+      "sha256": "a845256bb585399ab35e0cb94efafb020e4155965113cdb6cc4f2b18bed87cfa"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8525311669.json": {
+      "bytes": 11588,
+      "sha256": "0c2fd18397d1e30020f9c4849e4bc87067c43525b12f6bb597d9e631264516ee"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8525384070.json": {
+      "bytes": 15134,
+      "sha256": "38b567f3686214158699ccddc7bc82ac357a63771fc9de387793fccc01e62b60"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8525608293.json": {
+      "bytes": 11898,
+      "sha256": "9d1b35d6d5e74ba6e581d914290fd616234e241174b5c0e160cd4c1e3e94240b"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8525802598.json": {
+      "bytes": 10797,
+      "sha256": "c52d919920982ddb0d5cb3001a6ae41cba2b48a4f626a1dfbe71814827d8b8ec"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8543054103.json": {
+      "bytes": 15142,
+      "sha256": "131b53804f7a0aa309cfc81354947fa7b1388e32f43fe55d8669fdfba8c58d1f"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8543121368.json": {
+      "bytes": 10469,
+      "sha256": "ddf9a437778f58ba5a86b54b3af11180a8b292402aa12140195f0525e77e471d"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8543508497.json": {
+      "bytes": 11025,
+      "sha256": "0df48bae55732eb938a89498667fba0477aa94afafaba88e2af14b1ad7fddaa1"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8543777536.json": {
+      "bytes": 9504,
+      "sha256": "9e7fc45d1c91e74fd6c4e319983c2e8b2a12c4989843ccefe00513ff727927db"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8543906578.json": {
+      "bytes": 10417,
+      "sha256": "cbdfd03f3aac3f133815316f25acf7cb1ac3ab50b9b1a9a107ca827f8627f2e3"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8544493910.json": {
+      "bytes": 10411,
+      "sha256": "9da113f1ed9b67c471a5e891eaba0a17faac6bb9af30cdd8b918cc7512725100"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8544966739.json": {
+      "bytes": 10481,
+      "sha256": "eeb416169d406d0ab5265ea265d4f76170578505805e66d6321acd48d6b1827f"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8545089478.json": {
+      "bytes": 11818,
+      "sha256": "3bf5333eaf7d436e4f693103c4900f94d44a5f7799385cc58e61d920688fc103"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8545125971.json": {
+      "bytes": 10632,
+      "sha256": "17b72ffd6fb369bce9aedee9d943b5d2c0db65677afa20dac6a093245d92e960"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8545323417.json": {
+      "bytes": 15322,
+      "sha256": "47dac8b9604e03cab244b112c93fc4aabe1d9341d88880dcc76afcc540d34855"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8545413545.json": {
+      "bytes": 9747,
+      "sha256": "63ffc837607d08436382dd510725de4fa95c00256c3ba73f3aa40d8fa5a9006a"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8556900149.json": {
+      "bytes": 10449,
+      "sha256": "5f5730602cb6318ae9e40b13d2173e8558cf7f1c4c62b622d752d4c312884034"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8557579511.json": {
+      "bytes": 14846,
+      "sha256": "b71e608f4468087c840e0630d71f2573d9a42f6b4084c7546d630814de5d0484"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8557672062.json": {
+      "bytes": 14429,
+      "sha256": "7364c8aab41a460c32f71c8282fa2f3ed25dfcf6a466fc2d942f1dceb6f661ba"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8557681350.json": {
+      "bytes": 10862,
+      "sha256": "196ba1075fdc6f9444022bbd6682ba9d0e88134d4f32bc20e10c2443f48cf161"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8575059038.json": {
+      "bytes": 12693,
+      "sha256": "2b22459c0d24236c2eb5be9b98080e318142eee2776c326ffda1ac3f99577f90"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/raw/8577079069.json": {
+      "bytes": 7437,
+      "sha256": "502c8598d399e1539c9a76f38e23cd87973c47da154f8713023779f5c82df632"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/3764069326.json": {
+      "bytes": 782,
+      "sha256": "071d8f9711409c487065cd74d9ca95e1284577192aa679c82ee66c8bce653736"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/3781644486.json": {
+      "bytes": 757,
+      "sha256": "dabbcc3ddcad7512667f992738f7f873b93d19d672067f9351217f2185b958e8"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/3782130353.json": {
+      "bytes": 757,
+      "sha256": "7a0ff82d7ca2a02f9b518cdbbd52f2061064300eb89f00834389fffd9131d948"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/3782500082.json": {
+      "bytes": 757,
+      "sha256": "17c5801116d41d92f54dd07f52c2b1e355a637333ec7d853aa58f406dfcc8073"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/4474562473.json": {
+      "bytes": 800,
+      "sha256": "a5a424861874682eb2bbe6dbea408dc1963d28466bb0baf95e7be986b3b37ffd"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/7418503276.json": {
+      "bytes": 762,
+      "sha256": "2a912ecab670dc31139835a3555923a89fd733ef326dde223707e8e421325cc6"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/7589869557.json": {
+      "bytes": 797,
+      "sha256": "134a1b92af11f0895c3043f6211b2c26e73c61b8d2fa9218c7bc051927d0940c"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/7738231665.json": {
+      "bytes": 810,
+      "sha256": "f955824f3d45f8cbb7cbf8b0704438f3977a2c84f418988b5a731c06d5fd7250"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/7781199315.json": {
+      "bytes": 766,
+      "sha256": "f52d76d009eb0add67fdef8f3dd13fabed022858279caca4f08bb9fab276b7df"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/7813143318.json": {
+      "bytes": 715,
+      "sha256": "ad57886fce2dfae1182ac32255ad8c9d610f213a4555d0508d49b5e2db4f6dcc"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/7843854337.json": {
+      "bytes": 810,
+      "sha256": "c9dc61c41c0ebaafaf640fb6275e31936ad4259bff5421d4dcc4a3de8af36228"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8058465934.json": {
+      "bytes": 942,
+      "sha256": "c30caf834be8743d5886697b25e7942d58bff2b8d0989f2ac1603bcdc2b9c78b"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8068936044.json": {
+      "bytes": 829,
+      "sha256": "aa1e0af8573fa2b4b9e12b9c91a3d92ecb58b567af8eae84b65a8794d22ce28a"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8078060771.json": {
+      "bytes": 755,
+      "sha256": "d3e5c075c6790e25c11ec715c341d96f03898340ea1f1a182734d8593d61e2db"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8101690156.json": {
+      "bytes": 774,
+      "sha256": "1df705466f877e1f8c1a3e92e2179081a2591ff9920dbdbffb0bad2b5a7cc39a"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8120341993.json": {
+      "bytes": 787,
+      "sha256": "3b680117ca9fc723846385e5c5f079961c02194e12283bf92ec2a42e37a7674a"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8143823653.json": {
+      "bytes": 745,
+      "sha256": "492a30b8cb0e25addbaba11261562436e4bbf5a01f35dc0d182e456dec096a1d"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8175436014.json": {
+      "bytes": 745,
+      "sha256": "f64e29048039dc61a00f39e20ddf7f5b61ae503425baf429ade86f300258a396"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8207603944.json": {
+      "bytes": 819,
+      "sha256": "a449022c9765c890e7c15db13587d35b7deb23b9f335a06f62a3a4654a7dfad7"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8207804954.json": {
+      "bytes": 731,
+      "sha256": "c569be2da88a73adb77ce25ae89f47d0be5aea54662f6d1da75a47638b7f10f7"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8218169885.json": {
+      "bytes": 785,
+      "sha256": "89f6d7bab9d27f0387142e14523a5f3314aec544bf706dc728b3f1dca1dffd74"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8220352111.json": {
+      "bytes": 790,
+      "sha256": "726807a7b4a294eb7488c12642d0361b50d7e7b5e454887346a2f6905434c87b"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8230098987.json": {
+      "bytes": 794,
+      "sha256": "db14681913961012e2754ec088c284751289de2fa67e491891923cae1286c461"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8230125451.json": {
+      "bytes": 840,
+      "sha256": "78c91affedf4b5b66c3ff8a3379deebe4178e2a687fff88702ee4b08484aa9af"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8247508747.json": {
+      "bytes": 747,
+      "sha256": "961910a0d3a7fce57f192e83a1c58043590f16886a39aaf473c1764673d7d38b"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8248687811.json": {
+      "bytes": 950,
+      "sha256": "64ffe93b2750ac6bde7f88a7d67144e16658f0de61feaaa46ff7928cfc552c0c"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8254197066.json": {
+      "bytes": 777,
+      "sha256": "c0c23ecd4a3b445f41ca0f70db39c72f88ddd6942116bec79a4618105fd02a4b"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8261198253.json": {
+      "bytes": 790,
+      "sha256": "b294db954a4c05155387a91b32e572b8bd9174a99a608f9c79f99ad7682abc54"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8268048431.json": {
+      "bytes": 885,
+      "sha256": "d5c3a3a6a554a387e3c3ba389532d6f58f0d50bfd06a6866f58c9b22ec37d41e"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8271104104.json": {
+      "bytes": 785,
+      "sha256": "1ba1459c9c0465bca1cd6e042be1aa6a27821ef7b0970423d8e07d183c498504"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8271244156.json": {
+      "bytes": 807,
+      "sha256": "b8ab99c58155657670800add5b70daaa7cd3c0a929c24f114a280f524aeadfd5"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8274092735.json": {
+      "bytes": 771,
+      "sha256": "4711bc46c22274e8fc9dacbcf075818208123ba3e47f9042740a16a5cc4001f4"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8274387474.json": {
+      "bytes": 810,
+      "sha256": "c82aa348148e82b3b8bec2def630e5fecee31e9edffb8c7ed724e43e87775268"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8282195664.json": {
+      "bytes": 775,
+      "sha256": "86daff39b44798503d8d3aaad3263da7df76682df49e972189025890bf5df755"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8283623819.json": {
+      "bytes": 781,
+      "sha256": "1e13c5e46ef4ae71d0095a076df844f2fcec1049621bc762bdea1be382447570"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8283782854.json": {
+      "bytes": 796,
+      "sha256": "c9b23ee0fb4957f54a888d31040648171bbb6b4825a47b2a3516b5c82b3027ea"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8283828258.json": {
+      "bytes": 801,
+      "sha256": "2ce2ff1c8780f0286aa18846f7675f0c1950488aecfeb9809fd2a27e7e61ed12"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8284362018.json": {
+      "bytes": 787,
+      "sha256": "0aced237cb829a07501b38c58f5492f7a2268044daa8dcc6f542e079f3cefdf0"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8284392931.json": {
+      "bytes": 783,
+      "sha256": "ebdca827433d13112c6a42d902107bb26c8a56029e710de4d4ab9c64c51cba80"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8286652054.json": {
+      "bytes": 780,
+      "sha256": "0907c62eb59fb9c8629713b1fc94a3ed189e5735b7e2ae377553fc0dbd3e71e0"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8295152916.json": {
+      "bytes": 863,
+      "sha256": "aa33cf0baaa99fe0b35ccc41a5cb3db7892ef5edaa315faeecd1f9447abae089"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8295914779.json": {
+      "bytes": 849,
+      "sha256": "4878a6e7888273297b4d0f06791924f5ed7103a28363da64464f6f879fde9618"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8296612785.json": {
+      "bytes": 804,
+      "sha256": "14b31742f248120b01b2e1572cca5cc8b2d5ffe28e7a8f55eed21f63dd7e67ff"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8300299049.json": {
+      "bytes": 773,
+      "sha256": "067bfa478438c317d8085ee085b0120dcc22ad7cf213569f2d8d14af15d2fec8"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8300736102.json": {
+      "bytes": 790,
+      "sha256": "3be73b8c01eada8684d7ed836d5336afe786c4d1096100bc040c7707a5596154"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8306407258.json": {
+      "bytes": 826,
+      "sha256": "db8624bcae7702a7bd4d7a7a53cc83daf2a6e1fc32094123b3f2759deb752ac5"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8306592813.json": {
+      "bytes": 778,
+      "sha256": "2806a5a3340f3aec621f9b20134b4d74271f3673d6ca857a63beb7a677fd0af1"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8308602114.json": {
+      "bytes": 820,
+      "sha256": "099426153dd8258a3a7c1ec326eba8c80e9262fb04b556130587986c27495479"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8309563737.json": {
+      "bytes": 768,
+      "sha256": "25c4c1f14c33888f7b4d4077607bce6416cbf424eb935d11a733d92f3bb55896"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8314984011.json": {
+      "bytes": 853,
+      "sha256": "d8680171ab638ade86262bcde43f90d18c42b046449597ed7e6dff8e933847b3"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8315243616.json": {
+      "bytes": 779,
+      "sha256": "6582a99cca59100862bf48ee060feda8c8068fe98f74dcf1380025ddcfa71909"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8315575173.json": {
+      "bytes": 778,
+      "sha256": "a2da9b5494bc121fd66fffb0e16db317e9be03ab710d6e68386e1462fa1db4e9"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8315889971.json": {
+      "bytes": 785,
+      "sha256": "73cabf6f99ad68603f03da8301e3a4bf6db671de73bfcc08dd0b965d24fa2b83"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8316022786.json": {
+      "bytes": 777,
+      "sha256": "326b21e3a118a2ed43bcb244cd7bc2f6adfec5e88ee47ec23c5630d978e3a6e0"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8316369536.json": {
+      "bytes": 773,
+      "sha256": "bac98cabcd8884fdd237627fde19c8afe845e9fb01340f50154e2a29ab04d10d"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8316529260.json": {
+      "bytes": 802,
+      "sha256": "d6705b4a69fdeefb3f982e5a154ee024748f5e576de548a099950107d73e17e7"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8316643178.json": {
+      "bytes": 786,
+      "sha256": "7dcae3b73cf14474fd34fd4e2aba5120da0cad656c6d9a67152a3f4b30a4c6e3"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8316811211.json": {
+      "bytes": 762,
+      "sha256": "7586746976bb844eb3d660fa8925a47ee41ddb4169b693c36936b67fb673aa16"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8318258798.json": {
+      "bytes": 790,
+      "sha256": "15b2a024ab7477f8880239daa8d981d3dee37ee01408775eac59ad5ceebf27be"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8326122148.json": {
+      "bytes": 859,
+      "sha256": "72897bde4f5f9b350dd9493bb1c53e016e8d994a3ef0ddb3ff548ab9f8d08e74"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8328105282.json": {
+      "bytes": 771,
+      "sha256": "e6f7134c694657eae090f3d1f803be0bd9c45bc626744fd9b8ed36ae929fd2b7"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8332185333.json": {
+      "bytes": 878,
+      "sha256": "bca60a3f110d6410ab9393151311350fc69a542513d3aaf0ec46dd6dcd301983"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8334222319.json": {
+      "bytes": 758,
+      "sha256": "88176c06bb723fc04f51a3a8508b4cab4a5ebb59ef8694421ff475a27a46fa74"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8335745122.json": {
+      "bytes": 841,
+      "sha256": "4164634cc8689e3fb206ac7abcc9a12c5dcc95b93efe982ace0f1b9968100d72"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8335927540.json": {
+      "bytes": 813,
+      "sha256": "2ee75824b8b7eef481138ded2a5956ab685674b91268cf3ab6741465a1bbbf16"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8336032210.json": {
+      "bytes": 789,
+      "sha256": "ae6a14a5e4fbc3e4014c9dc08a6646399a63a00960566fa386ab9ca106daf3cf"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8336291529.json": {
+      "bytes": 778,
+      "sha256": "463da6a42a8238e75763623170bbcbe33af79401483be446351c74e49a9f0c41"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8336625686.json": {
+      "bytes": 771,
+      "sha256": "aea29acb3642b424d16d8fbeeeb076f03ecf7799cfc116820eee038e75620f0a"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8336763797.json": {
+      "bytes": 789,
+      "sha256": "29517c6c1394bbb745d50e11843d512f81766947b5959ea3f354fa67d7097ee5"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8336874142.json": {
+      "bytes": 869,
+      "sha256": "bb27b4f13400b23c478205a4940208f3baa657252f1d33f032fddf10e50f39cd"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8337489697.json": {
+      "bytes": 790,
+      "sha256": "00437b83c5e99ee27abcdb144aa3a9df510bc0ec068837dac6859ff4dd342616"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8337555062.json": {
+      "bytes": 809,
+      "sha256": "28c4d574b5da53c64c8ed04f78f4b2b177f24e12de50d659d17378aa9890af09"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8337579626.json": {
+      "bytes": 800,
+      "sha256": "ab4c201f8aac17da83ab06de2d1a0c404543e1dfa63d4f866b835bc678c8df24"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8338464129.json": {
+      "bytes": 795,
+      "sha256": "a7a1e61bf33c01b87a1cfa6dc6a5348f6250d7d19b022ce7c04a21fdac12d659"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8338482697.json": {
+      "bytes": 789,
+      "sha256": "b772c444af1921320fbfbde4f2b2d3c401e5231e2bf1f90d8a20bfa779241a42"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8338811067.json": {
+      "bytes": 824,
+      "sha256": "b4656433ea2e11ae058a8bb96717b3b79ad2ebb82b2b2c7d4367a836d23f3b0e"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8339864495.json": {
+      "bytes": 806,
+      "sha256": "12a9f4ca67e8830f0cb721da36a0e47a7d2e67dca641f6ca1a79b16b84a26ebd"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8340309978.json": {
+      "bytes": 803,
+      "sha256": "979b7b6c5beabfe92b25299d8249a5d07f3dc1fc336119c548ebcd12160518aa"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8340552099.json": {
+      "bytes": 836,
+      "sha256": "879ccf4f3630213f6f5d07ec502c2df84afb461260bc7e5c9812d923e59d3a93"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8343428245.json": {
+      "bytes": 807,
+      "sha256": "8f71f995d0c57da87c02de723991e6e4445d25633ba06413b1d48230607cca32"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8343733026.json": {
+      "bytes": 777,
+      "sha256": "b8d0f6d379a2d652619dbbd0f04cad2250556be5e51400b14ad87f7a56010e22"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8345910353.json": {
+      "bytes": 787,
+      "sha256": "665fde586dae80e8aa0b27b36b1db8b18b633aea6b2f6ae1f075c2f91672e438"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8346375433.json": {
+      "bytes": 844,
+      "sha256": "f2a0860c6cac6d1d2636cfe9bed21ce467408888326a6dfe0d6684497d75bdb9"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8346751840.json": {
+      "bytes": 798,
+      "sha256": "6a5ef08120d48bf593ba0b22b6dce4ea50f89e2f0f3a33565b6cd9dde4760f8d"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8348378661.json": {
+      "bytes": 826,
+      "sha256": "c2960a60a1268ed5de1f11910f30fc4f4bc4dc863ecf0328c22dd2c735c66509"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8349296096.json": {
+      "bytes": 782,
+      "sha256": "4148c6a3dd148e4b44c776e48646a14cafff0b37ce1d444f9e60a50789a9fd38"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8350011827.json": {
+      "bytes": 779,
+      "sha256": "4e7f928deb5cb99ae12d26eec957993ff0f118402c1157b422f82f84171c2a80"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8353825484.json": {
+      "bytes": 790,
+      "sha256": "af4d5ce4f9438cc17c3fb4298ed30e2c2b596701e2a6d82d51da9ca7a63ee074"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8355945608.json": {
+      "bytes": 835,
+      "sha256": "a5bb6f2ecce435614eefa7cee62dd1ccc5b2824cad2a493f5eebe37f50880ae0"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8358175901.json": {
+      "bytes": 863,
+      "sha256": "83e50da2a793adcfe41d7713a779e3e376ef3538abc01d5529904b08b1420c5f"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8358523288.json": {
+      "bytes": 882,
+      "sha256": "88fcb5cd52ac2abe1541d4d4f19c9c8c61e0502e261ab4f1ad0e09f51b190b55"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8358576569.json": {
+      "bytes": 863,
+      "sha256": "ed765470720e1609f2e08422a565b8106d3fc68e482aa5196510630505b3b8c2"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8359334712.json": {
+      "bytes": 883,
+      "sha256": "b4342547eee9dee15bf138eeda6752b9e5b9241838c561c77e31bddeb4f4a3de"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8364468670.json": {
+      "bytes": 813,
+      "sha256": "b33bed159a561953f771350d6b4b3528cdfde9a27b08525362f3f35de7206ad1"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8365978087.json": {
+      "bytes": 788,
+      "sha256": "742d3bc52bd99bc3596debf1a3d21ecf385bec38a8f97eb9b3da6c1050fa640c"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8366075028.json": {
+      "bytes": 797,
+      "sha256": "3f61a110c4af0697cfeb873555cbb201373057ca7ae36b6a959e39efa6a4af33"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8366775511.json": {
+      "bytes": 793,
+      "sha256": "20b797858d33fe6919dd53ccc4bbd198b2ac4c050fa7ce49ebf852cf63f2fe97"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8368404047.json": {
+      "bytes": 795,
+      "sha256": "21b5252b5e21e0a60bff94d3dd31aa8c0a4bc65dfa2eeca3e5fc694ab1250992"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8368431968.json": {
+      "bytes": 791,
+      "sha256": "a9b48877289c15a9a4e8e3ca6057814237512c7ea60bcf243a7f32e69a3b32e2"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8368669020.json": {
+      "bytes": 774,
+      "sha256": "7a976640980fb606721b1dda530ecd963889bf5bbb580c2db4473064cdabf09b"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8368946833.json": {
+      "bytes": 783,
+      "sha256": "61652135355530bffe4f5276c9d1f397231a74f1dc41a462e51f79b032d56907"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8369084216.json": {
+      "bytes": 951,
+      "sha256": "7a6d99f9419b32d32bd069c9323fc927b3e27ae89a3d65760a3f2ea38ed9d83f"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8369155001.json": {
+      "bytes": 719,
+      "sha256": "57635577a10a94d4942708c477a7587836a17e4b2436263a9f710aa97f04fe85"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8369190236.json": {
+      "bytes": 850,
+      "sha256": "a621e4621c0d1b0249940fe0d2afd2d7a68ed0b76e15ead81642f7c25673af21"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8369226254.json": {
+      "bytes": 888,
+      "sha256": "a563fa44cb6e6c9bee0db9126dd7023928232e2a7ce1b9a3b670f543a5684954"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8370452100.json": {
+      "bytes": 771,
+      "sha256": "a176b90f9f84a87b19503f8a3999e6693ef3d6e2fac0a5851b9028e7d48b8c1d"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8372033408.json": {
+      "bytes": 764,
+      "sha256": "f4da6ba69fa451738df51e063bd880639f04c26e0920f52a5c8b63dae6fe18f7"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8372489616.json": {
+      "bytes": 840,
+      "sha256": "1e6c7dec19a1dc451c8f2e91f6d678cc3d2cae67fa144b15fac8bc83692f08f6"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8372498261.json": {
+      "bytes": 778,
+      "sha256": "788217aa240e717d842e7ac7e15b67ee130e9a9fb4873f62fa8566167cda3bfd"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8372709954.json": {
+      "bytes": 790,
+      "sha256": "d0618ab9e5a7a60eb389a5345074cdd7a20b66aaf74c4ae10e05bb52b542756a"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8372901891.json": {
+      "bytes": 764,
+      "sha256": "ec715c4d8cbf964fcc683904ed8fb57d6e93e46b9589cf5da9888e7df7e9b593"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8373088443.json": {
+      "bytes": 790,
+      "sha256": "d1fcbf2cec1af7bf4e0af5dc16abfca91b78f5046246d6b3e5375aba438c2a88"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8373447380.json": {
+      "bytes": 781,
+      "sha256": "bac89c05bbc6c857e5c5ed8b098224d440c7a4ce1cbb011ba912b287a1ad9e18"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8373788913.json": {
+      "bytes": 773,
+      "sha256": "3d05253e6ca42e070533fcfc48e2f605ad2208c7bf21c0eb4dcbe6e8bd503583"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8375894787.json": {
+      "bytes": 853,
+      "sha256": "deb06d59370fbc791dab8eef4fa1ba8d389c9b110db31ae21d9d0ab6b6467a6d"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8375922827.json": {
+      "bytes": 777,
+      "sha256": "258646ce59000cbda76ef5d2ebfdf77eec5280951c9e347b9fccb5a8d36f17f7"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8376124195.json": {
+      "bytes": 782,
+      "sha256": "7c9816fdb7bd7a481912a4916d26bae41ef055a8dbc7ad061ad0e4e5aebde00a"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8377851880.json": {
+      "bytes": 843,
+      "sha256": "6a3811d0a28868aefe4ac4669deef0b567fda6af78d5afecd13332bd5ae252c8"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8377919955.json": {
+      "bytes": 775,
+      "sha256": "713303e42ce2cd5fe5caf61bff7268ebb7bd47af5e8aa43ad1c5f6572b3b3239"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8378247550.json": {
+      "bytes": 794,
+      "sha256": "7a46b37958cbadffc88dc2273917b21d4c01688fc45e3ded3b5bf18f9acbfb28"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8378604789.json": {
+      "bytes": 798,
+      "sha256": "a3f863d760818963ab462f97cba448d6bcdb8b5adb844eacbff63bba09f49e00"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8378614887.json": {
+      "bytes": 860,
+      "sha256": "22e3ba1ba57c4596a79016268b22a28aa6faad085629f2d80e3620589d149165"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8378785475.json": {
+      "bytes": 799,
+      "sha256": "460fae8cd79391855597be6e6b1c72c1942fc46a956597ed0acc20734b78a44f"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8381247846.json": {
+      "bytes": 758,
+      "sha256": "9fd6d7c1916f1181605c1a3e07340dc85c969a491cd3223321ca8775f98de69f"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8382135861.json": {
+      "bytes": 803,
+      "sha256": "568ae6c3186987b44fdaf8e0fb1fe9a2a55294f4ebb47ff75ec11b007aa67635"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8383940982.json": {
+      "bytes": 801,
+      "sha256": "70283e6304225aac92e7a84d50fd5e61095d3bd81618c8446fff7257180cb90b"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8388029560.json": {
+      "bytes": 790,
+      "sha256": "5dd336612c1495516c47d1352e43952f828dd4baed54dfbe5fcadfeae610f0e7"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8388070759.json": {
+      "bytes": 817,
+      "sha256": "11944dc1c24261b0d42e55459d9cf574aa7dee3054f766e2b8492567b7fa4b93"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8388392018.json": {
+      "bytes": 786,
+      "sha256": "9db4a91d68765981d02987460656694383c426cec1936a1eb37c6b2f7296dd75"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8389054658.json": {
+      "bytes": 788,
+      "sha256": "2705554f89bf66aa9b184ac19841c82f08942b7f5cae2edde9d944927c451b50"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8390118103.json": {
+      "bytes": 773,
+      "sha256": "cfde3f884c0a807c13407a843c69bcef4e1c88ec5fc554da11e9ac2e12d50a62"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8390559180.json": {
+      "bytes": 770,
+      "sha256": "361bb0811b859a79f84372245d430a7dfab4e0aa538e93f3b187bbe205a8c8db"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8390652936.json": {
+      "bytes": 797,
+      "sha256": "1a8ac1fd414e20989e94eb771b8db743c5a24133d5c316443500d7956a780c95"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8390848258.json": {
+      "bytes": 855,
+      "sha256": "97fca4e57bf9db34b06ec7b6b1d0e33efbb27b2c11981cdc3517f33a128a4430"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8391487471.json": {
+      "bytes": 863,
+      "sha256": "a09f082da33474fd1577f8768ba4587b28abad3a647592300acbca28bedd856f"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8391729292.json": {
+      "bytes": 901,
+      "sha256": "68cd5299411bacc1470f360c00659b329e241ab516aa0babf21f9350427f0d74"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8399019727.json": {
+      "bytes": 782,
+      "sha256": "333015eb317c2a10cd45ed563c494fa643e8403ae0453f019cf0e3fba8c9d2f5"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8399341491.json": {
+      "bytes": 819,
+      "sha256": "a5166535f36a6b0d72fd1cd9bec480548ceee938c8005427e21bd25ba60f2f57"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8399449880.json": {
+      "bytes": 859,
+      "sha256": "2a57e220c0391bf99f2255cbbdd849c0c033ede7e14ffc2e39a65aef9c0465c2"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8401528767.json": {
+      "bytes": 802,
+      "sha256": "f767051bfb8d6121d274ef1bc30fe5ac04690fb26a884af6a4c6f56a49ffa9e9"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8404888913.json": {
+      "bytes": 778,
+      "sha256": "077a59898eaa495ab214f406dc98448e48e72cc70d7e7c50b0711898e69499e1"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8404963347.json": {
+      "bytes": 858,
+      "sha256": "221bce493a42b0d066266593531fa48387fcd2381961053b5aafc7be6ce4e093"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8405120870.json": {
+      "bytes": 770,
+      "sha256": "a50cd9bbe189e116c980b1a8549332e6d145e5afbab7113fac5761b72e0796e1"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8405378737.json": {
+      "bytes": 854,
+      "sha256": "6ec1034f6839aa657710f9f2d36b05570e2e5c3ea35da49562cf533d5b6fc7c0"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8405526982.json": {
+      "bytes": 773,
+      "sha256": "1fb1ef4ce79d24f8246fc137e527d0caa267b900843f309add0d0f296acea44d"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8405638954.json": {
+      "bytes": 778,
+      "sha256": "6ce5925e7a93dd9883549ba9fc92d194330392d024465a8741005801f7e480c6"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8405780303.json": {
+      "bytes": 885,
+      "sha256": "b8378516bde9ed09c1df876dabf9c8e172c910857388fbeb241e559bc84fc3b6"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8405842234.json": {
+      "bytes": 770,
+      "sha256": "054bd7218b5585cc6549fd28d3c22376a7be75afa4ef94aaab7aa8a9cd189103"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8406524946.json": {
+      "bytes": 786,
+      "sha256": "3d183e7310b62a1b3d3a835bc2bcac08fcdad21167e03507d608e1b311042021"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8407978013.json": {
+      "bytes": 777,
+      "sha256": "c8d10e136b8703d32a3ddea5332cd9c1bc6cad478fd0e83d977e44f2ec165021"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8408117099.json": {
+      "bytes": 788,
+      "sha256": "140566ac7119070f4de1752db8f2a686c7b28d71ba6315b8b238675b07420243"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8408284325.json": {
+      "bytes": 783,
+      "sha256": "62e6cc8d26a73324b248d350ffdd71c417aef245311afc86543ec22f3175285c"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8408538665.json": {
+      "bytes": 777,
+      "sha256": "fdc98b332f8562cde8d84c1fc3c0f1bed0c3d626efb1fac94f14e1688ed6e7af"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8408825306.json": {
+      "bytes": 762,
+      "sha256": "efed4ae46b68b1a0c7a2d69f37341cf0fd3a31928fc7fc8e44a4b380f8126f79"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8409258032.json": {
+      "bytes": 775,
+      "sha256": "8568f2044b4aab81c5c3033ef9722120e46427989621988716ff6565a992877a"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8409656851.json": {
+      "bytes": 800,
+      "sha256": "a6bf6dddef551c1ef3734e98e017eb3540e65db61739801a11800b589cb4afb8"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8409766046.json": {
+      "bytes": 776,
+      "sha256": "1fdfc6c79c907fe29b3095878977c3146b4308b072bc2e32afab89f430b6c3bf"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8409774915.json": {
+      "bytes": 786,
+      "sha256": "88320c82bb98ec6c0362443e2e10a16ccbaaa5dd9b983d4b1eafb208adb38589"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8410143852.json": {
+      "bytes": 778,
+      "sha256": "1ffe2f6bfdd68ab5af04f4a51e2489170a3fad2c2525c76c5768bd531b5bce08"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8410553689.json": {
+      "bytes": 785,
+      "sha256": "0ca20ce3f8bd08508ffeb0a914b5e6c655be1e34b6840e5611253756d3dd77fb"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8413011238.json": {
+      "bytes": 781,
+      "sha256": "95c90eb76e2d31f0104432cbb6561a1194f303a6b2fdc0c5773c871578308799"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8413522400.json": {
+      "bytes": 820,
+      "sha256": "0678ef5393759235b80b446e5f1d4bfa2ac0fb60b7144fc9900be4631fe9af04"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8413825784.json": {
+      "bytes": 756,
+      "sha256": "b443992a1a5c940f73b24f151ec1dc0b85514f6c69621a246afd153e22588eb0"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8419870064.json": {
+      "bytes": 816,
+      "sha256": "f6d67ba82dd8056207178c85f5b2302a32491b2ccbb64f74b8e58e5c7fd193e7"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8419987898.json": {
+      "bytes": 762,
+      "sha256": "cb1bdbb8e08d8986852acf6df3429b9199c09091b744fd86b3a0507405ceca2e"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8423632937.json": {
+      "bytes": 785,
+      "sha256": "1b785d731ce7f9dd6f8f6c84ad0e11afc1c600aa1516aa0227dee7ceee70b984"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8423805166.json": {
+      "bytes": 765,
+      "sha256": "4b25985f86a9f2b6c43e9fc08017ce3615582af6a2e38af24985a15c2420a706"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8426155579.json": {
+      "bytes": 780,
+      "sha256": "918b537a9abaabf8990c4f6a991b887dd2fc14428ecef22f1b48d288a02ff49b"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8426456571.json": {
+      "bytes": 771,
+      "sha256": "29a23617bc30a4198044c262e2ea6afeced79d3d1a6c916de6015a8fbd68f432"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8427034107.json": {
+      "bytes": 993,
+      "sha256": "0c3cfcdba52508f7f57360b791ef4b4f664009d1dc03d21a430b1177c24b0ca4"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8427076988.json": {
+      "bytes": 841,
+      "sha256": "f05d2d5226590b741fb91b047c4ae665f5fcfdd623b8e0238b3fb0a472ac3584"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8427343825.json": {
+      "bytes": 754,
+      "sha256": "0a1decd7ab065727026fe817e25d3a9dd31b1c50cacc38a3fd548480effafddd"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8427398015.json": {
+      "bytes": 789,
+      "sha256": "56db3ddd426010b670b9ea3e2e11ab75442a174260539b755d9ed27b400aad7e"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8427715730.json": {
+      "bytes": 872,
+      "sha256": "6c70549cf104838af2fdcdd1fff4b4cb30998fa805bcfa51b001c38c9417d8fa"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8430895217.json": {
+      "bytes": 770,
+      "sha256": "42c2d3f75d380122e82e9c797f4f0f4fd10fcdc6d8db147e1fbd5489628126b1"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8430988984.json": {
+      "bytes": 867,
+      "sha256": "7166eed185bf29f3562f68f0684a2e4faafa56328a497d95b8ed70e685f5efd4"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8431083188.json": {
+      "bytes": 870,
+      "sha256": "81e12dac2bba13da80d6ee91cc2d61febd953ba4c11acf4e19879c2625fcde36"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8431200019.json": {
+      "bytes": 755,
+      "sha256": "6a709f0a5af52d2442983a840706878c21371c70206e38c2b831456782f5524b"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8431730897.json": {
+      "bytes": 880,
+      "sha256": "1afedb00e0104f53355544b57499a49a23e0b915e642359cbbd8f4b338c09986"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8437604116.json": {
+      "bytes": 788,
+      "sha256": "3fbd45480e2abc82890594b4af171e63ca06337b6289ab6ea073c4a4a72dbc97"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8437838081.json": {
+      "bytes": 800,
+      "sha256": "fefb08fcc94f71aea29ded89ed7826121ca809f01021d89a9d8e9ef201acce29"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8437889574.json": {
+      "bytes": 781,
+      "sha256": "94fedb286633fe85499a4722a4f88e53e58cb5aefa8ac24c08dfe09bf4bd7bf9"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8438330255.json": {
+      "bytes": 809,
+      "sha256": "ba01c6c368baeb60fb0275eb8504d3368660f028518be8bcdf18b54a315f45d5"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8438540617.json": {
+      "bytes": 883,
+      "sha256": "3dbd9c3b5d955e6c19cf0ecb4b31ae80c454e926dc90faa0477e93bb96394661"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8438674298.json": {
+      "bytes": 758,
+      "sha256": "0e58a67e58ff88cefcbaae9195d7f3ecdfe4d03f89f993743464fb696fa47d19"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8438811054.json": {
+      "bytes": 793,
+      "sha256": "147a5f19b1b2b119e07ac18d5183282adf7bf44b25b171c47312a42dbef8ea19"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8438967474.json": {
+      "bytes": 780,
+      "sha256": "45e07c47f8e6e69c79f6048d6e3f62b9fe228ba9e43c8eec84c521782aad815d"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8439083930.json": {
+      "bytes": 758,
+      "sha256": "efb75210e820ec343b45fdf98ac779a5f2c71140da31f28897dfae2155720bfd"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8439199303.json": {
+      "bytes": 776,
+      "sha256": "aba8dee1d01f0bebff2e63890ea17a6faf94ff3bbf316d530804b8dd4ac5dad0"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8439647985.json": {
+      "bytes": 761,
+      "sha256": "d0b1726ac2f38741afc4cf1477fab306ff1bf4609958efb809864e8dd2ab4225"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8439862063.json": {
+      "bytes": 774,
+      "sha256": "5e4197e3a7d75982608dc58e852428ab515b48a454caf6de8fd4b8e92fca5bb2"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8440438788.json": {
+      "bytes": 780,
+      "sha256": "48d32ef0d214a2e6b23f731ed282bb4c0274bfa837a1ee5d08ddc8420f1b9ff0"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8440760551.json": {
+      "bytes": 769,
+      "sha256": "4c5039a25b8bbea812d5c1b0cbf3b42b9e94ca6ea735ac0f05ea524201da6049"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8440834325.json": {
+      "bytes": 1031,
+      "sha256": "24772e8e7a46a624bea69a0172a731689658dde8d5c16cda0f0745ea9930c520"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8441118392.json": {
+      "bytes": 768,
+      "sha256": "84a20606deeaa92e0eccd941f4a80f0e6956e89bbaa9a0b8db7b273ff3ff01a8"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8441399008.json": {
+      "bytes": 780,
+      "sha256": "9334367859f1c6312cded41ae7c7f73d15e62e432f570962c7e35047301b407b"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8441596106.json": {
+      "bytes": 787,
+      "sha256": "e8b6348bd180694410c50a9444e92fd450e94f837d1b2346f3a3278c7ba72c50"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8441721748.json": {
+      "bytes": 747,
+      "sha256": "fbda8d1a9339c044f86f63085ac51cf3197208d753d4342ba32d9a265def7ecc"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8444897882.json": {
+      "bytes": 779,
+      "sha256": "2d95da5c3d318f371edf9af64f37ee2bd857b2d9aad6a356929681d7bbddb0bb"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8445448370.json": {
+      "bytes": 783,
+      "sha256": "3645eaa3f13b965e0cc4d2b6f193a7b007e59dca1afae821e4876064af7aef6c"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8447016175.json": {
+      "bytes": 786,
+      "sha256": "71586d884d6a0efe044c88212fbc6a7bdf0137e7f3c2f21806ec4a56ca17e029"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8448633468.json": {
+      "bytes": 778,
+      "sha256": "f1d552c1800174c7b44aa118b559c26ebb9d112444a95e57dadadd573f25cdc2"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8450513492.json": {
+      "bytes": 778,
+      "sha256": "9fcfd73ba9470c95af640c0930d362488df9dfffce424840bbd0e4d5d39483e9"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8450823099.json": {
+      "bytes": 772,
+      "sha256": "5eeb5ee4598ef8a734693ed38cea192e13228248b70c9b27404b224e0e26c543"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8451149668.json": {
+      "bytes": 782,
+      "sha256": "4e6b82430fb831325dc3d3432411eb629a7b7ed5935124288981e1bdb0149618"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8451214743.json": {
+      "bytes": 786,
+      "sha256": "ce55de684873dc9270377e4edbda552bb6819d5107b1b732e8c8a55025914b70"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8451396334.json": {
+      "bytes": 835,
+      "sha256": "76d7632716b752c5905c778403913d9dd9656aea28e1dbb57a16fc82b8de0ff6"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8453182801.json": {
+      "bytes": 852,
+      "sha256": "c8412ce4b21dde3549407746cdb3b0be5cb57562964028daf4d168ca0e5c5820"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8453343665.json": {
+      "bytes": 800,
+      "sha256": "bfcf8e86510b7145ccd79ec6b639fa675cbe547056e7c24885908320802142fe"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8453352193.json": {
+      "bytes": 864,
+      "sha256": "412ccdf1364d7cfd7133ad86efea6eed5c56623a28a2d6fe62c61fca0c2719b8"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8456912452.json": {
+      "bytes": 778,
+      "sha256": "f5191865ea23131706989ada5a7f8c6ed7d20c2c04427ae09e125836e4d67119"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8457905425.json": {
+      "bytes": 862,
+      "sha256": "7ce81cc3d1d100123d7ca2b73f15ae7c8085d459779989da231d508ca831ae11"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8458011609.json": {
+      "bytes": 898,
+      "sha256": "20d31c867930b2fb991ad93a2800ecb30983d0f0ced8eff93285b2da93e82194"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8458033906.json": {
+      "bytes": 782,
+      "sha256": "89560436f9c8a2bebafde87be030918864f26188ef34ffa5c14f1d529bb2363b"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8458313901.json": {
+      "bytes": 841,
+      "sha256": "f48f2c9f1dea2e48ca19e820472007ce86071d0e62234acd56c553c7c4be2511"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8458695285.json": {
+      "bytes": 753,
+      "sha256": "d9823c9e6d7a543b2583ce9d92e1cb3973b1df3cd3dc13a3e9a708add339dcb2"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8458994147.json": {
+      "bytes": 770,
+      "sha256": "efadce9326c3994db06970238d94ff8849ac78db9b0a53f75449961f223d37f8"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8459064742.json": {
+      "bytes": 782,
+      "sha256": "07a33a75b50d1b924a02d0de29fffb4e784237583e7c572417800d3bf891a883"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8459575250.json": {
+      "bytes": 809,
+      "sha256": "dd1422bec6f8f6a3af2b142a94ac424ca6cfa390b0eb9ee788bd9ea0254849f6"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8459656383.json": {
+      "bytes": 856,
+      "sha256": "366251ece939de5f835709c1fa1477d3bee9a7034e9dfd1f7683565c5162f4a6"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8463493857.json": {
+      "bytes": 854,
+      "sha256": "deb27a4c55d82ac1f6f213fdaa55e8456de2f7e4d8329531b661cb140377bfa7"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8466906257.json": {
+      "bytes": 801,
+      "sha256": "276e2a63a618f9da6fd4b822f5d4e251c56fa0bb59e90a2bcb064390e32f9410"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8466926543.json": {
+      "bytes": 809,
+      "sha256": "544fadd0b678762528ebd501c72a17ccff7a6465fa763dda56fd2a563e34051c"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8466929273.json": {
+      "bytes": 863,
+      "sha256": "124429b61e95aa08f185ea54080e35af526864e018854a6467a1e5e2b4d5387e"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8467253459.json": {
+      "bytes": 778,
+      "sha256": "3c1cf038d2d3a1d3b4db320edb913457390fccce642addaadd44ebea413413d6"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8467332047.json": {
+      "bytes": 768,
+      "sha256": "8d00043cdd559116a9650187a888e19906d2b57d7c60f6f0bd84fb5db0ee96f3"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8467650586.json": {
+      "bytes": 780,
+      "sha256": "3f5f501c3257e78b34680287ca9c77a5e643a83840a05e3ed1808f7a0a68abe5"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8467744216.json": {
+      "bytes": 783,
+      "sha256": "a26325e3ad43e5e82c9b529d96b56b899554fb967dd18bcd04d9fe593922f14c"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8470456782.json": {
+      "bytes": 794,
+      "sha256": "bc4ca06f9717282347a0833a7cb8c6d033d28c12ce26144cf02c88957538b482"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8470591156.json": {
+      "bytes": 779,
+      "sha256": "a22f60d80a806d081a263aee991dfac2fe1ac65658ec6182f386c1c9cbb2fbe4"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8470982905.json": {
+      "bytes": 778,
+      "sha256": "96bcbb30afd8d94e55e0b5db680c9d236e6a503f2498dc8e835782bdd58b3dd2"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8471247351.json": {
+      "bytes": 784,
+      "sha256": "a9f78c53255a9b81935ceef77c6b49ff5efb11e0306506240c7cd795f4d49981"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8471460935.json": {
+      "bytes": 839,
+      "sha256": "6f64783871e7d0711bf2a3e6c7d75aa2ed68a67b0f9582429a11f7755bea71dc"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8480312020.json": {
+      "bytes": 838,
+      "sha256": "71f624be9d0c6bd3d2bc935662ea730957f353b4b1ab8b13f362ae23fcc9fdab"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8481852326.json": {
+      "bytes": 790,
+      "sha256": "cd5eb40a526678bc155d0bb4fe90008e7c82ee71edba77c53e8bb17f7aaa3ea6"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8481919485.json": {
+      "bytes": 894,
+      "sha256": "8c3471bf3529d19ffb297b293ab6e078692fc330f9d8321fa8f741c3b48b2841"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8481960666.json": {
+      "bytes": 778,
+      "sha256": "3ad55995ead6f55009788afdf08caa9c9bae2f66e5c75557ce35541ea53e467e"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8482145398.json": {
+      "bytes": 847,
+      "sha256": "5afbcf9903b23e81453b3933c6876848997f32df29ac57c3e78db55ad16d8d49"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8482343942.json": {
+      "bytes": 786,
+      "sha256": "e5b9ebf69ad0c8ef6dcff119dfddd65ab1b2b40aba37f8e593876bfe162f0ac3"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8482532602.json": {
+      "bytes": 878,
+      "sha256": "61f57a40ca4f7ca26419ebd8fdaf62af888346e5e8056cbf2f606d312efc8060"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8482989122.json": {
+      "bytes": 778,
+      "sha256": "c59dd5d6d3c1d8bc6fd29cf6e3d0cea08ddd4e37ba738d05f9e3d35caeed519c"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8484930212.json": {
+      "bytes": 789,
+      "sha256": "52851e3f02c2da2af07a50eac47cc61bfe2577dc59ad1b77f4d368c86ac0e4a8"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8485194560.json": {
+      "bytes": 737,
+      "sha256": "45f76fbf9aa755349746c5ea84dfaa2623c1d7b9139fc63d2785728f2b7bb20a"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8485465780.json": {
+      "bytes": 867,
+      "sha256": "f1520ad1919491de3a60dcf43cd2c8d052e5af3d7990ba66c93dc9f8e14dab35"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8485469038.json": {
+      "bytes": 875,
+      "sha256": "23d206cf421d2f423136ade5a563df0be2fbd3791c6597908dc1dfc7ed0ef383"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8485549981.json": {
+      "bytes": 765,
+      "sha256": "fb8144dc62e92ed86a8a3d195343ee5578310c4b0a5da745ff0bd0d35cc81225"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8485733701.json": {
+      "bytes": 793,
+      "sha256": "d0f5f3296d03b6b93384cfaa34cbb7a71927a350926a36166679f78c060b0c48"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8489076421.json": {
+      "bytes": 745,
+      "sha256": "686063bb221f679733b5cdc87bdf8458d50fa6dd70489d086875b6f75591a312"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8489722834.json": {
+      "bytes": 786,
+      "sha256": "69ab976c93ec1d24b6f2a9bca3ee9e38ad45ea0e71e031ecd9e020de35fd2a2f"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8490602116.json": {
+      "bytes": 780,
+      "sha256": "64b189249c79df29e5dfb96b8749f4048b90f39d88d949023ec2c92c0714b778"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8491360811.json": {
+      "bytes": 838,
+      "sha256": "5ee6f12f4b00336bc8dbd8ed58fc7eb84e05da96c6ef0acbd58f3fc2133cf8a8"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8491522684.json": {
+      "bytes": 737,
+      "sha256": "a8651f067fdd93fff741d27cad8717ea4423c679a14bf02e6c4c889ffd827452"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8491529597.json": {
+      "bytes": 874,
+      "sha256": "d527b8329011b14e19ab8a237cc1e2b4efc3d1fe147c2ddfe019528205a1e66a"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8491570707.json": {
+      "bytes": 794,
+      "sha256": "a73cf2dcb1b4bc709f00bf447337de469bee38c6159cd2f8572707eea64b5865"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8493042338.json": {
+      "bytes": 855,
+      "sha256": "aacd0df2d8f25556e542c34d8b46671b63ecfd7336d76f0c32276eece7484643"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8493078792.json": {
+      "bytes": 796,
+      "sha256": "0034966f05e05fc935980b7d01daf0aae83b534e0c15994241cc920e01dee3d3"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8493180702.json": {
+      "bytes": 775,
+      "sha256": "f16f9cead3d332c237dd5de2a8e3fa8d4b9c075f25e80d80be2b41d4a04284af"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8498926874.json": {
+      "bytes": 782,
+      "sha256": "29954174a0a12f43c06f879306c9e02528f41e04fa14fa94890d1cf7ad13e047"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8510844740.json": {
+      "bytes": 754,
+      "sha256": "ca7f6de2ccf8f9f06c30470482cd25d74ff099802d944f742fe405a4ef3e90b1"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8511125930.json": {
+      "bytes": 856,
+      "sha256": "d5d3998c2160e06796cc3d276603c714f77857a03bff786f4b7d751677e08569"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8511284790.json": {
+      "bytes": 767,
+      "sha256": "96a42a19e7c8179a186c8e1f408aeb8e38fbf5563556b88b61cac5982ff3dae3"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8511751383.json": {
+      "bytes": 856,
+      "sha256": "c182ffbecab505961f491c67dc976a9b931b3b61e9d8f958c7ed948c6a1c4254"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8511759792.json": {
+      "bytes": 784,
+      "sha256": "3a8f0ef08468d1135128ed0ef5d668ab45d0b7d70b54ad2f4cb2726e40340ab1"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8511833791.json": {
+      "bytes": 848,
+      "sha256": "0de2bf58bf5794c76e884c419f2938924b4edc35757ef062f4d95dd246435c10"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8511849704.json": {
+      "bytes": 839,
+      "sha256": "a5271f826786a3d8fe168330796306cbd01364efe1ef700ddac91d227e63c271"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8511932629.json": {
+      "bytes": 829,
+      "sha256": "d72cb7e8b547ee869edb159bca71dd5f2b9dd9403ad6b70207ebe08695895b59"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8511933380.json": {
+      "bytes": 878,
+      "sha256": "962d5931c4cfca0882e3a9d6f7e5ba6f147e43093ad29095db5bf53fbd239545"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8512323090.json": {
+      "bytes": 806,
+      "sha256": "2949c62f5f21601535655f5fa9674f5c3bb39a48b5ef5b215265b802cdeaa385"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8512507705.json": {
+      "bytes": 832,
+      "sha256": "6fc40667e956bcbf9b53f3ab2b21efc2fd1ac844e0046dce3f0e9e832feafee4"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8513063424.json": {
+      "bytes": 766,
+      "sha256": "8df0b736bd2a3d1352d37c3d0f8f21a4181d0b2fc3a1ac2c10587b3ccbedde84"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8513080906.json": {
+      "bytes": 795,
+      "sha256": "cf4b49c33a89c44339bd7629bf2b9064ae72761da82fa22eccc1c3878250f66f"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8513101911.json": {
+      "bytes": 763,
+      "sha256": "dd64a3318f49c117afcc86e7a46c2323b44605b000c748ff665992b9a860b7d9"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8513184653.json": {
+      "bytes": 787,
+      "sha256": "501be9977248353b60ba0ee1dea7ddf7f06dfac66946450346f31340381741e7"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8513192990.json": {
+      "bytes": 787,
+      "sha256": "205846ed1e6c3ce09b8dae988eeedb23318a6b0e70751bc710dc65432d377a8e"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8514862448.json": {
+      "bytes": 769,
+      "sha256": "7abbf03c1ad08be7b7e657ddfa8b2841d1fb5543cc611bd07a9a4f631e93e0e5"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8516833911.json": {
+      "bytes": 843,
+      "sha256": "2582657599c00e6e8623ea44d5ed70958a41c23282919d22abcef4c8212f88d3"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8521366002.json": {
+      "bytes": 769,
+      "sha256": "966782757a1ebd3b3600a9f5bdf608c2a5f5d66f72d89a52ee211d8a5d32b68c"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8524944985.json": {
+      "bytes": 783,
+      "sha256": "ce18a2f28a3e75a36623e91f40cdff716624fbdec79dfa8f3ecb1870fcc98a15"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8525292889.json": {
+      "bytes": 787,
+      "sha256": "27c5401c2da8bf973e44219794579d3d0e26d21612c0c3dbd53a33ce17a5889f"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8525311669.json": {
+      "bytes": 775,
+      "sha256": "195c3150495079b993ae0ea68f00f24abec18ea239eba03d6ba0df74b4282b7c"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8525384070.json": {
+      "bytes": 779,
+      "sha256": "812dbf2b6a37229ac58a0e189699481b8637d766727904bad5e0006708a022ca"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8525608293.json": {
+      "bytes": 810,
+      "sha256": "2abad4a8602a325466b4ca690b2d5b4681ef394e0ce6a2c130064e1b77bcf61c"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8525802598.json": {
+      "bytes": 811,
+      "sha256": "e5fd5a0f04e09880c86619131384c464866b86f0b11731622fd859dc32b65c51"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8543054103.json": {
+      "bytes": 780,
+      "sha256": "c22906251b1694289dcf97ee7f1745a824e3b1bbd9d87683d24f99e7d7475a34"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8543121368.json": {
+      "bytes": 791,
+      "sha256": "8e01acac4a46d21ed57b8740fb87fa4fd21db3a931306543a946a0ba865c5e3f"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8543508497.json": {
+      "bytes": 768,
+      "sha256": "32d3a7747a5d9b513509b2150c30cc5df5841997644ae6384cde6251a9350983"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8543777536.json": {
+      "bytes": 765,
+      "sha256": "a4a9a08be33839274d5bcd0f51f02e4231b59bfdcac2e36840e919ca9e822e54"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8543906578.json": {
+      "bytes": 856,
+      "sha256": "9d45c450c71a6ea89fb6211d340349e7d8f742a53f10efccfef9e4dc343b8c54"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8544493910.json": {
+      "bytes": 762,
+      "sha256": "08da09ab419a07fc402d7f28594aacb7d03d2def7cad5cf19f97f52441eb6875"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8544966739.json": {
+      "bytes": 801,
+      "sha256": "2dbc6815c121c40f3ffcd1bda71b4e85b27aa363ba6f0e9c5d9bd8bba0f3fd96"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8545089478.json": {
+      "bytes": 789,
+      "sha256": "024c6014c80308b016a29922ec09756aca55537bcde532e67fef7853a1ca3a2d"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8545125971.json": {
+      "bytes": 776,
+      "sha256": "fc2358c9fbecc12aa39539920e8e2044a732d34f469bddef625c34676135f861"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8545323417.json": {
+      "bytes": 789,
+      "sha256": "f41a0791f5f95356fb45c39767e34d34fd273774b548c07a78b1c71ad08bfc12"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8545413545.json": {
+      "bytes": 778,
+      "sha256": "a434ca68b3be5517cb8248f3c960e2d6a8b6283b86f1598101ccd55ea224c3db"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8556900149.json": {
+      "bytes": 794,
+      "sha256": "e5ffbf8b818672c2c2bc6a44e5b251a414efd9f7d8442479fc5fc526d922e5b2"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8557579511.json": {
+      "bytes": 782,
+      "sha256": "3197a13cb0b0d55191dea895aec69be91ccc095184104f8e9b5488ca2084caa3"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8557672062.json": {
+      "bytes": 859,
+      "sha256": "3b2b12efb882648c56ce296fd698ef2bbe8f77c5580ebe09f50c3b8970c1885a"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8557681350.json": {
+      "bytes": 781,
+      "sha256": "c54024c7f9e2d9ffa584497fa94ea24c4a5e6e0aba6738637523211c53678b14"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8575059038.json": {
+      "bytes": 804,
+      "sha256": "218b6172c789ed792c529aa589147d69de90ca92983f8cf77de956556ad2ad8e"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/reviewed/8577079069.json": {
+      "bytes": 799,
+      "sha256": "b1cd7b812cf29e2cb895a5dfc55e720fd558f3c44921a985701d64b4057fa4b4"
+    },
+    "Data/avito_runs/avito_f07_moscow_prodavets_20261029_b_03/standing_unavailable_policy.json": {
+      "bytes": 840,
+      "sha256": "af9d9881bd9e5b06e30535be314df0d7516873d62947e9491f8f5b1138a32dcb"
+    },
+    "Scraper/runs/avito_f07_moscow_prodavets_20261029_b_03/plan.json": {
+      "bytes": 14608,
+      "sha256": "27fbff2898ca4604f65f139a23d02b26c1071989108c70b821e708ec565ae509"
+    }
+  }
+}
