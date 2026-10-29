@@ -1,0 +1,29 @@
+{
+  "review_type": "partition_coverage_review",
+  "parent_run_id": "avito_10_moscow_courier_20261029",
+  "parent_queue": 778,
+  "parts": [
+    {
+      "run_id": "avito_10_moscow_courier_20261029_01",
+      "accepted": 300,
+      "skipped": 0
+    },
+    {
+      "run_id": "avito_10_moscow_courier_20261029_02",
+      "accepted": 299,
+      "skipped": 1
+    },
+    {
+      "run_id": "avito_10_moscow_courier_20261029_03",
+      "accepted": 178,
+      "skipped": 0
+    }
+  ],
+  "accepted_total": 777,
+  "skipped_ids": [
+    "8425822263"
+  ],
+  "unresolved": 0,
+  "verification": "Родительская очередь совпадает с последовательной конкатенацией трёх частей; все ID учтены. Проверены хеши 30 страниц и 29 UI-переходов. UI страница 30: текущая 30, активный Next отсутствует, фильтр Москва × Курьер сохранён. Это граница наблюдаемой выдачи, не доказательство полноты сайта.",
+  "lifecycle": "Причина завершения REPL ранее не установлена; PR 72 изолировал процессные сессии и добавил локальную диагностику, 71 тест прошёл."
+}
