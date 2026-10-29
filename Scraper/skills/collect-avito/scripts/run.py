@@ -1758,15 +1758,15 @@ def resume_browser(args):
 
 
 def diagnostic_pending_capture(args):
-    """One explicitly authorized pending-card observation; shared ledger stays stopped."""
+    """One authorized pending-card observation, with no budget reset."""
     out, service, diag = paths(ROOT, args.run_id)
     validate_partition(out, service)
     cp, queue = read(diag/'checkpoint.json'), read(out/'queue.json')
     identity = cp.get('next_id')
-    if (cp.get('state') != 'BROWSER_ERROR' or 'CDP command timeout: Page.navigate' not in cp.get('stop_reason', '')
+    if (cp.get('state') != 'BROWSER_ERROR' or cp.get('stop_reason') not in ('Error: CDP command timeout: Page.navigate', 'Error: Session with given id not found.')
             or not identity or identity != args.id or not args.human_instruction.strip() or not args.authorization_id.strip()
             or not args.connection_evidence.strip() or not (args.tab_id or '').strip()):
-        raise ValueError('Requires timeout checkpoint, pending ID, explicit instruction, restored connection evidence and own tab')
+        raise ValueError('Requires supported connection-error checkpoint, pending ID, explicit instruction, restored connection evidence and own tab')
     pending = [item for item in queue if item['id'] == identity]
     if len(pending) != 1 or (out/'raw'/f'{identity}.json').exists():
         raise ValueError('Pending queue ID must be unique and have no saved raw')
@@ -1788,10 +1788,12 @@ def diagnostic_pending_capture(args):
     archive = diag/'diagnostic-original'
     with locked(diag):
         ledger = load_failures(diag)
-        if ledger['state'] != 'NEEDS_HUMAN':
-            raise HumanRequired('Diagnostic requires stopped shared ledger')
-        if any(e.get('event') == 'pending_diagnostic_started' for e in ledger['events']):
-            raise HumanRequired('Pending diagnostic already consumed; no second action')
+        if ledger['state'] not in ('NEEDS_HUMAN', 'RETRY_AVAILABLE'):
+            raise HumanRequired('Diagnostic requires a stopped or retry-available ledger')
+        if ledger['state'] == 'RETRY_AVAILABLE' and ledger['retries_started'] >= ledger['retry_limit']:
+            raise HumanRequired('Diagnostic retry budget exhausted')
+        if any(e.get('event') == 'pending_diagnostic_started' and (e.get('run_id') == args.run_id or e.get('authorization_id') == args.authorization_id) for e in ledger['events']):
+            raise HumanRequired('Pending diagnostic or authorization already consumed; no second action')
         if archive.exists():
             raise ValueError('Diagnostic evidence archive already exists')
         archive.mkdir()
@@ -1802,11 +1804,20 @@ def diagnostic_pending_capture(args):
                 shutil.copy2(source, archive/name)
                 hashes[name] = sha(archive/name)
         write(archive/'hashes.json', hashes)
+        bounded_retry = ledger['state'] == 'RETRY_AVAILABLE'
+        if bounded_retry:
+            ledger['retries_started'] += 1
+            ledger['retry_started'] = True
+            ledger['retry_action_started'] = True
+            ledger['active_retry_stage'] = 'capture'
+            ledger['state'] = 'RETRY_STARTED'
+            ledger['events'].append(dict(at=datetime.now(timezone.utc).isoformat(), stage='capture', event='retry_started',
+                reason='Authorized one-card diagnostic after restored connection: ' + args.connection_evidence, retry_number=ledger['retries_started']))
         ledger['events'].append(dict(event='pending_diagnostic_started', at=datetime.now(timezone.utc).isoformat(),
             run_id=args.run_id, pending_id=identity, authorization_id=args.authorization_id,
             instruction=args.human_instruction, connection_evidence=args.connection_evidence, original_hashes=hashes))
         save_failures(diag, ledger)
-    # No success or exception unlocks the ledger. The existing error REPL stays alive.
+    # The existing error REPL stays alive; a spent retry is never replenished.
     try:
         cp2, elapsed = browser(dict(mode='capture', queue=pending, completed_ids=cp['completed_ids'], tab_id=args.tab_id,
             previous_capture_seconds=cp.get('capture_seconds', 0)), out, diag)
@@ -1824,7 +1835,9 @@ def diagnostic_pending_capture(args):
             authorization_id=args.authorization_id, pending_id=identity, state=cp2.get('state'),
             completed_ids=cp2.get('completed_ids'), checkpoint_sha256=sha(diag/'checkpoint.json')))
         save_failures(diag, ledger)
-    print(json.dumps({'diagnostic_state': cp2.get('state'), 'pending_id': identity, 'ledger_state': 'NEEDS_HUMAN'}, ensure_ascii=False))
+    if bounded_retry:
+        succeeded(diag, 'capture', 'Authorized pending-ID diagnostic completed with verified raw')
+    print(json.dumps({'diagnostic_state': cp2.get('state'), 'pending_id': identity, 'ledger_state': load_failures(diag)['state']}, ensure_ascii=False))
 
 
 def external_threshold_authorization(args):
