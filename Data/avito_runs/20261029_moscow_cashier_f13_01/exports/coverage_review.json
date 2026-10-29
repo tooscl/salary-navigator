@@ -1,0 +1,32 @@
+{
+  "reviewer": "gpt-6.1-terra",
+  "parent_run_id": "20261029_moscow_cashier_f13",
+  "method": "offline_saved_listing_and_partition_review",
+  "parent_unique_ids": 879,
+  "saved_pages": 30,
+  "last_page_pagination": {
+    "current_pages": [
+      "30"
+    ],
+    "next_url": null,
+    "end_confirmed": true,
+    "evidence": {
+      "text": null,
+      "label": null,
+      "href": null,
+      "disabled": true,
+      "direction": "next_arrowright"
+    },
+    "limitation": "End requires an explicitly disabled Next; missing Next alone is not proof; infinite loading and server-side result caps are not covered"
+  },
+  "page_hashes_match_plan": true,
+  "queue_partition": "child 01 equals first 300 of parent queue",
+  "child_accepted": 299,
+  "child_unavailable": 1,
+  "profession_values": [
+    "Кассир"
+  ],
+  "filter_evidence": "Fresh snapshot confirmed exact checkbox Кассир [checked], only checked listing checkbox name=Кассир,value=3201751; heading Вакансии по профессии Кассир в Москве; global search empty. No other selected filters.",
+  "limitation": "Граница доступной выдачи при наблюдении; не доказывает полноту всех объявлений сайта.",
+  "instruction_metadata": "В плане runner записана версия 1.7.28; фактический SKILL.md при commit 5d9508b9 указывает 1.7.29, SHA-256 совпадает с планом."
+}
