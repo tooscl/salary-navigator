@@ -1067,6 +1067,50 @@ p.stdin.close()
             self.assertEqual(runner.read(diag/'failures.json')['retries_started'], 1)
             self.assertEqual(runner.read(out/'listing_pages/0002.json'), second)
 
+    def test_accept_all_pages_with_pending_browser_error_and_partition(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory); out, service, diag = runner.paths(root, 'saved')
+            for file in runner.AUTOMATION_FILES:
+                path = root/file; path.parent.mkdir(parents=True, exist_ok=True)
+                path.write_bytes((runner.ROOT/file).read_bytes())
+            url = 'https://www.avito.ru/moskva/vakansii'
+            next_url = url + '?p=2'
+            page = dict(state='LISTING', source_url=url, selected_controls=[], items=[item('123'), item('456')], pagination={'next_url': next_url})
+            runner.write(out/'listing_pages/0001.json', page)
+            request = dict(url=url, limit=None, candidate_limit=None, geography='Москва', profession='', segments='', filter_evidence='Москва', all_pages=True, profession_scope='all')
+            runner.write(diag/'freeze_request.json', request)
+            runner.write(diag/'pending_listing.json', {'url': next_url})
+            runner.write(diag/'checkpoint.json', {'state': 'BROWSER_ERROR', 'completed_ids': [], 'next_id': None})
+            runner.record_failure(diag, 'freeze', 'browser error', 'freeze')
+            args = argparse.Namespace(run_id='saved', resume=True, url=url, limit=None, all_pages=True, geography='Москва', profession='', segments='', filter_evidence='Москва', profession_scope='all', agent_model='gpt-6-luna', retry_reason='Accept incomplete saved pages', accept_saved=True, human_instruction='Собрать только сохранённый префикс')
+            with patch.object(runner, 'ROOT', root), patch.object(runner, 'preflight') as preflight, patch.object(runner, 'browser') as browser, patch.object(runner, 'dirty_automation', return_value=[]), patch.object(runner.subprocess, 'check_output', return_value='abc'):
+                runner.freeze(args)
+                preflight.assert_not_called(); browser.assert_not_called()
+                plan = runner.read(service/'plan.json')
+                self.assertEqual(plan['selection_mode'], 'saved_incomplete_listing')
+                self.assertFalse(plan['available_listing_exhausted'])
+                self.assertEqual(plan['saved_selection_authorization']['pending']['sha256'], runner.sha(diag/'pending_listing.json'))
+                runner.succeeded(diag, 'freeze', 'Accepted incomplete saved pages')
+                runner.partition(argparse.Namespace(run_id='saved', batch_size=1, prefix='part'))
+                self.assertEqual(runner.read(root/'Data/avito_runs/part_01/queue.json')[0]['id'], '123')
+                self.assertEqual(runner.read(root/'Data/avito_runs/part_02/queue.json')[0]['id'], '456')
+                self.assertEqual(runner.read(root/'Scraper/runs/part_01/plan.json')['selection_mode'], 'saved_incomplete_listing')
+
+    def test_accept_saved_rejects_unrelated_pending_and_access_stop(self):
+        for state, pending_url in [('BROWSER_ERROR', 'https://www.avito.ru/moskva/vakansii?p=9'), ('NEEDS_HUMAN', 'https://www.avito.ru/moskva/vakansii?p=2')]:
+            with self.subTest(state=state), tempfile.TemporaryDirectory() as directory:
+                root = Path(directory); out, service, diag = runner.paths(root, 'saved')
+                url = 'https://www.avito.ru/moskva/vakansii'
+                runner.write(out/'listing_pages/0001.json', dict(state='LISTING', source_url=url, selected_controls=[], items=[item('123')], pagination={'next_url': url+'?p=2'}))
+                runner.write(diag/'freeze_request.json', dict(url=url, limit=None, candidate_limit=None, geography='Москва', profession='', segments='', filter_evidence='Москва', all_pages=True, profession_scope='all'))
+                runner.write(diag/'pending_listing.json', {'url': pending_url})
+                runner.write(diag/'checkpoint.json', {'state': state, 'completed_ids': [], 'next_id': None})
+                args = argparse.Namespace(run_id='saved', resume=True, url=url, limit=None, all_pages=True, geography='Москва', profession='', segments='', filter_evidence='Москва', profession_scope='all', accept_saved=True, human_instruction='Собрать сохранённый префикс')
+                with patch.object(runner, 'ROOT', root), self.assertRaisesRegex(ValueError, 'Pending page'):
+                    runner.freeze(args)
+                self.assertFalse((service/'plan.json').exists())
+                self.assertTrue((diag/'pending_listing.json').exists())
+
     def test_freeze_resumes_even_if_interrupted_before_request_was_saved(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
