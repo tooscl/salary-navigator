@@ -14,7 +14,7 @@ import subprocess
 import sys
 import time
 from threading import Thread
-from urllib.parse import urlsplit
+from urllib.parse import urlsplit, parse_qs
 
 SCRIPTS = Path(__file__).resolve().parent
 ROOT = SCRIPTS.parents[3]
@@ -27,7 +27,7 @@ from failure_log import ensure_allowed, record as record_failure, succeeded, Hum
 from preflight import find_aside, aside_command
 from utils.dataset_pr import validate_automation_changes
 
-VERSION = '1.7.26'
+VERSION = '1.7.28'
 AUTOMATION_FILES = ['Scraper/skills/collect-avito/references/top-professions.json', 'utils/title_flags.py', 'Scraper/extract.js', 'Scraper/skills/collect-avito/SKILL.md'] + [
     'Scraper/skills/collect-avito/scripts/' + name for name in ('run.py', 'browser_batch.js', 'check_capture.py', 'failure_log.py', 'preflight.py')]
 
@@ -159,7 +159,11 @@ def validate_plan_profession(plan, listing_path):
         if sha(path) != page['sha256']:
             raise ValueError('Frozen listing page changed after freeze')
         if index:
-            validate_page_filters(read(listing_path), read(path))
+            current = read(path)
+            if current.get('ui_transition'):
+                validate_ui_transition(read(listing_path), read(listing_path.parent / plan['listing_pages'][index-1]['file']), current)
+            else:
+                validate_page_filters(read(listing_path), current)
 
 
 def observed_profession_correction(out, service, plan, reason):
@@ -206,6 +210,30 @@ def observed_profession_correction(out, service, plan, reason):
         original_filter_evidence=plan.get('filter_evidence'), observed_source_url=read(out/'listing.json')['source_url'],
         child_plan_sha256=sha(service/'plan.json'), parent_plan_sha256=sha(parent_path),
         parent_queue_sha256=info['parent_queue_sha256'], listing_pages=pages)
+
+def page_number(url):
+    values = parse_qs(urlsplit(url).query).get('p', ['1'])
+    if len(values) != 1 or not values[0].isdigit() or int(values[0]) < 1:
+        raise ValueError('Invalid observed page number')
+    return int(values[0])
+
+
+def validate_ui_transition(first, previous, page):
+    validate_page_filters(first, page)
+    if str(page_number(page['source_url'])) not in page.get('pagination', {}).get('current_pages', []):
+        raise ValueError('Current page marker differs from URL')
+    if page_number(page['source_url']) != page_number(previous['source_url']) + 1:
+        raise ValueError('Observed page number did not advance exactly once')
+    if page.get('heading') != first.get('heading') or selection_profession(page, None) != selection_profession(first, None):
+        raise ValueError('Profession controls changed between pages')
+    transition = page.get('ui_transition') or {}
+    if (transition.get('method') != 'observed_ui_next' or not isinstance(transition.get('recovered'), bool)
+            or (not transition['recovered'] and not transition.get('next_snapshot'))
+            or transition.get('from_page') != page_number(previous['source_url'])
+            or transition.get('landed_page') != page_number(page['source_url'])
+            or transition.get('from_url') != previous['source_url'] or transition.get('next_href') != previous['pagination']['next_url'] or transition.get('landed_url') != page['source_url']):
+        raise ValueError('UI transition evidence differs from previous page')
+
 
 def validate_page_filters(first, page):
     # The Next link comes from the already filtered listing. Do not reopen UI
@@ -309,7 +337,7 @@ def preflight(config_path=None, diag=None):
 
 def import_sandbox(sandbox, out, diag):
     """Copy even a stopped batch; never replace an earlier raw observation."""
-    for name in ['listing.json', 'checkpoint.json', 'timing.json', 'problem.snapshot.txt', 'browser-tab.json']:
+    for name in ['listing.json', 'checkpoint.json', 'timing.json', 'problem.snapshot.txt', 'browser-tab.json', 'next-comparison.json']:
         source = sandbox / name
         if source.exists():
             if name == 'checkpoint.json' and (diag/name).exists():
@@ -491,6 +519,37 @@ def archive_partial_listing(args):
     print('Rejected partial listing archived; failure budget preserved')
 
 
+def archive_uncertain_freeze(args):
+    out, service, diag = paths(ROOT, args.run_id)
+    if not args.reason.strip() or (service/'plan.json').exists() or (out/'queue.json').exists() or any((out/'raw').glob('*')):
+        raise ValueError('Only an unplanned, uncaptured freeze can be archived')
+    ledger = load_failures(diag)
+    if ledger.get('stages', {}).get('freeze', {}).get('state') != 'RETRY_AVAILABLE':
+        raise ValueError('Archive requires a recorded freeze failure and available correction')
+    archive = service/'uncertain-freeze'
+    if archive.exists(): raise ValueError('Uncertain freeze already archived')
+    archive.mkdir(parents=True)
+    files = {}
+    for root, names in ((out, ('listing_pages',)), (diag, ('freeze_request.json','pending_listing.json','listing.json','checkpoint.json','sandbox.json','timing.json','browser-tab.json','failures.json'))):
+        for name in names:
+            source = root/name
+            if not source.exists(): continue
+            target = archive/('data' if root == out else 'diagnostics')/name
+            target.parent.mkdir(parents=True, exist_ok=True)
+            if source.is_dir(): shutil.copytree(source, target)
+            else: shutil.copy2(source, target)
+            for item in ([target] if target.is_file() else sorted(target.rglob('*'))):
+                if item.is_file(): files[str(item.relative_to(archive))] = sha(item)
+    write(archive/'provenance.json', dict(reason=args.reason, files=files, at=datetime.now(timezone.utc).isoformat(),
+        original_code_git_commit=subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=ROOT, text=True).strip(),
+        original_automation_sha256={file: hashlib.sha256(subprocess.check_output(['git', 'show', 'HEAD:' + file], cwd=ROOT)).hexdigest() for file in AUTOMATION_FILES},
+        corrected_automation_sha256={file: sha(ROOT/file) for file in AUTOMATION_FILES}))
+    for name in ('freeze_request.json','pending_listing.json','listing.json','checkpoint.json','sandbox.json','timing.json','browser-tab.json'):
+        (diag/name).unlink(missing_ok=True)
+    if (out/'listing_pages').exists(): shutil.rmtree(out/'listing_pages')
+    print('Uncertain freeze archived with hashes; failure history preserved')
+
+
 def reselect(args):
     """Preserve a mistaken freeze before any card capture, keeping its failure ledger."""
     out, service, diag = paths(ROOT, args.run_id)
@@ -578,6 +637,10 @@ def freeze(args):
     request = dict(url=args.url, limit=args.limit, candidate_limit=getattr(args, 'candidate_limit', None), geography=args.geography,
                    profession=args.profession, segments=args.segments, filter_evidence=args.filter_evidence)
     request.update(all_pages=all_pages, profession_scope=getattr(args, 'profession_scope', None))
+    ui_next = getattr(args, 'ui_next', False)
+    if ui_next:
+        if not getattr(args, 'tab_id', None): raise ValueError('UI Next requires an explicit --tab-id')
+        request['ui_next'] = True
     if (out/'listing_pages').exists() and not (diag/'freeze_request.json').exists():
         raise ValueError('Frozen pages lack their original request; cannot safely resume')
     if existing and (diag/'freeze_request.json').exists() and read(diag / 'freeze_request.json') != request:
@@ -591,7 +654,9 @@ def freeze(args):
     pages = [read(path) for path in page_paths]
     for index, page in enumerate(pages):
         expected_url = args.url if index == 0 else pages[index-1].get('pagination', {}).get('next_url')
-        if not expected_url or not same_observed_url(expected_url, page.get('source_url', '')):
+        if index and ui_next:
+            validate_ui_transition(pages[0], pages[index-1], page)
+        elif not expected_url or not same_observed_url(expected_url, page.get('source_url', '')):
             raise ValueError('Frozen listing page does not match the observed Next link')
         if index:
             validate_page_filters(pages[0], page)
@@ -621,21 +686,25 @@ def freeze(args):
             raise ValueError('Pending listing does not match the observed Next link')
         if recovering and (diag / 'sandbox.json').exists():
             import_sandbox(Path(read(diag / 'sandbox.json')['path']), out, diag)
-        if recovering and (diag/'checkpoint.json').exists() and read(diag/'checkpoint.json')['state'] == 'READY' and (diag/'listing.json').exists():
+        if recovering and not ui_next and (diag/'checkpoint.json').exists() and read(diag/'checkpoint.json')['state'] == 'READY' and (diag/'listing.json').exists():
             cp = read(diag/'checkpoint.json')
         else:
             for name in ('sandbox.json', 'listing.json', 'checkpoint.json'):
                 (diag/name).unlink(missing_ok=True)
             write(pending, {'url': url})
-            cp, _ = browser(dict(mode='freeze', url=url, completed_ids=[], tab_id=getattr(args, 'tab_id', None), allow_navigation=bool(pages)), out, diag)
+            cp, _ = browser(dict(mode='freeze', url=url, completed_ids=[], tab_id=getattr(args, 'tab_id', None), allow_navigation=bool(pages), ui_next=ui_next, previous=pages[-1] if pages and ui_next else None, first=pages[0] if pages and ui_next else None), out, diag)
         if cp['state'] != 'READY':
             raise CollectionStopped(f'Stopped: {cp["state"]}; inspect local diagnostics', cp['state'])
         page = read(diag / 'listing.json')
-        if not same_observed_url(url, page.get('source_url', '')):
+        if pages and ui_next:
+            validate_ui_transition(pages[0], pages[-1], page)
+        elif not same_observed_url(url, page.get('source_url', '')):
             raise ValueError('Loaded listing URL differs from observed link')
         if pages:
             validate_page_filters(pages[0], page)
         else:
+            if ui_next and (page_number(page['source_url']) != 1 or '1' not in page.get('pagination', {}).get('current_pages', [])):
+                raise ValueError('First page marker differs from URL')
             if getattr(args, 'profession_scope', None) == 'all' and has_checked_profession(page):
                 raise ValueError('All-scope conflicts with observed checked profession controls')
             selection_profession(page, getattr(args, 'profession_scope', None), args.profession)
@@ -1664,13 +1733,13 @@ def publish(args):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     commands = parser.add_subparsers(dest='command', required=True)
-    for name in ['archive-partial-listing', 'partition', 'continuation', 'freeze', 'capture', 'finalize', 'post-finalize-review', 'publish', 'reselect', 'standing-unavailable-policy', 'closed-policy', 'review-policy', 'blocked-listing-policy', 'salary-review-policy', 'review-salary-line', 'mark-unavailable', 'preserve-stopped-observation', 'note-change', 'record-error', 'check-stage', 'stage-ok', 'resume-offline', 'resume-browser']:
+    for name in ['archive-uncertain-freeze', 'archive-partial-listing', 'partition', 'continuation', 'freeze', 'capture', 'finalize', 'post-finalize-review', 'publish', 'reselect', 'standing-unavailable-policy', 'closed-policy', 'review-policy', 'blocked-listing-policy', 'salary-review-policy', 'review-salary-line', 'mark-unavailable', 'preserve-stopped-observation', 'note-change', 'record-error', 'check-stage', 'stage-ok', 'resume-offline', 'resume-browser']:
         command = commands.add_parser(name)
         command.add_argument('--run-id', required=True)
         if name in ('freeze', 'capture'):
             command.add_argument('--tab-id', help='Explicitly authorized Aside browser targetId')
             command.add_argument('--config', type=Path, help='Local config also used by setup_workspace/preflight')
-        if name in ('archive-partial-listing', 'post-finalize-review'):
+        if name in ('archive-uncertain-freeze', 'archive-partial-listing', 'post-finalize-review'):
             command.add_argument('--reason', required=True)
         elif name == 'partition':
             command.add_argument('--batch-size', type=int, required=True)
@@ -1679,6 +1748,7 @@ def main():
             command.add_argument('--parent-run-id', required=True)
         elif name == 'freeze':
             command.add_argument('--retry-reason')
+            command.add_argument('--ui-next', action='store_true', help='Click observed Next in explicit tab and verify landed page')
             command.add_argument('--resume', action='store_true', help='Recover an interrupted freeze with identical inputs')
             command.add_argument('--accept-saved', action='store_true', help='Offline: accept the incomplete saved listing with explicit human instruction')
             command.add_argument('--human-instruction', help='Explicit instruction to accept exactly the saved listing')
@@ -1752,7 +1822,7 @@ def main():
         parser.error('batch-size must be positive')
     with ExitStack() as stack:
         try:
-            if args.command in ('archive-partial-listing', 'partition', 'continuation', 'freeze', 'capture', 'finalize', 'post-finalize-review', 'publish', 'reselect', 'standing-unavailable-policy', 'closed-policy', 'review-policy', 'blocked-listing-policy', 'salary-review-policy', 'review-salary-line', 'mark-unavailable', 'preserve-stopped-observation', 'record-error', 'stage-ok', 'resume-browser', 'resume-offline'):
+            if args.command in ('archive-uncertain-freeze', 'archive-partial-listing', 'partition', 'continuation', 'freeze', 'capture', 'finalize', 'post-finalize-review', 'publish', 'reselect', 'standing-unavailable-policy', 'closed-policy', 'review-policy', 'blocked-listing-policy', 'salary-review-policy', 'review-salary-line', 'mark-unavailable', 'preserve-stopped-observation', 'record-error', 'stage-ok', 'resume-browser', 'resume-offline'):
                 lock_run_id = args.parent_run_id if args.command == 'continuation' else args.run_id
                 stack.enter_context(operation_locked(paths(ROOT, lock_run_id)[2]))
             globals()[args.command.replace('-', '_')](args)
