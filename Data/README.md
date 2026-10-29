@@ -183,3 +183,5 @@ avito_runs/<название_сбора>/
 - [avito_f11_spb_courier_20261029_part_01](avito_runs/avito_f11_spb_courier_20261029_part_01/exports/vacancies_flat.csv): 300 вакансий.
 
 - [avito_f11_spb_courier_20261029_part_02](avito_runs/avito_f11_spb_courier_20261029_part_02/exports/vacancies_flat.csv): 295 вакансий.
+
+- [20261029_ekaterinburg_courier_part_01](avito_runs/20261029_ekaterinburg_courier_part_01/exports/vacancies_flat.csv): 299 вакансий.
