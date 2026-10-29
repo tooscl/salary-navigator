@@ -159,3 +159,5 @@ avito_runs/<название_сбора>/
 - [avito_f07_moscow_prodavets_20261029_b_02](avito_runs/avito_f07_moscow_prodavets_20261029_b_02/exports/vacancies_flat.csv): 300 вакансий.
 
 - [avito_f07_moscow_prodavets_20261029_b_03](avito_runs/avito_f07_moscow_prodavets_20261029_b_03/exports/vacancies_flat.csv): 300 вакансий.
+
+- [avito_f07_moscow_prodavets_20261029_b_04](avito_runs/avito_f07_moscow_prodavets_20261029_b_04/exports/vacancies_flat.csv): 45 вакансий.
