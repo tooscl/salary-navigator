@@ -637,7 +637,7 @@ def freeze(args):
     existing = out.exists() or (service/'plan.json').exists() or (diag/'freeze_request.json').exists()
     ensure_allowed(diag, 'freeze', getattr(args, 'retry_reason', None), action=True)
     if existing and not args.resume:
-        raise ValueError('Run already exists; capture resumes it, new collection needs a new run_id')
+        raise ValueError('Run already exists; use freeze --resume if no queue exists, otherwise capture')
     if (service / 'manifest.json').exists() or (service / 'plan.json').exists():
         raise ValueError('Queue already frozen; use capture, not freeze')
     avito_url(args.url)
@@ -1757,6 +1757,27 @@ def resume_browser(args):
     print('Human browser authorization recorded; history retained, bounded retry budget active')
 
 
+def external_threshold_authorization(args):
+    """Record human authorization at a stricter external stop without resetting budget."""
+    _, _, diag = paths(ROOT, args.run_id)
+    if not args.human_instruction.strip() or not args.authorization_id.strip():
+        raise ValueError('Human instruction and stable authorization ID required')
+    with locked(diag):
+        ledger = load_failures(diag)
+        prior = [e for e in ledger['events'] if e.get('authorization_id') == args.authorization_id]
+        if prior:
+            if len(prior) == 1 and prior[0].get('event') == 'external_threshold_authorization' and prior[0].get('instruction') == args.human_instruction:
+                return
+            raise ValueError('Authorization ID already used for a different instruction')
+        if ledger['state'] != 'RETRY_AVAILABLE' or ledger['failures'] < 2 or ledger['retries_started'] >= ledger['retry_limit']:
+            raise HumanRequired('Requires externally stopped technical run with remaining retry budget')
+        ledger['events'].append(dict(event='external_threshold_authorization', authorization_id=args.authorization_id,
+            instruction=args.human_instruction, failures=ledger['failures'], retries_started=ledger['retries_started'],
+            at=datetime.now(timezone.utc).isoformat()))
+        save_failures(diag, ledger)
+    print('External threshold authorization recorded; history and retry budget unchanged')
+
+
 def diagnostic_authorization(args):
     out, service, diag = paths(ROOT, args.run_id)
     validate_partition(out, service)
@@ -1943,7 +1964,7 @@ def publish(args):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     commands = parser.add_subparsers(dest='command', required=True)
-    for name in ['archive-uncertain-freeze', 'archive-partial-listing', 'partition', 'partial-suffix', 'continuation', 'freeze', 'capture', 'finalize', 'post-finalize-review', 'publish', 'reselect', 'standing-unavailable-policy', 'closed-policy', 'review-policy', 'blocked-listing-policy', 'salary-review-policy', 'review-salary-line', 'mark-unavailable', 'preserve-stopped-observation', 'note-change', 'record-error', 'check-stage', 'stage-ok', 'resume-offline', 'resume-browser', 'diagnostic-authorization']:
+    for name in ['archive-uncertain-freeze', 'archive-partial-listing', 'partition', 'partial-suffix', 'continuation', 'freeze', 'capture', 'finalize', 'post-finalize-review', 'publish', 'reselect', 'standing-unavailable-policy', 'closed-policy', 'review-policy', 'blocked-listing-policy', 'salary-review-policy', 'review-salary-line', 'mark-unavailable', 'preserve-stopped-observation', 'note-change', 'record-error', 'check-stage', 'stage-ok', 'resume-offline', 'resume-browser', 'diagnostic-authorization', 'external-threshold-authorization']:
         command = commands.add_parser(name)
         command.add_argument('--run-id', required=True)
         if name in ('freeze', 'capture'):
@@ -2024,9 +2045,9 @@ def main():
         elif name in ('check-stage', 'stage-ok'):
             command.add_argument('--stage', required=True)
             command.add_argument('--retry-reason' if name == 'check-stage' else '--evidence', required=name == 'stage-ok')
-        elif name in ('resume-offline', 'resume-browser', 'diagnostic-authorization'):
+        elif name in ('resume-offline', 'resume-browser', 'diagnostic-authorization', 'external-threshold-authorization'):
             command.add_argument('--human-instruction', required=True)
-            if name in ('resume-browser', 'diagnostic-authorization'):
+            if name in ('resume-browser', 'diagnostic-authorization', 'external-threshold-authorization'):
                 command.add_argument('--authorization-id', required=True, help='Stable ID for this fresh human instruction; reuse on CLI retries')
         else:
             for flag in ['file', 'reason', 'validation']:
@@ -2036,7 +2057,7 @@ def main():
         parser.error('batch-size must be positive')
     with ExitStack() as stack:
         try:
-            if args.command in ('archive-uncertain-freeze', 'archive-partial-listing', 'partition', 'partial-suffix', 'continuation', 'freeze', 'capture', 'finalize', 'post-finalize-review', 'publish', 'reselect', 'standing-unavailable-policy', 'closed-policy', 'review-policy', 'blocked-listing-policy', 'salary-review-policy', 'review-salary-line', 'mark-unavailable', 'preserve-stopped-observation', 'record-error', 'stage-ok', 'resume-browser', 'resume-offline', 'diagnostic-authorization'):
+            if args.command in ('archive-uncertain-freeze', 'archive-partial-listing', 'partition', 'partial-suffix', 'continuation', 'freeze', 'capture', 'finalize', 'post-finalize-review', 'publish', 'reselect', 'standing-unavailable-policy', 'closed-policy', 'review-policy', 'blocked-listing-policy', 'salary-review-policy', 'review-salary-line', 'mark-unavailable', 'preserve-stopped-observation', 'record-error', 'stage-ok', 'resume-browser', 'resume-offline', 'diagnostic-authorization', 'external-threshold-authorization'):
                 lock_run_id = args.parent_run_id if args.command == 'continuation' else args.source_run_id if args.command == 'partial-suffix' else args.run_id
                 stack.enter_context(operation_locked(paths(ROOT, lock_run_id)[2]))
             globals()[args.command.replace('-', '_')](args)
