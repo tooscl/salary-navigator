@@ -141,6 +141,11 @@ def profession_from_listing(listing, requested=''):
     return observed
 
 
+def has_checked_profession(listing):
+    return any((c.get('marker') or '').startswith('params[144170]/checkbox/')
+               for c in listing.get('selected_controls', []) if isinstance(c, dict))
+
+
 def validate_plan_profession(plan, listing_path):
     if 'profession' not in plan:
         raise ValueError('Plan profession is missing')
@@ -157,6 +162,50 @@ def validate_plan_profession(plan, listing_path):
             validate_page_filters(read(listing_path), read(path))
 
 
+def observed_profession_correction(out, service, plan, reason):
+    """Reconcile a legacy incorrect all-scope from immutable, chained listing evidence."""
+    if not reason or not reason.strip() or plan.get('profession_scope') != 'all' or plan.get('profession'):
+        raise ValueError('Profession correction requires a reason and an empty legacy all-scope plan')
+    info = plan.get('partition')
+    if not info:
+        raise ValueError('Profession correction requires a partitioned frozen queue')
+    parent_path = out/'provenance'/'parent-plan.json'
+    parent = read(parent_path)
+    if sha(parent_path) != info['parent_plan_sha256'] or parent.get('profession_scope') != 'all' or parent.get('profession'):
+        raise ValueError('Parent profession provenance differs')
+    expected_child = dict(parent, run_id=plan['run_id'], limit=info['end']-info['start'],
+        requested_limit=info['end']-info['start'], available_unique=info['end']-info['start'], partition=info)
+    if plan != expected_child:
+        raise ValueError('Child plan differs from parent provenance')
+    pages = parent.get('listing_pages') or []
+    if not pages or plan.get('listing_pages') != pages:
+        raise ValueError('Frozen page provenance differs')
+    observed = None
+    checked = None
+    previous = None
+    for index, entry in enumerate(pages):
+        path = out/entry['file']
+        if sha(path) != entry['sha256']:
+            raise ValueError('Frozen page hash differs')
+        page = read(path)
+        expected = parent['listing_request_url'] if index == 0 else previous
+        if not expected or not same_observed_url(expected, page['source_url']) or page['source_url'] != entry['source_url']:
+            raise ValueError('Frozen page URL chain differs')
+        profession = profession_from_listing(page)
+        controls = sorted((c.get('marker'), c.get('value'), c.get('label')) for c in page.get('selected_controls', [])
+                          if (c.get('marker') or '').startswith('params[144170]/checkbox/'))
+        if not profession or (observed is not None and (profession != observed or controls != checked)):
+            raise ValueError('Observed profession controls differ or are empty')
+        observed = profession
+        checked = controls
+        previous = page.get('pagination', {}).get('next_url')
+    if sha(out/'listing.json') != pages[0]['sha256']:
+        raise ValueError('First listing hash differs')
+    return dict(method='observed_checked_controls_v1', reason=reason, original_profession=plan['profession'],
+        corrected_profession=observed, original_profession_scope=plan['profession_scope'],
+        original_filter_evidence=plan.get('filter_evidence'), observed_source_url=read(out/'listing.json')['source_url'],
+        child_plan_sha256=sha(service/'plan.json'), parent_plan_sha256=sha(parent_path),
+        parent_queue_sha256=info['parent_queue_sha256'], listing_pages=pages)
 
 def validate_page_filters(first, page):
     # The Next link comes from the already filtered listing. Do not reopen UI
@@ -587,6 +636,8 @@ def freeze(args):
         if pages:
             validate_page_filters(pages[0], page)
         else:
+            if getattr(args, 'profession_scope', None) == 'all' and has_checked_profession(page):
+                raise ValueError('All-scope conflicts with observed checked profession controls')
             selection_profession(page, getattr(args, 'profession_scope', None), args.profession)
             if candidate_limit is not None and not any(c.get('label') == 'Удалённо' and 'params[172815]' in (c.get('marker') or '') for c in page.get('selected_controls', [])):
                 raise ValueError('Remote selection requires the observed Удалённо filter')
@@ -1283,6 +1334,14 @@ def finalize(args):
     started = time.perf_counter()
     queue, plan = read(out / 'queue.json'), read(service / 'plan.json')
     validate_plan_profession(plan, out / 'listing.json')
+    correction = None
+    if getattr(args, 'profession_from_observed_controls', False):
+        correction = observed_profession_correction(out, service, plan, getattr(args, 'profession_correction_reason', None))
+        plan = dict(plan, profession=correction['corrected_profession'])
+    elif getattr(args, 'profession_correction_reason', None):
+        raise ValueError('Correction reason requires --profession-from-observed-controls')
+    elif plan.get('profession_scope') == 'all' and has_checked_profession(read(out/'listing.json')):
+        raise ValueError('All-scope conflicts with observed profession; use audited correction')
     plan = dict(plan, city_anomaly_policy=getattr(args,'city_anomaly_policy','blank'))
     changes = read(diag / 'automation_changes.json') if (diag / 'automation_changes.json').exists() else []
     changed = {file for file,value in plan.get('automation_sha256', {}).items() if sha(ROOT/file) != value}
@@ -1331,6 +1390,8 @@ def finalize(args):
     columns = list(dict.fromkeys(k for row in rows for k in row))
     exports = out / 'exports'
     exports.mkdir(exist_ok=True)  # unfinished drafts may be retried; completed runs cannot
+    if correction:
+        write(exports/'profession_correction.json', correction)
     with (exports / 'vacancies_flat.csv').open('w', encoding='utf-8-sig', newline='') as stream:
         writer = csv.DictWriter(stream, fieldnames=columns, lineterminator='\n')
         writer.writeheader(); writer.writerows(rows)
@@ -1345,6 +1406,9 @@ def finalize(args):
     entry = dict(run_id=args.run_id, source='avito',
         path=str((exports / 'vacancies_flat.csv').relative_to(ROOT)), sha256=sha(exports / 'vacancies_flat.csv'),
         placement_regions=mapping, enrichment_status='not_run')
+    if correction:
+        entry['profession_correction'] = dict(path=str((exports/'profession_correction.json').relative_to(ROOT)),
+            sha256=sha(exports/'profession_correction.json'))
     if unknown_cities:
         entry['unknown_city_placements'] = unknown_cities
     if any(row.get('city__source') == 'search_filter' for row in rows):
@@ -1364,6 +1428,7 @@ def finalize(args):
         timing=dict(setup_seconds=plan['setup_seconds'], capture_seconds=read(diag/'checkpoint.json').get('capture_seconds'),
             review_export_seconds=time.perf_counter()-started, publication_seconds=None),
         review_model=args.review_model, automation_changes=changes,
+        profession_correction=correction,
         post_capture_automation_sha256={file: sha(ROOT/file) for file in sorted(changed)}, files={})
     for path in sorted(list(out.rglob('*')) + [service / 'plan.json']):
         if path.is_file():
@@ -1470,6 +1535,64 @@ def resume_browser(args):
     print('Human browser authorization recorded; history retained, bounded retry budget active')
 
 
+def validate_completed_export(out, service):
+    manifest = read(service/'manifest.json')
+    if manifest.get('status') != 'complete':
+        raise ValueError('Post-finalize review requires a complete export')
+    validate_partition(out, service)
+    plan = read(service/'plan.json')
+    validate_plan_profession(plan, out/'listing.json')
+    for path, expected in manifest['files'].items():
+        if sha(ROOT/path) != expected['sha256']:
+            raise ValueError(f'Published artifact changed: {path}')
+    correction = read(out/'exports/profession_correction.json')
+    if observed_profession_correction(out, service, plan, correction['reason']) != correction:
+        raise ValueError('Profession correction evidence differs')
+    queue = read(out/'queue.json')
+    excluded = {r['id'] for r in unavailable_records(out, queue)}
+    expected = [item for item in queue if item['id'] not in excluded]
+    for item in expected:
+        data = reviewed_capture(out, item)
+        if (not check(data, item['id'])['structural_check_passed'] or data.get('source_url') != item['url']
+                or not data.get('parameter_audit', {}).get('rendered_complete')):
+            raise ValueError('Raw capture fails structural or identity validation')
+    with (out/'exports/vacancies_flat.csv').open(encoding='utf-8-sig', newline='') as stream:
+        rows = list(csv.DictReader(stream))
+    if [r['id'] for r in rows] != [item['id'] for item in expected] or any(r['profession'] != correction['corrected_profession'] for r in rows):
+        raise ValueError('Export IDs or profession differ from evidence')
+    if manifest.get('profession_correction') != correction or manifest['coverage']['accepted'] != len(rows):
+        raise ValueError('Manifest correction or accepted count differs')
+    return manifest
+
+
+POST_FINALIZE_TESTED = ['Scraper/skills/collect-avito/scripts/run.py', 'Scraper/skills/collect-avito/SKILL.md',
+                        'Scraper/test_aside_runner.py', 'utils/build_dataset.py', 'utils/test_build_dataset.py']
+
+
+def post_finalize_review(args):
+    out, service, _ = paths(ROOT, args.run_id)
+    reviews = sorted((out/'exports').glob('post_finalize_review*.json'))
+    dest = out/'exports'/('post_finalize_review.json' if not reviews else f'post_finalize_review_{len(reviews)+1:03}.json')
+    if dest.exists() or not args.reason.strip():
+        raise ValueError('A new review and a reason are required')
+    manifest = validate_completed_export(out, service)
+    baseline = dict(manifest['collection'].get('automation_sha256', {}))
+    baseline.update(manifest.get('post_capture_automation_sha256', {}))
+    noted = {c['file'] for c in manifest.get('automation_changes', [])}
+    changed = {f for f, value in baseline.items() if sha(ROOT/f) != value}
+    if changed - noted or not changed:
+        raise ValueError('Post-finalize source changes must be recorded and nonempty')
+    if not set(POST_FINALIZE_TESTED).issubset(noted):
+        raise ValueError('Review requires recorded sources, tests, and skill')
+    subprocess.run([sys.executable, '-m', 'unittest', 'Scraper.test_aside_runner', 'utils.test_build_dataset'], check=True, cwd=ROOT)
+    subprocess.run([sys.executable, 'utils/build_dataset.py', '--check'], check=True, cwd=ROOT)
+    write(dest, dict(method='post_finalize_validation_v1', reason=args.reason,
+        original_manifest_sha256=sha(service/'manifest.json'), previous_automation_sha256=baseline,
+        previous_review_sha256=sha(reviews[-1]) if reviews else None,
+        current_automation_sha256={f: sha(ROOT/f) for f in sorted(set(baseline) | set(POST_FINALIZE_TESTED))},
+        validation='Partition, plan, page hashes, URL chain, raw, correction, CSV IDs and profession, dataset check and offline regression suites passed'))
+
+
 def publish(args):
     out, service, diag = paths(ROOT, args.run_id)
     validate_partition(out, service)
@@ -1489,7 +1612,23 @@ def publish(args):
     expected_automation = dict(manifest['collection'].get('automation_sha256', {}))
     expected_automation.update(manifest.get('post_capture_automation_sha256', {}))
     if any(sha(ROOT/file) != value for file,value in expected_automation.items()):
-        raise ValueError('Collector source changed after collection; document and resolve before publication')
+        reviews = sorted((out/'exports').glob('post_finalize_review*.json'))
+        if not reviews:
+            raise ValueError('Collector source changed after collection; document and resolve before publication')
+        previous = None
+        for index, path in enumerate(reviews):
+            expected_name = 'post_finalize_review.json' if index == 0 else f'post_finalize_review_{index+1:03}.json'
+            if path.name != expected_name or read(path).get('previous_review_sha256') != previous:
+                raise ValueError('Post-finalize review chain differs')
+            previous = sha(path)
+        review = read(reviews[-1])
+        validate_completed_export(out, service)
+        if (review.get('method') != 'post_finalize_validation_v1' or review.get('original_manifest_sha256') != sha(service/'manifest.json')
+                or review.get('previous_automation_sha256') != expected_automation
+                or any(sha(ROOT/f) != h for f, h in review.get('current_automation_sha256', {}).items())
+                or not (set(expected_automation) | set(POST_FINALIZE_TESTED)).issubset(review.get('current_automation_sha256', {}))
+                or not review.get('reason', '').strip()):
+            raise ValueError('Post-finalize review no longer matches source or manifest')
     # Existing fast batch validations suffice for data-only runs; changed code needs its own tests.
     subprocess.run([sys.executable, 'utils/build_dataset.py', '--check'], check=True, cwd=ROOT)
     files = [str(out.relative_to(ROOT)), str((service/'plan.json').relative_to(ROOT)),
@@ -1525,13 +1664,13 @@ def publish(args):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     commands = parser.add_subparsers(dest='command', required=True)
-    for name in ['archive-partial-listing', 'partition', 'continuation', 'freeze', 'capture', 'finalize', 'publish', 'reselect', 'standing-unavailable-policy', 'closed-policy', 'review-policy', 'blocked-listing-policy', 'salary-review-policy', 'review-salary-line', 'mark-unavailable', 'preserve-stopped-observation', 'note-change', 'record-error', 'check-stage', 'stage-ok', 'resume-offline', 'resume-browser']:
+    for name in ['archive-partial-listing', 'partition', 'continuation', 'freeze', 'capture', 'finalize', 'post-finalize-review', 'publish', 'reselect', 'standing-unavailable-policy', 'closed-policy', 'review-policy', 'blocked-listing-policy', 'salary-review-policy', 'review-salary-line', 'mark-unavailable', 'preserve-stopped-observation', 'note-change', 'record-error', 'check-stage', 'stage-ok', 'resume-offline', 'resume-browser']:
         command = commands.add_parser(name)
         command.add_argument('--run-id', required=True)
         if name in ('freeze', 'capture'):
             command.add_argument('--tab-id', help='Explicitly authorized Aside browser targetId')
             command.add_argument('--config', type=Path, help='Local config also used by setup_workspace/preflight')
-        if name == 'archive-partial-listing':
+        if name in ('archive-partial-listing', 'post-finalize-review'):
             command.add_argument('--reason', required=True)
         elif name == 'partition':
             command.add_argument('--batch-size', type=int, required=True)
@@ -1559,6 +1698,8 @@ def main():
             command.add_argument('--batch-size', type=int, default=30)
         elif name == 'finalize':
             command.add_argument('--city-anomaly-policy', choices=['blank','search_filter'], default='blank')
+            command.add_argument('--profession-from-observed-controls', action='store_true')
+            command.add_argument('--profession-correction-reason')
             command.add_argument('--retry-reason')
             command.add_argument('--review-model', default=None, help='Actual reviewer model, not a model switch')
             command.add_argument('--placements', type=Path, help='Reviewed ID -> city,region,evidence JSON for unknown places')
@@ -1611,7 +1752,7 @@ def main():
         parser.error('batch-size must be positive')
     with ExitStack() as stack:
         try:
-            if args.command in ('archive-partial-listing', 'partition', 'continuation', 'freeze', 'capture', 'finalize', 'publish', 'reselect', 'standing-unavailable-policy', 'closed-policy', 'review-policy', 'blocked-listing-policy', 'salary-review-policy', 'review-salary-line', 'mark-unavailable', 'preserve-stopped-observation', 'record-error', 'stage-ok', 'resume-browser', 'resume-offline'):
+            if args.command in ('archive-partial-listing', 'partition', 'continuation', 'freeze', 'capture', 'finalize', 'post-finalize-review', 'publish', 'reselect', 'standing-unavailable-policy', 'closed-policy', 'review-policy', 'blocked-listing-policy', 'salary-review-policy', 'review-salary-line', 'mark-unavailable', 'preserve-stopped-observation', 'record-error', 'stage-ok', 'resume-browser', 'resume-offline'):
                 lock_run_id = args.parent_run_id if args.command == 'continuation' else args.run_id
                 stack.enter_context(operation_locked(paths(ROOT, lock_run_id)[2]))
             globals()[args.command.replace('-', '_')](args)

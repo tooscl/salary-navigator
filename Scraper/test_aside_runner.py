@@ -37,6 +37,89 @@ def raw(identity='123'):
 
 
 class RunnerTests(unittest.TestCase):
+    def test_post_finalize_review_pins_code_and_appends_revision(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory); out, service, _ = runner.paths(root, 'review')
+            for name in runner.POST_FINALIZE_TESTED:
+                path = root/name; path.parent.mkdir(parents=True, exist_ok=True); path.write_text('current')
+            runner.write(service/'manifest.json', {'status': 'complete'})
+            name = runner.POST_FINALIZE_TESTED[0]
+            manifest = {'collection': {'automation_sha256': {name: 'old-hash'}},
+                        'automation_changes': [{'file': f} for f in runner.POST_FINALIZE_TESTED]}
+            args = argparse.Namespace(run_id='review', reason='restore page validation')
+            with patch.object(runner, 'ROOT', root), patch.object(runner, 'validate_completed_export', return_value=manifest), patch.object(runner.subprocess, 'run') as run:
+                runner.post_finalize_review(args)
+                audit = runner.read(out/'exports/post_finalize_review.json')
+                self.assertEqual(audit['original_manifest_sha256'], runner.sha(service/'manifest.json'))
+                self.assertEqual(audit['current_automation_sha256'][name], runner.sha(root/name))
+                self.assertEqual(run.call_count, 2)
+                first = out/'exports/post_finalize_review.json'; original = first.read_bytes()
+                runner.post_finalize_review(args)
+                self.assertEqual(first.read_bytes(), original)
+                self.assertEqual(runner.read(out/'exports/post_finalize_review_002.json')['previous_review_sha256'], runner.sha(first))
+
+    def test_audited_profession_correction_requires_unchanged_consistent_pages(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory); out, service, _ = runner.paths(root, 'child')
+            urls = ['https://www.avito.ru/moskva/vakansii?p=1', 'https://www.avito.ru/moskva/vakansii?p=2']
+            pages = []
+            for i, url in enumerate(urls):
+                page = dict(source_url=url, selected_controls=courier_controls(), pagination={'next_url': urls[1] if i == 0 else None})
+                path = out/f'listing_pages/000{i+1}.json'; runner.write(path, page)
+                pages.append(dict(file=f'listing_pages/000{i+1}.json', sha256=runner.sha(path), source_url=url))
+            runner.write(out/'listing.json', runner.read(out/'listing_pages/0001.json'))
+            parent = dict(run_id='parent', profession='', profession_scope='all', listing_request_url=urls[0],
+                listing_pages=pages, filter_evidence='original evidence', limit=2, requested_limit=None, available_unique=2)
+            parent_path = out/'provenance/parent-plan.json'; runner.write(parent_path, parent)
+            info = dict(parent_plan_sha256=runner.sha(parent_path), parent_queue_sha256='queue-hash', start=0, end=2)
+            plan = dict(parent, run_id='child', limit=2, requested_limit=2, available_unique=2, partition=info)
+            runner.write(service/'plan.json', plan)
+            before = (service/'plan.json').read_bytes()
+            result = runner.observed_profession_correction(out, service, plan, 'Wrong scope and evidence URL')
+            self.assertEqual(result['corrected_profession'], 'Курьер')
+            self.assertEqual(result['observed_source_url'], urls[0])
+            self.assertEqual(before, (service/'plan.json').read_bytes())
+            with self.assertRaisesRegex(ValueError, 'reason'):
+                runner.observed_profession_correction(out, service, plan, '')
+            with self.assertRaisesRegex(ValueError, 'legacy all-scope'):
+                runner.observed_profession_correction(out, service, dict(plan, profession_scope='top20'), 'reason')
+            second = out/'listing_pages/0002.json'
+            changed = runner.read(second); changed['selected_controls'] = [dict(label='Водитель', marker='params[144170]/checkbox/1')]
+            runner.write(second, changed)
+            with self.assertRaisesRegex(ValueError, 'hash'):
+                runner.observed_profession_correction(out, service, plan, 'reason')
+            pages[1]['sha256'] = runner.sha(second)
+            runner.write(parent_path, parent); info['parent_plan_sha256'] = runner.sha(parent_path)
+            runner.write(service/'plan.json', plan)
+            with self.assertRaisesRegex(ValueError, 'controls differ'):
+                runner.observed_profession_correction(out, service, plan, 'reason')
+            changed['selected_controls'] = []
+            changed['profession_filter'] = {'observed': True, 'selected_count': 0}
+            runner.write(second, changed); pages[1]['sha256'] = runner.sha(second)
+            runner.write(parent_path, parent); info['parent_plan_sha256'] = runner.sha(parent_path); runner.write(service/'plan.json', plan)
+            with self.assertRaisesRegex(ValueError, 'empty'):
+                runner.observed_profession_correction(out, service, plan, 'reason')
+            changed['selected_controls'] = courier_controls(); changed['source_url'] = urls[1] + '&unexpected=1'
+            runner.write(second, changed); pages[1]['sha256'] = runner.sha(second)
+            runner.write(parent_path, parent); info['parent_plan_sha256'] = runner.sha(parent_path); runner.write(service/'plan.json', plan)
+            with self.assertRaisesRegex(ValueError, 'URL chain'):
+                runner.observed_profession_correction(out, service, plan, 'reason')
+
+    def test_validate_all_pages_hash(self):
+        with tempfile.TemporaryDirectory() as directory:
+            out = Path(directory); url = 'https://www.avito.ru/moskva/vakansii'
+            first = dict(source_url=url, selected_controls=courier_controls())
+            second = dict(source_url=url+'?p=2', selected_controls=courier_controls())
+            runner.write(out/'listing.json', first); runner.write(out/'listing_pages/0001.json', first)
+            runner.write(out/'listing_pages/0002.json', second)
+            pages = [dict(file=f'listing_pages/000{i}.json', sha256=runner.sha(out/f'listing_pages/000{i}.json')) for i in (1, 2)]
+            plan = dict(profession='Курьер', listing_sha256=runner.sha(out/'listing.json'), listing_pages=pages)
+            runner.validate_plan_profession(plan, out/'listing.json')
+            second['selected_controls'] = [dict(label='Водитель', marker='params[144170]/checkbox/1')]
+            runner.write(out/'listing_pages/0002.json', second)
+            with self.assertRaisesRegex(ValueError, 'page changed'):
+                runner.validate_plan_profession(plan, out/'listing.json')
+
     def test_closed_policy_records_question_without_changing_authorization_budget(self):
         question = 'Разрешаете пропускать это и все последующие явно закрытые объявления, сохраняя подтверждение причины, и продолжить очередь?'
         answer = 'да, закрытые вакансии отмечай как недоступные, исключи из csv и продолжай поостальным вакансиям'
@@ -824,6 +907,18 @@ p.stdin.close()
             self.assertEqual(runner.read(service/'plan.json')['execution_model'], 'gpt-6-luna')
             self.assertEqual(runner.read(service/'plan.json')['profession'], 'Курьер')
 
+    def test_freeze_rejects_all_scope_with_checked_profession(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory); out, service, diag = runner.paths(root, 'bad_scope')
+            def browser(job, output, diagnostics):
+                runner.write(diagnostics/'listing.json', dict(state='LISTING', source_url=item()['url'], selected_controls=courier_controls(), items=[item()]))
+                return {'state':'READY', 'completed_ids':[]}, 0
+            args = argparse.Namespace(run_id='bad_scope', resume=False, url=item()['url'], limit=1, geography='Москва', profession='', segments='', filter_evidence='filter', profession_scope='all', retry_reason=None)
+            with patch.object(runner, 'ROOT', root), patch.object(runner, 'preflight'), patch.object(runner, 'browser', side_effect=browser):
+                with self.assertRaisesRegex(ValueError, 'All-scope conflicts'):
+                    runner.freeze(args)
+            self.assertFalse((service/'plan.json').exists())
+
     def test_finalize_registers_and_builds_once_without_browser(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory); run_id = 'test_sample'
@@ -864,6 +959,31 @@ p.stdin.close()
                 self.assertEqual(next(csv.DictReader(stream))['profession'], 'Курьер')
             self.assertEqual(manifest['collection']['profession'], 'Курьер')
             self.assertTrue(all('diagnostics' not in name for name in manifest['files']))
+
+    def test_finalize_applies_audited_profession_without_rewriting_plan_or_raw(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory); out, service, diag = runner.paths(root, 'correction')
+            runner.write(root/'Data/dataset/sources.json', {'schema_version': '1', 'exports': []})
+            (root/'Data/README.md').write_text('# Data\n'); (root/'Data/dataset/README.md').write_text('Текущий состав: старый\n')
+            runner.write(out/'queue.json', [item()]); runner.write(out/'raw/123.json', raw())
+            runner.write(out/'listing.json', {'selected_controls': courier_controls()})
+            runner.write(service/'plan.json', {'setup_seconds': 1, 'profession': '', 'profession_scope': 'all', 'segments': ''})
+            runner.write(diag/'checkpoint.json', {'capture_seconds': 1})
+            plan_before = (service/'plan.json').read_bytes(); raw_before = (out/'raw/123.json').read_bytes()
+            correction = {'corrected_profession': 'Курьер', 'reason': 'wrong scope'}
+            args = argparse.Namespace(run_id='correction', placements=None, review_model='test', profession_from_observed_controls=True, profession_correction_reason='wrong scope')
+            with patch.object(runner, 'ROOT', root), patch.object(runner, 'validate_partition'), patch.object(runner, 'observed_profession_correction', return_value=correction):
+                runner.finalize(args)
+            with (out/'exports/vacancies_flat.csv').open(encoding='utf-8-sig', newline='') as stream:
+                self.assertEqual(next(csv.DictReader(stream))['profession'], 'Курьер')
+            self.assertEqual(runner.read(service/'manifest.json')['profession_correction'], correction)
+            self.assertEqual(plan_before, (service/'plan.json').read_bytes())
+            self.assertEqual(raw_before, (out/'raw/123.json').read_bytes())
+            with patch.object(runner, 'ROOT', root), patch.object(runner, 'validate_partition'), patch.object(runner, 'observed_profession_correction', return_value=correction):
+                runner.validate_completed_export(out, service)
+                (out/'raw/123.json').write_bytes(raw_before + b' ')
+                with self.assertRaisesRegex(ValueError, 'artifact changed'):
+                    runner.validate_completed_export(out, service)
 
 
 if __name__ == '__main__':
