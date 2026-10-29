@@ -1,0 +1,39 @@
+{
+  "method": "post_finalize_validation_v1",
+  "reason": "Синхронизация origin/main после параллельного документационного PR 52; исходные наблюдения и экспорт не менялись.",
+  "original_manifest_sha256": "fe46fdfceed8dda8a20e3070c0689f48becee087e6138c7cdfc3afbc8f21aa5b",
+  "previous_automation_sha256": {
+    "Scraper/skills/collect-avito/references/top-professions.json": "e3e72638b17b48f825ec6f2fefb963662494f679ae4b0cef1bebedba889610dd",
+    "utils/title_flags.py": "9c9456cb3fb0df5791630049c9c85987381091dbb9ba18bc3fb3314b8cccbeb6",
+    "Scraper/extract.js": "bd17892bcc632a1c0bb3f14b91a0a1856ac96c1b2960f82597f41c4aa4723a41",
+    "Scraper/skills/collect-avito/SKILL.md": "8745bc30e30454d95eff7553b7c0289c19483844679f110ff5f743917da52da4",
+    "Scraper/skills/collect-avito/scripts/run.py": "63f13b2b9e880e530a10de6da4ed13a710adee0396666e702caea252c64d985e",
+    "Scraper/skills/collect-avito/scripts/browser_batch.js": "aa9ac31e38d07e72ee0737def2a35dda79b376166315b7388a7fd471f0e14136",
+    "Scraper/skills/collect-avito/scripts/check_capture.py": "aa746849317f9768af5aae08b394b9379539f6e268c1fc69e4ed13bd06a4657f",
+    "Scraper/skills/collect-avito/scripts/failure_log.py": "5a28324829d546ce87b662b9e6e4b48cc4ba5aa5d13114483975d2c407b293e6",
+    "Scraper/skills/collect-avito/scripts/preflight.py": "661708892946a68dec53c986df496e76dd67c314021af2567f760b740bb3ce3d"
+  },
+  "automation_changes": [
+    {
+      "file": "Scraper/skills/collect-avito/SKILL.md",
+      "reason": "Обновление документации в origin/main PR 52 после завершения захвата; сохранены исходные hashes плана и экспорта.",
+      "validation": "post-finalize-review проверяет неизменность набора и выполняет офлайн regression suites и dataset --check."
+    }
+  ],
+  "previous_review_sha256": null,
+  "current_automation_sha256": {
+    "Scraper/extract.js": "bd17892bcc632a1c0bb3f14b91a0a1856ac96c1b2960f82597f41c4aa4723a41",
+    "Scraper/skills/collect-avito/SKILL.md": "d504a42f8d87c28f7944af331db265089452d874d731abb7fcfe1a604c3329e7",
+    "Scraper/skills/collect-avito/references/top-professions.json": "e3e72638b17b48f825ec6f2fefb963662494f679ae4b0cef1bebedba889610dd",
+    "Scraper/skills/collect-avito/scripts/browser_batch.js": "aa9ac31e38d07e72ee0737def2a35dda79b376166315b7388a7fd471f0e14136",
+    "Scraper/skills/collect-avito/scripts/check_capture.py": "aa746849317f9768af5aae08b394b9379539f6e268c1fc69e4ed13bd06a4657f",
+    "Scraper/skills/collect-avito/scripts/failure_log.py": "5a28324829d546ce87b662b9e6e4b48cc4ba5aa5d13114483975d2c407b293e6",
+    "Scraper/skills/collect-avito/scripts/preflight.py": "661708892946a68dec53c986df496e76dd67c314021af2567f760b740bb3ce3d",
+    "Scraper/skills/collect-avito/scripts/run.py": "63f13b2b9e880e530a10de6da4ed13a710adee0396666e702caea252c64d985e",
+    "Scraper/test_aside_runner.py": "f848389ece8bc98519032f6b2fbf6056180c4ef5f208b02a1ff7aacc021f548a",
+    "utils/build_dataset.py": "38d05bb054cfae1181fe71ba655270e8e92ef413d9614aa745fd39468252d550",
+    "utils/test_build_dataset.py": "ced093139444f1562759c6e192174d198339d78592d5641ec7fc2ff8127cc1f7",
+    "utils/title_flags.py": "9c9456cb3fb0df5791630049c9c85987381091dbb9ba18bc3fb3314b8cccbeb6"
+  },
+  "validation": "Partition, plan, page hashes, URL chain, raw, correction, CSV IDs and profession, dataset check and offline regression suites passed"
+}
