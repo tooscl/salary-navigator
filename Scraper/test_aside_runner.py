@@ -37,6 +37,40 @@ def raw(identity='123'):
 
 
 class RunnerTests(unittest.TestCase):
+    def test_partial_partition_prefix_preserves_queue_and_rejects_gaps_and_bad_raw(self):
+        with tempfile.TemporaryDirectory() as directory, patch.object(runner, 'ROOT', Path(directory)):
+            out, service, diag = runner.paths(runner.ROOT, 'part')
+            queue = [item('123'), item('456'), item('789')]
+            runner.write(out/'queue.json', queue); runner.write(service/'plan.json', {'partition': {'index': 1}})
+            runner.write(out/'raw/123.json', raw('123')); runner.write(out/'raw/456.json', raw('456'))
+            cp = dict(state='REVIEW_REQUIRED', next_id='789', completed_ids=['123', '456'], stop_reason='identity_or_template_review')
+            runner.write(diag/'checkpoint.json', cp)
+            before = ((service/'plan.json').read_bytes(), (out/'queue.json').read_bytes())
+            with patch.object(runner, 'check', return_value={'structural_check_passed': True}):
+                selection = runner.partial_prefix_selection(out, service, queue, 'publish prefix')
+                self.assertEqual(selection['accepted_ids'], ['123', '456'])
+                self.assertEqual(selection['unresolved_ids'], ['789'])
+                runner.write(diag/'checkpoint.json', dict(cp, completed_ids=['456']))
+                with self.assertRaises(ValueError): runner.partial_prefix_selection(out, service, queue, 'publish prefix')
+                runner.write(diag/'checkpoint.json', cp)
+                (out/'raw/456.json').unlink()
+                with self.assertRaises((ValueError, FileNotFoundError)): runner.partial_prefix_selection(out, service, queue, 'publish prefix')
+                runner.write(out/'raw/456.json', dict(raw('456'), parameter_audit={'rendered_complete': False}))
+                with self.assertRaises(ValueError): runner.partial_prefix_selection(out, service, queue, 'publish prefix')
+            self.assertEqual(before, ((service/'plan.json').read_bytes(), (out/'queue.json').read_bytes()))
+
+    def test_instruction_version_tracks_skill_and_rejects_ambiguous_declarations(self):
+        with tempfile.TemporaryDirectory() as directory:
+            skill = Path(directory)/'SKILL.md'
+            skill.write_text('Версия 1.7.29, 29.10.2026.\n', encoding='utf-8')
+            self.assertEqual(runner.instruction_version(skill), '1.7.29')
+            skill.write_text('Версия 1.7.30, 30.10.2026.\n', encoding='utf-8')
+            self.assertEqual(runner.instruction_version(skill), '1.7.30')
+            for content in ('No version\n', 'Версия 1.7.29, date\nВерсия 1.7.30, date\n'):
+                skill.write_text(content, encoding='utf-8')
+                with self.assertRaises(ValueError):
+                    runner.instruction_version(skill)
+
     def test_staged_diff_allows_text_separator_only_in_data(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
@@ -873,6 +907,32 @@ p.stdin.close()
             self.assertEqual(runner.read(diag/'failures.json')['retries_started'], 0)
             runner.write(out/'raw/123.json', dict(data, heading='Changed'))
             with self.assertRaisesRegex(ValueError, 'raw'): runner.unavailable_records(out, runner.read(out/'queue.json'))
+
+    def test_preserve_blank_observation_requires_exact_evidence_and_authorization(self):
+        with tempfile.TemporaryDirectory() as directory, patch.object(runner, 'ROOT', Path(directory)):
+            out, service, diag = runner.paths(runner.ROOT, 'blank')
+            sandbox = Path(directory)/'sandbox'
+            data = dict(state='UNKNOWN_PAGE', source_url='about:blank', heading=None, items=[], empty_evidence=None, observed_at='now')
+            cp = dict(state='REVIEW_REQUIRED', next_id='123', completed_ids=[], stop_reason='identity_or_template_review')
+            snapshot = '# note: interactive (clickable / focusable) elements only.\n- title: "" [url=]'
+            runner.write(out/'queue.json', [item()]); runner.write(out/'raw/123.json', data)
+            runner.write(diag/'checkpoint.json', cp); runner.write(diag/'sandbox.json', {'path': str(sandbox)})
+            runner.write(sandbox/'raw/123.json', data); runner.write(sandbox/'checkpoint.json', cp)
+            (diag/'problem.snapshot.txt').write_text(snapshot); (sandbox/'problem.snapshot.txt').write_text(snapshot)
+            original = (out/'raw/123.json').read_bytes()
+            runner.record_failure(diag, 'capture', 'blank', 'capture', immediate=True)
+            args = argparse.Namespace(run_id='blank', authorization_id='auth')
+            with self.assertRaises(runner.HumanRequired): runner.preserve_stopped_observation(args)
+            runner.authorize_browser(diag, 'Сохранить about:blank для ID 123 и продолжить', 'auth')
+            (diag/'problem.snapshot.txt').write_text(snapshot + '\nCAPTCHA')
+            with self.assertRaises(ValueError): runner.preserve_stopped_observation(args)
+            self.assertEqual((out/'raw/123.json').read_bytes(), original)
+            (diag/'problem.snapshot.txt').write_text(snapshot)
+            runner.preserve_stopped_observation(args)
+            self.assertFalse((out/'raw/123.json').exists())
+            self.assertEqual((out/'observations/123'/f'{runner.sha(sandbox/"raw/123.json")}.json').read_bytes(), original)
+            self.assertEqual(runner.read(diag/'checkpoint.json')['next_id'], '123')
+            self.assertEqual((sandbox/'raw/123.json').read_bytes(), original)
 
     def test_preserve_captcha_observation_requires_authorization_and_retains_raw(self):
         with tempfile.TemporaryDirectory() as directory, patch.object(runner, 'ROOT', Path(directory)):

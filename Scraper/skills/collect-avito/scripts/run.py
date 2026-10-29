@@ -27,7 +27,6 @@ from failure_log import ensure_allowed, record as record_failure, succeeded, Hum
 from preflight import find_aside, aside_command
 from utils.dataset_pr import validate_automation_changes
 
-VERSION = '1.7.28'
 AUTOMATION_FILES = ['Scraper/skills/collect-avito/references/top-professions.json', 'utils/title_flags.py', 'Scraper/extract.js', 'Scraper/skills/collect-avito/SKILL.md'] + [
     'Scraper/skills/collect-avito/scripts/' + name for name in ('run.py', 'browser_batch.js', 'check_capture.py', 'failure_log.py', 'preflight.py')]
 
@@ -51,6 +50,14 @@ def write(path, data):
 
 def sha(path):
     return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def instruction_version(path):
+    """Read the single declared version from the same skill pinned by the plan."""
+    versions = re.findall(r'^Версия\s+(\d+\.\d+\.\d+),', path.read_text(encoding='utf-8'), re.MULTILINE)
+    if len(versions) != 1:
+        raise ValueError('SKILL.md must declare exactly one instruction version')
+    return versions[0]
 
 
 def dirty_automation(root):
@@ -767,7 +774,7 @@ def freeze(args):
         requested_limit=args.limit, available_unique=len(queue),
         listing_end_reason=listing_end_reason, available_listing_exhausted=listing_end_reason == 'confirmed_end', continuation=continuation_info,
         candidate_limit=candidate_limit,
-        created_at=datetime.now(timezone.utc).isoformat(), instruction_version=VERSION,
+        created_at=datetime.now(timezone.utc).isoformat(), instruction_version=instruction_version(ROOT/'Scraper/skills/collect-avito/SKILL.md'),
         extractor_sha256=sha(ROOT / 'Scraper/extract.js'), instruction_sha256=sha(SCRIPTS.parent / 'SKILL.md'),
         code_git_commit=subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=ROOT, text=True).strip(),
         setup_seconds=time.perf_counter() - started, live_route_verified=False,
@@ -1412,6 +1419,38 @@ def reviewed_row(data, item, regions, plan, override=None):
     return row, review, region
 
 
+def partial_prefix_selection(out, service, queue, instruction):
+    if not instruction or not instruction.strip():
+        raise ValueError('Explicit partial publication instruction required')
+    plan = read(service/'plan.json')
+    if not plan.get('partition'):
+        raise ValueError('Partial prefix requires a frozen partition')
+    cp = read(service/'diagnostics/checkpoint.json')
+    unavailable = unavailable_records(out, queue)
+    excluded = {r['id'] for r in unavailable}
+    ids = [x['id'] for x in queue]
+    next_id = cp.get('next_id')
+    if next_id not in ids or cp.get('state') not in ('REVIEW_REQUIRED', 'BROWSER_ERROR', 'NEEDS_HUMAN'):
+        raise ValueError('Expected a stopped pending partition ID')
+    cut = ids.index(next_id)
+    if cut == 0 or cp.get('completed_ids') != [i for i in ids[:cut] if i not in excluded] or excluded - set(ids[:cut]):
+        raise ValueError('Completed IDs must be the accounted queue prefix')
+    if any((out/'raw'/f'{i}.json').exists() for i in ids[cut:]):
+        raise ValueError('Unresolved raw must be preserved or reviewed before partial export')
+    accepted = []
+    for item in queue[:cut]:
+        if item['id'] in excluded: continue
+        data = reviewed_capture(out, item)
+        if not check(data, item['id'])['structural_check_passed'] or data.get('source_url') != item['url'] or not data.get('parameter_audit', {}).get('rendered_complete'):
+            raise ValueError('Prefix contains missing or unreviewed raw')
+        accepted.append(item['id'])
+    return dict(method='partition_prefix_v1', plan_sha256=sha(service/'plan.json'), queue_sha256=sha(out/'queue.json'),
+        accepted_ids=accepted, skipped_ids=[i for i in ids[:cut] if i in excluded], unresolved_ids=ids[cut:],
+        stop_state=cp['state'], stop_reason=cp.get('stop_reason'), next_id=next_id,
+        raw_sha256={i: sha(out/'raw'/f'{i}.json') for i in ids[:cut]},
+        authorization=instruction)
+
+
 def finalize(args):
     out, service, diag = paths(ROOT, args.run_id)
     validate_partition(out, service)
@@ -1459,6 +1498,9 @@ def finalize(args):
     if unavailable and decisions is not None:
         raise ValueError('Unavailable handling is not supported for remote candidate selection')
     excluded = {record['id'] for record in unavailable}
+    partial = partial_prefix_selection(out, service, queue, getattr(args, 'partial_instruction', None)) if getattr(args, 'partial_prefix', False) else None
+    if partial:
+        selected_queue = queue[:len(partial['accepted_ids']) + len(partial['skipped_ids'])]
     rows, reviews, mapping, unknown_cities = [], [], {}, {}
     for item in selected_queue:
         if item['id'] in excluded:
@@ -1477,6 +1519,8 @@ def finalize(args):
     columns = list(dict.fromkeys(k for row in rows for k in row))
     exports = out / 'exports'
     exports.mkdir(exist_ok=True)  # unfinished drafts may be retried; completed runs cannot
+    if partial:
+        write(exports/'partial_selection.json', partial)
     if correction:
         write(exports/'profession_correction.json', correction)
     with (exports / 'vacancies_flat.csv').open('w', encoding='utf-8-sig', newline='') as stream:
@@ -1510,7 +1554,7 @@ def finalize(args):
     (ROOT / 'Data/dataset/manifest.json').write_bytes(manifest_bytes)
     manifest = dict(run_id=args.run_id, dataset_id=args.run_id, status='complete',
         schema=dict(columns=columns, unknown_policy='empty_not_zero'), collection=plan,
-        coverage=dict(planned=len(queue), accepted=len(rows), unavailable=unavailable, unique_ids=[r['id'] for r in rows], errors=[],
+        coverage=dict(planned=len(queue), accepted=len(rows), unavailable=unavailable, unique_ids=[r['id'] for r in rows], errors=[], partial=partial,
             limitations=['Visible rendered parameters only; enrichment not run; placement on site; live route unverified']),
         timing=dict(setup_seconds=plan['setup_seconds'], capture_seconds=read(diag/'checkpoint.json').get('capture_seconds'),
             review_export_seconds=time.perf_counter()-started, publication_seconds=None),
@@ -1579,15 +1623,34 @@ def preserve_stopped_observation(args):
         raise HumanRequired('Current browser authorization required after the stop')
     cp = read(diag/'checkpoint.json')
     identity = cp.get('next_id')
-    if cp.get('state') != 'NEEDS_HUMAN' or cp.get('stop_reason') != 'access_restriction_or_captcha' or not identity or identity in cp.get('completed_ids', []):
-        raise ValueError('Expected a stopped CAPTCHA observation at the pending checkpoint ID')
+    captcha = cp.get('state') == 'NEEDS_HUMAN' and cp.get('stop_reason') == 'access_restriction_or_captcha'
+    blank = cp.get('state') == 'REVIEW_REQUIRED' and cp.get('stop_reason') == 'identity_or_template_review'
+    if not (captcha or blank) or not identity or identity in cp.get('completed_ids', []):
+        raise ValueError('Expected a supported stopped observation at the pending checkpoint ID')
     queue = read(out/'queue.json')
     if len([item for item in queue if item['id'] == identity]) != 1:
         raise ValueError('Checkpoint ID must occur once in the frozen queue')
+    if blank:
+        instruction = events[authorizations[-1]].get('instruction', '')
+        if identity not in instruction or 'about:blank' not in instruction:
+            raise HumanRequired('Authorization must identify the blank-tab observation and pending ID')
+        excluded = {record['id'] for record in unavailable_records(out, queue)}
+        index = next(i for i, item in enumerate(queue) if item['id'] == identity)
+        if cp.get('completed_ids') != [item['id'] for item in queue[:index] if item['id'] not in excluded]:
+            raise ValueError('Checkpoint prefix mismatch')
     source = out/'raw'/f'{identity}.json'
     data = read(source)
-    if data.get('state') != 'NEEDS_HUMAN' or data.get('reason') != 'access_restriction_or_captcha' or data.get('source_url') != next(item['url'] for item in queue if item['id'] == identity):
-        raise ValueError('Raw observation does not match the stopped queue item')
+    if captcha:
+        if data.get('state') != 'NEEDS_HUMAN' or data.get('reason') != 'access_restriction_or_captcha' or data.get('source_url') != next(item['url'] for item in queue if item['id'] == identity):
+            raise ValueError('Raw observation does not match the stopped queue item')
+        reason = data['reason']
+    else:
+        snapshot = diag/'problem.snapshot.txt'
+        if (data.get('state') != 'UNKNOWN_PAGE' or data.get('source_url') != 'about:blank'
+                or data.get('heading') is not None or data.get('items') != [] or data.get('empty_evidence') is not None
+                or not snapshot.exists() or snapshot.read_text(encoding='utf-8').strip() != '# note: interactive (clickable / focusable) elements only.\n- title: "" [url=]'):
+            raise ValueError('Not an evidenced blank-tab observation')
+        reason = 'blank_tab_before_navigation'
     sandbox_pointer = diag/'sandbox.json'
     if sandbox_pointer.exists():
         sandbox = Path(read(sandbox_pointer)['path'])
@@ -1595,8 +1658,12 @@ def preserve_stopped_observation(args):
         if not other.exists() or other.read_bytes() != source.read_bytes():
             raise ValueError('Sandbox raw differs; inspect interrupted transfer')
         sandbox_cp = read(sandbox/'checkpoint.json')
-        if sandbox_cp.get('next_id') != identity or sandbox_cp.get('state') != 'NEEDS_HUMAN':
+        if sandbox_cp.get('next_id') != identity or sandbox_cp.get('state') != cp.get('state') or sandbox_cp.get('stop_reason') != cp.get('stop_reason'):
             raise ValueError('Sandbox checkpoint differs; inspect interrupted transfer')
+        if blank and (sandbox/'problem.snapshot.txt').read_bytes() != snapshot.read_bytes():
+            raise ValueError('Sandbox snapshot differs; inspect interrupted transfer')
+    elif blank:
+        raise ValueError('Blank-tab preservation requires the original sandbox')
     archive = out/'observations'/identity
     archive.mkdir(parents=True, exist_ok=True)
     destination = archive/(sha(source) + '.json')
@@ -1606,7 +1673,8 @@ def preserve_stopped_observation(args):
         shutil.copy2(source, destination)
     write(archive/(sha(source) + '.provenance.json'), dict(authorization_id=args.authorization_id,
         original_file=str(source.relative_to(out)), sha256=sha(source), observed_at=data.get('observed_at'),
-        preserved_at=datetime.now(timezone.utc).isoformat(), reason=data['reason']))
+        preserved_at=datetime.now(timezone.utc).isoformat(), reason=reason,
+        snapshot_sha256=sha(snapshot) if blank else None))
     # The old sandbox remains on disk; removing only its pointer prevents reimport of
     # the already archived stopped observation into the pending raw slot.
     sandbox_pointer.unlink(missing_ok=True)
@@ -1636,6 +1704,17 @@ def validate_completed_export(out, service):
         raise ValueError('Profession correction evidence differs')
     queue = read(out/'queue.json')
     excluded = {r['id'] for r in unavailable_records(out, queue)}
+    partial = manifest['coverage'].get('partial')
+    if partial:
+        if read(out/'exports/partial_selection.json') != partial or partial['plan_sha256'] != sha(service/'plan.json') or partial['queue_sha256'] != sha(out/'queue.json'):
+            raise ValueError('Partial selection provenance differs')
+        ids = [x['id'] for x in queue]
+        cut = len(partial['accepted_ids']) + len(partial['skipped_ids'])
+        if not plan.get('partition') or not 0 < cut < len(ids) or partial['unresolved_ids'] != ids[cut:] or partial['next_id'] != ids[cut] or partial['skipped_ids'] != [i for i in ids[:cut] if i in excluded] or partial['accepted_ids'] != [i for i in ids[:cut] if i not in excluded] or excluded - set(ids[:cut]):
+            raise ValueError('Partial selection is not the accounted prefix')
+        if partial['raw_sha256'] != {i: sha(out/'raw'/f'{i}.json') for i in ids[:cut]}:
+            raise ValueError('Partial raw hashes differ')
+        queue = queue[:cut]
     expected = [item for item in queue if item['id'] not in excluded]
     for item in expected:
         data = reviewed_capture(out, item)
@@ -1708,6 +1787,8 @@ def publish(args):
     manifest = read(service / 'manifest.json')
     if manifest['status'] != 'complete':
         raise ValueError('Only completed exports can be published')
+    if manifest.get('coverage', {}).get('partial'):
+        validate_completed_export(out, service)
     def git(*argv):
         return subprocess.check_output(['git', *argv], cwd=ROOT, text=True).strip()
     git('fetch', 'origin', 'main')
@@ -1808,6 +1889,8 @@ def main():
             command.add_argument('--retry-reason')
             command.add_argument('--batch-size', type=int, default=30)
         elif name == 'finalize':
+            command.add_argument('--partial-prefix', action='store_true', help='Export only the verified stopped partition prefix, preserving unresolved IDs')
+            command.add_argument('--partial-instruction', help='Exact authorization to publish the verified prefix offline')
             command.add_argument('--city-anomaly-policy', choices=['blank','search_filter'], default='blank')
             command.add_argument('--profession-from-observed-controls', action='store_true')
             command.add_argument('--profession-correction-reason')
