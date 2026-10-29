@@ -179,3 +179,5 @@ avito_runs/<название_сбора>/
 - [avito_10_moscow_courier_20261029_02](avito_runs/avito_10_moscow_courier_20261029_02/exports/vacancies_flat.csv): 299 вакансий.
 
 - [avito_10_moscow_courier_20261029_03](avito_runs/avito_10_moscow_courier_20261029_03/exports/vacancies_flat.csv): 178 вакансий.
+
+- [avito_f11_spb_courier_20261029_part_01](avito_runs/avito_f11_spb_courier_20261029_part_01/exports/vacancies_flat.csv): 300 вакансий.
