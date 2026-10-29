@@ -227,3 +227,5 @@ avito_runs/<название_сбора>/
 - [20261029_sp_driver17_part_03](avito_runs/20261029_sp_driver17_part_03/exports/vacancies_flat.csv): 294 вакансий.
 
 - [20261029_sp_driver17_part_04](avito_runs/20261029_sp_driver17_part_04/exports/vacancies_flat.csv): 24 вакансий.
+
+- [20261029_sp_driver17_supplement_p19](avito_runs/20261029_sp_driver17_supplement_p19/exports/vacancies_flat.csv): 24 вакансий.
