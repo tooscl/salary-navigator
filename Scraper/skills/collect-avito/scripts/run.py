@@ -686,11 +686,17 @@ def freeze(args):
     cp = read(diag/'checkpoint.json') if (diag/'checkpoint.json').exists() else dict(state='READY', completed_ids=[])
     target = candidate_limit or args.limit
     listing_end_reason = None
+    saved_pending = None
     if accept_saved:
-        if candidate_limit is not None or all_pages or not pages or (diag/'pending_listing.json').exists() or any((out/'raw').glob('*')):
-            raise ValueError('Saved-page acceptance requires complete saved pages and a numeric ordinary request')
+        if candidate_limit is not None or not pages or any((out/'raw').glob('*')):
+            raise ValueError('Saved-page acceptance requires complete saved pages and an ordinary request')
+        if pending.exists():
+            pending_data = read(pending)
+            if pending_data != {'url': pages[-1].get('pagination', {}).get('next_url')} or cp.get('state') != 'BROWSER_ERROR':
+                raise ValueError('Pending page must match the observed Next and a stopped browser error')
+            saved_pending = dict(data=pending_data, sha256=sha(pending), checkpoint=cp)
         target = len(queue_from_pages(pages, None))
-        if not target or target >= args.limit:
+        if not target or (not all_pages and target >= args.limit):
             raise ValueError('Saved pages must contain a nonempty incomplete selection')
     while not pages or target is None or len(queue_from_pages(pages, target, False)) < target:
         url = args.url if not pages else pages[-1].get('pagination', {}).get('next_url')
@@ -770,7 +776,7 @@ def freeze(args):
         listing_pages=[dict(file=str(path.relative_to(out)), sha256=sha(path), source_url=page['source_url'])
                        for path, page in zip(page_paths, pages)],
         selection_mode='saved_incomplete_listing' if accept_saved else ('first_N_remote_parameter_matches' if candidate_limit is not None else 'first_N_unique_on_frozen_listing'), limit=args.limit if candidate_limit is not None else len(queue), requested_all_pages=all_pages,
-        saved_selection_authorization={'instruction': instruction, 'at': datetime.now(timezone.utc).isoformat(), 'original_request': request} if accept_saved else None,
+        saved_selection_authorization={'instruction': instruction, 'at': datetime.now(timezone.utc).isoformat(), 'original_request': request, 'pending': saved_pending} if accept_saved else None,
         requested_limit=args.limit, available_unique=len(queue),
         listing_end_reason=listing_end_reason, available_listing_exhausted=listing_end_reason == 'confirmed_end', continuation=continuation_info,
         candidate_limit=candidate_limit,
@@ -1220,7 +1226,7 @@ def partition(args):
     if args.batch_size < 1:
         raise ValueError('Partition size must be positive')
     plan = read(parent_service/'plan.json')
-    if plan.get('selection_mode') != 'first_N_unique_on_frozen_listing' or plan.get('partition') or plan.get('continuation'):
+    if plan.get('selection_mode') not in ('first_N_unique_on_frozen_listing', 'saved_incomplete_listing') or plan.get('partition') or plan.get('continuation'):
         raise ValueError('Partition supports an ordinary frozen parent queue only')
     if (parent_service/'manifest.json').exists() or (parent_service/'partition.json').exists() or any((parent_out/'raw').glob('*.json')):
         raise ValueError('Partition requires an unpartitioned, uncaptured parent')
