@@ -171,3 +171,5 @@ avito_runs/<название_сбора>/
 - [f08_spb_seller_20261029_b_04](avito_runs/f08_spb_seller_20261029_b_04/exports/vacancies_flat.csv): 65 вакансий.
 
 - [filter09_ekaterinburg_prodavets_20261029_b_01](avito_runs/filter09_ekaterinburg_prodavets_20261029_b_01/exports/vacancies_flat.csv): 300 вакансий.
+
+- [filter09_ekaterinburg_prodavets_20261029_b_02](avito_runs/filter09_ekaterinburg_prodavets_20261029_b_02/exports/vacancies_flat.csv): 218 вакансий.
