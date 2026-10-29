@@ -205,3 +205,5 @@ avito_runs/<название_сбора>/
 - [20261029_spb_cashier_part_04](avito_runs/20261029_spb_cashier_part_04/exports/vacancies_flat.csv): 107 вакансий.
 
 - [filter15_01](avito_runs/filter15_01/exports/vacancies_flat.csv): 299 вакансий.
+
+- [filter15_02](avito_runs/filter15_02/exports/vacancies_flat.csv): 116 вакансий.
