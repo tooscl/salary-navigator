@@ -32,6 +32,40 @@ class PaginationTests(unittest.TestCase):
             with self.assertRaises(runner.HumanRequired):
                 runner.external_threshold_authorization(args)
 
+    def test_pending_diagnostic_is_single_use_and_preserves_ledger(self):
+        with tempfile.TemporaryDirectory() as directory, ExitStack() as stack:
+            root = Path(directory)
+            stack.enter_context(patch.object(runner, 'ROOT', root))
+            for name in ('validate_partition', 'validate_plan_profession', 'preflight', 'verify_partition_url_guard', 'validate_automation_changes'):
+                stack.enter_context(patch.object(runner, name))
+            out, service, diag = runner.paths(root, 'run')
+            diag.mkdir(parents=True); (out/'raw').mkdir(parents=True)
+            runner.write(service/'plan.json', {'automation_sha256': {}})
+            runner.write(diag/'checkpoint.json', {'state': 'BROWSER_ERROR', 'stop_reason': 'Error: CDP command timeout: Page.navigate', 'completed_ids': [], 'next_id': '123'})
+            runner.write(out/'queue.json', [{'id': '123', 'url': 'https://www.avito.ru/moskva/vakansii/x_123'}])
+            runner.write(out/'listing.json', {})
+            runner.write(diag/'sandbox.json', {'path': '/old/sandbox'})
+            runner.record_failure(diag, 'capture', 'timeout', 'capture', immediate=True)
+            original = runner.load_failures(diag)
+            args = argparse.Namespace(run_id='run', id='123', human_instruction='Diagnostic 123', authorization_id='human-1', connection_evidence='Probe succeeded', tab_id='new-tab', config=None)
+            def fake_browser(job, out, diag):
+                self.assertEqual([x['id'] for x in job['queue']], ['123'])
+                self.assertEqual(job['tab_id'], 'new-tab')
+                result = {'state': 'CAPTURED', 'completed_ids': ['123']}
+                runner.write(diag/'checkpoint.json', result)
+                return result, 1
+            with patch.object(runner, 'reviewed_capture', return_value={'parameter_audit': {'rendered_complete': True}}), patch.object(runner, 'check', return_value={'structural_check_passed': True}), patch.object(runner, 'browser', side_effect=fake_browser) as browser:
+                runner.diagnostic_pending_capture(args)
+                with self.assertRaises((ValueError, runner.HumanRequired)):
+                    runner.diagnostic_pending_capture(args)
+                self.assertEqual(browser.call_count, 1)
+            ledger = runner.load_failures(diag)
+            for field in ('state', 'failures', 'retries_started', 'budget_start_failures'):
+                self.assertEqual(ledger[field], original[field])
+            self.assertEqual(runner.read(diag/'diagnostic-original'/'sandbox.json')['path'], '/old/sandbox')
+            with self.assertRaises(runner.HumanRequired):
+                runner.ensure_allowed(diag, 'capture', 'No authorization')
+
     def simulate(self, count=5000, all_pages=False, interrupt=None, scope=None, cycle=False, blocked=False, requested=None, repeat_items=False, confirmed_end=False):
         with tempfile.TemporaryDirectory() as directory, ExitStack() as stack:
             root = Path(directory)
