@@ -1757,6 +1757,76 @@ def resume_browser(args):
     print('Human browser authorization recorded; history retained, bounded retry budget active')
 
 
+def diagnostic_pending_capture(args):
+    """One explicitly authorized pending-card observation; shared ledger stays stopped."""
+    out, service, diag = paths(ROOT, args.run_id)
+    validate_partition(out, service)
+    cp, queue = read(diag/'checkpoint.json'), read(out/'queue.json')
+    identity = cp.get('next_id')
+    if (cp.get('state') != 'BROWSER_ERROR' or 'CDP command timeout: Page.navigate' not in cp.get('stop_reason', '')
+            or not identity or identity != args.id or not args.human_instruction.strip() or not args.authorization_id.strip()
+            or not args.connection_evidence.strip() or not (args.tab_id or '').strip()):
+        raise ValueError('Requires timeout checkpoint, pending ID, explicit instruction, restored connection evidence and own tab')
+    pending = [item for item in queue if item['id'] == identity]
+    if len(pending) != 1 or (out/'raw'/f'{identity}.json').exists():
+        raise ValueError('Pending queue ID must be unique and have no saved raw')
+    if len(cp['completed_ids']) >= len(queue) or [item['id'] for item in queue[:len(cp['completed_ids'])]] != cp['completed_ids'] or queue[len(cp['completed_ids'])]['id'] != identity:
+        raise ValueError('Checkpoint must match the saved queue prefix')
+    for item in queue[:len(cp['completed_ids'])]:
+        data = reviewed_capture(out, item)
+        if not check(data, item['id'])['structural_check_passed'] or not data.get('parameter_audit', {}).get('rendered_complete'):
+            raise ValueError('Completed prefix is not structurally verified')
+    plan = read(service/'plan.json')
+    validate_plan_profession(plan, out/'listing.json')
+    changed = {file for file, value in plan['automation_sha256'].items() if sha(ROOT/file) != value}
+    changes = read(diag/'automation_changes.json') if (diag/'automation_changes.json').exists() else []
+    if changed - allowed_capture_changes(plan, changes):
+        raise ValueError('Unapproved collector source changed')
+    verify_partition_url_guard(plan, changed)
+    validate_automation_changes(changes, changed)
+    preflight(getattr(args, 'config', None), diag)
+    archive = diag/'diagnostic-original'
+    with locked(diag):
+        ledger = load_failures(diag)
+        if ledger['state'] != 'NEEDS_HUMAN':
+            raise HumanRequired('Diagnostic requires stopped shared ledger')
+        if any(e.get('event') == 'pending_diagnostic_started' for e in ledger['events']):
+            raise HumanRequired('Pending diagnostic already consumed; no second action')
+        if archive.exists():
+            raise ValueError('Diagnostic evidence archive already exists')
+        archive.mkdir()
+        hashes = {}
+        for name in ('checkpoint.json', 'sandbox.json', 'browser-tab.json', 'browser-session.local.json', 'timing.json', 'problem.snapshot.txt'):
+            source = diag/name
+            if source.exists():
+                shutil.copy2(source, archive/name)
+                hashes[name] = sha(archive/name)
+        write(archive/'hashes.json', hashes)
+        ledger['events'].append(dict(event='pending_diagnostic_started', at=datetime.now(timezone.utc).isoformat(),
+            run_id=args.run_id, pending_id=identity, authorization_id=args.authorization_id,
+            instruction=args.human_instruction, connection_evidence=args.connection_evidence, original_hashes=hashes))
+        save_failures(diag, ledger)
+    # No success or exception unlocks the ledger. The existing error REPL stays alive.
+    try:
+        cp2, elapsed = browser(dict(mode='capture', queue=pending, completed_ids=cp['completed_ids'], tab_id=args.tab_id,
+            previous_capture_seconds=cp.get('capture_seconds', 0)), out, diag)
+        if cp2.get('state') != 'CAPTURED' or cp2.get('completed_ids') != cp['completed_ids'] + [identity]:
+            raise RuntimeError('Diagnostic did not complete pending ID: ' + str(cp2.get('state')))
+        data = reviewed_capture(out, pending[0])
+        if not check(data, identity)['structural_check_passed'] or not data.get('parameter_audit', {}).get('rendered_complete'):
+            raise RuntimeError('Diagnostic raw failed structural verification')
+    except (ValueError, RuntimeError, OSError, subprocess.CalledProcessError) as error:
+        record_failure(diag, 'capture', str(error), 'diagnostic-pending-capture', immediate=True)
+        raise
+    with locked(diag):
+        ledger = load_failures(diag)
+        ledger['events'].append(dict(event='pending_diagnostic_result', at=datetime.now(timezone.utc).isoformat(),
+            authorization_id=args.authorization_id, pending_id=identity, state=cp2.get('state'),
+            completed_ids=cp2.get('completed_ids'), checkpoint_sha256=sha(diag/'checkpoint.json')))
+        save_failures(diag, ledger)
+    print(json.dumps({'diagnostic_state': cp2.get('state'), 'pending_id': identity, 'ledger_state': 'NEEDS_HUMAN'}, ensure_ascii=False))
+
+
 def external_threshold_authorization(args):
     """Record human authorization at a stricter external stop without resetting budget."""
     _, _, diag = paths(ROOT, args.run_id)
@@ -1964,10 +2034,10 @@ def publish(args):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     commands = parser.add_subparsers(dest='command', required=True)
-    for name in ['archive-uncertain-freeze', 'archive-partial-listing', 'partition', 'partial-suffix', 'continuation', 'freeze', 'capture', 'finalize', 'post-finalize-review', 'publish', 'reselect', 'standing-unavailable-policy', 'closed-policy', 'review-policy', 'blocked-listing-policy', 'salary-review-policy', 'review-salary-line', 'mark-unavailable', 'preserve-stopped-observation', 'note-change', 'record-error', 'check-stage', 'stage-ok', 'resume-offline', 'resume-browser', 'diagnostic-authorization', 'external-threshold-authorization']:
+    for name in ['archive-uncertain-freeze', 'archive-partial-listing', 'partition', 'partial-suffix', 'continuation', 'freeze', 'capture', 'finalize', 'post-finalize-review', 'publish', 'reselect', 'standing-unavailable-policy', 'closed-policy', 'review-policy', 'blocked-listing-policy', 'salary-review-policy', 'review-salary-line', 'mark-unavailable', 'preserve-stopped-observation', 'note-change', 'record-error', 'check-stage', 'stage-ok', 'resume-offline', 'resume-browser', 'diagnostic-authorization', 'external-threshold-authorization', 'diagnostic-pending-capture']:
         command = commands.add_parser(name)
         command.add_argument('--run-id', required=True)
-        if name in ('freeze', 'capture'):
+        if name in ('freeze', 'capture', 'diagnostic-pending-capture'):
             command.add_argument('--tab-id', help='Explicitly authorized Aside browser targetId')
             command.add_argument('--config', type=Path, help='Local config also used by setup_workspace/preflight')
         if name in ('archive-uncertain-freeze', 'archive-partial-listing', 'post-finalize-review'):
@@ -1996,6 +2066,11 @@ def main():
             command.add_argument('--profession-scope', choices=['top20', 'all'], help='Selection already applied in the UI; do not recheck collapsed controls')
             command.add_argument('--segments', default='')
             command.add_argument('--filter-evidence', required=True, help='What was visibly confirmed in the listing')
+        elif name == 'diagnostic-pending-capture':
+            command.add_argument('--id', required=True)
+            command.add_argument('--human-instruction', required=True)
+            command.add_argument('--authorization-id', required=True)
+            command.add_argument('--connection-evidence', required=True)
         elif name == 'capture':
             command.add_argument('--retry-reason')
             command.add_argument('--batch-size', type=int, default=30)
@@ -2057,7 +2132,7 @@ def main():
         parser.error('batch-size must be positive')
     with ExitStack() as stack:
         try:
-            if args.command in ('archive-uncertain-freeze', 'archive-partial-listing', 'partition', 'partial-suffix', 'continuation', 'freeze', 'capture', 'finalize', 'post-finalize-review', 'publish', 'reselect', 'standing-unavailable-policy', 'closed-policy', 'review-policy', 'blocked-listing-policy', 'salary-review-policy', 'review-salary-line', 'mark-unavailable', 'preserve-stopped-observation', 'record-error', 'stage-ok', 'resume-browser', 'resume-offline', 'diagnostic-authorization', 'external-threshold-authorization'):
+            if args.command in ('archive-uncertain-freeze', 'archive-partial-listing', 'partition', 'partial-suffix', 'continuation', 'freeze', 'capture', 'finalize', 'post-finalize-review', 'publish', 'reselect', 'standing-unavailable-policy', 'closed-policy', 'review-policy', 'blocked-listing-policy', 'salary-review-policy', 'review-salary-line', 'mark-unavailable', 'preserve-stopped-observation', 'record-error', 'stage-ok', 'resume-browser', 'resume-offline', 'diagnostic-authorization', 'external-threshold-authorization', 'diagnostic-pending-capture'):
                 lock_run_id = args.parent_run_id if args.command == 'continuation' else args.source_run_id if args.command == 'partial-suffix' else args.run_id
                 stack.enter_context(operation_locked(paths(ROOT, lock_run_id)[2]))
             globals()[args.command.replace('-', '_')](args)

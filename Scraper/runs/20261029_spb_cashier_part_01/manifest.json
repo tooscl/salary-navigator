@@ -1,0 +1,3214 @@
+{
+  "run_id": "20261029_spb_cashier_part_01",
+  "dataset_id": "20261029_spb_cashier_part_01",
+  "status": "complete",
+  "schema": {
+    "columns": [
+      "id",
+      "city",
+      "profession",
+      "segments",
+      "title",
+      "salary_raw",
+      "source_url",
+      "observed_at",
+      "description",
+      "location_observed",
+      "employer_name_observed",
+      "date_raw",
+      "views_total",
+      "views_today",
+      "listing_rank",
+      "listing_promoted",
+      "full_parameters_read",
+      "analysis_status",
+      "export_eligibility",
+      "read_status_parameters",
+      "read_status_description",
+      "read_status_location",
+      "read_limitations",
+      "enrichment_status",
+      "enriched_fields",
+      "enrichment_version",
+      "military",
+      "military_keywords",
+      "military_rule_version",
+      "city__source",
+      "city__evidence",
+      "city_anomaly",
+      "График",
+      "Занятость",
+      "Способ оформления",
+      "Частота выплат",
+      "Сфера деятельности компании",
+      "Что получают работники",
+      "Опыт работы",
+      "В том числе для кандидатов",
+      "Медкнижка",
+      "Количество рабочих часов в день",
+      "Смены",
+      "Ассортимент",
+      "С чем надо работать",
+      "Количество рабочих дней в неделю",
+      "Режим работы",
+      "Можно заканчивать в 17:00",
+      "Стажировка",
+      "Длительность вахты",
+      "Тип предприятия",
+      "Формат заведения"
+    ],
+    "unknown_policy": "empty_not_zero"
+  },
+  "collection": {
+    "run_id": "20261029_spb_cashier_part_01",
+    "geography": "Санкт-Петербург",
+    "profession": "Кассир",
+    "segments": "",
+    "filter_evidence": "Snapshot: checkbox Кассир checked (site input name=Кассир, value=3201751); heading Вакансии по профессии Кассир в Санкт-Петербурге; location path /sankt-peterburg/vakansii/kassir-ASgBAgICAUTUzBGu64YD; search textbox empty. Pagination snapshot showed Следующая страница href /sankt-peterburg/vakansii?context=...&p=2, so use UI Next and verify profession.",
+    "listing_url": "https://www.avito.ru/sankt-peterburg/vakansii/kassir-ASgBAgICAUTUzBGu64YD?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6IlpNWTdlYXQwU1VEWE00MTYiO32jrGJhJgAAAA",
+    "listing_request_url": "https://www.avito.ru/sankt-peterburg/vakansii/kassir-ASgBAgICAUTUzBGu64YD?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6IlpNWTdlYXQwU1VEWE00MTYiO32jrGJhJgAAAA&localPriority=0",
+    "selected_controls": [
+      {
+        "label": "Кассир",
+        "marker": "params[144170]/checkbox/3201751",
+        "value": null
+      },
+      {
+        "label": "Кассир",
+        "marker": "params[144170]/checkbox/toggle",
+        "value": "3201751"
+      },
+      {
+        "label": "Любой",
+        "marker": "params[196929]/all",
+        "value": null
+      },
+      {
+        "label": "Любой",
+        "marker": "params[196929]/toggle",
+        "value": "all"
+      },
+      {
+        "label": "Неважно",
+        "marker": "params[172815]/all",
+        "value": null
+      },
+      {
+        "label": "Неважно",
+        "marker": "params[172815]/toggle",
+        "value": "all"
+      },
+      {
+        "label": "Неважно",
+        "marker": null,
+        "value": "all"
+      },
+      {
+        "label": "Все",
+        "marker": null,
+        "value": "all"
+      }
+    ],
+    "listing_sha256": "708d991620b651aff99b0a7f7fee92e840b33d6845b6a10214237563d9206dc0",
+    "profession_scope": null,
+    "profession_source": "observed_controls",
+    "listing_pages": [
+      {
+        "file": "listing_pages/0001.json",
+        "sha256": "708d991620b651aff99b0a7f7fee92e840b33d6845b6a10214237563d9206dc0",
+        "source_url": "https://www.avito.ru/sankt-peterburg/vakansii/kassir-ASgBAgICAUTUzBGu64YD?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6IlpNWTdlYXQwU1VEWE00MTYiO32jrGJhJgAAAA"
+      },
+      {
+        "file": "listing_pages/0002.json",
+        "sha256": "ac6bfc6ec2441c5ca330cb088100cec59e1daf8ce9f073b5c696d826f515bf2b",
+        "source_url": "https://www.avito.ru/sankt-peterburg/vakansii/kassir-ASgBAgICAUTUzBGu64YD?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6IkRCRjNLb0VZVEZvRXcxd1YiO32J9ApmJgAAAA&localPriority=0&p=2"
+      },
+      {
+        "file": "listing_pages/0003.json",
+        "sha256": "38efc278ba704ca2a966377ea70fbc539f81cefd007b69265bdf23ac31eb93a7",
+        "source_url": "https://www.avito.ru/sankt-peterburg/vakansii/kassir-ASgBAgICAUTUzBGu64YD?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6IkRCRjNLb0VZVEZvRXcxd1YiO32J9ApmJgAAAA&localPriority=0&p=3"
+      },
+      {
+        "file": "listing_pages/0004.json",
+        "sha256": "b1fd50a354d808f6dc9c741f000fd19bb6542c61dd90b33119f323da39f2c788",
+        "source_url": "https://www.avito.ru/sankt-peterburg/vakansii/kassir-ASgBAgICAUTUzBGu64YD?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6IkRCRjNLb0VZVEZvRXcxd1YiO32J9ApmJgAAAA&localPriority=0&p=4"
+      },
+      {
+        "file": "listing_pages/0005.json",
+        "sha256": "6cd3292e244e26097e2fe5ab318e75ae4013bd3c65b4075a0cd21b60bfea8e2f",
+        "source_url": "https://www.avito.ru/sankt-peterburg/vakansii/kassir-ASgBAgICAUTUzBGu64YD?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6IkRCRjNLb0VZVEZvRXcxd1YiO32J9ApmJgAAAA&localPriority=0&p=5"
+      },
+      {
+        "file": "listing_pages/0006.json",
+        "sha256": "1bba987f4f1653a7dbd42a0d9d54fb75d1c095907dc6ed843b0f0eaf3d89ddd7",
+        "source_url": "https://www.avito.ru/sankt-peterburg/vakansii/kassir-ASgBAgICAUTUzBGu64YD?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6IkRCRjNLb0VZVEZvRXcxd1YiO32J9ApmJgAAAA&localPriority=0&p=6"
+      },
+      {
+        "file": "listing_pages/0007.json",
+        "sha256": "a951ffb82a97db7a24d3bb542a4863d166c4e30105a7f435b58579a7d7b7c4a4",
+        "source_url": "https://www.avito.ru/sankt-peterburg/vakansii/kassir-ASgBAgICAUTUzBGu64YD?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6IkRCRjNLb0VZVEZvRXcxd1YiO32J9ApmJgAAAA&localPriority=0&p=7"
+      },
+      {
+        "file": "listing_pages/0008.json",
+        "sha256": "deffea469be3e639b21ea8275dc3bd0528a4b7402e008ee1eb339185e668961c",
+        "source_url": "https://www.avito.ru/sankt-peterburg/vakansii/kassir-ASgBAgICAUTUzBGu64YD?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6IkRCRjNLb0VZVEZvRXcxd1YiO32J9ApmJgAAAA&localPriority=0&p=8"
+      },
+      {
+        "file": "listing_pages/0009.json",
+        "sha256": "74b5679ceb7fd868930a328fa9c56318c3bd34bbf06552b0345447edeac493a4",
+        "source_url": "https://www.avito.ru/sankt-peterburg/vakansii/kassir-ASgBAgICAUTUzBGu64YD?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6IkRCRjNLb0VZVEZvRXcxd1YiO32J9ApmJgAAAA&localPriority=0&p=9"
+      },
+      {
+        "file": "listing_pages/0010.json",
+        "sha256": "07c64010f07960076ac32e6355fde6d3b52e79193fcf538fef17bd4f59e0753c",
+        "source_url": "https://www.avito.ru/sankt-peterburg/vakansii/kassir-ASgBAgICAUTUzBGu64YD?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6IkRCRjNLb0VZVEZvRXcxd1YiO32J9ApmJgAAAA&localPriority=0&p=10"
+      },
+      {
+        "file": "listing_pages/0011.json",
+        "sha256": "1ee4eca6993b9be2b1cc01aab1161ac99623afde621cc57dbfa092c5aedf27fb",
+        "source_url": "https://www.avito.ru/sankt-peterburg/vakansii/kassir-ASgBAgICAUTUzBGu64YD?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6IkRCRjNLb0VZVEZvRXcxd1YiO32J9ApmJgAAAA&localPriority=0&p=11"
+      },
+      {
+        "file": "listing_pages/0012.json",
+        "sha256": "2836b8af1397bccbbc012ffbbcd33a7b622a6c94212e4f1113735a809a594af3",
+        "source_url": "https://www.avito.ru/sankt-peterburg/vakansii/kassir-ASgBAgICAUTUzBGu64YD?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6IkRCRjNLb0VZVEZvRXcxd1YiO32J9ApmJgAAAA&localPriority=0&p=12"
+      },
+      {
+        "file": "listing_pages/0013.json",
+        "sha256": "58b4a26be9e2497be0f1e2bf1be31fc10789aa4da755a6e58fe4af562bc45155",
+        "source_url": "https://www.avito.ru/sankt-peterburg/vakansii/kassir-ASgBAgICAUTUzBGu64YD?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6IkRCRjNLb0VZVEZvRXcxd1YiO32J9ApmJgAAAA&localPriority=0&p=13"
+      },
+      {
+        "file": "listing_pages/0014.json",
+        "sha256": "28da3f965ac193521b6d2422ee9d72c66bba4002660cd15813d70364d430d270",
+        "source_url": "https://www.avito.ru/sankt-peterburg/vakansii/kassir-ASgBAgICAUTUzBGu64YD?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6IkRCRjNLb0VZVEZvRXcxd1YiO32J9ApmJgAAAA&localPriority=0&p=14"
+      },
+      {
+        "file": "listing_pages/0015.json",
+        "sha256": "4ae29d7acbecfe792e99d5a66014ce836064b8a077dc21a85edba6653efff825",
+        "source_url": "https://www.avito.ru/sankt-peterburg/vakansii/kassir-ASgBAgICAUTUzBGu64YD?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6IkRCRjNLb0VZVEZvRXcxd1YiO32J9ApmJgAAAA&localPriority=0&p=15"
+      },
+      {
+        "file": "listing_pages/0016.json",
+        "sha256": "88eda8fce2224d1c8f98497a8bb418f404041d1fc9e75f95fec98b22c68ebca8",
+        "source_url": "https://www.avito.ru/sankt-peterburg/vakansii/kassir-ASgBAgICAUTUzBGu64YD?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6IkRCRjNLb0VZVEZvRXcxd1YiO32J9ApmJgAAAA&localPriority=0&p=16"
+      },
+      {
+        "file": "listing_pages/0017.json",
+        "sha256": "ac88e3b4125710c47c727ee0322c9d8bfc2cf57b878d2af983eda960c7a0fc11",
+        "source_url": "https://www.avito.ru/sankt-peterburg/vakansii/kassir-ASgBAgICAUTUzBGu64YD?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6IkRCRjNLb0VZVEZvRXcxd1YiO32J9ApmJgAAAA&localPriority=0&p=17"
+      },
+      {
+        "file": "listing_pages/0018.json",
+        "sha256": "ddfbd072f2d715a90f57bfabeed2c2419252d14be8c6ed8a32ebdbadbe33ccae",
+        "source_url": "https://www.avito.ru/sankt-peterburg/vakansii/kassir-ASgBAgICAUTUzBGu64YD?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6IkRCRjNLb0VZVEZvRXcxd1YiO32J9ApmJgAAAA&localPriority=0&p=18"
+      },
+      {
+        "file": "listing_pages/0019.json",
+        "sha256": "c9112888c58bc2e7badeb593825cff35278fe155f56e6d00e82253d90330fea6",
+        "source_url": "https://www.avito.ru/sankt-peterburg/vakansii/kassir-ASgBAgICAUTUzBGu64YD?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6IkRCRjNLb0VZVEZvRXcxd1YiO32J9ApmJgAAAA&localPriority=0&p=19"
+      },
+      {
+        "file": "listing_pages/0020.json",
+        "sha256": "fcf64c5e47fcfcebf4a102d160c62bd2f599e4a3cd5f32ad97fdb25719f30d34",
+        "source_url": "https://www.avito.ru/sankt-peterburg/vakansii/kassir-ASgBAgICAUTUzBGu64YD?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6IkRCRjNLb0VZVEZvRXcxd1YiO32J9ApmJgAAAA&localPriority=0&p=20"
+      },
+      {
+        "file": "listing_pages/0021.json",
+        "sha256": "2cf4331bc462ac9004bf923ebe4f4b556c20bb292c1852831ffdf0dbd4a74163",
+        "source_url": "https://www.avito.ru/sankt-peterburg/vakansii/kassir-ASgBAgICAUTUzBGu64YD?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6IkRCRjNLb0VZVEZvRXcxd1YiO32J9ApmJgAAAA&localPriority=0&p=21"
+      },
+      {
+        "file": "listing_pages/0022.json",
+        "sha256": "3d549273d3eee2492b468d3f17e59a2813627b9985f42ff132c840f2c70c8af4",
+        "source_url": "https://www.avito.ru/sankt-peterburg/vakansii/kassir-ASgBAgICAUTUzBGu64YD?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6IkRCRjNLb0VZVEZvRXcxd1YiO32J9ApmJgAAAA&localPriority=0&p=22"
+      },
+      {
+        "file": "listing_pages/0023.json",
+        "sha256": "c449ad5a35435f1f7f46006c01f5ce03bb9a1b59ebc01c5ca84d3231f414a184",
+        "source_url": "https://www.avito.ru/sankt-peterburg/vakansii/kassir-ASgBAgICAUTUzBGu64YD?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6IkRCRjNLb0VZVEZvRXcxd1YiO32J9ApmJgAAAA&localPriority=0&p=23"
+      },
+      {
+        "file": "listing_pages/0024.json",
+        "sha256": "af1c130afef959545fc72dc29e9d794c3356d0fe49b820eb3b2a2f3f21aedfa4",
+        "source_url": "https://www.avito.ru/sankt-peterburg/vakansii/kassir-ASgBAgICAUTUzBGu64YD?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6IkRCRjNLb0VZVEZvRXcxd1YiO32J9ApmJgAAAA&localPriority=0&p=24"
+      },
+      {
+        "file": "listing_pages/0025.json",
+        "sha256": "9a1a7a3b02875bb69f72743a7003cf55f3099a4adff98352745c748bbd6347dd",
+        "source_url": "https://www.avito.ru/sankt-peterburg/vakansii/kassir-ASgBAgICAUTUzBGu64YD?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6IkRCRjNLb0VZVEZvRXcxd1YiO32J9ApmJgAAAA&localPriority=0&p=25"
+      },
+      {
+        "file": "listing_pages/0026.json",
+        "sha256": "84a1b118ac4da9131d49c5dee882496a0a26a06ba1d4b1c992b6882160142e18",
+        "source_url": "https://www.avito.ru/sankt-peterburg/vakansii/kassir-ASgBAgICAUTUzBGu64YD?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6IkRCRjNLb0VZVEZvRXcxd1YiO32J9ApmJgAAAA&localPriority=0&p=26"
+      },
+      {
+        "file": "listing_pages/0027.json",
+        "sha256": "031888873bd83117030f525023362e658598c69e46e3c2d0b8eb2ef8eb73564d",
+        "source_url": "https://www.avito.ru/sankt-peterburg/vakansii/kassir-ASgBAgICAUTUzBGu64YD?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6IkRCRjNLb0VZVEZvRXcxd1YiO32J9ApmJgAAAA&localPriority=0&p=27"
+      },
+      {
+        "file": "listing_pages/0028.json",
+        "sha256": "938f24688f7597715a4d4386be52b07e33b4a9459eac53acbe0c87b22a6041a0",
+        "source_url": "https://www.avito.ru/sankt-peterburg/vakansii/kassir-ASgBAgICAUTUzBGu64YD?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6IkRCRjNLb0VZVEZvRXcxd1YiO32J9ApmJgAAAA&localPriority=0&p=28"
+      },
+      {
+        "file": "listing_pages/0029.json",
+        "sha256": "077ddee3250c42341eec7586353fe2f9bf6e2c898a2cc20f121a06341a161dfe",
+        "source_url": "https://www.avito.ru/sankt-peterburg/vakansii/kassir-ASgBAgICAUTUzBGu64YD?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6IkRCRjNLb0VZVEZvRXcxd1YiO32J9ApmJgAAAA&localPriority=0&p=29"
+      },
+      {
+        "file": "listing_pages/0030.json",
+        "sha256": "79e43c3bdb9a0636a6c2ef84a1d46f39fc04ac28e6f6fe12e5963fd59bcc7153",
+        "source_url": "https://www.avito.ru/sankt-peterburg/vakansii/kassir-ASgBAgICAUTUzBGu64YD?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6IkRCRjNLb0VZVEZvRXcxd1YiO32J9ApmJgAAAA&localPriority=0&p=30"
+      }
+    ],
+    "selection_mode": "first_N_unique_on_frozen_listing",
+    "limit": 300,
+    "requested_all_pages": true,
+    "saved_selection_authorization": null,
+    "requested_limit": 300,
+    "available_unique": 300,
+    "listing_end_reason": "confirmed_end",
+    "available_listing_exhausted": true,
+    "continuation": null,
+    "candidate_limit": null,
+    "created_at": "2026-10-29T07:16:06.416553+00:00",
+    "instruction_version": "1.7.35",
+    "extractor_sha256": "bd17892bcc632a1c0bb3f14b91a0a1856ac96c1b2960f82597f41c4aa4723a41",
+    "instruction_sha256": "c0852fb70c2430e9c84d838a91fff52cf03533fbf45e987426a139777b4e05fa",
+    "code_git_commit": "4439055b0362d8727a5e0f01fe53470c72900c94",
+    "setup_seconds": 140.2262867919635,
+    "live_route_verified": false,
+    "execution_model": "gpt-6-luna",
+    "automation_sha256": {
+      "Scraper/skills/collect-avito/references/top-professions.json": "e3e72638b17b48f825ec6f2fefb963662494f679ae4b0cef1bebedba889610dd",
+      "utils/title_flags.py": "9c9456cb3fb0df5791630049c9c85987381091dbb9ba18bc3fb3314b8cccbeb6",
+      "Scraper/extract.js": "bd17892bcc632a1c0bb3f14b91a0a1856ac96c1b2960f82597f41c4aa4723a41",
+      "Scraper/skills/collect-avito/SKILL.md": "c0852fb70c2430e9c84d838a91fff52cf03533fbf45e987426a139777b4e05fa",
+      "Scraper/skills/collect-avito/scripts/run.py": "95f1498f6a8d7b0a9064bb8d0c7716b1c5a5f2ae9a2eef18874321e2c46df78c",
+      "Scraper/skills/collect-avito/scripts/browser_batch.js": "aa9ac31e38d07e72ee0737def2a35dda79b376166315b7388a7fd471f0e14136",
+      "Scraper/skills/collect-avito/scripts/check_capture.py": "aa746849317f9768af5aae08b394b9379539f6e268c1fc69e4ed13bd06a4657f",
+      "Scraper/skills/collect-avito/scripts/failure_log.py": "5a28324829d546ce87b662b9e6e4b48cc4ba5aa5d13114483975d2c407b293e6",
+      "Scraper/skills/collect-avito/scripts/preflight.py": "661708892946a68dec53c986df496e76dd67c314021af2567f760b740bb3ce3d"
+    },
+    "uncommitted_automation_files": [],
+    "partition": {
+      "parent_run_id": "20261029_spb_cashier_all",
+      "parent_plan_sha256": "76a8b7dd1ae309b904e6d47f3c8b4a56dd5cb833cf59889e8bfc0540850a405d",
+      "parent_queue_sha256": "9d395a5276c91a8c61d5bbb751b07e44645f042d44389d6dabd4de049dc68cd7",
+      "index": 1,
+      "batch_size": 300,
+      "start": 0,
+      "end": 300,
+      "total": 1007,
+      "siblings": [
+        "20261029_spb_cashier_part_01",
+        "20261029_spb_cashier_part_02",
+        "20261029_spb_cashier_part_03",
+        "20261029_spb_cashier_part_04"
+      ]
+    },
+    "city_anomaly_policy": "blank"
+  },
+  "coverage": {
+    "planned": 300,
+    "accepted": 300,
+    "unavailable": [],
+    "unique_ids": [
+      "8410666776",
+      "8328593219",
+      "8419691890",
+      "8218012552",
+      "8437663115",
+      "8557577322",
+      "8517222154",
+      "8458258708",
+      "7978911382",
+      "8239263302",
+      "8291432056",
+      "7754217408",
+      "8332382688",
+      "7336085266",
+      "8184705020",
+      "8201631363",
+      "8285686152",
+      "8347053195",
+      "2235842456",
+      "7293963786",
+      "8276292798",
+      "8470109019",
+      "8278387167",
+      "8577523013",
+      "8388085423",
+      "8158534182",
+      "8405285669",
+      "8512714222",
+      "8331328918",
+      "7296948409",
+      "3261161811",
+      "8400045259",
+      "7951356632",
+      "8414751697",
+      "8262609238",
+      "8513495481",
+      "8319953560",
+      "8207407279",
+      "2674735304",
+      "8349551848",
+      "7953259001",
+      "8251910993",
+      "8405516285",
+      "3349559907",
+      "8088666052",
+      "8300681759",
+      "8313988435",
+      "8357445083",
+      "8358212080",
+      "2969604311",
+      "8243776100",
+      "8415722960",
+      "8387844976",
+      "8370735951",
+      "7257560547",
+      "8470491299",
+      "8393561239",
+      "8126640490",
+      "8390929879",
+      "4198173797",
+      "7514359637",
+      "8303294893",
+      "7506423671",
+      "3588755455",
+      "2971866871",
+      "8394384607",
+      "8338579401",
+      "7843220562",
+      "5058284689",
+      "7695213678",
+      "8517721825",
+      "7981267506",
+      "8401751647",
+      "3758090427",
+      "8470163358",
+      "8482062234",
+      "7806193348",
+      "3741573174",
+      "8369439337",
+      "8372559237",
+      "8489074488",
+      "8458915522",
+      "8410561188",
+      "8469831682",
+      "8227414048",
+      "8368473978",
+      "7987373512",
+      "8108498349",
+      "7261765822",
+      "7278386153",
+      "8352012511",
+      "8453026257",
+      "3784863402",
+      "8226365511",
+      "7687478284",
+      "3361339722",
+      "3174036617",
+      "8250654736",
+      "8383552843",
+      "8449665922",
+      "8143802468",
+      "8577675698",
+      "8338058183",
+      "3049410844",
+      "8459824383",
+      "8575250023",
+      "8304731831",
+      "8422156698",
+      "8349376387",
+      "8427354694",
+      "8482004367",
+      "8226959817",
+      "8422714042",
+      "8439987799",
+      "8401673928",
+      "8344002583",
+      "7274737415",
+      "8416063367",
+      "8512566138",
+      "8368822748",
+      "8400774461",
+      "8426072892",
+      "8453238356",
+      "8366745413",
+      "8343035880",
+      "8003165712",
+      "8167920680",
+      "7953160403",
+      "8314291170",
+      "8272809876",
+      "8545138548",
+      "8378140961",
+      "8406035392",
+      "8451004655",
+      "8325892764",
+      "8521454016",
+      "8361953633",
+      "7639200992",
+      "8346910382",
+      "4509887790",
+      "8271368990",
+      "8330849036",
+      "8126896932",
+      "8208388388",
+      "3584986617",
+      "8327879027",
+      "8315681009",
+      "8386422383",
+      "8340164271",
+      "8252121423",
+      "8348416314",
+      "8524911825",
+      "8512275386",
+      "8372724795",
+      "8545399211",
+      "7655569673",
+      "8306544559",
+      "8233542723",
+      "8230440793",
+      "1946692970",
+      "8421990048",
+      "8366256312",
+      "8408302336",
+      "8085663888",
+      "7751350481",
+      "8482467354",
+      "8344734075",
+      "8480662273",
+      "8387964795",
+      "4654015202",
+      "8444893837",
+      "8315982689",
+      "4993441252",
+      "4061935940",
+      "8441464543",
+      "8288007446",
+      "4091389969",
+      "7766507641",
+      "8466972968",
+      "8296121085",
+      "8049379227",
+      "8264784506",
+      "8076119845",
+      "8272412035",
+      "8467601204",
+      "8337097890",
+      "7471263689",
+      "8223689843",
+      "8253350059",
+      "8315219827",
+      "7690129775",
+      "8296219251",
+      "8400928487",
+      "8481801402",
+      "8410061013",
+      "4436009539",
+      "4013437015",
+      "8324344574",
+      "8332242198",
+      "7902204231",
+      "8303435747",
+      "3467896669",
+      "8524942448",
+      "8142096004",
+      "8470630300",
+      "8337766855",
+      "8074277320",
+      "8060018341",
+      "8332719791",
+      "8429221986",
+      "8315423792",
+      "4747587302",
+      "8438628464",
+      "7476044008",
+      "8485310550",
+      "8341250953",
+      "8196215153",
+      "8458332949",
+      "8391223420",
+      "8239964397",
+      "8025455343",
+      "8323203189",
+      "8264137442",
+      "8338526165",
+      "8346558466",
+      "8481974946",
+      "8439576374",
+      "3165353832",
+      "7811871132",
+      "8407963811",
+      "8543512616",
+      "8380907011",
+      "8480979232",
+      "7726619022",
+      "8435320949",
+      "8296276709",
+      "4874181239",
+      "8300239378",
+      "7581262768",
+      "8339631957",
+      "8450993286",
+      "8485167411",
+      "8363661739",
+      "8238833516",
+      "8306519393",
+      "8458840366",
+      "8397782203",
+      "8251894989",
+      "8261653665",
+      "4374843259",
+      "4564203229",
+      "8407035224",
+      "8441342441",
+      "8323554965",
+      "8283398810",
+      "8332491976",
+      "7810635199",
+      "8235488560",
+      "8458822302",
+      "8347990467",
+      "8300174474",
+      "3171198091",
+      "8485496660",
+      "8207202970",
+      "8330892235",
+      "8407808102",
+      "8450816243",
+      "3937576523",
+      "8382478788",
+      "8094163041",
+      "2831837231",
+      "8376198305",
+      "8374755649",
+      "8466916059",
+      "7722332120",
+      "8350395169",
+      "8366618514",
+      "8364708063",
+      "7330277856",
+      "7743723098",
+      "8480807775",
+      "8515132821",
+      "8323275951",
+      "4754667691",
+      "8426646722",
+      "8386873932",
+      "8387123350",
+      "8342664138",
+      "8323704604",
+      "8387097326",
+      "7341036466",
+      "8355886681",
+      "7417717511",
+      "8270315442",
+      "8291855321",
+      "8439348417",
+      "8323169215",
+      "8144298595",
+      "8378029163",
+      "4466338947"
+    ],
+    "errors": [],
+    "partial": null,
+    "limitations": [
+      "Visible rendered parameters only; enrichment not run; placement on site; live route unverified"
+    ]
+  },
+  "timing": {
+    "setup_seconds": 140.2262867919635,
+    "capture_seconds": 565.3154844173696,
+    "review_export_seconds": 0.9638746250420809,
+    "publication_seconds": null
+  },
+  "review_model": "gpt-6.1-terra",
+  "automation_changes": [
+    {
+      "file": "Scraper/skills/collect-avito/scripts/run.py",
+      "reason": "One authorized pending-ID diagnostic after confirmed CDP recovery, preserving stopped ledger and error evidence",
+      "validation": "python3 -m unittest Scraper.test_pagination Scraper.test_failure_log; 24 tests passed"
+    },
+    {
+      "file": "Scraper/skills/collect-avito/SKILL.md",
+      "reason": "Document one authorized pending-ID diagnostic after confirmed CDP recovery",
+      "validation": "python3 -m unittest Scraper.test_pagination Scraper.test_failure_log; 24 tests passed"
+    },
+    {
+      "file": "Scraper/test_pagination.py",
+      "reason": "Test bounded one-shot diagnostic, preservation and stopped ledger",
+      "validation": "python3 -m unittest Scraper.test_pagination Scraper.test_failure_log; 24 tests passed"
+    }
+  ],
+  "profession_correction": null,
+  "post_capture_automation_sha256": {
+    "Scraper/skills/collect-avito/SKILL.md": "d6a57a63c4b96575b0d11b1d67c0a635655d60a7696dc9def9abfcbbc9d23781",
+    "Scraper/skills/collect-avito/scripts/run.py": "a534d0fad6a73f752b44986b70154d367639a540b78f403dbd280158269d5cb2"
+  },
+  "files": {
+    "Data/avito_runs/20261029_spb_cashier_part_01/exports/vacancies.json": {
+      "bytes": 1283536,
+      "sha256": "1ce6782884e298c156688d6e25748a4a10a2d5b713ba5c2b0610c4cbae83c016"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/exports/vacancies_flat.csv": {
+      "bytes": 909779,
+      "sha256": "df10e2f044729a809db7188bb89c8c7b4d76397587aa4fead0c0bca2aa8cb839"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/exports/validation.json": {
+      "bytes": 155,
+      "sha256": "796254a22ea31c19ac59ee5651b46ba59bca70c638e198b072a8fb1831cb288b"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/listing.json": {
+      "bytes": 26189,
+      "sha256": "708d991620b651aff99b0a7f7fee92e840b33d6845b6a10214237563d9206dc0"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/listing_pages/0001.json": {
+      "bytes": 26189,
+      "sha256": "708d991620b651aff99b0a7f7fee92e840b33d6845b6a10214237563d9206dc0"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/listing_pages/0002.json": {
+      "bytes": 27103,
+      "sha256": "ac6bfc6ec2441c5ca330cb088100cec59e1daf8ce9f073b5c696d826f515bf2b"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/listing_pages/0003.json": {
+      "bytes": 27128,
+      "sha256": "38efc278ba704ca2a966377ea70fbc539f81cefd007b69265bdf23ac31eb93a7"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/listing_pages/0004.json": {
+      "bytes": 27120,
+      "sha256": "b1fd50a354d808f6dc9c741f000fd19bb6542c61dd90b33119f323da39f2c788"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/listing_pages/0005.json": {
+      "bytes": 27450,
+      "sha256": "6cd3292e244e26097e2fe5ab318e75ae4013bd3c65b4075a0cd21b60bfea8e2f"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/listing_pages/0006.json": {
+      "bytes": 27713,
+      "sha256": "1bba987f4f1653a7dbd42a0d9d54fb75d1c095907dc6ed843b0f0eaf3d89ddd7"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/listing_pages/0007.json": {
+      "bytes": 27719,
+      "sha256": "a951ffb82a97db7a24d3bb542a4863d166c4e30105a7f435b58579a7d7b7c4a4"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/listing_pages/0008.json": {
+      "bytes": 27239,
+      "sha256": "deffea469be3e639b21ea8275dc3bd0528a4b7402e008ee1eb339185e668961c"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/listing_pages/0009.json": {
+      "bytes": 27451,
+      "sha256": "74b5679ceb7fd868930a328fa9c56318c3bd34bbf06552b0345447edeac493a4"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/listing_pages/0010.json": {
+      "bytes": 28116,
+      "sha256": "07c64010f07960076ac32e6355fde6d3b52e79193fcf538fef17bd4f59e0753c"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/listing_pages/0011.json": {
+      "bytes": 27251,
+      "sha256": "1ee4eca6993b9be2b1cc01aab1161ac99623afde621cc57dbfa092c5aedf27fb"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/listing_pages/0012.json": {
+      "bytes": 27163,
+      "sha256": "2836b8af1397bccbbc012ffbbcd33a7b622a6c94212e4f1113735a809a594af3"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/listing_pages/0013.json": {
+      "bytes": 26715,
+      "sha256": "58b4a26be9e2497be0f1e2bf1be31fc10789aa4da755a6e58fe4af562bc45155"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/listing_pages/0014.json": {
+      "bytes": 27179,
+      "sha256": "28da3f965ac193521b6d2422ee9d72c66bba4002660cd15813d70364d430d270"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/listing_pages/0015.json": {
+      "bytes": 27619,
+      "sha256": "4ae29d7acbecfe792e99d5a66014ce836064b8a077dc21a85edba6653efff825"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/listing_pages/0016.json": {
+      "bytes": 27450,
+      "sha256": "88eda8fce2224d1c8f98497a8bb418f404041d1fc9e75f95fec98b22c68ebca8"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/listing_pages/0017.json": {
+      "bytes": 26945,
+      "sha256": "ac88e3b4125710c47c727ee0322c9d8bfc2cf57b878d2af983eda960c7a0fc11"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/listing_pages/0018.json": {
+      "bytes": 26677,
+      "sha256": "ddfbd072f2d715a90f57bfabeed2c2419252d14be8c6ed8a32ebdbadbe33ccae"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/listing_pages/0019.json": {
+      "bytes": 27030,
+      "sha256": "c9112888c58bc2e7badeb593825cff35278fe155f56e6d00e82253d90330fea6"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/listing_pages/0020.json": {
+      "bytes": 27134,
+      "sha256": "fcf64c5e47fcfcebf4a102d160c62bd2f599e4a3cd5f32ad97fdb25719f30d34"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/listing_pages/0021.json": {
+      "bytes": 27035,
+      "sha256": "2cf4331bc462ac9004bf923ebe4f4b556c20bb292c1852831ffdf0dbd4a74163"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/listing_pages/0022.json": {
+      "bytes": 26645,
+      "sha256": "3d549273d3eee2492b468d3f17e59a2813627b9985f42ff132c840f2c70c8af4"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/listing_pages/0023.json": {
+      "bytes": 26656,
+      "sha256": "c449ad5a35435f1f7f46006c01f5ce03bb9a1b59ebc01c5ca84d3231f414a184"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/listing_pages/0024.json": {
+      "bytes": 27282,
+      "sha256": "af1c130afef959545fc72dc29e9d794c3356d0fe49b820eb3b2a2f3f21aedfa4"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/listing_pages/0025.json": {
+      "bytes": 26835,
+      "sha256": "9a1a7a3b02875bb69f72743a7003cf55f3099a4adff98352745c748bbd6347dd"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/listing_pages/0026.json": {
+      "bytes": 26863,
+      "sha256": "84a1b118ac4da9131d49c5dee882496a0a26a06ba1d4b1c992b6882160142e18"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/listing_pages/0027.json": {
+      "bytes": 26687,
+      "sha256": "031888873bd83117030f525023362e658598c69e46e3c2d0b8eb2ef8eb73564d"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/listing_pages/0028.json": {
+      "bytes": 26957,
+      "sha256": "938f24688f7597715a4d4386be52b07e33b4a9459eac53acbe0c87b22a6041a0"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/listing_pages/0029.json": {
+      "bytes": 26870,
+      "sha256": "077ddee3250c42341eec7586353fe2f9bf6e2c898a2cc20f121a06341a161dfe"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/listing_pages/0030.json": {
+      "bytes": 26596,
+      "sha256": "79e43c3bdb9a0636a6c2ef84a1d46f39fc04ac28e6f6fe12e5963fd59bcc7153"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/provenance/parent-plan.json": {
+      "bytes": 14274,
+      "sha256": "76a8b7dd1ae309b904e6d47f3c8b4a56dd5cb833cf59889e8bfc0540850a405d"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/provenance/parent-queue.json": {
+      "bytes": 491675,
+      "sha256": "9d395a5276c91a8c61d5bbb751b07e44645f042d44389d6dabd4de049dc68cd7"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/queue.json": {
+      "bytes": 146547,
+      "sha256": "69033783f57189f8f4b45a664332e5e53ea10aa5ec495d043a74fc27b3262385"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/1946692970.json": {
+      "bytes": 8561,
+      "sha256": "ba1451ef568bf24dc3ed4b6819c079f4b36bb4f2e3005fc9f3d0e83b32e219e9"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/2235842456.json": {
+      "bytes": 8076,
+      "sha256": "98a288fc50e0e2cb0e59e8250bc8bc3f7635a88d79ff696025ee4ba1ff198345"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/2674735304.json": {
+      "bytes": 8254,
+      "sha256": "7744ce7beaca524fe28c33f37ad48b4ffddcec6578fdf5085da1d5ea50935278"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/2831837231.json": {
+      "bytes": 7208,
+      "sha256": "ae94183b595c6f5787f771f2786d10fd8ececcbac8239ffcbd76fa64f6b9f926"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/2969604311.json": {
+      "bytes": 7505,
+      "sha256": "2f9c3cd8f901f58d3ed8e83fd1b564e60f0c0f7bd49cccce81abe4e374daa277"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/2971866871.json": {
+      "bytes": 9771,
+      "sha256": "32fe44a42795433e15625e05d6f2624db7229864dfb567eea5b6f4d86eb2ae4b"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/3049410844.json": {
+      "bytes": 8388,
+      "sha256": "4c2cac50d640cf24f9a464ac7ebb97ca785c50b54dcb92ccc83094478de37826"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/3165353832.json": {
+      "bytes": 5814,
+      "sha256": "f4c3d109cfc14f92e282d0feadcc3cde39014ee2caf31cc91ea0309e8a48fadb"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/3171198091.json": {
+      "bytes": 8975,
+      "sha256": "f7f3601184928df31e54e2cdca0bf101934af634608c79e137593f910b35e8dd"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/3174036617.json": {
+      "bytes": 14097,
+      "sha256": "b11e57b97e8c535f4dd7c3e513497b6df8fc26860196aca8d6ae2f326c747310"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/3261161811.json": {
+      "bytes": 12601,
+      "sha256": "2dc3edafb1cc26e8d0559d712f2f928554221d3b51db1ebf52265225f384f655"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/3349559907.json": {
+      "bytes": 10394,
+      "sha256": "5c4d5bc5e1defeacc25b322c0cda9259c83f4f2fd4b95790f1b63f5dbc7bb398"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/3361339722.json": {
+      "bytes": 13592,
+      "sha256": "7b9b200911444d8c917fe2d6b6c2c7cebc848ce26b600bd6a8bc46d66ea0de7c"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/3467896669.json": {
+      "bytes": 10053,
+      "sha256": "74bef427abe97a7697a6ea65709f98d636f6ef5224360edef035df7801d7d1b9"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/3584986617.json": {
+      "bytes": 7860,
+      "sha256": "97d9787ec1208d0b2851f5fcbd16a1332434a913dce34352b17e06f2e6bd8a05"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/3588755455.json": {
+      "bytes": 6925,
+      "sha256": "3db570f78655ef767cebc0876192dd9743be58a01f571608fe6df6496790e511"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/3741573174.json": {
+      "bytes": 14269,
+      "sha256": "0fd7dc5fa83fa3f92bf7500635bf351a0731505c7a94be6b627e412be3135937"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/3758090427.json": {
+      "bytes": 7244,
+      "sha256": "2170dba5246f116a390550beafea7890442324d4b42d0ccb61af2c1929b46ed0"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/3784863402.json": {
+      "bytes": 11291,
+      "sha256": "c6122769ba69f988623fdbb1c84e31b1085705986f9f0dfab9dc3205927315b9"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/3937576523.json": {
+      "bytes": 12865,
+      "sha256": "ef9f93741f233913a4b1165aeeb85ed41de8e3206d790a2649408b61ae31a2af"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/4013437015.json": {
+      "bytes": 7464,
+      "sha256": "0f9c3ef905d3a4b673dab2ed9a01bc734fadadcece54894ce124b2783a1a852e"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/4061935940.json": {
+      "bytes": 8859,
+      "sha256": "01f88db8eb7b1662a225164af41eba25ab7197b3ddc33a2da587511e2ac4c095"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/4091389969.json": {
+      "bytes": 11649,
+      "sha256": "ea80d76b4e0d69b8e5972d598c4202a4d678ae5f283486cb3697e67e12821f02"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/4198173797.json": {
+      "bytes": 18860,
+      "sha256": "d65862377317091d8bc618b768e440f4c5a3c2e325a13414bdf346056bb46861"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/4374843259.json": {
+      "bytes": 10306,
+      "sha256": "a164e8808c63ba0483f4c397560eb04c7f4b6c2117677ac91f56e6e672f6768c"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/4436009539.json": {
+      "bytes": 10072,
+      "sha256": "10a2a81cdfde7af9bb8be051a71a766d885146aa5ccbba7c45c26a4f7dc35ff5"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/4466338947.json": {
+      "bytes": 7165,
+      "sha256": "57942f973dd0c0c4024bc8f63b5a2c70b399236f587ac787c23d74f57e1f5208"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/4509887790.json": {
+      "bytes": 10406,
+      "sha256": "b71f86041a32456fc0a4a09b2b6bbf6d7d7e680768ce14ab203435dc82fe3bee"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/4564203229.json": {
+      "bytes": 10194,
+      "sha256": "087740ca513459af449d5b01d2783ad4855ad7d29c670fb9837f168e496135f3"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/4654015202.json": {
+      "bytes": 7726,
+      "sha256": "2f38469da8b72712a03f384eb8807161790c8415e31fe13a55ff6ed67bc7fe53"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/4747587302.json": {
+      "bytes": 7966,
+      "sha256": "44ecf29fff14b531c8d1dd4f3a46c13f28b3227083d06bf1457f3a804ef5cac2"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/4754667691.json": {
+      "bytes": 14081,
+      "sha256": "5070844c939dbd63492b345253195858405788499f70ef4449cf552b58ae6573"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/4874181239.json": {
+      "bytes": 14483,
+      "sha256": "7df8751474b0958c491ab46e1558a9db2d7f7e2c1297794db0f2218c082267b3"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/4993441252.json": {
+      "bytes": 9710,
+      "sha256": "2fbedce1ba730d7b6fff2cb4e53c55a94b64eb968b9c34ff4c87d2bd50fa87b3"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/5058284689.json": {
+      "bytes": 11897,
+      "sha256": "3117ca9561a9b9e079e58c0dd8f61e8fc511f56b618d9db47f04518f13ebd5c4"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/7257560547.json": {
+      "bytes": 9929,
+      "sha256": "c536c4e4c79db6fdeec3ce053b061857001581d28cd2f1978afe3c17fea34677"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/7261765822.json": {
+      "bytes": 10224,
+      "sha256": "3a9ebf2192d68f238961883faebbf6c4de41dc32bd3dbbcb4e4403b2529d00d5"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/7274737415.json": {
+      "bytes": 12407,
+      "sha256": "2efdd023975def5f1f4adb24fc8624c1bf3c228ceaaff833eb2a6ba83795c35a"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/7278386153.json": {
+      "bytes": 10290,
+      "sha256": "21e29eec302565fe65fd4ea5218800b5050225e1f14c8f362ae4859e7ea21bac"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/7293963786.json": {
+      "bytes": 9279,
+      "sha256": "4cb48b14ddefe3ec98a2aa954c6a5d45fbb8124b6c7e5bf743879acfd15a774c"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/7296948409.json": {
+      "bytes": 14199,
+      "sha256": "11d2a544e0fddeb389af6b5fcb2595d7a315d6afef6ea07bb9e5aec96469e99d"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/7330277856.json": {
+      "bytes": 8265,
+      "sha256": "1600a37131a7c057f6d12503db4241e6e1cfcda2383993479cf44cf3ec8faf70"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/7336085266.json": {
+      "bytes": 13543,
+      "sha256": "0f41a0756822828bf8ace148035d224629b00ca843c27adc054fd366aa1ae7b9"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/7341036466.json": {
+      "bytes": 11071,
+      "sha256": "c8322d00d53e9a8dbcc2896bae7af5e969cd530716210ab2d838525dbe2067c8"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/7417717511.json": {
+      "bytes": 8043,
+      "sha256": "e8e23411eddb7cd9762049b28d61fb9c6697dcc44f4f5108caf930ef746c7fd8"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/7471263689.json": {
+      "bytes": 10413,
+      "sha256": "17611b99656202d934d9462943e33d1aff65c245ec79a7654aa4112f95eed730"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/7476044008.json": {
+      "bytes": 12155,
+      "sha256": "c7d94f9dd739f605837200bc9a284183067368d34ee4849e6e503ef08f923ace"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/7506423671.json": {
+      "bytes": 14708,
+      "sha256": "313c8eea75c4e4357c8cdbce14726b0f61d66782f31f1004d2788907c902b275"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/7514359637.json": {
+      "bytes": 11682,
+      "sha256": "ac4332d5707e1b88cd062193150c04c3f2a2e43a260847b3272e3211c0d76cf7"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/7581262768.json": {
+      "bytes": 9585,
+      "sha256": "f9d36deb04d97b41de2b54621c034dac95e90cb92f3226e5b616d313e4fc9bdf"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/7639200992.json": {
+      "bytes": 17131,
+      "sha256": "e846eca28cf07f81b714dcd97d48fbe02230e72d3a45fe4232e6e49bc24ebaaf"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/7655569673.json": {
+      "bytes": 13804,
+      "sha256": "9e35f5661382add857adf46a5463b0c1f47123a14794d67a26562d039e1403b0"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/7687478284.json": {
+      "bytes": 9203,
+      "sha256": "dd152e85e4697c93f63fae5677216d8d5bb3d1550429d9e8a465114e345be546"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/7690129775.json": {
+      "bytes": 8139,
+      "sha256": "3e45b69bacf7b9fb9de9e0264fb3ba4edcdf635594c8255637b0899335b66371"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/7695213678.json": {
+      "bytes": 16590,
+      "sha256": "8bfe61d4c9d1f7efa089b689d1b54abb34ea40560c59e3fc676ecd252ae558c5"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/7722332120.json": {
+      "bytes": 15362,
+      "sha256": "2bcb48c823883c4c15f8d03da6fe586561f904f567557c845ea666974e9caca9"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/7726619022.json": {
+      "bytes": 12149,
+      "sha256": "81aec81796c9bcaa525e2073367c1f57f817ece656cd504003b72a6c64808e8e"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/7743723098.json": {
+      "bytes": 13892,
+      "sha256": "7e972f278919cde883fefd0b18c8bf30c03a6c195dced91f38014d1e429d865c"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/7751350481.json": {
+      "bytes": 14404,
+      "sha256": "0096afd77ca23ba62bc7804b82760e42398b1a0aae4a93d627a6f2e7b02109a7"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/7754217408.json": {
+      "bytes": 8522,
+      "sha256": "d92810f9f7975ff795724256d00ec86e21679ce32e82f7ee7a69c06269c26c3d"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/7766507641.json": {
+      "bytes": 14527,
+      "sha256": "62ccedd48e873a9f527b17ce30bc4bed857c7b89d64d1af8c3dcbc850359cc9e"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/7806193348.json": {
+      "bytes": 13904,
+      "sha256": "d9801603662753296a76a6a863a0bc1957b77d1d779cbd306871375f01930cad"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/7810635199.json": {
+      "bytes": 10347,
+      "sha256": "2fedc0fd3485511ad0f97c86709ba939b28b733f6e2cc508be113e29e3d35e63"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/7811871132.json": {
+      "bytes": 11300,
+      "sha256": "10753b46d90d0cbed39e33a0eaf03f8f56e087e65e3996db8f7e46de83305b52"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/7843220562.json": {
+      "bytes": 14286,
+      "sha256": "e96d578e3452a1c297ff06eac31958b3c510e05089c79652bb5db81843314b00"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/7902204231.json": {
+      "bytes": 10658,
+      "sha256": "0dac2493611884745e206a9ecee55a5915e02192b4d62c298a73cfaef9419809"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/7951356632.json": {
+      "bytes": 11992,
+      "sha256": "ae00df9b9d43b662657e85fa4d27639bd459e5928b5bd894a7035e764ea806dc"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/7953160403.json": {
+      "bytes": 10467,
+      "sha256": "b6598bf19dce6e4d280982a513c38b966ccd97c89ea2c59f07dfb2af89ef0f5d"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/7953259001.json": {
+      "bytes": 10417,
+      "sha256": "89afbf47271b266727b802a0dbea1f215669a9712d51da324f3d107b1d3a1fea"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/7978911382.json": {
+      "bytes": 12287,
+      "sha256": "cf6106ff3128a2c5b67bd4ad99ab368834bd9cab28d6fdab72f5f3842c8844bc"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/7981267506.json": {
+      "bytes": 13536,
+      "sha256": "9a39d02cee73b7c253e406d72dd5d9c25fb6e02cd9ec7dba91afd984d4ab9802"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/7987373512.json": {
+      "bytes": 13702,
+      "sha256": "6b8a7601782990558bb95374905d1815b48db7b315bbd47ae46a27f6efeb5d69"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8003165712.json": {
+      "bytes": 8315,
+      "sha256": "89b95d24f42f0d35413c5045b4c4a04721546747765dec91a6afa68504f0a156"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8025455343.json": {
+      "bytes": 7788,
+      "sha256": "f5131e805e459c53eaeb0f9b5d95bc9729d982adfa0ceec157b4a3f2012ef2dc"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8049379227.json": {
+      "bytes": 12460,
+      "sha256": "be5b20070706d0f7d1ce5945a3121037eb3f3c1c8d0e232d9e790bca557717eb"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8060018341.json": {
+      "bytes": 24077,
+      "sha256": "01b69508c5bc2c81141174d0c50e43d896c6247fc3d2b67be54ed20f16487aa7"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8074277320.json": {
+      "bytes": 12920,
+      "sha256": "e17bc3a22990b787a295f726f7f042784518276a1ea879aec2abab5f68b9c675"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8076119845.json": {
+      "bytes": 11132,
+      "sha256": "2b7b136611c1e2377ce7f855cf3f2344a59fc2eba9b64e8e72d9c9d52d180356"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8085663888.json": {
+      "bytes": 13266,
+      "sha256": "adfe60b5991a24b688aac29a508be151a42ae48a46ee9d80f6489fdd629a8814"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8088666052.json": {
+      "bytes": 12419,
+      "sha256": "045f8796cc753989437f70c40c0ec41c641bb10640456adaba3fbaaeebc8224b"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8094163041.json": {
+      "bytes": 10923,
+      "sha256": "5aed2206134b3a3530d137804829adc22f107b18d7012b632a56ae850361aac6"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8108498349.json": {
+      "bytes": 9633,
+      "sha256": "b958500e38e7ab0109b997d2c221718d4a804fa5683cacad461f89d90b8fedd3"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8126640490.json": {
+      "bytes": 9103,
+      "sha256": "5ccdc4a83a8faef25d8196c7971ed3883230bc5fdb4bf2bde6535c6742ad4b66"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8126896932.json": {
+      "bytes": 10993,
+      "sha256": "8c4740cda98afb9259cc0631eb7f59c9f21f25b26032def381414ef7788303c9"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8142096004.json": {
+      "bytes": 8519,
+      "sha256": "7ee6325425296b0f66dbe8f7f0fa3bd882e84c709d559f703739037253077ad8"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8143802468.json": {
+      "bytes": 10851,
+      "sha256": "b784a113839f4e54f0015ad53dc127ad369fe158558d03cc3ed077718ded1394"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8144298595.json": {
+      "bytes": 11918,
+      "sha256": "fed63edb0d159f0cdc46f7c409430284768116d287085206794a70d74d0f732e"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8158534182.json": {
+      "bytes": 13894,
+      "sha256": "fb2780da792de8513986e0a5838bb72601c8eb717c81d87fce3ef57e14839dec"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8167920680.json": {
+      "bytes": 6284,
+      "sha256": "4856175818c217bc4a89e94094e8007a2013e9861d61140cff67c6835a13e1f4"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8184705020.json": {
+      "bytes": 8828,
+      "sha256": "56bc6c75c48ce120622cda73046787ae2379ebd51d55d79f39726ce06876b277"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8196215153.json": {
+      "bytes": 11102,
+      "sha256": "d1bcb1d448366513702ea6d75e8f90dbb718fd3bd09a3ad95ad37e5c6f483d17"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8201631363.json": {
+      "bytes": 6566,
+      "sha256": "92ee3d795757c25c80cc77b8414ca5188a7db4f9c03bf7428b21298e2adbad0b"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8207202970.json": {
+      "bytes": 14577,
+      "sha256": "03141613860f4e11f5f1adcc7b2bd8ce836f0fa2da1de89fc0930047755d04fa"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8207407279.json": {
+      "bytes": 15317,
+      "sha256": "6b11ccfd763a024a394e1313e805b1e62842185bb6db1f657cdca151784b89f2"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8208388388.json": {
+      "bytes": 8538,
+      "sha256": "e93cce6a31a3c7c6fcb247b309d127fc8a684ec83d179bb8ea4994691723a411"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8218012552.json": {
+      "bytes": 14218,
+      "sha256": "632ee9610539e3786d7b34f4476763d5b06badc246aa36958cade0d686f47978"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8223689843.json": {
+      "bytes": 21324,
+      "sha256": "b7db8ee71f8c44078ddeaa88086515cb95f7d2604682b602d92b9a8590eaad98"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8226365511.json": {
+      "bytes": 12304,
+      "sha256": "5490160b2fc9381efd70ae98c0da5d7be234898dfed9c8495ee7502b58db9fb0"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8226959817.json": {
+      "bytes": 12290,
+      "sha256": "b3828c79613670f4fc55491429adfcdb15dc716a70e6e029bcc53b940f31f9fc"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8227414048.json": {
+      "bytes": 12093,
+      "sha256": "1b9410931aa9ef6debf40d98eac761080f17a2d01e2ba640f98af94d4d2aa43c"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8230440793.json": {
+      "bytes": 8695,
+      "sha256": "b42477ab12e0b982068ee9f42a96b4cb407c44e968c3bc65a9dbf441d1d33e45"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8233542723.json": {
+      "bytes": 9850,
+      "sha256": "01656327aade9ae5184f5034b7dd6f98edc57a81e8cf8179508675f3e3daccc9"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8235488560.json": {
+      "bytes": 12492,
+      "sha256": "0be71802a3a1f0b70538babd7d9e77323d5a924ba271e94d31e192d38121deee"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8238833516.json": {
+      "bytes": 8125,
+      "sha256": "b404637ce5ae7530265210d1c9936c8b50afd4839d57eff7005aa0a59ac451e1"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8239263302.json": {
+      "bytes": 9115,
+      "sha256": "d3ca154a49376a8095dbcf5cfb328b02289a9cb6829a6572948d0c3f5c61f019"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8239964397.json": {
+      "bytes": 8504,
+      "sha256": "34af755238420357447c3aef6eab26ac9e22e4f1b7f5e3be5f610480ac454ade"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8243776100.json": {
+      "bytes": 13459,
+      "sha256": "e21ab6b5a5dfdca8ffce7b618916908eb917594d4ea125f14486727ec5de71a4"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8250654736.json": {
+      "bytes": 7034,
+      "sha256": "b951ec26b5d552597281eddda65d482ee639f83babeebda48c6d9276cc2e1a0c"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8251894989.json": {
+      "bytes": 8801,
+      "sha256": "355c537953d47ce73a7a584813cd9c9d3dc41d9dbaba281f91c5bbf5f2d30328"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8251910993.json": {
+      "bytes": 13985,
+      "sha256": "f4bd3c848bb442f7c73bb116e179106643696e5ab99a0fdc2c0ed874b4c3b238"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8252121423.json": {
+      "bytes": 11430,
+      "sha256": "a062be8c181060a5dc67534e75b26fbc175efa555830717c95b48cbd57e0e23e"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8253350059.json": {
+      "bytes": 9582,
+      "sha256": "1f4fd251f87f8a91bde27a3d80b1572180e8196ff4ff70db7949df501f3c4af2"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8261653665.json": {
+      "bytes": 9582,
+      "sha256": "dc81222237bbff506782fb340c676989dc7a8c76cc7bd97bb232a37cceb9ee1a"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8262609238.json": {
+      "bytes": 12007,
+      "sha256": "1347b43dbbfe16ac95b8d10ed428f4f51bfa48e71ff182b4aa60259fa378412f"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8264137442.json": {
+      "bytes": 8838,
+      "sha256": "1cae1594e4b46d64b82deb2e6fcbcc224f1d47c6be07520d9abb66926d6fe881"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8264784506.json": {
+      "bytes": 8367,
+      "sha256": "da99b1610285ead5d02fcc2e3baeb4b2182972c31b590b07e11b9a0f30d0f4e7"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8270315442.json": {
+      "bytes": 11631,
+      "sha256": "1979b02c19dc7fda2cd799452607984e4d73df8ccf4cfebed15425683a7a9925"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8271368990.json": {
+      "bytes": 9991,
+      "sha256": "a945c11e63bd4402de7ad8f7f76fe3b29df8b083b1c7a8d9e139d77fb303e763"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8272412035.json": {
+      "bytes": 9492,
+      "sha256": "afd25a588a5301a1ab8320e02fe8a5e33a80da5b490e8f2edf5266b5182de1ce"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8272809876.json": {
+      "bytes": 11826,
+      "sha256": "820e7748f7f8e64b5e91f8e4f41a084d3faf27315e7eaad3ecfa808b02da594c"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8276292798.json": {
+      "bytes": 14944,
+      "sha256": "c55674bb57783e30466231f4cb4ca2972dfd04be303a5343da5156cdc051c9ef"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8278387167.json": {
+      "bytes": 11123,
+      "sha256": "048ff34e422ad8e782cb7180b451072ed76a4806bae3a6f440215b183ec78dbc"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8283398810.json": {
+      "bytes": 14974,
+      "sha256": "ad565be7e3bcb310cc1a0020fa2264ac2ea375ddf76b50489980c43ff2f363fe"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8285686152.json": {
+      "bytes": 11400,
+      "sha256": "1c3702e9f8de51512b21039f7cffaadbc38922b55eb9b86168ce4d7faa1ec19b"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8288007446.json": {
+      "bytes": 9997,
+      "sha256": "43c12ce5db5803c05055f49d5d457eaca0ef9f754e271c7c2c35fede3d53a7d2"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8291432056.json": {
+      "bytes": 14806,
+      "sha256": "b60c2b60383a3ca21bdde1e88ef89bd7f16e6c0dd7a3eec54ddcc0bb005ad78a"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8291855321.json": {
+      "bytes": 14947,
+      "sha256": "a200159c1d5bfa4e7b09c8af314883ae2d01c6897d0a7307127efdb4b560e5d6"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8296121085.json": {
+      "bytes": 9484,
+      "sha256": "e16d4a6937ef584dfc7752f50dc86f3356613b9a986cb099f49a395a169d10c5"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8296219251.json": {
+      "bytes": 13492,
+      "sha256": "c20b5aad0f64ba6ac32a97b5d5c7d7ff52e4b8303ddb3256769240fcfefbec7b"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8296276709.json": {
+      "bytes": 13139,
+      "sha256": "5e46198ce18f24125ca1d9f0f9606c832f6eef96e4d7feca4c9900c9d703f0fa"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8300174474.json": {
+      "bytes": 12369,
+      "sha256": "c2c4133044cd1d9a26eb14fd06d6023366afda5536019b2ca922405c9b922abf"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8300239378.json": {
+      "bytes": 13430,
+      "sha256": "4847d5e77646bed88caedd400558bc676a2ceb24e55f21d8b206301ca2fff10a"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8300681759.json": {
+      "bytes": 10004,
+      "sha256": "0203af8b9e6efd17538c0f4ae07da34322fd49e505a1b94d1ed53688b0f230bc"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8303294893.json": {
+      "bytes": 11261,
+      "sha256": "531e86d2d12a67052f5cde09d8ec30f54712cdf63dab864b98c077e8ac0b6033"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8303435747.json": {
+      "bytes": 18287,
+      "sha256": "19e7394ae86cdbd9e0943df64582c3ddf04732e1d1d4c193d8aab3264a8e4729"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8304731831.json": {
+      "bytes": 13853,
+      "sha256": "96786415c5f3243c02cb129d0b527b7883882f4a8654c17571ff9931c3e05efc"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8306519393.json": {
+      "bytes": 14937,
+      "sha256": "184fe9f8d0831dde00e8803da7271b48b6bd7ca47fa574569d05a319d46a518c"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8306544559.json": {
+      "bytes": 8445,
+      "sha256": "a0484e0f49e6c8e58eba99b5a5ecc1464a1704fc9a0b399cbba838677d36b9e1"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8313988435.json": {
+      "bytes": 15148,
+      "sha256": "c2b4ce1fabca31c41de1db3457bac8340bb10117197f3e42584d1bbd73635cca"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8314291170.json": {
+      "bytes": 13528,
+      "sha256": "434ea60fb5aed8508b89dafbf2d3a90dbb686daec719890dec6d7541b80b66b7"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8315219827.json": {
+      "bytes": 14422,
+      "sha256": "ebd468db848441d8abe57644cfde3a0ce0f80858cf9368765d42628ae9c232ae"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8315423792.json": {
+      "bytes": 13422,
+      "sha256": "afa7f9a85b4df341aac26a560751f240b8d08b3010f9422e024a9ad392affb7b"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8315681009.json": {
+      "bytes": 10608,
+      "sha256": "aeaae0dd6791e44910885edf09e519bb5152c77116c068af5ecc919675394213"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8315982689.json": {
+      "bytes": 13488,
+      "sha256": "ee4a52a3243bbd45295510419b38f96a68450449e7d1906b1889e0dd9bbb4e19"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8319953560.json": {
+      "bytes": 6844,
+      "sha256": "dd17e17fe3f15801ad51c85cddcf761457c841b94ee0e15412ecc0268aa24d53"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8323169215.json": {
+      "bytes": 14972,
+      "sha256": "ca4c202518f5637062946fb60d0de2674b889c537c42c5836b69672b8af5a7b3"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8323203189.json": {
+      "bytes": 10622,
+      "sha256": "971cd9254a177aa5c1d90665c3f6d4c05018c8902024ab61e8d5302b7ced4ef0"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8323275951.json": {
+      "bytes": 14868,
+      "sha256": "978757ffb4880529ab65f75719ac7e7bc02be1c31ba694a2e9409a49b488ed60"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8323554965.json": {
+      "bytes": 14974,
+      "sha256": "d54d23f93838c20583e7604c0ef6736d4b1285857097d1b28f1dccffe839b62a"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8323704604.json": {
+      "bytes": 14876,
+      "sha256": "b9dc83c6b8b06f224c3bf4bc0f4ac095973b95bb5ed4d3dcb554cf09f9a31035"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8324344574.json": {
+      "bytes": 8857,
+      "sha256": "4eb4f544ea0406ebcdea4831d5c91fd1ffa85e7e151a4127aaf3b6270f0b7654"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8325892764.json": {
+      "bytes": 13679,
+      "sha256": "4c24ffba38a878991e82d6feb966f883d6e6fefb5ff9700582ab2001a98b3f10"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8327879027.json": {
+      "bytes": 10567,
+      "sha256": "532fb014398a570916a5a46c5cf5f3c64e9ee20fa32dc40d210492ae99f98aa7"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8328593219.json": {
+      "bytes": 10696,
+      "sha256": "0078e8b5d4bc5cc7dc35907252b8dd8dfb09ccee120656bb85761df62679a0ba"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8330849036.json": {
+      "bytes": 8070,
+      "sha256": "7f6a322996bfb9bce259d92a843d93ead121dec3e76df0e5474aee2cf8e9e6ac"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8330892235.json": {
+      "bytes": 10848,
+      "sha256": "cd00ba5082560ea1dc080349b43543b11cc21b8fc64b6f45397bb9b5a0db762d"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8331328918.json": {
+      "bytes": 7809,
+      "sha256": "f6363262495fa072953f003c7a557ef8386a57fdf19a8424b64ac1d3d9d78e6c"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8332242198.json": {
+      "bytes": 14868,
+      "sha256": "dfac09972559073ef3bfc44453b36700e24953a9bc34e3654b0fad93670f74d4"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8332382688.json": {
+      "bytes": 13358,
+      "sha256": "be3acec392603db8e7ceae719406b10d35688fcf1a4d0af77f96090dca87695d"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8332491976.json": {
+      "bytes": 14550,
+      "sha256": "75bbce39da8c1ce3db63b2dc7a7d5429c940506c70359e329a00d6463b306550"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8332719791.json": {
+      "bytes": 10716,
+      "sha256": "188382214908803e0b7ae45e5b5d99b1042e95ba65a29580ffbeb3f5c96e54ba"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8337097890.json": {
+      "bytes": 17000,
+      "sha256": "aac883820e75e75034d152865d8b20f1eed635c75a6d6d5b7e8dd56cf0cbfdd5"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8337766855.json": {
+      "bytes": 12240,
+      "sha256": "428a0c1986d9cbc04ae53a97a11dce4c2541b2a764e13382db0c325d9d0f1ea0"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8338058183.json": {
+      "bytes": 11858,
+      "sha256": "5f8fa4e44b0facbaf834a066d57da08559ac285b5682ffd129d779fc65751444"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8338526165.json": {
+      "bytes": 8630,
+      "sha256": "0bd0ba9c3b1f6e01c7f40372cdf9156bf7f19aaa9a96930449bea4fe68b83d39"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8338579401.json": {
+      "bytes": 13902,
+      "sha256": "154d86f6d8ed517fbfc6338e559c7fbbec8dc01a9f9e6d862563276dca7108ad"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8339631957.json": {
+      "bytes": 13810,
+      "sha256": "72df5423cc94b4deb6ab6589bfc8b38c03f2b72a8afd7933477ea5cbff262920"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8340164271.json": {
+      "bytes": 9887,
+      "sha256": "c34d65067b9d6da4fd13e928fb479962deec2dc3d519b85c32a198333b00a3df"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8341250953.json": {
+      "bytes": 8122,
+      "sha256": "f0ebd8caf192b0b1e6f5b5c7a18f1ae3c33d53d2ba9bd41ecb24caceea498f03"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8342664138.json": {
+      "bytes": 15587,
+      "sha256": "56544eedcb7080c4e2e1f2304ff240829f4f71ec4dabe6feb074de2566a2b932"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8343035880.json": {
+      "bytes": 18899,
+      "sha256": "aeecab0294453c5b2d315591be44c6b6b36018f4326b8f8f0a6dc102069a12b8"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8344002583.json": {
+      "bytes": 10909,
+      "sha256": "a565087baeb5ab59f53a8e1f28ea0b3b8da4c49549259284b71cf6b494a49c6a"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8344734075.json": {
+      "bytes": 10844,
+      "sha256": "962377b4a51684b9ab82045680a8d4b3545bcf56b1129f149d558307ec763914"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8346558466.json": {
+      "bytes": 11956,
+      "sha256": "abc662face3ba4556a48356ca1ea3ae0e6bb5b310f74ffab115ece190fc1e947"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8346910382.json": {
+      "bytes": 16476,
+      "sha256": "94131164fc3553a2dd1cc0d89509295966a0a91f279715f30b5971d961a74171"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8347053195.json": {
+      "bytes": 11813,
+      "sha256": "9726e0baf99f2b6f1d4dfb8f45d14eb13dc2fe49d27ca294251b71db2d545c87"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8347990467.json": {
+      "bytes": 11698,
+      "sha256": "6e757a07740da1b256296d716dafb562c724265437aaf580e049f14bfdc171a8"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8348416314.json": {
+      "bytes": 17009,
+      "sha256": "b5251e40cf9ac5fe25c3bcb3395ce2889f5813af9de5b952316e733ac881ef7f"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8349376387.json": {
+      "bytes": 10509,
+      "sha256": "0a8997e1122f69cd50a88a40ea88bb9227d732f3472992108d7b6d5a30725a95"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8349551848.json": {
+      "bytes": 11006,
+      "sha256": "665c3441aaa66251d357af656e44beb3c7a2d1606983d688498d45d10c0d12ba"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8350395169.json": {
+      "bytes": 12187,
+      "sha256": "fb7ea9527bc1a44c57a5bf0384e7f58548c2a9cf488553a5cd7ccf4dccf75e05"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8352012511.json": {
+      "bytes": 8034,
+      "sha256": "795ed9adad8b47d2354956aa7097f381e47f7b0a0f59b8a9c6c9854a43e174db"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8355886681.json": {
+      "bytes": 14501,
+      "sha256": "6303c87f9cefc48ef59c34c5b1f68d5fb31de52f1d0960e2d842f4bb13229446"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8357445083.json": {
+      "bytes": 9261,
+      "sha256": "59ee9e08197775489a16ad0e95291ad2785bb8f5c07dbd86b88384f0b0a0f7b2"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8358212080.json": {
+      "bytes": 12171,
+      "sha256": "7226d01ec02f7896c6e60f073765cbbc5fb7c516843fcbb449595b20869ddea5"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8361953633.json": {
+      "bytes": 11801,
+      "sha256": "ebb781bed6c84963c10dd732a273b777a001d259d91236eb6c88f31d40af5953"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8363661739.json": {
+      "bytes": 15539,
+      "sha256": "22473f15fca2cdbd08577843020f27a240b5259c4e9098ba9e40bca7cecaef9a"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8364708063.json": {
+      "bytes": 11793,
+      "sha256": "248507a75790697717a41e68720fe918af6b7c3b798d8eb04f8da1f63c59c26c"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8366256312.json": {
+      "bytes": 16091,
+      "sha256": "04fc64ae896cc4aee4116e0ae59081eb1261f35e150d9e3869ab0a71b65c4db2"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8366618514.json": {
+      "bytes": 13432,
+      "sha256": "382dbba8e1b198689ddf02e4c4f99f161c8a1de81ffaa42e600b3fa2aedf7cf4"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8366745413.json": {
+      "bytes": 14013,
+      "sha256": "1ca2d63fc8b4e426906697592580d6c205490463bcd91647dded3b14816da11a"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8368473978.json": {
+      "bytes": 11682,
+      "sha256": "a5672dc06b163d1b7cd8acb1a11824bc91c1c09eb197055219f6d6a750641f21"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8368822748.json": {
+      "bytes": 13696,
+      "sha256": "8fd278d8a2f1c58c901044066a6ec74c8b58b962ab26a7f545451cd6fc1d4c12"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8369439337.json": {
+      "bytes": 10863,
+      "sha256": "c1295d5aa4b594f3795c17ecb6fa8c2a765b5b36d4dedf5d74ef503c9b674bdd"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8370735951.json": {
+      "bytes": 4764,
+      "sha256": "abcfdd660fa2c4a67762164af6f244db0127150dff8c12b1b9dfc41d649aa647"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8372559237.json": {
+      "bytes": 14774,
+      "sha256": "51007ed62ef2946f3ea59804ce92efa8196db715c95adaeb79a5fd17b3528801"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8372724795.json": {
+      "bytes": 11782,
+      "sha256": "4e8dcd96cbb42a96db243e9ae8e7974324496f15399917a8b8e9405fdcfd9035"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8374755649.json": {
+      "bytes": 11476,
+      "sha256": "76734de2e6c2474a3bb4b4c124dae71c41471f08d898b104531bd55203171fd2"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8376198305.json": {
+      "bytes": 14995,
+      "sha256": "72005c27ce1e52c7464b697fb0f70bb22bcecdf7305367e6a8426646f710595c"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8378029163.json": {
+      "bytes": 11542,
+      "sha256": "080cbc1f3f2bd98b68943fb655e26eafcfdff172dbba237b1e21ddc6cedc066c"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8378140961.json": {
+      "bytes": 13111,
+      "sha256": "cb139bde17159b242a0f311de8dcd3c8dd41f93a34ccd4f18ca5108e9ebbd9e2"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8380907011.json": {
+      "bytes": 13281,
+      "sha256": "160e15bdbf8b3a83047571267c4213b945f7cd6838b6b13c8fd98969687eb941"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8382478788.json": {
+      "bytes": 13460,
+      "sha256": "3a1a941c379201b60699f0ca7a42d152fd17de43a78d965c5aa92e97f4832846"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8383552843.json": {
+      "bytes": 11190,
+      "sha256": "4a093953150749a08165cf7c4528b18c695604916623bc036efae92d300230e5"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8386422383.json": {
+      "bytes": 15599,
+      "sha256": "37831323ee42d0f4f6bfd8f5809c4628a9ea6205e00fe90121fcc695e438714d"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8386873932.json": {
+      "bytes": 14947,
+      "sha256": "4c691f436bcfa4dbdd60736bd9020c68c34dea8d383f4c845160c0ac3a216b96"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8387097326.json": {
+      "bytes": 14749,
+      "sha256": "6bcb6bc6257b5d993f0413e05a7263bb9336f517d2c892cff7e8c80b5b8c35ed"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8387123350.json": {
+      "bytes": 14901,
+      "sha256": "fdd965bba92402be34831636b40b806115c5162cd5d2c7eba66af8717e21d497"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8387844976.json": {
+      "bytes": 13919,
+      "sha256": "50a8bd9853503430044675b8287c5ad387a8d2bef15b1148e3146c7587d24375"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8387964795.json": {
+      "bytes": 13484,
+      "sha256": "9306a9fe6226e008b829546e14a5ebbd029fcc7d9e9f08c371a494f1b4db58a7"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8388085423.json": {
+      "bytes": 29442,
+      "sha256": "6cbd4b731d3095f3f54899777b1b2c98ccaec88dee19e64e406531ebe4191175"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8390929879.json": {
+      "bytes": 9268,
+      "sha256": "5c91d9924bf8ff490707ea2cb62cf87fd569b625fba1a29a69fa497b29b9f76b"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8391223420.json": {
+      "bytes": 10298,
+      "sha256": "e59b35e3738aaf2ff61e2343d4eb8ade68c46786da4a57f5611f32baf8af5a6e"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8393561239.json": {
+      "bytes": 14387,
+      "sha256": "0ed88036b63bfbdcc10bcbfb9ee41d996113e3860213d9c5e73eca79167300b5"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8394384607.json": {
+      "bytes": 7862,
+      "sha256": "79f9a42288339b968a57333fe33cf71fab2c4308e3a5764bfe7509ba830c40a1"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8397782203.json": {
+      "bytes": 13450,
+      "sha256": "f24fa72bd5355f9845432fa63d8d46be5a227a72267d8d39bf80cfb4b3d980bf"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8400045259.json": {
+      "bytes": 9428,
+      "sha256": "3585ef28c5f7ad2d4a65cefc9df6b55aac74f9058a068be0c91335a8dd64b877"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8400774461.json": {
+      "bytes": 8596,
+      "sha256": "c478aa676a92baec7a1137f696ae7feda0c5b99d67e8ae6d50bdbc69bea2383d"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8400928487.json": {
+      "bytes": 12532,
+      "sha256": "d3eba3f697493054e5d7bc0a815056d6a1e5338e048a99563839ffafe520c17b"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8401673928.json": {
+      "bytes": 7667,
+      "sha256": "22cb5d6290ad7f3ec1e92ead3bdb25009e6127b22943fe9bf61138d5481384f5"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8401751647.json": {
+      "bytes": 14167,
+      "sha256": "1e3f23ffd0475fb32b286e562cd02add634f7934b79bd53aab58f31d2e36f59e"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8405285669.json": {
+      "bytes": 10513,
+      "sha256": "b8a096439dfeea389db566c7e338afb262569798172cf193444c4814a87d2c91"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8405516285.json": {
+      "bytes": 11051,
+      "sha256": "54e88e478b51b9bfb035792537d2131546aeffe173958471fbccf384c3c8100a"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8406035392.json": {
+      "bytes": 11861,
+      "sha256": "9a1036646fdeb6081a7c5a7c406423d28328c761679ad218c1413a6f71960dd6"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8407035224.json": {
+      "bytes": 13027,
+      "sha256": "82bd90c4780ed55115a6e29e83be470e89d4a463d18761079e52e567447e6741"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8407808102.json": {
+      "bytes": 14917,
+      "sha256": "ac37344ba75c9065fb8c8df7480ac00f44f7a41a2c09b4c4239086921554b829"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8407963811.json": {
+      "bytes": 13500,
+      "sha256": "fa12d0abb1ca27146f9e2c9b954ee18e20aef4f9307401bed4420a3f49c9c9f8"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8408302336.json": {
+      "bytes": 14194,
+      "sha256": "7d8294aacdf0bf5fe2032688f44e481827c281b3354ea3d856f9d1e5ca511b2a"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8410061013.json": {
+      "bytes": 8530,
+      "sha256": "0f2a69b76798bbea79783edcc5b8ed016774b94c8f12e6b215004ac99ed7e44f"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8410561188.json": {
+      "bytes": 9591,
+      "sha256": "a9597d4af54e92d18c70d8ba813f4b1d0ce2803ae2ae1d7eeab7e679ebca07df"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8410666776.json": {
+      "bytes": 11594,
+      "sha256": "a82f3af9e95635a7e9f8233448e0f7e7b324fe61548be6a15f46c02a6b94c1ab"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8414751697.json": {
+      "bytes": 8814,
+      "sha256": "6502c2c7daa395999e3bb047714ed909f06c44ebcb7c837e6de57fa07b0ba357"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8415722960.json": {
+      "bytes": 13835,
+      "sha256": "2c975bcdffab7038b52a00f89755e527c2dd455974ebd576e170e74870dfb30c"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8416063367.json": {
+      "bytes": 13543,
+      "sha256": "4d52b720206446aac4dd8acb4e289b1bce7b8822e90b535c28e16a4f72a7026e"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8419691890.json": {
+      "bytes": 11113,
+      "sha256": "9d3c5c621bab8065da9687e1e56b7c4957256c77c4e430bd01ef679ecaefedf2"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8421990048.json": {
+      "bytes": 8414,
+      "sha256": "3c38e81a62ba8efb24f3e7d2255ea10fcef0fecb23e412a995ebca9adcdaffe1"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8422156698.json": {
+      "bytes": 8950,
+      "sha256": "2c85670352c060862bd6d8a3a9be10072e44d46137c5bca5297518d51305f9bf"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8422714042.json": {
+      "bytes": 11850,
+      "sha256": "e972c0b903f67d9cc79d288d8146198a2b980938dcbb0635b2e7534258bd3690"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8426072892.json": {
+      "bytes": 12246,
+      "sha256": "e95272456453d2fed54e52f04b68777033b9ad48fe01dd20f2a857264f48fb81"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8426646722.json": {
+      "bytes": 9839,
+      "sha256": "dcbaa1fed4d346ef86efacb0d41c40bf6597817484fbc7dc5ce045a5e2ad5233"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8427354694.json": {
+      "bytes": 13151,
+      "sha256": "9eb0ce9671bf91b4e751d7a037db7ce168eb042cccbbe2de2f7ef83a4f5571d7"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8429221986.json": {
+      "bytes": 12973,
+      "sha256": "cea1b7df2f6357808bb73c2036a16c9536b2b5d8e557a338d45703476b3ed310"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8435320949.json": {
+      "bytes": 14795,
+      "sha256": "490e7f67b808cc346f47c940ef1968790fdf5ed46c5690eb72e0747b7070ffee"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8437663115.json": {
+      "bytes": 10600,
+      "sha256": "9a6b581ecf6b47bf8641c90efacde2b0156ff40e86b693753a6cf43f4b0e4318"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8438628464.json": {
+      "bytes": 13396,
+      "sha256": "759d980567d5ea5925a2a5101a2cfecf487dd014483080be38d62493696823ae"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8439348417.json": {
+      "bytes": 13456,
+      "sha256": "480f5ff506915cb80e9defc6bf1ecd3bd3c15a8a554e39c7cdb1b6490637b7a9"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8439576374.json": {
+      "bytes": 13458,
+      "sha256": "36274e7b23c634648effedcd1c5e16525c93da2bfd7e328ae5d768ae463a4e67"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8439987799.json": {
+      "bytes": 21302,
+      "sha256": "894322eb882593ec8e715eb4153b902a6f589a1414742e48863119137444dc9f"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8441342441.json": {
+      "bytes": 14730,
+      "sha256": "a10e8d6c9ffda50ab9f62aed646065af3caec8ce728718381ad055831c6cabe5"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8441464543.json": {
+      "bytes": 17560,
+      "sha256": "ccd0b4c36791068a3b6bc9ba8f2b4dbffaddb9c891820b2c109376f6ce06e211"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8444893837.json": {
+      "bytes": 11801,
+      "sha256": "9c5ffedbcf2c915b8ba8cb833d5b51b81419788c09f08a3d048c0eeb2b339028"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8449665922.json": {
+      "bytes": 14191,
+      "sha256": "3cbbb91f9cdd7f83e54f6bc2ddf3cfefd72dba40b9f12f574a257b5e7ff64ba6"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8450816243.json": {
+      "bytes": 8225,
+      "sha256": "07961d0cce98b85edddb1f51cd98f81a639f3413d076782b6cc90bd2f53f8803"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8450993286.json": {
+      "bytes": 12076,
+      "sha256": "d76bcc655f352c4cb9f38d70d7a8c251007be4186bf9a5a20cd395990461eb4c"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8451004655.json": {
+      "bytes": 11412,
+      "sha256": "36f696d3c52e42f8629fff2b9809eb4f95bdd71261ca80ea1aef75dc1c706389"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8453026257.json": {
+      "bytes": 6048,
+      "sha256": "0ccaecc4a241977aeeb2cdb29611776bdfe89f4f8bf19fd464181d2d02725e0e"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8453238356.json": {
+      "bytes": 10132,
+      "sha256": "e235577e6a5f5467a2d72cc9128c7ebbf6adce3474134a19c66c502ddcffd307"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8458258708.json": {
+      "bytes": 9131,
+      "sha256": "72398a1641c16cfb461f23d77ef0ce4c4e839d9ca94fafc962c6bbb251fbfb40"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8458332949.json": {
+      "bytes": 13268,
+      "sha256": "ccd82f13b147ccb32f7157861c4fa20f745b614efb05fd993e65040aec94b424"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8458822302.json": {
+      "bytes": 14214,
+      "sha256": "1d2ddc2dc9a04481db876868218ccf4a15b8a7c8daf5b6fe31990913fe7e034f"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8458840366.json": {
+      "bytes": 19187,
+      "sha256": "6953d9b1e25d067fc429549dca0e1764ed78a165cc94b7bbc40601d5aa59f839"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8458915522.json": {
+      "bytes": 14068,
+      "sha256": "d1826c381961b207887b0dca18c0abc5e2b6fb0faea2f640b7f16c6dc68b64b0"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8459824383.json": {
+      "bytes": 13481,
+      "sha256": "e03eb909fa4527393a60fbbee2ea77b14e577640dc76bf7cbac8d974a9072b0e"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8466916059.json": {
+      "bytes": 14376,
+      "sha256": "0d9551b536bb279218b22033259d55ac4abfd73e0ca01df47e80f6964ac9b5ad"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8466972968.json": {
+      "bytes": 13532,
+      "sha256": "c74bfb664a5279f8f89733951729ef32ca62f97ae3cf2aeac887756bb282c5a8"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8467601204.json": {
+      "bytes": 8078,
+      "sha256": "5c026f8c4d0d23feee0b6f8ae20d2b66c01c1857aa803cf86f5e55a15cd9e6dc"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8469831682.json": {
+      "bytes": 8970,
+      "sha256": "86bc2732f19163c8bf2f8c6c4905f7f99d0b66ae7756aab9ff0fddece7f1aed3"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8470109019.json": {
+      "bytes": 11971,
+      "sha256": "aa78245955ec14b494102647b501a8054e5e1a49802f86568e8c8990a0fbf954"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8470163358.json": {
+      "bytes": 8618,
+      "sha256": "e5012417ca1dd2c2b6190fdf6edbd80be125f2f57f8ac087dca502147cf6afec"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8470491299.json": {
+      "bytes": 8007,
+      "sha256": "6c4f9777fc229b42cec54d243f9b5ca7eb9cb41fb46a45ca1b730fad38d68449"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8470630300.json": {
+      "bytes": 14198,
+      "sha256": "0bc71aae65862a484e0f148f56d4f380644deada6fc2f63d4ce391b31e3fbb5d"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8480662273.json": {
+      "bytes": 11892,
+      "sha256": "179a91c26ae6a0ab203cf8ee88e336100ec83046dc5b882642a1344b436ceebc"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8480807775.json": {
+      "bytes": 16390,
+      "sha256": "26efa4423aa01cae3f35ff82c3b317fe200ea7296a71985cda1d6c4ecf50ac2e"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8480979232.json": {
+      "bytes": 14524,
+      "sha256": "94597f91355b15f636206090cc302faeb96f72cb6335c26a08e8e26c9239aa78"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8481801402.json": {
+      "bytes": 12212,
+      "sha256": "ef0feee2d47403cc03ac8d1b594e76d81fa800d8233b34ba98ab1b34666f945f"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8481974946.json": {
+      "bytes": 13462,
+      "sha256": "b314a3e3f666cc6e80ad471563a0ca68a3c2c4fe0ba522d1f914f59052764b70"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8482004367.json": {
+      "bytes": 9461,
+      "sha256": "06ee00b93644744a481550bbcd12f306e9316833ab9c516f9a4d6b69afc8527a"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8482062234.json": {
+      "bytes": 12360,
+      "sha256": "17c56b49b050857ad1e15e2671e9cee9da2e860f93d4321bd08f9ad261d9ca25"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8482467354.json": {
+      "bytes": 8914,
+      "sha256": "dfe3f9b034978f63d102e1680476f1f0f281e27a9ba5908d171d8e830bccc4b2"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8485167411.json": {
+      "bytes": 11636,
+      "sha256": "2af5d276e011e7120c5ca8ca6b1e1b4a143788f2bcd8dac4606ac63bb9cbbe36"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8485310550.json": {
+      "bytes": 13372,
+      "sha256": "e2a8a75a05991da77f0e1f4b7b9111dc98493987725c5ff521c71aad782d1b78"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8485496660.json": {
+      "bytes": 11771,
+      "sha256": "104b761bffc7b1668d7d28da246a7505425c4c1d27362c8a220fc138830f3149"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8489074488.json": {
+      "bytes": 9992,
+      "sha256": "429c7d4b228dd81cb0ce95f4b26f3f4810c497c9d6fd58f9fc85ad8263ea9216"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8512275386.json": {
+      "bytes": 15473,
+      "sha256": "c7b910f5ce84874b5b4b570f0b92f263e57e331df15cea7730b977e41f6982bb"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8512566138.json": {
+      "bytes": 17511,
+      "sha256": "2f030c6e4e804eec2be6b853cb29b1e36229296df5aba372cc8e534126f2a4ef"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8512714222.json": {
+      "bytes": 21338,
+      "sha256": "a3fdf01ba2c52ff522d99b420fc353681e4bfce24360f38a16bf2b14f3ce44df"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8513495481.json": {
+      "bytes": 16420,
+      "sha256": "144382a5d28454b34572b3c2faff6b0b3e5aeec34f20fd5b2e8d1115ba144607"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8515132821.json": {
+      "bytes": 10909,
+      "sha256": "87c49f5320d81282496c86526368dcac7f0e3a8c0ca466f022d86f3853b4b083"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8517222154.json": {
+      "bytes": 11903,
+      "sha256": "54fcb6864c6c963e0337f3e620472383e555fa577e65ff72e22be98a75615d7b"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8517721825.json": {
+      "bytes": 8864,
+      "sha256": "3149c4bb97653b63dc30b3e214db17ea72724a2e7f55c69d206d0860ea4077fd"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8521454016.json": {
+      "bytes": 7922,
+      "sha256": "f03b3cd5fe62f997b09b1bd7a117a611d7243d7ded7d7bca2b4c9ea9cb41b5b1"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8524911825.json": {
+      "bytes": 13510,
+      "sha256": "286584ee6aeb9a0b8413dfb3cd2e665eb4cf46ff60a496881eacc4184f2cd0a9"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8524942448.json": {
+      "bytes": 13466,
+      "sha256": "eaf2a2d6d00fabb9d89e8364c8e5eafd50b509a4483a1bedfa57a6daa8dd2f10"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8543512616.json": {
+      "bytes": 10282,
+      "sha256": "dca533d740b4868208c0fa06faa31e900d82922ece0b5e1c8b4909857a6120ea"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8545138548.json": {
+      "bytes": 11835,
+      "sha256": "ba4971e602e3b1a133905828de803c914ee936b3659ec23e3b5829849f1fff7f"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8545399211.json": {
+      "bytes": 13464,
+      "sha256": "db6d5514dd07f28564ce80b28a338820c862dc6954799d7a86e5ff980fdf7a1e"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8557577322.json": {
+      "bytes": 11168,
+      "sha256": "2f9fa1dada61617e7cc8159f96689a8c39a147594f1ddc90b56aac9c4e448b4a"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8575250023.json": {
+      "bytes": 12584,
+      "sha256": "62eb165c58dcf15c80cbc2e033b2d6dfd38f153663547725e73c6782b70ccdfd"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8577523013.json": {
+      "bytes": 11974,
+      "sha256": "8af2de0ff513d8f0870980811462d9f1d8f4aca2da87e1713d037da38b2ce95c"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/raw/8577675698.json": {
+      "bytes": 21186,
+      "sha256": "ba2c4125ebe64f0cc6707946603db14185ba8edf7b60460cd08271e2fddf1559"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/1946692970.json": {
+      "bytes": 801,
+      "sha256": "b7cd79c566e5c730c1538ade5d7405867a997274ee371c6fa9b1142498a42643"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/2235842456.json": {
+      "bytes": 940,
+      "sha256": "6e248d39af028ff2a1a4b38aa26e05e7242702dd74d08de6bb7abe2406191ffc"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/2674735304.json": {
+      "bytes": 862,
+      "sha256": "5f92a088d0819d0197810719d11f08178fdff76380b85ed6e71f6ee526700313"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/2831837231.json": {
+      "bytes": 767,
+      "sha256": "f05153841eca5143b7e45570c10aecf435f7ac63a78507abf3e92425332ca7dd"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/2969604311.json": {
+      "bytes": 837,
+      "sha256": "66f7c14f85ff21825a0a2e3aca1a931034d5cf24f0a56bc0cede9c74351006b7"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/2971866871.json": {
+      "bytes": 805,
+      "sha256": "e2cbba52295af141d1b249b6e9cb7e2522ddf679322147fa3619d4674556dab6"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/3049410844.json": {
+      "bytes": 816,
+      "sha256": "bfe0685ceaed78883b2923abaecb9b8ae8319b43b4be34af32b03bf44db833ea"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/3165353832.json": {
+      "bytes": 835,
+      "sha256": "767eaebc65cf8990ddeedf4387d998251ed70da19acf2f59b996aaaecc62af2a"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/3171198091.json": {
+      "bytes": 831,
+      "sha256": "c185e5bc5948738df0831f280d427a06f31d732759286438372d1596e3397972"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/3174036617.json": {
+      "bytes": 836,
+      "sha256": "dee5a9e27c0a109fd2aec7f29598e5ceeebe119c1b225d9ff7314515982b742c"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/3261161811.json": {
+      "bytes": 885,
+      "sha256": "63a4492d03b644285148be506e4e4879dcfc2479c7d38286463758b6206b51a6"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/3349559907.json": {
+      "bytes": 883,
+      "sha256": "d370b780a8d35114e2fafd184db08b1bca7e4231e014c12f631435dcf87c4395"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/3361339722.json": {
+      "bytes": 839,
+      "sha256": "8d3086c82358c1cc7070c33e46cc0fef87028e25b90339147148bf05847dc505"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/3467896669.json": {
+      "bytes": 835,
+      "sha256": "33f6bc904f6e8a56aa9f513e11759a52872ea2f76934dbd17c9f635169394de6"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/3584986617.json": {
+      "bytes": 882,
+      "sha256": "d23175d9799caf6c16437d70d691513e887dd5ff19a942b06dcb665b2843b154"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/3588755455.json": {
+      "bytes": 807,
+      "sha256": "ad656c8e94d7d2a647ff8a3556a695bb43fe7825a9c9c18b4c911df1c6dcd833"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/3741573174.json": {
+      "bytes": 852,
+      "sha256": "13ae31676ae0992384c771a0df4f235fa37462dce30d96a68312c98ea4a40fcb"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/3758090427.json": {
+      "bytes": 859,
+      "sha256": "94cbcc034a98be72b766e7208fab9fbf800c9907ebb37ef7f5ca37c962732eb0"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/3784863402.json": {
+      "bytes": 846,
+      "sha256": "7825d759ffeee7ba6329df674be1d35732c16e09167a4c55bda181996780e40c"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/3937576523.json": {
+      "bytes": 842,
+      "sha256": "7e70ec706e6b1ca9ad3d34e7d540d3fc4859b44fd7c0b565a9c0371b45b0e38a"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/4013437015.json": {
+      "bytes": 838,
+      "sha256": "4a60db7c99fde882c56880cf84bd055913f3f85309e7998a3bf078025a3e47d8"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/4061935940.json": {
+      "bytes": 823,
+      "sha256": "61cd3e892e4fad60590b3eabe1a76d61c58888f5747f2de4b32dd6be08e1200e"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/4091389969.json": {
+      "bytes": 843,
+      "sha256": "5e614c0b4510c75946b744165ac4ff1113102e462f3f29beacdc2f18da40dcc5"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/4198173797.json": {
+      "bytes": 784,
+      "sha256": "ddc1e5faa917e39c6440677e7447e54c695feb586a34a83466bf77e1f0a4e9e2"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/4374843259.json": {
+      "bytes": 849,
+      "sha256": "e94bf9985dc503d65db8d94859d6313404c8022b7a033f0d64ec0c50a0ff7eac"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/4436009539.json": {
+      "bytes": 830,
+      "sha256": "5fa91a513e669af07ff693fb65efd29fe1c941beb53e33c3df7ee0e2caca50c7"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/4466338947.json": {
+      "bytes": 807,
+      "sha256": "aa32efe4b54fde8642839e46391aeb0889d70a52e5598648ea5f2c03096ed460"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/4509887790.json": {
+      "bytes": 841,
+      "sha256": "3fd961dee4cb96d54db2c2a2440b35fa127036f281744d0b6a40cf606a6e3c3d"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/4564203229.json": {
+      "bytes": 903,
+      "sha256": "af77f37a87b759b0d95e54edfc4755a696aa8b165666570fd37036133c07534c"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/4654015202.json": {
+      "bytes": 784,
+      "sha256": "2cdba0e59212036bf990bc0f9f4f46c843aeeec91358ff3d28eba0f24ff3c515"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/4747587302.json": {
+      "bytes": 885,
+      "sha256": "0dc6a1951c225c3d714f8a4ec6bd9077a455ee00539f3c5dd50f9f7686d4fed5"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/4754667691.json": {
+      "bytes": 765,
+      "sha256": "978370eca13cf7c622f378c77bd49e84774bb66a629b746a947099cae0530a10"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/4874181239.json": {
+      "bytes": 868,
+      "sha256": "d7b09cb57b654ea9c98bf002043eb69b50753b16b8da9f66e9c21f9428468a08"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/4993441252.json": {
+      "bytes": 767,
+      "sha256": "e16b5ec2bbd010fc77e8a17d9f65d7513a04e0a71d5170d1dcf0f0ce838351ef"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/5058284689.json": {
+      "bytes": 832,
+      "sha256": "f8fd6c66ea793456404d0b627097963deff077bdb348f789b8fb55f9b52f2d55"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/7257560547.json": {
+      "bytes": 878,
+      "sha256": "c759cdb72aa287e35041f0608811ec14c9cc46ae629e1a8e0cc18851eea0ea70"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/7261765822.json": {
+      "bytes": 885,
+      "sha256": "6c71e936990e261181560c30778f4d4ad555560ece625ae38df012709e848abb"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/7274737415.json": {
+      "bytes": 864,
+      "sha256": "ae0e899c95505bcef5601b755f4f3cdb29d98e73d6fbe0d0545a0a96c3a7b6c3"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/7278386153.json": {
+      "bytes": 888,
+      "sha256": "a1d99f081f833dcf22d496676b9a86e48ba65b7675e25560aef23f735ec9929e"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/7293963786.json": {
+      "bytes": 882,
+      "sha256": "5ee7e50dc7a9da98f8bb8096a294da3559080e3b3936574adc739f365e5a7220"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/7296948409.json": {
+      "bytes": 1041,
+      "sha256": "7e434833bc903a03ebf8c75031e233e0977e1eaffa195b4a03433e125c6a7e53"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/7330277856.json": {
+      "bytes": 850,
+      "sha256": "1874aea7dc83d3ac3048bf1f7ed17313cc86035857b5c69562b74750746035a0"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/7336085266.json": {
+      "bytes": 821,
+      "sha256": "33fa14c1b1f9d76ebd4f8c2b96f5c32c70ef39467dc105892c919f9d04ced68c"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/7341036466.json": {
+      "bytes": 849,
+      "sha256": "1a683138a17ccd7460f5e57c75292080e0b53ba6c674be8647888aa11c805d97"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/7417717511.json": {
+      "bytes": 874,
+      "sha256": "5c97787609969ef233ed72e9cfa556d06be0eaa0cb742ca14c6da762ee7ddcf6"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/7471263689.json": {
+      "bytes": 854,
+      "sha256": "f7723d925a73ec02cc83e650b5f43361aa43a99154ac9f6b9e0c48fb7799e531"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/7476044008.json": {
+      "bytes": 835,
+      "sha256": "654b064985e698bf479ef15a0d8f9261f6ede37a0c17aa6e24e7b1c378be49f5"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/7506423671.json": {
+      "bytes": 852,
+      "sha256": "e6d6da767e3848286e1c05cb750b8c7732520cbcec41b8987edcd6c2054af888"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/7514359637.json": {
+      "bytes": 824,
+      "sha256": "6a1509477dd9e006ac901a212f9ad63818cbe94507493113e9c00bc418abfc4a"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/7581262768.json": {
+      "bytes": 853,
+      "sha256": "ce2ad6dca0b19d43f68b3cf23449a8be74057ce39c8b4b44ea07068406010684"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/7639200992.json": {
+      "bytes": 817,
+      "sha256": "48fca207f4d9c738d50091f65c67b4f565e043dd54a749eec36d940e7b6da49f"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/7655569673.json": {
+      "bytes": 808,
+      "sha256": "98066e223629a952c5782a96bef314443729a8e32761bacfdbec5ef3a92c67fb"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/7687478284.json": {
+      "bytes": 829,
+      "sha256": "c714d687c7a1a8cc6825fc741aeb8d102f4454d5467d8375b9d9fad80bb898db"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/7690129775.json": {
+      "bytes": 858,
+      "sha256": "a04683807a2990034dcff109e816a4b14e557cdfb361f20a8caecf243cf93391"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/7695213678.json": {
+      "bytes": 856,
+      "sha256": "9051ee4080ab68f62c3a8f13419aaf94c339f35205033ee07e85b9ef3b8b7cc9"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/7722332120.json": {
+      "bytes": 838,
+      "sha256": "d1597f21df0f459b17b8eab6987b91d1c10a7e935b0cf9012b12f9f8f7885156"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/7726619022.json": {
+      "bytes": 754,
+      "sha256": "3ee1571355f7f7569c55bb10c3766deb22863968c342e900889ec5dfa6810e99"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/7743723098.json": {
+      "bytes": 767,
+      "sha256": "50707a1f206d36d0a5aeb793850b213fe8ed02f0942eed398dd61b57351d7a48"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/7751350481.json": {
+      "bytes": 829,
+      "sha256": "af9cdf0892fb21fba67eb6d0d41b9620194e3badf8a556fd205918acbc8812be"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/7754217408.json": {
+      "bytes": 816,
+      "sha256": "92a3b5fce593a4d2900f8c5e214f1a7d7295e0755710134f917c1e312bc51df7"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/7766507641.json": {
+      "bytes": 811,
+      "sha256": "021f64a44496acd577ea617db903e103d92c1ec984a394a02aa45d19341a7505"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/7806193348.json": {
+      "bytes": 889,
+      "sha256": "8c41392df60b3ff710e36bf853e555f147cd2b8bc32b310e1b78c57fe73ad3ae"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/7810635199.json": {
+      "bytes": 787,
+      "sha256": "acab8813833cf6c9271f79c0edf2b14b5efa1ac021170a64dc7c845cbc2821c4"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/7811871132.json": {
+      "bytes": 889,
+      "sha256": "7f934c3c2ba5611a28a2f64c8097856dd3c954775b83d32dc60b27c82262d7e3"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/7843220562.json": {
+      "bytes": 869,
+      "sha256": "860c5a2be39fd479ceca7b302920945395d9b790e2fcc162eaceaa027610ef0e"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/7902204231.json": {
+      "bytes": 841,
+      "sha256": "7b29bf15e0401a423271140826b762c4215e707d19dad2acef7d8ffb7d1578fe"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/7951356632.json": {
+      "bytes": 779,
+      "sha256": "df9d110595bdf07e1736d7180f0ec418447f9c63f79a01c56a80c7c6436befcc"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/7953160403.json": {
+      "bytes": 858,
+      "sha256": "92fa9a47db7861597ff26ef14b039bf7b217044ca089026a36fb350fff675264"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/7953259001.json": {
+      "bytes": 893,
+      "sha256": "f841be0b0177eabc86269eef957bac1a9acc220dc7b60f501b3de3b4861d41aa"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/7978911382.json": {
+      "bytes": 865,
+      "sha256": "ce4a1cfc1956c38e729ee18dc8abb3ad4d4ea626d1fdf592722fc5de2a32639c"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/7981267506.json": {
+      "bytes": 899,
+      "sha256": "ce7df8ebab928e3cef4ea2acf4e903213dfab4a12acaada6edbe0ca26c3b2547"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/7987373512.json": {
+      "bytes": 839,
+      "sha256": "ea564e4bc997b7149405d97ce718d6458b0f81d26468a93e5de2ffb292111209"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8003165712.json": {
+      "bytes": 834,
+      "sha256": "59c1408c05cf1dd13dc48707b9ea6aca2625f799cfbe0b0c7c702871a1caf5c4"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8025455343.json": {
+      "bytes": 842,
+      "sha256": "2176149552dfe0667e6b8525a446b9b47ff0be1bdde8d2d10e98f1e4b42dcf1d"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8049379227.json": {
+      "bytes": 896,
+      "sha256": "ffe718fad026f58cc4e2a00654aac69ef5cab50c291b6ef8baa321b2aa125a43"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8060018341.json": {
+      "bytes": 879,
+      "sha256": "5ad70f529ff213ea1929f3b0d9965c159e8225915a2767c9d96f7143146be17b"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8074277320.json": {
+      "bytes": 838,
+      "sha256": "f2286b4637ef1057e47ddcf2c1510dc94416228c9818bdb8c5b2204dd0567b05"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8076119845.json": {
+      "bytes": 825,
+      "sha256": "d72d7bb3dcad9e6c445244b9d6d1d2cfd458cbeb7462e9ef16f04b5239aa9f98"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8085663888.json": {
+      "bytes": 871,
+      "sha256": "4ac7649d61c70b0efb46580d80e43f63723fcbfcfb6b3c1fd964c9243a3f07ad"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8088666052.json": {
+      "bytes": 895,
+      "sha256": "82eefdf4fcfb99d6e19e7559e1f2bf7d32f929e4e0194d326b5b58f774b39013"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8094163041.json": {
+      "bytes": 873,
+      "sha256": "42b109277fea4a38df9e8abc67e3b25d4dafcf4abdb8cf9dca3df394d6817fdc"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8108498349.json": {
+      "bytes": 850,
+      "sha256": "5ff6533267bb94c725b65fc8ee343371dc7f86ff0aee5c71b6dfb2bae5caf042"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8126640490.json": {
+      "bytes": 811,
+      "sha256": "875dc7e3d83c9324d8c9dc70b4a7a6203e2497b363a48ebe53cfe97cf482c503"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8126896932.json": {
+      "bytes": 838,
+      "sha256": "00f692d196fe8b6df9d817d0c93e37af049c774d7beded210a36a2fe3cbaf3d7"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8142096004.json": {
+      "bytes": 826,
+      "sha256": "5e1a21ed8081c926cf1e67a5a178b80606783b2a0eb05dfb939bda62b16d0e8f"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8143802468.json": {
+      "bytes": 866,
+      "sha256": "1c4a5001107becaafea1c74d566fd60ad70fbd7310f579f413eda556ba574e89"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8144298595.json": {
+      "bytes": 864,
+      "sha256": "61690a298247befbe34f08fa5adf44f653188e6c49137ab5a7a48895402ffe22"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8158534182.json": {
+      "bytes": 920,
+      "sha256": "d0e222e5ba46a187087746a67c1b44a1b2429809d341abb477274568904736a7"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8167920680.json": {
+      "bytes": 817,
+      "sha256": "8369768af4e1b66105c583c1cceed70ad9012b8ced175ebb618e2bc696d9fe74"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8184705020.json": {
+      "bytes": 845,
+      "sha256": "caef47681c648143d6bbee42447293b4e56a06c1ad30b0a92680d1c8e6ebe53f"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8196215153.json": {
+      "bytes": 767,
+      "sha256": "6b23eb25f7af27d8f54f23aa7f81f03bde4b33c0e0e6921ade4c266fadc7c750"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8201631363.json": {
+      "bytes": 866,
+      "sha256": "207402da805f63eb3bc61d7de09c34aee644328cbae02fe52b105cb915b45e21"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8207202970.json": {
+      "bytes": 830,
+      "sha256": "0483b58940f044e2c86f8033ab3df0676534b459a1f9d9de37cdcf6c5ccd0047"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8207407279.json": {
+      "bytes": 857,
+      "sha256": "ec6cbd3e0d851a11f34fb0234cbc56b9710cf40f1fb24b4e5e87ffadba0b98e6"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8208388388.json": {
+      "bytes": 910,
+      "sha256": "15174276745a4f0306d2e99bd994f2c562bf23d42b12ad25fcce1927b0853bb6"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8218012552.json": {
+      "bytes": 826,
+      "sha256": "7043941793444d5c6daadc970df72b8144630294047c7d9c312c2b45b4700d38"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8223689843.json": {
+      "bytes": 851,
+      "sha256": "6a2659fe25563bb01b6be1d1a52cd42c00e5fc2a2ce0c1238704a4d1c2ce07c0"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8226365511.json": {
+      "bytes": 888,
+      "sha256": "1243413779af5397f173f3305ac38bae389137f7fb0be99be29ecfaff2d346f6"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8226959817.json": {
+      "bytes": 834,
+      "sha256": "1ad69d553179b45e8366d51b319f01f5de055a752310aecba13e83d7de8c8299"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8227414048.json": {
+      "bytes": 860,
+      "sha256": "d1f383bc1867c8b32e1f673b63c0a4c512cce997539c4523184d002174c5872c"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8230440793.json": {
+      "bytes": 850,
+      "sha256": "9e13a8b7ba67ad8199807aafe401147ae3d5e2220910839e3d1c2d9b43ee6a87"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8233542723.json": {
+      "bytes": 831,
+      "sha256": "06daab6ab00fbb0f0c643f4f4d9e4430f55a4624125983a9e14075f371acb274"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8235488560.json": {
+      "bytes": 851,
+      "sha256": "fc966d5a0a7f0f5abf5af14a2e9348a52f75b661114c21e2ed4b268141d0bdb9"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8238833516.json": {
+      "bytes": 811,
+      "sha256": "b6380f274d91aacce2d3a76162fcabcd452dd3bae1a89c2b78713509d307676a"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8239263302.json": {
+      "bytes": 843,
+      "sha256": "28eda109919118fc028f931de2fa91b0645e4e5bae03294cf2cd6367a901eaa1"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8239964397.json": {
+      "bytes": 879,
+      "sha256": "41b9132d2de9e760524bd310a4d827f10f8e1bfb10a2f9ead1101fbec51bb3fd"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8243776100.json": {
+      "bytes": 824,
+      "sha256": "4ccb622b263e971d623f9ba854ebdcd689893ee5c919d0deb3a26984147cef2a"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8250654736.json": {
+      "bytes": 882,
+      "sha256": "d20c4bcca5a9440c7e94b9f35731525a8f535c7c35214bc10d79681393cfe6cc"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8251894989.json": {
+      "bytes": 835,
+      "sha256": "cdc7e51278265edeb1e121f345b4fcc187a0723dd55d687e8ba96e00e12bc89d"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8251910993.json": {
+      "bytes": 834,
+      "sha256": "492675e36bbf84155e43736d5b479d1d4e9e887806b9afdcd2a76042516dc56c"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8252121423.json": {
+      "bytes": 865,
+      "sha256": "5814f235cb37b47ddd7460d20e95826229c2a2a57e4a105d58380940b7ee7b32"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8253350059.json": {
+      "bytes": 881,
+      "sha256": "addace52f3011039fd06ad12ec68c9a39265aa00ab0bc57d49a681116d2f47b0"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8261653665.json": {
+      "bytes": 808,
+      "sha256": "992fbb877dcaa8a08901dd0953a857dfc832a6fcf53d30f8a48404721cf62dc6"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8262609238.json": {
+      "bytes": 920,
+      "sha256": "4629e788b83bcc173a2bd858765efbc03a25eff3b73165ec943ea2ad3df99fbd"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8264137442.json": {
+      "bytes": 854,
+      "sha256": "71fe68af198b567859bde0e8bc54e8b6495e5972502e9825a709f52b5f6ed8d3"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8264784506.json": {
+      "bytes": 792,
+      "sha256": "2b9116ee465843b93fbde68154aa804464db33b41032ee3e22b5b157babb381c"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8270315442.json": {
+      "bytes": 837,
+      "sha256": "107313a578732c9b9294e072e415f33444c1fa663e9748fa701005353d2d74be"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8271368990.json": {
+      "bytes": 854,
+      "sha256": "650b998a961eef38d777838f3d48eb712d79893f9a31a614e6cf575e66bd2fbb"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8272412035.json": {
+      "bytes": 912,
+      "sha256": "509b65b4dd0bfe3e0190b82d7ef6df81c8bcad7f381566fa65f607b7687d7b84"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8272809876.json": {
+      "bytes": 864,
+      "sha256": "65bae59f1c6b0ae845d8fbf5d6b6a382157bbc0d99f5fd32b35529ad447e7809"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8276292798.json": {
+      "bytes": 833,
+      "sha256": "69c7d9b52f19f7955f723040ab404f7eb828c1b0def7c3a4ac27ceb80ffd12c7"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8278387167.json": {
+      "bytes": 833,
+      "sha256": "8ad1fc5648ef200cd5efbeb99600e5674971f3780b000563a56f824767ac80a5"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8283398810.json": {
+      "bytes": 896,
+      "sha256": "48995375938461fb260bd40b436a22bb6b63dc9d781cf1268d40ae483ad7fb8f"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8285686152.json": {
+      "bytes": 891,
+      "sha256": "97a346b0a6ac3fe1055451c0374fdbe53ebe23c3a02ad613386c77597a9b1cfd"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8288007446.json": {
+      "bytes": 827,
+      "sha256": "1e933de04b20b03f30b684b535e5030e6d84d05a0671480e68a96ba7a525e4b7"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8291432056.json": {
+      "bytes": 840,
+      "sha256": "4ed3017a3de5c09d394466a06f384cec628530af0b1aa5d0e193886748caaf6a"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8291855321.json": {
+      "bytes": 838,
+      "sha256": "9c217c3c2d5c3c546f81daf7ce37e207979ce11719f66ca8458fc50a6047d226"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8296121085.json": {
+      "bytes": 826,
+      "sha256": "7a2b794f3a940f58b4c652ecba8279ef03ff5e84e73d7fd6013bff98b89039a2"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8296219251.json": {
+      "bytes": 854,
+      "sha256": "e75bf50f5af5f05ba342f6c8299c325fbcefeff4ad279a62fe576d928e207585"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8296276709.json": {
+      "bytes": 849,
+      "sha256": "0a777675b62aa790df7c9b0e757c75cbd05c4bbd97721cca76b1d405b3665daf"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8300174474.json": {
+      "bytes": 840,
+      "sha256": "1b6408ee0f7d6b26601a75c912418dafb2582db10bdc7463452603ec55a47f20"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8300239378.json": {
+      "bytes": 829,
+      "sha256": "68f384e69e9d57719750214ad83ca721244588602e408d31626fa00e0d8d2db3"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8300681759.json": {
+      "bytes": 767,
+      "sha256": "484c26927438e016e37dc1047bc9148b8bd65e1dcf51726a1c2fe8e6a1854268"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8303294893.json": {
+      "bytes": 814,
+      "sha256": "8b8f38aa76752bf2ec07aa65eff78b8f730e4782bc434144a2b51e30acbbf667"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8303435747.json": {
+      "bytes": 824,
+      "sha256": "ee052d4ec5613de4e643d739b7b0ab64c056685546830e9207aff42145f1f826"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8304731831.json": {
+      "bytes": 848,
+      "sha256": "5d688629e82b16801991214266061ded3e2682aaffe3989384871fd6e0f99bcf"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8306519393.json": {
+      "bytes": 835,
+      "sha256": "e8756b2599605ef48329eae2a2c9c78732f5cecf2524c8b69f9ee02a1348e331"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8306544559.json": {
+      "bytes": 821,
+      "sha256": "d1720bdfcb39fb153f1b9dbba4fd10372e1fea8b782a444bc7ddf122cd4f39d5"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8313988435.json": {
+      "bytes": 885,
+      "sha256": "57a6c32a8e112c51bdcf863113c6b13dd41e60afd089e6d5ba03dbc68e91a39c"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8314291170.json": {
+      "bytes": 854,
+      "sha256": "88d5ab4f452adf8bfef98fcddcf649b0e5646ca241b76d32f086f8cecda6e286"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8315219827.json": {
+      "bytes": 830,
+      "sha256": "e664413eb7fce9e19f5f58e762c515ecbc8f00a5d9db6610ab085e52d6f532d3"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8315423792.json": {
+      "bytes": 820,
+      "sha256": "6d6f6f36566ff272dc176702614a86deb2a85c324299bf3afa752dc1e5066512"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8315681009.json": {
+      "bytes": 863,
+      "sha256": "c098fc650b885f190feaeb93104866a3089c815cff52caa94f4ac56f8dee1b56"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8315982689.json": {
+      "bytes": 852,
+      "sha256": "150be34f2a3e6c5ae5de339e69662260cc549c02978b6ec29b3320abee537ba7"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8319953560.json": {
+      "bytes": 821,
+      "sha256": "2a41f7a6f6860bed4eda1ff38254f748be722b274b67bcca4797f88892a48b6d"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8323169215.json": {
+      "bytes": 852,
+      "sha256": "262e6c0edbb39e0d6c98c72c9c51050841c9eda73005a4bde4255a96e067a8f4"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8323203189.json": {
+      "bytes": 858,
+      "sha256": "9fce687752cf3a419f7d576042d318e6dd225c3209d5ef412a575f8448f1db3d"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8323275951.json": {
+      "bytes": 805,
+      "sha256": "5df2310161c9f76e458421a41d1d1866b23ed8b57f47f9aed1f8bcb1bace3805"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8323554965.json": {
+      "bytes": 856,
+      "sha256": "43e895080480085d7a943f4b7550a612bb010f96e58dc3612137b39be687bb79"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8323704604.json": {
+      "bytes": 816,
+      "sha256": "7d9bf24550cbc229245ba72df53f99e6ede5c25c45e2d13b3de48c386365aea4"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8324344574.json": {
+      "bytes": 833,
+      "sha256": "df86ede63c40eb4d4ee11beae029f68acb4fcbc2c7f3797843200de4d11e3871"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8325892764.json": {
+      "bytes": 838,
+      "sha256": "24ca0754b67c859ea9a7b907c5dc5ee3014e700945b170ff98b1fb9c963e6e51"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8327879027.json": {
+      "bytes": 801,
+      "sha256": "d4f64a8a17031d05e32d0f2e86d4aefc32d7bfd46ad5bf477c57a89333a2c054"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8328593219.json": {
+      "bytes": 812,
+      "sha256": "c54e128aee331c26359c262b118292162e9bc52285e397a6586f9822fd2ac6a9"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8330849036.json": {
+      "bytes": 824,
+      "sha256": "d77a9b89b3976e787c2900f036df618fdde0216a49998580a7c80056ab640348"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8330892235.json": {
+      "bytes": 821,
+      "sha256": "08b817f18c33ef583335119bef06768d6422f45843be562a479a02ea5314a74c"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8331328918.json": {
+      "bytes": 834,
+      "sha256": "4ba1e79d1e8298c9bd1f0efb3eab7d2d3921be8a141712840b201a006d9c6698"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8332242198.json": {
+      "bytes": 830,
+      "sha256": "875ead60434a84fcea8b3c96cfdc693ffa3f85d08dbde7c3965fcec8eeed162c"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8332382688.json": {
+      "bytes": 911,
+      "sha256": "57b2e42fa31ded74f2c6fa9d4c5b501f49aae52fe0f376d1e66dbd3370a5cc79"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8332491976.json": {
+      "bytes": 851,
+      "sha256": "4fa227927eaa794450d4251e2e01533a8ee6798f1da772c520f182eb4e229912"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8332719791.json": {
+      "bytes": 821,
+      "sha256": "f432a471c80c7b6af9d1e4619a63054a78a93dff6c3433a4a795ceffc6013334"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8337097890.json": {
+      "bytes": 857,
+      "sha256": "2b6c9b004f35f3f07beed85ff436e18739c1a4313caf00e1be646a5f26d71ea5"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8337766855.json": {
+      "bytes": 961,
+      "sha256": "d140500f38b9e4db78960366aa847c9872c5ccedcd82d43ef2f3dbe6b2015efd"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8338058183.json": {
+      "bytes": 850,
+      "sha256": "632ac1f08d2db72893c165db86dd902c955d4e8eb60ec04d726598a145646dc6"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8338526165.json": {
+      "bytes": 844,
+      "sha256": "0a5acb86351094b6d298923a0d4f0eb8ead8d8e3bfcb7b577391ae17fcd45ff4"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8338579401.json": {
+      "bytes": 845,
+      "sha256": "e1070eb712b1d10d388d8bc2196b88a67716978834c2dbae5ccad818f93688d7"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8339631957.json": {
+      "bytes": 866,
+      "sha256": "19ccd098dd8847bb5b377e89ac2216f7b471b6e9050b0415304a89c7ca0b2c2f"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8340164271.json": {
+      "bytes": 820,
+      "sha256": "3f30460ceabbdc6ed80bced7ed128ea79be272edfbe3bad27e9e65a4ad7a3669"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8341250953.json": {
+      "bytes": 830,
+      "sha256": "d81139719cce320499e48fa115c1c7ef35df0c3205a0c7224d8608578fb82b74"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8342664138.json": {
+      "bytes": 865,
+      "sha256": "b612d156213c1e594bc2f5ecc59ec515381333423008ea4f836bc5d6ea40d2cc"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8343035880.json": {
+      "bytes": 848,
+      "sha256": "2a89aa78c7e53d0b7691362a096486907ef4519ce7de90e1ac83ee56255b240f"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8344002583.json": {
+      "bytes": 855,
+      "sha256": "389b21f0ab8a93ea7d732e686672eec73951c7218593beae06980fd5a85d539b"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8344734075.json": {
+      "bytes": 836,
+      "sha256": "c6bb5f93d92f7a789d93a90cabe8886591d7c3dcec32fb2007242fc52037a111"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8346558466.json": {
+      "bytes": 929,
+      "sha256": "dd13256d15eb0120b3effa745193955760d231ff3de956721a94b426571c9a86"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8346910382.json": {
+      "bytes": 845,
+      "sha256": "02fc7729dcaaa39025c549518fe305e2ea64381d85d95d8c45a8ec67e1d87c3f"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8347053195.json": {
+      "bytes": 815,
+      "sha256": "82bcfaa5779ad7d68bafb73a4e44ceafb34b3443ba1ae9910f7a0925332b91dd"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8347990467.json": {
+      "bytes": 834,
+      "sha256": "e30c3feebf8f4881e2cc4626aa9c5d8a5df02f9d3a9727645c43a635ce26ada0"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8348416314.json": {
+      "bytes": 841,
+      "sha256": "bcee8c4c33a67654d803ed74202ec1fa0dc17539e264d7dc0281e9e105b2470b"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8349376387.json": {
+      "bytes": 918,
+      "sha256": "6de1fb59b88d04b37817acf78058f749d02c8e78f9953eff660ae7f2383e02c0"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8349551848.json": {
+      "bytes": 815,
+      "sha256": "b282d18e5c90777275dd01db35e602e921ed1ebbd41b681163099a029a1a8feb"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8350395169.json": {
+      "bytes": 841,
+      "sha256": "f56a9c47feef4a60f4703eab550d0297c57ca1d31c722c6123730d12f2eb4ba7"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8352012511.json": {
+      "bytes": 817,
+      "sha256": "d56d47838ba224371fdb3db0c89722439aa4753efa6dc3bcc6e0729ea9d77982"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8355886681.json": {
+      "bytes": 839,
+      "sha256": "0fd7d1bc34dfab5cb56a107745d40c92ce4bb20dd6166e41ca32ab303266677f"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8357445083.json": {
+      "bytes": 856,
+      "sha256": "d279f647b4adbf7d48ab078350f613f4d890570ca3df1e8e33fae64fb841a753"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8358212080.json": {
+      "bytes": 817,
+      "sha256": "e4e60aad3afacb7d3ae60fb1ba7c651cb63eca4f36be71b052f15eb3bf89ed2b"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8361953633.json": {
+      "bytes": 808,
+      "sha256": "271c0060d1dbbc3c0f6f40c165bfe375d994e72f7561c649b542e20b713945cb"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8363661739.json": {
+      "bytes": 847,
+      "sha256": "cbcd641e227adef577b0d663843914a24bf44e2a34dd7130466d9204fff3ef43"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8364708063.json": {
+      "bytes": 855,
+      "sha256": "fc68f000fccf11473ec16d2eaa6f6e9452d4eb7e536dc88f26ab6df68a9976bd"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8366256312.json": {
+      "bytes": 774,
+      "sha256": "e6e4f66074528dfbf9dc2614a0ba41406f42d64d6cdf14a25ba2c60afecfe7c4"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8366618514.json": {
+      "bytes": 824,
+      "sha256": "f18c236874b328beb2fae30bbb25b296537612dc6b163a97780d5f9ec244d2ba"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8366745413.json": {
+      "bytes": 929,
+      "sha256": "725b327f369fd51f772e6ece9336dfd5d88617dab467bfcd230fddc20e350ade"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8368473978.json": {
+      "bytes": 794,
+      "sha256": "10dd5106c4ce70378360cd289b431abc3388c9044f5a0fff59d6f197edcc3399"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8368822748.json": {
+      "bytes": 835,
+      "sha256": "836aa041dcc68f94a6c3b84806792c7074c89d2c30c1deb3f323cd756ec22bc8"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8369439337.json": {
+      "bytes": 842,
+      "sha256": "05d3fa6f6249b73c9c3e4d9824e49a9610eabc7b56c8cd436319c3138472e6ad"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8370735951.json": {
+      "bytes": 907,
+      "sha256": "88e4fc231e512975b3a1188be5eceb36c2e493e1e249f5b983941965ad230d5f"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8372559237.json": {
+      "bytes": 847,
+      "sha256": "12b4ca5b0bab34982817a58c0da71125bdfca51d4649788754a32997981df435"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8372724795.json": {
+      "bytes": 841,
+      "sha256": "67e75dc4a6ee819385830ce5c373577ae1b20c7ecf0e454f2932c2c786235c92"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8374755649.json": {
+      "bytes": 850,
+      "sha256": "259a8ea998aa5cac7249aff7347f4a021d104887d163ca7ce7ea424a05de8a23"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8376198305.json": {
+      "bytes": 871,
+      "sha256": "006cfbf658fdea9860ed18410c39a8667746f199a39e7f5ca208944d69e6af8e"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8378029163.json": {
+      "bytes": 833,
+      "sha256": "99b2de9771d84075a110721466f9af47f52a9abbce29dabe1e170dec89c64c0e"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8378140961.json": {
+      "bytes": 836,
+      "sha256": "2987e1543cff269ce54137d1ccf2b3f03e2cfa9138f4356d1b83b7925a1031da"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8380907011.json": {
+      "bytes": 840,
+      "sha256": "8afdea997d50de873150890cf01e2844c62275064016e846eee7c4886f44d64e"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8382478788.json": {
+      "bytes": 845,
+      "sha256": "ee95db82987c8fabfbf19ce83a9c896d75f5b8c70bd41a13265705b80fc6f6a5"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8383552843.json": {
+      "bytes": 817,
+      "sha256": "cc4b6b818d95f9e5d6f3e02ceb95e104892f099cb303b239cbf03b51186cc0f5"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8386422383.json": {
+      "bytes": 822,
+      "sha256": "bac7f974884fe3098e1603da71c0f7894eacba32723ff08f0f28ef8eaf035b46"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8386873932.json": {
+      "bytes": 842,
+      "sha256": "7ddeb1803f91be4977d0df292b07d1e6cf904ab73059e013e7a13ab167d7991e"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8387097326.json": {
+      "bytes": 755,
+      "sha256": "631f44bb983d03696555181df62181982d60cc5ea14e17013df54e1727d6d917"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8387123350.json": {
+      "bytes": 824,
+      "sha256": "a167292c7f6e5551f42050519a2e9aaa1af19c878824cdbe3780edd54c7a2c54"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8387844976.json": {
+      "bytes": 829,
+      "sha256": "363d45e5cfdddd56032e8a924b33154a1a15448d03ba2fc2d336aaee5c538682"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8387964795.json": {
+      "bytes": 842,
+      "sha256": "cbf646a73c390928bb8a97ca8572c215938cebc86fa6a43202993dc7abd3a0d5"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8388085423.json": {
+      "bytes": 878,
+      "sha256": "29aa4b9e35d1764ad751eda05ccbd983c22eeb591f738d0a080f37da61ca7752"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8390929879.json": {
+      "bytes": 828,
+      "sha256": "853c4c8438e6eb4108fdc2b73803a0763685cecd960ee612e8861fc4e7db57c0"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8391223420.json": {
+      "bytes": 854,
+      "sha256": "057aa429bd98dc4dd6cc01be5d1a2fb82db5d9b40dd8118529b8612e3ca895b1"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8393561239.json": {
+      "bytes": 823,
+      "sha256": "23fa4885bff4985dd5b82293676ccc6baa484a09726e34d90ba7d2de8621e47c"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8394384607.json": {
+      "bytes": 848,
+      "sha256": "408cb05231310557afdd1fec18eaebb98ccde88575c61750cb2a6c4bea5ca157"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8397782203.json": {
+      "bytes": 754,
+      "sha256": "ee3becd3a6d4442b19b854c3925b5d88b0c08945b21c3c0fc06c0e7520f9577e"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8400045259.json": {
+      "bytes": 829,
+      "sha256": "7445d2b9adcace9e49885f94f6b2bb9f15e9e13421d46abc89fb276240f31aee"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8400774461.json": {
+      "bytes": 825,
+      "sha256": "8e773b78a1dc58f521f52e25d0b6e83442f26e9f061929d1eb26b1c925460645"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8400928487.json": {
+      "bytes": 857,
+      "sha256": "2e9283232dd1a7441771db9f5e8260aa236339aeb44f241995e278c153a28cd0"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8401673928.json": {
+      "bytes": 848,
+      "sha256": "20d71d58c1ea999e6dc0ea3c29952d486802d612fefee3c3dea69e6820cb4e6c"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8401751647.json": {
+      "bytes": 925,
+      "sha256": "6f8681fa43c117b0e3cf3bb69a7e6cc83c0fc599bb9db98e1a72503a02849f22"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8405285669.json": {
+      "bytes": 878,
+      "sha256": "378fb46ce5c213210615f4734672526e656cdbabdd87ba6d81c0078dfd114a8c"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8405516285.json": {
+      "bytes": 787,
+      "sha256": "bb806d5bda8d099f4ac1616523201323cb2f0c7a86d4d269ea01881782ea0288"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8406035392.json": {
+      "bytes": 854,
+      "sha256": "cb2fe58a0d8f5e6d0eab039b109e21e9a98683b7f6dcf78236a023ea6c8f012b"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8407035224.json": {
+      "bytes": 862,
+      "sha256": "753e596ccbcbe266b6039ab79e83286c96e80e6e39214ccc5983e18692afed67"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8407808102.json": {
+      "bytes": 833,
+      "sha256": "c7373f0e5fe9fabdac5eb31414e5379fa10ce0a94a8cfceb151cabbc83e4aaf6"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8407963811.json": {
+      "bytes": 853,
+      "sha256": "af37b6c058fd8bcdb0a05e7734eedb569df49d3fbcbd1dda0f9be57b72c2afb7"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8408302336.json": {
+      "bytes": 810,
+      "sha256": "e6d377136b0681c92dcb19749c626fea5641f91610368f57b5690b4dedb983c0"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8410061013.json": {
+      "bytes": 845,
+      "sha256": "084379a836f1418a4f20e7bf80f7d683c80ce779d89aa22847de7efa9955c95b"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8410561188.json": {
+      "bytes": 929,
+      "sha256": "1b897128572f5f42a48f2ac7e2bbb9828fccda9b6ddaeee04767274c3dc5c5f5"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8410666776.json": {
+      "bytes": 864,
+      "sha256": "fc003e4edd1b57e855446ded6f94451c69ed1d724ab82879ff114efc91944b6a"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8414751697.json": {
+      "bytes": 894,
+      "sha256": "7aa47ce5dac59c1724695f59d99d1cb78aa309bf4dfe8cc2d6e5c48b0ec46378"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8415722960.json": {
+      "bytes": 883,
+      "sha256": "81e059b66d4e8b78f366ea4a3f83f69e66c80ede08c60edd13e7dda4db898e24"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8416063367.json": {
+      "bytes": 817,
+      "sha256": "e50419d4526901475f9dff0fb2984ee6796fa1af3c121c47ec2ce94bc089d11c"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8419691890.json": {
+      "bytes": 848,
+      "sha256": "9f075b6a09b593ed34f750eb91470b0792b275b25302f1182108bdffec9acaca"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8421990048.json": {
+      "bytes": 808,
+      "sha256": "3e0aa3043b9418bee32822fb10783b8fcb4e82b5200534d03cf90c7acfcaa498"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8422156698.json": {
+      "bytes": 854,
+      "sha256": "d3f02d05727f5f8f03931e20bcdcaf7d93dc4e8a6898519fb49b2bed390dd09a"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8422714042.json": {
+      "bytes": 832,
+      "sha256": "b14a8a91de3e6da6f82377cc0aa61c9b0519283db08c9fccf24c89e38dff3a07"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8426072892.json": {
+      "bytes": 903,
+      "sha256": "f9609ac512e9b22b4553da03c22c2f761d4e81e654723570f3d24dc0578d0b24"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8426646722.json": {
+      "bytes": 873,
+      "sha256": "6eb16fac4e7da245bdbc8a7962c8530a098b59b3683ae28ee28c9ebfff14977b"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8427354694.json": {
+      "bytes": 836,
+      "sha256": "e005ff10f3267d33ee1fc9ffa8588871c826406e3220a71f61865602ea0da460"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8429221986.json": {
+      "bytes": 844,
+      "sha256": "bfb6763ebe75d3c058c53911078cf1c464cc7cfbb74d11c4ae44b4e893f9b863"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8435320949.json": {
+      "bytes": 875,
+      "sha256": "9f052ec77ba23c687ec77355be8220f65e68fddfe20f0bb0b5ab9b3dff220dc2"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8437663115.json": {
+      "bytes": 858,
+      "sha256": "1e33cd9faa57a8fd5f94986c7a6a33bd2b249a4d0e118d516967059818814e4b"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8438628464.json": {
+      "bytes": 805,
+      "sha256": "78278bd2f5fda2f4faaceab93ba2ce051a012025bb476bf468c32ea32f7d3b79"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8439348417.json": {
+      "bytes": 839,
+      "sha256": "cb7261adb9a28454165759cd7710a54ee260f60a52d687d5c8189009d62cf78f"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8439576374.json": {
+      "bytes": 838,
+      "sha256": "8526d81beb67d8109428c81d0a2641555cc93f1c34799f98e16b10429e5a280d"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8439987799.json": {
+      "bytes": 814,
+      "sha256": "24fd9374f436dacbcbca66c7327290f79d6ac007505fab1137dfeed882bc8f1a"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8441342441.json": {
+      "bytes": 853,
+      "sha256": "bb5d9ce8d5281a7f2b3e3f9e2941e76a57591fb0d407be941200e5f0e4f0e4d4"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8441464543.json": {
+      "bytes": 874,
+      "sha256": "f27f78554a2e1a09ebffc387bdfbe43f7fc518cac6b1a8890cad2035ac19066d"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8444893837.json": {
+      "bytes": 849,
+      "sha256": "7da4bff812791bbea2940717f3d8085a64477de4cf9be7bf46b45789014e088a"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8449665922.json": {
+      "bytes": 837,
+      "sha256": "1ae514c7ddf604af437fd7c0b25f36457c504635752942554732c7c131ff297b"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8450816243.json": {
+      "bytes": 838,
+      "sha256": "bac874f33ecaa8fb153a6af30d831e06d5f465add62de828ae225a6a5fd9c771"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8450993286.json": {
+      "bytes": 880,
+      "sha256": "e9d255400ec03e82ca2b9ae20d6b3607036aeaf170ae945b391e381101f708f6"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8451004655.json": {
+      "bytes": 817,
+      "sha256": "e5d967819214fee155d480db19de82e89a4cd0d5c39dc868522d621103a3ceb7"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8453026257.json": {
+      "bytes": 877,
+      "sha256": "4a80300aae88d01a26a44c2cf2940a66bb0258053963edff170f846d21a3088d"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8453238356.json": {
+      "bytes": 830,
+      "sha256": "aa42e84abe0a388d69c253765b70a140f47973a0e5aed2b567ebba534f37a1ae"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8458258708.json": {
+      "bytes": 832,
+      "sha256": "b68178045fa2ad335c3411fce22f886edcd07b8d6ee0e35928cbf5ac55e31ed7"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8458332949.json": {
+      "bytes": 811,
+      "sha256": "9312e0aa7d4f6aa6ca8c0ad1f698571d7f8e8802837899564da92e7f8ed93aa2"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8458822302.json": {
+      "bytes": 817,
+      "sha256": "80e41b7f95389a071e6a2a18da0259cefcbda25c545f00f048636af7c1ce9007"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8458840366.json": {
+      "bytes": 848,
+      "sha256": "0e2dee34df7873bbad407a5c7589a7b274cdb1bfe4fba7ccd5e262d1d5ef4e04"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8458915522.json": {
+      "bytes": 858,
+      "sha256": "1beef6c7e6767899e40357134f443edde5a9d1d5a00fb52f36fb0bf43ff1d9a3"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8459824383.json": {
+      "bytes": 847,
+      "sha256": "ff8a1077d2ff85cce8d775beedce04d31dc641eacfa4607e97b9db1a95099e8f"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8466916059.json": {
+      "bytes": 854,
+      "sha256": "d42843790c9696d0f49d726a3ff2712f01a3db6ebe113366738e6a08132b3ea2"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8466972968.json": {
+      "bytes": 875,
+      "sha256": "ceb3f10027681c01cd2dd4308ef6dcf59f82727adaba476f41ed1b44b08ec153"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8467601204.json": {
+      "bytes": 862,
+      "sha256": "df333e43a0d45ea31b17ac0147146feb87d57c7d3cf0e95bfec3f374c98d4b1c"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8469831682.json": {
+      "bytes": 939,
+      "sha256": "50e24f437fabbdb82e1207e03f6a263dc9145f6f9293becf1d394c73b7d89a71"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8470109019.json": {
+      "bytes": 844,
+      "sha256": "9888250651ba6006450f980fae4a7011b46cc9e3be226ad04a3920b37e9fa4e2"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8470163358.json": {
+      "bytes": 823,
+      "sha256": "e9040c27774368429170e2d6a1df0091e089fcb4900472783302d089f780c025"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8470491299.json": {
+      "bytes": 881,
+      "sha256": "23881cc7b2c06e1ab0eabcb6cc36b79870245b3f15a6b179b3e2a55912543652"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8470630300.json": {
+      "bytes": 833,
+      "sha256": "72ff178599d8a5bcf7093fc0ff3524ba1390801c407a1450855f757c42a4de15"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8480662273.json": {
+      "bytes": 874,
+      "sha256": "cdb3591f0f713b54f4f76376f94d0595aa967422ed1077d9c27b541e36ae8ea2"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8480807775.json": {
+      "bytes": 851,
+      "sha256": "e9e79f990d9a0b72f14820b98fa8d149417db607244310c35ed03af97826d62b"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8480979232.json": {
+      "bytes": 852,
+      "sha256": "93fb2a275804f735ff3c4076a735df9f246b0eb3cf6c683d4c9d9ca8401827b1"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8481801402.json": {
+      "bytes": 856,
+      "sha256": "2e2b9c7505a76ba7e908a6fa68d4ffbcb387c51cba1b73c4147e80d0165b8ac6"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8481974946.json": {
+      "bytes": 839,
+      "sha256": "7ce43991f0b3e877e588eb1cb6c4481439e15cc1fceffcb0629e02d6c6f6b6dc"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8482004367.json": {
+      "bytes": 841,
+      "sha256": "10de569f846d7154dc37533872734695421e890d1ca8ffa29d6c60137f012cb7"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8482062234.json": {
+      "bytes": 856,
+      "sha256": "94c9aea12a1908551630d14e0a99ec9e86e860d899ecf64f7d09aa60b38a3c09"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8482467354.json": {
+      "bytes": 830,
+      "sha256": "74f9c2aa2f16dfae9fd11f70f2af3b41b5c2fc3ef6f3794a93b20f016306fe33"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8485167411.json": {
+      "bytes": 844,
+      "sha256": "6f015092bc45cfb4c6f4f659e5a831a137a803b3f92dad13b23cebaa9b5933c2"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8485310550.json": {
+      "bytes": 788,
+      "sha256": "1567e5f1d7d7478cc30dd4e476846b707c6861523e4b1a6d04888cd1ac2cfa8b"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8485496660.json": {
+      "bytes": 855,
+      "sha256": "11ceb856cc83eacb6904c4a95ce31229add9d235ec75ae696f8f766e7aacc653"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8489074488.json": {
+      "bytes": 855,
+      "sha256": "794f48de6b1b3fe708904c49cfc9212828f1865e29fd3eec28077a421f58515c"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8512275386.json": {
+      "bytes": 830,
+      "sha256": "29886c88693eba61966b4a08e7dcf9955f4503782cd545219f70949e7a0b95a2"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8512566138.json": {
+      "bytes": 875,
+      "sha256": "11d64c5946c5c8887547a673fd0cc7a16a18205577271350fd3b4e5d1c1f24b9"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8512714222.json": {
+      "bytes": 832,
+      "sha256": "8d2fe6c7d09b04c139637cb94574648c4243b79c5e0e010b35890c8470794fad"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8513495481.json": {
+      "bytes": 872,
+      "sha256": "f62b8b2e45d62a07089c19fe74f6227a098ed75dbe354816634816836b66e4e1"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8515132821.json": {
+      "bytes": 851,
+      "sha256": "fd9d9b3d55be88ebf056a1bac2ed18cde7bea18c28ee82ac944a5c7f1001f8f9"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8517222154.json": {
+      "bytes": 839,
+      "sha256": "a0aa3ab1889aa17401cec302806e771ede43fdee71f5406b4cf7ca956426f5c1"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8517721825.json": {
+      "bytes": 873,
+      "sha256": "db7512a96b29e0193958830937fce3ec229105d5c6a991bc783752033cd67754"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8521454016.json": {
+      "bytes": 833,
+      "sha256": "2608b6555f49ee0f2b806650757a0e8be93417d0800c8357356e6b84f61c6257"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8524911825.json": {
+      "bytes": 938,
+      "sha256": "10041c9c9ccd03335691dd4381085fafca0c9d855077af71d8b444c12b104212"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8524942448.json": {
+      "bytes": 912,
+      "sha256": "a74da97e983187b8c4e847b3db5f445f511e8fa105374f135dcaaf41f088282b"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8543512616.json": {
+      "bytes": 837,
+      "sha256": "5b46d19b2addd5c7fe175c93034dc6e8d3052e82d84877c74e35f4d30ed42ad4"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8545138548.json": {
+      "bytes": 777,
+      "sha256": "0516d9b495e7c3a2916e627416390948b2d4e6f467df6289f5e17b2bae7a4e54"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8545399211.json": {
+      "bytes": 831,
+      "sha256": "391c7b23bca7bb9001458a39826f636117d88b647ab3e764b75913f147611a55"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8557577322.json": {
+      "bytes": 834,
+      "sha256": "2fafa320940f5e0b989bc80b207cf89c3d21b766986683400b5aa73748eabacf"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8575250023.json": {
+      "bytes": 849,
+      "sha256": "dbab951b463c7f63b1bfcf4eb6add924ced7bf552a7a9decdbdd24a1c0b98f0c"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8577523013.json": {
+      "bytes": 835,
+      "sha256": "42f30a2f634d971e2fc8c271d11935a07b8a6399cc65876edf513774913f6a5c"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/reviewed/8577675698.json": {
+      "bytes": 838,
+      "sha256": "c562a5991707b136adb09a690c447fc1ab7e98700eb3b7166811a54592319fab"
+    },
+    "Data/avito_runs/20261029_spb_cashier_part_01/standing_unavailable_policy.json": {
+      "bytes": 840,
+      "sha256": "af9d9881bd9e5b06e30535be314df0d7516873d62947e9491f8f5b1138a32dcb"
+    },
+    "Scraper/runs/20261029_spb_cashier_part_01/plan.json": {
+      "bytes": 14800,
+      "sha256": "80b5b485605416f5309de392b8fcb62e4bf20eb1811b9786a9a6b2d0d497945e"
+    }
+  }
+}
