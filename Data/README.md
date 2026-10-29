@@ -151,3 +151,5 @@ avito_runs/<название_сбора>/
 - [spb_picker_20261029_b_01](avito_runs/spb_picker_20261029_b_01/exports/vacancies_flat.csv): 300 вакансий.
 
 - [spb_picker_20261029_b_02](avito_runs/spb_picker_20261029_b_02/exports/vacancies_flat.csv): 196 вакансий.
+
+- [avito_f06_ekb_picker_20261029_b_01](avito_runs/avito_f06_ekb_picker_20261029_b_01/exports/vacancies_flat.csv): 298 вакансий.

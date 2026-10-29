@@ -53,6 +53,13 @@ def build(root, registry):
         data = (root / path).read_bytes()
         if digest(data) != entry["sha256"]:
             raise ValueError(f"Source SHA-256 mismatch: {path}")
+        correction = entry.get('profession_correction')
+        if correction:
+            correction_path = Path(correction['path'])
+            if correction_path.is_absolute() or '..' in correction_path.parts or not (root / correction_path).resolve().is_relative_to(root.resolve()):
+                raise ValueError('Profession correction must be inside repository')
+            if digest((root / correction_path).read_bytes()) != correction['sha256']:
+                raise ValueError('Profession correction SHA-256 mismatch')
         reader = csv.DictReader(io.StringIO(data.decode("utf-8-sig")))
         names = reader.fieldnames or []
         if len(names) != len(set(names)) or not REQUIRED.issubset(names) or GENERATED.intersection(names):

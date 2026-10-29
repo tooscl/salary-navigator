@@ -100,6 +100,15 @@ class DatasetTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "SHA-256"):
             self.result()
 
+    def test_profession_correction_provenance_is_immutable(self):
+        self.add('one', [self.row()])
+        evidence = self.root/'correction.json'; evidence.write_text('{"reason":"observed"}')
+        self.registry['exports'][0]['profession_correction'] = {'path': evidence.name, 'sha256': digest(evidence.read_bytes())}
+        self.assertEqual(len(self.result()), 1)
+        evidence.write_text('{}')
+        with self.assertRaisesRegex(ValueError, 'Profession correction SHA-256'):
+            self.result()
+
     def test_same_time_conflict_rejected(self):
         self.add("one", [self.row()])
         row = self.row()
