@@ -12,6 +12,26 @@ from Scraper.test_aside_runner import runner, item, courier_controls
 
 
 class PaginationTests(unittest.TestCase):
+    def test_external_threshold_authorization_preserves_budget_and_rejects_hard_stop(self):
+        with tempfile.TemporaryDirectory() as directory, patch.object(runner, 'ROOT', Path(directory)):
+            diag = runner.paths(runner.ROOT, 'run')[2]
+            runner.record_failure(diag, 'freeze', 'Missing tab ID', 'freeze')
+            runner.ensure_allowed(diag, 'freeze', 'Use tab ID', action=True)
+            runner.record_failure(diag, 'freeze', 'Missing resume', 'freeze')
+            before = runner.load_failures(diag)
+            args = argparse.Namespace(run_id='run', human_instruction='Continue technical correction', authorization_id='human-1')
+            runner.external_threshold_authorization(args)
+            runner.external_threshold_authorization(args)
+            after = runner.load_failures(diag)
+            for field in ('failures', 'retries_started', 'retry_limit', 'budget_start_failures', 'state'):
+                self.assertEqual(before[field], after[field])
+            self.assertEqual(sum(e['event'] == 'external_threshold_authorization' for e in after['events']), 1)
+            runner.ensure_allowed(diag, 'freeze', 'Use --resume and tab ID', action=True)
+            runner.record_failure(diag, 'freeze', 'CAPTCHA', 'freeze', immediate=True)
+            args.authorization_id = 'human-2'
+            with self.assertRaises(runner.HumanRequired):
+                runner.external_threshold_authorization(args)
+
     def simulate(self, count=5000, all_pages=False, interrupt=None, scope=None, cycle=False, blocked=False, requested=None, repeat_items=False, confirmed_end=False):
         with tempfile.TemporaryDirectory() as directory, ExitStack() as stack:
             root = Path(directory)
