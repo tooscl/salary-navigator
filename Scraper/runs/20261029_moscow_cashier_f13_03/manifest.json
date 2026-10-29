@@ -1,0 +1,3083 @@
+{
+  "run_id": "20261029_moscow_cashier_f13_03",
+  "dataset_id": "20261029_moscow_cashier_f13_03",
+  "status": "complete",
+  "schema": {
+    "columns": [
+      "id",
+      "city",
+      "profession",
+      "segments",
+      "title",
+      "salary_raw",
+      "source_url",
+      "observed_at",
+      "description",
+      "location_observed",
+      "employer_name_observed",
+      "date_raw",
+      "views_total",
+      "views_today",
+      "listing_rank",
+      "listing_promoted",
+      "full_parameters_read",
+      "analysis_status",
+      "export_eligibility",
+      "read_status_parameters",
+      "read_status_description",
+      "read_status_location",
+      "read_limitations",
+      "enrichment_status",
+      "enriched_fields",
+      "enrichment_version",
+      "military",
+      "military_keywords",
+      "military_rule_version",
+      "city__source",
+      "city__evidence",
+      "city_anomaly",
+      "График",
+      "Занятость",
+      "Способ оформления",
+      "Количество рабочих часов в день",
+      "Частота выплат",
+      "Сфера деятельности компании",
+      "Что получают работники",
+      "Смены",
+      "Ассортимент",
+      "Опыт работы",
+      "В том числе для кандидатов",
+      "Медкнижка",
+      "Режим работы",
+      "Количество рабочих дней в неделю",
+      "С чем надо работать",
+      "Можно заканчивать в 17:00",
+      "Стажировка",
+      "Тип предприятия",
+      "Разряд",
+      "Тип организации"
+    ],
+    "unknown_policy": "empty_not_zero"
+  },
+  "collection": {
+    "run_id": "20261029_moscow_cashier_f13_03",
+    "geography": "Москва",
+    "profession": "Кассир",
+    "segments": "",
+    "filter_evidence": "Fresh snapshot confirmed exact checkbox Кассир [checked], only checked listing checkbox name=Кассир,value=3201751; heading Вакансии по профессии Кассир в Москве; global search empty. No other selected filters.",
+    "listing_url": "https://www.avito.ru/moskva/vakansii/kassir-ASgBAgICAUTUzBGu64YD?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6InAxZlpYMDVaN244bzBNWkciO33r1Lh9JgAAAA",
+    "listing_request_url": "https://www.avito.ru/moskva/vakansii/kassir-ASgBAgICAUTUzBGu64YD?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6InAxZlpYMDVaN244bzBNWkciO33r1Lh9JgAAAA&localPriority=0",
+    "selected_controls": [
+      {
+        "label": "Кассир",
+        "marker": "params[144170]/checkbox/3201751",
+        "value": null
+      },
+      {
+        "label": "Кассир",
+        "marker": "params[144170]/checkbox/toggle",
+        "value": "3201751"
+      },
+      {
+        "label": "Любой",
+        "marker": "params[196929]/all",
+        "value": null
+      },
+      {
+        "label": "Любой",
+        "marker": "params[196929]/toggle",
+        "value": "all"
+      },
+      {
+        "label": "Неважно",
+        "marker": "params[172815]/all",
+        "value": null
+      },
+      {
+        "label": "Неважно",
+        "marker": "params[172815]/toggle",
+        "value": "all"
+      },
+      {
+        "label": "Неважно",
+        "marker": null,
+        "value": "all"
+      },
+      {
+        "label": "Все",
+        "marker": null,
+        "value": "all"
+      }
+    ],
+    "listing_sha256": "d04f0b1d9148df0a939041b813bb585aac3fe431189f39f65cc2aa7c2f530d29",
+    "profession_scope": null,
+    "profession_source": "observed_controls",
+    "listing_pages": [
+      {
+        "file": "listing_pages/0001.json",
+        "sha256": "d04f0b1d9148df0a939041b813bb585aac3fe431189f39f65cc2aa7c2f530d29",
+        "source_url": "https://www.avito.ru/moskva/vakansii/kassir-ASgBAgICAUTUzBGu64YD?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6InAxZlpYMDVaN244bzBNWkciO33r1Lh9JgAAAA"
+      },
+      {
+        "file": "listing_pages/0002.json",
+        "sha256": "bad3961c5cde855a3a7028670ac470db17dc567d6ab25d21a038b532a76e9825",
+        "source_url": "https://www.avito.ru/moskva/vakansii/kassir-ASgBAgICAUTUzBGu64YD?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6IlFTMmRmaGJSbklLaHNCUGgiO31btfqaJgAAAA&localPriority=0&p=2"
+      },
+      {
+        "file": "listing_pages/0003.json",
+        "sha256": "0ff7ed807631dbd0f221957d72aefc8109cd28ab1cc4bb94d07a53e478b8e8c8",
+        "source_url": "https://www.avito.ru/moskva/vakansii/kassir-ASgBAgICAUTUzBGu64YD?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6IlFTMmRmaGJSbklLaHNCUGgiO31btfqaJgAAAA&localPriority=0&p=3"
+      },
+      {
+        "file": "listing_pages/0004.json",
+        "sha256": "a6af53f876c7aa8c6d07e1a3d5be6d74abf4fa030f2f3fb53376da5c9a438a0f",
+        "source_url": "https://www.avito.ru/moskva/vakansii/kassir-ASgBAgICAUTUzBGu64YD?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6IlFTMmRmaGJSbklLaHNCUGgiO31btfqaJgAAAA&localPriority=0&p=4"
+      },
+      {
+        "file": "listing_pages/0005.json",
+        "sha256": "00f19b750c170c4a3a44e85318c02673160ab89de44e6a46c4b813320589c75f",
+        "source_url": "https://www.avito.ru/moskva/vakansii/kassir-ASgBAgICAUTUzBGu64YD?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6IlFTMmRmaGJSbklLaHNCUGgiO31btfqaJgAAAA&localPriority=0&p=5"
+      },
+      {
+        "file": "listing_pages/0006.json",
+        "sha256": "5f02d2f984279d1ed71b29bfb328ea116cd763798c48b453b8ab5e0d5eb1490b",
+        "source_url": "https://www.avito.ru/moskva/vakansii/kassir-ASgBAgICAUTUzBGu64YD?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6IlFTMmRmaGJSbklLaHNCUGgiO31btfqaJgAAAA&localPriority=0&p=6"
+      },
+      {
+        "file": "listing_pages/0007.json",
+        "sha256": "15e67d1a2486736cf9d9f45c3a8c24ebba691d906f2d06f9f52c2d9869a8ec87",
+        "source_url": "https://www.avito.ru/moskva/vakansii/kassir-ASgBAgICAUTUzBGu64YD?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6IlFTMmRmaGJSbklLaHNCUGgiO31btfqaJgAAAA&localPriority=0&p=7"
+      },
+      {
+        "file": "listing_pages/0008.json",
+        "sha256": "a70ea094d0804568dc84f4cf5f8fa338f8f5a228923aa5c1f5ac295567b8c039",
+        "source_url": "https://www.avito.ru/moskva/vakansii/kassir-ASgBAgICAUTUzBGu64YD?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6IlFTMmRmaGJSbklLaHNCUGgiO31btfqaJgAAAA&localPriority=0&p=8"
+      },
+      {
+        "file": "listing_pages/0009.json",
+        "sha256": "d0099ac9f2736763bd64bb116e15e3b47bf489cc7f2eb81609f8f761ad9e10a8",
+        "source_url": "https://www.avito.ru/moskva/vakansii/kassir-ASgBAgICAUTUzBGu64YD?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6IlFTMmRmaGJSbklLaHNCUGgiO31btfqaJgAAAA&localPriority=0&p=9"
+      },
+      {
+        "file": "listing_pages/0010.json",
+        "sha256": "b6a8ee0737d179cdf55d0d058fa4339eb13cae18a347372dd8039289f5833ada",
+        "source_url": "https://www.avito.ru/moskva/vakansii/kassir-ASgBAgICAUTUzBGu64YD?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6IlFTMmRmaGJSbklLaHNCUGgiO31btfqaJgAAAA&localPriority=0&p=10"
+      },
+      {
+        "file": "listing_pages/0011.json",
+        "sha256": "b34298a611c7b8612dbffcdd12f8d930440892b6a25721316a846e7733311cfb",
+        "source_url": "https://www.avito.ru/moskva/vakansii/kassir-ASgBAgICAUTUzBGu64YD?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6IlFTMmRmaGJSbklLaHNCUGgiO31btfqaJgAAAA&localPriority=0&p=11"
+      },
+      {
+        "file": "listing_pages/0012.json",
+        "sha256": "12742510cbfb191b66029f931acbe737da544f8c541e1b5b46d338eddb7fdeb8",
+        "source_url": "https://www.avito.ru/moskva/vakansii/kassir-ASgBAgICAUTUzBGu64YD?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6IlFTMmRmaGJSbklLaHNCUGgiO31btfqaJgAAAA&localPriority=0&p=12"
+      },
+      {
+        "file": "listing_pages/0013.json",
+        "sha256": "7019ab219f8b62dce7269ee164669e8a2653c0646ca02b18336db5afb6020a39",
+        "source_url": "https://www.avito.ru/moskva/vakansii/kassir-ASgBAgICAUTUzBGu64YD?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6IlFTMmRmaGJSbklLaHNCUGgiO31btfqaJgAAAA&localPriority=0&p=13"
+      },
+      {
+        "file": "listing_pages/0014.json",
+        "sha256": "c2796f208a9892750a177759d2be069f18234ee5787c8e4f95b1c7c423864ca1",
+        "source_url": "https://www.avito.ru/moskva/vakansii/kassir-ASgBAgICAUTUzBGu64YD?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6IlFTMmRmaGJSbklLaHNCUGgiO31btfqaJgAAAA&localPriority=0&p=14"
+      },
+      {
+        "file": "listing_pages/0015.json",
+        "sha256": "aac889b9aaf78ec129fd12c32dbb1045362158ed495594d4f858195d24ce3bc3",
+        "source_url": "https://www.avito.ru/moskva/vakansii/kassir-ASgBAgICAUTUzBGu64YD?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6IlFTMmRmaGJSbklLaHNCUGgiO31btfqaJgAAAA&localPriority=0&p=15"
+      },
+      {
+        "file": "listing_pages/0016.json",
+        "sha256": "8a998942e89ce94ebc75fd7013ba141c703968c9bfa86b33aaae306167937202",
+        "source_url": "https://www.avito.ru/moskva/vakansii/kassir-ASgBAgICAUTUzBGu64YD?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6IlFTMmRmaGJSbklLaHNCUGgiO31btfqaJgAAAA&localPriority=0&p=16"
+      },
+      {
+        "file": "listing_pages/0017.json",
+        "sha256": "bdfedee6f7e0bf818f44d5857775cb87271eec154f3b63505b4a86d4fbc271d5",
+        "source_url": "https://www.avito.ru/moskva/vakansii/kassir-ASgBAgICAUTUzBGu64YD?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6IlFTMmRmaGJSbklLaHNCUGgiO31btfqaJgAAAA&localPriority=0&p=17"
+      },
+      {
+        "file": "listing_pages/0018.json",
+        "sha256": "4661c7e41e58f0aec9b59baede7fe59ffb91edd8eebeef7c10c1d22bf690014a",
+        "source_url": "https://www.avito.ru/moskva/vakansii/kassir-ASgBAgICAUTUzBGu64YD?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6IlFTMmRmaGJSbklLaHNCUGgiO31btfqaJgAAAA&localPriority=0&p=18"
+      },
+      {
+        "file": "listing_pages/0019.json",
+        "sha256": "fd1b283c0dd88eb3277a02f5508690be0d95795e5b19086ec55fbe676d6558f4",
+        "source_url": "https://www.avito.ru/moskva/vakansii/kassir-ASgBAgICAUTUzBGu64YD?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6IlFTMmRmaGJSbklLaHNCUGgiO31btfqaJgAAAA&localPriority=0&p=19"
+      },
+      {
+        "file": "listing_pages/0020.json",
+        "sha256": "99c21cb85c78edd5cf7149d17962f26ce0bb4499db64ee9681e1fec4e8b5d4ca",
+        "source_url": "https://www.avito.ru/moskva/vakansii/kassir-ASgBAgICAUTUzBGu64YD?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6IlFTMmRmaGJSbklLaHNCUGgiO31btfqaJgAAAA&localPriority=0&p=20"
+      },
+      {
+        "file": "listing_pages/0021.json",
+        "sha256": "42e242c038305601f9f38cba675e0efd8a06ef938d3f57b1f464c4716f54a809",
+        "source_url": "https://www.avito.ru/moskva/vakansii/kassir-ASgBAgICAUTUzBGu64YD?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6IlFTMmRmaGJSbklLaHNCUGgiO31btfqaJgAAAA&localPriority=0&p=21"
+      },
+      {
+        "file": "listing_pages/0022.json",
+        "sha256": "a80fa2ccc8a37a8a1c769435ed68424daf64e82086b91516f9f160aeffab0f82",
+        "source_url": "https://www.avito.ru/moskva/vakansii/kassir-ASgBAgICAUTUzBGu64YD?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6IlFTMmRmaGJSbklLaHNCUGgiO31btfqaJgAAAA&localPriority=0&p=22"
+      },
+      {
+        "file": "listing_pages/0023.json",
+        "sha256": "cc8b94247b4c629658fcaea614cb0448fb510d0016941b1e53cd936e9927a7dd",
+        "source_url": "https://www.avito.ru/moskva/vakansii/kassir-ASgBAgICAUTUzBGu64YD?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6IlFTMmRmaGJSbklLaHNCUGgiO31btfqaJgAAAA&localPriority=0&p=23"
+      },
+      {
+        "file": "listing_pages/0024.json",
+        "sha256": "ee7370e1d5fa1b918b21b525c6ba729052bce5c79826b2ebb7ee52b22dd9a0c3",
+        "source_url": "https://www.avito.ru/moskva/vakansii/kassir-ASgBAgICAUTUzBGu64YD?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6IlFTMmRmaGJSbklLaHNCUGgiO31btfqaJgAAAA&localPriority=0&p=24"
+      },
+      {
+        "file": "listing_pages/0025.json",
+        "sha256": "421f8bef6f689109ce6b4de8758c53610e6ef09c23eb3e6579b4f5a3519d7719",
+        "source_url": "https://www.avito.ru/moskva/vakansii/kassir-ASgBAgICAUTUzBGu64YD?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6IlFTMmRmaGJSbklLaHNCUGgiO31btfqaJgAAAA&localPriority=0&p=25"
+      },
+      {
+        "file": "listing_pages/0026.json",
+        "sha256": "996f3d53d46b85656db3d99223c83e16992ce3f23af62215e0e57f7b79bafd32",
+        "source_url": "https://www.avito.ru/moskva/vakansii/kassir-ASgBAgICAUTUzBGu64YD?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6IlFTMmRmaGJSbklLaHNCUGgiO31btfqaJgAAAA&localPriority=0&p=26"
+      },
+      {
+        "file": "listing_pages/0027.json",
+        "sha256": "313d420c089924c4318214a92f933f0d5de09fc47d57e494e27240a0bad460fc",
+        "source_url": "https://www.avito.ru/moskva/vakansii/kassir-ASgBAgICAUTUzBGu64YD?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6IlFTMmRmaGJSbklLaHNCUGgiO31btfqaJgAAAA&localPriority=0&p=27"
+      },
+      {
+        "file": "listing_pages/0028.json",
+        "sha256": "6e1d01fec580480d34056bad7b416731766678bb88822244f2fe6f4ea1dadc68",
+        "source_url": "https://www.avito.ru/moskva/vakansii/kassir-ASgBAgICAUTUzBGu64YD?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6IlFTMmRmaGJSbklLaHNCUGgiO31btfqaJgAAAA&localPriority=0&p=28"
+      },
+      {
+        "file": "listing_pages/0029.json",
+        "sha256": "d83a508543a3a8f6ba04bd92dc756b9f11804723582d7badf9d8441457030324",
+        "source_url": "https://www.avito.ru/moskva/vakansii/kassir-ASgBAgICAUTUzBGu64YD?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6IlFTMmRmaGJSbklLaHNCUGgiO31btfqaJgAAAA&localPriority=0&p=29"
+      },
+      {
+        "file": "listing_pages/0030.json",
+        "sha256": "7a21ae6a16a07cbcec2c7f346bd8127c4f583e60f4751b7940a28c2a2b0ab884",
+        "source_url": "https://www.avito.ru/moskva/vakansii/kassir-ASgBAgICAUTUzBGu64YD?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6IlFTMmRmaGJSbklLaHNCUGgiO31btfqaJgAAAA&localPriority=0&p=30"
+      }
+    ],
+    "selection_mode": "first_N_unique_on_frozen_listing",
+    "limit": 279,
+    "requested_all_pages": true,
+    "saved_selection_authorization": null,
+    "requested_limit": 279,
+    "available_unique": 279,
+    "listing_end_reason": "confirmed_end",
+    "available_listing_exhausted": true,
+    "continuation": null,
+    "candidate_limit": null,
+    "created_at": "2026-10-29T05:27:44.674764+00:00",
+    "instruction_version": "1.7.28",
+    "extractor_sha256": "bd17892bcc632a1c0bb3f14b91a0a1856ac96c1b2960f82597f41c4aa4723a41",
+    "instruction_sha256": "eeb3026c138a7888d48606d29c674804c00c328e25709afd91122265f7662337",
+    "code_git_commit": "5d9508b934e1176434f66306cc009f560937d4e4",
+    "setup_seconds": 154.85318970889784,
+    "live_route_verified": false,
+    "execution_model": "gpt-6-luna",
+    "automation_sha256": {
+      "Scraper/skills/collect-avito/references/top-professions.json": "e3e72638b17b48f825ec6f2fefb963662494f679ae4b0cef1bebedba889610dd",
+      "utils/title_flags.py": "9c9456cb3fb0df5791630049c9c85987381091dbb9ba18bc3fb3314b8cccbeb6",
+      "Scraper/extract.js": "bd17892bcc632a1c0bb3f14b91a0a1856ac96c1b2960f82597f41c4aa4723a41",
+      "Scraper/skills/collect-avito/SKILL.md": "eeb3026c138a7888d48606d29c674804c00c328e25709afd91122265f7662337",
+      "Scraper/skills/collect-avito/scripts/run.py": "b7d4057065dd5a971f2b076b3998f78184a0626a063afbf2f80543b68409068c",
+      "Scraper/skills/collect-avito/scripts/browser_batch.js": "c3784622f80205387f7aa9599b69cbef3b8bddebc05874c984a2d3280b0eb625",
+      "Scraper/skills/collect-avito/scripts/check_capture.py": "aa746849317f9768af5aae08b394b9379539f6e268c1fc69e4ed13bd06a4657f",
+      "Scraper/skills/collect-avito/scripts/failure_log.py": "5a28324829d546ce87b662b9e6e4b48cc4ba5aa5d13114483975d2c407b293e6",
+      "Scraper/skills/collect-avito/scripts/preflight.py": "661708892946a68dec53c986df496e76dd67c314021af2567f760b740bb3ce3d"
+    },
+    "uncommitted_automation_files": [],
+    "partition": {
+      "parent_run_id": "20261029_moscow_cashier_f13",
+      "parent_plan_sha256": "d7e27efa9b6911f08318fe98a5017973991c86e88a0c987c5876f3288fff65a9",
+      "parent_queue_sha256": "3984d0df7ca580277e1a2267b3f3b90f45ea9d07e7193cd89dcd181e8fc1a616",
+      "index": 3,
+      "batch_size": 300,
+      "start": 600,
+      "end": 879,
+      "total": 879,
+      "siblings": [
+        "20261029_moscow_cashier_f13_01",
+        "20261029_moscow_cashier_f13_02",
+        "20261029_moscow_cashier_f13_03"
+      ]
+    },
+    "city_anomaly_policy": "blank"
+  },
+  "coverage": {
+    "planned": 279,
+    "accepted": 277,
+    "unavailable": [
+      {
+        "id": "8435766961",
+        "url": "https://www.avito.ru/moskva/vakansii/trebuyutsya_kassiry_v_korporativnuyu_stolovuyu_8435766961",
+        "status": "unavailable_closed",
+        "evidence": "Объявление закрыто.",
+        "snapshot_sha256": "7592ab399ba6546ec5a307251184877d7e8912e5c9e5162f0b5604e1d17ea6f8",
+        "raw_sha256": "f2a56fbf7012c57260088b661853bc000f37df9f459627e780999678b640a6a9",
+        "observed_at": "2026-10-29T06:54:55.299Z",
+        "authorization_id": "verified-unavailable-v1",
+        "human_instruction": "Исключать отдельные карточки только по подтверждённому статусу недоступности, сохраняя raw, локальное доказательство, ID и причину; CAPTCHA, 429 и общие ограничения сайта останавливают сбор.",
+        "recorded_at": "2026-10-29T06:54:55.313121+00:00"
+      },
+      {
+        "id": "8493587048",
+        "url": "https://www.avito.ru/moskva/vakansii/trebuyutsya_kassiry_v_korporativnuyu_stolovuyu_8493587048",
+        "status": "unavailable_closed",
+        "evidence": "Объявление закрыто.",
+        "snapshot_sha256": "8b0ae512cd78aa2c7e5566e80d246723e370f6da6768181a57f3987ad52be686",
+        "raw_sha256": "9637c1a9576a3ae3a4fe8572f9fc3609d0fc5914e77c66f7b35bfa5b534b70b8",
+        "observed_at": "2026-10-29T06:55:31.484Z",
+        "authorization_id": "verified-unavailable-v1",
+        "human_instruction": "Исключать отдельные карточки только по подтверждённому статусу недоступности, сохраняя raw, локальное доказательство, ID и причину; CAPTCHA, 429 и общие ограничения сайта останавливают сбор.",
+        "recorded_at": "2026-10-29T06:55:31.511686+00:00"
+      }
+    ],
+    "unique_ids": [
+      "8512051742",
+      "8453627361",
+      "8545545464",
+      "8430887711",
+      "8328091413",
+      "8467201969",
+      "8340687236",
+      "8376183422",
+      "8423638938",
+      "8471452879",
+      "8158961679",
+      "8525281200",
+      "8340392883",
+      "7822496989",
+      "8354612115",
+      "8499425500",
+      "8279214473",
+      "8512892831",
+      "8054180034",
+      "8353139891",
+      "8368605430",
+      "8197832471",
+      "8331926870",
+      "8470942668",
+      "8450217643",
+      "8463804864",
+      "8331866163",
+      "8397688256",
+      "8405089979",
+      "8163521959",
+      "8514654746",
+      "8450496628",
+      "8453474796",
+      "8208240212",
+      "8484912798",
+      "8338663325",
+      "8412997383",
+      "8471563421",
+      "8459656383",
+      "8470954101",
+      "8470138556",
+      "8408807973",
+      "8543777536",
+      "8307910622",
+      "8482589157",
+      "8337674174",
+      "8340420883",
+      "8378428041",
+      "8365886960",
+      "8407683004",
+      "8373427613",
+      "8489065853",
+      "8279256899",
+      "8399580501",
+      "8328526164",
+      "8332843852",
+      "7856413517",
+      "8197385145",
+      "8420052032",
+      "8483299379",
+      "3782500082",
+      "8545697942",
+      "8279277188",
+      "8483472001",
+      "8575270479",
+      "8381959846",
+      "8420492106",
+      "8338673114",
+      "8215018128",
+      "7843854337",
+      "8483488831",
+      "8480924482",
+      "8400969424",
+      "8353007242",
+      "8439254862",
+      "8337150262",
+      "8279775736",
+      "8163870427",
+      "8397005064",
+      "8575421656",
+      "8429335529",
+      "8420424635",
+      "8394329444",
+      "8369844409",
+      "8413127940",
+      "8382441436",
+      "8422109082",
+      "8407916164",
+      "8215821460",
+      "8230770621",
+      "8332520905",
+      "8283782854",
+      "8449076954",
+      "8420611449",
+      "8439196495",
+      "8458283931",
+      "8423056031",
+      "8491182073",
+      "8316585604",
+      "8408379069",
+      "8441462782",
+      "8382632800",
+      "8328009298",
+      "8471003131",
+      "8513863543",
+      "8372223482",
+      "8229942119",
+      "8334846944",
+      "8490204429",
+      "8445185318",
+      "8482880300",
+      "8422635195",
+      "8413140389",
+      "8353617132",
+      "8316262267",
+      "8397591381",
+      "8327855408",
+      "8394155644",
+      "8524834702",
+      "8331920519",
+      "8348033897",
+      "8490187935",
+      "8420674104",
+      "8332729609",
+      "8370599516",
+      "8328778296",
+      "8315125705",
+      "8372662783",
+      "8378223630",
+      "8525379026",
+      "8299976208",
+      "8489713393",
+      "8270736871",
+      "8490255879",
+      "8397972474",
+      "8351042284",
+      "8415539938",
+      "8230444671",
+      "8557444123",
+      "8397548547",
+      "8514468617",
+      "8414096987",
+      "8491574746",
+      "8422370852",
+      "8369551770",
+      "8398886315",
+      "8287497537",
+      "8429068617",
+      "8423131201",
+      "8358851565",
+      "8301458888",
+      "8450813356",
+      "8459186561",
+      "8512096091",
+      "8281401934",
+      "8388726791",
+      "8369226322",
+      "8287273855",
+      "4448950216",
+      "8407942116",
+      "8423157485",
+      "8229968063",
+      "8400141586",
+      "8429708870",
+      "8332784102",
+      "8391221325",
+      "8577237980",
+      "8481886381",
+      "8397270456",
+      "8268667428",
+      "8390604539",
+      "8287444023",
+      "8397399257",
+      "8396913060",
+      "8437258217",
+      "8370128139",
+      "8415516128",
+      "8162960198",
+      "8352922659",
+      "8182935995",
+      "8230272619",
+      "8086932596",
+      "8512314211",
+      "8543116270",
+      "8423805166",
+      "8401025052",
+      "8483138473",
+      "8420420779",
+      "8227358005",
+      "8482867205",
+      "8448955606",
+      "8577423127",
+      "8471360313",
+      "8421141791",
+      "8133743355",
+      "8429102630",
+      "8484984784",
+      "8159707379",
+      "8431032070",
+      "8340105318",
+      "8366829183",
+      "8333426700",
+      "8382784459",
+      "8485346634",
+      "8372895500",
+      "8159145362",
+      "8338633245",
+      "8400926488",
+      "8450513492",
+      "8453182801",
+      "8295914779",
+      "8482708316",
+      "8445599678",
+      "8382135861",
+      "8159836324",
+      "8274005909",
+      "8413092923",
+      "8397761316",
+      "8429692459",
+      "8159851900",
+      "8388170980",
+      "8557071974",
+      "8340695599",
+      "8398485536",
+      "8463281984",
+      "8401031060",
+      "8315939846",
+      "8447253986",
+      "8158934678",
+      "8159534463",
+      "8420787420",
+      "8397200018",
+      "8387938361",
+      "8367566995",
+      "8482687879",
+      "8396923217",
+      "8270087577",
+      "8159498356",
+      "8340397212",
+      "8159103825",
+      "8287174941",
+      "8467033541",
+      "8363629334",
+      "8545361314",
+      "8304893095",
+      "8405485447",
+      "8350776306",
+      "8448585000",
+      "8482930375",
+      "8365003729",
+      "8458018148",
+      "8483654005",
+      "8377892107",
+      "8338087923",
+      "8479307694",
+      "8358631576",
+      "8429487273",
+      "8397800535",
+      "8480135277",
+      "8159372001",
+      "8377134532",
+      "8286980174",
+      "8366819299",
+      "8512361517",
+      "8390322948",
+      "8159877449",
+      "8557571424",
+      "8328079977",
+      "8436981014",
+      "8368684107",
+      "8159815719",
+      "8397413375",
+      "8334063785",
+      "8525300273",
+      "8159318986",
+      "8382077402",
+      "8287129569"
+    ],
+    "errors": [],
+    "partial": null,
+    "limitations": [
+      "Visible rendered parameters only; enrichment not run; placement on site; live route unverified"
+    ]
+  },
+  "timing": {
+    "setup_seconds": 154.85318970889784,
+    "capture_seconds": 409.53903691773303,
+    "review_export_seconds": 1.0338815420400351,
+    "publication_seconds": null
+  },
+  "review_model": "gpt-6.1-terra",
+  "automation_changes": [
+    {
+      "file": "Scraper/skills/collect-avito/scripts/run.py",
+      "reason": "Единый источник версии инструкции: runner читает объявление SKILL.md вместо устаревшей константы",
+      "validation": "python3 -m unittest Scraper.test_aside_runner utils.test_build_dataset: 66 tests OK"
+    },
+    {
+      "file": "Scraper/test_aside_runner.py",
+      "reason": "Единый источник версии инструкции: runner читает объявление SKILL.md вместо устаревшей константы",
+      "validation": "python3 -m unittest Scraper.test_aside_runner utils.test_build_dataset: 66 tests OK"
+    },
+    {
+      "file": "Scraper/skills/collect-avito/SKILL.md",
+      "reason": "Единый источник версии инструкции: runner читает объявление SKILL.md вместо устаревшей константы",
+      "validation": "python3 -m unittest Scraper.test_aside_runner utils.test_build_dataset: 66 tests OK"
+    },
+    {
+      "file": "Scraper/skills/collect-avito/scripts/run.py",
+      "reason": "Сохранять подтверждённое наблюдение about:blank с sandbox и авторизацией перед повторным чтением того же ID",
+      "validation": "python3 -m unittest Scraper.test_aside_runner utils.test_build_dataset: 67 tests OK"
+    },
+    {
+      "file": "Scraper/test_aside_runner.py",
+      "reason": "Сохранять подтверждённое наблюдение about:blank с sandbox и авторизацией перед повторным чтением того же ID",
+      "validation": "python3 -m unittest Scraper.test_aside_runner utils.test_build_dataset: 67 tests OK"
+    },
+    {
+      "file": "Scraper/skills/collect-avito/SKILL.md",
+      "reason": "Сохранять подтверждённое наблюдение about:blank с sandbox и авторизацией перед повторным чтением того же ID",
+      "validation": "python3 -m unittest Scraper.test_aside_runner utils.test_build_dataset: 67 tests OK"
+    },
+    {
+      "file": "Scraper/skills/collect-avito/scripts/run.py",
+      "reason": "Проверяемое применение URL guard к замороженному partition без изменения исходного extractor",
+      "validation": "python3 -m unittest Scraper.test_aside_runner utils.test_build_dataset: 72 tests OK"
+    },
+    {
+      "file": "Scraper/skills/collect-avito/scripts/browser_batch.js",
+      "reason": "Audited URL identity guard",
+      "validation": "python3 -m unittest Scraper.test_aside_runner utils.test_build_dataset: 72 tests OK"
+    },
+    {
+      "file": "Scraper/test_aside_runner.py",
+      "reason": "Проверяемое применение URL guard к замороженному partition без изменения исходного extractor",
+      "validation": "python3 -m unittest Scraper.test_aside_runner utils.test_build_dataset: 72 tests OK"
+    },
+    {
+      "file": "Scraper/skills/collect-avito/SKILL.md",
+      "reason": "Проверяемое применение URL guard к замороженному partition без изменения исходного extractor",
+      "validation": "python3 -m unittest Scraper.test_aside_runner utils.test_build_dataset: 72 tests OK"
+    }
+  ],
+  "profession_correction": null,
+  "post_capture_automation_sha256": {
+    "Scraper/skills/collect-avito/SKILL.md": "467fc10560e211467d7c5a83cc094d3dc5f4de76dfd6c9375daf0c67cd1df0fa",
+    "Scraper/skills/collect-avito/scripts/browser_batch.js": "aa9ac31e38d07e72ee0737def2a35dda79b376166315b7388a7fd471f0e14136",
+    "Scraper/skills/collect-avito/scripts/run.py": "9d5648c52d204080883e9c7cc499df6804e64d0aaf688ea92d5a71002b668dd8"
+  },
+  "files": {
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/exports/final_coverage_review.json": {
+      "bytes": 28092,
+      "sha256": "c2f8e5d4b1aeb522f2e7b6639c54b82345c2ea5fdb6e14ba4e143eddd1aa90f4"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/exports/vacancies.json": {
+      "bytes": 1194703,
+      "sha256": "6107fe2ce7fab972aa2936a26f06714c4b59704075df46bb94fc683798c8b978"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/exports/vacancies_flat.csv": {
+      "bytes": 845513,
+      "sha256": "137468fd5002b9638e1da67758adcbaf3367eff664320a0bbf77f0927859be1b"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/exports/validation.json": {
+      "bytes": 2063,
+      "sha256": "c52425edd09627eff68f4cc2a0d252c254b87d5a0b99384a2d1668ffd937a799"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/listing.json": {
+      "bytes": 25165,
+      "sha256": "d04f0b1d9148df0a939041b813bb585aac3fe431189f39f65cc2aa7c2f530d29"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/listing_pages/0001.json": {
+      "bytes": 25165,
+      "sha256": "d04f0b1d9148df0a939041b813bb585aac3fe431189f39f65cc2aa7c2f530d29"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/listing_pages/0002.json": {
+      "bytes": 26670,
+      "sha256": "bad3961c5cde855a3a7028670ac470db17dc567d6ab25d21a038b532a76e9825"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/listing_pages/0003.json": {
+      "bytes": 27061,
+      "sha256": "0ff7ed807631dbd0f221957d72aefc8109cd28ab1cc4bb94d07a53e478b8e8c8"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/listing_pages/0004.json": {
+      "bytes": 26895,
+      "sha256": "a6af53f876c7aa8c6d07e1a3d5be6d74abf4fa030f2f3fb53376da5c9a438a0f"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/listing_pages/0005.json": {
+      "bytes": 27468,
+      "sha256": "00f19b750c170c4a3a44e85318c02673160ab89de44e6a46c4b813320589c75f"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/listing_pages/0006.json": {
+      "bytes": 26994,
+      "sha256": "5f02d2f984279d1ed71b29bfb328ea116cd763798c48b453b8ab5e0d5eb1490b"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/listing_pages/0007.json": {
+      "bytes": 27087,
+      "sha256": "15e67d1a2486736cf9d9f45c3a8c24ebba691d906f2d06f9f52c2d9869a8ec87"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/listing_pages/0008.json": {
+      "bytes": 26596,
+      "sha256": "a70ea094d0804568dc84f4cf5f8fa338f8f5a228923aa5c1f5ac295567b8c039"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/listing_pages/0009.json": {
+      "bytes": 26683,
+      "sha256": "d0099ac9f2736763bd64bb116e15e3b47bf489cc7f2eb81609f8f761ad9e10a8"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/listing_pages/0010.json": {
+      "bytes": 26531,
+      "sha256": "b6a8ee0737d179cdf55d0d058fa4339eb13cae18a347372dd8039289f5833ada"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/listing_pages/0011.json": {
+      "bytes": 26656,
+      "sha256": "b34298a611c7b8612dbffcdd12f8d930440892b6a25721316a846e7733311cfb"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/listing_pages/0012.json": {
+      "bytes": 26873,
+      "sha256": "12742510cbfb191b66029f931acbe737da544f8c541e1b5b46d338eddb7fdeb8"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/listing_pages/0013.json": {
+      "bytes": 27096,
+      "sha256": "7019ab219f8b62dce7269ee164669e8a2653c0646ca02b18336db5afb6020a39"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/listing_pages/0014.json": {
+      "bytes": 26838,
+      "sha256": "c2796f208a9892750a177759d2be069f18234ee5787c8e4f95b1c7c423864ca1"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/listing_pages/0015.json": {
+      "bytes": 26938,
+      "sha256": "aac889b9aaf78ec129fd12c32dbb1045362158ed495594d4f858195d24ce3bc3"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/listing_pages/0016.json": {
+      "bytes": 27208,
+      "sha256": "8a998942e89ce94ebc75fd7013ba141c703968c9bfa86b33aaae306167937202"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/listing_pages/0017.json": {
+      "bytes": 27238,
+      "sha256": "bdfedee6f7e0bf818f44d5857775cb87271eec154f3b63505b4a86d4fbc271d5"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/listing_pages/0018.json": {
+      "bytes": 26932,
+      "sha256": "4661c7e41e58f0aec9b59baede7fe59ffb91edd8eebeef7c10c1d22bf690014a"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/listing_pages/0019.json": {
+      "bytes": 27157,
+      "sha256": "fd1b283c0dd88eb3277a02f5508690be0d95795e5b19086ec55fbe676d6558f4"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/listing_pages/0020.json": {
+      "bytes": 27109,
+      "sha256": "99c21cb85c78edd5cf7149d17962f26ce0bb4499db64ee9681e1fec4e8b5d4ca"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/listing_pages/0021.json": {
+      "bytes": 26893,
+      "sha256": "42e242c038305601f9f38cba675e0efd8a06ef938d3f57b1f464c4716f54a809"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/listing_pages/0022.json": {
+      "bytes": 26897,
+      "sha256": "a80fa2ccc8a37a8a1c769435ed68424daf64e82086b91516f9f160aeffab0f82"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/listing_pages/0023.json": {
+      "bytes": 26789,
+      "sha256": "cc8b94247b4c629658fcaea614cb0448fb510d0016941b1e53cd936e9927a7dd"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/listing_pages/0024.json": {
+      "bytes": 26531,
+      "sha256": "ee7370e1d5fa1b918b21b525c6ba729052bce5c79826b2ebb7ee52b22dd9a0c3"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/listing_pages/0025.json": {
+      "bytes": 26778,
+      "sha256": "421f8bef6f689109ce6b4de8758c53610e6ef09c23eb3e6579b4f5a3519d7719"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/listing_pages/0026.json": {
+      "bytes": 26901,
+      "sha256": "996f3d53d46b85656db3d99223c83e16992ce3f23af62215e0e57f7b79bafd32"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/listing_pages/0027.json": {
+      "bytes": 27210,
+      "sha256": "313d420c089924c4318214a92f933f0d5de09fc47d57e494e27240a0bad460fc"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/listing_pages/0028.json": {
+      "bytes": 27207,
+      "sha256": "6e1d01fec580480d34056bad7b416731766678bb88822244f2fe6f4ea1dadc68"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/listing_pages/0029.json": {
+      "bytes": 26939,
+      "sha256": "d83a508543a3a8f6ba04bd92dc756b9f11804723582d7badf9d8441457030324"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/listing_pages/0030.json": {
+      "bytes": 26524,
+      "sha256": "7a21ae6a16a07cbcec2c7f346bd8127c4f583e60f4751b7940a28c2a2b0ab884"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/provenance/parent-plan.json": {
+      "bytes": 13800,
+      "sha256": "d7e27efa9b6911f08318fe98a5017973991c86e88a0c987c5876f3288fff65a9"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/provenance/parent-queue.json": {
+      "bytes": 423514,
+      "sha256": "3984d0df7ca580277e1a2267b3f3b90f45ea9d07e7193cd89dcd181e8fc1a616"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/queue.json": {
+      "bytes": 134638,
+      "sha256": "9adc6e6e4781e4d633a2f731c2288eb14226d286ff25aa81937efdab9e0f7568"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/3782500082.json": {
+      "bytes": 11721,
+      "sha256": "2552d9b3850946dbd9ff0ccf8bd1fb71b0ce8dac98168488841017fada9dae65"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/4448950216.json": {
+      "bytes": 10031,
+      "sha256": "5aacc8417477379e128e0d5aa31dbfceb4bc9be624a9f1b9d4a63f35f129ab80"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/7822496989.json": {
+      "bytes": 11056,
+      "sha256": "c78e62362a43393d42a7f7762f4610a575a7a1e8e90b7f12ac417de01b98e38c"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/7843854337.json": {
+      "bytes": 13558,
+      "sha256": "fecd602263780f60ec58ee43faa0bfe7ce0da13fe897ae14df0ff337f4a36c97"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/7856413517.json": {
+      "bytes": 10562,
+      "sha256": "e2bf850f52bc6c222f50bc241dac67623789045f731ee303d5ed9749c8e836c1"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8054180034.json": {
+      "bytes": 15455,
+      "sha256": "4a108e2b31034bee57ac75380061aa354c50def852b5a2ba4cc178bef4b57ac2"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8086932596.json": {
+      "bytes": 12320,
+      "sha256": "56bd80c268c78d66d003e6b1abc334a5b4dd5bfc3e17e45c89b2be3d15fba06a"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8133743355.json": {
+      "bytes": 13266,
+      "sha256": "d33c72ab7ccb4006021a8d69626f7229e6b4d565c510c3cd174241c7a29ddeb2"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8158934678.json": {
+      "bytes": 11097,
+      "sha256": "01bcd576ebca86e5f867c453b529b7e0f5a38d186d1225d2a744adeb612a68a3"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8158961679.json": {
+      "bytes": 11059,
+      "sha256": "200e8b76dcdbe7784e32d23dd3d84663e266aa8ee69b56002cb16c096e0a7fb8"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8159103825.json": {
+      "bytes": 11041,
+      "sha256": "cbff2be75ba91f9c01a0bfcebb26de3bceba7309d90131964b31731292632cce"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8159145362.json": {
+      "bytes": 11084,
+      "sha256": "f7e5795365698746ac31e7350bc987b0d1e741152357720767ab2e89b15db091"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8159318986.json": {
+      "bytes": 11038,
+      "sha256": "7859e4e6c54a2164eff9b51242c7fd36f9fb21c4f2f5ade22625ae26de1ffc6d"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8159372001.json": {
+      "bytes": 10965,
+      "sha256": "f8bf38b8c54d0b54801079ba367c92254d0dc52aa31bda0b9f0cd9149bd0771f"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8159498356.json": {
+      "bytes": 11066,
+      "sha256": "f456e9df038b33abba22b6536fc98d1325eb59eb7763a39a7b0a86c45d03d9d4"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8159534463.json": {
+      "bytes": 11093,
+      "sha256": "e3d59498daf8b41289480a4c431b1227bf56e28a0303c41eb0f795230ce28672"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8159707379.json": {
+      "bytes": 11017,
+      "sha256": "75bac4c7a3aa7789372b627b831f8f8f3753053cdbe37b42beb9f353b238a24f"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8159815719.json": {
+      "bytes": 11035,
+      "sha256": "070b0765d33f3b8e9ba1fab38a25bc03f6d6d8c50b54a55efc13e17ae8c77761"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8159836324.json": {
+      "bytes": 11098,
+      "sha256": "bc9baffb8bbb0b95bc4b5b132180ef85777380bf565a00ec474ab8649b2dcec4"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8159851900.json": {
+      "bytes": 11078,
+      "sha256": "2115fb0a1182ad1e2cafe3c0e0555346d527b034a266dfe8e84846cccfb9b6cd"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8159877449.json": {
+      "bytes": 11040,
+      "sha256": "2928ef298bfd0ddacac662f07c28a457f777f291917d62c3cf6742352eb44ad0"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8162960198.json": {
+      "bytes": 14858,
+      "sha256": "558c031cdaeaded225dcf22c75a8e3dae233f7272720341c27d7fce89cddaaee"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8163521959.json": {
+      "bytes": 14855,
+      "sha256": "a768af3609f632174caa8225561f5b3c580cf184a7e655ca6762d99dc6e6f092"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8163870427.json": {
+      "bytes": 15021,
+      "sha256": "cf3c9e7abd3344894ff62944133244f64cef58b8d165b7c13f1e421f616b73a5"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8182935995.json": {
+      "bytes": 14225,
+      "sha256": "2721d6019749fce9124106feddcc424f98bb4236b29a4783b7528d9d3fb06301"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8197385145.json": {
+      "bytes": 13657,
+      "sha256": "31934dd085e4ccc46d68ac9fe13fde9024674f0f5532a8bb85c7ee7a8650e4e9"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8197832471.json": {
+      "bytes": 13442,
+      "sha256": "ab3d9e5352715ab3ac46618f3f4b14ca1a76757db9a24cc62b5bdb5b214e8f85"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8208240212.json": {
+      "bytes": 10526,
+      "sha256": "f000f67c1e55b9aa44124c171198992f6d712b7326072ddf7a08ad74e677f978"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8215018128.json": {
+      "bytes": 13257,
+      "sha256": "5583f0ef0f9e4201f489279ad44534faa78c46fdf4189ca15b9088d2347e780f"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8215821460.json": {
+      "bytes": 11852,
+      "sha256": "386f3fc52ceead864b90c8a95603983db0fff94d7e9cd2fac537e71e426edfa9"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8227358005.json": {
+      "bytes": 14912,
+      "sha256": "e9e31523e6a03bc41bdf9c1d312c5bf629437835b09f13fe5cd54c17b21c921f"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8229942119.json": {
+      "bytes": 12198,
+      "sha256": "2f74e99c539820c8c6e807730513fc5db01ba21c21c16b8075b5daf6fa4e23a5"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8229968063.json": {
+      "bytes": 12109,
+      "sha256": "c190b6f6840e0f0e4f4a4290dbaac037dec5182b54f7b34a89ace991776a6ac5"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8230272619.json": {
+      "bytes": 12176,
+      "sha256": "ae5786d774fa8bb59a4746afc99b3532b3b03deed8bfede2b7ccd8f2db988ab2"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8230444671.json": {
+      "bytes": 10970,
+      "sha256": "344f1e1efbd8824b81b5b88c5f393c6f06f7a1d2fcd59e31dacef082f9d1d283"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8230770621.json": {
+      "bytes": 11849,
+      "sha256": "42fd78870657f030518e04b7bd3d74842eba786bbef28c76cdd966e54edb8d2b"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8268667428.json": {
+      "bytes": 13577,
+      "sha256": "736ba920ced8d140e27a0a15aa4afdaa132140a8e57ff6261c0e9effbdd4c6f2"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8270087577.json": {
+      "bytes": 13283,
+      "sha256": "8c3b864fa69283037638ffebf29f443950d5129ae494de5ee3f57b2d40bf5427"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8270736871.json": {
+      "bytes": 6970,
+      "sha256": "499f87fd198aa951670fc6dd40cc5c5e98307cf868c6f049f272d4101303d816"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8274005909.json": {
+      "bytes": 13288,
+      "sha256": "f79f1df0795487937397a75a614ad907942da02e465523a5019d013083731611"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8279214473.json": {
+      "bytes": 11814,
+      "sha256": "9fb28bc25cf34eab8b213e9ae7e01e393e554eeace01b8a1660d55e780448f9d"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8279256899.json": {
+      "bytes": 11810,
+      "sha256": "df75dcd44015f9136e4839179d19dd225f972d75aa51fb4db8a84cb00f6efc4c"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8279277188.json": {
+      "bytes": 11605,
+      "sha256": "3063e036b388344ae0a5b46c7d38c7e95988fa1c60a61b447b91a12adecfa091"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8279775736.json": {
+      "bytes": 10560,
+      "sha256": "ab35f5afef0497345319ecda1d0bbce571b90e2176e8c90c7bdd24c3b2743fe0"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8281401934.json": {
+      "bytes": 11406,
+      "sha256": "97fc8e52b29a63f092a23a1a6594410ad1ae43db4555f50602f3bcdee505b9eb"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8283782854.json": {
+      "bytes": 15206,
+      "sha256": "763699af6d1ba734f0441645782440b542a958efca4be4665e2739e7d5316a0a"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8286980174.json": {
+      "bytes": 16735,
+      "sha256": "a6346a4d217d7dd7a3a6caffa065231e0e29c93b1260f0f989441cf8c59c3118"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8287129569.json": {
+      "bytes": 16696,
+      "sha256": "8445bc5e5d935d3b8c36f8530434bc19493e64392d3164c27b34834485a875ea"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8287174941.json": {
+      "bytes": 16723,
+      "sha256": "bcc5f3d546fc951ee0270c4c2b91bf14c6b8f0c34983a3f92f30e52249ca197b"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8287273855.json": {
+      "bytes": 16759,
+      "sha256": "a8052df836a943abd4de07b74d81f61a5f3239d48f474cae03f311e273a3a226"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8287444023.json": {
+      "bytes": 16702,
+      "sha256": "d86ec8619f413b7d1c28b33a4b60c225b2b7f5d1e7c5e7744ee3de8da802e1b8"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8287497537.json": {
+      "bytes": 16704,
+      "sha256": "3a5c3191da31395015dc127cf17b7f88c0068df204946cdf98897f4775b2e6a0"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8295914779.json": {
+      "bytes": 10018,
+      "sha256": "b6d552bc09bc711447784f550d27da1bc8d5415deb4e8cb7de56fff4660d2c62"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8299976208.json": {
+      "bytes": 12688,
+      "sha256": "a7ce08d515c780fbb3f10952a387f6be5ac17a2d1e7404cfd824cdbab5cb2f71"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8301458888.json": {
+      "bytes": 12991,
+      "sha256": "1e4d259e3cdeafb8582363c5ed129766c6580c79e4d0c50cbc4c14fa5c6faf98"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8304893095.json": {
+      "bytes": 13336,
+      "sha256": "4db90c36d51d6fa0c33e3b7c87892fc4046706fdc48e83568e1b14dcc0a4de79"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8307910622.json": {
+      "bytes": 10449,
+      "sha256": "8c9f7e96915b6bc83a9a83c1737f5473debd173a0d90aa3635814f62fcb4d2bd"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8315125705.json": {
+      "bytes": 12668,
+      "sha256": "cf674a44c4d2a317b8913306dabe380352f267fca1628e44fd65f13b13d7e22e"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8315939846.json": {
+      "bytes": 13333,
+      "sha256": "fda89b91afe37fe3ada3f4160b67fb39bb8c6d160c12880b08875dca951c97b9"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8316262267.json": {
+      "bytes": 12874,
+      "sha256": "8b78e40bd26a26660b9081d9cb115f5a21b8856e9b7533bc3d4788bbe24b5427"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8316585604.json": {
+      "bytes": 15727,
+      "sha256": "1ef3e3b880cd732da7ba0d395cadfd0a3a07818eb233a6020bf083417f6f8e4c"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8327855408.json": {
+      "bytes": 12609,
+      "sha256": "85f7405aa9e0743a53050896627e8ac543ace9bd59a6898c722bc1cc387d1fd4"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8328009298.json": {
+      "bytes": 10969,
+      "sha256": "867b85a1c81fd5474f48a5b31ccc9151be5521fd4063660eadaeaf99a70b003e"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8328079977.json": {
+      "bytes": 10836,
+      "sha256": "32ef4898efbb83048f4ce289522813af797ca665a0a78a6d2cf477aa5045a690"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8328091413.json": {
+      "bytes": 14390,
+      "sha256": "e64414ba7bd0690f8ea88ac24d37df58e59bd0d67fb216b42fd64e2ea165755e"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8328526164.json": {
+      "bytes": 11284,
+      "sha256": "07e765e6e42827a6ec27ab24dd174cbf5534161061ca3033ea021c03b1db15b5"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8328778296.json": {
+      "bytes": 14964,
+      "sha256": "2f8ebf6a435fa374332bc02d1a83ee9722ace351c83ea8f83ee53af137781a73"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8331866163.json": {
+      "bytes": 8595,
+      "sha256": "fac39fd1b6ae285071eb45fd2ad7673bf59e60f47a684e160b57d796a0bfc60e"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8331920519.json": {
+      "bytes": 10271,
+      "sha256": "af28fcc5114219a3867761f8b2aa3167296c1334c25918ec8ed95d786a378caf"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8331926870.json": {
+      "bytes": 10315,
+      "sha256": "790d2136501799a13dd733cedc4750dc9c89ac6cf4899f6d7b07cf2444bbcbcf"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8332520905.json": {
+      "bytes": 12686,
+      "sha256": "eb5d6d0f156b5d19f58c98a9fa5968616c3c6616e6ee0fab92cc4b0e142339d0"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8332729609.json": {
+      "bytes": 14889,
+      "sha256": "57644596b6859a630d1e5a6df58c17531080943f10ca68fc1b05423b98852586"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8332784102.json": {
+      "bytes": 10877,
+      "sha256": "50842fd4c773b3c6d08e70ec1e60dc8eaabaf56a6b39456c10aa95942d277806"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8332843852.json": {
+      "bytes": 12976,
+      "sha256": "516dbbb22a98201fc9ce61948a04d7eddb2d075befc55631f5cc5d0a476bee55"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8333426700.json": {
+      "bytes": 13019,
+      "sha256": "c723b51e187efa4be55ff70f67516e747a27734bb92d3d032e2675c3a71c899f"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8334063785.json": {
+      "bytes": 13297,
+      "sha256": "f989a5a1ee8fbb129d385c220a55e58d9939ba45bd0a4a9a66d224f22b51c7b1"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8334846944.json": {
+      "bytes": 11032,
+      "sha256": "ac64afca5dc793afe9a621356a1f1a40298727e28325110fc33af0b9a72b7ccc"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8337150262.json": {
+      "bytes": 10153,
+      "sha256": "c2474d9502600ca9a302f692b15701b319ee65419387c725d8fa61561775f166"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8337674174.json": {
+      "bytes": 11121,
+      "sha256": "20a6f0fb8db974295da358d52009440c5c94c09c00b7684aefe3e0416a4d497f"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8338087923.json": {
+      "bytes": 11955,
+      "sha256": "cfe7ec8899839e0d47ce9b64af302893d31008af58aaa67bdcf64d5f6fdd68ec"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8338633245.json": {
+      "bytes": 12044,
+      "sha256": "c9dd9a0220dec9d4c1e88992db148d5951d8f60ae606a59659d0dc4a57a70144"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8338663325.json": {
+      "bytes": 11357,
+      "sha256": "0f1b2090ceb1d355744f615376c153c218641aa2759ad387f203bbd0630ecd9b"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8338673114.json": {
+      "bytes": 12685,
+      "sha256": "e6f57e903d3c2f18954b1027a049e8bf9986276ab07a2097046e8001851fc425"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8340105318.json": {
+      "bytes": 10912,
+      "sha256": "03c5e5efbe3dd538829ff7dc53e8eb0c0a818bc98555f496b4a95b7191f95103"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8340392883.json": {
+      "bytes": 16733,
+      "sha256": "05b2af75d68211d26d599c2ca79b570e4fd17b17c41546422532b59b9348dde2"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8340397212.json": {
+      "bytes": 11066,
+      "sha256": "249301bf8e905f55df61085787cbd3f13a7bea03b526f7a92aca30e7910ad81c"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8340420883.json": {
+      "bytes": 11807,
+      "sha256": "1c641c99fbcc2ec5a25ec66392a642db146b0a143af2a53ee3cc13aada531bd3"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8340687236.json": {
+      "bytes": 16252,
+      "sha256": "990251d079a7bd45e689b6e23ce38ad23e594d73b12d0cce6690363c9cc59461"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8340695599.json": {
+      "bytes": 10857,
+      "sha256": "64e45d30d9efffb4e614348238bfe7306f361b56cfc5bf530667f37e4d34158a"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8348033897.json": {
+      "bytes": 11184,
+      "sha256": "f90eff023e12bb328b4d9366120698908580aca8cc1da3778e2de98c4c60f63d"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8350776306.json": {
+      "bytes": 13244,
+      "sha256": "a399dc9d59e8ba3d55c3e33d0de42bfa7fd8864ef66a6db535c33e92c55d4ee1"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8351042284.json": {
+      "bytes": 16745,
+      "sha256": "c1edf52f79950bb1b9bd3b011871e74272d065fbeb7b884ea6bafef800e775de"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8352922659.json": {
+      "bytes": 11232,
+      "sha256": "b732202503a1f098cefed5fd50740596df069a3127fa75f76678051a1b67b441"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8353007242.json": {
+      "bytes": 11459,
+      "sha256": "7a2ca2358083fe1a5e34c3f489259a163e2d3fa8ee3730125c4c52349967ab35"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8353139891.json": {
+      "bytes": 10298,
+      "sha256": "449cc99c392fd597918556d04e84ca175ad6fa2596cd3f284641993d40805cb6"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8353617132.json": {
+      "bytes": 10110,
+      "sha256": "d78d6c877352698f89ef5f6b226a8514204c42a7c2e1741eb1ac32c9e7096cac"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8354612115.json": {
+      "bytes": 12354,
+      "sha256": "b33f025374a305c67b1da2ac55adfbd738454e5eba3812874fd07615c15e1534"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8358631576.json": {
+      "bytes": 13373,
+      "sha256": "38e89b20739a94fd3abf8eaf440ea052f85fb55dbe495bf46e3a09c239fa7229"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8358851565.json": {
+      "bytes": 13250,
+      "sha256": "b09ba09d9c842525894a46f810fd6fbca7d8bfa0f8297787c06e3bf43d6e65c9"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8363629334.json": {
+      "bytes": 10718,
+      "sha256": "7945b577ecf4919d2e6fd7a5cf08de2e4aa8d0e00b8fe59112d82ec15a6fa05b"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8365003729.json": {
+      "bytes": 13010,
+      "sha256": "9d229662ceb5aa80d2f5c55a00b853679806f8b09a02fc67f5b88a78447020db"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8365886960.json": {
+      "bytes": 10411,
+      "sha256": "a05c3a1c7b3e922d4352fcddc908411a23d76c1aac418da39e8e277632b1e057"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8366819299.json": {
+      "bytes": 12132,
+      "sha256": "668800e91e21cd227d4caebebcaf2db9492cc888dd136a854640045dd73137ed"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8366829183.json": {
+      "bytes": 12271,
+      "sha256": "e1c89f54522b67cac4cb9fb763b7284a6a1441e19d5e70f6e217fec14205000b"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8367566995.json": {
+      "bytes": 13294,
+      "sha256": "e4e83f9fe155900411c2a2c4da9b48cb153527004eec2befe63d2f3adc376a68"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8368605430.json": {
+      "bytes": 11047,
+      "sha256": "8b7d5d64f9272592e74a26c80f678a2ea98d90f7e34767b732677f6001254053"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8368684107.json": {
+      "bytes": 10106,
+      "sha256": "d91352c7d9462cdae93eee8b5b5c7f698017eb96be8879ba9422b3d0e4e65a49"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8369226322.json": {
+      "bytes": 10420,
+      "sha256": "f27f246be4f92f693d795005f6e45750d73274cad7181ddc99da626ee9f223b8"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8369551770.json": {
+      "bytes": 14402,
+      "sha256": "30585d1ed97f4466e02983462bdd85cc6185a8bb5ea1cb020ac4660892f449d8"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8369844409.json": {
+      "bytes": 14382,
+      "sha256": "a2de165b0676bab501d59062ed0e9608cd75a797d75638d3365d242cbfdbc42f"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8370128139.json": {
+      "bytes": 10936,
+      "sha256": "a1795f52f57e9aa112afbe585eea65b4d81387ec17de88c23f0250dbe27f9021"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8370599516.json": {
+      "bytes": 11639,
+      "sha256": "dd8907cb96c142f99cb866294394d8babcc57322618828a109f73e76a4557401"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8372223482.json": {
+      "bytes": 14341,
+      "sha256": "8ca47e89ec40e862482fcebd7f3d7a861eea427e80d857135cd8550104a999a8"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8372662783.json": {
+      "bytes": 11094,
+      "sha256": "eace73d4ac3263182bf0ab9997ef3279a97c4706c49557188e5ef68c825f51c4"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8372895500.json": {
+      "bytes": 13270,
+      "sha256": "efc6c87f50d5bd3e71a6f7d59645a1b3b142a3479e2328e68f5fd066cb5d74a5"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8373427613.json": {
+      "bytes": 10361,
+      "sha256": "32ec09d933203de480318b510df4b4802c75f064f9385a4922113d628d8c4c03"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8376183422.json": {
+      "bytes": 10466,
+      "sha256": "178fa47dd32378dea898f6dcd023fe030528cfec171726ce706a071dd1c306b7"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8377134532.json": {
+      "bytes": 9888,
+      "sha256": "d506aec86628b1fa8c69e749e86b660b734a24e2e116cfa003464f2b5b3e22ab"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8377892107.json": {
+      "bytes": 10892,
+      "sha256": "b076bd0015ca7d0b8d1b617b78c3e01e29676e0a251f12ec8348767121924078"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8378223630.json": {
+      "bytes": 10558,
+      "sha256": "27d6230351a39dba4bae90fbf570c808c146f3409407c8f601a41a13bb542fcd"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8378428041.json": {
+      "bytes": 10172,
+      "sha256": "db603228d3df081029eed304d2404b2b4901fb44d043fa6c972b13af3457ab1d"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8381959846.json": {
+      "bytes": 10963,
+      "sha256": "ebcd13b7876c185b09e472d8f789a584d23c2c5405fc20e982e375c184d8e674"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8382077402.json": {
+      "bytes": 6263,
+      "sha256": "ec32164e69ae86682e62ebe66035ea6e7924040ab217ebef39e8df8fe93981ea"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8382135861.json": {
+      "bytes": 10917,
+      "sha256": "8d68628d1bac49e00ff936779d6fc20b668aedc324bef3489249d126a7c4c57f"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8382441436.json": {
+      "bytes": 8558,
+      "sha256": "a3e55cc372f557c48db47566c3dcc76a6acb5e68f8587f2b64012559824bc1ac"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8382632800.json": {
+      "bytes": 10897,
+      "sha256": "b0848c8a12acfe559b7c43f2bf780e516e4b4bd5b936e8f14f241d1d12e9f9cb"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8382784459.json": {
+      "bytes": 11861,
+      "sha256": "329ad6cfead6bd5836325f09243be2401997d1caa90bca2288a5b483dcf5d50c"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8387938361.json": {
+      "bytes": 11131,
+      "sha256": "d2172b8b3df672241a5f3ea040dee01584df0fc78d3e6672215f598b010bae2b"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8388170980.json": {
+      "bytes": 10410,
+      "sha256": "bda2dbd132c315c19aef80988a6f643d29fcfabedce1ee2673248d3a34a1e599"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8388726791.json": {
+      "bytes": 13288,
+      "sha256": "d3243d959653e81178d396924607041776e38fc89f16c0bf00c2b3dcb7f30544"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8390322948.json": {
+      "bytes": 11508,
+      "sha256": "d51955fd0e7280c343c1510291c8977dd2609b8fe814408c17cd6d1413602d35"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8390604539.json": {
+      "bytes": 11152,
+      "sha256": "d0fc711c6fb29e6bceb576f6874e17630032085eb416f257c6510627586c4fc2"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8391221325.json": {
+      "bytes": 10913,
+      "sha256": "2ffccb557ac92750fc0c99667c3ecd23a6c5f4bf9929f436028d46c89b659ef8"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8394155644.json": {
+      "bytes": 13285,
+      "sha256": "b055a31710266e31d04ba08a8c24803321b29c18707e3cd1dc46a8ab5167c083"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8394329444.json": {
+      "bytes": 13608,
+      "sha256": "8eab86d68ceb0fc14675efa7f5712e663f8edefb61c29064e499aab5588e4558"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8396913060.json": {
+      "bytes": 13288,
+      "sha256": "dcb684a9562f0b5206f7e9ba046d45c3ab47363396d96f194a9bd4519ab1525c"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8396923217.json": {
+      "bytes": 13298,
+      "sha256": "8dfc4a90694021618f3108efcb5e438284f11538375fb8f4ad4852e097b6ede1"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8397005064.json": {
+      "bytes": 13596,
+      "sha256": "70ad18267f520b2bcd67a90249763e87069485269d53bfdf59bdf6af0b582cfa"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8397200018.json": {
+      "bytes": 13280,
+      "sha256": "160205c1f26d2e3f7a6fc779cb9af2e2357394c427e4aab7089a1ebf8a58069b"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8397270456.json": {
+      "bytes": 13602,
+      "sha256": "fab4b3c5bf7d5ced61579fdab05328286f6089fc39d5321e99e769638d1df0ba"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8397399257.json": {
+      "bytes": 13298,
+      "sha256": "ec5513e0854030d6e3e2fbb68d9408c8ec42a5ba7cef8e6da3a9c9e30d2639ec"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8397413375.json": {
+      "bytes": 13323,
+      "sha256": "a9bbf9e9b050ff3e1fad186655e7d07f34e3092cb675b395f7cac12446eceb52"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8397548547.json": {
+      "bytes": 13375,
+      "sha256": "05baef38e1d7b5df58ee8653230d415ce9b02a6fb97b20a08556a4501f684014"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8397591381.json": {
+      "bytes": 13594,
+      "sha256": "a46f42185eeeb2a296eb99bb9e2ea9014452b09a1aba3e94c1e0912b79251b11"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8397688256.json": {
+      "bytes": 13310,
+      "sha256": "46fc9cde7d70ed34d51fc95c3e03722a08961b59bd847f80b977e3aad54553e6"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8397761316.json": {
+      "bytes": 13299,
+      "sha256": "fb9d2c6d89df0824c5ad588a4ec5749a8a233496bddc67f3affd99680ec92a18"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8397800535.json": {
+      "bytes": 13274,
+      "sha256": "11f803a4b22f913dedaeb422577f487bcf6b14083b52f63863616f595f464ca4"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8397972474.json": {
+      "bytes": 15272,
+      "sha256": "f9fcfdf1ab7c59e8fa6da894f7edf0149b51234efaa44978e610f62fb322c048"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8398485536.json": {
+      "bytes": 14301,
+      "sha256": "fcd28eb61a38607d2c5fae31d3c5dec0fdfd055789b0a1820c7cf1f932586814"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8398886315.json": {
+      "bytes": 12671,
+      "sha256": "edc646ef067cce3583206f5750f0250e6b3b34d2d8f13a37996940c202d8bb34"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8399580501.json": {
+      "bytes": 15275,
+      "sha256": "eafa90c049a442bd4c371b4340dd34f2d7952732626bfc3c1a77fb9fa607d247"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8400141586.json": {
+      "bytes": 11211,
+      "sha256": "9fb739502707b099afd0385f339df5b1d658574c042eda4b9917e7716cb89003"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8400926488.json": {
+      "bytes": 10866,
+      "sha256": "d228482572a0531cde59f0c84897dcfeb48d12521bf0288cc8a99fd734ce9d38"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8400969424.json": {
+      "bytes": 14845,
+      "sha256": "7946f6d8acc3ac9a13b743a6e2db27e6d6680bd0afc724962fc0bba3a01c8a53"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8401025052.json": {
+      "bytes": 14408,
+      "sha256": "8eb75cd292ebf20614147742285b8d7aab1377662aaa4f913c4d693514438aa0"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8401031060.json": {
+      "bytes": 10901,
+      "sha256": "b9fa26abab7c96c5cdc0fc6b50c47f1a07ec3a1bdb24305c940c27546943fe79"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8405089979.json": {
+      "bytes": 9338,
+      "sha256": "488a84f9840b935ae213a2a6c9d46d5aba0305d64c8acdf7263c69c83d4c80f3"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8405485447.json": {
+      "bytes": 10326,
+      "sha256": "4cffb8d79f55d3f5c2b78d0d981296559d383b58c9a2cbc659b32b3abe7029ac"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8407683004.json": {
+      "bytes": 10721,
+      "sha256": "5832c71030583ed3c17a49648fe6741d2c0f06be66a40c3fdda2f1df2f397c57"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8407916164.json": {
+      "bytes": 12625,
+      "sha256": "fb67a18d3438f525dc296ff22ed45bd08abc72e6fb06eb21e25a1d79d5fa9846"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8407942116.json": {
+      "bytes": 11128,
+      "sha256": "55edc6502345ba2a680fe920f9e31497c491ad03bcf1e97836f8f3b6f473d497"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8408379069.json": {
+      "bytes": 15689,
+      "sha256": "adf745be40ed43a53becd027e40ad9370fd1070cc584d8cfb5e1e9754c431129"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8408807973.json": {
+      "bytes": 19075,
+      "sha256": "b248af18c23b7fc636eb09f600269e609097881eda38dfc62ebf77d4931e1f9d"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8412997383.json": {
+      "bytes": 12924,
+      "sha256": "d8a53c6732944a1e02226afea953ab4def2bc8a432bb8d5a7a3b089979f849ed"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8413092923.json": {
+      "bytes": 11981,
+      "sha256": "cddb039790685c1a3dd60757201ffac63fe0217abcdea5ca7fe0d241ff2e4713"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8413127940.json": {
+      "bytes": 16877,
+      "sha256": "166ef8e47b891048cd2a94bd3762325fac42b5c8e600ec5caf9c95f74993ce51"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8413140389.json": {
+      "bytes": 10395,
+      "sha256": "59cff5380a8c6720eac85835b439dc1b3dae1ea2766882eb59783afcfcde47a5"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8414096987.json": {
+      "bytes": 14954,
+      "sha256": "95f9b83a886ddcff22445d80052967f7af0a2a28095fe987a54a090aedfbe3c1"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8415516128.json": {
+      "bytes": 13339,
+      "sha256": "24fd9dade23c07303eb9f1cce5ba860c1c455a2f5cd6c6b273051ef7edc45b3a"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8415539938.json": {
+      "bytes": 11880,
+      "sha256": "1ff76cf5fc5f77e27ae7ffdceaea3f2c67f225e83092bcf660eb1d9f6c30c80a"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8420052032.json": {
+      "bytes": 10343,
+      "sha256": "8486d4ed9b79c228a15569099acd7a3c44f0fbf7e5ec58c34d922f18c0b64e64"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8420420779.json": {
+      "bytes": 14835,
+      "sha256": "5f95e936ba6e503dd5e06dfe54985fcf68c62f7c50d7918ff7cd0f47d1905ef2"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8420424635.json": {
+      "bytes": 8540,
+      "sha256": "16d1eb4b43d7bf83a1fb6d073db6337096c605d6dda6a80723afbc1646086b90"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8420492106.json": {
+      "bytes": 14366,
+      "sha256": "91f54462183446e6c5824bee5d29a304221636067f13e84203009e8c8c4c4e34"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8420611449.json": {
+      "bytes": 12138,
+      "sha256": "de2f2e377879f76c2f58765b49b33b90591583e0fd9b17bd6498392aa71153ab"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8420674104.json": {
+      "bytes": 11556,
+      "sha256": "76b30515671c68a043e92d69618800bbc3dae3a954e800c2d722e5c3effd0b5e"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8420787420.json": {
+      "bytes": 11497,
+      "sha256": "9a552b881cf484bda65feb1dc95bded0e7dabbc99769a2d41ee287ae8b056783"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8421141791.json": {
+      "bytes": 13336,
+      "sha256": "47d0acc3b5144a9a9ca4c679046c4dcfead7253fec9024f5699824a6df4c1ec0"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8422109082.json": {
+      "bytes": 14968,
+      "sha256": "eaeacd2e5966719f492011bc8383dabf151f4ca7b8a7227ec379dd3479469cb5"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8422370852.json": {
+      "bytes": 14708,
+      "sha256": "52abf75c1d40d643174077d058fe4ebcc6902284615839dc6a0f0ebdac4fc77a"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8422635195.json": {
+      "bytes": 15256,
+      "sha256": "abe7e39d03d3e7493c0c7f6a031d7282e5d9df23e86ba4cf9db9c2e2f3f1f151"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8423056031.json": {
+      "bytes": 15000,
+      "sha256": "b41d0e2bbba3f05c97c6c7c742befecfeaf1998eb799b731d865c710bf481bc9"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8423131201.json": {
+      "bytes": 10877,
+      "sha256": "0724b37731da817a373e098f988963b929fe3419c74189c0c0070b0fd1017602"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8423157485.json": {
+      "bytes": 11027,
+      "sha256": "5383a1f1adb0ff011a3e648a9226fb48843e74fefec844525db1dadbf5e70fdf"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8423638938.json": {
+      "bytes": 10465,
+      "sha256": "dd6087fd9cfbf928a77a5adab4611fa03479ee650ec78e966cc4e305f98c0306"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8423805166.json": {
+      "bytes": 11199,
+      "sha256": "ea65e21be6dec18804a831e8bbe9e07f4cc18a29cdc142ddaca0c62b8a20d01f"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8429068617.json": {
+      "bytes": 13338,
+      "sha256": "f40939ae7cad2986f9f0a5e6f41360aa1cebf8d208c315ec32edff9e775b84b2"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8429102630.json": {
+      "bytes": 13278,
+      "sha256": "bea815b338935b5ffab6f1a5211c3ba8acfe6e52c063b04e76a46103b80d2b71"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8429335529.json": {
+      "bytes": 13321,
+      "sha256": "3188895748340c807e6decfb1946de1f1bc965b189dba4238d8f55382efad391"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8429487273.json": {
+      "bytes": 13281,
+      "sha256": "07388ccc39cd1234d6810fea3c41ff6cee06b185c74e2466825dea4b36b5feb2"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8429692459.json": {
+      "bytes": 13306,
+      "sha256": "9b13ee3e9621418eed7699f7fbeacb7c089b2cae0397c4ff7b5bb9e53e7293a6"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8429708870.json": {
+      "bytes": 13315,
+      "sha256": "95fb04c33c08720064ba9e1970aebab48b731a42e06c83223d2141c3d7196d34"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8430887711.json": {
+      "bytes": 10133,
+      "sha256": "48463df57a228454ccbdb831144e81071f99ac5f5eed43bd386ba70916cf172d"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8431032070.json": {
+      "bytes": 12014,
+      "sha256": "453f3f262c2a671aec202a1c37919709eba32b2455e94fa86ffe6e05e02bafc8"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8435766961.json": {
+      "bytes": 310,
+      "sha256": "f2a56fbf7012c57260088b661853bc000f37df9f459627e780999678b640a6a9"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8436981014.json": {
+      "bytes": 10822,
+      "sha256": "e1b881be730243af38e043bfb8b747d542265569fc6d13ad93da202a8a8f5f8f"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8437258217.json": {
+      "bytes": 14375,
+      "sha256": "fb2b691176479d0e7785320288d511c4ef8b729adacd63c07da884c9cc02e3f2"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8439196495.json": {
+      "bytes": 12689,
+      "sha256": "2c4014d4777bf3169156a00c4ef159aaa656c29214b7d6ca7215922c07d82306"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8439254862.json": {
+      "bytes": 10589,
+      "sha256": "572b26602313eff7b1e92c73fd85a18a91e31c3dd40b31c6575f047c15c94012"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8441462782.json": {
+      "bytes": 10403,
+      "sha256": "7f1a73a7720526e203ad94abcca3debc50944a20f11222af14c6b9d868b42c98"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8445185318.json": {
+      "bytes": 14720,
+      "sha256": "4ef1e52e348e44e4fa0bc8d2b9604a0d917ad9e7482978f40d1f32d4f5552f8e"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8445599678.json": {
+      "bytes": 12434,
+      "sha256": "f136d6359e8698442c2b1cb60c0004af5af19997b69bd0a90d9e7f42aa442d62"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8447253986.json": {
+      "bytes": 13294,
+      "sha256": "ae0e9277f6be3458a2b2458e8de29d2851b08bbaef51389f0e609daab65a1fc0"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8448585000.json": {
+      "bytes": 11208,
+      "sha256": "d157c4a14917e0c98c95f847bd9f10d8bf3c1f764d6486be6948f3589f284192"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8448955606.json": {
+      "bytes": 10756,
+      "sha256": "785b3d785ee32186de227df2ed37f406a258fab093ab216975be960038c23d95"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8449076954.json": {
+      "bytes": 10418,
+      "sha256": "2e35984199fdd33ca4c6fb4ec3dea5e6ac3700d579fb62b9b235ad2ad1482807"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8450217643.json": {
+      "bytes": 10473,
+      "sha256": "731189321181218ea930a64e199d61ad6b54e2b3f46e84aed846b4e3f1e14147"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8450496628.json": {
+      "bytes": 9886,
+      "sha256": "eb2a57fe4305355afb9fecfb63f166df8ddeaae725d7297736fae6fa3ad775fa"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8450513492.json": {
+      "bytes": 10040,
+      "sha256": "5168191f98dbf10d4fc63a77e8c24bc46511588f179b393cc4f94d2a72eb4f12"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8450813356.json": {
+      "bytes": 13326,
+      "sha256": "f2c8455a084d2995373ebcc4a7a523cb8b4e37b107f937b8684a28c17e862fcb"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8453182801.json": {
+      "bytes": 10349,
+      "sha256": "c4e86d38138c2a232af64b5e04bb7793685b11b2a5e133321ee09f79f17d5776"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8453474796.json": {
+      "bytes": 20584,
+      "sha256": "e6cd94f444ae075b4ea65ee01a0718dd7be9751897ddc6a11d18ff481e33db0b"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8453627361.json": {
+      "bytes": 10495,
+      "sha256": "021a0930757d970ba66f6e5c4cfcd9fafbda3fc4bea93667fdc9140d2b477157"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8458018148.json": {
+      "bytes": 11951,
+      "sha256": "0a7dca5e134194dcab7799e5971ae585a0a797350cea979cd8ed368f66327d3e"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8458283931.json": {
+      "bytes": 13611,
+      "sha256": "f7fc701dcd86916d7f3f67ebf914cce6b2798c91af33c7abd48767387274c805"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8459186561.json": {
+      "bytes": 10892,
+      "sha256": "b875ccf95828727e0b2e4651e25d978c4c0b7f7eb7586dd0a318689dc4d98720"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8459656383.json": {
+      "bytes": 11794,
+      "sha256": "1ebafc5b66b80d6454fd9ec005dc8c83d305f541a32df8b58ed9e33838fa8ef9"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8463281984.json": {
+      "bytes": 11041,
+      "sha256": "61f32b0a50711f2aab3d9e98d88d78310c0a8fc7255db1d74be35ee5bfd6b072"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8463804864.json": {
+      "bytes": 13874,
+      "sha256": "df650fda0871aab213467c9cc096e877129a4cd5a5df78222dc64db284964d5f"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8467033541.json": {
+      "bytes": 10390,
+      "sha256": "55e60bfacfa4baa4f6f813e401957b0365ee0691d329966e6039bbe7016184cb"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8467201969.json": {
+      "bytes": 10902,
+      "sha256": "f8d85fe84bfb9192ac3646e3396d35ef9b4a1189f92a812343aab1224883902c"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8470138556.json": {
+      "bytes": 14990,
+      "sha256": "3ae25acf63d92303884d06f3b6c67bc92d3461c69f43c9fe8dc6a1e5c7d91069"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8470942668.json": {
+      "bytes": 15892,
+      "sha256": "7de9c7c1190a98672de5eac33fbfb088f031eb3ac6e435c6999cc7a75db04521"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8470954101.json": {
+      "bytes": 13729,
+      "sha256": "e24945882c31c1eae0e1a08aaae1bf5be8445a84cae1d1368e1fe8f0427d7ecc"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8471003131.json": {
+      "bytes": 8849,
+      "sha256": "00b559d9caa9feb3dc77e19f868814345faecd52e66298aca3671ae14993e7e2"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8471360313.json": {
+      "bytes": 16665,
+      "sha256": "5293b7ba039b98fef86e2f9c1c2071ca4e944fb65f681f30f93361ff5f7d958e"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8471452879.json": {
+      "bytes": 10775,
+      "sha256": "b0d4e42585bb3744eb772d264f328ecc232a1cf6328f66302593f0b9970c6177"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8471563421.json": {
+      "bytes": 13298,
+      "sha256": "c1cdbade56acc0ecd6634e4d330f6066f9efaf054f982b4ebbad2e4dc5d49d94"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8479307694.json": {
+      "bytes": 13344,
+      "sha256": "1496382b7fbc93fd6657b1d4a48412f861bb352a5269257eb02afe50d835de57"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8480135277.json": {
+      "bytes": 11816,
+      "sha256": "2f8f56f6c9b6945da31985d8c3f9c4b1705a861908d2a98ada6e5631259b5789"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8480924482.json": {
+      "bytes": 12673,
+      "sha256": "211d2857c039ee7f0c5c4baea36ac8ea6a607716f38b17264e779edd76728708"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8481886381.json": {
+      "bytes": 10926,
+      "sha256": "39064413117c0c1aa1a9e3ce9a93aa0c1934fba9e24d549a09cb5cdbdce66cd2"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8482589157.json": {
+      "bytes": 10883,
+      "sha256": "f91d9507860674764ccd4cb3c564c99cf7724b949750f2ae43bc04e93900f968"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8482687879.json": {
+      "bytes": 10920,
+      "sha256": "b188e34b7752635d013fc13f2fb3465d8a0ed9caeec4cf615e048909b9ede5d7"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8482708316.json": {
+      "bytes": 12934,
+      "sha256": "dbd81b9b3598a7cb239a67e8faa145112eb719f3b6f980a063e63f3ba38f21c6"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8482867205.json": {
+      "bytes": 11216,
+      "sha256": "023114481f172259242684d7a13adca9bbd51ceb8ef481e964e4b7569880f5e3"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8482880300.json": {
+      "bytes": 12045,
+      "sha256": "e8c5c109bd9664f7bace8be9483e5aef7e3ac89e11a106532ee53fde5c16b2ee"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8482930375.json": {
+      "bytes": 10910,
+      "sha256": "96b8417b1cc41eeb658a7b46094b336f8ae8b95421ba9f835dc83e0547e8a5ae"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8483138473.json": {
+      "bytes": 14366,
+      "sha256": "fcde6fcbb88aad8a939b005a7ae4b119451d63ebc3a8be83bb046d3ccb69d9a3"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8483299379.json": {
+      "bytes": 20682,
+      "sha256": "d3a4b04a4059e84d68f7723d13a8397e47f9af327a10d899b72b6ba03bf0315c"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8483472001.json": {
+      "bytes": 11789,
+      "sha256": "441c547ad4874045ce1fcaf790134241c31dc13e9fad96514860dacc85f7730d"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8483488831.json": {
+      "bytes": 12275,
+      "sha256": "c93f81c849e1c0ecdc1f3af3b93794642e55e3cb8ac1001cdcd8678cbab6de09"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8483654005.json": {
+      "bytes": 10293,
+      "sha256": "f13343fd19677bfda3178ad4cbfb8302099f00cef7d376dc8ec2575b34b9c282"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8484912798.json": {
+      "bytes": 9916,
+      "sha256": "91f0104c2e4fa25d81a470ead4626f19727092cd64f00cf01e3853122c526fd9"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8484984784.json": {
+      "bytes": 10908,
+      "sha256": "7287a51b1267ab7b8f9d9eb960d5921eb1733b901b76bf58fe4650328ca8223a"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8485346634.json": {
+      "bytes": 10178,
+      "sha256": "4e24808c874a08b2170947a709a2b5b158ecebf2208ad210edc2c7f4e94475ca"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8489065853.json": {
+      "bytes": 11362,
+      "sha256": "bf3dbfd81cc3e02b8e440115e1afb36dcc7faba78d102a54eeeaaea6c1bee350"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8489713393.json": {
+      "bytes": 13595,
+      "sha256": "75c6ff5dd04aa06a38cfed113bcbc1ad3dc6606eb00b600838c3ffd925509e09"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8490187935.json": {
+      "bytes": 11392,
+      "sha256": "131e0ec8741c9c6853e6528652129fa5e16a82c0f8833f4e4525b33d59bf2b75"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8490204429.json": {
+      "bytes": 10832,
+      "sha256": "22c3b96315180a63500183032c072c21f49adb7d73592aab57e00553d744c15e"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8490255879.json": {
+      "bytes": 10080,
+      "sha256": "eb12f4cb8693f96d431dac6b7c2f05c7664223d6fb127d553261aaa533fb1b54"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8491182073.json": {
+      "bytes": 14908,
+      "sha256": "32a443c4b13ccf96aaed5a961878b2b4072a4be816e0d7244ed5c43fe5f949c5"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8491574746.json": {
+      "bytes": 6974,
+      "sha256": "6b392e1a573e4a26e09236dd0f40e9d8b8f39c0672e340d7efd442e25dc9fae5"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8493587048.json": {
+      "bytes": 310,
+      "sha256": "9637c1a9576a3ae3a4fe8572f9fc3609d0fc5914e77c66f7b35bfa5b534b70b8"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8499425500.json": {
+      "bytes": 10968,
+      "sha256": "3bb3505e39d48be266aabaace6043f8f88914da69c6b9d8fd6dd6a0ecbe33e44"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8512051742.json": {
+      "bytes": 10528,
+      "sha256": "2a88f33dd4513a3aaea24f2f0a58b044b0fabd74b72379d34c8adf11b92d9204"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8512096091.json": {
+      "bytes": 9186,
+      "sha256": "96babaaea3803426124052a3c50a080dd20d30bbf27fc0ae2d7c593862a82197"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8512314211.json": {
+      "bytes": 12682,
+      "sha256": "4906399453808d4fcae18dff4db55a7c2e440fcc08714a4f28597a12194623ce"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8512361517.json": {
+      "bytes": 9981,
+      "sha256": "ee0f2131beb1834ed8c5a2d06589bca8adfd7984bb71132a7de49d898d14b941"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8512892831.json": {
+      "bytes": 11385,
+      "sha256": "3e699893c7aeb5c7600a9e366f099f56c95ab4b58a9403b4e966fb62547e9b04"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8513863543.json": {
+      "bytes": 10708,
+      "sha256": "330a3da38b3cf091c62c4a11bfc2feec577527e9f6a725777ab60b1c6ef4a2ad"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8514468617.json": {
+      "bytes": 10062,
+      "sha256": "ba8d4c69b4f175b1d9828ab005fe5ac53f5344ec821635f583189999f1ab1fa3"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8514654746.json": {
+      "bytes": 10145,
+      "sha256": "4d7a31e6731761176f3502bb642b1ad060fc592b3a8a14eb11d74d3548c86b84"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8524834702.json": {
+      "bytes": 12693,
+      "sha256": "c1d681887017f784823ff1be5bdba40967d099cbec87bd76d686cfde6374c485"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8525281200.json": {
+      "bytes": 10989,
+      "sha256": "1df5a1b16284c3fd42f8e229e0de4703f0e2e1f011e8c4fdf53dd74bdf507e5a"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8525300273.json": {
+      "bytes": 11054,
+      "sha256": "e983d42536bdd9999e5883c8c2c346bd46ff0b18a2ab46f24aeb8c974ea6e301"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8525379026.json": {
+      "bytes": 12684,
+      "sha256": "c1a338879852c2862e97b19bd1f69cc7e6875af4abd764802b058defec012e53"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8543116270.json": {
+      "bytes": 11780,
+      "sha256": "37ee8d90e5f491a629e8fa6735630f3f4abc79e9961a2981cacb5005f0670ee3"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8543777536.json": {
+      "bytes": 9510,
+      "sha256": "e256d1669ad28b5ba7795c5c5a5edd2a061c76ea0f3639bb01debbbb5cd5ae2f"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8545361314.json": {
+      "bytes": 10488,
+      "sha256": "125a26d37c6df23f34fb91817556a28045f29a236cff4e91119ba383b0c35205"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8545545464.json": {
+      "bytes": 10466,
+      "sha256": "fdad21ec3f79d90367000b72595ced52dae0c039de1ec60d9b1590e12cad4540"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8545697942.json": {
+      "bytes": 12910,
+      "sha256": "4f7c09a2d4e95ee60d7484a0f97dc10c0c00425fea286a2dee867c23e739a581"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8557071974.json": {
+      "bytes": 10887,
+      "sha256": "22fca3ef28351dc530c35833b99edfb448290c158974d538c5ad8e3574436a12"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8557444123.json": {
+      "bytes": 11979,
+      "sha256": "809a3611260a6e2cb1132e6593b0ece0b3ec6299dd34c5041d9768b3c02b8b34"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8557571424.json": {
+      "bytes": 10472,
+      "sha256": "0f2071f254d9e08f3fb1ac877a51310db3b4057cb1c4455670adf1a6945a80ed"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8575270479.json": {
+      "bytes": 15000,
+      "sha256": "1891b4c5d0912da8e5f193179f1f51cd29355efb7197d3325dc8d690c67f9a94"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8575421656.json": {
+      "bytes": 14347,
+      "sha256": "44a1d4bde4de254dd54960b226c4e64db0986bd44ed3aba77b944e88325679d2"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8577237980.json": {
+      "bytes": 10667,
+      "sha256": "1faf5cac88333b937c10797d2d8b3847a6122038bbfa55733dc7797540007d7e"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/raw/8577423127.json": {
+      "bytes": 10874,
+      "sha256": "f0c968ff8c034d7bdcf4006249664c36f71cdbaa7f483aea2f70deb047670f74"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/3782500082.json": {
+      "bytes": 757,
+      "sha256": "17c5801116d41d92f54dd07f52c2b1e355a637333ec7d853aa58f406dfcc8073"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/4448950216.json": {
+      "bytes": 791,
+      "sha256": "6a00c2a651943b66b44068fe2f6d1cfa2b05a1b3c7685d16ba8859e3ae4d38e5"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/7822496989.json": {
+      "bytes": 777,
+      "sha256": "c48fadc43fa8e9bda7d11aac412a1664a1d30249748f47b1e482e8e9c38067d6"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/7843854337.json": {
+      "bytes": 810,
+      "sha256": "c9dc61c41c0ebaafaf640fb6275e31936ad4259bff5421d4dcc4a3de8af36228"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/7856413517.json": {
+      "bytes": 788,
+      "sha256": "5f7553e653f57f3471a695f9472e4194d9b559935ae7656222cf5fd908468cca"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8054180034.json": {
+      "bytes": 797,
+      "sha256": "9e4bfd7ac572e7d427ed5ccb95a841f0011a843e384928680426e39bff538603"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8086932596.json": {
+      "bytes": 875,
+      "sha256": "c9f0ae9833c92bbcfce0263083d5e68a50f54f703672dca6b650bf3f6052db41"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8133743355.json": {
+      "bytes": 777,
+      "sha256": "36807ec6976a91bbd7fb879b609d6e2de9086ed820334787b198734e43fb8520"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8158934678.json": {
+      "bytes": 807,
+      "sha256": "263b3c0cdf6cf956a267387affcfeb55eb5a1beb9d422bc63d0dd01db49f5fee"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8158961679.json": {
+      "bytes": 874,
+      "sha256": "0423da91cb9b933cf1cf65483f128ea4c28307c37a8c927a90407fb73ddaa9bb"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8159103825.json": {
+      "bytes": 846,
+      "sha256": "500f78b8b1adb3ed6bed0d22a541bdb4b909dbe0d16014ccd115f03cba605ddb"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8159145362.json": {
+      "bytes": 812,
+      "sha256": "d6dd834490ec0d0b3e8cf72d6df4acce676cc7e6b3561ef3deda51ea78c09b17"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8159318986.json": {
+      "bytes": 784,
+      "sha256": "be3852f020ad2003a8ddafdafcdc6bee80c50f829541151d9f63689f234a0fa6"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8159372001.json": {
+      "bytes": 825,
+      "sha256": "9b93337d02ba86319f93c7a915810f35c7de43cebfe53e468f0dd810b96733a4"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8159498356.json": {
+      "bytes": 797,
+      "sha256": "2c4c6a6118e7054e0faf9e125247d2aa9a49a04e6ae72a5eeadd76d67da8967d"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8159534463.json": {
+      "bytes": 811,
+      "sha256": "1b23c36930670712445b8610f1885e2f1ecd80a72e6a69b68e353d7b38168e0e"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8159707379.json": {
+      "bytes": 779,
+      "sha256": "ee8d58d0b6fadb2ebe318b2db695dce57aa7e1542b844ecbd97e1608c67806de"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8159815719.json": {
+      "bytes": 861,
+      "sha256": "f66704a6436238ede7a1469f55d374f3b1d6ac289e35bb2ceb158c57f7b5e62a"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8159836324.json": {
+      "bytes": 813,
+      "sha256": "c1d6754c36b08d0321401f75cc32dcf56368e388089c09023dc743814c48dfe3"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8159851900.json": {
+      "bytes": 806,
+      "sha256": "0ec6fd1c7c64ce7e94f3c321f41fb20faf5b443d444e09672b61c28b970d8a96"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8159877449.json": {
+      "bytes": 878,
+      "sha256": "6bb48acc3c608233fa6fd98b2f91c0862993db88a13f1020aa46a91cb1f66f12"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8162960198.json": {
+      "bytes": 780,
+      "sha256": "08be1d82740d3e357b6fd70c7781b913976017a66a7e54eee356342e0b7696b4"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8163521959.json": {
+      "bytes": 795,
+      "sha256": "3550acf6cd7969b33f38507429f24b76e0e5bbb33338ddb62bf11116d6a0f9bc"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8163870427.json": {
+      "bytes": 816,
+      "sha256": "6bb056d87ac54a45a52bd88b3adb027ce94ed43e5d931fa48863de6136c60789"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8182935995.json": {
+      "bytes": 807,
+      "sha256": "b63a493a65cec39115990fccae12e154082b8f641846f7302a7ae03b780cd2e1"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8197385145.json": {
+      "bytes": 836,
+      "sha256": "5c692368e5aee72a5b4ba8c693a597596e66521b0202b199799788dd6d10ae1c"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8197832471.json": {
+      "bytes": 792,
+      "sha256": "59b043868028c988ac2ca0209527fa17b4c73bdf23f913752d33faf4dc3ef55f"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8208240212.json": {
+      "bytes": 789,
+      "sha256": "4e5da9a93cd782d04e428e7950c1d8390f397c6eac9058f339534bf82ee592dc"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8215018128.json": {
+      "bytes": 797,
+      "sha256": "a9e444e0f68dd5f340e8e7cdc2faa7f1320ca6192ea390270dd4bbbeb1a5b74d"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8215821460.json": {
+      "bytes": 806,
+      "sha256": "77b71183f220ab2d18bcca5a1052daf90c30e267ea445f50abec91b340091372"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8227358005.json": {
+      "bytes": 844,
+      "sha256": "9a8d847485f0d83ba96867d64a2b7d46a5665621ec9a8669d602e1d4e15106e3"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8229942119.json": {
+      "bytes": 797,
+      "sha256": "8072a08882797c3b821b227a6aca1501355e897db8ece94f668ff9167aa1b570"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8229968063.json": {
+      "bytes": 800,
+      "sha256": "fe1039fd9380658ef2d1a35fc8bfc62fb4f54f50acfa8a24170b0c6c89954965"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8230272619.json": {
+      "bytes": 781,
+      "sha256": "a6e9ed051001bb8be72c0e9416ba38f75db1e81fdaf2ddce3d026cdfa0058e9a"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8230444671.json": {
+      "bytes": 863,
+      "sha256": "24081577a2288de89d0fc828e2fa01f06619a57806d3be33c083db9b13444a96"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8230770621.json": {
+      "bytes": 852,
+      "sha256": "bc0a2f11ed87bbcf4d180bf0f1568e19ec217cd8fb26bd5be307d02c871995ce"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8268667428.json": {
+      "bytes": 834,
+      "sha256": "86690232ceb4f974ec32c8e2a354802e7309748f87e1a237bf8e6156086a0a55"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8270087577.json": {
+      "bytes": 875,
+      "sha256": "719b04a83dc77fdda3f8fd3536ac4cc92b19f2ebb55554318540ec0305edcf2d"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8270736871.json": {
+      "bytes": 856,
+      "sha256": "99604c64e38ab940957fe7690a825f232dad62135c0c8531299c188e35b38c13"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8274005909.json": {
+      "bytes": 790,
+      "sha256": "a290b2d876342ba3eb3bb53f0d9bfe658ead6d7de6cdfc243866bd4cb7c20893"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8279214473.json": {
+      "bytes": 863,
+      "sha256": "ce4ffce0b22642453f8a4b3869bda1edaac915d9ca163d9e07772000c3841875"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8279256899.json": {
+      "bytes": 789,
+      "sha256": "1cd0984cb6e8adaa4848cd79a54f9142f8601d1cb9b97419910eef2d8af6cfb5"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8279277188.json": {
+      "bytes": 834,
+      "sha256": "7083061abdfd23f35d7f12a47ae3c0828d27dd139f8e60f05071310c2122124a"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8279775736.json": {
+      "bytes": 788,
+      "sha256": "b226a6c59b047d30eaec58e12972b6caab1975e4965831a25dc6c972fdc080ce"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8281401934.json": {
+      "bytes": 849,
+      "sha256": "7a0fff4065331522e018f98b9efe84f7a7c5313eb63e6b1f177055fc8e86945e"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8283782854.json": {
+      "bytes": 796,
+      "sha256": "c9b23ee0fb4957f54a888d31040648171bbb6b4825a47b2a3516b5c82b3027ea"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8286980174.json": {
+      "bytes": 777,
+      "sha256": "d05693085c70068ac0174b231d66886733c10618cdfc332f7ec8bd9f6b336c94"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8287129569.json": {
+      "bytes": 759,
+      "sha256": "21fea35c8ae2856dfef3ed97418bd0b270265b5ca70cfeee604496486a809c95"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8287174941.json": {
+      "bytes": 765,
+      "sha256": "48bcb05628164389bb42b3714f47572f4aeee787537191552072d09ca254b268"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8287273855.json": {
+      "bytes": 875,
+      "sha256": "b454cff45ce50c8e432c3d47497070d6ada8c7adda1173788905f8a494943c92"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8287444023.json": {
+      "bytes": 849,
+      "sha256": "a678687b19d2d812770668e7f65a0a90653a9ffcc5aa2cce818987d14f9c0a43"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8287497537.json": {
+      "bytes": 781,
+      "sha256": "a0844b8a62ecb4849e74a0eda7ec95cd2ecc5a0acf25c1d3cf6fd097fc4f880c"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8295914779.json": {
+      "bytes": 849,
+      "sha256": "4878a6e7888273297b4d0f06791924f5ed7103a28363da64464f6f879fde9618"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8299976208.json": {
+      "bytes": 775,
+      "sha256": "838a91b01d5ce79cf56bbe9a9bcbabb527fea5ebe7cdc839691c948071033836"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8301458888.json": {
+      "bytes": 817,
+      "sha256": "31408e49706e6bf6463cb4c89f5becfbce1854da56cce0d864ed1be4f163b83e"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8304893095.json": {
+      "bytes": 791,
+      "sha256": "950145d63a3a1a7f45be1bffe7499e33cfc3656200d515fa3053bed29b380538"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8307910622.json": {
+      "bytes": 748,
+      "sha256": "4a6097506a7119917db06a721ad0d9603afbd6f48d55956d68abd15adedfe876"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8315125705.json": {
+      "bytes": 769,
+      "sha256": "9c686f0ef90ad79df4e35beb2f4d77049454230bd731a36bb844971d978b289a"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8315939846.json": {
+      "bytes": 791,
+      "sha256": "bab9f77a8da553eb6ea7d248daa934e5a0319408fa8f970537b718fb7aa1e1f1"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8316262267.json": {
+      "bytes": 745,
+      "sha256": "4698d47c39a5e8efc5078599e4fcc75fca72b91596868ba5c040a0f9a9531c06"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8316585604.json": {
+      "bytes": 865,
+      "sha256": "7f61ed5539b6c14d04223355e7cf017ed1dca0c3ae3140c0887d420e79bb9e5c"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8327855408.json": {
+      "bytes": 796,
+      "sha256": "2232790083d153f6ae6b543710efc43fc98f613774d3c99c1b30fd990983b4a4"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8328009298.json": {
+      "bytes": 771,
+      "sha256": "1efe0c31e078a5e595343d3353fa77f4c32028a3315c86fa3205041a58ab1dc6"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8328079977.json": {
+      "bytes": 803,
+      "sha256": "bdb6fd2c747ba4bd97fdf6ba2d8991711d79253da0f286011470ac0f74f691bb"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8328091413.json": {
+      "bytes": 795,
+      "sha256": "72143e7e6ae7a44f848af64917708928a387daac40c8aaeaec7dee436cbbc08a"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8328526164.json": {
+      "bytes": 798,
+      "sha256": "6f418ace67ac7763e7e38b146f6996e09ae5eeeafdb5adc2152644a77411b68c"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8328778296.json": {
+      "bytes": 792,
+      "sha256": "9d45623cba941c6fa469c4fa20ce5bf6168ca59239d2f23b01267b7d9be0fc92"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8331866163.json": {
+      "bytes": 763,
+      "sha256": "98144a7f32f7acfeb1a6976b3a7a6b0b146a029f27950125480599fea36550ae"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8331920519.json": {
+      "bytes": 768,
+      "sha256": "5425d338cf5316c250500dcf5a6cd14a198fbf9c6580947fdb43532ea4c5d448"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8331926870.json": {
+      "bytes": 775,
+      "sha256": "dd26d36b9f0c7e4994ccd631c8374bcbd39e817ffa0f4daa49afcb82648ccccc"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8332520905.json": {
+      "bytes": 765,
+      "sha256": "e3224a260d6ff6bd30d4690253567789ece1323eef35af8b0eb410e98eadb18b"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8332729609.json": {
+      "bytes": 765,
+      "sha256": "97856443c2b75504490aafc8d5398f72586fda3da8617cfae11eee16c0b63ba5"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8332784102.json": {
+      "bytes": 859,
+      "sha256": "d1f9dfc153d06f82767bc605ed2148b161879cac6d59ebc17eda8bb01e3f8800"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8332843852.json": {
+      "bytes": 868,
+      "sha256": "d2c0bc8f71b0e5fdaff38cc73af2e02993693670b971a7793c1dfc53782c31e6"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8333426700.json": {
+      "bytes": 818,
+      "sha256": "c1d21ffb6e665aa9a657b3ca2879e1ca85cf98defb70537f9e7d00dcf2dcb356"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8334063785.json": {
+      "bytes": 854,
+      "sha256": "87c741407e636592b0fc12c38076ccc1ddff9322e0897c35e2befe2060963e70"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8334846944.json": {
+      "bytes": 774,
+      "sha256": "c9ff9e3c21f3e59d9a5a40ce974f25b15bdae4d44c0d954f93ae010d458bc1ad"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8337150262.json": {
+      "bytes": 766,
+      "sha256": "e65eb6bdd323645c8351adbfbc962d200f781256dcd20040e8ee65e3e45886e0"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8337674174.json": {
+      "bytes": 853,
+      "sha256": "b5d1e0e4681def098817e0b0b6d0003a8050f7374c9fa1baebd5b6b9acb91c58"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8338087923.json": {
+      "bytes": 868,
+      "sha256": "fb44caa5615914074ec589b171e817033bcfa813255b7dc54ad753931fc89e54"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8338633245.json": {
+      "bytes": 782,
+      "sha256": "0ee6c33fec86ec994a18875fba63cc0975d9e99bd57585cf079280fe757f8c7c"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8338663325.json": {
+      "bytes": 793,
+      "sha256": "8f8f3ed26f10d75ed288384802bd03b3b15cfc6bb367446d72448a64113fde8c"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8338673114.json": {
+      "bytes": 765,
+      "sha256": "ffeea79c884a97380d5060fe6442e8a8b8c5d8e2acce158ae34a6b048ae8c2ab"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8340105318.json": {
+      "bytes": 784,
+      "sha256": "15426825fd4f56b7a02312da6709bf36ba81ddb5788de6e0ac90d13d6aa93846"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8340392883.json": {
+      "bytes": 869,
+      "sha256": "3931be3e856f8c3800de0f2a63c0eb78f11e23a264fe709e1b2d0ba31a1c6c03"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8340397212.json": {
+      "bytes": 789,
+      "sha256": "dabfbd85b917b03a2efa86098c18a76fe53fa4e32ea36b9e0ccc105cf97c28c4"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8340420883.json": {
+      "bytes": 782,
+      "sha256": "96f61102d358927c49afeba038c5788ce8b55369704d916137117991c596e9cc"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8340687236.json": {
+      "bytes": 778,
+      "sha256": "8a7044e67f7babf08c4fb436927caf2d93cb954f95d3af813cf095f4c3c01b67"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8340695599.json": {
+      "bytes": 767,
+      "sha256": "43b7bdc149d1a77d712a2769b23aa5d9f27b38b35f5a8212fe0dfc79afc01437"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8348033897.json": {
+      "bytes": 832,
+      "sha256": "35f47ddda770c5ae1fdcd0442e40092de4ad95d38adf29321028137148bdce6c"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8350776306.json": {
+      "bytes": 750,
+      "sha256": "fe1a7a3b04b676d29b805a48a5ea5a086be78df0b071fe75e3cac994e4292c21"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8351042284.json": {
+      "bytes": 779,
+      "sha256": "1a420813980857bc71336108476d8b1f30838b131eb6b9bc96ed0fb62cfcb062"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8352922659.json": {
+      "bytes": 794,
+      "sha256": "150c8b84953b7aab4cafc3858fe3b916fa23ed6116f36e4611ac51f78408f81f"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8353007242.json": {
+      "bytes": 803,
+      "sha256": "eb8bacfeaf73fde8c2e1668d9ee88c9ed0862883b46bcd91ae71aacb9e8a31cc"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8353139891.json": {
+      "bytes": 788,
+      "sha256": "5a805864a56c6a5916ee33244a8bd3e36cf1c5c14e81f22643057504a4343787"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8353617132.json": {
+      "bytes": 940,
+      "sha256": "f8e32a4db620f9853b9d7ff3afd194e55a01c1e28500eaa9321668986ef4b43f"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8354612115.json": {
+      "bytes": 821,
+      "sha256": "8d5e75a1476435b8fe0e0671b77381498e0eb54758b2faeedd591027fefc5926"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8358631576.json": {
+      "bytes": 811,
+      "sha256": "92127a0dde14633b1adf8b0d1ef6a2bd501ba857221135b498c929138f5b3317"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8358851565.json": {
+      "bytes": 776,
+      "sha256": "6c91bcfeea003bbbecf14273ca10856a7d1189be65be05252b7e992b275ac159"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8363629334.json": {
+      "bytes": 771,
+      "sha256": "3b609cd96a3ca5ce04c1493e06a41ffb840ec7100fce2c71f5b70945a4add1e7"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8365003729.json": {
+      "bytes": 811,
+      "sha256": "9af770d3217cc6cf4bdda8f3a64c389a4747c3784497590ae92f35aea687367a"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8365886960.json": {
+      "bytes": 789,
+      "sha256": "21e36cd60e26e169b56bbcb44b327fa3db3ebf9dbadc2f323bac004f9add9ba3"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8366819299.json": {
+      "bytes": 797,
+      "sha256": "e1c11be1dadfafc4e9a564bfc43333e80345c3d4e275a0cd6d55e6fd212c0ef8"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8366829183.json": {
+      "bytes": 765,
+      "sha256": "6c0413aed870ff7fc1aa366220051dc9b0ac517983f8bf8f3f735f88761c3926"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8367566995.json": {
+      "bytes": 865,
+      "sha256": "5e0b6213810cafe68f05783fe17ce1bd1911f8718278f1ce70c58163efdb60fa"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8368605430.json": {
+      "bytes": 784,
+      "sha256": "240190badaca314ea8ad1526dbdf2b63884739450303486fc5a726d5592ae967"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8368684107.json": {
+      "bytes": 788,
+      "sha256": "3e88af1126af775d4df4504fa8fe5366aea3c7a3d6abd7a3226b68197149756b"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8369226322.json": {
+      "bytes": 799,
+      "sha256": "d7e60eadf4c0c56d3f5626afd1b295ffc5c6b714c4d94bbcd24aa16596c2b3ae"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8369551770.json": {
+      "bytes": 795,
+      "sha256": "2f09a2325911865c14f4cc30dc9d965adee26b633b524fabf1677a4c80b95cfd"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8369844409.json": {
+      "bytes": 794,
+      "sha256": "8b6a22fd8f3062edfc90202c93bcc1abeaf008a2a7589bd6031ca874b755fc1d"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8370128139.json": {
+      "bytes": 815,
+      "sha256": "60b7911dc0a36a16be15e0573f70a3393611f525232f10359dbe921ab0913220"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8370599516.json": {
+      "bytes": 761,
+      "sha256": "f8f35cefa8cc116783088185bca79369dc84b8ac6944575870ff9bf78a16cd68"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8372223482.json": {
+      "bytes": 777,
+      "sha256": "ba9b5b512dd99a11860e8fc6f94492ffcc00f2d57f09787624700583ae9b4f1a"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8372662783.json": {
+      "bytes": 784,
+      "sha256": "b7398ee314e87d72a1909e27ef4beb4f2abe861354d9d6174322bc8c3a3c709d"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8372895500.json": {
+      "bytes": 766,
+      "sha256": "1e1d28552a195bdf3a880037b94e71376f7fce415651806d650b90e1d48f0a8b"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8373427613.json": {
+      "bytes": 779,
+      "sha256": "d5382e961696b54860161b37fa8292916513b13f58b4112f6768949ca44eae33"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8376183422.json": {
+      "bytes": 755,
+      "sha256": "f0278df8896b6511ecc8c3d579a85e5ed10b8b398804e17411ac2b3c22529d5e"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8377134532.json": {
+      "bytes": 774,
+      "sha256": "63b6b2d0a462000c8bc2cd73294193a7c6ce057692a8e4797c621be7a1318af8"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8377892107.json": {
+      "bytes": 799,
+      "sha256": "630e9f855b16c41b4e08c5347bb096e3ca10ea452d0f9630fe1ca76b0904e1aa"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8378223630.json": {
+      "bytes": 794,
+      "sha256": "db170d872955fada9af21789ebe5731591188454d49361e6025e92ee2ff41753"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8378428041.json": {
+      "bytes": 871,
+      "sha256": "fbd4064f05a4f1b1c7b09f8b3b4bdcc0d65a712c91d2b10cca8e8a257d1727ce"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8381959846.json": {
+      "bytes": 807,
+      "sha256": "c57a41ba11d86e1040f5e08bac20522e7ea7022b324a4e5663738522e97a5f8e"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8382077402.json": {
+      "bytes": 757,
+      "sha256": "e83874b55831ed04097e709baa01830e874a163a314752003c594e778a153286"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8382135861.json": {
+      "bytes": 803,
+      "sha256": "568ae6c3186987b44fdaf8e0fb1fe9a2a55294f4ebb47ff75ec11b007aa67635"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8382441436.json": {
+      "bytes": 788,
+      "sha256": "c5851c24ebbdb889c3de4ff561a8439be3c47178d19c4646b52c5f6235e88880"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8382632800.json": {
+      "bytes": 781,
+      "sha256": "b20e6c4edc88e1433e33b17b00e921631819e42995ddc1c7f65705f221c73a62"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8382784459.json": {
+      "bytes": 773,
+      "sha256": "3be259b6ae4b7defdac6ac041bbee999cb9aec8db78cb883888d3862ddd0871f"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8387938361.json": {
+      "bytes": 853,
+      "sha256": "5d3923ae65feed305797a51e0fe9f8e1a9fd0d9fcbcccbd4305593d55a654558"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8388170980.json": {
+      "bytes": 799,
+      "sha256": "2a969961ac0ddcd3d16e7598708f7a31c42ccf99bfa1fe1b80782f96bb9dfeb4"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8388726791.json": {
+      "bytes": 771,
+      "sha256": "b4759ff65d95082e3fd83f138befeb194d162e68f240e01d477ea37302bda309"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8390322948.json": {
+      "bytes": 797,
+      "sha256": "539b5f06f0c9bcaa49ef5fcfe2a91b494d0532055d7f388b5ac68b5363c94dc2"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8390604539.json": {
+      "bytes": 859,
+      "sha256": "54f912236c29e4325713fbbdc5bb5127248a61cfb3a8664a6455a8c468a551f7"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8391221325.json": {
+      "bytes": 787,
+      "sha256": "6169710a1b7fed6ff76ca723427a4953c8489ba583ad2333d8260a30c9efed62"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8394155644.json": {
+      "bytes": 778,
+      "sha256": "6ae90349ca4620f865c2518903ee61b3d3004a22b57b1be1c7a80f7fd89854fb"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8394329444.json": {
+      "bytes": 878,
+      "sha256": "9ad5dab6df5db1966d75d278f7b2be6e048c63de41e6d956b164b813a4fd8fdf"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8396913060.json": {
+      "bytes": 868,
+      "sha256": "231e30c96c91b02f556650b4471331b675c110ac20ed5cc62efabbc0522bffce"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8396923217.json": {
+      "bytes": 793,
+      "sha256": "cb58dec9229bad3852e6eb67a1d894c18ba3a7ceb6db7468c4f5cf559cabc4ec"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8397005064.json": {
+      "bytes": 784,
+      "sha256": "7da6bc8db820e42a0d1e8af2e99204dea6f3381fbab8a358c54ff63947427422"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8397200018.json": {
+      "bytes": 783,
+      "sha256": "f0836d92be124cb78450ba26e3e47c40adbf6f152ad29503a598ac9e09b0de98"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8397270456.json": {
+      "bytes": 788,
+      "sha256": "6de95d1f8183082a0647d9d95bef466080a1921a41d3f0a6d87c6b4d58a12aad"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8397399257.json": {
+      "bytes": 800,
+      "sha256": "6ca829c5a1f57ca89844588a3dbefc5b9908c95028413d0f72238632d5901dbf"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8397413375.json": {
+      "bytes": 792,
+      "sha256": "2f4218539091f8f51bb691c24f68921c0645cd44952c5bbac8e9423dfbe445a6"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8397548547.json": {
+      "bytes": 826,
+      "sha256": "3b6dca767af06e9f4b93b78b9a42662252573043f2242a8941e32b4bfb5198f2"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8397591381.json": {
+      "bytes": 780,
+      "sha256": "179d9ac827e8f554a261c09133ace3de75520dfc15fb29098be4c11693bdfa52"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8397688256.json": {
+      "bytes": 795,
+      "sha256": "bc72cbeca8972685ae3635226ac6217cb7676ac419738f825063d6fb4cbb65e4"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8397761316.json": {
+      "bytes": 789,
+      "sha256": "61f07b2752ba205cf3e9c899a5c76a3bd1f235667073c20a9be4514bb6a1329f"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8397800535.json": {
+      "bytes": 787,
+      "sha256": "fc5b8aaa4cef86ebd8f41108cbba6bbfcb047578769f75de77465ef604db2bc9"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8397972474.json": {
+      "bytes": 786,
+      "sha256": "c0a32de2b02fe9926fe9cac66fae8551e356dcccb851818c81fac961c2e206c7"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8398485536.json": {
+      "bytes": 769,
+      "sha256": "7fc8ea7fb398c6e51deda5e57b4b796234b2cba77981ff3c27c764c484a15be6"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8398886315.json": {
+      "bytes": 848,
+      "sha256": "b01e932a609a54ba40cb370296eb871aa6d1998c5d5886950befec7b1b82954f"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8399580501.json": {
+      "bytes": 834,
+      "sha256": "26767d33fa46099b346620b54b66a309867d9bd5b938d818f39accc5d1919e79"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8400141586.json": {
+      "bytes": 750,
+      "sha256": "604df479c985770240e25265c85559a48b33c1ba1f1505bb58d3fdcdb29b81e1"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8400926488.json": {
+      "bytes": 785,
+      "sha256": "01b4ca06c7eb908850bbbc1488b96b170a29fcbe3fd80e6680e6d999a0f71312"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8400969424.json": {
+      "bytes": 841,
+      "sha256": "f59a6e56fb5a29ef41b4cfb258b739f17f7e79982b696570987fbcb6029c0af6"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8401025052.json": {
+      "bytes": 766,
+      "sha256": "0b3db2e51f74633dcc48a15c8f289a422f3e8f3e57a29a08b6c5e78e1003a4cf"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8401031060.json": {
+      "bytes": 773,
+      "sha256": "c230264f3494b097b68cdfd6e6ae1359d42624ead7517b91b4551ab335b3b644"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8405089979.json": {
+      "bytes": 798,
+      "sha256": "f22a7a6f28dbb8c12cac439a76b4e3b6179f1d585c108b7949d3bc37e8752a15"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8405485447.json": {
+      "bytes": 848,
+      "sha256": "05d9192b2f9ecb18f1497c60b74d3019b2a2cf47ea5e3a5576e7c0615599e17a"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8407683004.json": {
+      "bytes": 842,
+      "sha256": "366dc1741a843050af7d017e45813c1345fec37c3e69473c57fa782bce915ec7"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8407916164.json": {
+      "bytes": 872,
+      "sha256": "bb12c2b0250f5f973c618098d49070bbfbb3f749d56dcdee2506e5f486230edb"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8407942116.json": {
+      "bytes": 856,
+      "sha256": "1bee319deac069e5154717f04119aa6e4f1be2742b8d5f62ff4526f3ab4f94ad"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8408379069.json": {
+      "bytes": 769,
+      "sha256": "76b4a505a578effe63d96898969f856ee5793c741ed918a164bc94df47b2a435"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8408807973.json": {
+      "bytes": 837,
+      "sha256": "34c5a67cb7e7abed8b439ff40cd1f3da3b57decb249220ebcbcdcda8876e3b24"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8412997383.json": {
+      "bytes": 766,
+      "sha256": "16d07779666b4aaad290a5775ba311e2081a688e2534d9b877deac0b6e45ae2e"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8413092923.json": {
+      "bytes": 869,
+      "sha256": "e5be37ca24b04491017ff48242be4cc1e8c60beba89250b59143a19182199bad"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8413127940.json": {
+      "bytes": 831,
+      "sha256": "ebb4eb2d9b12517d7726308dbf89d7bd7e941c9ef754cbe8bfe12d85cf874046"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8413140389.json": {
+      "bytes": 829,
+      "sha256": "b60c7a8130702336daacf33f80d098454450e018ddc275630b8d5d78a8b56fc1"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8414096987.json": {
+      "bytes": 783,
+      "sha256": "158d4016121eed494b37a214b334f77f5c6c52523388302efeaf17119f629ed7"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8415516128.json": {
+      "bytes": 808,
+      "sha256": "fc59c0aecb588f7ffd54ef65176001baa9bb9fa1b0987eea5148cc9f05a1aaa6"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8415539938.json": {
+      "bytes": 824,
+      "sha256": "353c98998593bd78113fb9cf8e2502d75375aaf9714007351fc9e79323c61fc9"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8420052032.json": {
+      "bytes": 788,
+      "sha256": "cff8b694c8668811634bb5a2e065359923c6ca7ef82b454d0b9b854e23bee6b1"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8420420779.json": {
+      "bytes": 938,
+      "sha256": "210eb75f358dec2ecb605dc674b9e83c6f18be1b3170960459e7a64324028895"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8420424635.json": {
+      "bytes": 775,
+      "sha256": "c5b9cb38476f2f4d2d403138538bead26c9f2b9f97996f6a6b10f6211e23c7e4"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8420492106.json": {
+      "bytes": 859,
+      "sha256": "914044ed74fbe29140e65d589230bb652e153d1a699ee798859c6e5dca11189a"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8420611449.json": {
+      "bytes": 780,
+      "sha256": "f030147f339cc809a75d8805b1ef4085cb19b915ed8e1942a9d977abd691a49e"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8420674104.json": {
+      "bytes": 855,
+      "sha256": "e3fd8601dfb1d059b35a304bda857d9d9287cc8f5c90613ff2aab654e5d5f6eb"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8420787420.json": {
+      "bytes": 774,
+      "sha256": "0b17f02db52c2b798acda1b7740fcbb92392c63309e8e811d369fe2cddb63a8f"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8421141791.json": {
+      "bytes": 802,
+      "sha256": "9d865212f9ca5b5e855655abc7b5148d5b728a78bd28fc970d66131f90216fd5"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8422109082.json": {
+      "bytes": 784,
+      "sha256": "8ba1936d53aa5e6e5407975cf6dc6eb17cf23da910fe388de34613051b4d981c"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8422370852.json": {
+      "bytes": 881,
+      "sha256": "8edd99fa985b5bf892c3260c031ced277ad10cd2e3a04374bcbc71c6deca2201"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8422635195.json": {
+      "bytes": 876,
+      "sha256": "0666393b5eab015f1784d0a26db1db9a9872adde0c9fe3e21ad83484c340b300"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8423056031.json": {
+      "bytes": 800,
+      "sha256": "21e7b509d0119c6be72da438342d2a311236bfcf78f9d8d2b11f56385e04b65d"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8423131201.json": {
+      "bytes": 859,
+      "sha256": "b293a4f1811d94b4249dec220c43d705ad6f86b8de1b4edade2c0adb31ae9e3f"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8423157485.json": {
+      "bytes": 778,
+      "sha256": "7111d508a498d96c7180369cc1fc020b0f8ea5a66f61b65086e1554d234b5c09"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8423638938.json": {
+      "bytes": 754,
+      "sha256": "c6b970546e6b0c34b934cb0d803abb0d48aa5e56874fb03b7e56218c9696cbd7"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8423805166.json": {
+      "bytes": 765,
+      "sha256": "4b25985f86a9f2b6c43e9fc08017ce3615582af6a2e38af24985a15c2420a706"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8429068617.json": {
+      "bytes": 898,
+      "sha256": "c62861dd4a3d39fac7171e0d41f578ca02428101a213ed06be80d2c222b30963"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8429102630.json": {
+      "bytes": 783,
+      "sha256": "64ea2ac62c7e35b5fccf9106d91d530ac0c72cb59a656b21ed467f9716d21174"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8429335529.json": {
+      "bytes": 798,
+      "sha256": "f44d57e2d1f6e92c8f1f979c400720c485a118bad84a68b1adf47ff0b267c2c2"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8429487273.json": {
+      "bytes": 781,
+      "sha256": "6df48d1b70ecf1bde71abb2d5ab3b0d299c78d02d243e070ecc225e5d5fa4aac"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8429692459.json": {
+      "bytes": 799,
+      "sha256": "b91703f056597684172db4f00ce7fb6329aedd181f18c1ee4cb4f8deba8938e4"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8429708870.json": {
+      "bytes": 800,
+      "sha256": "3eb7ae808d89b27cc05d35c962c38869079f064cdb451e0c34f0021681480bd2"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8430887711.json": {
+      "bytes": 798,
+      "sha256": "34f074c3ddc0edae45077c936ca4de185ec32ff9fd8b1ec15c51772abab5864a"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8431032070.json": {
+      "bytes": 771,
+      "sha256": "5418634189a283e1bf9d4c59e3ae7da098f2ae485dcee7d885c636831712315d"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8436981014.json": {
+      "bytes": 847,
+      "sha256": "436357f4725257f33ad692f0e464dfc2e629bbda616adecd129689b485105cf1"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8437258217.json": {
+      "bytes": 794,
+      "sha256": "6d9d27c438882a4cf30e6db3cc45716e2744d5b6f6980db93e030c3b1feee8f4"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8439196495.json": {
+      "bytes": 763,
+      "sha256": "189f01568dddb69517f18a4107b046ead6b3b6e671a610ace836f11d4ce370c6"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8439254862.json": {
+      "bytes": 821,
+      "sha256": "e8fa2e6ec650e5f338045b48d0a1aa69cff322e28a90601d16ca0a14f06c8320"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8441462782.json": {
+      "bytes": 823,
+      "sha256": "cd1a0eb6b0433af655e6e7b7efb13c568d3c1983fa21e310423c7966aea3b76c"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8445185318.json": {
+      "bytes": 789,
+      "sha256": "e1e298a85cf684a89c492d9520a92b721a8b67b581a0d0254066db98b6b42e90"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8445599678.json": {
+      "bytes": 778,
+      "sha256": "f1b560998e4a8766ff8e9bff4d60b82051870e4dc946e2c04ba8af8e9003a1e1"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8447253986.json": {
+      "bytes": 782,
+      "sha256": "a845b558a1b90f0f78804dd257e77a524267183b97f3d545f73c8025ed94e5ac"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8448585000.json": {
+      "bytes": 768,
+      "sha256": "df77e215edc8510f3091d1b7885ad322b503a732066e6a782dd6d458ddd63bb8"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8448955606.json": {
+      "bytes": 795,
+      "sha256": "34f2e85523e648b10f38546fe07c1219a1d45170b9061397bc7fafaf71d0e45b"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8449076954.json": {
+      "bytes": 808,
+      "sha256": "dd0a83eb804cc49623ec00cc82de8ecab8df63a3746733b60b50eb8f35edf13e"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8450217643.json": {
+      "bytes": 779,
+      "sha256": "2ae098a5ae7f9e11aac071808c43d6657b294f150d123d475efdb62578c5f86e"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8450496628.json": {
+      "bytes": 766,
+      "sha256": "b9ec57b682ca4648838d41c97c4f68e334763985979c95ec2ed481d245079987"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8450513492.json": {
+      "bytes": 778,
+      "sha256": "9fcfd73ba9470c95af640c0930d362488df9dfffce424840bbd0e4d5d39483e9"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8450813356.json": {
+      "bytes": 865,
+      "sha256": "1e5cd2d4905e107174ff25d03d6d8af652f56e712fd4ddeb43eb7c3a0c5ace6e"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8453182801.json": {
+      "bytes": 852,
+      "sha256": "c8412ce4b21dde3549407746cdb3b0be5cb57562964028daf4d168ca0e5c5820"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8453474796.json": {
+      "bytes": 766,
+      "sha256": "a5ec9b764b5a6226d2f1be549542ea034244c7cce9ea76d951af26631a784646"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8453627361.json": {
+      "bytes": 782,
+      "sha256": "8e72d015c86fcad4ecd771bc5b47e2ae82491fccdee9d70b1ac40924769d9620"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8458018148.json": {
+      "bytes": 777,
+      "sha256": "51f89e15dcc7adf6f50ff09e3894b1a01df7095b937e07978f064aa4cda40fd6"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8458283931.json": {
+      "bytes": 764,
+      "sha256": "b9775c9dd2d81c3548a6ebbf0540e7504ef4dfe2f5516830aaa0ebf09f8de10c"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8459186561.json": {
+      "bytes": 771,
+      "sha256": "86b32c9b23dc3781a5cda27d8848c932b8e4fed37606276e25011107c911763f"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8459656383.json": {
+      "bytes": 856,
+      "sha256": "366251ece939de5f835709c1fa1477d3bee9a7034e9dfd1f7683565c5162f4a6"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8463281984.json": {
+      "bytes": 916,
+      "sha256": "d59f9347f273b6011201f70a681438af54ac7d6ea3d9700859e3874d0d082546"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8463804864.json": {
+      "bytes": 878,
+      "sha256": "7996830c4a450cacfd62113042b1ea6a9057f53e35c411e3a413a00bb3f05196"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8467033541.json": {
+      "bytes": 792,
+      "sha256": "e310fab31847cac8a0686a155c4ec97a29fb03ab0a1d473018cb445535c85996"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8467201969.json": {
+      "bytes": 855,
+      "sha256": "19a43522f9699328226bf03ceb0bf2e684ba118215827efd8eaf29bdbdcb27b0"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8470138556.json": {
+      "bytes": 798,
+      "sha256": "480c774437693b2fa72b24add3a8e3bfccc93fa97db1b40f28663dee27eb0c07"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8470942668.json": {
+      "bytes": 808,
+      "sha256": "69002202910334fc0f146692f1f6f3292899dac1787c5df18607fa1784d91857"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8470954101.json": {
+      "bytes": 772,
+      "sha256": "48c87be989dcf348fc4fd556ba85787df61b105a3c10e3dd6133f8b5e312c8ef"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8471003131.json": {
+      "bytes": 787,
+      "sha256": "e07062df483d4642ae9e111bb74422512bc50056bf0257da14346fb736ce872e"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8471360313.json": {
+      "bytes": 840,
+      "sha256": "547d4ee2898f7007e50591ed613b20a02f7d15ce5bf9bc50ef1a46e94a46f970"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8471452879.json": {
+      "bytes": 789,
+      "sha256": "68dd4e2dec2758de0d40a5504aa51986287448d0ae177700378de26c6b88afdd"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8471563421.json": {
+      "bytes": 772,
+      "sha256": "9cf5f56565f175454605726e44bda1cade88de42c3cc29d3a7b7c9c3ac6f68b6"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8479307694.json": {
+      "bytes": 818,
+      "sha256": "932e61fc8828f4964a61731fd8c45e946fbf2cbd7603572a871543e376ed4e62"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8480135277.json": {
+      "bytes": 785,
+      "sha256": "ee04b0bc7b4bf7910e0330a14d940bb62eebc86493b98c53254a604baaac43bd"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8480924482.json": {
+      "bytes": 805,
+      "sha256": "dd7556aade72152e6a3d662fb35fbb838e02182856dca3bf5996040e16f67e74"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8481886381.json": {
+      "bytes": 787,
+      "sha256": "458bba934f35abc9b19e467f052cda497369805f294dd998fc01a74156c21e62"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8482589157.json": {
+      "bytes": 866,
+      "sha256": "6b5f68a4b0f5588643a812dffaee539ca450b1e334b7f1b0d5a6420faaf9e14e"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8482687879.json": {
+      "bytes": 862,
+      "sha256": "b56f23d8ac86fc5d1e60db3f85638e51a1327ff967b1ba5727b8d72ee5e3426b"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8482708316.json": {
+      "bytes": 780,
+      "sha256": "c97c40df428ed457fa855ae4289c0c566c772749dcf0a75c3048447e66885def"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8482867205.json": {
+      "bytes": 761,
+      "sha256": "760e6185f5ee02bc251443a60eab734168d33c69512fb5859d76c28fd0f05d6a"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8482880300.json": {
+      "bytes": 817,
+      "sha256": "81eb96770fd23f644f84e07f48395cdb8eaca400a8f3f76d17903eb43117b90b"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8482930375.json": {
+      "bytes": 774,
+      "sha256": "2f45ac3887831dbce602588f97046af68a7282254000d42de493e524853ec065"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8483138473.json": {
+      "bytes": 792,
+      "sha256": "575a3efbaf87119179baba623e4f420718e31a5bf5541beeabfcb3d8a2e3ea91"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8483299379.json": {
+      "bytes": 909,
+      "sha256": "7e218661b8f37a088b882674cca8f83f5472b5018048cd0094518400f16fc577"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8483472001.json": {
+      "bytes": 775,
+      "sha256": "c47221c52d873239b99ca460d854d36b2c0e61ff31d9461552e2ed5eed09e0a7"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8483488831.json": {
+      "bytes": 860,
+      "sha256": "e967fc299c04eeebe2a02143725aa2e3e552d973783a6cf7e9a8be6d4261bbe6"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8483654005.json": {
+      "bytes": 859,
+      "sha256": "c7b0b8d3bcba7be73be4c1021dce2d694a7c41b9824283811bb450edd90729e5"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8484912798.json": {
+      "bytes": 787,
+      "sha256": "7e8e1d6fb1ddf1a5cfcc80b238cc03e9bd4bfea05f3244ca0778b2770f61becc"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8484984784.json": {
+      "bytes": 873,
+      "sha256": "42d043dc771bb3ca17569b54d5a5faaf75a19e56269d8081f5153affdfb4ef75"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8485346634.json": {
+      "bytes": 882,
+      "sha256": "a3365d8ce54c65b5a9e1fbe3ec908835c94304d35f83fbc18a114fd2f46aef74"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8489065853.json": {
+      "bytes": 861,
+      "sha256": "2069efb4ffb7e543364fcbee4925b70bbad63e3ca36988acb8b8bf5a0237378c"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8489713393.json": {
+      "bytes": 790,
+      "sha256": "9fabbba4c4525c31083a82d6b2a33970f41882da7159fea26fe883f06b293a6b"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8490187935.json": {
+      "bytes": 861,
+      "sha256": "01b6944dbb8403b6d55269f50d75eea348df38a3f7529b189583f3104f1f8bcb"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8490204429.json": {
+      "bytes": 771,
+      "sha256": "4374d85233b27da04afbd8caafa3d33eb0e39c41da5fec7c8505d54de85c6c81"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8490255879.json": {
+      "bytes": 864,
+      "sha256": "d8d97b2f9de4dee078ef4c5a420b18d451c95b3890006bc9e2e4710f681b2067"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8491182073.json": {
+      "bytes": 945,
+      "sha256": "edc2dca82cd8699ce42cd82885a2c65524404da0c7f2059fb129464b9a7a9121"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8491574746.json": {
+      "bytes": 785,
+      "sha256": "9f8a5efe992702531d5aaddf13894b05342d4153025bb223adc9ad1482750530"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8499425500.json": {
+      "bytes": 694,
+      "sha256": "5378d103bc0fd50bc9f2497b1a2b8952cb7a9e80634ab0333730f9f39509195b"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8512051742.json": {
+      "bytes": 788,
+      "sha256": "54dc88c5a885bd5bab8a323ad204b513861b9cf64effb03687c7303fd8454fe7"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8512096091.json": {
+      "bytes": 820,
+      "sha256": "8839226630773d9ce0cac3894a3602211237843e9cef16bbb3a9fc99016a2f67"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8512314211.json": {
+      "bytes": 771,
+      "sha256": "c12060a078c58e739f1f4fc8923bb34b1b5dac37d5700a01641112c9bf39c012"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8512361517.json": {
+      "bytes": 799,
+      "sha256": "9481110666bd3ced2f35b1fe64587ff93bdc917ba11e93daf5317cf189c92368"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8512892831.json": {
+      "bytes": 786,
+      "sha256": "e43efbcea254d2fe5c47b50ea28c367ffce1dca210fe5ba89faf7990f172a72b"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8513863543.json": {
+      "bytes": 966,
+      "sha256": "8c57e833d42d42163de7add488538daacd553876ac293f87d56aba2eac014e48"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8514468617.json": {
+      "bytes": 782,
+      "sha256": "d95a93134e828ff144039a304656089e7a16f2a0337d884a6d4e762ffe71b8b0"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8514654746.json": {
+      "bytes": 798,
+      "sha256": "286e6d2a0e58d01bf5cae1368d701c135d03062f72e14a579e8e43146a3bb4fa"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8524834702.json": {
+      "bytes": 777,
+      "sha256": "7d4d5be51753b231ddd79020f5ed274fc1a8d6051a76de723d502605ac5ff284"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8525281200.json": {
+      "bytes": 831,
+      "sha256": "c5da0b785e66c6d4b54a8eb2461cc8d498bb2de0ebd0d67c922d34fdbc4c5245"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8525300273.json": {
+      "bytes": 785,
+      "sha256": "2d2bb7d1b6f0972a8ba76f79789e9e47f0aed44cbb8c6bb25d07767532f3727e"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8525379026.json": {
+      "bytes": 776,
+      "sha256": "abbb1e52fc26c4d5530c2cb9c305e20ed74708bf526a714197956016efbec637"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8543116270.json": {
+      "bytes": 799,
+      "sha256": "acc535f43a349dc832c1531dd4442c77c5ab51b5e7137c37c83c8ab7e5847d76"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8543777536.json": {
+      "bytes": 765,
+      "sha256": "a4a9a08be33839274d5bcd0f51f02e4231b59bfdcac2e36840e919ca9e822e54"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8545361314.json": {
+      "bytes": 760,
+      "sha256": "4245eda0812bc86972ca5d5a2ebb1cc4c24c99f445cb65702c6a97d98ab5be13"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8545545464.json": {
+      "bytes": 755,
+      "sha256": "915f32b9e3b6dafb06641ecb1280c42bab050d31b63a0caf3bc1f506cee5d627"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8545697942.json": {
+      "bytes": 763,
+      "sha256": "177c8f01f99bd7d2450e190338b3b98365db51888a136b9ce9f6a481ce59a60e"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8557071974.json": {
+      "bytes": 777,
+      "sha256": "e0d9669d3412a7ec4d7665363a18b39eea33bb9fef963cb261df61141082b032"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8557444123.json": {
+      "bytes": 773,
+      "sha256": "adc5c3ae772d7deeb649a72b811bce61f782746254f30136ab75437ab528bfd1"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8557571424.json": {
+      "bytes": 761,
+      "sha256": "4df5438a64fbcb4203aeb44bc3556d772a71da88baa796a7e736a7dcd2175d94"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8575270479.json": {
+      "bytes": 803,
+      "sha256": "7cc944f84fb2f5befe05d4abb1c0e1745ecde26cf1b786d303da97ccb5ee9228"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8575421656.json": {
+      "bytes": 869,
+      "sha256": "3a6a411ca6cf4c3dca5cd064a827ab91e9f3e4183c08ddf4b5567fe75425e9d7"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8577237980.json": {
+      "bytes": 969,
+      "sha256": "ab20c519991b0440b63cbd907d83095fdad17f7f488db0168e34afd0198cad8e"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/reviewed/8577423127.json": {
+      "bytes": 800,
+      "sha256": "29362a8b147c62a9d7997180a706e9ea0ba65e4ba39e21daf3511079dbc31a70"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/standing_unavailable_policy.json": {
+      "bytes": 840,
+      "sha256": "af9d9881bd9e5b06e30535be314df0d7516873d62947e9491f8f5b1138a32dcb"
+    },
+    "Data/avito_runs/20261029_moscow_cashier_f13_03/unavailable.json": {
+      "bytes": 1861,
+      "sha256": "94c5ce8486fd7bc23cdf831e96473c1cc2b61cea5e5c6a938eda37be0d622e27"
+    },
+    "Scraper/runs/20261029_moscow_cashier_f13_03/plan.json": {
+      "bytes": 14299,
+      "sha256": "c506fc25aa790adf105c11b9a36adfd91825f5184e6c322ea440cd286b6fa44e"
+    }
+  }
+}
