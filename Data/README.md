@@ -163,3 +163,5 @@ avito_runs/<название_сбора>/
 - [avito_f07_moscow_prodavets_20261029_b_04](avito_runs/avito_f07_moscow_prodavets_20261029_b_04/exports/vacancies_flat.csv): 45 вакансий.
 
 - [f08_spb_seller_20261029_b_01](avito_runs/f08_spb_seller_20261029_b_01/exports/vacancies_flat.csv): 299 вакансий.
+
+- [f08_spb_seller_20261029_b_02](avito_runs/f08_spb_seller_20261029_b_02/exports/vacancies_flat.csv): 298 вакансий.
