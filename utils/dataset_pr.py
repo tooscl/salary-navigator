@@ -75,6 +75,14 @@ def render(summary, before, after, batches):
             "Проверка общей таблицы: --check пройден.\n")
 
 
+def review_changes(root, run_id):
+    manifest = root / 'Scraper/runs' / run_id / 'manifest.json'
+    changes = json.loads(manifest.read_text()).get('automation_changes', []) if manifest.exists() else []
+    reviews = sorted((root / 'Data/avito_runs' / run_id / 'exports').glob('post_finalize_review*.json'))
+    if reviews:
+        changes = json.loads(reviews[-1].read_text()).get('automation_changes', changes)
+    return changes
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--run-id", action="append", required=True)
@@ -100,9 +108,7 @@ def main():
         entry = entries[run_id]
         _, rows = read_csv((ROOT / entry["path"]).read_bytes())
         batches.append((entry["source"], rows))
-        manifest_path = ROOT / 'Scraper/runs' / run_id / 'manifest.json'
-        if manifest_path.exists():
-            automation_changes.extend(json.loads(manifest_path.read_text()).get('automation_changes', []))
+        automation_changes.extend(review_changes(ROOT, run_id))
     code = [p for p in staged if p.startswith(('Scraper/', 'utils/')) and
             (p.endswith(('.py', '.js', 'SKILL.md')) and '/runs/' not in p)]
     validate_automation_changes(automation_changes, code)

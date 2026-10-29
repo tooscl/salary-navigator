@@ -1,0 +1,61 @@
+{
+  "method": "post_finalize_validation_v1",
+  "reason": "Генератор PR учитывает append-only audit; повторная фиксация всех файлов и проверок.",
+  "original_manifest_sha256": "64e264dcb240e290187e417e7e67ced16ba08432cfcc270eeebde3864c590302",
+  "previous_automation_sha256": {
+    "Scraper/skills/collect-avito/references/top-professions.json": "e3e72638b17b48f825ec6f2fefb963662494f679ae4b0cef1bebedba889610dd",
+    "utils/title_flags.py": "9c9456cb3fb0df5791630049c9c85987381091dbb9ba18bc3fb3314b8cccbeb6",
+    "Scraper/extract.js": "2da2a09e0829e3af077297755b1eae9c4776da8261ca817d312703c418c23adb",
+    "Scraper/skills/collect-avito/SKILL.md": "0b0a81776082a5b2c2a5a3b93df383b3298da90671513386c3fe98e8b57bb9be",
+    "Scraper/skills/collect-avito/scripts/run.py": "f96e9e75a3eb218bd28b30957f6cfe96ea26594dd49bf1935864660faaf07205",
+    "Scraper/skills/collect-avito/scripts/browser_batch.js": "c3784622f80205387f7aa9599b69cbef3b8bddebc05874c984a2d3280b0eb625",
+    "Scraper/skills/collect-avito/scripts/check_capture.py": "aa746849317f9768af5aae08b394b9379539f6e268c1fc69e4ed13bd06a4657f",
+    "Scraper/skills/collect-avito/scripts/failure_log.py": "5a28324829d546ce87b662b9e6e4b48cc4ba5aa5d13114483975d2c407b293e6",
+    "Scraper/skills/collect-avito/scripts/preflight.py": "661708892946a68dec53c986df496e76dd67c314021af2567f760b740bb3ce3d"
+  },
+  "automation_changes": [
+    {
+      "file": "Scraper/skills/collect-avito/scripts/run.py",
+      "reason": "Git diff check ошибочно распознал текст описания CSV как маркер конфликта; append-only аудит после finalize.",
+      "validation": "63 теста Scraper.test_aside_runner и utils.test_build_dataset пройдены; фактические маркеры и не-data остаются заблокированы."
+    },
+    {
+      "file": "Scraper/test_aside_runner.py",
+      "reason": "Git diff check ошибочно распознал текст описания CSV как маркер конфликта; append-only аудит после finalize.",
+      "validation": "63 теста Scraper.test_aside_runner и utils.test_build_dataset пройдены; фактические маркеры и не-data остаются заблокированы."
+    },
+    {
+      "file": "Scraper/skills/collect-avito/SKILL.md",
+      "reason": "Git diff check ошибочно распознал текст описания CSV как маркер конфликта; append-only аудит после finalize.",
+      "validation": "63 теста Scraper.test_aside_runner и utils.test_build_dataset пройдены; фактические маркеры и не-data остаются заблокированы."
+    },
+    {
+      "file": "utils/dataset_pr.py",
+      "reason": "Генератор PR читает зарегистрированные изменения из последнего post-finalize audit с fallback на manifest.",
+      "validation": "69 тестов, включая latest audit и manifest fallback, прошли."
+    },
+    {
+      "file": "utils/test_dataset_pr.py",
+      "reason": "Генератор PR читает зарегистрированные изменения из последнего post-finalize audit с fallback на manifest.",
+      "validation": "69 тестов, включая latest audit и manifest fallback, прошли."
+    }
+  ],
+  "previous_review_sha256": "3da1d9187cd0c4cc56589bf9c4d972321b19b4b9d4365fbc00c40fb66f60a40d",
+  "current_automation_sha256": {
+    "Scraper/extract.js": "2da2a09e0829e3af077297755b1eae9c4776da8261ca817d312703c418c23adb",
+    "Scraper/skills/collect-avito/SKILL.md": "ceafbed3b5cd9ed86d253c7c2974385734b8fc9e89f5757998c1eb08cbb6bf66",
+    "Scraper/skills/collect-avito/references/top-professions.json": "e3e72638b17b48f825ec6f2fefb963662494f679ae4b0cef1bebedba889610dd",
+    "Scraper/skills/collect-avito/scripts/browser_batch.js": "c3784622f80205387f7aa9599b69cbef3b8bddebc05874c984a2d3280b0eb625",
+    "Scraper/skills/collect-avito/scripts/check_capture.py": "aa746849317f9768af5aae08b394b9379539f6e268c1fc69e4ed13bd06a4657f",
+    "Scraper/skills/collect-avito/scripts/failure_log.py": "5a28324829d546ce87b662b9e6e4b48cc4ba5aa5d13114483975d2c407b293e6",
+    "Scraper/skills/collect-avito/scripts/preflight.py": "661708892946a68dec53c986df496e76dd67c314021af2567f760b740bb3ce3d",
+    "Scraper/skills/collect-avito/scripts/run.py": "d7628e20419ecc5e3aaa04eb8a44437eb9851c37e6701a7065a6388ba236654d",
+    "Scraper/test_aside_runner.py": "0a85bb8a9eb8843172d99cdc44c99460a9cd2a814e3c0f5bbc4715d4c2f989d3",
+    "utils/build_dataset.py": "38d05bb054cfae1181fe71ba655270e8e92ef413d9614aa745fd39468252d550",
+    "utils/dataset_pr.py": "08ee490798995a3904950c598ddb07f3b0aa3f6f7ecc68e05d5cc19a4c022002",
+    "utils/test_build_dataset.py": "ced093139444f1562759c6e192174d198339d78592d5641ec7fc2ff8127cc1f7",
+    "utils/test_dataset_pr.py": "14a9fddb91c45b35a75f136afed44f0005c77aab3d557b91e01eb0efc137ab14",
+    "utils/title_flags.py": "9c9456cb3fb0df5791630049c9c85987381091dbb9ba18bc3fb3314b8cccbeb6"
+  },
+  "validation": "Partition, plan, page hashes, URL chain, raw, correction, CSV IDs and profession, dataset check and offline regression suites passed"
+}

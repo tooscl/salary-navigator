@@ -1518,8 +1518,6 @@ def finalize(args):
 
 def note_change(args):
     _, service, diag = paths(ROOT, args.run_id)
-    if (service / 'manifest.json').exists():
-        raise ValueError('Record automation fixes before finalizing')
     relative = Path(args.file)
     if relative.is_absolute() or '..' in relative.parts or not (ROOT / relative).is_file():
         raise ValueError('Change must reference a reusable file inside the repository')
@@ -1614,8 +1612,9 @@ def validate_completed_export(out, service):
     for path, expected in manifest['files'].items():
         if sha(ROOT/path) != expected['sha256']:
             raise ValueError(f'Published artifact changed: {path}')
-    correction = read(out/'exports/profession_correction.json')
-    if observed_profession_correction(out, service, plan, correction['reason']) != correction:
+    correction_path = out/'exports/profession_correction.json'
+    correction = read(correction_path) if correction_path.exists() else None
+    if correction and observed_profession_correction(out, service, plan, correction['reason']) != correction:
         raise ValueError('Profession correction evidence differs')
     queue = read(out/'queue.json')
     excluded = {r['id'] for r in unavailable_records(out, queue)}
@@ -1627,7 +1626,7 @@ def validate_completed_export(out, service):
             raise ValueError('Raw capture fails structural or identity validation')
     with (out/'exports/vacancies_flat.csv').open(encoding='utf-8-sig', newline='') as stream:
         rows = list(csv.DictReader(stream))
-    if [r['id'] for r in rows] != [item['id'] for item in expected] or any(r['profession'] != correction['corrected_profession'] for r in rows):
+    if [r['id'] for r in rows] != [item['id'] for item in expected] or any(r['profession'] != (correction['corrected_profession'] if correction else plan['profession']) for r in rows):
         raise ValueError('Export IDs or profession differ from evidence')
     if manifest.get('profession_correction') != correction or manifest['coverage']['accepted'] != len(rows):
         raise ValueError('Manifest correction or accepted count differs')
@@ -1639,7 +1638,7 @@ POST_FINALIZE_TESTED = ['Scraper/skills/collect-avito/scripts/run.py', 'Scraper/
 
 
 def post_finalize_review(args):
-    out, service, _ = paths(ROOT, args.run_id)
+    out, service, diag = paths(ROOT, args.run_id)
     reviews = sorted((out/'exports').glob('post_finalize_review*.json'))
     dest = out/'exports'/('post_finalize_review.json' if not reviews else f'post_finalize_review_{len(reviews)+1:03}.json')
     if dest.exists() or not args.reason.strip():
@@ -1647,19 +1646,41 @@ def post_finalize_review(args):
     manifest = validate_completed_export(out, service)
     baseline = dict(manifest['collection'].get('automation_sha256', {}))
     baseline.update(manifest.get('post_capture_automation_sha256', {}))
-    noted = {c['file'] for c in manifest.get('automation_changes', [])}
+    changes = manifest.get('automation_changes', []) + (read(diag/'automation_changes.json') if (diag/'automation_changes.json').exists() else [])
+    noted = {c['file'] for c in changes}
     changed = {f for f, value in baseline.items() if sha(ROOT/f) != value}
     if changed - noted or not changed:
         raise ValueError('Post-finalize source changes must be recorded and nonempty')
-    if not set(POST_FINALIZE_TESTED).issubset(noted):
-        raise ValueError('Review requires recorded sources, tests, and skill')
+    validate_automation_changes(changes, changed)
     subprocess.run([sys.executable, '-m', 'unittest', 'Scraper.test_aside_runner', 'utils.test_build_dataset'], check=True, cwd=ROOT)
     subprocess.run([sys.executable, 'utils/build_dataset.py', '--check'], check=True, cwd=ROOT)
     write(dest, dict(method='post_finalize_validation_v1', reason=args.reason,
-        original_manifest_sha256=sha(service/'manifest.json'), previous_automation_sha256=baseline,
+        original_manifest_sha256=sha(service/'manifest.json'), previous_automation_sha256=baseline, automation_changes=changes,
         previous_review_sha256=sha(reviews[-1]) if reviews else None,
-        current_automation_sha256={f: sha(ROOT/f) for f in sorted(set(baseline) | set(POST_FINALIZE_TESTED))},
+        current_automation_sha256={f: sha(ROOT/f) for f in sorted(set(baseline) | set(POST_FINALIZE_TESTED) | noted)},
         validation='Partition, plan, page hashes, URL chain, raw, correction, CSV IDs and profession, dataset check and offline regression suites passed'))
+
+
+def check_staged_diff(root):
+    """Keep Git checks strict except non-marker text in staged data separator lines."""
+    if subprocess.check_output(['git', 'ls-files', '-u', '-z'], cwd=root):
+        raise ValueError('Unmerged index entries')
+    result = subprocess.run(['git', 'diff', '--cached', '--check'], cwd=root, text=True, capture_output=True)
+    if result.returncode == 0:
+        return
+    if result.returncode != 2 or result.stderr:
+        raise ValueError('Git diff check failed: ' + result.stderr + result.stdout)
+    for diagnostic in result.stdout.splitlines():
+        match = re.fullmatch(r'(.+):(\d+): leftover conflict marker', diagnostic)
+        if not match:
+            raise ValueError('Git diff check failed: ' + diagnostic)
+        path, number = match.group(1), int(match.group(2))
+        if not (path.startswith('Data/') and Path(path).suffix.lower() in {'.csv', '.json'}):
+            raise ValueError('Git diff check failed: ' + diagnostic)
+        data = subprocess.check_output(['git', 'show', ':' + path], cwd=root).decode('utf-8-sig').split('\n')
+        line = data[number-1].removesuffix('\r') if 0 < number <= len(data) else ''
+        if not re.fullmatch(r'={7}\s*[^=\s].*', line):
+            raise ValueError('Git diff check failed: ' + diagnostic)
 
 
 def publish(args):
@@ -1706,6 +1727,8 @@ def publish(args):
     if (service/'superseded-freeze').exists():
         files.append(str((service/'superseded-freeze').relative_to(ROOT)))
     files += [change['file'] for change in manifest.get('automation_changes', [])]
+    if any(sha(ROOT/file) != value for file,value in expected_automation.items()):
+        files += [change['file'] for change in review.get('automation_changes', [])]
     staged = git('diff', '--cached', '--name-only').splitlines()
     if any(not any(path == own or path.startswith(own + '/') for own in files) for path in staged):
         raise ValueError('Stage contains unrelated changes; inspect before publication')
@@ -1713,7 +1736,7 @@ def publish(args):
     body = diag / 'pr.md'
     subprocess.run([sys.executable, 'utils/dataset_pr.py', '--run-id', args.run_id,
         '--summary', args.summary, '--output', str(body)], check=True, cwd=ROOT)
-    git('diff', '--cached', '--check')
+    check_staged_diff(ROOT)
     if args.prepare_only:
         print(f'Staged explicit run files; review body at {body}')
         return
