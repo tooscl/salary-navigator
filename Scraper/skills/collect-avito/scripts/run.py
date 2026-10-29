@@ -793,10 +793,12 @@ CLOSED_MARKERS = ('Объявление закрыто.', 'Объявление 
 REVIEW_MARKER = 'Оно ещё на проверке.'
 BLOCKED_LISTING_MARKER = 'Оно заблокировано после проверки.'
 DELETED_MARKER = 'Объявление удалено.'
+USER_DELETED_MARKER = 'Пользователь его удалил.'
 NO_LONGER_AVAILABLE_MARKER = 'Объявление больше недоступно.'
 UNAVAILABLE_TO_VIEW_MARKER = 'Объявление недоступно для просмотра.'
-OTHER_UNAVAILABLE_MARKERS = (DELETED_MARKER, NO_LONGER_AVAILABLE_MARKER, UNAVAILABLE_TO_VIEW_MARKER)
+OTHER_UNAVAILABLE_MARKERS = (DELETED_MARKER, USER_DELETED_MARKER, NO_LONGER_AVAILABLE_MARKER, UNAVAILABLE_TO_VIEW_MARKER)
 ALL_UNAVAILABLE_MARKERS = (*CLOSED_MARKERS, REVIEW_MARKER, BLOCKED_LISTING_MARKER, *OTHER_UNAVAILABLE_MARKERS)
+LEGACY_UNAVAILABLE_MARKERS = tuple(marker for marker in ALL_UNAVAILABLE_MARKERS if marker != USER_DELETED_MARKER)
 STANDING_UNAVAILABLE_ID = 'verified-unavailable-v1'
 STANDING_UNAVAILABLE_SOURCE = 'project_skill'
 STANDING_UNAVAILABLE_INSTRUCTION = ('Исключать отдельные карточки только по подтверждённому статусу недоступности, '
@@ -831,7 +833,9 @@ def standing_unavailable_policy(args):
                   markers=list(ALL_UNAVAILABLE_MARKERS))
     path = out/'standing_unavailable_policy.json'
     if path.exists() and read(path) != policy:
-        raise ValueError('Existing standing policy differs; preserve history')
+        legacy = dict(policy, markers=list(LEGACY_UNAVAILABLE_MARKERS))
+        if read(path) != legacy:
+            raise ValueError('Existing standing policy differs; preserve history')
     if not path.exists(): write(path, policy)
     print('Standing unavailable policy recorded for this run')
 
@@ -937,7 +941,7 @@ def mark_unavailable(args):
         raise HumanRequired('Current human authorization required')
     instruction = events[auth[-1]]['instruction']
     policies = [read(path) for path in (out/'closed_policy.json', out/'review_policy.json', out/'blocked_listing_policy.json', out/'standing_unavailable_policy.json') if path.exists()]
-    policy = next((p for p in policies if p.get('authorization_id') == args.authorization_id and p.get('human_instruction') == instruction and p.get('markers') in (list(CLOSED_MARKERS), [REVIEW_MARKER], [BLOCKED_LISTING_MARKER], list(ALL_UNAVAILABLE_MARKERS))), None)
+    policy = next((p for p in policies if p.get('authorization_id') == args.authorization_id and p.get('human_instruction') == instruction and p.get('markers') in (list(CLOSED_MARKERS), [REVIEW_MARKER], [BLOCKED_LISTING_MARKER], list(ALL_UNAVAILABLE_MARKERS), list(LEGACY_UNAVAILABLE_MARKERS))), None)
     if args.id not in instruction and not policy:
         raise ValueError('Human authorization must identify the unavailable ID or authorize its policy')
     cp = read(diag/'checkpoint.json')
@@ -969,7 +973,7 @@ def mark_unavailable(args):
         sandbox = Path(read(pointer)['path'])
         if (sandbox/'raw'/raw.name).read_bytes() != raw.read_bytes() or read(sandbox/'checkpoint.json').get('next_id') != args.id:
             raise ValueError('Sandbox differs from stopped observation')
-    records.append(dict(id=args.id, url=url, status=('unavailable_under_review' if markers[0] == REVIEW_MARKER else 'unavailable_blocked_after_review' if markers[0] == BLOCKED_LISTING_MARKER else 'unavailable_deleted' if markers[0] == DELETED_MARKER else 'unavailable_other' if markers[0] in OTHER_UNAVAILABLE_MARKERS else 'unavailable_closed'), evidence=markers[0],
+    records.append(dict(id=args.id, url=url, status=('unavailable_under_review' if markers[0] == REVIEW_MARKER else 'unavailable_blocked_after_review' if markers[0] == BLOCKED_LISTING_MARKER else 'unavailable_deleted' if markers[0] in (DELETED_MARKER, USER_DELETED_MARKER) else 'unavailable_other' if markers[0] in OTHER_UNAVAILABLE_MARKERS else 'unavailable_closed'), evidence=markers[0],
         snapshot_sha256=sha(snap), raw_sha256=sha(raw), observed_at=data.get('observed_at'),
         authorization_id=args.authorization_id, human_instruction=instruction,
         recorded_at=datetime.now(timezone.utc).isoformat()))

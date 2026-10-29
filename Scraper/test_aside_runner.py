@@ -292,7 +292,7 @@ const listBrowserTabs=async()=>[], openTab=async()=>pg, snapshot=async()=>({tree
             runner.record_failure(parent,'capture','earlier error','test',immediate=True)
             runner.authorize_browser(parent,'Continue','prior-auth')
             before = runner.load_failures(parent)
-            children = [runner.paths(runner.ROOT, f'child{i}') for i in range(1,7)]
+            children = [runner.paths(runner.ROOT, f'child{i}') for i in range(1,8)]
             for out, service, diag in children:
                 runner.write(diag/'shared-ledger.json', {'parent_run_id':'parent'})
                 runner.standing_unavailable_policy(argparse.Namespace(run_id=service.name,authorization_id=runner.STANDING_UNAVAILABLE_ID,human_instruction=runner.STANDING_UNAVAILABLE_INSTRUCTION))
@@ -310,10 +310,28 @@ const listBrowserTabs=async()=>[], openTab=async()=>pg, snapshot=async()=>({tree
                 runner.mark_unavailable(argparse.Namespace(run_id=service.name,id='123',authorization_id=runner.STANDING_UNAVAILABLE_ID,automatic=True))
                 self.assertEqual((out/'raw/123.json').read_bytes(),raw_before)
                 self.assertEqual(runner.read(out/'unavailable.json')[0]['evidence'],marker)
+                if marker == runner.USER_DELETED_MARKER:
+                    self.assertEqual(runner.read(out/'unavailable.json')[0]['status'], 'unavailable_deleted')
                 self.assertFalse((diag/'failures.json').exists())
             self.assertFalse(runner.closed_raw_matches({'state':'NEEDS_HUMAN','source_url':item()['url']},'123',item()['url'],runner.CLOSED_MARKERS[0]))
             self.assertFalse(runner.closed_raw_matches({'state':'UNKNOWN_PAGE','heading':'Объявление не посмотреть','source_url':'https://wrong.example'},'123',item()['url'],runner.CLOSED_MARKERS[0]))
             self.assertFalse(runner.closed_raw_matches({'state':'UNKNOWN_PAGE','heading':'Объявление не посмотреть','source_url':item()['url']},'123',item()['url'],'CAPTCHA'))
+
+    def test_legacy_standing_policy_is_preserved_and_cannot_authorize_new_marker(self):
+        with tempfile.TemporaryDirectory() as directory, patch.object(runner, 'ROOT', Path(directory)):
+            out, service, diag = runner.paths(runner.ROOT, 'legacy')
+            args = argparse.Namespace(run_id='legacy', authorization_id=runner.STANDING_UNAVAILABLE_ID, human_instruction=runner.STANDING_UNAVAILABLE_INSTRUCTION)
+            policy = dict(authorization_id=args.authorization_id, human_instruction=args.human_instruction, markers=list(runner.LEGACY_UNAVAILABLE_MARKERS))
+            runner.write(out/'standing_unavailable_policy.json', policy)
+            runner.standing_unavailable_policy(args)
+            self.assertEqual(runner.read(out/'standing_unavailable_policy.json'), policy)
+            candidate = item('123'); runner.write(out/'queue.json', [candidate]); runner.write(service/'plan.json', {})
+            runner.write(diag/'checkpoint.json', {'state':'REVIEW_REQUIRED','stop_reason':'identity_or_template_review','next_id':'123','completed_ids':[]})
+            runner.write(out/'raw/123.json', {'source_url':candidate['url'],'state':'UNKNOWN_PAGE','heading':'Объявление не посмотреть'})
+            (diag/'problem.snapshot.txt').write_text(f'# title [url={candidate["url"]}]\n- text: "{runner.USER_DELETED_MARKER}"\n')
+            with self.assertRaisesRegex(ValueError, 'outside this authorization'):
+                runner.mark_unavailable(argparse.Namespace(run_id='legacy', id='123', authorization_id=args.authorization_id, automatic=True))
+            self.assertEqual(runner.read(out/'standing_unavailable_policy.json'), policy)
 
     def test_capture_auto_registers_standing_policy_and_skips_proven_review(self):
         with tempfile.TemporaryDirectory() as directory, patch.object(runner, 'ROOT', Path(directory)):

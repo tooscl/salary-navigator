@@ -1,0 +1,3222 @@
+{
+  "run_id": "filter16_moscow_truck_driver_20261029_b_01",
+  "dataset_id": "filter16_moscow_truck_driver_20261029_b_01",
+  "status": "complete",
+  "schema": {
+    "columns": [
+      "id",
+      "city",
+      "profession",
+      "segments",
+      "title",
+      "salary_raw",
+      "source_url",
+      "observed_at",
+      "description",
+      "location_observed",
+      "employer_name_observed",
+      "date_raw",
+      "views_total",
+      "views_today",
+      "listing_rank",
+      "listing_promoted",
+      "full_parameters_read",
+      "analysis_status",
+      "export_eligibility",
+      "read_status_parameters",
+      "read_status_description",
+      "read_status_location",
+      "read_limitations",
+      "enrichment_status",
+      "enriched_fields",
+      "enrichment_version",
+      "military",
+      "military_keywords",
+      "military_rule_version",
+      "city__source",
+      "city__evidence",
+      "city_anomaly",
+      "График",
+      "Занятость",
+      "Сфера деятельности компании",
+      "Опыт работы",
+      "Стажировка",
+      "Количество рабочих часов в день",
+      "Частота выплат",
+      "Что получают работники",
+      "Возраст автомобиля",
+      "Компания предоставляет",
+      "В том числе для кандидатов",
+      "Навык мелкого ремонта автомобиля",
+      "Статус самозанятости",
+      "Медкнижка",
+      "Способ оформления",
+      "Длительность вахты",
+      "Категория водительских прав",
+      "Где предстоит работать",
+      "Количество рабочих дней в неделю",
+      "Режим работы",
+      "Техника",
+      "Бренд автомобиля",
+      "Можно заканчивать в 17:00",
+      "Смены",
+      "Стаж вождения",
+      "Автомобиль",
+      "Категория прав тракториста-машиниста"
+    ],
+    "unknown_policy": "empty_not_zero"
+  },
+  "collection": {
+    "run_id": "filter16_moscow_truck_driver_20261029_b_01",
+    "geography": "Москва",
+    "profession": "Водитель грузового транспорта",
+    "segments": "",
+    "filter_evidence": "Свежий snapshot /moskva/vakansii: checkbox «Водитель грузового транспорта» checked после locator(e10).check(); form.action фактически наблюдён как /moskva/vakansii/voditel_gruzovogo_transporta-ASgBAgICAUTUzBHOjqAV?context=...; на этой странице заголовок «Вакансии по профессии Водитель грузового транспорта в Москве», input value=22283175 checked=true, поиск по объявлениям пустой, прочие видимые checkbox не выбраны и radio по умолчанию.",
+    "listing_url": "https://www.avito.ru/moskva/vakansii/voditel_gruzovogo_transporta-ASgBAgICAUTUzBHOjqAV?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6Ik5zWWRYTkxRbkI0TDE4a2oiO31wbGnUJgAAAA",
+    "listing_request_url": "https://www.avito.ru/moskva/vakansii/voditel_gruzovogo_transporta-ASgBAgICAUTUzBHOjqAV?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6Ik5zWWRYTkxRbkI0TDE4a2oiO31wbGnUJgAAAA",
+    "selected_controls": [
+      {
+        "label": "Водитель грузового транспорта",
+        "marker": "params[144170]/checkbox/22283175",
+        "value": null
+      },
+      {
+        "label": "Водитель грузового транспорта",
+        "marker": "params[144170]/checkbox/toggle",
+        "value": "22283175"
+      },
+      {
+        "label": "Любой",
+        "marker": "params[196929]/all",
+        "value": null
+      },
+      {
+        "label": "Любой",
+        "marker": "params[196929]/toggle",
+        "value": "all"
+      },
+      {
+        "label": "Неважно",
+        "marker": "params[172815]/all",
+        "value": null
+      },
+      {
+        "label": "Неважно",
+        "marker": "params[172815]/toggle",
+        "value": "all"
+      },
+      {
+        "label": "Неважно",
+        "marker": null,
+        "value": "all"
+      },
+      {
+        "label": "Все",
+        "marker": null,
+        "value": "all"
+      }
+    ],
+    "listing_sha256": "8395ae953a8c0e56b41c9f2c615310ed944231974ea939ce22736d544a008892",
+    "profession_scope": null,
+    "profession_source": "observed_controls",
+    "listing_pages": [
+      {
+        "file": "listing_pages/0001.json",
+        "sha256": "8395ae953a8c0e56b41c9f2c615310ed944231974ea939ce22736d544a008892",
+        "source_url": "https://www.avito.ru/moskva/vakansii/voditel_gruzovogo_transporta-ASgBAgICAUTUzBHOjqAV?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6Ik5zWWRYTkxRbkI0TDE4a2oiO31wbGnUJgAAAA"
+      },
+      {
+        "file": "listing_pages/0002.json",
+        "sha256": "84188defd3ce571315e6bc21029c5d4afaef079d8d4b96d8f899b353e0d99355",
+        "source_url": "https://www.avito.ru/moskva/vakansii/voditel_gruzovogo_transporta-ASgBAgICAUTUzBHOjqAV?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6ImRLNVl6QTRjbUJLaHFubkciO33zL3FUJgAAAA&p=2"
+      },
+      {
+        "file": "listing_pages/0003.json",
+        "sha256": "27e70f1e745a4ba1427642ef04160d56ab3a8b7547a8e31aa17bac571afbffc4",
+        "source_url": "https://www.avito.ru/moskva/vakansii/voditel_gruzovogo_transporta-ASgBAgICAUTUzBHOjqAV?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6ImRLNVl6QTRjbUJLaHFubkciO33zL3FUJgAAAA&p=3"
+      },
+      {
+        "file": "listing_pages/0004.json",
+        "sha256": "76f9e6baa865f8a2137b3f2cbc3c9dfc2b187f87e8655acca8398d6e04a5536b",
+        "source_url": "https://www.avito.ru/moskva/vakansii/voditel_gruzovogo_transporta-ASgBAgICAUTUzBHOjqAV?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6ImRLNVl6QTRjbUJLaHFubkciO33zL3FUJgAAAA&p=4"
+      },
+      {
+        "file": "listing_pages/0005.json",
+        "sha256": "660545fb2451d06038519675e043f726040c6f3654703ffbee40c0fd45ad4052",
+        "source_url": "https://www.avito.ru/moskva/vakansii/voditel_gruzovogo_transporta-ASgBAgICAUTUzBHOjqAV?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6ImRLNVl6QTRjbUJLaHFubkciO33zL3FUJgAAAA&p=5"
+      },
+      {
+        "file": "listing_pages/0006.json",
+        "sha256": "8ff9d7e4f23ba82cd0153f4db275d2eb4bbc7e7e7e2b2720fae5147b3da94c54",
+        "source_url": "https://www.avito.ru/moskva/vakansii/voditel_gruzovogo_transporta-ASgBAgICAUTUzBHOjqAV?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6ImRLNVl6QTRjbUJLaHFubkciO33zL3FUJgAAAA&p=6"
+      },
+      {
+        "file": "listing_pages/0007.json",
+        "sha256": "cb6a5db54c1e2d9317ad356675738571622c4257e660c82f5da32b147aecc040",
+        "source_url": "https://www.avito.ru/moskva/vakansii/voditel_gruzovogo_transporta-ASgBAgICAUTUzBHOjqAV?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6ImRLNVl6QTRjbUJLaHFubkciO33zL3FUJgAAAA&p=7"
+      },
+      {
+        "file": "listing_pages/0008.json",
+        "sha256": "1d07346f82faa509ce54ae5e9555344c5b6979ad3d3e005211434468243dbe6f",
+        "source_url": "https://www.avito.ru/moskva/vakansii/voditel_gruzovogo_transporta-ASgBAgICAUTUzBHOjqAV?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6ImRLNVl6QTRjbUJLaHFubkciO33zL3FUJgAAAA&p=8"
+      },
+      {
+        "file": "listing_pages/0009.json",
+        "sha256": "f0b1d32222ba76b82621f73b566ff49901a1bc21b8a57f4206a364adab33453a",
+        "source_url": "https://www.avito.ru/moskva/vakansii/voditel_gruzovogo_transporta-ASgBAgICAUTUzBHOjqAV?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6ImRLNVl6QTRjbUJLaHFubkciO33zL3FUJgAAAA&p=9"
+      },
+      {
+        "file": "listing_pages/0010.json",
+        "sha256": "25decbeb915c762b2654501dab552e1f69fc19009964e44e4f2d4f18a3c34d3f",
+        "source_url": "https://www.avito.ru/moskva/vakansii/voditel_gruzovogo_transporta-ASgBAgICAUTUzBHOjqAV?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6ImRLNVl6QTRjbUJLaHFubkciO33zL3FUJgAAAA&p=10"
+      },
+      {
+        "file": "listing_pages/0011.json",
+        "sha256": "27d72e0d2ad5165109673098e20442e4aedd55d52f3780854ed6389a3fc30f9f",
+        "source_url": "https://www.avito.ru/moskva/vakansii/voditel_gruzovogo_transporta-ASgBAgICAUTUzBHOjqAV?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6ImRLNVl6QTRjbUJLaHFubkciO33zL3FUJgAAAA&p=11"
+      },
+      {
+        "file": "listing_pages/0012.json",
+        "sha256": "f824fa86f361941204f31dbe0d4042770a040dfb394361f1aaa1618de9e2855f",
+        "source_url": "https://www.avito.ru/moskva/vakansii/voditel_gruzovogo_transporta-ASgBAgICAUTUzBHOjqAV?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6ImRLNVl6QTRjbUJLaHFubkciO33zL3FUJgAAAA&p=12"
+      },
+      {
+        "file": "listing_pages/0013.json",
+        "sha256": "ed2f375c3b6e3f56c3b05682802dd7f7da37b6b994089edbb3dbd90d86940734",
+        "source_url": "https://www.avito.ru/moskva/vakansii/voditel_gruzovogo_transporta-ASgBAgICAUTUzBHOjqAV?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6ImRLNVl6QTRjbUJLaHFubkciO33zL3FUJgAAAA&p=13"
+      },
+      {
+        "file": "listing_pages/0014.json",
+        "sha256": "d9f114ddc481551dd7c4a0fa83d3b574bb1e78a4cfa7a5a2eef01fab6a7088fb",
+        "source_url": "https://www.avito.ru/moskva/vakansii/voditel_gruzovogo_transporta-ASgBAgICAUTUzBHOjqAV?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6ImRLNVl6QTRjbUJLaHFubkciO33zL3FUJgAAAA&p=14"
+      },
+      {
+        "file": "listing_pages/0015.json",
+        "sha256": "a10ebdf7a25f115de4ada8ef53cab012b7f384b326c929187b670b13a50b619b",
+        "source_url": "https://www.avito.ru/moskva/vakansii/voditel_gruzovogo_transporta-ASgBAgICAUTUzBHOjqAV?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6ImRLNVl6QTRjbUJLaHFubkciO33zL3FUJgAAAA&p=15"
+      },
+      {
+        "file": "listing_pages/0016.json",
+        "sha256": "1baed29635ec75c24953336dff5f641b18f03e652f836fb0b34d31e15d88be0e",
+        "source_url": "https://www.avito.ru/moskva/vakansii/voditel_gruzovogo_transporta-ASgBAgICAUTUzBHOjqAV?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6ImRLNVl6QTRjbUJLaHFubkciO33zL3FUJgAAAA&p=16"
+      },
+      {
+        "file": "listing_pages/0017.json",
+        "sha256": "c81da561c619416fc8c07fc45a2378e972438b676d54b723759c3fc7bbeecae9",
+        "source_url": "https://www.avito.ru/moskva/vakansii/voditel_gruzovogo_transporta-ASgBAgICAUTUzBHOjqAV?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6ImRLNVl6QTRjbUJLaHFubkciO33zL3FUJgAAAA&p=17"
+      },
+      {
+        "file": "listing_pages/0018.json",
+        "sha256": "e4b199702c216ab4cf3cd19c94c3c4206280e1d0361ef29b6d0bc3ec8a26596b",
+        "source_url": "https://www.avito.ru/moskva/vakansii/voditel_gruzovogo_transporta-ASgBAgICAUTUzBHOjqAV?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6ImRLNVl6QTRjbUJLaHFubkciO33zL3FUJgAAAA&p=18"
+      },
+      {
+        "file": "listing_pages/0019.json",
+        "sha256": "1cf1f5ce71131bdab9aef2afd20d9830c8957de4448594c2b41801b6682dd338",
+        "source_url": "https://www.avito.ru/moskva/vakansii/voditel_gruzovogo_transporta-ASgBAgICAUTUzBHOjqAV?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6ImRLNVl6QTRjbUJLaHFubkciO33zL3FUJgAAAA&p=19"
+      },
+      {
+        "file": "listing_pages/0020.json",
+        "sha256": "604d9185aac047e124d941c4810a6f15d05f63171e772b41654f03de3aa93a8d",
+        "source_url": "https://www.avito.ru/moskva/vakansii/voditel_gruzovogo_transporta-ASgBAgICAUTUzBHOjqAV?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6ImRLNVl6QTRjbUJLaHFubkciO33zL3FUJgAAAA&p=20"
+      },
+      {
+        "file": "listing_pages/0021.json",
+        "sha256": "44a8f090e56dc6d79c1821cac16ef3ebf10d5712c12e189021cfaf58eaca0aae",
+        "source_url": "https://www.avito.ru/moskva/vakansii/voditel_gruzovogo_transporta-ASgBAgICAUTUzBHOjqAV?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6ImRLNVl6QTRjbUJLaHFubkciO33zL3FUJgAAAA&p=21"
+      },
+      {
+        "file": "listing_pages/0022.json",
+        "sha256": "719717d7340894defe7abe8999cd9f5aa0e532420b751a18e5c89b53397cee31",
+        "source_url": "https://www.avito.ru/moskva/vakansii/voditel_gruzovogo_transporta-ASgBAgICAUTUzBHOjqAV?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6ImRLNVl6QTRjbUJLaHFubkciO33zL3FUJgAAAA&p=22"
+      },
+      {
+        "file": "listing_pages/0023.json",
+        "sha256": "8c7d772e790b797202ca6ad73b5109b239b1208b3fadd79425ccbdc13ca851de",
+        "source_url": "https://www.avito.ru/moskva/vakansii/voditel_gruzovogo_transporta-ASgBAgICAUTUzBHOjqAV?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6ImRLNVl6QTRjbUJLaHFubkciO33zL3FUJgAAAA&p=23"
+      },
+      {
+        "file": "listing_pages/0024.json",
+        "sha256": "36deddccbbfb89dbeded8238bee13cdcbca9a994838e8fed06fb20e0466367ff",
+        "source_url": "https://www.avito.ru/moskva/vakansii/voditel_gruzovogo_transporta-ASgBAgICAUTUzBHOjqAV?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6ImRLNVl6QTRjbUJLaHFubkciO33zL3FUJgAAAA&p=24"
+      },
+      {
+        "file": "listing_pages/0025.json",
+        "sha256": "bd28df6b3f984b884518cde062e1533a5897790ba69cae059a510eca2863acc5",
+        "source_url": "https://www.avito.ru/moskva/vakansii/voditel_gruzovogo_transporta-ASgBAgICAUTUzBHOjqAV?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6ImRLNVl6QTRjbUJLaHFubkciO33zL3FUJgAAAA&p=25"
+      },
+      {
+        "file": "listing_pages/0026.json",
+        "sha256": "f11e451b7138bb8f2a00754591739755a198cda5df45d75d828d20ef452411cd",
+        "source_url": "https://www.avito.ru/moskva/vakansii/voditel_gruzovogo_transporta-ASgBAgICAUTUzBHOjqAV?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6ImRLNVl6QTRjbUJLaHFubkciO33zL3FUJgAAAA&p=26"
+      },
+      {
+        "file": "listing_pages/0027.json",
+        "sha256": "82fa758611a03e99d6252c6096b9d5390eb714d3f9fd6b4a4898bd23338de158",
+        "source_url": "https://www.avito.ru/moskva/vakansii/voditel_gruzovogo_transporta-ASgBAgICAUTUzBHOjqAV?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6ImRLNVl6QTRjbUJLaHFubkciO33zL3FUJgAAAA&p=27"
+      }
+    ],
+    "selection_mode": "first_N_unique_on_frozen_listing",
+    "limit": 300,
+    "requested_all_pages": true,
+    "saved_selection_authorization": null,
+    "requested_limit": 300,
+    "available_unique": 300,
+    "listing_end_reason": "confirmed_end",
+    "available_listing_exhausted": true,
+    "continuation": null,
+    "candidate_limit": null,
+    "created_at": "2026-10-29T09:28:27.074801+00:00",
+    "instruction_version": "1.7.37",
+    "extractor_sha256": "bd17892bcc632a1c0bb3f14b91a0a1856ac96c1b2960f82597f41c4aa4723a41",
+    "instruction_sha256": "69565d43f4343a5ab9e10f7d4003a3584cfa4c2370b1594b82e0f3d6b44911a8",
+    "code_git_commit": "40a6e2c4939742fb19353361de98ca8998d0f390",
+    "setup_seconds": 129.6289299579803,
+    "live_route_verified": false,
+    "execution_model": "gpt-6-luna low",
+    "automation_sha256": {
+      "Scraper/skills/collect-avito/references/top-professions.json": "e3e72638b17b48f825ec6f2fefb963662494f679ae4b0cef1bebedba889610dd",
+      "utils/title_flags.py": "9c9456cb3fb0df5791630049c9c85987381091dbb9ba18bc3fb3314b8cccbeb6",
+      "Scraper/extract.js": "bd17892bcc632a1c0bb3f14b91a0a1856ac96c1b2960f82597f41c4aa4723a41",
+      "Scraper/skills/collect-avito/SKILL.md": "69565d43f4343a5ab9e10f7d4003a3584cfa4c2370b1594b82e0f3d6b44911a8",
+      "Scraper/skills/collect-avito/scripts/run.py": "989593bc38dd571d3469dd5f059192a28e1a1c6d3514ab9f06200f7125357ac4",
+      "Scraper/skills/collect-avito/scripts/browser_batch.js": "aa9ac31e38d07e72ee0737def2a35dda79b376166315b7388a7fd471f0e14136",
+      "Scraper/skills/collect-avito/scripts/check_capture.py": "aa746849317f9768af5aae08b394b9379539f6e268c1fc69e4ed13bd06a4657f",
+      "Scraper/skills/collect-avito/scripts/failure_log.py": "5a28324829d546ce87b662b9e6e4b48cc4ba5aa5d13114483975d2c407b293e6",
+      "Scraper/skills/collect-avito/scripts/preflight.py": "661708892946a68dec53c986df496e76dd67c314021af2567f760b740bb3ce3d"
+    },
+    "uncommitted_automation_files": [],
+    "partition": {
+      "parent_run_id": "filter16_moscow_truck_driver_20261029",
+      "parent_plan_sha256": "b202d79ea629fd6248edc5df7b4daf10527603b55ea4ea6d54335095a762a40a",
+      "parent_queue_sha256": "45f9e842777c596525ef4f19bcaea4d3b819152961d8e5b953ea12ddf7290e49",
+      "index": 1,
+      "batch_size": 300,
+      "start": 0,
+      "end": 300,
+      "total": 1266,
+      "siblings": [
+        "filter16_moscow_truck_driver_20261029_b_01",
+        "filter16_moscow_truck_driver_20261029_b_02",
+        "filter16_moscow_truck_driver_20261029_b_03",
+        "filter16_moscow_truck_driver_20261029_b_04",
+        "filter16_moscow_truck_driver_20261029_b_05"
+      ]
+    },
+    "city_anomaly_policy": "blank"
+  },
+  "coverage": {
+    "planned": 300,
+    "accepted": 299,
+    "unavailable": [
+      {
+        "id": "8557063662",
+        "url": "https://www.avito.ru/moskva/vakansii/voditel_kategorii_b_privoz_lekarstvproduktovsvo_8557063662",
+        "status": "unavailable_deleted",
+        "evidence": "Пользователь его удалил.",
+        "snapshot_sha256": "7334087d426b6fd9e1bd1bffa7d53daf5ada971e6fdad399304cdee0a6238b9b",
+        "raw_sha256": "57a923d9b40a204e18184a8b75baad0f9251bffe24564a16843ba0429284e719",
+        "observed_at": "2026-10-29T09:33:06.999Z",
+        "authorization_id": "filter16-deleted-8557063662",
+        "human_instruction": "Прямая постоянная инструкция пользователя для всех18: полностью автономно решать исправимые проблемы; координатор вправе разрешать продолжение от его имени. Явно закрытые/удалённые/заблокированные/на проверке/недоступные для просмотра отдельные карточки — автоматический skip с причиной, raw и доказательством, без вопроса и расхода технического бюджета. Неизвестный шаблон/REVIEW_REQUIRED сам по себе не skip. Координатор разрешает исправление подтверждённого шаблона удалённой карточки ID 8557063662 и штатное продолжение с сохранением истории.",
+        "recorded_at": "2026-10-29T09:34:26.673696+00:00"
+      }
+    ],
+    "unique_ids": [
+      "8315549899",
+      "3784945398",
+      "8369105236",
+      "8132883572",
+      "8401719855",
+      "7598293502",
+      "8408476091",
+      "7968082533",
+      "7579178984",
+      "8491367648",
+      "8400900684",
+      "8381768675",
+      "8271167467",
+      "3235448359",
+      "8420816768",
+      "4384946738",
+      "7261466140",
+      "8511785841",
+      "8377300468",
+      "8345926182",
+      "7349901030",
+      "8293468144",
+      "8471458960",
+      "2013566629",
+      "8412971328",
+      "8374693185",
+      "8440887724",
+      "8420715206",
+      "8263659537",
+      "7892958149",
+      "1816151640",
+      "7962566049",
+      "8451756108",
+      "8148415401",
+      "8147994528",
+      "8209517933",
+      "8368673276",
+      "8382240364",
+      "8220779942",
+      "8439329593",
+      "8544323699",
+      "8414550001",
+      "8363136642",
+      "3833077198",
+      "8158137754",
+      "8409122420",
+      "8375832579",
+      "3681652065",
+      "7869898731",
+      "8438782696",
+      "7989429369",
+      "8262876847",
+      "7928638277",
+      "8355473246",
+      "8320762194",
+      "8347936944",
+      "8441065404",
+      "8499439451",
+      "4495092552",
+      "8401277244",
+      "3235687837",
+      "7307465309",
+      "8376309440",
+      "8390492882",
+      "8142886853",
+      "8372590243",
+      "8137008160",
+      "2309508061",
+      "8248868576",
+      "8348638757",
+      "7893168274",
+      "4627422421",
+      "8327881561",
+      "8463080385",
+      "8421603673",
+      "7613021213",
+      "3359766461",
+      "8426937017",
+      "8211436054",
+      "8371915695",
+      "8490067338",
+      "8413237681",
+      "7845388815",
+      "8340161452",
+      "8517091191",
+      "4331460442",
+      "8470033332",
+      "4612207713",
+      "8453231361",
+      "7969573669",
+      "8414966779",
+      "8557361329",
+      "8451733155",
+      "8418080974",
+      "7623442188",
+      "8312090251",
+      "8232059634",
+      "7794097918",
+      "3385068482",
+      "8226987773",
+      "8177368689",
+      "4389095016",
+      "8440116859",
+      "8391658590",
+      "8413679426",
+      "7497516999",
+      "3455105582",
+      "3768560215",
+      "8294519200",
+      "8467303607",
+      "8256134699",
+      "1997565893",
+      "7732969767",
+      "8438410217",
+      "8116063276",
+      "7372659711",
+      "8445405869",
+      "7848937288",
+      "8369873988",
+      "7946112251",
+      "4261027123",
+      "3332179406",
+      "8347241736",
+      "8447073503",
+      "7961642923",
+      "7406389212",
+      "4313043971",
+      "8341524630",
+      "8372943628",
+      "8435678650",
+      "8155875302",
+      "8254272528",
+      "7334351449",
+      "8317321042",
+      "8423776878",
+      "8342365997",
+      "8257111398",
+      "8292653335",
+      "8423457681",
+      "7898648327",
+      "8152634798",
+      "3352958737",
+      "8363446372",
+      "8359497535",
+      "8452956978",
+      "1435321222",
+      "8332573037",
+      "7446315159",
+      "3851670037",
+      "8257522616",
+      "8340925817",
+      "8409625737",
+      "4568013407",
+      "7752432528",
+      "8282988649",
+      "8421061461",
+      "8366295064",
+      "8348639683",
+      "8396877734",
+      "8033753079",
+      "8387167774",
+      "8125826114",
+      "7515258215",
+      "3357548508",
+      "8331689956",
+      "3419326742",
+      "3090034181",
+      "2252334984",
+      "3085621865",
+      "8421856462",
+      "8463479752",
+      "8112919386",
+      "2168458263",
+      "8289426987",
+      "8420701664",
+      "3507577407",
+      "8334774293",
+      "3302768337",
+      "8359431644",
+      "7690456036",
+      "4345061177",
+      "8445120155",
+      "8525264429",
+      "7773563980",
+      "8319957513",
+      "8158929182",
+      "8039179938",
+      "8372690198",
+      "3171112954",
+      "7204765703",
+      "8461423640",
+      "8372191785",
+      "8157118802",
+      "8386178266",
+      "8368244272",
+      "8247946938",
+      "1123223983",
+      "2738240614",
+      "8213404140",
+      "8230537171",
+      "8447813577",
+      "8299143130",
+      "8260676513",
+      "4618405743",
+      "3670242371",
+      "7542655257",
+      "7541170004",
+      "8108777992",
+      "7917105766",
+      "7958473905",
+      "7618742753",
+      "8357242634",
+      "8337386062",
+      "3778642265",
+      "1812972182",
+      "8217754536",
+      "2302801012",
+      "1975142382",
+      "1873122838",
+      "8385469697",
+      "8002342914",
+      "1957550734",
+      "4108358330",
+      "4468180935",
+      "8390502410",
+      "3373761268",
+      "7325111909",
+      "7889089251",
+      "8376991604",
+      "3603398677",
+      "7886322766",
+      "7945217672",
+      "1976607116",
+      "8471335465",
+      "8353599933",
+      "2157378430",
+      "8461814962",
+      "8431734264",
+      "7424638143",
+      "8007391017",
+      "8483203042",
+      "4632441196",
+      "8451439904",
+      "3492279605",
+      "8345928328",
+      "4110319037",
+      "4752351015",
+      "2132301049",
+      "8320702337",
+      "8459140780",
+      "8525697717",
+      "8416612247",
+      "8346303417",
+      "8543971247",
+      "7428288185",
+      "8368741003",
+      "2965549561",
+      "8290910859",
+      "3638963450",
+      "8376183999",
+      "8440587656",
+      "7927311970",
+      "8408004336",
+      "2969983862",
+      "7649417290",
+      "7811003440",
+      "1058705360",
+      "4065546130",
+      "3600966609",
+      "8377954181",
+      "8260540919",
+      "7249845413",
+      "1720929662",
+      "8274447287",
+      "1875107641",
+      "3002568376",
+      "4231004249",
+      "3872111022",
+      "2204818764",
+      "8350474730",
+      "2227475180",
+      "2481221371",
+      "8282245823",
+      "3300371926",
+      "8247223532",
+      "7343976122",
+      "8557522588",
+      "8511210405",
+      "8260814231",
+      "990382119",
+      "8070214628",
+      "8113813424",
+      "8410751012",
+      "8078124502",
+      "4524098858",
+      "8300202034",
+      "3610385439",
+      "8458803143",
+      "8450591079"
+    ],
+    "errors": [],
+    "partial": null,
+    "limitations": [
+      "Visible rendered parameters only; enrichment not run; placement on site; live route unverified"
+    ]
+  },
+  "timing": {
+    "setup_seconds": 129.6289299579803,
+    "capture_seconds": 586.5229513740633,
+    "review_export_seconds": 1.0261930408887565,
+    "publication_seconds": null
+  },
+  "review_model": "gpt-6.1-terra",
+  "automation_changes": [
+    {
+      "file": "Scraper/skills/collect-avito/scripts/run.py",
+      "reason": "Подтверждённый статус Пользователь его удалил для ID 8557063662",
+      "validation": "python3 -m unittest Scraper.test_aside_runner.RunnerTests.test_standing_policy_shares_audit_and_skips_only_proven_unavailable"
+    },
+    {
+      "file": "Scraper/test_aside_runner.py",
+      "reason": "Регрессия для подтверждённого статуса удаления пользователем",
+      "validation": "python3 -m unittest Scraper.test_aside_runner.RunnerTests.test_standing_policy_shares_audit_and_skips_only_proven_unavailable"
+    },
+    {
+      "file": "Scraper/skills/collect-avito/SKILL.md",
+      "reason": "Документировать подтверждённый статус удаления пользователем",
+      "validation": "python3 -m unittest Scraper.test_aside_runner.RunnerTests.test_standing_policy_shares_audit_and_skips_only_proven_unavailable"
+    },
+    {
+      "file": "Scraper/skills/collect-avito/scripts/run.py",
+      "reason": "Сохранить прежнюю политику при расширении списка статусов",
+      "validation": "python3 -m unittest Scraper.test_aside_runner: 56 OK"
+    },
+    {
+      "file": "Scraper/test_aside_runner.py",
+      "reason": "Проверить неизменность и границы прежней политики",
+      "validation": "python3 -m unittest Scraper.test_aside_runner: 56 OK"
+    },
+    {
+      "file": "Scraper/skills/collect-avito/SKILL.md",
+      "reason": "Документировать границы прежней политики",
+      "validation": "python3 -m unittest Scraper.test_aside_runner: 56 OK"
+    }
+  ],
+  "profession_correction": null,
+  "post_capture_automation_sha256": {
+    "Scraper/skills/collect-avito/SKILL.md": "1f93d0b8ea87c1dbb31416b1729f08d4a7878890aa27216822bc047eddd4d679",
+    "Scraper/skills/collect-avito/scripts/run.py": "d88e753426e386c7aeccbb5a81263cffd6599ada5861bd13620f8c9f8267d3b3"
+  },
+  "files": {
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/exports/vacancies.json": {
+      "bytes": 1293949,
+      "sha256": "04357388b24cacd0fbbdbcd0067e36405891c503033de8232bb36d0c553a68f4"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/exports/vacancies_flat.csv": {
+      "bytes": 900329,
+      "sha256": "c4528baa84a9bbe7582b434641e9fc586d139447ef6e7bc7cbd18732fc382364"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/exports/validation.json": {
+      "bytes": 1768,
+      "sha256": "1b4212e920d82237f6028e7841ab5375755a46f510c66f29d62d78b9faffaa05"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/listing.json": {
+      "bytes": 26077,
+      "sha256": "8395ae953a8c0e56b41c9f2c615310ed944231974ea939ce22736d544a008892"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/listing_pages/0001.json": {
+      "bytes": 26077,
+      "sha256": "8395ae953a8c0e56b41c9f2c615310ed944231974ea939ce22736d544a008892"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/listing_pages/0002.json": {
+      "bytes": 26052,
+      "sha256": "84188defd3ce571315e6bc21029c5d4afaef079d8d4b96d8f899b353e0d99355"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/listing_pages/0003.json": {
+      "bytes": 26314,
+      "sha256": "27e70f1e745a4ba1427642ef04160d56ab3a8b7547a8e31aa17bac571afbffc4"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/listing_pages/0004.json": {
+      "bytes": 26113,
+      "sha256": "76f9e6baa865f8a2137b3f2cbc3c9dfc2b187f87e8655acca8398d6e04a5536b"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/listing_pages/0005.json": {
+      "bytes": 25778,
+      "sha256": "660545fb2451d06038519675e043f726040c6f3654703ffbee40c0fd45ad4052"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/listing_pages/0006.json": {
+      "bytes": 25772,
+      "sha256": "8ff9d7e4f23ba82cd0153f4db275d2eb4bbc7e7e7e2b2720fae5147b3da94c54"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/listing_pages/0007.json": {
+      "bytes": 25852,
+      "sha256": "cb6a5db54c1e2d9317ad356675738571622c4257e660c82f5da32b147aecc040"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/listing_pages/0008.json": {
+      "bytes": 26177,
+      "sha256": "1d07346f82faa509ce54ae5e9555344c5b6979ad3d3e005211434468243dbe6f"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/listing_pages/0009.json": {
+      "bytes": 26088,
+      "sha256": "f0b1d32222ba76b82621f73b566ff49901a1bc21b8a57f4206a364adab33453a"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/listing_pages/0010.json": {
+      "bytes": 26028,
+      "sha256": "25decbeb915c762b2654501dab552e1f69fc19009964e44e4f2d4f18a3c34d3f"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/listing_pages/0011.json": {
+      "bytes": 25928,
+      "sha256": "27d72e0d2ad5165109673098e20442e4aedd55d52f3780854ed6389a3fc30f9f"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/listing_pages/0012.json": {
+      "bytes": 26081,
+      "sha256": "f824fa86f361941204f31dbe0d4042770a040dfb394361f1aaa1618de9e2855f"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/listing_pages/0013.json": {
+      "bytes": 26012,
+      "sha256": "ed2f375c3b6e3f56c3b05682802dd7f7da37b6b994089edbb3dbd90d86940734"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/listing_pages/0014.json": {
+      "bytes": 26598,
+      "sha256": "d9f114ddc481551dd7c4a0fa83d3b574bb1e78a4cfa7a5a2eef01fab6a7088fb"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/listing_pages/0015.json": {
+      "bytes": 26030,
+      "sha256": "a10ebdf7a25f115de4ada8ef53cab012b7f384b326c929187b670b13a50b619b"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/listing_pages/0016.json": {
+      "bytes": 26102,
+      "sha256": "1baed29635ec75c24953336dff5f641b18f03e652f836fb0b34d31e15d88be0e"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/listing_pages/0017.json": {
+      "bytes": 25850,
+      "sha256": "c81da561c619416fc8c07fc45a2378e972438b676d54b723759c3fc7bbeecae9"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/listing_pages/0018.json": {
+      "bytes": 26442,
+      "sha256": "e4b199702c216ab4cf3cd19c94c3c4206280e1d0361ef29b6d0bc3ec8a26596b"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/listing_pages/0019.json": {
+      "bytes": 26146,
+      "sha256": "1cf1f5ce71131bdab9aef2afd20d9830c8957de4448594c2b41801b6682dd338"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/listing_pages/0020.json": {
+      "bytes": 26139,
+      "sha256": "604d9185aac047e124d941c4810a6f15d05f63171e772b41654f03de3aa93a8d"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/listing_pages/0021.json": {
+      "bytes": 25454,
+      "sha256": "44a8f090e56dc6d79c1821cac16ef3ebf10d5712c12e189021cfaf58eaca0aae"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/listing_pages/0022.json": {
+      "bytes": 26198,
+      "sha256": "719717d7340894defe7abe8999cd9f5aa0e532420b751a18e5c89b53397cee31"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/listing_pages/0023.json": {
+      "bytes": 25737,
+      "sha256": "8c7d772e790b797202ca6ad73b5109b239b1208b3fadd79425ccbdc13ca851de"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/listing_pages/0024.json": {
+      "bytes": 25774,
+      "sha256": "36deddccbbfb89dbeded8238bee13cdcbca9a994838e8fed06fb20e0466367ff"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/listing_pages/0025.json": {
+      "bytes": 25965,
+      "sha256": "bd28df6b3f984b884518cde062e1533a5897790ba69cae059a510eca2863acc5"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/listing_pages/0026.json": {
+      "bytes": 25787,
+      "sha256": "f11e451b7138bb8f2a00754591739755a198cda5df45d75d828d20ef452411cd"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/listing_pages/0027.json": {
+      "bytes": 21199,
+      "sha256": "82fa758611a03e99d6252c6096b9d5390eb714d3f9fd6b4a4898bd23338de158"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/provenance/parent-plan.json": {
+      "bytes": 13526,
+      "sha256": "b202d79ea629fd6248edc5df7b4daf10527603b55ea4ea6d54335095a762a40a"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/provenance/parent-queue.json": {
+      "bytes": 608910,
+      "sha256": "45f9e842777c596525ef4f19bcaea4d3b819152961d8e5b953ea12ddf7290e49"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/queue.json": {
+      "bytes": 144112,
+      "sha256": "aee8e38182a846c170ec11465e571464acea9c49d40dde296cd53450f3dcc37a"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/1058705360.json": {
+      "bytes": 5813,
+      "sha256": "59299dbcfa6d219a3afe40221f7f443d1a34bdf74a48acf8c71a667cb2dbd285"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/1123223983.json": {
+      "bytes": 5304,
+      "sha256": "8598df58853fcc047029026fa4799d6fcf4f9dbe082b0b69a6713a3230e80206"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/1435321222.json": {
+      "bytes": 8410,
+      "sha256": "9a15ade08888f79eab255711746e1aa22ee10f1cd50920b80eebf5b3775f5305"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/1720929662.json": {
+      "bytes": 9913,
+      "sha256": "9ed952e944437a75c72e9a823dce2ef8ad24f5fee7dc3a97156c77fa2feae138"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/1812972182.json": {
+      "bytes": 11863,
+      "sha256": "537459b058bf707e7853eaeb847c2f7fa257757600cc86d6534d1087ea339e15"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/1816151640.json": {
+      "bytes": 16419,
+      "sha256": "c136d4135eb72f53bc259ae9b3f3c883ec1c9aec8708c9ccba2ff929829323c5"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/1873122838.json": {
+      "bytes": 9221,
+      "sha256": "edc10762cbff32b97e677d8ba75ef2b42ebe301b16d75b855b21c3791d098bad"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/1875107641.json": {
+      "bytes": 7447,
+      "sha256": "04d8fa331948588d718a31c1f8a14388c6bf59c72559ff9ea97dc00b53d956e1"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/1957550734.json": {
+      "bytes": 11947,
+      "sha256": "ba08b40d4f5d926dd7548011bcce9c5ca326454d86b9814185a4da82a95c37ea"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/1975142382.json": {
+      "bytes": 13922,
+      "sha256": "0101b5798d9e0c35710b55ab784b8d956ba923aab0be8076d1e090ed4748f40c"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/1976607116.json": {
+      "bytes": 9368,
+      "sha256": "92393e996003b342d18ad70fedffa97583282b9ed5348957a2c4fbe0eb0e098e"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/1997565893.json": {
+      "bytes": 7775,
+      "sha256": "949b4c02d1bf76e087e49ec4eef616b33a1151c1973afa1438a9d4abe53463e7"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/2013566629.json": {
+      "bytes": 10242,
+      "sha256": "40cc18114b1ce4f2c57e782638c1e6fc523cbbcbea1e2d46b44b0d2ca7aaecea"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/2132301049.json": {
+      "bytes": 5853,
+      "sha256": "bd42074558273ea7c82464e29fada74cf03e5ced9d298770cfb978d1e2a5ffe6"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/2157378430.json": {
+      "bytes": 11748,
+      "sha256": "567ddb7893ce5437e04888e1706953292ca8feec37c149901a28b43eaf561da2"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/2168458263.json": {
+      "bytes": 9232,
+      "sha256": "26ec874a687a870cfd8edc7ae57706ee1a122be0a4f22feae0f26f3fc229a483"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/2204818764.json": {
+      "bytes": 7661,
+      "sha256": "2bc0a2a0927ce7a4812e838e177e8137a977206d74c3902eac1a1183c5dafa22"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/2227475180.json": {
+      "bytes": 10738,
+      "sha256": "6d69130a9bb60f583a00c720a30107be0a3fab33c3cdac51ae37e8da15f44e7a"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/2252334984.json": {
+      "bytes": 11753,
+      "sha256": "6da246738428a20f4047bd8b3ecc9035d4dd4f0da33dfd3ea7fc9afe5f5e50df"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/2302801012.json": {
+      "bytes": 14811,
+      "sha256": "ccd89e917b6d9dacd692023dc18db03da63c8cdf8767a63a929a8eb39efba402"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/2309508061.json": {
+      "bytes": 6866,
+      "sha256": "9858b82a4d62ceeb2a6d4379eb5d10f8433ba0d99b06de5d99e730b8cd803ce5"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/2481221371.json": {
+      "bytes": 17176,
+      "sha256": "9345633deb0307a0172e5d942999ce85d837f281e59b379e63757e4f360b22c1"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/2738240614.json": {
+      "bytes": 8214,
+      "sha256": "c493c07d3212ed2620da6a3df878c4e7894fd7f0e3535fe0e1d743c00b84cbf7"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/2965549561.json": {
+      "bytes": 11396,
+      "sha256": "95f0d4ce6bab466491abbb907ede474b51093c6392b71643195cd2e0de3c0b7f"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/2969983862.json": {
+      "bytes": 8950,
+      "sha256": "955a0787b751e1f1f141471627cc3ae01bb7bbe16909b13fc2d1cbecdbc39119"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/3002568376.json": {
+      "bytes": 14139,
+      "sha256": "419cb68c06bfc3f26a6b3f21045154c6fdf26e5f9bccf956658157b27485ec47"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/3085621865.json": {
+      "bytes": 14669,
+      "sha256": "bd91599c9db816b341c3ff679eed5da866cbf96810c911814dad861f199c97be"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/3090034181.json": {
+      "bytes": 10745,
+      "sha256": "5dd09393b5733baa4ed0b16e2ab815a79432bdcc5eec79eb1e03fa03b50a53ac"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/3171112954.json": {
+      "bytes": 6254,
+      "sha256": "b0396bac5a41c5c93bc4491f1c85dd0302c4b26a6fec21600f9ef253e5b1f635"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/3235448359.json": {
+      "bytes": 9281,
+      "sha256": "9a87c057f4ab54af9d310155b7a18b110d4effe752c42071cf536a42ef93fce3"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/3235687837.json": {
+      "bytes": 14556,
+      "sha256": "aeb5367dde0539bc0d2e89d50742187f8de965a14a7a0252d79ccc4a161c162c"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/3300371926.json": {
+      "bytes": 15374,
+      "sha256": "893493f0dea8fd6ca39dc53621ab8e22c946aa55b3564c63f5945f45f9f8cb13"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/3302768337.json": {
+      "bytes": 9282,
+      "sha256": "28b360714f86018eb9f7fdccd5c169d8040065d8763c336a230f31c31451f9eb"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/3332179406.json": {
+      "bytes": 7986,
+      "sha256": "9babf65d6819a72918b701c6c597686854bfd4a5ca73a3a41bbe10914c76bf5f"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/3352958737.json": {
+      "bytes": 12766,
+      "sha256": "bb190c3b5d36b2c6cfb473e0af456b111b96e08eaf261a785661a061137b3409"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/3357548508.json": {
+      "bytes": 10490,
+      "sha256": "6b98b9c5bfae30a3df442df03f5cb50445747d2f345fe7381c42473b209d749a"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/3359766461.json": {
+      "bytes": 17307,
+      "sha256": "2633feab6fae37860c0c498dceb7235129f24e9c22260401c62ef37e1a688550"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/3373761268.json": {
+      "bytes": 11501,
+      "sha256": "ea4a98d5dec6baff0e016b0002aaf726dc7a714c4d64161f2ff4fa107d2c0eba"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/3385068482.json": {
+      "bytes": 12318,
+      "sha256": "ace288a9f488f50fa09040270a408c052d05b7f8ee43d97949b6b502281e5811"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/3419326742.json": {
+      "bytes": 9311,
+      "sha256": "01325636d0a8fd0483ac11b798de99c24e56838ff5083946975d78322310d84b"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/3455105582.json": {
+      "bytes": 15198,
+      "sha256": "c0c9754cc3030b607004dd2c9770933773c41aec036241d3c5671583970c691e"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/3492279605.json": {
+      "bytes": 6360,
+      "sha256": "094e0f9ca5bdb69a8e32f65bf3a4f18f68801cce7f8932c6e17671128a3b0f66"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/3507577407.json": {
+      "bytes": 16938,
+      "sha256": "ffd3ad9755e4de26c00c40ce9e69f32644d3bf2bbc553b7cab381bf6a56d9965"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/3600966609.json": {
+      "bytes": 8729,
+      "sha256": "48157b1ee91fbd124396134b04797c6aa137c327bb504fa901a6f99d9b40e2ae"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/3603398677.json": {
+      "bytes": 11383,
+      "sha256": "3af3c7cffa3d552ebd2bea651db12e976d02a559b3c6a1f26fae5956dde094fe"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/3610385439.json": {
+      "bytes": 15568,
+      "sha256": "1bd35cccc64823d786feb47ed7d4cfb524d66558d521af1720ff33b8c061e932"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/3638963450.json": {
+      "bytes": 12595,
+      "sha256": "c1a9e85d2bdcd23360c62adfa453a3fcd6c62b90baa34c263913ea4886ecfac7"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/3670242371.json": {
+      "bytes": 5904,
+      "sha256": "3ba6f9e6e9f17b40b5d407199990d7e152c8d33a51797a543d7862cc932a714e"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/3681652065.json": {
+      "bytes": 15327,
+      "sha256": "0c8bce288fe05637137968a8d9f5566f727d762dd6314907bc4492af91d45094"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/3768560215.json": {
+      "bytes": 13460,
+      "sha256": "3103325e32b91f0a35e4015dc6a3dc9b34636802d4b982d69d0a290790ed6445"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/3778642265.json": {
+      "bytes": 6421,
+      "sha256": "366555364d55f2fcddef4d1fff1cf00b741db7814ca631466afc3c0e33396ed8"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/3784945398.json": {
+      "bytes": 15482,
+      "sha256": "57a2aab2d2f4617d04b972c31cfafa8df8dcd2623a15fab957dc53ed2b0c8840"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/3833077198.json": {
+      "bytes": 7821,
+      "sha256": "c21b438d8849b55101a96e48e3591311d17818438296546c218355419108e1c5"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/3851670037.json": {
+      "bytes": 13503,
+      "sha256": "b9dca427ca7d99e231db1b037ae16100434eaef0e4d37f11a04cde18b38fc339"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/3872111022.json": {
+      "bytes": 8877,
+      "sha256": "827909fce71b420944b801c826313153cb95bd65942760cfbaf72d8dcab5476f"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/4065546130.json": {
+      "bytes": 13114,
+      "sha256": "ca7b51903a9a183bc1ce8d3e1035b5ff229e299e4e351a89ec1d75be9aa1b78d"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/4108358330.json": {
+      "bytes": 10653,
+      "sha256": "e25b65036f0d0b00adadecdbee81398ce9ad6fcf2dd96dc080cc8dff7e71a435"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/4110319037.json": {
+      "bytes": 11117,
+      "sha256": "218538ec375f85b8c54acd15e48d160c3067eb2a08e5a1978d412f5509cfc3b2"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/4231004249.json": {
+      "bytes": 8132,
+      "sha256": "debf111f9dac99377c2f1836d7a2fc3af5fdcd3ea6ebdb819f5fcb40bfecfe0e"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/4261027123.json": {
+      "bytes": 11669,
+      "sha256": "5105bc4c4c6b62528b0bb68cd9391a84c4ec3d0a6b634323cba3760ea2e62256"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/4313043971.json": {
+      "bytes": 6766,
+      "sha256": "e4d602029f2599d2e31251fe0bb69872632b9962568204a251300e179f314a9c"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/4331460442.json": {
+      "bytes": 15544,
+      "sha256": "68376d93be7eeb86f6ff12fab0a2f63def8c161a3d8db28ed59edb1a02807e44"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/4345061177.json": {
+      "bytes": 7687,
+      "sha256": "0353edb41e5916160cfffcb7186d2f27ee932ef986ca3a7f95b8d9502a7c563e"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/4384946738.json": {
+      "bytes": 18305,
+      "sha256": "674272d766badb9d5c71e4c7a4aa086da2c19bce515170f83026635b5fece46c"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/4389095016.json": {
+      "bytes": 15351,
+      "sha256": "2f49e6562af2db3e7334e9feac5910b1104e62d33a3852dd5055f0704e84b959"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/4468180935.json": {
+      "bytes": 12680,
+      "sha256": "a1c514305d55acf9576ad2b49a6997f2256b734b3e5348914aa0dbc19ec7b257"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/4495092552.json": {
+      "bytes": 12712,
+      "sha256": "785dfddfbab6c650fc3cf7a8aaf4388f1507db0eff0a33381eb2c6f1b51d4c39"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/4524098858.json": {
+      "bytes": 8135,
+      "sha256": "6a4eaa4970264552adaf2316c525738a8342c732591b1b39aa30a2a0e226d13f"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/4568013407.json": {
+      "bytes": 12696,
+      "sha256": "9f509277f9cb49b5e4a4fb7a2cd72e6d571e4af7b8e094d254bdca7e6001cf7e"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/4612207713.json": {
+      "bytes": 12478,
+      "sha256": "61011d76b22cacfe75f0f08d554700b05b3e6a8a0b912309e3a29024025a2870"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/4618405743.json": {
+      "bytes": 8438,
+      "sha256": "3e050fe282e024bc395905cb8cdd691c7c7f8ff967cd64b1b4ed69a9c014a85c"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/4627422421.json": {
+      "bytes": 17342,
+      "sha256": "ada7f758862d89ea2b1368a8e7480e1f8a56c8bbd845652bab6453596637832f"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/4632441196.json": {
+      "bytes": 16042,
+      "sha256": "0bc39bae00bd18287a28346ba96cf3cac45c2c27d96933660c54963b8d3bfe9a"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/4752351015.json": {
+      "bytes": 11086,
+      "sha256": "40e3fa18eceb08d7e398967ac3f0501837fbac63dd581b1421fe2f45daf24163"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/7204765703.json": {
+      "bytes": 15548,
+      "sha256": "546c5952e9685306a05e7a6c617883a1cee9f0a2bbd95d95d4eb0ffdeddee53d"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/7249845413.json": {
+      "bytes": 12308,
+      "sha256": "f02c5a936c7ee0d26dd88c23a40389319f7140dc0ece9ac15c5cb2545a6c393e"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/7261466140.json": {
+      "bytes": 24307,
+      "sha256": "6b4f8296f4384b8d2968b8bb036f1de7c57f0ab84b465f2c97eaab57f142d4b0"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/7307465309.json": {
+      "bytes": 19308,
+      "sha256": "5200aedd94b71aac324aaff7c29237b16b940493511b5f99741392d318d3b1bb"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/7325111909.json": {
+      "bytes": 9983,
+      "sha256": "70a0d8676687479a08a7e0e0a6f0ba79428c761dd91450f4cf28e7d226c81f7b"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/7334351449.json": {
+      "bytes": 17653,
+      "sha256": "6722212b57f1226e612f64422673e575eab0a0d89b8ef45af50be424a00984e6"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/7343976122.json": {
+      "bytes": 7747,
+      "sha256": "5c083710a4a1289487cd2dc72c057172f1b24512f9ff6fd7a522cc080a8a4782"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/7349901030.json": {
+      "bytes": 15626,
+      "sha256": "ba1c886a2d2df399a9b16adb49cf3905026718d0937602fca6d62ddce1707e61"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/7372659711.json": {
+      "bytes": 16224,
+      "sha256": "99b9c4e012a5bfe8e3b82f4d98a4fbbea88c2e0ece5336cafc4ad98b680742ec"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/7406389212.json": {
+      "bytes": 9381,
+      "sha256": "c7ec39e0ba5c08e7e7e407de55fdfa526d8c21ba6d56e8fd370e9fbfd7b2ef8b"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/7424638143.json": {
+      "bytes": 8674,
+      "sha256": "02ca6cc30db16a4d9a3eadc11c8c1e43d9eed30883314c2849791c8796b435aa"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/7428288185.json": {
+      "bytes": 13571,
+      "sha256": "136ebd0abcb68edfbfb1422b63118d4057c043cadb7134d4345aa1a4eb75f2ce"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/7446315159.json": {
+      "bytes": 9617,
+      "sha256": "9efdd543f4f1f16d59a5709768ac6a37d24c735651da3b2b06670ab3a69b7997"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/7497516999.json": {
+      "bytes": 12138,
+      "sha256": "1debc49abcd01314af478ea25a0a87929da54de7c8d30b10c6e13223965544ed"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/7515258215.json": {
+      "bytes": 10883,
+      "sha256": "61504e947ac86bb339c05a90b525b37977ef8c9f19dfb2dfd6c86dc63308a22d"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/7541170004.json": {
+      "bytes": 7843,
+      "sha256": "c707c19ce55cfda0c6ad427e0f35ee5923ca4c70bb5b097cd132341304f7041e"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/7542655257.json": {
+      "bytes": 8842,
+      "sha256": "173f0c338f25db46a6d6ae0bec66f6fa8ac2c47a1ef906d5e51ce4d8138410b3"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/7579178984.json": {
+      "bytes": 15421,
+      "sha256": "bc2004104c3c97655bfecede211aca33fbd75bb52359abdee263726b6eca88f2"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/7598293502.json": {
+      "bytes": 19327,
+      "sha256": "200be4ab89a7037c464fcc79da8b172c35637a23fccd2c56cb32def095a5da70"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/7613021213.json": {
+      "bytes": 11146,
+      "sha256": "57d613b5d3ad80a7890128a4956f4fe0df93ebeb507ea2acc94b739c63e3564c"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/7618742753.json": {
+      "bytes": 11400,
+      "sha256": "c22fcfa8c545af3ef015a4c5e953cdf25e90b519016a1ce8d54b526047164789"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/7623442188.json": {
+      "bytes": 13367,
+      "sha256": "74722baff752252c218e837f45d7acb3bfa9684c749dff5250ea275164b6aa6d"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/7649417290.json": {
+      "bytes": 8781,
+      "sha256": "c4a0360712d8be6c9b4e1d39b8e5f6d29d072d07f41848e2f4f882a137cda7f8"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/7690456036.json": {
+      "bytes": 9923,
+      "sha256": "e285c9eb3d34554fce376f7727e28df318aec3cebf61fa66a40207a4db17c2b7"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/7732969767.json": {
+      "bytes": 6820,
+      "sha256": "85a32e3ae2691400d7421a53be87a34b21bf566a401df307f2e0a580d3d870c3"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/7752432528.json": {
+      "bytes": 9392,
+      "sha256": "c5e0011ec48f47bdba1f914d49a6ab314193354bf5a9f41849203faaa695c7ef"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/7773563980.json": {
+      "bytes": 15885,
+      "sha256": "fe087e38efe4c650e1d3d4d081eb984aa62eea2857cdd3c1037c5e8625c5140d"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/7794097918.json": {
+      "bytes": 8362,
+      "sha256": "255deab72b08d9f294c5c11da2c788f80493b9a426d24ce80dcd85d70f5d9dd9"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/7811003440.json": {
+      "bytes": 10098,
+      "sha256": "fa26dd85d8baa8f3ec3792893fc8e51614c914db66d7d304571f955b1533bbd6"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/7845388815.json": {
+      "bytes": 8174,
+      "sha256": "a8528b258e7a77a71a445a72a08e6a4ec60d1309a69c4540133731363435d036"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/7848937288.json": {
+      "bytes": 13382,
+      "sha256": "61b3d18d6172999fd92543b3aed432b141b1b4408d558838abe62a50b88d8d07"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/7869898731.json": {
+      "bytes": 22874,
+      "sha256": "f7e646816de1ca8355688ccfbf4d0111da79a987c9e344e1e5df0a7cfb9b6c04"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/7886322766.json": {
+      "bytes": 14071,
+      "sha256": "97e76e3cbb62c70ae0b93555cdb0d933d2aed25ae932d40739d7c882d0aa4d70"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/7889089251.json": {
+      "bytes": 16456,
+      "sha256": "18980c25da1d8ff797d7859eea31136253cce4602cdde577466f98d991ad7528"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/7892958149.json": {
+      "bytes": 16736,
+      "sha256": "dad04e37df5ba5b1d9afd590c6c11d6647176b2ad5b75ece0bc602a7fda02fef"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/7893168274.json": {
+      "bytes": 12387,
+      "sha256": "f95e2a48f6415de342598240256491206caf30bd383c1fd0b199660895a9043e"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/7898648327.json": {
+      "bytes": 6747,
+      "sha256": "d89b9e73045ec834b2d6744341c3059fed775165875acf0b287d1b29bf12873d"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/7917105766.json": {
+      "bytes": 6801,
+      "sha256": "4bc52f58d36837ad1d36a4b3e09491651cf8c9b562844d16ede8aced9d033678"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/7927311970.json": {
+      "bytes": 7284,
+      "sha256": "086cbeaac20b0238d349739b1b790987ff48014335ce4c1d3dbd4d5a03c23089"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/7928638277.json": {
+      "bytes": 14351,
+      "sha256": "1da73a4c547f165339898e63cedad7886c90f02da266327b24266de61dd70602"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/7945217672.json": {
+      "bytes": 11173,
+      "sha256": "cd599b0a07ad368584e452e2d6609fd8326682c84b158966390d6cba22725eb4"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/7946112251.json": {
+      "bytes": 8373,
+      "sha256": "96b47ec15c57bf01cd45fd4a80c60caab6eec3f90c48f442fb680dc53454ca49"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/7958473905.json": {
+      "bytes": 9868,
+      "sha256": "b26cd8f6ff9704558dd1ed54d5e5c1e5733a39cadc4de250470ce27329d6112f"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/7961642923.json": {
+      "bytes": 9998,
+      "sha256": "f85e68c1085c82bfc096f24548268e1fc0040a2333208b9ece586d44cd4a35ce"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/7962566049.json": {
+      "bytes": 7599,
+      "sha256": "736a6a1f673ff06bd43350e848048be56ed2c28061c6b9e7a894297f38b64283"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/7968082533.json": {
+      "bytes": 16973,
+      "sha256": "e0cde81fc5e74b25bb2d5d075300e8eeeb442b93431dc40030bb4a393ed11c0a"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/7969573669.json": {
+      "bytes": 11790,
+      "sha256": "fddbf87169e47ee03a70f5a179081b263166fa3a34eb72f21138aedab504e3fd"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/7989429369.json": {
+      "bytes": 10941,
+      "sha256": "d597e7772002fc856eee570311b4760ac0aa3fd75aed10d1e1fca8e7caec1541"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/8002342914.json": {
+      "bytes": 9575,
+      "sha256": "c2e72cfb7cad8e55841c6610556b2809ba6a6eb8fc4b39c6ee3eedac2863594f"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/8007391017.json": {
+      "bytes": 10187,
+      "sha256": "1eaaf3afaaf70d0a02890cba3a7180319fc65f48416aa383837043c9e069c068"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/8033753079.json": {
+      "bytes": 7951,
+      "sha256": "dbc190acd5b49a3df306653eeb8d8d6fec467fe9fe2697343ad98627d15714fd"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/8039179938.json": {
+      "bytes": 7586,
+      "sha256": "eb31ab7b80c56f8327c22029f9cee9cba59462cb4b0de5926082ac92a087d6fc"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/8070214628.json": {
+      "bytes": 9643,
+      "sha256": "b2437814ecb5792e9c46557d0d8c76e025461aeb13b4c4117e9083faa28b5660"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/8078124502.json": {
+      "bytes": 8217,
+      "sha256": "696f20f3e5c833534ddab7e3e99bbb54054c16242f9a2519d7964c42b3008457"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/8108777992.json": {
+      "bytes": 10153,
+      "sha256": "810a773900e6ac5a047d89a7dbd02261ce61ff851898fcc5b926b492bded762e"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/8112919386.json": {
+      "bytes": 20530,
+      "sha256": "85a331dd95a0f7a833a19d443b584495212e3256e0658b7326dd4c09711a1ec8"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/8113813424.json": {
+      "bytes": 10168,
+      "sha256": "678c88298bf8665573c61a25c52c5bd5ccb02b73cccdd20ac7d0311666b94e76"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/8116063276.json": {
+      "bytes": 14523,
+      "sha256": "2e23ae1f08d2b4c4c3fbeed3ed263dcab3b860db98139b37ef6434c9dd81a368"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/8125826114.json": {
+      "bytes": 11477,
+      "sha256": "d98725a72636a4b784814ee74e821f37e4d2a2bd951f607764b678ea334a0d56"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/8132883572.json": {
+      "bytes": 12924,
+      "sha256": "cf66fbc1c032bfb111794f9d6542f49911b597188d642f31ca47c72f6583a8c3"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/8137008160.json": {
+      "bytes": 9139,
+      "sha256": "80d4d571e2e79af680588171a88cb1e371257104778985a815a915072ad722cd"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/8142886853.json": {
+      "bytes": 12264,
+      "sha256": "465ce08933775f21f96140ee3f7a98ce9f47e7f82745fbf3809a75b312fed3d0"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/8147994528.json": {
+      "bytes": 17928,
+      "sha256": "b80529f67870ab72a8a4bbfa882302fa3bdb5c8de11147c6bb26096acf7652eb"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/8148415401.json": {
+      "bytes": 18782,
+      "sha256": "c94d1f8bbfbc2c68aacdf20f2cfcb437c69ab892a370260e2507554ba47db471"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/8152634798.json": {
+      "bytes": 13429,
+      "sha256": "a696f1d83447699c56198cd1ee2dc822c054e79421c1787315404cf6f544f56c"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/8155875302.json": {
+      "bytes": 9136,
+      "sha256": "829784214567fba6da67353fc1531e3037e06d8e7d02c1154f91f56bb9497ca0"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/8157118802.json": {
+      "bytes": 11760,
+      "sha256": "38aff8d757867f9e180c0f835f069d23b3d7b2335d15fbe75841d1d6c08a4204"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/8158137754.json": {
+      "bytes": 7798,
+      "sha256": "ae8e00f70c3212caff50bc421ba5de50709242a36ec2cd74973035e176c9c566"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/8158929182.json": {
+      "bytes": 6925,
+      "sha256": "43057e0bfc51e311043fb501f96b88de069b506d291c383da8f35c4d9b0ccede"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/8177368689.json": {
+      "bytes": 10900,
+      "sha256": "5d51587b31f2b2623466d2d7e004d4733487e6aa8860f009bf896b463320c4bd"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/8209517933.json": {
+      "bytes": 13034,
+      "sha256": "81f91af4d055b47c274c018e03f55820ab80cd3a823c8fdfae7e69933d6c3a59"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/8211436054.json": {
+      "bytes": 12358,
+      "sha256": "89f04594ebe3fe1051c8237001a12462e9fba560e15378f453d2f5dc8eb0f483"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/8213404140.json": {
+      "bytes": 11209,
+      "sha256": "50d2c2f9a0b1a87b77b55ac42bf8dd86170d2da17755541fb9da1c2e2ee49d3f"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/8217754536.json": {
+      "bytes": 5648,
+      "sha256": "51728cba928eaeef0ef36b6e80670464e6a444cdb2823950f7018815e0777ad1"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/8220779942.json": {
+      "bytes": 9378,
+      "sha256": "30ec484e8fc88b0e6b5ef1ce96fc762bd536dcb90b970c3e670effec3f1877c4"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/8226987773.json": {
+      "bytes": 11090,
+      "sha256": "1ddcaacde8c7d6f73adc796a6a280ff4559d3c4c2b748153a2ce548ec72a494b"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/8230537171.json": {
+      "bytes": 9550,
+      "sha256": "fd2de512f706e4fd5bb4f254c7cfb571ce371951254763810ceceffa15563db6"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/8232059634.json": {
+      "bytes": 13430,
+      "sha256": "fc4f91d2fac54261bb47c7b7361810ec551a2e3b6ee085b637fc97ab7672ba7e"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/8247223532.json": {
+      "bytes": 14493,
+      "sha256": "d1d17a815c5deecbc8afcceb9530336d33ef141fa41c8e128ea32b877bcf650b"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/8247946938.json": {
+      "bytes": 7854,
+      "sha256": "7d59f27e7efa48782c23290f61cb4d9970a48ccd9214afa9b2d7d643ce6b1238"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/8248868576.json": {
+      "bytes": 12342,
+      "sha256": "06763b30b5127a66063fe38513bf29196160cd9b61582abf96ff7b63cb281853"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/8254272528.json": {
+      "bytes": 20523,
+      "sha256": "b66cb8712ed9123aac6928c5c688f2ee745eea6b3b6a3342d39b3d0862794730"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/8256134699.json": {
+      "bytes": 14250,
+      "sha256": "30ae8520c3758236bd4f34060db29048cc11d6525a78c028e5e3a5a709852df8"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/8257111398.json": {
+      "bytes": 11096,
+      "sha256": "6a7e31b94d781858600fc10c7714ad68631f468ad42c49665cf832d48e52e8f6"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/8257522616.json": {
+      "bytes": 10855,
+      "sha256": "47aaa883ddde49d09a121b6a0dd95c7c72326b80c2bfeeb68ea033df5c6152ca"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/8260540919.json": {
+      "bytes": 15880,
+      "sha256": "282a600a6d8fc20fa9fee33b6432e669fa236dbe284c5b378ccb35984fbdc61f"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/8260676513.json": {
+      "bytes": 5905,
+      "sha256": "793c632adbb89fc8536a0df00dc2eb1693612f46f5acc897f50f281f47fb505e"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/8260814231.json": {
+      "bytes": 18091,
+      "sha256": "6e3e9d664119a2d9f58453177e0392043edd882a3439bbf96b3b1339081191d9"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/8262876847.json": {
+      "bytes": 13287,
+      "sha256": "1b56342adbb66091242b740a9507c96787f63e4b3c53569e22650fc6d299c3dd"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/8263659537.json": {
+      "bytes": 15714,
+      "sha256": "86f4e8f690352d3d97873020026ddd3747c1726f95f764f3a0c1e5885a5e8e9d"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/8271167467.json": {
+      "bytes": 18485,
+      "sha256": "d7e4db60f23fbf92823dac78839fd693964b2df2bb606c20b57745c2072783a9"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/8274447287.json": {
+      "bytes": 8744,
+      "sha256": "08a40c00277bb0bb39c46431e6b19cab95b8afed5852ba7fb564b212e4a83df2"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/8282245823.json": {
+      "bytes": 12654,
+      "sha256": "7dda2fd91bea0932aca5809f3807dc3fb628adb7a013a2d691bfeeb6000fe86c"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/8282988649.json": {
+      "bytes": 13206,
+      "sha256": "3c86ed5919428e38cda532ae2b5429985dc1ca8d259265549a0f146bfc4968ca"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/8289426987.json": {
+      "bytes": 6009,
+      "sha256": "1776db1e66d7d7743ee43b352ade4f6177260818dd6ef7ce76a8f5ee875b917f"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/8290910859.json": {
+      "bytes": 14133,
+      "sha256": "5b6fcf8aea1708e631221dde432e76dd5292386c237a4f7c696d5542d884e3fb"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/8292653335.json": {
+      "bytes": 13106,
+      "sha256": "a20c4a80735121af2db8b85f5a714c9dfddd2cb216e93584997ffed1c6246606"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/8293468144.json": {
+      "bytes": 18722,
+      "sha256": "cc676cf6a70bbe8d63e7151cc885d2c6c4a33e68284e6d1ac4731e3a84e4a7ec"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/8294519200.json": {
+      "bytes": 13649,
+      "sha256": "e040fdbbc03003d26762961e980940aec3d34cc1e1693823644f53fb1eee1187"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/8299143130.json": {
+      "bytes": 11443,
+      "sha256": "4de2a351725713cf66e9e233a520ccb4a3c797b486e5fcdbd87e6d5b867d8c42"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/8300202034.json": {
+      "bytes": 10443,
+      "sha256": "6bff9d1c5207578fd51596a659f6d5748eb6bf3b62bf7436f4ad10708ceeab17"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/8312090251.json": {
+      "bytes": 13062,
+      "sha256": "c26d48962658004dfa68a1653a47db1d0e7ba3b160c8656df497787c4c001281"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/8315549899.json": {
+      "bytes": 13180,
+      "sha256": "27dbc7de4e97c4235d2031eb40c0d60419340eb7f369639cd93ff180b308e535"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/8317321042.json": {
+      "bytes": 4767,
+      "sha256": "552e04e7e17ae7460cc43021c5709eab41981beb8e1134f5c96bbbcaaaedbaca"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/8319957513.json": {
+      "bytes": 15704,
+      "sha256": "ae46eb651c4f129bbcc7e1beebabf226549538180e550633aa422378d95a97b3"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/8320702337.json": {
+      "bytes": 8068,
+      "sha256": "01e2259bafdd3f892135a4ca5eabad8210468457a5f6058ab15d8245fcfb6205"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/8320762194.json": {
+      "bytes": 15247,
+      "sha256": "bb9a44c967d5476d419ae1510ec1fa9c58482e50a31594321471cad08576786b"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/8327881561.json": {
+      "bytes": 11378,
+      "sha256": "bf562d2bdcd4f64ba374d796875157d7141dd6c27a2a41194e7ed20da5b5906c"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/8331689956.json": {
+      "bytes": 8050,
+      "sha256": "eee43a9f547172f099632b115360808562abaf708ac182016e7ae2c25490947a"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/8332573037.json": {
+      "bytes": 29110,
+      "sha256": "8b04523684e6adbf8e9656b6bd56297a3c89a4f861539c16b3a8062e2be28ef3"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/8334774293.json": {
+      "bytes": 13687,
+      "sha256": "bc7c6d3c5c687ffe96f978e149ef76dee8b11ec6b38e531e470db0f18e438edc"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/8337386062.json": {
+      "bytes": 6386,
+      "sha256": "93f65a3d2033400a5ec902cf00210878af3d78e2816054fe198ee5f8bb0343fd"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/8340161452.json": {
+      "bytes": 12005,
+      "sha256": "e7e6abc6ba91dcc35ba3c15547960eca84d5992bc10fdb8f97755e73a01eea49"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/8340925817.json": {
+      "bytes": 6129,
+      "sha256": "db4e70da9b1040a8b5aa70172c22e170328060ee106bf517d9eaa6d06fddca7a"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/8341524630.json": {
+      "bytes": 17245,
+      "sha256": "b640eb286522690c87ccf02dc57a137dcc77f04dc7cbe18f3b73fdf99ba326d9"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/8342365997.json": {
+      "bytes": 13428,
+      "sha256": "a39df45dd2b72e1bc4c245000a1b8a6e07279ef6193137f3242eafe61f4dc9e0"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/8345926182.json": {
+      "bytes": 16510,
+      "sha256": "451dcecc4b03ac0e329ec3a61bc4e75e2846362e35af9bf7535071607c701f5a"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/8345928328.json": {
+      "bytes": 11642,
+      "sha256": "801a25df6bde46921b310f63820b22f988a8370c9ac24ed70ff61e5710224dbd"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/8346303417.json": {
+      "bytes": 17709,
+      "sha256": "285a98a0fbd765e1232b3c502d69c9f0e72f46b78d2151dd60e8b0ef9ef54c89"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/8347241736.json": {
+      "bytes": 24009,
+      "sha256": "b0264364fbfe78926094704ab1e06e4a1fd07a57ed89c6921eb3601fa4789d38"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/8347936944.json": {
+      "bytes": 19442,
+      "sha256": "e398346037bc5ef91228376971f2ef0a92f6d62cb8c2e782a8bebd848298880c"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/8348638757.json": {
+      "bytes": 13776,
+      "sha256": "e94262c364de88b567a2ba42a12ace1129c9036b342872ef791f6e60bca69036"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/8348639683.json": {
+      "bytes": 8212,
+      "sha256": "e758360d6f6cfd09a08cb9b74ee2a320081f0224054a0b2a2ffaedf66607f44e"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/8350474730.json": {
+      "bytes": 11240,
+      "sha256": "e3769c4707635c147aae45075460611e73e48c54b1671ab6d87848bedce94b2a"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/8353599933.json": {
+      "bytes": 4994,
+      "sha256": "832ebb3baa975519d9399cfae81ef20b02da2161ca2fb90e43a8b2ab5d8251e7"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/8355473246.json": {
+      "bytes": 6726,
+      "sha256": "4f6d274bc34960a3df2f58845f2eea6d41bc6e2011c72794f7f3032aa37e87d7"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/8357242634.json": {
+      "bytes": 7914,
+      "sha256": "dd276c0e441cfd71f1fceba57a629b62c8b7f7ba4614c9fbccccb53a83c4eea9"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/8359431644.json": {
+      "bytes": 16821,
+      "sha256": "59817784e1d3698519efeb2245da764742dea0af6a4cc95eeeae5e608dfe6c08"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/8359497535.json": {
+      "bytes": 3623,
+      "sha256": "a1edeb1b59900d97c56e1457c899e8674cca2b94ff0de7dafee3a0804757338d"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/8363136642.json": {
+      "bytes": 10741,
+      "sha256": "8d8c30b5f38689d0d11627104c004620d1ee4631e1af4f884250954c0a3c0096"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/8363446372.json": {
+      "bytes": 9993,
+      "sha256": "5c17f37403f9e5c1c7cdc9e4cf2be0a9d68590e71fff02e923a26068230aecda"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/8366295064.json": {
+      "bytes": 10739,
+      "sha256": "6c73ea44507c88f849b2c41d9a63f29f009851052e584372fec7334f1d2e23ad"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/8368244272.json": {
+      "bytes": 13942,
+      "sha256": "e6619ae2c56f7c506f1a488f488ad0d7d044a29124fa8c0b78090b6561ca795f"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/8368673276.json": {
+      "bytes": 12934,
+      "sha256": "37fea4f75bfae2fae7486922aee3e75358fd986b7ae44094e98afd8906cf157b"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/8368741003.json": {
+      "bytes": 14890,
+      "sha256": "f1adfbbd223f0d58325b37ad55f97771b25c448375d3947e64529587ffec8e30"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/8369105236.json": {
+      "bytes": 16546,
+      "sha256": "293cd9ead941482c3e3c5378d110994e9fc0686f644e5c2022265848eff913b2"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/8369873988.json": {
+      "bytes": 11978,
+      "sha256": "f3fcc8447a8da6a7fdff757b272312f5022c65ba839ca57f8fb48b6d6fc4d60d"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/8371915695.json": {
+      "bytes": 6742,
+      "sha256": "1ffa332c243fab48e5a0806b42735efd046dc663f5bb03494b48c2f2ec887534"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/8372191785.json": {
+      "bytes": 12598,
+      "sha256": "66aad0abd871635ae2146f5f66ca8f12cbd1422b4a8d34858f8d659aa9f29491"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/8372590243.json": {
+      "bytes": 16225,
+      "sha256": "efb2e1efeb0c9929805e92d9b06e5cd59a2f0869bd68491c1c3194b5216642a1"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/8372690198.json": {
+      "bytes": 22389,
+      "sha256": "8ea30ea25be3f097d958a831c672ed2241c93dfd99a8020b3c1cb9fff0b8ac00"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/8372943628.json": {
+      "bytes": 7791,
+      "sha256": "54fbe968a390d331c713354589a5e4f4ca4d7dcfb8cdd0de72ce235a1a2eac1d"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/8374693185.json": {
+      "bytes": 16174,
+      "sha256": "f7a78cdd4879efa0500ce95f07b7f2e39332c5824f82a9b80c44fc7f76b526a3"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/8375832579.json": {
+      "bytes": 14498,
+      "sha256": "19597d83c8af172f74534582223c33677ec34abf40d2b77492616643e10ae73c"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/8376183999.json": {
+      "bytes": 11463,
+      "sha256": "0d74e6abdb40a94f852d0b199d3a6521c12caf5f477336f28bc1bcc3f6b97e1f"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/8376309440.json": {
+      "bytes": 12001,
+      "sha256": "c21ef997ee09bb476166d37e6a20c848add65e604dc72ae8cac0de86445750a8"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/8376991604.json": {
+      "bytes": 11889,
+      "sha256": "70ef2225d22f51225afa49f412294c00551abe4221a11b41915fad67c02ab6f0"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/8377300468.json": {
+      "bytes": 13524,
+      "sha256": "01206780e159fd8a5e4e516d1e3b84d84fadf52cd5e542bc7d36a71c0c249170"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/8377954181.json": {
+      "bytes": 7473,
+      "sha256": "4f3a6f60ce8ea26d58398b195dec56398c602fa17a4bca26e18e0454b84c3a26"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/8381768675.json": {
+      "bytes": 13014,
+      "sha256": "fd7d501c429147e21651b8076c519cb899ae62a219bdc54cd41a19e1f3490eff"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/8382240364.json": {
+      "bytes": 16852,
+      "sha256": "b1f9e6178333fe70da4734cb081c08eeaa94cfcb598b7accefdd4e4b44544534"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/8385469697.json": {
+      "bytes": 10021,
+      "sha256": "17a28ab9326c1d6f2c6e34b3b21e8386d7a072508c7f7204acfe2475e2b76b8b"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/8386178266.json": {
+      "bytes": 6394,
+      "sha256": "d3ba6450812d4126c1c69274ad23279f37cfeda7c82326ece6d6e2ce8559e577"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/8387167774.json": {
+      "bytes": 3548,
+      "sha256": "6abc66663e6bd9e1f67c447315483cba06fbe70db416c6309b6ba19127dbe645"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/8390492882.json": {
+      "bytes": 12385,
+      "sha256": "51bc5ac84dbd484943e28f839df1c7e3316566c934b346e995129fddfcf61821"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/8390502410.json": {
+      "bytes": 7526,
+      "sha256": "a95edf9a7e11a3d4212a725fbf70b257bd915d9b42dc474f88201cc254dd7252"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/8391658590.json": {
+      "bytes": 17616,
+      "sha256": "63562928a53340c11f306b16e9a8a9a9b9b5c97d247b2f77cf368a08d169ee9a"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/8396877734.json": {
+      "bytes": 14804,
+      "sha256": "c8fcf1c7accc21db9a8d702361131dc5a69bc0ef9a6543f1db14947b29b206ec"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/8400900684.json": {
+      "bytes": 23743,
+      "sha256": "1327737f24f7579701f371df67d384b0a3212d73ce21a5d108688a594030ade8"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/8401277244.json": {
+      "bytes": 16753,
+      "sha256": "2638fa078de9a07c5ec463bb38eafb0a20abb2d003985627b08386db52404de3"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/8401719855.json": {
+      "bytes": 8026,
+      "sha256": "c8b320166b2b96e95d95cb51f5904fab5a7666601172c945650e80ba1425d558"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/8408004336.json": {
+      "bytes": 9766,
+      "sha256": "b079758582140164f68cc5e73f81e4cdc71011ee6ad93f6b2e80082803804e66"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/8408476091.json": {
+      "bytes": 9806,
+      "sha256": "1555ec88754d827f47bdceefb4260efe4a22c2aaa0a8448215b28d6118df20b3"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/8409122420.json": {
+      "bytes": 15515,
+      "sha256": "96490dcb8cdc1fa6b62f5ea66b4dca4f88e4679d85c5f0d10c17ffbbde572e24"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/8409625737.json": {
+      "bytes": 6207,
+      "sha256": "22cd2b56b7131b9411a6019e83d05c68e811c10e4337d958f3121754f2104abb"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/8410751012.json": {
+      "bytes": 42690,
+      "sha256": "745c5793c5a4ccd9e63d9ea85d0f5c259a2cc10a695ef715e97ab4bc177d2d2e"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/8412971328.json": {
+      "bytes": 12270,
+      "sha256": "c60a96be5ddb6f777aa1471bc2c41a8ee5e94ca83d677f5e36cb1c6daa38fa1f"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/8413237681.json": {
+      "bytes": 22499,
+      "sha256": "2bf662b0abceebae6de713d5615ca61254ceed150750890acc6a5ff749e1f093"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/8413679426.json": {
+      "bytes": 12932,
+      "sha256": "728d924fb67383569ec88c017422c9ef1910e833a5923cdf1e881d667cc7d68d"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/8414550001.json": {
+      "bytes": 12860,
+      "sha256": "63742853bc55bc5c740b96b264979e10cbe865b40a00af70c22434bbc89c2764"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/8414966779.json": {
+      "bytes": 13691,
+      "sha256": "988ffb8a63278ba8f8c6eb9ced07de4e2bff558969aa17e8f7e7ba026d75842c"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/8416612247.json": {
+      "bytes": 9841,
+      "sha256": "0d4c830a75584c70ce312d2189da36152ce0de643a3845ba10f269bc81673489"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/8418080974.json": {
+      "bytes": 18523,
+      "sha256": "4776da252540267cc2ac8f279d907fd46adacaa98e35bff282a255c96b8216d6"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/8420701664.json": {
+      "bytes": 17244,
+      "sha256": "e3e8c8a1eaec78dd9f8c3892bbfdb2c995dba51bf5a037d241908d0960d7b588"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/8420715206.json": {
+      "bytes": 11443,
+      "sha256": "c1c1a1a01d94e932b4772fc43fececca59dff8860752f4724c854cd060b26302"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/8420816768.json": {
+      "bytes": 11214,
+      "sha256": "5abdebd4be342b7678f638aa93cb985a307fc5596fe9b0e1c06c0a05c0176853"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/8421061461.json": {
+      "bytes": 21283,
+      "sha256": "7302b700472b98264ec5e56d5ac790df6251324da741453e8d33c7e15285011c"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/8421603673.json": {
+      "bytes": 14783,
+      "sha256": "3de8441ddeebb2b5260fa0c483ddfaf1b151c6dbccb503f6dd95527005bf15ef"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/8421856462.json": {
+      "bytes": 18480,
+      "sha256": "12e18b98b56920afd3a02b80ac5ccdc3b2fef555fd6f69ed6e977e452abef29d"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/8423457681.json": {
+      "bytes": 10981,
+      "sha256": "a24cc893ec1deb89796b72b09ab1fa7f1246bbcdd70dc8bfe7306a7b8b9a01d9"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/8423776878.json": {
+      "bytes": 14020,
+      "sha256": "48b7d8fc67cb42fa42d2d4322804ebb4e5b43c13c8e8f1b228fefd33c76749c0"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/8426937017.json": {
+      "bytes": 16935,
+      "sha256": "3289f1648b6e4f33ec0884363f75e384f866885af4a7e44d3cb6535cb08bddd0"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/8431734264.json": {
+      "bytes": 10744,
+      "sha256": "08224eb7304cd71ba742a88d4736ec8503743cbfc47e7ff4afb04e961d6ebf4a"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/8435678650.json": {
+      "bytes": 13420,
+      "sha256": "dbeadf77933f01f053fcd6a5f972c4dbc5818658eacfc0dbb8c4687ca49fc272"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/8438410217.json": {
+      "bytes": 6330,
+      "sha256": "38f34a0fa8958e55011173fbb3d7d4e1acb2a7016ef215756dec9b671d39d1c9"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/8438782696.json": {
+      "bytes": 9135,
+      "sha256": "0e195e49965326abf03909d161f211ce17b26a092892c96bbfb50de9c23d0d23"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/8439329593.json": {
+      "bytes": 10648,
+      "sha256": "97188518e321c266c79ae34a70f944a78bdbd9feb95146962aa10815b08fbb31"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/8440116859.json": {
+      "bytes": 8332,
+      "sha256": "bd2cd28913042c56629e55907e5d1e8ccf7a9489ac376efe3c2a51f4597afb0f"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/8440587656.json": {
+      "bytes": 26774,
+      "sha256": "894ef058a6d68e701b18792d62a819a9b031f95a91ba879e8e8871d54174a0d1"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/8440887724.json": {
+      "bytes": 12499,
+      "sha256": "8564edbd0a6f953d2948000e1a299b51fd0738ce0d675e1f9dc505f30202ad59"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/8441065404.json": {
+      "bytes": 7645,
+      "sha256": "63da7cfd74e9a0ef2f97aa41da487983efcf23135f08252f4907c8f149054f99"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/8445120155.json": {
+      "bytes": 23973,
+      "sha256": "a6563e9181dfb52fd53c7424284d3968c8422291db8dd246d7da1e250a452257"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/8445405869.json": {
+      "bytes": 16084,
+      "sha256": "86eb5b4175bb3a60eb55df88af452450464ab99a58c28379d6047fe26facfcee"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/8447073503.json": {
+      "bytes": 12492,
+      "sha256": "ed432972aaaa550bcb529686f30131c20a743267903a50a3ae6b45da6e333caa"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/8447813577.json": {
+      "bytes": 5371,
+      "sha256": "e931af4fc6502395714b3648ae66f82e9afffb5679a9b9d9ab39c65b044eb6e3"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/8450591079.json": {
+      "bytes": 11104,
+      "sha256": "532c75efe67cdcf42d94933a0d5a7fb171ad5ff3503072e30bd2cc6c884fb2f5"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/8451439904.json": {
+      "bytes": 6919,
+      "sha256": "d1b255da56d24f0eb5aaaeab581e37686726be03268075e2e141ce2f0cd7d42e"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/8451733155.json": {
+      "bytes": 9362,
+      "sha256": "b62e5e05ed8510708abfc746276e5992b17b54e29b63c346fa25b57d27cd20cc"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/8451756108.json": {
+      "bytes": 10702,
+      "sha256": "57106eaf2299245485d3667f5d67f6313114007f925fd47ed9c2f11ee367d84c"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/8452956978.json": {
+      "bytes": 11152,
+      "sha256": "6f138678ced86fa707506dafbcd27d36442697ec65233295bdc1bcb7e8c00ef1"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/8453231361.json": {
+      "bytes": 17955,
+      "sha256": "c799029857da170e8d103ccb3b4eb2dba51c1f2414284647931110bbc773e795"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/8458803143.json": {
+      "bytes": 15048,
+      "sha256": "43e834a6e5e150990df68133bb0052c8a98fb23dacd4edf641103cf4525aa855"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/8459140780.json": {
+      "bytes": 14099,
+      "sha256": "0f90f803a9b49e2dee1e04d6603f46401948e180087e93ecc9421b06e91d673e"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/8461423640.json": {
+      "bytes": 10323,
+      "sha256": "c77b02fb4b4942bd13419d1515419537f0bf85dc2e5e4dd44c8ac19e0127aac5"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/8461814962.json": {
+      "bytes": 3501,
+      "sha256": "0293e37a1e91f838bc4c9c0a8414e61fb4b90b1d810b86398be5c75286c3412c"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/8463080385.json": {
+      "bytes": 25198,
+      "sha256": "0ba0bbbff08f665f2901b2c1f2f1c1eefb51d669365574d2c003fc7606baaf2a"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/8463479752.json": {
+      "bytes": 7253,
+      "sha256": "fa3b0d6703b0382b3796da6093d330a59e69e6e0a34ec044bc912f05671a04bc"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/8467303607.json": {
+      "bytes": 16572,
+      "sha256": "14476a98c694ae42a74d68b166bcf81ca3b9c480d8fda6f2b9188872ed2880ab"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/8470033332.json": {
+      "bytes": 13734,
+      "sha256": "86da7507a33746772c3dbb1a445a021499c2cc697050295dba59f5fe8a74c187"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/8471335465.json": {
+      "bytes": 7245,
+      "sha256": "0ddf5c932bf2bd1834f5d082f4744ee2af43e746294dc4d158210bb560524075"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/8471458960.json": {
+      "bytes": 17301,
+      "sha256": "30f606dfe6a1c71103bf1b58426899e94ee5f58df85c604d16dc03b317e6e368"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/8483203042.json": {
+      "bytes": 10302,
+      "sha256": "8f043605c1457b6d1682a608b222b0a519a7c25ebd39725b72cf6453f45acd32"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/8490067338.json": {
+      "bytes": 13659,
+      "sha256": "f5687a8042e38997ec076fb33922790fcc634bf8084317618229714930eb7fc4"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/8491367648.json": {
+      "bytes": 26074,
+      "sha256": "3eac1fd7b0c0f85f174f185edcc353bb2ba350cc471ff0bb787db17b4b75a5a7"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/8499439451.json": {
+      "bytes": 10482,
+      "sha256": "a941ec1ae1ce5c34c8ca9d7ab8120f19858112ade893419054cf9b0ce3c4d77b"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/8511210405.json": {
+      "bytes": 13045,
+      "sha256": "a5d60582f5d204c9736da77e0766932ce2a624021b17124091763357cc14886d"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/8511785841.json": {
+      "bytes": 14166,
+      "sha256": "360b1d38b01bd1822057769543059a103df82099b73343ec9384e0ae0b9397f3"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/8517091191.json": {
+      "bytes": 6646,
+      "sha256": "c4c3000f8bde2e3010615c9ae49ed8e4bf92ff582ffb053152cd4e9f08f01837"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/8525264429.json": {
+      "bytes": 15952,
+      "sha256": "55142f2bcc95fbc298b17d6930939c1c5ac3fdb359fca5eef01607ea3a8ed38c"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/8525697717.json": {
+      "bytes": 9893,
+      "sha256": "1bdcdcc9f94f2eb4d3f47019d138b3b1e55f1b8e23c875b1255233150041334d"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/8543971247.json": {
+      "bytes": 13217,
+      "sha256": "225d85ccd9ce57c07bb43b2f44afa90927ed7c89d4c1cfcf05b9df3fbb83730c"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/8544323699.json": {
+      "bytes": 12384,
+      "sha256": "522293551995b052746b60b4ec0337200b8d0d619751b6dd0483d2973a3e5e30"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/8557063662.json": {
+      "bytes": 311,
+      "sha256": "57a923d9b40a204e18184a8b75baad0f9251bffe24564a16843ba0429284e719"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/8557361329.json": {
+      "bytes": 5496,
+      "sha256": "e913dd49caebb4d6153e7c6f4d5c3dec4951a77a9d997a13278ef65b84bde701"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/8557522588.json": {
+      "bytes": 8299,
+      "sha256": "0bcd4db13b035171ed375d86644c7ab55ef42dd9b7274cba3b1b94d8ec3a181f"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/raw/990382119.json": {
+      "bytes": 10237,
+      "sha256": "ed5ea44a6f40164ea0f470520055ca5bf1d8a122afb514dfca17d0db7015e3fc"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/1058705360.json": {
+      "bytes": 764,
+      "sha256": "6567e6c527439a766a962d1f47329c8b5001020ce0b92c71738da9a1d12e835f"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/1123223983.json": {
+      "bytes": 810,
+      "sha256": "57e924ff558f7934224082156a88dd646043745db1d1d221efa94ad0f93517a5"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/1435321222.json": {
+      "bytes": 792,
+      "sha256": "4906beaee82ebb696e9a6636d852bd20cd02a08b64fd51f90dc9be78e1c429a6"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/1720929662.json": {
+      "bytes": 804,
+      "sha256": "11eed5eaf743630d91e4168d30ad265be6b213eef478045264c9d7a3f54f5b9d"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/1812972182.json": {
+      "bytes": 757,
+      "sha256": "faf8eadfd2cc35304723446b479151b7f9fb043ebc68eafdfe0ab6968368b9e2"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/1816151640.json": {
+      "bytes": 778,
+      "sha256": "6ca0be685ececa7aca7432746a91e45aa30aa95bf878a590aaad50513566f32c"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/1873122838.json": {
+      "bytes": 789,
+      "sha256": "bb3692ac600f8e7ba914ef4de43803c36d496f60ef0b4117f8c796ab56af8f89"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/1875107641.json": {
+      "bytes": 757,
+      "sha256": "7d799c15058109d6bcd1110733ad0573bd162a2810e11d7b81860e6d688b3277"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/1957550734.json": {
+      "bytes": 812,
+      "sha256": "1930bf1fd12132e06e24cf98c4d08ba9046f610dba84ea813ccadb9d5221704e"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/1975142382.json": {
+      "bytes": 785,
+      "sha256": "12f0bf3ac069bb7d97e16176c5a072be7ed358bd1bf21feeb4c287a7565c652a"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/1976607116.json": {
+      "bytes": 852,
+      "sha256": "263c2f90e19e39fe234709076956f668c8c328d40838c06998d579ab10469451"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/1997565893.json": {
+      "bytes": 852,
+      "sha256": "e035d2e4eb516a147f6a0c6e4dbe143a93414ce815d16d029ac690f568b07b16"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/2013566629.json": {
+      "bytes": 756,
+      "sha256": "f10b6d3e73931a5f08d1b24e966818438f2f91816ec2323df6a14e1ac34dedb4"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/2132301049.json": {
+      "bytes": 800,
+      "sha256": "54569f40e1f8a7f942d175f1ca8fe2af0f1dfa22c6c0e7b722d901eb30b9f58c"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/2157378430.json": {
+      "bytes": 902,
+      "sha256": "dc1ddc4b41b5914b333642b987df5c71691ba0ae0906d495fe8c4904e222be90"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/2168458263.json": {
+      "bytes": 837,
+      "sha256": "f561516842fb93769ce575a2bc3a2fe370128024a5a467256d249e319fbb45e1"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/2204818764.json": {
+      "bytes": 877,
+      "sha256": "a9c3d79e1e56cb7f30bc7a6c3e139bb5c9f2864709621566750cbe58f0ef7a03"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/2227475180.json": {
+      "bytes": 778,
+      "sha256": "0504312cb5ea1e26ca62e168565e9650d4e1d2562f35c9233950b8eb4442ce0d"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/2252334984.json": {
+      "bytes": 822,
+      "sha256": "d7681a408e8b51bcda4cc3f8917d4bc7129fc5def04f5b0ff09355c3ae8d50eb"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/2302801012.json": {
+      "bytes": 892,
+      "sha256": "5b0986de95980794f07859500b42ff010022873b06b340c0b45fea6165a72057"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/2309508061.json": {
+      "bytes": 759,
+      "sha256": "c625c41017ca43b4fcb30355e2026c6aa32aaef63a1b1b086d80252e02d6b14e"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/2481221371.json": {
+      "bytes": 766,
+      "sha256": "6071a380a97cab6a8b718b387d4d79fb84541e3fe5cfd969c51bf149bdd41965"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/2738240614.json": {
+      "bytes": 902,
+      "sha256": "666ceaef7cd81c841220cd46647648e40a10dc2c95c64319256a9e3971e54c37"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/2965549561.json": {
+      "bytes": 794,
+      "sha256": "08b52795f211d57c8840ccc5e082e9805597dd33d3c9dfb071d1b3e18c02155a"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/2969983862.json": {
+      "bytes": 852,
+      "sha256": "1bd4381141c2d0a21098b88f927a72300ad042d44cddbcfc92aaa14ea9a5be43"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/3002568376.json": {
+      "bytes": 767,
+      "sha256": "7233a9b5d88ccc05957c916e855a1ba4c7642d7eb1ef86d2e8c89fb106204576"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/3085621865.json": {
+      "bytes": 782,
+      "sha256": "0bf921fd02e5d5133f96ab4fc3fd7b08c9a8cdfd31af650f4dbac3183e3a0a5a"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/3090034181.json": {
+      "bytes": 804,
+      "sha256": "6e3b120251d4a065ff2c7e3689811c59423fb94be0238da35fc68e109aa0eda9"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/3171112954.json": {
+      "bytes": 757,
+      "sha256": "2fc212e2b0a2a555c7d946e953cbfc81073cdffa23181365af88feb537eaf960"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/3235448359.json": {
+      "bytes": 789,
+      "sha256": "8ae84396bede0fb6e6e639464d313c898d5bb4670cce3d692f403d53adbb9651"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/3235687837.json": {
+      "bytes": 757,
+      "sha256": "48a2f680b46cbd89fe0cf2c6a5bef2237971677fefe7c9a91a05b298529ba64e"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/3300371926.json": {
+      "bytes": 769,
+      "sha256": "ef07845c920d5e955b85ffcda20aaa9bbab6f031df09d4cf0ae2fdde35aa8432"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/3302768337.json": {
+      "bytes": 775,
+      "sha256": "9c3779a1ff5b202ad72a8a781c0543f92f8b8db3b6c2e2f17bd2511204f4191d"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/3332179406.json": {
+      "bytes": 740,
+      "sha256": "72bd262dcc145fe76296a94ce7eaa9f09c103587b57acf1d45228fad0248040d"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/3352958737.json": {
+      "bytes": 771,
+      "sha256": "d8430d166d904e8ab487e8d9d6c8553458cd903d73489ff011c65abdc27f84d1"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/3357548508.json": {
+      "bytes": 943,
+      "sha256": "8c9838d7e58f674a05f07755fa6c00167096dd0d1c803114d66b12945816f41d"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/3359766461.json": {
+      "bytes": 778,
+      "sha256": "16fc949ca83b1d84e452c5c60fd137d5fad5282e7c3c5eed941f46c76fc706cb"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/3373761268.json": {
+      "bytes": 777,
+      "sha256": "a06fc7c7863ab49292fab1c0f4cefe230065b77cad43cd4c9ee8002b379e78e9"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/3385068482.json": {
+      "bytes": 902,
+      "sha256": "049352d3d7c91aee8fcbd6218214d3f07206d6c3f423072ceed03f9da76d50f7"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/3419326742.json": {
+      "bytes": 789,
+      "sha256": "ab379eec92c45783af648ae239e22e6638723d898fe2d53250aef862d6d76ea3"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/3455105582.json": {
+      "bytes": 757,
+      "sha256": "8b175771339e3b19b27e25cf245f342a791f857e35bc07cffd1a00e1fc639fa8"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/3492279605.json": {
+      "bytes": 850,
+      "sha256": "e36e8ceb2c3dffe72ebd9211e4929e50a939e20738536b56709e4a8384e8592e"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/3507577407.json": {
+      "bytes": 757,
+      "sha256": "62b420b413e016590b73da218d0c4eac1afbb4947bb78d666b7e1875cd672698"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/3600966609.json": {
+      "bytes": 762,
+      "sha256": "25b4dc7e4cdad6aabfc433aef98aa52b3cdac06ca6e348ef213053d29f7a07c9"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/3603398677.json": {
+      "bytes": 788,
+      "sha256": "10054fec5b2069e7559db414b8d7bb71503f27a12bd17bf44112c37d8ef31718"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/3610385439.json": {
+      "bytes": 795,
+      "sha256": "e35e416d6feaeb95b77a67f1d8d483229d58f167d44065e82a118f3183eea76c"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/3638963450.json": {
+      "bytes": 888,
+      "sha256": "56931007a3f5d88c792b30bccf495721c26fa980d4450c4ee4fae61d1d3fff19"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/3670242371.json": {
+      "bytes": 857,
+      "sha256": "696042d275ad2a2c344a180e542df154eb5c6f78567c41c27e8178aa91d8b10f"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/3681652065.json": {
+      "bytes": 757,
+      "sha256": "bbee78e5e0139acc1e3f586d1c11b0d3dd14238988fc6bdc975c5f6805a28849"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/3768560215.json": {
+      "bytes": 759,
+      "sha256": "8d62136ac9587b752a2b10e52ebe0c1f8e243d39d20e5194bd2e036bc5cc8bcc"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/3778642265.json": {
+      "bytes": 794,
+      "sha256": "5ebd5c3499db02bfe9975ddd2d3699afba842132f3891d720b6e6e3db09f8430"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/3784945398.json": {
+      "bytes": 801,
+      "sha256": "af02e4d073021ad3492641764d03d096b860d11f64b4edfafe7c775939a2d9c1"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/3833077198.json": {
+      "bytes": 790,
+      "sha256": "29373065a02a1698233477a1956d39852dcef7f3f5f779e03f2b3db5c995f562"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/3851670037.json": {
+      "bytes": 822,
+      "sha256": "733eac8c57a3ffac6c676b295ec93125d3a4f77c3cc2eb66e3b6c3a69b2e9a82"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/3872111022.json": {
+      "bytes": 807,
+      "sha256": "10b765fb930f1d715bf1015f1db0a3eae96ca03bbbf205174e14fcadecef5600"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/4065546130.json": {
+      "bytes": 844,
+      "sha256": "5fc2d86fc0f548c250f52edced685a0b89626e47b230994fb06f2d2824f313ac"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/4108358330.json": {
+      "bytes": 757,
+      "sha256": "906956b0087f7e5266d45280be68cffdb91ea456944494e3b00dacdc870a14b8"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/4110319037.json": {
+      "bytes": 800,
+      "sha256": "af4650ba4bca333cb12344d99ef5a722d1dc2a92bfc9402d961cbacc92b022ff"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/4231004249.json": {
+      "bytes": 781,
+      "sha256": "9826876ad0d208bd403add7afb1545f1bb1864fc67e9ee2fb83290f25ec80cf5"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/4261027123.json": {
+      "bytes": 902,
+      "sha256": "dbe23d1fe3813ee5becd31248b47a8de936aad608543d7aa8e749f1b307eeee1"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/4313043971.json": {
+      "bytes": 848,
+      "sha256": "61c19a748c6ba072927e4e26ff8446e2fd167e14f0a853ed57e46dd6134752c3"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/4331460442.json": {
+      "bytes": 757,
+      "sha256": "35a6de676884419d7a7871fcc4d26986bfa509b677fe7803cc8ad4cb3404205d"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/4345061177.json": {
+      "bytes": 854,
+      "sha256": "a8079fbfb4bf041c3ca27b67fbd088e16e336f9b1234dbd4578d6fa8ec2081b3"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/4384946738.json": {
+      "bytes": 771,
+      "sha256": "abb5481acc88406d903f5a7d36c13d3c277bfd7449515c51af41f5aac16a5ab0"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/4389095016.json": {
+      "bytes": 846,
+      "sha256": "0168248721e9be7c0f9168444f46a6787418695bcaf149c46363e13ca922624b"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/4468180935.json": {
+      "bytes": 841,
+      "sha256": "c4416b500d16c6c21e3ee069de1582f6a8333c9ce1b8744484848004386bdcd7"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/4495092552.json": {
+      "bytes": 757,
+      "sha256": "9a6ac9643f41c1d248b561d6d307e0ae832212d946544469433b03079b75ffe5"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/4524098858.json": {
+      "bytes": 801,
+      "sha256": "d46c2476482dba6cde5ff4e5d543c11162b8d13295d70088d17a8b95e31dc0a0"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/4568013407.json": {
+      "bytes": 757,
+      "sha256": "c0f645e03afa38e61a8b68ab2f1089c37dc0364efbc90f27f70d175d07065ef1"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/4612207713.json": {
+      "bytes": 901,
+      "sha256": "6bf121a63231ac84a8daa1214073f76e6e9700a8584710895c46d2362c64ea29"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/4618405743.json": {
+      "bytes": 779,
+      "sha256": "70748a1c38284b25c51ae19a64af0606aa55a824edf679da4852bfbc322c7de6"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/4627422421.json": {
+      "bytes": 782,
+      "sha256": "6333e8f58cbd2c19bf5222ac47b84591940025870b511bf00f09a85b54f9b1d1"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/4632441196.json": {
+      "bytes": 757,
+      "sha256": "3c5475899a2d9af362e35ab0c563052624229b265d36c7a6b75cbe3264bb6d58"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/4752351015.json": {
+      "bytes": 852,
+      "sha256": "6a8a8c7f599e751e74e18d474edfddcb38c8fdb6c418c2bcd49ebe93c7dbbe0c"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/7204765703.json": {
+      "bytes": 757,
+      "sha256": "55a87b450ffb319d2997dd7c96dd592a6d7e653d219514403b639e726178f9f8"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/7249845413.json": {
+      "bytes": 757,
+      "sha256": "2407a1c65140a42403b0b648521328cb1e84654101a4458e16f1e5a19a611511"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/7261466140.json": {
+      "bytes": 787,
+      "sha256": "5412bbdeb19be2ae0dbdac52845f30476f9398d30a91772352ccadc359d1efa2"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/7307465309.json": {
+      "bytes": 757,
+      "sha256": "f4a9566cfb07d708e2e7674457fc3dd2c2675072f2a7b07c76423f948ba42f95"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/7325111909.json": {
+      "bytes": 863,
+      "sha256": "ace2182186c3e33e19f67accdbd9a6cf4a911578e983d79430dff283062336b7"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/7334351449.json": {
+      "bytes": 757,
+      "sha256": "ead2c001f9f7e46f2b2028528ac1006e0cd1d07be1a907979a89ef34494a0525"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/7343976122.json": {
+      "bytes": 839,
+      "sha256": "f122ae1f1f3c7121b4e3e6a947efd80b549d589ffd1acf7a5fe46ed30833871a"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/7349901030.json": {
+      "bytes": 757,
+      "sha256": "b6b3bcfc83f1159178198b960ea4ca956f44f974239070be0b2de513d43dba69"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/7372659711.json": {
+      "bytes": 757,
+      "sha256": "b40ec53fd1d1061b175f7cbcde975e8e717314b7d1fa8fc12cb30dfef73fd34d"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/7406389212.json": {
+      "bytes": 768,
+      "sha256": "5e495a0c9f1491f1c27b21b1b3d32ac4dddb06da70948763cdc3485e9e5c708f"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/7424638143.json": {
+      "bytes": 791,
+      "sha256": "4af3ed34a83684fdc163d214e9d3103a6a539df6464c02fd6328c6d7ea58b89e"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/7428288185.json": {
+      "bytes": 788,
+      "sha256": "1c31dc1554b04a9a76e81003f62d0afc1c8c0261ce9f3d17b07b88b9408723bd"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/7446315159.json": {
+      "bytes": 785,
+      "sha256": "be8ae1f8d9757313956866c64b3f787b7da9963a156d3f534dcd7cea20133249"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/7497516999.json": {
+      "bytes": 794,
+      "sha256": "87346a5a9f277b8d1970a7f280b7218a70032ca948d6f55508c05c789cb2ea35"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/7515258215.json": {
+      "bytes": 786,
+      "sha256": "5b7d776f2bffc70695854b2f2fce847f6dbac8a4ea8510934eb2f840c0e97308"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/7541170004.json": {
+      "bytes": 825,
+      "sha256": "c68f263f32af1a2d844ddaaa721ca4f60485575b1fdbb27bde5bf6c3edef9420"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/7542655257.json": {
+      "bytes": 767,
+      "sha256": "99b67dc11c110d4abe93054b01fa1044630e44b8780021b8b615822ace8ae61a"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/7579178984.json": {
+      "bytes": 757,
+      "sha256": "9df15758e56c69929ba6b76d099d7d05ff85abf656287cd39ccb6d183e3f0f2e"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/7598293502.json": {
+      "bytes": 757,
+      "sha256": "8a0daa4f3a054514b70dce12be816c46c52355504f9b85a3481a44d57a7118e7"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/7613021213.json": {
+      "bytes": 771,
+      "sha256": "e18a013f7460b32f0e840de034b9846b5bdcc5e901a1f4880df19db42829449f"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/7618742753.json": {
+      "bytes": 785,
+      "sha256": "79fe304f1e3697130ee0049bca95db7681012df89f19a1de4acea64d0d4c5ff9"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/7623442188.json": {
+      "bytes": 715,
+      "sha256": "936967c487992933732856bb63bfb3bf9830df00f30bbe03b68ad89b13bb84a7"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/7649417290.json": {
+      "bytes": 757,
+      "sha256": "ce957407676347e770b79f7a4ebaaadf96e3270f145a80a3aa4ee1fe2ea55633"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/7690456036.json": {
+      "bytes": 840,
+      "sha256": "af01a8ce7e0cc076914df03a6d51a91423108047410f4da8d9395abebefb4110"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/7732969767.json": {
+      "bytes": 822,
+      "sha256": "397eac9ae1f0e27e0e69763e653b973f9aa7090e80b55f628799a0210e54a324"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/7752432528.json": {
+      "bytes": 773,
+      "sha256": "1a8884230ce2e4866dd217aba22778eb45fee8b600abf42a49a0f5efcab60356"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/7773563980.json": {
+      "bytes": 837,
+      "sha256": "7f478067c6595c1522db227db5ba32ffab98b8d58956bb65e78cfe0ac6ca00df"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/7794097918.json": {
+      "bytes": 771,
+      "sha256": "7d0a2bfe2816e115f249f5a2a2868a9032e5f9b5a44e7300c43e75a1ca6c38cd"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/7811003440.json": {
+      "bytes": 902,
+      "sha256": "7febe44f1de67d50b951689521eefc23f4ec07567d289c7c63dbc4a5c01cfb4d"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/7845388815.json": {
+      "bytes": 757,
+      "sha256": "2abf2be03b4ac3d00d94aeb2e45c47910e8b19b32cdd2ff5e63fbcfa51362cf1"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/7848937288.json": {
+      "bytes": 902,
+      "sha256": "6fe6bf42e7b371989de855b596cccde00acea3bc7fc63bbd99c387b240fb6624"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/7869898731.json": {
+      "bytes": 757,
+      "sha256": "75990e11521ab64ffa7e0ed5929411d8224533e3d9c4d8993dc8e8fd4b53ad29"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/7886322766.json": {
+      "bytes": 783,
+      "sha256": "489dd5a557d8ac11a03cd0b4df5c34bab2f7f08bf660e525a0a99e31b4a39b66"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/7889089251.json": {
+      "bytes": 765,
+      "sha256": "c0507a3ed30396477c7fb4442aa2c82fd71284f46068a7f08b9a5f9646076695"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/7892958149.json": {
+      "bytes": 796,
+      "sha256": "fa44447fd8790abacd2100a4ddfa173d2b69f3084ca6aa8cb09183b42e33aa13"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/7893168274.json": {
+      "bytes": 757,
+      "sha256": "15efc45ae4099bc2eb3dfba2f0dabdac80cfc8d9b774c3bdb6d1d17b77cc27f4"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/7898648327.json": {
+      "bytes": 848,
+      "sha256": "1f9134d8020392786f80fcf4a4deb32bdf0874180789cbd1babdb19c8e7a4a46"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/7917105766.json": {
+      "bytes": 804,
+      "sha256": "6f3fb411ccfff2fe59ed71fa1b342b4334d1b2dc9e3adb7a0739464ebdc82970"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/7927311970.json": {
+      "bytes": 786,
+      "sha256": "9f6f32d8b28f335dc9257c824f69e8c9b548728c264e332fb26e657d29c0a159"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/7928638277.json": {
+      "bytes": 757,
+      "sha256": "a61d030b66f95d4c272c688f03c9903bee73a3a078ddd995b437202ad992c2d3"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/7945217672.json": {
+      "bytes": 775,
+      "sha256": "fe94369d0f7a21181e7d1bd5a0e16a38a281fd2553eb14804ebc59a5b15d1c3f"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/7946112251.json": {
+      "bytes": 861,
+      "sha256": "643d7af10c83a8886797c61180f8ccf640b3dc96d4b321eb99f9df90269627c7"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/7958473905.json": {
+      "bytes": 1020,
+      "sha256": "9ed3b4c18cdca6a3885030592dc29500f6c977f1aebbca32615e197f06bcc3c4"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/7961642923.json": {
+      "bytes": 834,
+      "sha256": "e1743383854744ce13f6ebaa24385d061242a14a2873c749e11c7d14f45ab8bd"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/7962566049.json": {
+      "bytes": 881,
+      "sha256": "122ba9643b54df68f28225858473413ce8129503028851f4163482c055d334af"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/7968082533.json": {
+      "bytes": 795,
+      "sha256": "d92b422680eb483014323a80fb01be1040174b6fa69c5d81329aebe1b5cdd40e"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/7969573669.json": {
+      "bytes": 878,
+      "sha256": "e973c962e39017af1feaaf274e171f34961e9202f668fec829f3000136c455c3"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/7989429369.json": {
+      "bytes": 774,
+      "sha256": "4e5633ae7d7b31f10f769aeeda9d45a511e0d4339b5466932e4723df35b55023"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/8002342914.json": {
+      "bytes": 773,
+      "sha256": "a2b9751a2ff533509fc8be81a2bb970ac85e1b9058094ebbd046360c686a3921"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/8007391017.json": {
+      "bytes": 747,
+      "sha256": "8e311db4ebb806806d78a190dd25c514c1f1ee94f66a655a85e132329674af89"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/8033753079.json": {
+      "bytes": 861,
+      "sha256": "4e5b9e139d775b65b0666f991b4268925d2881e43f36165988463896854921ca"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/8039179938.json": {
+      "bytes": 869,
+      "sha256": "7bcca77f6b9b81da79ad81b34ec2290fed87034de383a0a1c717e2f496c2fa4b"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/8070214628.json": {
+      "bytes": 824,
+      "sha256": "3503476d6f8721245aeded2ed39b3607c7e6f79820dcdd583c8321782128e9b8"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/8078124502.json": {
+      "bytes": 757,
+      "sha256": "09d677f4fe2b4980282725c146b91dfe71ff0b9ef2de18e7d2a7088692583b7f"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/8108777992.json": {
+      "bytes": 781,
+      "sha256": "3916c910b8ee10ad319da454f0d60ff02603f9bab1105f83a85253346048c7b6"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/8112919386.json": {
+      "bytes": 842,
+      "sha256": "32e6dc8b1dd876be417b8dc13e1f3f21b24865997ac6308c5f4efab162453f72"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/8113813424.json": {
+      "bytes": 902,
+      "sha256": "59cd7ff843bb9f4fefe0e288858312f8e64243af39bf3e55498ec081487a93f6"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/8116063276.json": {
+      "bytes": 902,
+      "sha256": "69006397b44833ffcc5763cda85feb70a074e5995d53ca6397afefa59debc3e7"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/8125826114.json": {
+      "bytes": 902,
+      "sha256": "5ef8296b7d5c3f1557ee62c5dc491f1252bc31c6cf0159c73128c1e3caa58a92"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/8132883572.json": {
+      "bytes": 757,
+      "sha256": "c4bd1d84ba82f74d4343de5582cce64a3f0d31eaad5ba10ef9e0d3f2ff0f7fc6"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/8137008160.json": {
+      "bytes": 798,
+      "sha256": "fce0cbd7d5c843c75a0af370af63385739cd691ab177bcf129cb746876eda215"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/8142886853.json": {
+      "bytes": 757,
+      "sha256": "d3361c872a9ca9129a7b60daf00e60c9b218e40ffb3d133b705201dc74e615ff"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/8147994528.json": {
+      "bytes": 757,
+      "sha256": "4aa4a66dbe3cff4daf50b1d936255c551d79f0e1adb012f5e403428573532c71"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/8148415401.json": {
+      "bytes": 757,
+      "sha256": "365232a547957d96b6e68dbd9e3317c092dc8bfa134d3279d83e7f13f4e1705c"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/8152634798.json": {
+      "bytes": 885,
+      "sha256": "096db944c7dd545a748de0231206d1911e6449edfce86eb2204fff0fc44e6682"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/8155875302.json": {
+      "bytes": 768,
+      "sha256": "c0a83a4d93c953edfb9d73f38aae367c211b0dde18e409f70f450b10d93b86b2"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/8157118802.json": {
+      "bytes": 757,
+      "sha256": "bea93939889d84260def54b096afdd84dba0bb1a37e66fbc9673760915cd3d2e"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/8158137754.json": {
+      "bytes": 757,
+      "sha256": "fc8be8377ee50228dec1d08c608a370b3bc5385346faa5b9f210e46706d2f4e7"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/8158929182.json": {
+      "bytes": 870,
+      "sha256": "967efb923b3028a3bfa72c9892108dc4a5be175702a2b95e53c6f93da934879a"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/8177368689.json": {
+      "bytes": 757,
+      "sha256": "769ffb95af3d0b855018fbcbe823bc7d0e3e3be54e8e64524aefcc01f81e1f3f"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/8209517933.json": {
+      "bytes": 781,
+      "sha256": "b7a04470447f3f0b6eec470e2cc578cfb01427f65a2e9a85c32605bc4d43d0eb"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/8211436054.json": {
+      "bytes": 831,
+      "sha256": "37d4f9d67b7521f2389a220386486df2f3b3431ae7d52c3fa1e6bf7e63614cde"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/8213404140.json": {
+      "bytes": 790,
+      "sha256": "ae87aef973c199cadd7eceb1f9bb9d4cc9479cd359d2cc5b1879161e376e5581"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/8217754536.json": {
+      "bytes": 777,
+      "sha256": "a2774bb1990848b5406b1b1525623656a37049d9fd525eed6eda15d3cb93f0f9"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/8220779942.json": {
+      "bytes": 833,
+      "sha256": "46afcc8cec2b5e08a59bfe9a63c73b6eca6eef0cf525fe422c414f60393233bc"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/8226987773.json": {
+      "bytes": 755,
+      "sha256": "116946fbcb394b29d98a5d129193bad8bcfb698020c4c79840951202195fbbd0"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/8230537171.json": {
+      "bytes": 956,
+      "sha256": "485f29d32abc6d5b483e86b87d6fa59d6fe8812c928ebfd400661a11b382a596"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/8232059634.json": {
+      "bytes": 788,
+      "sha256": "0fd3277b197592111264d0ae7dc41ec339c8fb6d0f128bffbbcd1806f5c63353"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/8247223532.json": {
+      "bytes": 757,
+      "sha256": "ce822b74d445fb782675b9f42144fa2269b92f4673e9e302b04953788bf8ebe2"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/8247946938.json": {
+      "bytes": 771,
+      "sha256": "b0beae6d7fa8e683ee235fcbe6227bed4f6793129f0612c191dc97d51a707ee3"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/8248868576.json": {
+      "bytes": 902,
+      "sha256": "dced896f4eba2f05c3831cee5d5863f2332fdeba26c87dc5dda4a06b700e92e0"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/8254272528.json": {
+      "bytes": 758,
+      "sha256": "d7c411516dcb9b0d4386b98f0c562e3128e26efb2e52143a618706159bb064c3"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/8256134699.json": {
+      "bytes": 757,
+      "sha256": "a468529f507fcf27b2f95dd6b3e5aba767bee8e6af0b228cd3837b5ba7c7cc0f"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/8257111398.json": {
+      "bytes": 771,
+      "sha256": "fe073e0dee7a61de0abeada208ddf46bcf1b7c7176548206978d2bd560c7423a"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/8257522616.json": {
+      "bytes": 774,
+      "sha256": "f0d6e5bb6b9999ca45a39ae443e2ea37d75549083b57e5be1e75b7e568528d7e"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/8260540919.json": {
+      "bytes": 790,
+      "sha256": "9bc96c31975c5892ce8da16c09b4a025c0bd3fbfb825e97efe450debf4871edc"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/8260676513.json": {
+      "bytes": 877,
+      "sha256": "7ab5399c79e619bec7d6c0f2dafa896a5a1338435f98dcbd032ce1b07e0b4d5e"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/8260814231.json": {
+      "bytes": 757,
+      "sha256": "dcb96b33607be4d356686177c9b9afa55eee1bc79fe3a8e6ee78d32d4d52f17d"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/8262876847.json": {
+      "bytes": 757,
+      "sha256": "67c2a83957af7104a905e84626f15554dab3632a9ff5fb52eac44c4e2ceeb028"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/8263659537.json": {
+      "bytes": 757,
+      "sha256": "c51d5fd0537c5e6d71b1674b2bd0084918084d120c7f5f27166642d57602400b"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/8271167467.json": {
+      "bytes": 787,
+      "sha256": "a6791041ab9c69be98d853929595b418a8cc791f574a1fcbb4bdca3fccc8b95f"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/8274447287.json": {
+      "bytes": 788,
+      "sha256": "90a22d322f976d24a2d4b3c6cb54fcbd61d7478f7461ec845f9e6b9a21652d79"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/8282245823.json": {
+      "bytes": 757,
+      "sha256": "1b8dba7aefe166dc0619ddd7deff229298b57e68758a152d0dc16a19d41d4027"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/8282988649.json": {
+      "bytes": 757,
+      "sha256": "e50fb5f0516d5c59bf6ffb5955f451a1787824407ddd8129f4ec196e64198165"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/8289426987.json": {
+      "bytes": 895,
+      "sha256": "0d9be553d63d5182b5371c2443cc67457a52f6028648b8b9c067eb07c1e5d088"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/8290910859.json": {
+      "bytes": 902,
+      "sha256": "3c395d10f1466ef61356f80534d9d4e7edfebdadc23061ee6c5cae4df2191db9"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/8292653335.json": {
+      "bytes": 777,
+      "sha256": "feeb43088354e30bafbd7377570fa22ba3d424d62deb7ead3aa6768838bf0050"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/8293468144.json": {
+      "bytes": 757,
+      "sha256": "f61ea675993c4481157b8b7580ccb3dfbc09a0de91b243a8f53ff844e3d63afe"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/8294519200.json": {
+      "bytes": 757,
+      "sha256": "bad7adf2d1e9cc501ed978d09c045dd402c85159018bee4be8f896a1c6cd6937"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/8299143130.json": {
+      "bytes": 902,
+      "sha256": "1b8984be57cc0f5b60c4178a08d34a706c4f4da427a6b8ba3186dc368e844386"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/8300202034.json": {
+      "bytes": 902,
+      "sha256": "dca3399310c41ec4f9e578f13be4ded88e819955fdad7edc122d5f58d33482cd"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/8312090251.json": {
+      "bytes": 881,
+      "sha256": "c36790556244250ece5febd45c490c675926a95d02d1d9ff552bd42ccfc907a7"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/8315549899.json": {
+      "bytes": 869,
+      "sha256": "aa2e86767e2a1c79cf7d92647b44c20c44576616ff9feff1995292e685892dab"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/8317321042.json": {
+      "bytes": 788,
+      "sha256": "79f97380689d10e1debc95b85adb3530513baa82aea15a57b6da96add4fa07e9"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/8319957513.json": {
+      "bytes": 757,
+      "sha256": "27481a99dd8ac676567e366048e1abcb806530a457b13e24ed9238a9c2671576"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/8320702337.json": {
+      "bytes": 757,
+      "sha256": "dbef2da83b40ae6c975e2f1f5aa811896ed951c6210d16a1d77b919a42800233"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/8320762194.json": {
+      "bytes": 757,
+      "sha256": "20cefaf130b8e58e3cacf5abae3b28481a2b240ffdf89119da45cbdc6092f2e4"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/8327881561.json": {
+      "bytes": 757,
+      "sha256": "f2b470ff46b2a6f8665f9d5e9e18f613baf12b4003efaf789665731496938e10"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/8331689956.json": {
+      "bytes": 873,
+      "sha256": "80fe213c0af95aaaf3d5818c8c2245e76fc09ea0b50d58a331eced577029cf9e"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/8332573037.json": {
+      "bytes": 757,
+      "sha256": "6aab0e142e567b5a95a13e51e309eeddb84f741973648957d05a1843e54ed2f4"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/8334774293.json": {
+      "bytes": 866,
+      "sha256": "270387739e6c9de8b09405e61cea9b6846e3e8beff044db09333b328c3b7f204"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/8337386062.json": {
+      "bytes": 797,
+      "sha256": "1d4fd24815e87a84f68306ab478ca487c62d9eac909966b2fbc4ef3a930214fa"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/8340161452.json": {
+      "bytes": 757,
+      "sha256": "ab31acb6316daea77017ebf21d00a5c105ee974120dbe3de429c5ea18dff7d77"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/8340925817.json": {
+      "bytes": 842,
+      "sha256": "a90f6176b59736774ce5ace28fe01539e5d3799a076575e991b1446bcbd2edfa"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/8341524630.json": {
+      "bytes": 931,
+      "sha256": "be63f59c7ad469da2dc4621030b2d5c16ee762a6911d875475dc1832cafa4ccc"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/8342365997.json": {
+      "bytes": 771,
+      "sha256": "d0f1680cc8b897abd8729236a1c86c148615c41a60397388c873c1400acf7cd8"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/8345926182.json": {
+      "bytes": 757,
+      "sha256": "773068f661bb1837d8e8f08e771fcafd7538887efc2630998f1c5e466a7ac108"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/8345928328.json": {
+      "bytes": 757,
+      "sha256": "3753a6ee75dbd33082f7a6fabf13f3a9892624ce3941f5cdc3fef7ae6513f9d4"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/8346303417.json": {
+      "bytes": 757,
+      "sha256": "0f9b9e920fd91796acf0cf2589d98262ad6e6ea5f3a2b675bd6e3e6c4b8eeb55"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/8347241736.json": {
+      "bytes": 795,
+      "sha256": "36a7574473856358e8d531650442b699766d18c98842da5a956e7c83c68de650"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/8347936944.json": {
+      "bytes": 795,
+      "sha256": "93fd4997be298ff5288e8fffc88b030199d4c725715b5081b468f33cd83c38a4"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/8348638757.json": {
+      "bytes": 757,
+      "sha256": "f4254df2f3cd3b235d8599f17a5d9454883c7db6078b73c3c948c3041d4cd526"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/8348639683.json": {
+      "bytes": 769,
+      "sha256": "b171ab1cff2eeb81bbf15e18cf66dc49575a550a9c1d5571ba99dbb2b8dbc731"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/8350474730.json": {
+      "bytes": 767,
+      "sha256": "4a4e0e02516d0184fb6ddca1f898e4df0b8e8f43cf6f40bce6b0746fb11d75ce"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/8353599933.json": {
+      "bytes": 781,
+      "sha256": "812677803751d38ccc0349644d32d19a8ba8ae12471731c83ea533ab69002a40"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/8355473246.json": {
+      "bytes": 902,
+      "sha256": "f9b29fec1e943b349f98b4a33ae6a69536bbace50f17a80e625257d71744a338"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/8357242634.json": {
+      "bytes": 886,
+      "sha256": "4a888fb2315ee3161103c2c71c81f6b9258b83227d3a36b09b958f87356d7710"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/8359431644.json": {
+      "bytes": 757,
+      "sha256": "6e7897a1ff40cc83ac0afcc3c20dd4fe70d44820bcff48fa74a22ed9b8dcea0f"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/8359497535.json": {
+      "bytes": 757,
+      "sha256": "9449f308e720f4a034a35778e29e00c4715cd33f38e9309bbe66588de85514fb"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/8363136642.json": {
+      "bytes": 768,
+      "sha256": "e83e4a62a43231922a7850d8138d96930114cfe95575753186b66bf07a5efbe0"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/8363446372.json": {
+      "bytes": 870,
+      "sha256": "027e17cd4f7420245e413dc0c33027cea11172f2903e1c304e4462af1b8ff76d"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/8366295064.json": {
+      "bytes": 772,
+      "sha256": "9d815b9f2d7592445a7029a67dff5147850b6b986a31e82897f628f6d8c85c9d"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/8368244272.json": {
+      "bytes": 757,
+      "sha256": "f6677b5337af974e1855cafbecdc088833ae48609229e571526018e070b60f5f"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/8368673276.json": {
+      "bytes": 860,
+      "sha256": "2ece98f702e3fdd9eecb2bfbd6649df32c8607297d7a441968d7f7c35690b1b9"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/8368741003.json": {
+      "bytes": 772,
+      "sha256": "b1884116c79321ac552b3477d3319b3d2d4c1fa867c879a33dbf87b3ee626515"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/8369105236.json": {
+      "bytes": 795,
+      "sha256": "f16646ecc45c6daa2ddaea822031dc1ded21acdc44127d02989637071f9f5ec4"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/8369873988.json": {
+      "bytes": 777,
+      "sha256": "594ea00294ba7771674b82434964f8806aceb3c45a37a74565e7c29ed7e489fc"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/8371915695.json": {
+      "bytes": 767,
+      "sha256": "23976bce29897cd8669753f81a48dff47ce8c6ae142648b472b0bb17f8bce367"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/8372191785.json": {
+      "bytes": 808,
+      "sha256": "5eb9620b49375d90dc686a6bf887536ae61eca2145aad0545c68a1003852a20a"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/8372590243.json": {
+      "bytes": 757,
+      "sha256": "cff1b7a8b7b6d52b227241620f56c397a8c128207deccd7d38862b656a58f03f"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/8372690198.json": {
+      "bytes": 757,
+      "sha256": "b18fee15abddca1801aa19f726031079f9d6babf08d1693544fcabc12d0c451f"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/8372943628.json": {
+      "bytes": 902,
+      "sha256": "4228b920a7c92a147ee96ca95f42209d341463c8cea95944e5c8e1b9e7ffd539"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/8374693185.json": {
+      "bytes": 789,
+      "sha256": "6672a1e6facacf3010ea6c8d677471c27510b494cdf293910217ed9ab29f629f"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/8375832579.json": {
+      "bytes": 795,
+      "sha256": "46a15adacf4334da51b78c52b5ceedc314beebd4a75a4b7693f83be9948c19b9"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/8376183999.json": {
+      "bytes": 764,
+      "sha256": "5ad043badb7bd6070249b70bfc65e8adc5f1d811c454b7316788b4df648e3fe8"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/8376309440.json": {
+      "bytes": 862,
+      "sha256": "ab2f76541fb374591cef7ff3d5d270947d08c06f6232707e98e0560bc0b02652"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/8376991604.json": {
+      "bytes": 853,
+      "sha256": "177a59e57f192d9951ee65c860bbef874e3a1b4d4971a05c5dcd5b7cbc09ade0"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/8377300468.json": {
+      "bytes": 757,
+      "sha256": "0b08a65c52381a5adee1b75aad3b12faeb1898d8642199455f069fef6236c50b"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/8377954181.json": {
+      "bytes": 902,
+      "sha256": "dd1ea8e34b892d9761b0abee931a587a57308847587e3c30f3849fa16a2ab67d"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/8381768675.json": {
+      "bytes": 885,
+      "sha256": "3f2fa63abe7ef2d1b4e2d36451f854542b94c92381d2980043b079d9ed867e0b"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/8382240364.json": {
+      "bytes": 902,
+      "sha256": "74abf76b0b84f483be4b479d7c797a12b5f8170805b080ba87b7d4442be3389a"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/8385469697.json": {
+      "bytes": 770,
+      "sha256": "ff84272744b83707b49f240cb7347c841605780318e6ca85cb9a2e5cff9cbc54"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/8386178266.json": {
+      "bytes": 783,
+      "sha256": "5c4885db0ab3b9d0bbdf25f94b23045873212a6139dc00561b25c54500153c5a"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/8387167774.json": {
+      "bytes": 757,
+      "sha256": "5f3da2c5db45e2cbe57b1c502be795db99d0fbf9b71d112ba9159c889fd0f0d5"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/8390492882.json": {
+      "bytes": 757,
+      "sha256": "ded320001be3d1e28051aaf6f552c8b202564ec9c12ef90d176310d799d26399"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/8390502410.json": {
+      "bytes": 793,
+      "sha256": "5153c6e5f75217264b60448a2bdc088323eeae099f480c0ae6a9177041e2fe73"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/8391658590.json": {
+      "bytes": 788,
+      "sha256": "ced6769eaf3bc1f13c7f6e2781c7d89c05647a2f918d7836ec166d31b047c2e5"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/8396877734.json": {
+      "bytes": 779,
+      "sha256": "e6ea0e453a24e4d3a7647e4190e8b172d6cd601c882dd4a7f51878abe7b1cc64"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/8400900684.json": {
+      "bytes": 795,
+      "sha256": "ca86cf9f7f318af0958981d23fb04a4161d5d5dad597ce2413bc9274609b78cf"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/8401277244.json": {
+      "bytes": 795,
+      "sha256": "7914dd0156795f5ace85a81638d6775d0405873bd0dbec2b28da44b9137cca42"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/8401719855.json": {
+      "bytes": 792,
+      "sha256": "2f25a4d3a425688ddbdfbf1836b687ea1ad975f807da4a2726343308310ae90e"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/8408004336.json": {
+      "bytes": 757,
+      "sha256": "cdc2ce9d54d94408403f32cacffd44347e13aef3bdda4a98f06f854a138209c8"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/8408476091.json": {
+      "bytes": 769,
+      "sha256": "c5e5a2736e81f188ed0bc912ab092c3f625a2fdcf3af08ba900323c015a2093b"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/8409122420.json": {
+      "bytes": 795,
+      "sha256": "50544fce686da8c5f911f689a743d93941a58daa4158cf0991a95ce6b044aac5"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/8409625737.json": {
+      "bytes": 757,
+      "sha256": "240e01ab8ae7e68d0869e6325e82b536626fd8e89914923f5f935e0be3cc1106"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/8410751012.json": {
+      "bytes": 787,
+      "sha256": "2a1e0b2c1280c56ddc78f7f0775787b5b344377e403805d4c78f344513fb7d52"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/8412971328.json": {
+      "bytes": 925,
+      "sha256": "3dd06c8b3b0a9f4d8e1cd487d2f860e1cef3f6f3e2d2118e3528a901c856d28b"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/8413237681.json": {
+      "bytes": 795,
+      "sha256": "0ba2f6f9727fe4904edc50afa7132cdbd68c9566ca161fe9cc614eca6b7ce767"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/8413679426.json": {
+      "bytes": 758,
+      "sha256": "497a751a98b2c9ffc5199d22ec89cdd15355da4ac47bb66b6b52411a2970cef0"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/8414550001.json": {
+      "bytes": 771,
+      "sha256": "dd0b451edb55f29590d6938e55d4e5a3c2e1ec6f54481a0644d79e91d641dd69"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/8414966779.json": {
+      "bytes": 757,
+      "sha256": "50017ba33b2b6629c063887f9e533d04f51852f36a3ea18df1616c0116d55b4a"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/8416612247.json": {
+      "bytes": 779,
+      "sha256": "5deec0f9e6276761484f10a10d5f6fdf8635e63cf3fa176470cecc0725ccc5a2"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/8418080974.json": {
+      "bytes": 757,
+      "sha256": "94ee4eca6007382af06f424425621e80de57d3cc296d6cdc320fb0afa3dd41f1"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/8420701664.json": {
+      "bytes": 795,
+      "sha256": "89c88f2bf2b9a009179071a598cc6d22c323b614d719803deecd8099bf50fb22"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/8420715206.json": {
+      "bytes": 757,
+      "sha256": "d97b5edbedb18b589152b8f902991c46d717f83fb8a3c6ab8849751484710152"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/8420816768.json": {
+      "bytes": 895,
+      "sha256": "8c7fe203fb452c786763e1bdce6580b0d7320de0de9e16636891212d26cd23d9"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/8421061461.json": {
+      "bytes": 857,
+      "sha256": "c3c829ae6a9c6afb87c60c4cce6e9771fd11157212e7178954bd6b7624727804"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/8421603673.json": {
+      "bytes": 757,
+      "sha256": "e33b878b1851c5504ab0e5effc3c421f8116ca2aaff0f874f12b35ea479f05d6"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/8421856462.json": {
+      "bytes": 795,
+      "sha256": "3c8f23eaa6a63f9460ea9f3e30c1b9e3fe0d324e2cc9cd3119112018b71f3cb0"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/8423457681.json": {
+      "bytes": 757,
+      "sha256": "fe70fc3e2ebfb7a03f64b3bd3083e765990b8b353fbf3be39ff63fa7cb484cd9"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/8423776878.json": {
+      "bytes": 757,
+      "sha256": "764266b9a17d600751162f4f6f121590d3a681d785eeee36cd8ff69f7f660404"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/8426937017.json": {
+      "bytes": 757,
+      "sha256": "e3dabb9fa120d8271737ab66990ee026ca8f8951193a1089457de894f212cc4a"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/8431734264.json": {
+      "bytes": 783,
+      "sha256": "86b05f6aa2cf5cfcd877866de922b6be0997008a8b49b22f7c198e1bbb767ad2"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/8435678650.json": {
+      "bytes": 770,
+      "sha256": "e5b72d0b510fbad9ed3dc21e5f19de437df55edb280fddd956acddde8723f12f"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/8438410217.json": {
+      "bytes": 793,
+      "sha256": "748aec611e669a11dfcf1eb7da4f1395f652ab49af4ef0d34fc1ff373d9ec6cc"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/8438782696.json": {
+      "bytes": 788,
+      "sha256": "8465f3c0ee36ac8809e20f5e5397ccbc37bbe667464adc9c2916d15b6068cc59"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/8439329593.json": {
+      "bytes": 754,
+      "sha256": "259941a26ea40712554de3dcdd4ebfc314f31eaf3888cec839bc99bce68bf401"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/8440116859.json": {
+      "bytes": 858,
+      "sha256": "527a97c0d3a3be7c0cc5b2be5fad942515cdd88c8ad9eb6c0c00a7bd1a2cb8f2"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/8440587656.json": {
+      "bytes": 795,
+      "sha256": "a20adf3caf2ee051ead0ec897f4935fa74f4e03eafca84e2365e7ba234f0d0bb"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/8440887724.json": {
+      "bytes": 777,
+      "sha256": "b5590c8f70c074aa18444b62803bae1d2ade5c23eac32b1ebb368b173ac9933b"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/8441065404.json": {
+      "bytes": 902,
+      "sha256": "2b7ced388409901613d7b47dd9b6d26dc0b9a9e27ed1cd03ce2057215db044f4"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/8445120155.json": {
+      "bytes": 787,
+      "sha256": "a1e6aee71e6a576b2ec0e6b393dd976f17a9dca54b8702359939bccea2b75fe3"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/8445405869.json": {
+      "bytes": 774,
+      "sha256": "ddee968187c35f6b10acf095cb128d84b1f62266d26259da34dc9a0d5a22d90a"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/8447073503.json": {
+      "bytes": 921,
+      "sha256": "02a149994224174da807e6aa3a5bb9fa4594623b0090a1a7e61cd0e8175b8037"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/8447813577.json": {
+      "bytes": 793,
+      "sha256": "9b7a3edb58a9a0256ba48072dfd845e3c623503de909dbf5e5a7c97aca067d38"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/8450591079.json": {
+      "bytes": 789,
+      "sha256": "95c79d8cea1813c59d5bad5f49461e5410c0ec5d80e30e5f7ff5fc6118a3b0f6"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/8451439904.json": {
+      "bytes": 757,
+      "sha256": "f9a8a6734df4c01bde97e4868d2832c852dd8376f3bf0da00b3b878667f9fed3"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/8451733155.json": {
+      "bytes": 757,
+      "sha256": "ea70c6ee3093870d52e9cfdddbf343040cf7d1d6f7da3baa11ea06b08ae1b288"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/8451756108.json": {
+      "bytes": 803,
+      "sha256": "a0efe149f3c61da783566a2c58b5f3c48f69679409bfff33f377733f49e9f96d"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/8452956978.json": {
+      "bytes": 757,
+      "sha256": "129f4e457e04d0467ae36f46a9bd5b5c119b8ffb54b348a2d79c201724c071b1"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/8453231361.json": {
+      "bytes": 757,
+      "sha256": "6149545b5654a4a29446df82b9725aa5b946c87460f3f9adf25e0b7678b84547"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/8458803143.json": {
+      "bytes": 771,
+      "sha256": "8374e3003e915a19ffb8d9a2b5044789433d9f2722a7ffddef640220d5884b11"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/8459140780.json": {
+      "bytes": 757,
+      "sha256": "1b493f818cfde4d8a8474f2a30cc831affa7c26148cb49a797cfb548f36de1db"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/8461423640.json": {
+      "bytes": 844,
+      "sha256": "c684440ad14c063cfb8ac623f1e317f360859892babe911c36e8e0475dc83c51"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/8461814962.json": {
+      "bytes": 757,
+      "sha256": "ce09f45052a7aebcc2fd97be8886209639dee7b7df35c210d2cfee1057a746d3"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/8463080385.json": {
+      "bytes": 795,
+      "sha256": "a43b590283c50e2204be44eb5bb4fd0a83e7dae9f586697fbe0a1b2d2bf69a3a"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/8463479752.json": {
+      "bytes": 757,
+      "sha256": "20782b76692253e4313d2e1c3be5a0ffd1e689d99a315741fe0ad18d9fecbdef"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/8467303607.json": {
+      "bytes": 902,
+      "sha256": "2cbf84b92c3def050cc824c52824af38e2f0319e2208b3dd5508d2f40dd77665"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/8470033332.json": {
+      "bytes": 787,
+      "sha256": "f583acbc77efe375134827457cf8645c6e4c2dc01fa6b1317c308f0ebca4eeea"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/8471335465.json": {
+      "bytes": 868,
+      "sha256": "100f969225663c0136111c0309648a968fd42527327641a6a2f1c7ed212123fb"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/8471458960.json": {
+      "bytes": 757,
+      "sha256": "95e4b1d7ea808a9c907fca204a9a735b04cbb224919f69cd9eb8c4d73e71ad8a"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/8483203042.json": {
+      "bytes": 809,
+      "sha256": "816c5c08a12139c51c4163973db0132c0faf715b30fac3d7504236afa369d508"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/8490067338.json": {
+      "bytes": 795,
+      "sha256": "ec130ac431ae45076bac3430f3ae79a446b0b1bcdd1dbb9917952ab55eead0ba"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/8491367648.json": {
+      "bytes": 749,
+      "sha256": "8283052a8344badb9a04bc8c7564668240548957a9d4e5df11240466118d4248"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/8499439451.json": {
+      "bytes": 902,
+      "sha256": "8b3bca6c75e571d4cd45ff72a7ed17e471a95d2aab66979306170f31a69a1713"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/8511210405.json": {
+      "bytes": 875,
+      "sha256": "41880b67d37cb2b808144cb08d42f72ec6f493c3116cb29432b135e6eadbc9b6"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/8511785841.json": {
+      "bytes": 766,
+      "sha256": "2ae2dac49ea081d0f020309b86405ad629d3835fc424fc20227945290bf9f036"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/8517091191.json": {
+      "bytes": 788,
+      "sha256": "d4c6aa696afb548c6e46ba17cdfb926478283fbcfdfbd81ffd12cbbdef19687e"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/8525264429.json": {
+      "bytes": 790,
+      "sha256": "93b0b240eb611a5dcc8a166757d1211e35431a4f43d9e5e69760fc47028e83c4"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/8525697717.json": {
+      "bytes": 800,
+      "sha256": "dbb059c5859da1ca538e878ae6b51d5ff14cb9c54ecd5af544ef294fe8e01b19"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/8543971247.json": {
+      "bytes": 788,
+      "sha256": "fc34c0d7215e8f3d62e2adc16449776f27f1a38885312704f729e61fe83a517c"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/8544323699.json": {
+      "bytes": 754,
+      "sha256": "be508ce1182d2d2ca7bd319ad33a177b237ba872f0bed117f1a4b5799edb67a0"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/8557361329.json": {
+      "bytes": 807,
+      "sha256": "3e8a24df216904262481c6279551b4c8675bd8063c86dd6feaf72690f981bd14"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/8557522588.json": {
+      "bytes": 747,
+      "sha256": "a4f7f9b3dda21103a4fe1d1c5bf3b3e2786f4c053908ff810e8cb47a1e81360a"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/reviewed/990382119.json": {
+      "bytes": 778,
+      "sha256": "f32355bd6790fb27049721b1f1a0368cbcd4af663660c82b8ac9a8cb0bda7d6c"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/standing_unavailable_policy.json": {
+      "bytes": 840,
+      "sha256": "af9d9881bd9e5b06e30535be314df0d7516873d62947e9491f8f5b1138a32dcb"
+    },
+    "Data/avito_runs/filter16_moscow_truck_driver_20261029_b_01/unavailable.json": {
+      "bytes": 1590,
+      "sha256": "f50aee4701d5c12716b505cc2c6e89c27781315ff74374acebb34a3190b1a2c0"
+    },
+    "Scraper/runs/filter16_moscow_truck_driver_20261029_b_01/plan.json": {
+      "bytes": 14174,
+      "sha256": "98745e0ac169b93a6927b0a41d2a7622f850a44d469100b3cc70e1cd8ea17cb2"
+    }
+  }
+}
