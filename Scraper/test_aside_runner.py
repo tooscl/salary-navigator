@@ -55,6 +55,31 @@ class RunnerTests(unittest.TestCase):
                 target.write_bytes(target.read_bytes() + b'other change')
                 with self.assertRaises(ValueError): runner.verify_partition_url_guard(plan, {guard})
 
+    def test_browser_sources_preserve_russian_with_legacy_windows_encoding(self):
+        env = dict(os.environ, PYTHONUTF8='0', PYTHONIOENCODING='utf-8')
+        code = """import importlib.util,sys
+spec=importlib.util.spec_from_file_location('r',sys.argv[1]); r=importlib.util.module_from_spec(spec); spec.loader.exec_module(r)
+batch,extractor=r.browser_sources()
+assert '\u0421\u043b\u0435\u0434\u0443\u044e\u0449\u0430\u044f \u0441\u0442\u0440\u0430\u043d\u0438\u0446\u0430' in batch
+assert '\u0421\u043b\u0435\u0434\u0443\u044e\u0449\u0430\u044f \u0441\u0442\u0440\u0430\u043d\u0438\u0446\u0430' in extractor
+"""
+        subprocess.run([sys.executable, '-c', code, str(SCRIPTS/'run.py')], env=env, check=True)
+
+    def test_ui_next_waits_for_delayed_pagination(self):
+        script = (SCRIPTS/'browser_batch.js').read_text()
+        job = {'mode':'freeze','url':'https://www.avito.ru/all/vakansii', 'completed_ids':[], 'tab_id':'own', 'ui_next':True}
+        body = script.replace('__JOB__', json.dumps(job), 1).replace('__EXTRACTOR__', '"extract"', 1)
+        with tempfile.TemporaryDirectory() as directory:
+            harness = """const fs=require('fs').promises, pwd=process.cwd(); let calls=0;
+const pg={url:()=> 'https://www.avito.ru/all/vakansii',goto:async()=>{},evaluate:async()=>{calls++;return {state:'LISTING',items:[{id:'1'}],listing_item_audit:{malformed:0},pagination:{current_pages:['1'],next_url:calls>=5?'https://www.avito.ru/all/vakansii?p=2':null,end_confirmed:false}}}};
+const attachBrowserTab=async()=>pg, snapshot=async()=>({tree:''}), sleep=async()=>{};
+(async()=>{BODY; console.log('CALLS='+calls)})().catch(e=>{console.error(e);process.exit(1)});
+""".replace('BODY',body)
+            result = subprocess.run(['node','-e',harness],cwd=directory,capture_output=True,text=True,check=True)
+            self.assertGreaterEqual(int(result.stdout.split('CALLS=')[-1]), 7)
+            page = json.loads((Path(directory)/'listing.json').read_text(encoding='utf-8'))
+            self.assertTrue(page['pagination']['next_url'])
+
     def test_capture_rejects_blank_or_mismatched_actual_url(self):
         script = (SCRIPTS/'browser_batch.js').read_text()
         candidate = item('123'); job = {'mode':'capture','queue':[candidate],'completed_ids':[],'close_tab':False}
@@ -169,6 +194,8 @@ const listBrowserTabs=async()=>[], openTab=async()=>pg, snapshot=async()=>({tree
                 self.assertEqual(audit['original_manifest_sha256'], runner.sha(service/'manifest.json'))
                 self.assertEqual(audit['current_automation_sha256'][name], runner.sha(root/name))
                 self.assertEqual(run.call_count, 2)
+                for call in run.call_args_list:
+                    self.assertEqual(call.args[0][1:3], ['-X', 'utf8'])
                 first = out/'exports/post_finalize_review.json'; original = first.read_bytes()
                 runner.post_finalize_review(args)
                 self.assertEqual(first.read_bytes(), original)
@@ -435,12 +462,65 @@ const snapshot=async()=>({tree:'stopped'});const closeTab=async()=>{closed++};
                 self.assertNotIn('secret', data['result']['url'])
                 self.assertEqual(data['result']['target_id'], 'external-id' if external else 'new-id')
 
+    def test_release_keeps_previous_sessions_and_allows_replay(self):
+        with tempfile.TemporaryDirectory() as directory:
+            diag = Path(directory)
+            legacy = diag/'browser-session-released.local.json'
+            legacy.write_bytes(b'previous session')
+            source = diag/'browser-session.local.json'
+            session = {'repl_pid': 42, 'release_marker': str(diag/'release-42')}
+            runner.write(source, session)
+            original = source.read_bytes()
+            runner.release_browser(diag)
+            archived = diag/f'browser-session-released-{hashlib.sha256(original).hexdigest()}.local.json'
+            self.assertEqual(archived.read_bytes(), original)
+            self.assertEqual(legacy.read_bytes(), b'previous session')
+            self.assertTrue((diag/'release-42').exists())
+            source.write_bytes(original)  # retry after destination was already created
+            runner.release_browser(diag)
+            self.assertFalse(source.exists())
+            self.assertEqual(archived.read_bytes(), original)
+            runner.release_browser(diag)  # already released
+
+    def test_keeper_lifecycle_with_reused_pid_and_old_marker(self):
+        with tempfile.TemporaryDirectory() as directory:
+            diag = Path(directory)
+            stale = diag/'release-browser-session-12345'
+            stale.write_bytes(b'original marker')
+            legacy = diag/'browser-session-released.local.json'
+            legacy.write_bytes(b'original session')
+            markers = []
+            for _ in range(2):
+                proc = runner.launch_repl([sys.executable, '-u', '-c', 'import sys; print("READY",flush=True); sys.stdin.read()'], diag)
+                class ReusedPid:
+                    pid = 12345
+                    def __getattr__(self, name): return getattr(proc, name)
+                try:
+                    self.assertEqual(proc.stdout.readline().strip(), b'READY')
+                    runner.retain_repl(ReusedPid(), diag, None, {})
+                    session = runner.read(diag/'browser-session.local.json')
+                    marker = Path(session['release_marker'])
+                    self.assertFalse(marker.exists())
+                    markers.append(marker)
+                    proc.stdin.close(); proc.stdout.close()
+                    self.assertIsNone(proc.poll())
+                    runner.release_browser(diag)
+                    proc.wait(timeout=5)
+                    self.assertTrue(marker.exists())
+                finally:
+                    if proc.poll() is None: proc.kill(); proc.wait()
+            self.assertNotEqual(markers[0], markers[1])
+            self.assertEqual(stale.read_bytes(), b'original marker')
+            self.assertEqual(legacy.read_bytes(), b'original session')
+            self.assertEqual(len(list(diag.glob('browser-session-released-*.local.json'))), 2)
+
     def test_launched_repl_is_detached_and_kept_after_error(self):
         with tempfile.TemporaryDirectory() as directory:
             diag = Path(directory)
             proc = runner.launch_repl([sys.executable, '-u', '-c', 'import sys; print("REVIEW_REQUIRED", flush=True); sys.stdin.read()'], diag)
             try:
-                self.assertEqual(os.getsid(proc.pid), proc.pid)
+                if os.name != 'nt':
+                    self.assertEqual(os.getsid(proc.pid), proc.pid)
                 self.assertEqual(proc.stdout.readline().strip(), b'REVIEW_REQUIRED')
                 runner.retain_repl(proc, diag, None, {})
                 info = runner.read(diag/'browser-session.local.json')
@@ -465,10 +545,30 @@ p.stdin.close()
                 stdout=subprocess.PIPE, stderr=subprocess.PIPE, timeout=5)
             self.assertEqual(result.returncode, 0, result.stderr.decode())
             info = runner.read(Path(directory)/'browser-session.local.json')
-            try:
-                os.kill(info['repl_pid'], 0)
-            finally:
-                Path(info['release_marker']).touch()
+            if os.name == 'nt':
+                import ctypes
+                from ctypes import wintypes
+                kernel = ctypes.WinDLL('kernel32', use_last_error=True)
+                kernel.OpenProcess.argtypes = [wintypes.DWORD, wintypes.BOOL, wintypes.DWORD]
+                kernel.OpenProcess.restype = wintypes.HANDLE
+                kernel.GetExitCodeProcess.argtypes = [wintypes.HANDLE, ctypes.POINTER(wintypes.DWORD)]
+                kernel.WaitForSingleObject.argtypes = [wintypes.HANDLE, wintypes.DWORD]
+                kernel.CloseHandle.argtypes = [wintypes.HANDLE]
+                handle = kernel.OpenProcess(0x100000 | 0x1000, False, info['repl_pid'])
+                self.assertTrue(handle, ctypes.get_last_error())
+                try:
+                    exit_code = wintypes.DWORD()
+                    self.assertTrue(kernel.GetExitCodeProcess(handle, ctypes.byref(exit_code)))
+                    self.assertEqual(exit_code.value, 259)  # STILL_ACTIVE
+                finally:
+                    Path(info['release_marker']).touch()
+                    self.assertEqual(kernel.WaitForSingleObject(handle, 5000), 0)
+                    kernel.CloseHandle(handle)
+            else:
+                try:
+                    os.kill(info['repl_pid'], 0)
+                finally:
+                    Path(info['release_marker']).touch()
 
     def test_retained_repl_stays_alive_until_release(self):
         with tempfile.TemporaryDirectory() as directory:
@@ -629,7 +729,7 @@ p.stdin.close()
                 if command[:2] == ['git','branch']:
                     return 'codex/publish_retry'
                 if command[:5] == ['git','diff','--cached','--name-only']:
-                    return str((out/'raw/123.json').relative_to(root)) if not state['commits'] else ''
+                    return (out/'raw/123.json').relative_to(root).as_posix() if not state['commits'] else ''
                 if command[:2] == ['git','commit']:
                     state['commits'] += 1
                 if command[:2] == ['git','push']:
@@ -642,13 +742,49 @@ p.stdin.close()
             def run(command, **kwargs):
                 return subprocess.CompletedProcess(command,0,stdout=json.dumps({'state':'OPEN','url':'https://github.com/example/repo/pull/1'}))
             args = argparse.Namespace(run_id=run_id, retry_reason=None, summary='Sample', title='Data', prepare_only=False)
-            with patch.object(runner,'ROOT',root), patch.object(runner.subprocess,'check_output',side_effect=output), patch.object(runner.subprocess,'run',side_effect=run):
+            with patch.object(runner,'ROOT',root), patch.object(runner.subprocess,'check_output',side_effect=output), patch.object(runner.subprocess,'run',side_effect=run), patch.object(runner,'stage_pinned_provenance'), patch.object(runner,'verify_staged_manifest'):
                 with self.assertRaises(subprocess.CalledProcessError):
                     runner.publish(args)
                 runner.record_failure(diag,'publish','push failed','push')
                 args.retry_reason = 'Connection restored'
                 runner.publish(args)
             self.assertEqual(state, {'commits':1,'pushes':2})
+
+    def test_publish_stages_pinned_provenance_bytes_and_rejects_changed_index(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory); service = root/'Scraper/runs/run'; service.mkdir(parents=True)
+            subprocess.run(['git','init','-q'], cwd=root, check=True)
+            subprocess.run(['git','config','core.autocrlf','true'], cwd=root, check=True)
+            plan = service/'plan.json'; plan.write_bytes(b'{\r\n  "x": 1\r\n}\r\n')
+            manifest_path = service/'manifest.json'; manifest_path.write_bytes(b'{\r\n}\r\n')
+            data = root/'Data/item.json'; data.parent.mkdir(parents=True); data.write_bytes(b'{"id":1}\n')
+            manifest = {'files': {p.relative_to(root).as_posix(): {'bytes':p.stat().st_size,'sha256':runner.sha(p)} for p in (plan,data)}}
+            subprocess.run(['git','add','--','Data/item.json','Scraper/runs/run/plan.json','Scraper/runs/run/manifest.json'],cwd=root,check=True)
+            runner.stage_pinned_provenance(root,service,manifest)
+            runner.verify_staged_manifest(root,service,manifest)
+            runner.check_staged_diff(root)  # CRLF is valid, not trailing whitespace
+            bad = root/'notes.txt'; bad.write_bytes(b'bad space \r\n')
+            subprocess.run(['git','-c','core.autocrlf=false','add','--','notes.txt'],cwd=root,check=True)
+            with self.assertRaisesRegex(ValueError,'trailing whitespace'): runner.check_staged_diff(root)
+            subprocess.run(['git','reset','-q','--','notes.txt'],cwd=root,check=True)
+            self.assertEqual(subprocess.check_output(['git','show',':Scraper/runs/run/plan.json'],cwd=root),plan.read_bytes())
+            original=plan.read_bytes(); plan.write_bytes(b'{\n  \"x\": 2\n}\n')
+            subprocess.run(['git','add','--','Scraper/runs/run/plan.json'],cwd=root,check=True)
+            plan.write_bytes(original)
+            with self.assertRaisesRegex(ValueError,'Staged bytes differ'): runner.verify_staged_manifest(root,service,manifest)
+
+    def test_publish_rejects_unrelated_staged_file_after_normalization(self):
+        with tempfile.TemporaryDirectory() as directory, patch.object(runner, 'ROOT', Path(directory)):
+            out, service, diag = runner.paths(runner.ROOT, 'publish_guard')
+            runner.write(service/'plan.json', {})
+            runner.write(service/'manifest.json', dict(status='complete', files={}, collection={}, coverage={'accepted':1}))
+            def output(command, **kwargs):
+                if command[:2] == ['git', 'branch']: return 'codex/publish_guard'
+                if command[:4] == ['git', 'diff', '--cached', '--name-only']: return 'unrelated/file.py'
+                return ''
+            args = argparse.Namespace(run_id='publish_guard', retry_reason=None, summary='Sample', title='Data', prepare_only=False)
+            with patch.object(runner.subprocess,'check_output',side_effect=output), patch.object(runner.subprocess,'run'):
+                with self.assertRaisesRegex(ValueError, 'unrelated changes'): runner.publish(args)
 
     def test_regionless_vacancy_entry_is_rejected_before_browser(self):
         for url in ['https://www.avito.ru/vakansii', 'https://www.avito.ru/vakansii?context=x',
@@ -1023,7 +1159,13 @@ p.stdin.close()
             blocked = dict(state='NEEDS_HUMAN', reason='access_restriction_or_captcha', source_url=item()['url'], observed_at='2026-10-28T03:00:00Z')
             runner.write(out/'raw/123.json', blocked); original = (out/'raw/123.json').read_bytes()
             runner.write(out/'queue.json', [item()])
-            runner.write(diag/'checkpoint.json', dict(state='NEEDS_HUMAN', next_id='123', completed_ids=[], stop_reason='access_restriction_or_captcha'))
+            checkpoint = dict(state='NEEDS_HUMAN', next_id='123', completed_ids=[], stop_reason='access_restriction_or_captcha')
+            runner.write(diag/'checkpoint.json', checkpoint)
+            sandbox=Path(directory)/'sandbox'; runner.write(diag/'sandbox.json', {'path':str(sandbox)})
+            runner.write(sandbox/'checkpoint.json', checkpoint); runner.write(sandbox/'raw/123.json', blocked)
+            runner.write(sandbox/'browser-tab.json', {'url':item()['url']})
+            (sandbox/'problem.snapshot.txt').write_text('protected evidence', encoding='utf8')
+            (diag/'problem.snapshot.txt').write_text('protected evidence', encoding='utf8')
             runner.record_failure(diag, 'capture', 'captcha', 'capture', immediate=True)
             args = argparse.Namespace(run_id='captcha', authorization_id='human-1')
             with self.assertRaises(runner.HumanRequired): runner.preserve_stopped_observation(args)
@@ -1035,6 +1177,10 @@ p.stdin.close()
             self.assertEqual(raw_archive.read_bytes(), original)
             provenance = runner.read(next(p for p in archived if p.name.endswith('.provenance.json')))
             self.assertEqual(provenance['authorization_id'], 'human-1')
+            evidence = diag/'observations/123'
+            self.assertEqual((evidence/(provenance['snapshot_sha256']+'.problem.snapshot.txt')).read_text(encoding='utf8'), 'protected evidence')
+            self.assertEqual(runner.read(evidence/(provenance['browser_tab_sha256']+'.browser-tab.json'))['url'], item()['url'])
+            self.assertEqual((sandbox/'raw/123.json').read_bytes(), original)
             self.assertEqual(runner.read(diag/'checkpoint.json')['next_id'], '123')
             self.assertEqual(runner.read(diag/'failures.json')['retries_started'], 0)
 
@@ -1179,6 +1325,104 @@ p.stdin.close()
                 with self.assertRaisesRegex(ValueError, 'All-scope conflicts'):
                     runner.freeze(args)
             self.assertFalse((service/'plan.json').exists())
+
+    def test_http_429_status_does_not_match_vacancy_id(self):
+        extractor = (Path(__file__).parent/'extract.js').read_text(encoding='utf8').strip().removesuffix(';')
+        harness = r"""const extract=()=>EXTRACTOR;
+const body=process.argv[1]; global.location={href:'https://www.avito.ru/moskva/vakansii/job_7875654292',pathname:'/moskva/vakansii/job_7875654292'};
+global.document={title:'Авито',readyState:'complete',body:{innerText:body},querySelector:s=>s.includes('item-view/title-info')?{innerText:'Вакансия'}:null,querySelectorAll:()=>[]};
+global.getComputedStyle=()=>({visibility:'visible'}); console.log(JSON.stringify(extract()));""".replace('EXTRACTOR',extractor)
+        for body,state in [('№ 7875654292 · 5 октября', 'DETAIL'), ('Зарплата 142900 рублей', 'DETAIL'), ('HTTP 429', 'NEEDS_HUMAN'), ('Ошибка 429', 'NEEDS_HUMAN'), ('429 Too Many Requests', 'NEEDS_HUMAN'), ('Доступ ограничен: проблема с IP', 'NEEDS_HUMAN'), ('Подозрительная активность с вашего IP', 'NEEDS_HUMAN')]:
+            with self.subTest(body=body):
+                result=subprocess.run(['node','-e',harness,body],capture_output=True,text=True,encoding='utf8',check=True)
+                self.assertEqual(json.loads(result.stdout)['state'],state)
+
+    def test_windows_checkout_dirty_audit_requires_exact_frozen_bytes(self):
+        blob=b'a\nb\n'; file='Scraper/extract.js'
+        plan={'code_git_commit':'frozen','uncommitted_automation_files':[file],
+              'automation_sha256':{file:hashlib.sha256(blob.replace(b'\n',b'\r\n')).hexdigest()}}
+        with patch.object(runner.subprocess,'check_output',return_value=blob):
+            self.assertEqual(runner.frozen_dirty_sources(plan),set())
+            plan['automation_sha256'][file]='bad'
+            self.assertEqual(runner.frozen_dirty_sources(plan),{file})
+
+    def test_unknown_evidence_scans_full_text_and_refuses_incomplete(self):
+        extractor = (Path(__file__).parent/'extract.js').read_text(encoding='utf8')
+        harness = r"""const extract=()=>EXTRACTOR;
+const body=process.argv[1], title=process.argv[2], ready=process.argv[3];
+global.location={href:'https://www.avito.ru/moskva/vakansii/example_123'};
+global.document={title,readyState:ready,body:{innerText:body},querySelector:()=>null,querySelectorAll:()=>[]};
+global.getComputedStyle=()=>({visibility:'visible'});
+console.log(JSON.stringify(extract()));""".replace('EXTRACTOR', extractor.rstrip().rstrip(';'))
+        for body,title,ready,state,restriction,unavailable in [
+            ('ordinary text','Title','complete','UNKNOWN_PAGE',False,False),
+            ('x'*6000+' CAPTCHA','Title','complete','NEEDS_HUMAN',None,None),
+            ('ordinary text','429 Too Many Requests','complete','NEEDS_HUMAN',None,None),
+            ('ordinary text Объявление удалено.','Title','complete','UNKNOWN_PAGE',False,True),
+            ('ordinary text','Title','loading','UNKNOWN_PAGE',False,False)]:
+            result=subprocess.run(['node','-e',harness,body,title,ready],capture_output=True,text=True,encoding='utf8',check=True)
+            data=json.loads(result.stdout); self.assertEqual(data['state'],state)
+            if state=='UNKNOWN_PAGE':
+                self.assertEqual(data['unresolved_evidence']['restriction'],restriction)
+                self.assertEqual(data['unresolved_evidence']['known_unavailable'],unavailable)
+                self.assertEqual(data['unresolved_evidence']['complete'],ready=='complete')
+
+    def test_authorized_unresolved_preserve_retry_and_finalize(self):
+        with tempfile.TemporaryDirectory() as directory, patch.object(runner, 'ROOT', Path(directory)):
+            root = runner.ROOT; run_id = 'remote_1500_2026-10-29_shamil'
+            out, service, diag = runner.paths(root, run_id); sandbox = root/'sandbox'
+            old_extractor = b'old extractor'; extractor = root/'Scraper/extract.js'
+            extractor.parent.mkdir(parents=True); extractor.write_text(runner.HTTP429_OLD_BLOCK+'\n'+runner.HTTP429_OLD_RESTRICTION+'\n', encoding='utf8', newline='')
+            queue = [item('123'), item('7995516348')]; queue[1]['listing_rank'] = 2
+            runner.write(root/'Data/dataset/sources.json', {'schema_version':'1','exports':[]})
+            (root/'Data/README.md').write_text('# Data\n', encoding='utf8'); (root/'Data/dataset/README.md').write_text('Текущий состав: old\n', encoding='utf8')
+            runner.write(out/'queue.json', queue); runner.write(out/'listing.json', {'selected_controls':courier_controls()})
+            runner.write(out/'raw/123.json', raw())
+            runner.write(service/'plan.json', {'setup_seconds':1,'profession':'Курьер','segments':'all','code_git_commit':'old','extractor_sha256':hashlib.sha256(old_extractor).hexdigest()})
+            cp = dict(state='REVIEW_REQUIRED', next_id='7995516348', completed_ids=['123'], stop_reason='identity_or_template_review', capture_seconds=1)
+            old = dict(state='UNKNOWN_PAGE', source_url=queue[1]['url'], heading=None, items=[], observed_at='old')
+            runner.write(out/'raw/7995516348.json', old); runner.write(sandbox/'raw/7995516348.json', old)
+            runner.write(diag/'checkpoint.json', cp); runner.write(sandbox/'checkpoint.json', cp); runner.write(diag/'sandbox.json', {'path':str(sandbox)})
+            runner.write(sandbox/'browser-tab.json', {'url':queue[1]['url']})
+            (diag/'problem.snapshot.txt').write_text('old incomplete snapshot',encoding='utf8'); (sandbox/'problem.snapshot.txt').write_text('old incomplete snapshot',encoding='utf8')
+            runner.record_failure(diag, 'capture', 'stopped', 'capture', immediate=True)
+            runner.authorize_browser(diag, runner.UNRESOLVED_ANSWER, runner.UNRESOLVED_AUTH)
+            runner.note_change(argparse.Namespace(run_id=run_id,file='Scraper/extract.js',reason='Authorized unresolved observation evidence',validation='offline regression'))
+            args=argparse.Namespace(run_id=run_id,authorization_id=runner.UNRESOLVED_AUTH,authorization_question=runner.UNRESOLVED_QUESTION)
+            with patch.object(runner.subprocess, 'check_output', return_value=old_extractor): runner.unresolved_policy(args)
+            runner.preserve_stopped_observation(args)
+            self.assertEqual(runner.read(sandbox/'raw/7995516348.json'), old)
+            self.assertFalse((out/'raw/7995516348.json').exists())
+            new = dict(old, observed_at='new', unresolved_evidence=dict(version=1,complete=True,title_body_params_scanned=True,restriction=False,known_unavailable=False))
+            runner.write(out/'raw/7995516348.json', new); runner.write(sandbox/'raw/7995516348.json', new)
+            runner.write(diag/'sandbox.json', {'path':str(sandbox)})
+            (diag/'problem.snapshot.txt').write_text('new snapshot',encoding='utf8'); (sandbox/'problem.snapshot.txt').write_text('new snapshot',encoding='utf8')
+            mark = argparse.Namespace(run_id=run_id,id='7995516348',authorization_id=runner.UNRESOLVED_AUTH)
+            for invalid in (dict(restriction=True), dict(known_unavailable=True), dict(complete=False), dict(title_body_params_scanned=False)):
+                bad = dict(new, unresolved_evidence=dict(new['unresolved_evidence'], **invalid))
+                runner.write(out/'raw/7995516348.json', bad); runner.write(sandbox/'raw/7995516348.json', bad)
+                with self.assertRaises(ValueError): runner.mark_unresolved(mark)
+                self.assertFalse((out/'unresolved_observations.json').exists())
+            runner.write(out/'raw/7995516348.json', new); runner.write(sandbox/'raw/7995516348.json', new)
+            runner.write(sandbox/'browser-tab.json', {'url':item('123')['url']})
+            with self.assertRaises(ValueError): runner.mark_unresolved(mark)
+            runner.write(sandbox/'browser-tab.json', {'url':queue[1]['url']}); runner.mark_unresolved(mark)
+            self.assertEqual(runner.read(diag/'checkpoint.json')['completed_ids'], ['123'])
+            before_policy = runner.read(out/'unresolved_policy.json'); previous_hash = runner.sha(out/'unresolved_policy.json')
+            extractor.write_text(runner.HTTP429_NEW_BLOCK+'\n'+runner.HTTP429_NEW_RESTRICTION+'\n', encoding='utf8', newline='')
+            runner.note_change(argparse.Namespace(run_id=run_id,file='Scraper/extract.js',reason=runner.HTTP429_AUDIT_REASON,validation='HTTP status regression'))
+            runner.upgrade_unresolved_extractor(argparse.Namespace(run_id=run_id))
+            updated = runner.read(out/'unresolved_policy.json')
+            self.assertEqual(runner.read(out/'automation'/f'policy-{previous_hash}.json'), before_policy)
+            self.assertEqual(updated['extractor_upgrades'][0]['from_sha256'], before_policy['new_extractor_sha256'])
+            self.assertEqual(runner.unresolved_records(out, queue)[0]['id'], '7995516348')
+            placement = root/'placements.json'; runner.write(placement, {'123':{'city':'Коммунарка','region':'Москва','evidence':'пос. Коммунарка'}})
+            runner.finalize(argparse.Namespace(run_id=run_id,placements=placement,review_model='test'))
+            manifest = runner.read(service/'manifest.json')
+            self.assertEqual(manifest['coverage']['accepted'], 1)
+            self.assertEqual(manifest['coverage']['unresolved_observations'][0]['id'], '7995516348')
+            with (out/'exports/vacancies_flat.csv').open(encoding='utf-8-sig',newline='') as stream:
+                self.assertEqual([r['id'] for r in csv.DictReader(stream)], ['123'])
 
     def test_finalize_registers_and_builds_once_without_browser(self):
         with tempfile.TemporaryDirectory() as directory:

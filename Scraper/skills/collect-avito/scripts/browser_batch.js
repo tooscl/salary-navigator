@@ -36,7 +36,8 @@ try {
         const {observed_at, ...stableFields} = value;
         const key = JSON.stringify(stableFields);
         repeats = key === last ? repeats + 1 : 0; last = key;
-        if (repeats >= 2 && value.state === 'LISTING' && value.items.length && value.listing_item_audit?.malformed === 0 && accept(value)) return value;
+        const paginationObserved = value.pagination?.next_url || value.pagination?.end_confirmed;
+        if (repeats >= 2 && value.state === 'LISTING' && value.items.length && value.listing_item_audit?.malformed === 0 && paginationObserved && accept(value)) return value;
         await sleep(500);
       }
       throw new Error('Listing did not stabilize');

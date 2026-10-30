@@ -1,0 +1,435 @@
+{
+  "method": "post_finalize_validation_v1",
+  "reason": "Preserve and verify exact provenance bytes in Git index with strict CRLF-aware whitespace checks",
+  "original_manifest_sha256": "43aad08a9a1aae4007d400c492d183edd2e071159642c0ed3760d9c70dac6e49",
+  "previous_automation_sha256": {
+    "Scraper/skills/collect-avito/references/top-professions.json": "ec283ea09c0b283fca77bbf4c9818facf99410bc572018acd2f357f4107f83de",
+    "utils/title_flags.py": "6fd8d2cf699b7c417fa69453cb4d7e37c2ff3c47832668335649d1d911db9160",
+    "Scraper/extract.js": "cd16f70bfff02941b05423a28203b797eba9a2063c958c1dd03dedf678d6bc2f",
+    "Scraper/skills/collect-avito/SKILL.md": "93753ee78027d87418aefc358a9de505ec7c5705c82f88bd1e34d5788c8ffff8",
+    "Scraper/skills/collect-avito/scripts/run.py": "e4d5561bd7c13ae32680329c139c9d4c5fdf6f24d08a111654bfdb3967d81291",
+    "Scraper/skills/collect-avito/scripts/browser_batch.js": "22ff14e0c98294459d2e48257ea40d8c0329697fed8b4c87437f367b84560bbd",
+    "Scraper/skills/collect-avito/scripts/check_capture.py": "530f984a99217860ca30c90b87e38c533283c37853ed90be02d139ee48e82505",
+    "Scraper/skills/collect-avito/scripts/failure_log.py": "115082c87623ac3282a220a48632b95df7a3d57b765364c6149c4f702121cc77",
+    "Scraper/skills/collect-avito/scripts/preflight.py": "363924eb1aed897b3902b89394e8523bb37dd203a552f0676fc398c474f338f4"
+  },
+  "automation_changes": [
+    {
+      "file": "Scraper/skills/collect-avito/scripts/failure_log.py",
+      "reason": "Windows cross-platform shared file locking",
+      "validation": "Windows Python: failure-log tests including cross-process exclusion"
+    },
+    {
+      "file": "Scraper/skills/collect-avito/scripts/run.py",
+      "reason": "Windows cross-platform locking and REPL keeper",
+      "validation": "Windows Python failure-log and keeper tests passed"
+    },
+    {
+      "file": "Scraper/test_failure_log.py",
+      "reason": "Windows cross-platform locking and REPL keeper",
+      "validation": "Windows Python failure-log and keeper tests passed"
+    },
+    {
+      "file": "Scraper/skills/collect-avito/SKILL.md",
+      "reason": "Windows cross-platform locking and REPL keeper",
+      "validation": "Windows Python failure-log and keeper tests passed"
+    },
+    {
+      "file": "Scraper/test_aside_runner.py",
+      "reason": "Windows keeper test portability",
+      "validation": "Windows launched and retained REPL tests passed"
+    },
+    {
+      "file": "Scraper/skills/collect-avito/scripts/browser_batch.js",
+      "reason": "Wait for pagination evidence in UI Next mode",
+      "validation": "Offline delayed-pagination regression passed on Windows"
+    },
+    {
+      "file": "Scraper/test_aside_runner.py",
+      "reason": "Wait for pagination evidence in UI Next mode",
+      "validation": "Offline delayed-pagination regression passed on Windows"
+    },
+    {
+      "file": "Scraper/skills/collect-avito/SKILL.md",
+      "reason": "Wait for pagination evidence in UI Next mode",
+      "validation": "Offline delayed-pagination regression passed on Windows"
+    },
+    {
+      "file": "Scraper/skills/collect-avito/scripts/run.py",
+      "reason": "Explicit UTF-8 browser scripts and shared ledger on Windows",
+      "validation": "14 offline tests passed including legacy code page and delayed pagination"
+    },
+    {
+      "file": "Scraper/skills/collect-avito/scripts/failure_log.py",
+      "reason": "Explicit UTF-8 browser scripts and shared ledger on Windows",
+      "validation": "14 offline tests passed including legacy code page and delayed pagination"
+    },
+    {
+      "file": "Scraper/test_failure_log.py",
+      "reason": "Explicit UTF-8 browser scripts and shared ledger on Windows",
+      "validation": "14 offline tests passed including legacy code page and delayed pagination"
+    },
+    {
+      "file": "Scraper/test_aside_runner.py",
+      "reason": "Explicit UTF-8 browser scripts and shared ledger on Windows",
+      "validation": "14 offline tests passed including legacy code page and delayed pagination"
+    },
+    {
+      "file": "Scraper/skills/collect-avito/SKILL.md",
+      "reason": "Explicit UTF-8 browser scripts and shared ledger on Windows",
+      "validation": "14 offline tests passed including legacy code page and delayed pagination"
+    },
+    {
+      "file": "Scraper/skills/collect-avito/scripts/run.py",
+      "reason": "Preserve each released REPL session on Windows and allow replay",
+      "validation": "Release collision and replay regression plus keeper and ledger tests passed"
+    },
+    {
+      "file": "Scraper/test_aside_runner.py",
+      "reason": "Preserve each released REPL session on Windows and allow replay",
+      "validation": "Release collision and replay regression plus keeper and ledger tests passed"
+    },
+    {
+      "file": "Scraper/skills/collect-avito/SKILL.md",
+      "reason": "Preserve each released REPL session on Windows and allow replay",
+      "validation": "Release collision and replay regression plus keeper and ledger tests passed"
+    },
+    {
+      "file": "Scraper/skills/collect-avito/scripts/run.py",
+      "reason": "Unique keeper markers despite PID reuse",
+      "validation": "Offline Windows end-to-end two keeper lifecycles with reused PID and old marker plus release replay passed"
+    },
+    {
+      "file": "Scraper/test_aside_runner.py",
+      "reason": "Unique keeper markers despite PID reuse",
+      "validation": "Offline Windows end-to-end two keeper lifecycles with reused PID and old marker plus release replay passed"
+    },
+    {
+      "file": "Scraper/skills/collect-avito/SKILL.md",
+      "reason": "Unique keeper markers despite PID reuse",
+      "validation": "Offline Windows end-to-end two keeper lifecycles with reused PID and old marker plus release replay passed"
+    },
+    {
+      "file": "Scraper/extract.js",
+      "reason": "Authorized unresolved observation evidence",
+      "validation": "76 offline runner and failure-log tests; preserve-policy-retry-finalize fixture and full-text evidence regression"
+    },
+    {
+      "file": "Scraper/skills/collect-avito/scripts/run.py",
+      "reason": "Authorized unresolved observation evidence",
+      "validation": "76 offline runner and failure-log tests; preserve-policy-retry-finalize fixture and full-text evidence regression"
+    },
+    {
+      "file": "Scraper/test_aside_runner.py",
+      "reason": "Authorized unresolved observation evidence",
+      "validation": "76 offline runner and failure-log tests; preserve-policy-retry-finalize fixture and full-text evidence regression"
+    },
+    {
+      "file": "Scraper/skills/collect-avito/SKILL.md",
+      "reason": "Authorized unresolved observation evidence",
+      "validation": "76 offline runner and failure-log tests; preserve-policy-retry-finalize fixture and full-text evidence regression"
+    },
+    {
+      "file": "Scraper/skills/collect-avito/references/edge-cases.md",
+      "reason": "Authorized unresolved observation evidence",
+      "validation": "76 offline runner and failure-log tests; preserve-policy-retry-finalize fixture and full-text evidence regression"
+    },
+    {
+      "file": "Scraper/skills/collect-avito/references/OUTPUT_CONTRACT.md",
+      "reason": "Authorized unresolved observation evidence",
+      "validation": "76 offline runner and failure-log tests; preserve-policy-retry-finalize fixture and full-text evidence regression"
+    },
+    {
+      "file": "Scraper/skills/collect-avito/scripts/run.py",
+      "reason": "Keep archived snapshots local in diagnostics",
+      "validation": "76 offline runner and failure-log tests; archive and finalize fixture"
+    },
+    {
+      "file": "Scraper/extract.js",
+      "reason": "Audited HTTP 429 status boundary",
+      "validation": "77 offline tests; ID 7875654292 normal DETAIL, HTTP 429 and IP restrictions; extractor upgrade and historical observation finalize"
+    },
+    {
+      "file": "Scraper/skills/collect-avito/scripts/run.py",
+      "reason": "Audited HTTP 429 status boundary",
+      "validation": "77 offline tests; ID 7875654292 normal DETAIL, HTTP 429 and IP restrictions; extractor upgrade and historical observation finalize"
+    },
+    {
+      "file": "Scraper/test_aside_runner.py",
+      "reason": "Audited HTTP 429 status boundary",
+      "validation": "77 offline tests; ID 7875654292 normal DETAIL, HTTP 429 and IP restrictions; extractor upgrade and historical observation finalize"
+    },
+    {
+      "file": "Scraper/skills/collect-avito/SKILL.md",
+      "reason": "Audited HTTP 429 status boundary",
+      "validation": "77 offline tests; ID 7875654292 normal DETAIL, HTTP 429 and IP restrictions; extractor upgrade and historical observation finalize"
+    },
+    {
+      "file": "Scraper/skills/collect-avito/references/edge-cases.md",
+      "reason": "Audited HTTP 429 status boundary",
+      "validation": "77 offline tests; ID 7875654292 normal DETAIL, HTTP 429 and IP restrictions; extractor upgrade and historical observation finalize"
+    },
+    {
+      "file": "Scraper/skills/collect-avito/scripts/run.py",
+      "reason": "Preserve protected stopped snapshot and tab locally",
+      "validation": "77 offline tests including protected sandbox snapshot, tab, raw and authorization preservation"
+    },
+    {
+      "file": "Scraper/test_aside_runner.py",
+      "reason": "Preserve protected stopped snapshot and tab locally",
+      "validation": "77 offline tests including protected sandbox snapshot, tab, raw and authorization preservation"
+    },
+    {
+      "file": "Scraper\\skills\\collect-avito\\scripts\\failure_log.py",
+      "reason": "Windows cross-platform shared file locking",
+      "validation": "Windows Python: failure-log tests including cross-process exclusion"
+    },
+    {
+      "file": "Scraper\\skills\\collect-avito\\scripts\\run.py",
+      "reason": "Windows cross-platform locking and REPL keeper",
+      "validation": "Windows Python failure-log and keeper tests passed"
+    },
+    {
+      "file": "Scraper\\test_failure_log.py",
+      "reason": "Windows cross-platform locking and REPL keeper",
+      "validation": "Windows Python failure-log and keeper tests passed"
+    },
+    {
+      "file": "Scraper\\skills\\collect-avito\\SKILL.md",
+      "reason": "Windows cross-platform locking and REPL keeper",
+      "validation": "Windows Python failure-log and keeper tests passed"
+    },
+    {
+      "file": "Scraper\\test_aside_runner.py",
+      "reason": "Windows keeper test portability",
+      "validation": "Windows launched and retained REPL tests passed"
+    },
+    {
+      "file": "Scraper\\skills\\collect-avito\\scripts\\browser_batch.js",
+      "reason": "Wait for pagination evidence in UI Next mode",
+      "validation": "Offline delayed-pagination regression passed on Windows"
+    },
+    {
+      "file": "Scraper\\test_aside_runner.py",
+      "reason": "Wait for pagination evidence in UI Next mode",
+      "validation": "Offline delayed-pagination regression passed on Windows"
+    },
+    {
+      "file": "Scraper\\skills\\collect-avito\\SKILL.md",
+      "reason": "Wait for pagination evidence in UI Next mode",
+      "validation": "Offline delayed-pagination regression passed on Windows"
+    },
+    {
+      "file": "Scraper\\skills\\collect-avito\\scripts\\run.py",
+      "reason": "Explicit UTF-8 browser scripts and shared ledger on Windows",
+      "validation": "14 offline tests passed including legacy code page and delayed pagination"
+    },
+    {
+      "file": "Scraper\\skills\\collect-avito\\scripts\\failure_log.py",
+      "reason": "Explicit UTF-8 browser scripts and shared ledger on Windows",
+      "validation": "14 offline tests passed including legacy code page and delayed pagination"
+    },
+    {
+      "file": "Scraper\\test_failure_log.py",
+      "reason": "Explicit UTF-8 browser scripts and shared ledger on Windows",
+      "validation": "14 offline tests passed including legacy code page and delayed pagination"
+    },
+    {
+      "file": "Scraper\\test_aside_runner.py",
+      "reason": "Explicit UTF-8 browser scripts and shared ledger on Windows",
+      "validation": "14 offline tests passed including legacy code page and delayed pagination"
+    },
+    {
+      "file": "Scraper\\skills\\collect-avito\\SKILL.md",
+      "reason": "Explicit UTF-8 browser scripts and shared ledger on Windows",
+      "validation": "14 offline tests passed including legacy code page and delayed pagination"
+    },
+    {
+      "file": "Scraper\\skills\\collect-avito\\scripts\\run.py",
+      "reason": "Preserve each released REPL session on Windows and allow replay",
+      "validation": "Release collision and replay regression plus keeper and ledger tests passed"
+    },
+    {
+      "file": "Scraper\\test_aside_runner.py",
+      "reason": "Preserve each released REPL session on Windows and allow replay",
+      "validation": "Release collision and replay regression plus keeper and ledger tests passed"
+    },
+    {
+      "file": "Scraper\\skills\\collect-avito\\SKILL.md",
+      "reason": "Preserve each released REPL session on Windows and allow replay",
+      "validation": "Release collision and replay regression plus keeper and ledger tests passed"
+    },
+    {
+      "file": "Scraper\\skills\\collect-avito\\scripts\\run.py",
+      "reason": "Unique keeper markers despite PID reuse",
+      "validation": "Offline Windows end-to-end two keeper lifecycles with reused PID and old marker plus release replay passed"
+    },
+    {
+      "file": "Scraper\\test_aside_runner.py",
+      "reason": "Unique keeper markers despite PID reuse",
+      "validation": "Offline Windows end-to-end two keeper lifecycles with reused PID and old marker plus release replay passed"
+    },
+    {
+      "file": "Scraper\\skills\\collect-avito\\SKILL.md",
+      "reason": "Unique keeper markers despite PID reuse",
+      "validation": "Offline Windows end-to-end two keeper lifecycles with reused PID and old marker plus release replay passed"
+    },
+    {
+      "file": "Scraper/extract.js",
+      "reason": "Authorized unresolved observation evidence",
+      "validation": "76 offline runner and failure-log tests; preserve-policy-retry-finalize fixture and full-text evidence regression"
+    },
+    {
+      "file": "Scraper/skills/collect-avito/scripts/run.py",
+      "reason": "Authorized unresolved observation evidence",
+      "validation": "76 offline runner and failure-log tests; preserve-policy-retry-finalize fixture and full-text evidence regression"
+    },
+    {
+      "file": "Scraper/test_aside_runner.py",
+      "reason": "Authorized unresolved observation evidence",
+      "validation": "76 offline runner and failure-log tests; preserve-policy-retry-finalize fixture and full-text evidence regression"
+    },
+    {
+      "file": "Scraper/skills/collect-avito/SKILL.md",
+      "reason": "Authorized unresolved observation evidence",
+      "validation": "76 offline runner and failure-log tests; preserve-policy-retry-finalize fixture and full-text evidence regression"
+    },
+    {
+      "file": "Scraper/skills/collect-avito/references/edge-cases.md",
+      "reason": "Authorized unresolved observation evidence",
+      "validation": "76 offline runner and failure-log tests; preserve-policy-retry-finalize fixture and full-text evidence regression"
+    },
+    {
+      "file": "Scraper/skills/collect-avito/references/OUTPUT_CONTRACT.md",
+      "reason": "Authorized unresolved observation evidence",
+      "validation": "76 offline runner and failure-log tests; preserve-policy-retry-finalize fixture and full-text evidence regression"
+    },
+    {
+      "file": "Scraper/skills/collect-avito/scripts/run.py",
+      "reason": "Keep archived snapshots local in diagnostics",
+      "validation": "76 offline runner and failure-log tests; archive and finalize fixture"
+    },
+    {
+      "file": "Scraper/extract.js",
+      "reason": "Audited HTTP 429 status boundary",
+      "validation": "77 offline tests; ID 7875654292 normal DETAIL, HTTP 429 and IP restrictions; extractor upgrade and historical observation finalize"
+    },
+    {
+      "file": "Scraper/skills/collect-avito/scripts/run.py",
+      "reason": "Audited HTTP 429 status boundary",
+      "validation": "77 offline tests; ID 7875654292 normal DETAIL, HTTP 429 and IP restrictions; extractor upgrade and historical observation finalize"
+    },
+    {
+      "file": "Scraper/test_aside_runner.py",
+      "reason": "Audited HTTP 429 status boundary",
+      "validation": "77 offline tests; ID 7875654292 normal DETAIL, HTTP 429 and IP restrictions; extractor upgrade and historical observation finalize"
+    },
+    {
+      "file": "Scraper/skills/collect-avito/SKILL.md",
+      "reason": "Audited HTTP 429 status boundary",
+      "validation": "77 offline tests; ID 7875654292 normal DETAIL, HTTP 429 and IP restrictions; extractor upgrade and historical observation finalize"
+    },
+    {
+      "file": "Scraper/skills/collect-avito/references/edge-cases.md",
+      "reason": "Audited HTTP 429 status boundary",
+      "validation": "77 offline tests; ID 7875654292 normal DETAIL, HTTP 429 and IP restrictions; extractor upgrade and historical observation finalize"
+    },
+    {
+      "file": "Scraper/skills/collect-avito/scripts/run.py",
+      "reason": "Preserve protected stopped snapshot and tab locally",
+      "validation": "77 offline tests including protected sandbox snapshot, tab, raw and authorization preservation"
+    },
+    {
+      "file": "Scraper/test_aside_runner.py",
+      "reason": "Preserve protected stopped snapshot and tab locally",
+      "validation": "77 offline tests including protected sandbox snapshot, tab, raw and authorization preservation"
+    },
+    {
+      "file": "Scraper/skills/collect-avito/scripts/run.py",
+      "reason": "Windows staged-path normalization and REPL lifecycle test portability",
+      "validation": "Windows offline staged own/unrelated path regressions and full runner, failure-log and dataset suites"
+    },
+    {
+      "file": "Scraper/test_aside_runner.py",
+      "reason": "Windows staged-path normalization and REPL lifecycle test portability",
+      "validation": "Windows offline staged own/unrelated path regressions and full runner, failure-log and dataset suites"
+    },
+    {
+      "file": "Scraper/skills/collect-avito/SKILL.md",
+      "reason": "Windows staged-path normalization and REPL lifecycle test portability",
+      "validation": "Windows offline staged own/unrelated path regressions and full runner, failure-log and dataset suites"
+    },
+    {
+      "file": "Scraper/skills/collect-avito/scripts/run.py",
+      "reason": "Explicit UTF-8 for post-finalize and publish child Python checks",
+      "validation": "Regression asserts both child commands use -X utf8; Windows full runner and dataset checks"
+    },
+    {
+      "file": "Scraper/test_aside_runner.py",
+      "reason": "Explicit UTF-8 for post-finalize and publish child Python checks",
+      "validation": "Regression asserts both child commands use -X utf8; Windows full runner and dataset checks"
+    },
+    {
+      "file": "Scraper/skills/collect-avito/SKILL.md",
+      "reason": "Explicit UTF-8 for post-finalize and publish child Python checks",
+      "validation": "Regression asserts both child commands use -X utf8; Windows full runner and dataset checks"
+    },
+    {
+      "file": "utils/dataset_pr.py",
+      "reason": "Use current UTF-8 Python for dataset PR check on Windows",
+      "validation": "utils.test_dataset_pr verifies current executable and UTF-8 flag; Windows offline suite"
+    },
+    {
+      "file": "utils/test_dataset_pr.py",
+      "reason": "Use current UTF-8 Python for dataset PR check on Windows",
+      "validation": "utils.test_dataset_pr verifies current executable and UTF-8 flag; Windows offline suite"
+    },
+    {
+      "file": "Scraper/skills/collect-avito/SKILL.md",
+      "reason": "Use current UTF-8 Python for dataset PR check on Windows",
+      "validation": "utils.test_dataset_pr verifies current executable and UTF-8 flag; Windows offline suite"
+    },
+    {
+      "file": "Scraper/skills/collect-avito/scripts/run.py",
+      "reason": "Preserve exact provenance in Git index and verify strict CRLF-aware whitespace",
+      "validation": "Windows real Git regression proves exact staged SHA, CRLF acceptance and rejection of actual trailing whitespace"
+    },
+    {
+      "file": "Scraper/test_aside_runner.py",
+      "reason": "Preserve exact provenance in Git index and verify strict CRLF-aware whitespace",
+      "validation": "Windows real Git regression proves exact staged SHA, CRLF acceptance and rejection of actual trailing whitespace"
+    },
+    {
+      "file": "Scraper/skills/collect-avito/SKILL.md",
+      "reason": "Preserve exact provenance in Git index and verify strict CRLF-aware whitespace",
+      "validation": "Windows real Git regression proves exact staged SHA, CRLF acceptance and rejection of actual trailing whitespace"
+    }
+  ],
+  "previous_review_sha256": "8fcbb2097d8be618327fc6f63d5f0f9fbf653c4dd878fe66af088662cc4bdf87",
+  "current_automation_sha256": {
+    "Scraper/extract.js": "cd16f70bfff02941b05423a28203b797eba9a2063c958c1dd03dedf678d6bc2f",
+    "Scraper/skills/collect-avito/SKILL.md": "dd5a4eb1d1a17cf4457fdbf32e1b4a0fec12fe910d7acf74953c52cf9a190e1a",
+    "Scraper/skills/collect-avito/references/OUTPUT_CONTRACT.md": "1defb1c84116816408dc81e7b62451fc8ffd05e2495a64fb7379af9c5fe0559a",
+    "Scraper/skills/collect-avito/references/edge-cases.md": "f38affd8bfe24122e077ed5ab079903250189f1fa0f2f9fca982962e29a60c9a",
+    "Scraper/skills/collect-avito/references/top-professions.json": "ec283ea09c0b283fca77bbf4c9818facf99410bc572018acd2f357f4107f83de",
+    "Scraper/skills/collect-avito/scripts/browser_batch.js": "22ff14e0c98294459d2e48257ea40d8c0329697fed8b4c87437f367b84560bbd",
+    "Scraper/skills/collect-avito/scripts/check_capture.py": "530f984a99217860ca30c90b87e38c533283c37853ed90be02d139ee48e82505",
+    "Scraper/skills/collect-avito/scripts/failure_log.py": "115082c87623ac3282a220a48632b95df7a3d57b765364c6149c4f702121cc77",
+    "Scraper/skills/collect-avito/scripts/preflight.py": "363924eb1aed897b3902b89394e8523bb37dd203a552f0676fc398c474f338f4",
+    "Scraper/skills/collect-avito/scripts/run.py": "d250a78e13bdccfbd96221ed839ccb7d09607287244eb15223aba80f219d4eb4",
+    "Scraper/test_aside_runner.py": "3f98684fcd82dd3462356368153a0b4c5d9e468729cc6433f9027dc08562e20d",
+    "Scraper/test_failure_log.py": "d390ebfe371f7d5f2c2f9488929232bea4371b0595f288c0b908aa2a2031f699",
+    "Scraper\\skills\\collect-avito\\SKILL.md": "dd5a4eb1d1a17cf4457fdbf32e1b4a0fec12fe910d7acf74953c52cf9a190e1a",
+    "Scraper\\skills\\collect-avito\\scripts\\browser_batch.js": "22ff14e0c98294459d2e48257ea40d8c0329697fed8b4c87437f367b84560bbd",
+    "Scraper\\skills\\collect-avito\\scripts\\failure_log.py": "115082c87623ac3282a220a48632b95df7a3d57b765364c6149c4f702121cc77",
+    "Scraper\\skills\\collect-avito\\scripts\\run.py": "d250a78e13bdccfbd96221ed839ccb7d09607287244eb15223aba80f219d4eb4",
+    "Scraper\\test_aside_runner.py": "3f98684fcd82dd3462356368153a0b4c5d9e468729cc6433f9027dc08562e20d",
+    "Scraper\\test_failure_log.py": "d390ebfe371f7d5f2c2f9488929232bea4371b0595f288c0b908aa2a2031f699",
+    "utils/build_dataset.py": "11702bbdd16a2cb64bec3bf0a5ee6b4c33ba7754e7183a3344a425d681505d8f",
+    "utils/dataset_pr.py": "e24983d9451c7f37c2f4703473f439b5c2f0b861715a0129aa8050f2eda7253c",
+    "utils/test_build_dataset.py": "2e3a428af48433080a4d2f9cd2ed7b7d874a626102f3279bc85bae8e40a82189",
+    "utils/test_dataset_pr.py": "de6c0ca895ba0daa72efd1aaa02b8cdb7b4a6092f2971092c9ab1cbea5def97f",
+    "utils/title_flags.py": "6fd8d2cf699b7c417fa69453cb4d7e37c2ff3c47832668335649d1d911db9160"
+  },
+  "validation": "Partition, plan, page hashes, URL chain, raw, correction, CSV IDs and profession, dataset check and offline regression suites passed"
+}

@@ -2,6 +2,8 @@
 import importlib.util
 from pathlib import Path
 import tempfile
+import subprocess
+import sys
 import unittest
 
 spec = importlib.util.spec_from_file_location('failure_log', Path(__file__).parent/'skills/collect-avito/scripts/failure_log.py')
@@ -50,6 +52,41 @@ class FailureBudgetTests(unittest.TestCase):
                         self.fail('Duplicate action acquired the lock')
             with failure_log.operation_locked(diag):
                 self.assertEqual(failure_log.load(diag)['retries_started'], 0)
+
+    @unittest.skipUnless(sys.platform == 'win32', 'Windows legacy code page')
+    def test_legacy_windows_ledger_reads_and_writes_utf8_without_budget_reset(self):
+        with tempfile.TemporaryDirectory() as directory:
+            diag = Path(directory)
+            legacy = {'events': [{'event': 'failure', 'message': 'Ошибка'}], 'stages': {},
+                      'failures': 2, 'state': 'RETRY_AVAILABLE', 'retry_started': False,
+                      'retries_started': 1, 'retry_limit': 5, 'budget_start_failures': 0}
+            import json
+            (diag/'failures.json').write_bytes(json.dumps(legacy, ensure_ascii=False).encode('cp1251'))
+            self.assertEqual(failure_log.load(diag)['events'][0]['message'], 'Ошибка')
+            failure_log.save(diag, failure_log.load(diag))
+            self.assertEqual(json.loads((diag/'failures.json').read_text(encoding='utf-8')), legacy)
+
+    def test_operation_lock_excludes_another_process(self):
+        with tempfile.TemporaryDirectory() as directory:
+            diag = Path(directory)
+            code = """import importlib.util,pathlib,sys
+s=importlib.util.spec_from_file_location('f',sys.argv[1]); f=importlib.util.module_from_spec(s); s.loader.exec_module(f)
+with f.operation_locked(pathlib.Path(sys.argv[2])):
+ print('locked',flush=True); sys.stdin.readline()
+"""
+            proc = subprocess.Popen([sys.executable, '-u', '-c', code, str(spec.origin), directory],
+                stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+            try:
+                self.assertEqual(proc.stdout.readline().strip(), b'locked')
+                with self.assertRaises(failure_log.HumanRequired):
+                    with failure_log.operation_locked(diag):
+                        self.fail('another process holds the lock')
+            finally:
+                proc.stdin.write(b'\n'); proc.stdin.flush()
+                proc.communicate(timeout=5)
+            self.assertEqual(proc.returncode, 0)
+            with failure_log.operation_locked(diag):
+                self.assertEqual(failure_log.load(diag)['failures'], 0)
 
     def test_five_retries_are_shared_across_agents_urls_and_stages(self):
         with tempfile.TemporaryDirectory() as directory:

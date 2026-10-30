@@ -13,6 +13,7 @@ from queue import Queue, Empty
 import subprocess
 import sys
 import time
+import uuid
 from threading import Thread
 from urllib.parse import urlsplit, parse_qs
 
@@ -50,6 +51,20 @@ def write(path, data):
 
 def sha(path):
     return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def frozen_dirty_sources(plan):
+    """Exclude only Git blobs proven byte-identical after Windows CRLF checkout."""
+    dirty = set(plan.get('uncommitted_automation_files', []))
+    for file in list(dirty):
+        expected = plan.get('automation_sha256', {}).get(file)
+        try:
+            blob = subprocess.check_output(['git', 'show', plan['code_git_commit'] + ':' + file], cwd=ROOT, stderr=subprocess.DEVNULL)
+        except (KeyError, subprocess.CalledProcessError):
+            continue
+        if expected in (hashlib.sha256(blob).hexdigest(), hashlib.sha256(blob.replace(b'\n', b'\r\n')).hexdigest()):
+            dirty.remove(file)
+    return dirty
 
 
 def instruction_version(path):
@@ -390,7 +405,8 @@ def pipe_chunks(stream):
 
 def retain_repl(process, diag, sandbox, job):
     """Keep our REPL pipes alive until an explicit local release marker is created."""
-    release = diag / f'release-browser-session-{process.pid}'
+    # PIDs may be reused during one run; each keeper needs its own marker.
+    release = diag / f'release-browser-session-{process.pid}-{uuid.uuid4().hex}'
     if release.exists():
         raise RuntimeError('Release marker collision; inspect diagnostics')
     code = """import os,select,sys,time
@@ -406,12 +422,43 @@ try:
 finally:
     os.close(inp); os.close(out)
 """
+    if os.name == 'nt':
+        # Windows pipes cannot be selected and pass_fds is POSIX-only. Give the
+        # keeper explicit inherited OS handles and drain stdout on a thread.
+        import msvcrt
+        code = """import msvcrt,os,sys,threading,time
+inp=msvcrt.open_osfhandle(int(sys.argv[1]),os.O_WRONLY)
+out=msvcrt.open_osfhandle(int(sys.argv[2]),os.O_RDONLY)
+release=sys.argv[3]
+print('keeper_started',flush=True)
+def drain():
+    while os.read(out,65536): pass
+    print('repl_stdout_eof',flush=True)
+t=threading.Thread(target=drain,daemon=True); t.start()
+while not os.path.exists(release) and t.is_alive(): time.sleep(.1)
+if os.path.exists(release): print('release_marker_observed',flush=True)
+os.close(inp)
+"""
     log_path = diag / f'keeper-{process.pid}.local.log'
     with log_path.open('ab', buffering=0) as log:
         log.write(f'handoff_before repl_pid={process.pid} poll={process.poll()}\n'.encode())
-        keeper = subprocess.Popen([sys.executable, '-c', code, str(process.stdin.fileno()),
-            str(process.stdout.fileno()), str(release)], pass_fds=(process.stdin.fileno(), process.stdout.fileno()),
-            stdin=subprocess.DEVNULL, stdout=log, stderr=log, start_new_session=True)
+        if os.name == 'nt':
+            handles = [msvcrt.get_osfhandle(process.stdin.fileno()), msvcrt.get_osfhandle(process.stdout.fileno())]
+            startup = subprocess.STARTUPINFO()
+            startup.lpAttributeList = {'handle_list': handles}
+            for handle in handles:
+                os.set_handle_inheritable(handle, True)
+            try:
+                keeper = subprocess.Popen([sys.executable, '-c', code, *map(str, handles), str(release)],
+                    stdin=subprocess.DEVNULL, stdout=log, stderr=log, startupinfo=startup,
+                    close_fds=True, creationflags=subprocess.CREATE_NEW_PROCESS_GROUP)
+            finally:
+                for handle in handles:
+                    os.set_handle_inheritable(handle, False)
+        else:
+            keeper = subprocess.Popen([sys.executable, '-c', code, str(process.stdin.fileno()),
+                str(process.stdout.fileno()), str(release)], pass_fds=(process.stdin.fileno(), process.stdout.fileno()),
+                stdin=subprocess.DEVNULL, stdout=log, stderr=log, start_new_session=True)
         log.write(f'handoff_after repl_pid={process.pid} poll={process.poll()} keeper_pid={keeper.pid} keeper_poll={keeper.poll()}\n'.encode())
     tab = read(sandbox/'browser-tab.json') if sandbox and (sandbox/'browser-tab.json').exists() else {}
     write(diag/'browser-session.local.json', dict(repl_pid=process.pid, keeper_pid=keeper.pid,
@@ -423,12 +470,27 @@ def release_browser(diag):
     if path.exists():
         session = read(path)
         Path(session['release_marker']).touch()
-        path.rename(diag/'browser-session-released.local.json')
+        # Each released session keeps its exact bytes; a retry may encounter
+        # the same destination after a crash, but must never replace history.
+        original = path.read_bytes()
+        digest = hashlib.sha256(original).hexdigest()
+        destination = diag/f'browser-session-released-{digest}.local.json'
+        if destination.exists():
+            if destination.read_bytes() != original:
+                raise RuntimeError('Released browser session hash collision; inspect diagnostics')
+            path.unlink()
+        else:
+            path.rename(destination)
 
 
 def launch_repl(command, cwd):
     return subprocess.Popen(command, stdin=subprocess.PIPE, stdout=subprocess.PIPE,
                             stderr=subprocess.STDOUT, cwd=cwd, start_new_session=True)
+
+def browser_sources():
+    return ((SCRIPTS / 'browser_batch.js').read_text(encoding='utf-8'),
+            (ROOT / 'Scraper/extract.js').read_text(encoding='utf-8'))
+
 
 def browser(job, out, diag):
     # One-shot Aside buffers stdout until completion. An interactive handshake
@@ -472,9 +534,9 @@ def browser(job, out, diag):
         done = list(job['completed_ids'])
         for part in jobs:
             part['completed_ids'] = done
-            script = (SCRIPTS / 'browser_batch.js').read_text()
+            script, extractor = browser_sources()
             script = script.replace('__JOB__', json.dumps(part, ensure_ascii=False), 1)
-            script = script.replace('__EXTRACTOR__', json.dumps((ROOT / 'Scraper/extract.js').read_text()), 1)
+            script = script.replace('__EXTRACTOR__', json.dumps(extractor), 1)
             expression = 'await eval(' + json.dumps('(async()=>{' + script + '})()') + ')\n'
             offset = len(chunks)
             process.stdin.write(expression.encode()); process.stdin.flush()
@@ -503,7 +565,7 @@ def browser(job, out, diag):
         if not preserve:
             process.stdout.close()
             reader.join(timeout=1)
-        (diag / f'aside-{stamp}.local.log').write_text(chunks.decode('utf-8', errors='replace'))
+        (diag / f'aside-{stamp}.local.log').write_text(chunks.decode('utf-8', errors='replace'), encoding='utf-8')
         if sandbox:
             import_sandbox(sandbox, out, diag)
     return read(diag / 'checkpoint.json'), time.perf_counter()-started
@@ -916,6 +978,164 @@ def blocked_listing_policy(args):
     print('Blocked-listing policy recorded for this run')
 
 
+
+UNRESOLVED_QUESTION = 'Разрешаете сохранить наблюдение по ID `7995516348` как неразрешённое, добавить проверяемую процедуру с тестом и продолжить оставшуюся очередь с этой карточки?'
+UNRESOLVED_ANSWER = 'Да, разрешаю. Подобные вакансии можешь тоже сохарянть'
+UNRESOLVED_AUTH = 'user-2026-10-29-unknown-page-policy-7995516348'
+
+
+def unresolved_policy(args):
+    out, service, diag = paths(ROOT, args.run_id)
+    if args.authorization_id != UNRESOLVED_AUTH or args.authorization_question != UNRESOLVED_QUESTION:
+        raise ValueError('Exact authorization question and ID required')
+    ledger = load_failures(diag)
+    events = ledger['events']
+    auth = [i for i, e in enumerate(events) if e.get('event') == 'human_browser_authorization' and e.get('authorization_id') == args.authorization_id and e.get('instruction') == UNRESOLVED_ANSWER]
+    if not auth or ledger['state'] in ('NEEDS_HUMAN', 'RETRY_STARTED') or any(e.get('state') == 'NEEDS_HUMAN' for e in events[auth[-1]+1:]):
+        raise HumanRequired('Current exact browser authorization required')
+    plan = read(service/'plan.json')
+    if args.run_id != 'remote_1500_2026-10-29_shamil':
+        raise ValueError('This authorization is limited to the named run')
+    old = plan['extractor_sha256']; new = sha(ROOT/'Scraper/extract.js')
+    original = subprocess.check_output(['git', 'show', plan['code_git_commit'] + ':Scraper/extract.js'], cwd=ROOT)
+    if hashlib.sha256(original).hexdigest() != old:
+        crlf = original.replace(b'\n', b'\r\n')
+        if hashlib.sha256(crlf).hexdigest() != old: raise ValueError('Frozen extractor bytes cannot be reconstructed exactly')
+        original = crlf
+    if new == old: raise ValueError('Extractor upgrade must change the frozen extractor')
+    changes = read(diag/'automation_changes.json') if (diag/'automation_changes.json').exists() else []
+    changes = [dict(c, file=c.get('file', '').replace('\\', '/')) for c in changes]
+    if not any(c.get('file', '').replace('\\', '/') == 'Scraper/extract.js' and c.get('reason') == 'Authorized unresolved observation evidence' and c.get('validation', '').strip() for c in changes):
+        raise ValueError('Register the extractor change and test via note-change first')
+    for digest, content in ((old, original), (new, (ROOT/'Scraper/extract.js').read_bytes())):
+        dest = out/'automation'/f'extractor-{digest}.js'
+        dest.parent.mkdir(parents=True, exist_ok=True)
+        if dest.exists() and dest.read_bytes() != content: raise ValueError('Extractor archive collision')
+        if not dest.exists(): dest.write_bytes(content)
+    policy = dict(version=1, run_id=args.run_id, authorization_id=args.authorization_id, question=args.authorization_question,
+        answer=UNRESOLVED_ANSWER, old_extractor_sha256=old, new_extractor_sha256=new)
+    path = out/'unresolved_policy.json'
+    if path.exists() and read(path) != policy: raise ValueError('Existing policy differs')
+    if not path.exists(): write(path, policy)
+
+
+HTTP429_OLD_BLOCK = '  const blockingText = /Доступ ограничен|проблема с IP|подтвердите.{0,30}(человек|робот)|проверка безопасности|Слишком много запросов|429 Too Many Requests/i;'
+HTTP429_NEW_BLOCK = '  const blockingText = /Доступ ограничен|проблема с IP|подтвердите.{0,30}(человек|робот)|проверка безопасности|Слишком много запросов/i;'
+HTTP429_OLD_RESTRICTION = '  const restrictionEvidence = /captcha|капч|429|too many requests|доступ ограничен|ограничени[ея] доступа|проблем[аы] с ip|ip.?адрес|подтвердите.{0,30}(человек|робот)|проверка безопасности|слишком много запросов|доступ заблокирован/i.test(normalizedEvidence);'
+HTTP429_NEW_RESTRICTION = '  const http429 = /(?:\\bHTTP\\s*|ошибка\\s*|код\\s*)(?<!\\d)429(?!\\d)|(?<!\\d)429(?!\\d)\\s*(?:Too Many Requests|слишком много запросов)/i.test(normalizedEvidence) ||\n    /^\\s*429\\s*$/.test(normalizedEvidence) || headings.some(s => /^\\s*429\\s*$/.test(s));\n  const restrictionEvidence = http429 || /captcha|капч|too many requests|доступ ограничен|ограничени[ея] доступа|проблем[аы] с ip|подозрительная активность с вашего ip|ip.?адрес|подтвердите.{0,30}(человек|робот)|проверка безопасности|слишком много запросов|доступ заблокирован/i.test(normalizedEvidence);'
+HTTP429_AUDIT_REASON = 'Audited HTTP 429 status boundary'
+
+
+def policy_extractor_hashes(out, policy):
+    hashes = {policy['old_extractor_sha256'], policy['new_extractor_sha256']}
+    for index, change in enumerate(policy.get('extractor_upgrades', [])):
+        previous = out/'automation'/('policy-' + change['previous_policy_sha256'] + '.json')
+        if not previous.is_file() or sha(previous) != change['previous_policy_sha256']:
+            raise ValueError('Prior policy archive differs')
+        old_policy = read(previous)
+        if (old_policy.get('new_extractor_sha256') != change['from_sha256'] or old_policy.get('extractor_upgrades', []) != policy['extractor_upgrades'][:index]
+                or any(old_policy.get(k) != policy.get(k) for k in ('version', 'run_id', 'authorization_id', 'question', 'answer', 'old_extractor_sha256'))
+                or change.get('reason') != HTTP429_AUDIT_REASON): raise ValueError('Extractor upgrade history differs')
+        expected_to = policy['extractor_upgrades'][index+1]['from_sha256'] if index+1 < len(policy['extractor_upgrades']) else policy['new_extractor_sha256']
+        if change['to_sha256'] != expected_to: raise ValueError('Extractor upgrade chain differs')
+        hashes.update((change['from_sha256'], change['to_sha256']))
+    for digest in hashes:
+        archived = out/'automation'/f'extractor-{digest}.js'
+        if not archived.is_file() or sha(archived) != digest: raise ValueError('Extractor archive differs')
+    return hashes - {policy['old_extractor_sha256']}
+
+
+def upgrade_unresolved_extractor(args):
+    out, service, diag = paths(ROOT, args.run_id)
+    if args.run_id != 'remote_1500_2026-10-29_shamil' or (service/'manifest.json').exists(): raise ValueError('Wrong or completed run')
+    path = out/'unresolved_policy.json'; policy = read(path)
+    if (policy.get('authorization_id') != UNRESOLVED_AUTH or policy.get('question') != UNRESOLVED_QUESTION or policy.get('answer') != UNRESOLVED_ANSWER): raise ValueError('Original authorization differs')
+    policy_extractor_hashes(out, policy)
+    before = policy['new_extractor_sha256']; after = sha(ROOT/'Scraper/extract.js')
+    original = (out/'automation'/f'extractor-{before}.js').read_bytes()
+    old = original.decode('utf8'); new = (ROOT/'Scraper/extract.js').read_text(encoding='utf8')
+    if old.count(HTTP429_OLD_BLOCK) != 1 or old.count(HTTP429_OLD_RESTRICTION) != 1 or old.replace(HTTP429_OLD_BLOCK, HTTP429_NEW_BLOCK).replace(HTTP429_OLD_RESTRICTION, HTTP429_NEW_RESTRICTION) != new:
+        raise ValueError('Upgrade must be exactly the audited HTTP 429 classifier fix')
+    changes = read(diag/'automation_changes.json') if (diag/'automation_changes.json').exists() else []
+    if not any(c.get('file', '').replace('\\', '/') == 'Scraper/extract.js' and c.get('reason') == HTTP429_AUDIT_REASON and c.get('validation', '').strip() for c in changes): raise ValueError('Record the extractor regression via note-change')
+    previous_hash = sha(path); snapshot = out/'automation'/f'policy-{previous_hash}.json'; target = out/'automation'/f'extractor-{after}.js'
+    for dest, content in ((snapshot, path.read_bytes()), (target, (ROOT/'Scraper/extract.js').read_bytes())):
+        if dest.exists() and dest.read_bytes() != content: raise ValueError('Upgrade archive collision')
+        if not dest.exists(): dest.write_bytes(content)
+    policy['extractor_upgrades'] = policy.get('extractor_upgrades', []) + [dict(from_sha256=before,to_sha256=after,previous_policy_sha256=previous_hash,reason=HTTP429_AUDIT_REASON)]
+    policy['new_extractor_sha256'] = after; write(path, policy)
+    policy_extractor_hashes(out, policy)
+    print(json.dumps(dict(previous_extractor_sha256=before,current_extractor_sha256=after,previous_policy_sha256=previous_hash)))
+
+
+def unresolved_records(out, queue):
+    path = out/'unresolved_observations.json'
+    records = read(path) if path.exists() else []
+    policy_path = out/'unresolved_policy.json'
+    if records and not policy_path.exists(): raise ValueError('Missing unresolved policy')
+    policy = read(policy_path) if records else None
+    if records:
+        if (policy.get('version') != 1 or policy.get('run_id') != out.name or policy.get('run_id') != 'remote_1500_2026-10-29_shamil' or policy.get('authorization_id') != UNRESOLVED_AUTH or policy.get('question') != UNRESOLVED_QUESTION or policy.get('answer') != UNRESOLVED_ANSWER): raise ValueError('Unresolved policy authorization differs')
+        allowed_extractors = policy_extractor_hashes(out, policy)
+    ids = set()
+    for record in records:
+        identity = record['id']; matches = [item for item in queue if item['id'] == identity]
+        raw = out/'raw'/f'{identity}.json'
+        if identity in ids or len(matches) != 1 or record.get('url') != matches[0]['url'] or not raw.is_file() or sha(raw) != record.get('raw_sha256'):
+            raise ValueError('Unresolved observation does not match queue or raw')
+        archive = paths(ROOT, out.name)[2]/'observations'/identity
+        for key, name in (('snapshot_sha256', 'problem.snapshot.txt'), ('browser_tab_sha256', 'browser-tab.json')):
+            saved = archive/(record.get(key, '') + '.' + name)
+            if not saved.is_file() or sha(saved) != record.get(key): raise ValueError('Unresolved evidence archive differs')
+        if read(archive/(record['browser_tab_sha256'] + '.browser-tab.json')).get('url') != record['url']: raise ValueError('Unresolved tab URL differs')
+        avito_url(record['url'], identity)
+        data = read(raw); evidence = data.get('unresolved_evidence', {})
+        if (data.get('state') != 'UNKNOWN_PAGE' or data.get('source_url') != record['url'] or evidence != dict(version=1, complete=True, title_body_params_scanned=True, restriction=False, known_unavailable=False)
+                or record.get('authorization_id') != policy['authorization_id'] or record.get('extractor_sha256') not in allowed_extractors):
+            raise ValueError('Unresolved observation lacks complete new evidence')
+        ids.add(identity)
+    return records
+
+
+def mark_unresolved(args):
+    out, service, diag = paths(ROOT, args.run_id)
+    if (service/'manifest.json').exists(): raise ValueError('Completed run is immutable')
+    policy = read(out/'unresolved_policy.json')
+    if policy['run_id'] != args.run_id or policy['authorization_id'] != args.authorization_id or sha(ROOT/'Scraper/extract.js') != policy['new_extractor_sha256']:
+        raise ValueError('Policy or upgraded extractor differs')
+    ledger = load_failures(diag)
+    if ledger['state'] == 'NEEDS_HUMAN': raise HumanRequired('Current browser authorization required')
+    cp = read(diag/'checkpoint.json'); queue = read(out/'queue.json')
+    if cp.get('state') != 'REVIEW_REQUIRED' or cp.get('stop_reason') != 'identity_or_template_review' or cp.get('next_id') != args.id:
+        raise ValueError('Expected pending review checkpoint')
+    excluded = {r['id'] for r in unavailable_records(out, queue)} | {r['id'] for r in unresolved_records(out, queue)}
+    matches = [x for x in queue if x['id'] == args.id]
+    if len(matches) != 1: raise ValueError('Expected one queue ID')
+    index = queue.index(matches[0])
+    if cp.get('completed_ids') != [x['id'] for x in queue[:index] if x['id'] not in excluded]: raise ValueError('Checkpoint prefix mismatch')
+    raw = out/'raw'/f'{args.id}.json'; snapshot = diag/'problem.snapshot.txt'; pointer = diag/'sandbox.json'
+    sandbox = Path(read(pointer)['path']); tab = read(sandbox/'browser-tab.json')
+    if (sandbox/'raw'/raw.name).read_bytes() != raw.read_bytes() or (sandbox/'problem.snapshot.txt').read_bytes() != snapshot.read_bytes() or any(read(sandbox/'checkpoint.json').get(k) != cp.get(k) for k in ('next_id', 'state', 'stop_reason', 'completed_ids')) or tab.get('url') != matches[0]['url']:
+        raise ValueError('New sandbox evidence or browser URL mismatch')
+    records = unresolved_records(out, queue)
+    record = dict(id=args.id, url=matches[0]['url'], status='unresolved_observation', raw_sha256=sha(raw), snapshot_sha256=sha(snapshot), browser_tab_sha256=sha(sandbox/'browser-tab.json'), extractor_sha256=policy['new_extractor_sha256'], authorization_id=args.authorization_id)
+    # Validate before mutating the registry or checkpoint.
+    data = read(raw); ev = data.get('unresolved_evidence', {})
+    avito_url(matches[0]['url'], args.id)
+    if data.get('source_url') != matches[0]['url'] or data.get('state') != 'UNKNOWN_PAGE' or ev != dict(version=1, complete=True, title_body_params_scanned=True, restriction=False, known_unavailable=False):
+        raise ValueError('New observation lacks complete unrestricted evidence')
+    archive = diag/'observations'/args.id
+    archive.mkdir(parents=True, exist_ok=True)
+    for source in (snapshot, sandbox/'browser-tab.json'):
+        dest = archive/(sha(source) + '.' + source.name)
+        if dest.exists() and dest.read_bytes() != source.read_bytes(): raise ValueError('Evidence archive collision')
+        if not dest.exists(): shutil.copy2(source, dest)
+    records.append(record); write(out/'unresolved_observations.json', records)
+    cp.update(state='READY', next_id=queue[index+1]['id'] if index+1 < len(queue) else None, stop_reason=None)
+    write(diag/'checkpoint.json', cp); pointer.unlink(missing_ok=True)
+    print(json.dumps({'unresolved': args.id, 'next_id': cp['next_id']}))
+
+
 def unavailable_records(out, queue):
     path = out/'unavailable.json'
     records = read(path) if path.exists() else []
@@ -957,7 +1177,7 @@ def mark_unavailable(args):
     if read(service/'plan.json').get('selection_mode') == 'first_N_remote_parameter_matches':
         raise ValueError('Unavailable handling is not supported for remote candidate selection')
     matches = [item for item in queue if item['id'] == args.id]
-    prior_excluded = {record['id'] for record in unavailable_records(out, queue)}
+    prior_excluded = {record['id'] for record in unavailable_records(out, queue)} | {record['id'] for record in unresolved_records(out, queue)}
     pending_index = next((i for i, item in enumerate(queue) if item['id'] == args.id), None)
     if pending_index is None or cp.get('completed_ids') != [item['id'] for item in queue[:pending_index] if item['id'] not in prior_excluded]:
         raise ValueError('Checkpoint completed IDs must match the reviewed queue prefix')
@@ -1100,7 +1320,7 @@ def review_salary_line(args):
         raise ValueError('Expected the pending review checkpoint')
     matches = [item for item in queue if item['id'] == args.id]
     if len(matches) != 1: raise ValueError('Expected one queue item')
-    excluded = {record['id'] for record in unavailable_records(out, queue)}
+    excluded = {record['id'] for record in unavailable_records(out, queue)} | {record['id'] for record in unresolved_records(out, queue)}
     index = next(i for i, item in enumerate(queue) if item['id'] == args.id)
     if cp.get('completed_ids') != [item['id'] for item in queue[:index] if item['id'] not in excluded]:
         raise ValueError('Checkpoint prefix mismatch')
@@ -1218,7 +1438,7 @@ def validate_partition(out, service):
         if (not source_plan.get('partition') or not 0 < cut < len(ids) or ids[cut:] != unresolved
                 or selection['plan_sha256'] != sha(provenance/'plan.json') or selection['queue_sha256'] != sha(provenance/'queue.json')
                 or manifest.get('coverage', {}).get('partial') != selection or read(out/'queue.json') != source_queue[cut:]
-                or set(selection['accepted_ids']) | set(selection['skipped_ids']) != set(ids[:cut])):
+                or set(selection['accepted_ids']) | set(selection['skipped_ids']) | set(selection.get('unresolved_observation_ids', [])) != set(ids[:cut])):
             raise ValueError('Derivative queue differs from partial source suffix')
         if read(service/'diagnostics/shared-ledger.json') != {'parent_run_id': suffix['ledger_parent_run_id']} or suffix['ledger_parent_run_id'] != source_plan['partition']['parent_run_id']:
             raise ValueError('Derivative shared ledger differs from frozen parent')
@@ -1361,7 +1581,11 @@ def partition(args):
 
 def allowed_capture_changes(plan, changes):
     permitted = {'Scraper/skills/collect-avito/scripts/run.py', 'Scraper/skills/collect-avito/SKILL.md'}
+    if any(c.get('file', '').replace('\\', '/') == 'Scraper/extract.js' and c.get('reason') == 'Authorized unresolved observation evidence' and c.get('validation', '').strip() for c in changes): permitted.add('Scraper/extract.js')
     guard = 'Scraper/skills/collect-avito/scripts/browser_batch.js'
+    for c in changes:
+        file = c.get('file', '').replace('\\', '/')
+        if c.get('validation', '').strip() and ((file == guard and c.get('reason') == 'Wait for pagination evidence in UI Next mode') or (file == 'Scraper/skills/collect-avito/scripts/failure_log.py' and c.get('reason') in ('Windows cross-platform shared file locking', 'Explicit UTF-8 browser scripts and shared ledger on Windows'))): permitted.add(file)
     if plan.get('partial_suffix') or (plan.get('partition') and any(c.get('file') == guard and c.get('reason') == 'Audited URL identity guard' and c.get('validation', '').strip() for c in changes)):
         permitted.add(guard)
     return permitted
@@ -1390,9 +1614,13 @@ def capture(args):
     preflight(getattr(args, 'config', None), diag)
     changed = {file for file, value in plan['automation_sha256'].items() if sha(ROOT/file) != value}
     changes = read(diag/'automation_changes.json') if (diag/'automation_changes.json').exists() else []
+    changes = [dict(c, file=c.get('file', '').replace('\\', '/')) for c in changes]
     permitted = allowed_capture_changes(plan, changes)
     if changed - permitted:
         raise ValueError('Unapproved collector source changed; preserve old run')
+    if 'Scraper/extract.js' in changed:
+        policy = read(out/'unresolved_policy.json')
+        if policy.get('old_extractor_sha256') != plan['extractor_sha256'] or policy.get('new_extractor_sha256') != sha(ROOT/'Scraper/extract.js'): raise ValueError('Extractor upgrade policy differs')
     verify_partition_url_guard(plan, changed)
     validate_automation_changes(changes, changed)
     standing_unavailable_policy(argparse.Namespace(run_id=args.run_id, authorization_id=STANDING_UNAVAILABLE_ID,
@@ -1427,20 +1655,24 @@ def capture(args):
         print(json.dumps(dict(state='CAPTURED' if accepted == plan['limit'] else 'IN_PROGRESS',
             captured=len(decisions), accepted=accepted, remaining=max(0, plan['limit']-accepted))))
         return
-    unavailable = {record['id'] for record in unavailable_records(out, queue)}
+    unavailable = {record['id'] for record in unavailable_records(out, queue)} | {record['id'] for record in unresolved_records(out, queue)}
     pending = []
     done = []
     for item in queue:
         if item['id'] in unavailable:
+            if pending: raise ValueError('Accounted observation follows a queue gap')
             continue
         path = out / 'raw' / (item['id'] + '.json')
         if path.exists():
+            if pending: raise ValueError('Saved observation follows a queue gap')
             data = reviewed_capture(out, item)
             if not check(data, item['id'])['structural_check_passed'] or not data.get('parameter_audit', {}).get('rendered_complete'):
                 raise ValueError(f'Saved {item["id"]} needs review; never overwrite or silently skip it')
             done.append(item['id'])
         else:
             pending.append(item)
+    if cp.get('completed_ids') != done:
+        raise ValueError('Checkpoint does not match accounted queue prefix')
     if not pending:
         print(json.dumps({'state': 'CAPTURED', 'captured': len(done), 'remaining': 0}))
         return
@@ -1460,6 +1692,16 @@ def capture(args):
                     continue
                 print(json.dumps({'state': 'IN_PROGRESS', 'unavailable': cp2['next_id']}))
                 return
+            unresolved_policy_path = out/'unresolved_policy.json'
+            if unresolved_policy_path.exists():
+                policy = read(unresolved_policy_path)
+                try:
+                    mark_unresolved(argparse.Namespace(run_id=args.run_id, id=cp2['next_id'], authorization_id=policy['authorization_id']))
+                except (ValueError, HumanRequired, OSError, KeyError):
+                    pass
+                else:
+                    print(json.dumps({'state': 'IN_PROGRESS', 'unresolved': cp2['next_id']}))
+                    return
             salary_policy = out/'salary_review_policy.json'
             if salary_policy.exists():
                 policy = read(salary_policy)
@@ -1589,7 +1831,10 @@ def partial_prefix_selection(out, service, queue, instruction):
         raise ValueError('Partial prefix requires a frozen partition')
     cp = read(service/'diagnostics/checkpoint.json')
     unavailable = unavailable_records(out, queue)
-    excluded = {r['id'] for r in unavailable}
+    unresolved = unresolved_records(out, queue)
+    unavailable_ids = {r['id'] for r in unavailable}
+    unresolved_ids = {r['id'] for r in unresolved}
+    excluded = unavailable_ids | unresolved_ids
     ids = [x['id'] for x in queue]
     next_id = cp.get('next_id')
     if next_id not in ids or cp.get('state') not in ('REVIEW_REQUIRED', 'BROWSER_ERROR', 'NEEDS_HUMAN'):
@@ -1607,7 +1852,7 @@ def partial_prefix_selection(out, service, queue, instruction):
             raise ValueError('Prefix contains missing or unreviewed raw')
         accepted.append(item['id'])
     return dict(method='partition_prefix_v1', plan_sha256=sha(service/'plan.json'), queue_sha256=sha(out/'queue.json'),
-        accepted_ids=accepted, skipped_ids=[i for i in ids[:cut] if i in excluded], unresolved_ids=ids[cut:],
+        accepted_ids=accepted, skipped_ids=[i for i in ids[:cut] if i in unavailable_ids], unresolved_observation_ids=[i for i in ids[:cut] if i in unresolved_ids], unresolved_ids=ids[cut:],
         stop_state=cp['state'], stop_reason=cp.get('stop_reason'), next_id=next_id,
         raw_sha256={i: sha(out/'raw'/f'{i}.json') for i in ids[:cut]},
         authorization=instruction)
@@ -1632,6 +1877,7 @@ def finalize(args):
         raise ValueError('All-scope conflicts with observed profession; use audited correction')
     plan = dict(plan, city_anomaly_policy=getattr(args,'city_anomaly_policy','blank'))
     changes = read(diag / 'automation_changes.json') if (diag / 'automation_changes.json').exists() else []
+    changes = [dict(c, file=c.get('file', '').replace('\\', '/')) for c in changes]
     changed = {file for file,value in plan.get('automation_sha256', {}).items() if sha(ROOT/file) != value}
     reviewed_changes = {change['file'] for change in changes}
     allowed_changes = {'Scraper/skills/collect-avito/scripts/run.py', 'Scraper/skills/collect-avito/scripts/failure_log.py', 'Scraper/skills/collect-avito/SKILL.md'}
@@ -1642,7 +1888,7 @@ def finalize(args):
     registry_path = ROOT / 'Data/dataset/sources.json'
     registry = read(registry_path)
     registered = [e for e in registry['exports'] if e['run_id'] == args.run_id]
-    validate_automation_changes(changes, set(plan.get('uncommitted_automation_files', [])) | changed)
+    validate_automation_changes(changes, frozen_dirty_sources(plan) | changed)
     regions = {}
     for entry in registry['exports']:
         for city, region in entry['placement_regions'].items():
@@ -1661,10 +1907,12 @@ def finalize(args):
     unavailable = unavailable_records(out, queue)
     if unavailable and decisions is not None:
         raise ValueError('Unavailable handling is not supported for remote candidate selection')
-    excluded = {record['id'] for record in unavailable}
+    unresolved = unresolved_records(out, queue)
+    if {r['id'] for r in unavailable} & {r['id'] for r in unresolved}: raise ValueError('Observation cannot be both unavailable and unresolved')
+    excluded = {record['id'] for record in unavailable} | {record['id'] for record in unresolved}
     partial = partial_prefix_selection(out, service, queue, getattr(args, 'partial_instruction', None)) if getattr(args, 'partial_prefix', False) else None
     if partial:
-        selected_queue = queue[:len(partial['accepted_ids']) + len(partial['skipped_ids'])]
+        selected_queue = queue[:len(partial['accepted_ids']) + len(partial['skipped_ids']) + len(partial.get('unresolved_observation_ids', []))]
     rows, reviews, mapping, unknown_cities = [], [], {}, {}
     for item in selected_queue:
         if item['id'] in excluded:
@@ -1697,7 +1945,7 @@ def finalize(args):
     for review in reviews:
         write(out / 'reviewed' / (review['id'] + '.json'), review)
     write(exports / 'validation.json', dict(planned=len(queue), accepted=len(rows),
-        unique_ids=len({r['id'] for r in rows}), unavailable=unavailable, errors=[], review_method='deterministic_rendered_template_v1'))
+        unique_ids=len({r['id'] for r in rows}), unavailable=unavailable, unresolved_observations=unresolved, errors=[], review_method='deterministic_rendered_template_v1'))
     entry = dict(run_id=args.run_id, source='avito',
         path=str((exports / 'vacancies_flat.csv').relative_to(ROOT)), sha256=sha(exports / 'vacancies_flat.csv'),
         placement_regions=mapping, enrichment_status='not_run')
@@ -1718,7 +1966,7 @@ def finalize(args):
     (ROOT / 'Data/dataset/manifest.json').write_bytes(manifest_bytes)
     manifest = dict(run_id=args.run_id, dataset_id=args.run_id, status='complete',
         schema=dict(columns=columns, unknown_policy='empty_not_zero'), collection=plan,
-        coverage=dict(planned=len(queue), accepted=len(rows), unavailable=unavailable, unique_ids=[r['id'] for r in rows], errors=[], partial=partial,
+        coverage=dict(planned=len(queue), accepted=len(rows), unavailable=unavailable, unresolved_observations=unresolved, unique_ids=[r['id'] for r in rows], errors=[], partial=partial,
             limitations=['Visible rendered parameters only; enrichment not run; placement on site; live route unverified']),
         timing=dict(setup_seconds=plan['setup_seconds'], capture_seconds=read(diag/'checkpoint.json').get('capture_seconds'),
             review_export_seconds=time.perf_counter()-started, publication_seconds=None),
@@ -1749,7 +1997,7 @@ def note_change(args):
         raise ValueError('Change must reference a reusable file inside the repository')
     path = diag / 'automation_changes.json'
     changes = read(path) if path.exists() else []
-    changes.append(dict(file=str(relative), reason=args.reason, validation=args.validation))
+    changes.append(dict(file=relative.as_posix(), reason=args.reason, validation=args.validation))
     write(path, changes)
 
 
@@ -1789,6 +2037,7 @@ def preserve_stopped_observation(args):
     identity = cp.get('next_id')
     captcha = cp.get('state') == 'NEEDS_HUMAN' and cp.get('stop_reason') == 'access_restriction_or_captcha'
     blank = cp.get('state') == 'REVIEW_REQUIRED' and cp.get('stop_reason') == 'identity_or_template_review'
+    unresolved_retry = blank and (out/'unresolved_policy.json').exists() and read(out/'unresolved_policy.json').get('authorization_id') == args.authorization_id
     if not (captcha or blank) or not identity or identity in cp.get('completed_ids', []):
         raise ValueError('Expected a supported stopped observation at the pending checkpoint ID')
     queue = read(out/'queue.json')
@@ -1796,9 +2045,9 @@ def preserve_stopped_observation(args):
         raise ValueError('Checkpoint ID must occur once in the frozen queue')
     if blank:
         instruction = events[authorizations[-1]].get('instruction', '')
-        if identity not in instruction or 'about:blank' not in instruction:
+        if not unresolved_retry and (identity not in instruction or 'about:blank' not in instruction):
             raise HumanRequired('Authorization must identify the blank-tab observation and pending ID')
-        excluded = {record['id'] for record in unavailable_records(out, queue)}
+        excluded = {record['id'] for record in unavailable_records(out, queue)} | {record['id'] for record in unresolved_records(out, queue)}
         index = next(i for i, item in enumerate(queue) if item['id'] == identity)
         if cp.get('completed_ids') != [item['id'] for item in queue[:index] if item['id'] not in excluded]:
             raise ValueError('Checkpoint prefix mismatch')
@@ -1808,6 +2057,14 @@ def preserve_stopped_observation(args):
         if data.get('state') != 'NEEDS_HUMAN' or data.get('reason') != 'access_restriction_or_captcha' or data.get('source_url') != next(item['url'] for item in queue if item['id'] == identity):
             raise ValueError('Raw observation does not match the stopped queue item')
         reason = data['reason']
+        snapshot = diag/'problem.snapshot.txt'
+    elif unresolved_retry:
+        snapshot = diag/'problem.snapshot.txt'
+        url = next(item['url'] for item in queue if item['id'] == identity)
+        avito_url(url, identity)
+        if data.get('state') != 'UNKNOWN_PAGE' or data.get('source_url') != url or not snapshot.exists():
+            raise ValueError('Expected the original unknown observation at the queue URL')
+        reason = 'unknown_page_before_authorized_retry'
     else:
         snapshot = diag/'problem.snapshot.txt'
         if (data.get('state') != 'UNKNOWN_PAGE' or data.get('source_url') != 'about:blank'
@@ -1824,8 +2081,10 @@ def preserve_stopped_observation(args):
         sandbox_cp = read(sandbox/'checkpoint.json')
         if sandbox_cp.get('next_id') != identity or sandbox_cp.get('state') != cp.get('state') or sandbox_cp.get('stop_reason') != cp.get('stop_reason'):
             raise ValueError('Sandbox checkpoint differs; inspect interrupted transfer')
-        if blank and (sandbox/'problem.snapshot.txt').read_bytes() != snapshot.read_bytes():
+        if (blank or (captcha and snapshot.exists())) and (not (sandbox/'problem.snapshot.txt').exists() or (sandbox/'problem.snapshot.txt').read_bytes() != snapshot.read_bytes()):
             raise ValueError('Sandbox snapshot differs; inspect interrupted transfer')
+        if captcha and (sandbox/'browser-tab.json').exists() and read(sandbox/'browser-tab.json').get('url') != data.get('source_url'):
+            raise ValueError('Original browser URL differs from queue')
     elif blank:
         raise ValueError('Blank-tab preservation requires the original sandbox')
     archive = out/'observations'/identity
@@ -1835,10 +2094,25 @@ def preserve_stopped_observation(args):
         raise ValueError('Observation archive collision')
     if not destination.exists():
         shutil.copy2(source, destination)
+    snapshot_saved = blank or (captcha and snapshot.exists())
+    tab_saved = bool(sandbox_pointer.exists() and (sandbox/'browser-tab.json').exists() and (unresolved_retry or captcha))
+    if snapshot_saved or tab_saved:
+        evidence_archive = diag/'observations'/identity
+        evidence_archive.mkdir(parents=True, exist_ok=True)
+        if snapshot_saved:
+            snapshot_dest = evidence_archive/(sha(snapshot) + '.problem.snapshot.txt')
+            if snapshot_dest.exists() and snapshot_dest.read_bytes() != snapshot.read_bytes(): raise ValueError('Snapshot archive collision')
+            if not snapshot_dest.exists(): shutil.copy2(snapshot, snapshot_dest)
+        if tab_saved:
+            tab = sandbox/'browser-tab.json'
+            if unresolved_retry and read(tab).get('url') != url: raise ValueError('Original browser URL differs from queue')
+            tab_dest = evidence_archive/(sha(tab) + '.browser-tab.json')
+            if tab_dest.exists() and tab_dest.read_bytes() != tab.read_bytes(): raise ValueError('Browser tab archive collision')
+            if not tab_dest.exists(): shutil.copy2(tab, tab_dest)
     write(archive/(sha(source) + '.provenance.json'), dict(authorization_id=args.authorization_id,
         original_file=str(source.relative_to(out)), sha256=sha(source), observed_at=data.get('observed_at'),
         preserved_at=datetime.now(timezone.utc).isoformat(), reason=reason,
-        snapshot_sha256=sha(snapshot) if blank else None))
+        snapshot_sha256=sha(snapshot) if snapshot_saved else None, sandbox_path=str(sandbox) if sandbox_pointer.exists() else None, browser_tab_sha256=sha(tab) if tab_saved else None))
     # The old sandbox remains on disk; removing only its pointer prevents reimport of
     # the already archived stopped observation into the pending raw slot.
     sandbox_pointer.unlink(missing_ok=True)
@@ -1875,6 +2149,7 @@ def diagnostic_pending_capture(args):
     validate_plan_profession(plan, out/'listing.json')
     changed = {file for file, value in plan['automation_sha256'].items() if sha(ROOT/file) != value}
     changes = read(diag/'automation_changes.json') if (diag/'automation_changes.json').exists() else []
+    changes = [dict(c, file=c.get('file', '').replace('\\', '/')) for c in changes]
     if changed - allowed_capture_changes(plan, changes):
         raise ValueError('Unapproved collector source changed')
     verify_partition_url_guard(plan, changed)
@@ -1990,14 +2265,16 @@ def validate_completed_export(out, service):
     if correction and observed_profession_correction(out, service, plan, correction['reason']) != correction:
         raise ValueError('Profession correction evidence differs')
     queue = read(out/'queue.json')
-    excluded = {r['id'] for r in unavailable_records(out, queue)}
+    verified_unavailable = unavailable_records(out, queue); verified_unresolved = unresolved_records(out, queue)
+    if manifest['coverage'].get('unavailable', []) != verified_unavailable or manifest['coverage'].get('unresolved_observations', []) != verified_unresolved: raise ValueError('Manifest observation coverage differs')
+    excluded = {r['id'] for r in verified_unavailable} | {r['id'] for r in verified_unresolved}
     partial = manifest['coverage'].get('partial')
     if partial:
         if read(out/'exports/partial_selection.json') != partial or partial['plan_sha256'] != sha(service/'plan.json') or partial['queue_sha256'] != sha(out/'queue.json'):
             raise ValueError('Partial selection provenance differs')
         ids = [x['id'] for x in queue]
-        cut = len(partial['accepted_ids']) + len(partial['skipped_ids'])
-        if not plan.get('partition') or not 0 < cut < len(ids) or partial['unresolved_ids'] != ids[cut:] or partial['next_id'] != ids[cut] or partial['skipped_ids'] != [i for i in ids[:cut] if i in excluded] or partial['accepted_ids'] != [i for i in ids[:cut] if i not in excluded] or excluded - set(ids[:cut]):
+        cut = len(partial['accepted_ids']) + len(partial['skipped_ids']) + len(partial.get('unresolved_observation_ids', []))
+        if not plan.get('partition') or not 0 < cut < len(ids) or partial['unresolved_ids'] != ids[cut:] or partial['next_id'] != ids[cut] or partial['skipped_ids'] != [i for i in ids[:cut] if i in {r['id'] for r in unavailable_records(out, queue)}] or partial.get('unresolved_observation_ids', []) != [i for i in ids[:cut] if i in {r['id'] for r in unresolved_records(out, queue)}] or partial['accepted_ids'] != [i for i in ids[:cut] if i not in excluded] or excluded - set(ids[:cut]):
             raise ValueError('Partial selection is not the accounted prefix')
         if partial['raw_sha256'] != {i: sha(out/'raw'/f'{i}.json') for i in ids[:cut]}:
             raise ValueError('Partial raw hashes differ')
@@ -2036,8 +2313,8 @@ def post_finalize_review(args):
     if changed - noted or not changed:
         raise ValueError('Post-finalize source changes must be recorded and nonempty')
     validate_automation_changes(changes, changed)
-    subprocess.run([sys.executable, '-m', 'unittest', 'Scraper.test_aside_runner', 'utils.test_build_dataset'], check=True, cwd=ROOT)
-    subprocess.run([sys.executable, 'utils/build_dataset.py', '--check'], check=True, cwd=ROOT)
+    subprocess.run([sys.executable, '-X', 'utf8', '-m', 'unittest', 'Scraper.test_aside_runner', 'utils.test_build_dataset'], check=True, cwd=ROOT)
+    subprocess.run([sys.executable, '-X', 'utf8', 'utils/build_dataset.py', '--check'], check=True, cwd=ROOT)
     write(dest, dict(method='post_finalize_validation_v1', reason=args.reason,
         original_manifest_sha256=sha(service/'manifest.json'), previous_automation_sha256=baseline, automation_changes=changes,
         previous_review_sha256=sha(reviews[-1]) if reviews else None,
@@ -2049,7 +2326,7 @@ def check_staged_diff(root):
     """Keep Git checks strict except non-marker text in staged data separator lines."""
     if subprocess.check_output(['git', 'ls-files', '-u', '-z'], cwd=root):
         raise ValueError('Unmerged index entries')
-    result = subprocess.run(['git', 'diff', '--cached', '--check'], cwd=root, text=True, capture_output=True)
+    result = subprocess.run(['git', '-c', 'core.whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol', 'diff', '--cached', '--check'], cwd=root, text=True, capture_output=True)
     if result.returncode == 0:
         return
     if result.returncode != 2 or result.stderr:
@@ -2065,6 +2342,37 @@ def check_staged_diff(root):
         line = data[number-1].removesuffix('\r') if 0 < number <= len(data) else ''
         if not re.fullmatch(r'={7}\s*[^=\s].*', line):
             raise ValueError('Git diff check failed: ' + diagnostic)
+
+
+def stage_pinned_provenance(root, service, manifest):
+    """Keep the exact bytes of this run's manifest and pinned service artifacts."""
+    prefix = service.relative_to(root).as_posix() + '/'
+    pinned = [name.replace('\\', '/') for name in manifest['files'] if name.replace('\\', '/').startswith(prefix)]
+    pinned.append((service/'manifest.json').relative_to(root).as_posix())
+    subprocess.run(['git', '-c', 'core.autocrlf=false', 'add', '--renormalize', '--', *pinned], cwd=root, check=True)
+
+
+def verify_staged_manifest(root, service, manifest):
+    """Check every manifest file against the Git index, including exact byte count."""
+    entries = [(name.replace('\\', '/'), value['bytes'], value['sha256']) for name, value in manifest['files'].items()]
+    manifest_path = service/'manifest.json'
+    entries.append((manifest_path.relative_to(root).as_posix(), manifest_path.stat().st_size, sha(manifest_path)))
+    for name, _, _ in entries:
+        path = Path(name)
+        if path.is_absolute() or '..' in path.parts or '\n' in name or '\r' in name:
+            raise ValueError('Invalid manifest path for staged byte verification')
+    query = b''.join((':' + name + '\n').encode('utf8') for name, _, _ in entries)
+    result = subprocess.run(['git', 'cat-file', '--batch'], cwd=root, input=query, stdout=subprocess.PIPE, check=True).stdout
+    from io import BytesIO
+    stream = BytesIO(result)
+    for name, size, digest in entries:
+        header = stream.readline().rstrip(b'\n').split()
+        if len(header) != 3 or header[1] != b'blob' or not header[2].isdigit():
+            raise ValueError(f'Missing staged manifest artifact: {name}')
+        actual_size = int(header[2]); content = stream.read(actual_size); delimiter = stream.read(1)
+        if delimiter != b'\n' or actual_size != size or hashlib.sha256(content).hexdigest() != digest:
+            raise ValueError(f'Staged bytes differ from manifest: {name}')
+    if stream.read(1): raise ValueError('Unexpected staged artifact output')
 
 
 def publish(args):
@@ -2106,7 +2414,7 @@ def publish(args):
                 or not review.get('reason', '').strip()):
             raise ValueError('Post-finalize review no longer matches source or manifest')
     # Existing fast batch validations suffice for data-only runs; changed code needs its own tests.
-    subprocess.run([sys.executable, 'utils/build_dataset.py', '--check'], check=True, cwd=ROOT)
+    subprocess.run([sys.executable, '-X', 'utf8', 'utils/build_dataset.py', '--check'], check=True, cwd=ROOT)
     files = [str(out.relative_to(ROOT)), str((service/'plan.json').relative_to(ROOT)),
         str((service/'manifest.json').relative_to(ROOT)), 'Data/dataset/sources.json',
         'Data/dataset/vacancies.csv', 'Data/dataset/manifest.json', 'Data/README.md', 'Data/dataset/README.md']
@@ -2115,13 +2423,16 @@ def publish(args):
     files += [change['file'] for change in manifest.get('automation_changes', [])]
     if any(sha(ROOT/file) != value for file,value in expected_automation.items()):
         files += [change['file'] for change in review.get('automation_changes', [])]
-    staged = git('diff', '--cached', '--name-only').splitlines()
-    if any(not any(path == own or path.startswith(own + '/') for own in files) for path in staged):
+    staged = [path.replace('\\', '/') for path in git('diff', '--cached', '--name-only').splitlines()]
+    allowed_paths = [path.replace('\\', '/') for path in files]
+    if any(not any(path == own or path.startswith(own + '/') for own in allowed_paths) for path in staged):
         raise ValueError('Stage contains unrelated changes; inspect before publication')
     git('add', '--', *files)
+    stage_pinned_provenance(ROOT, service, manifest)
     body = diag / 'pr.md'
     subprocess.run([sys.executable, 'utils/dataset_pr.py', '--run-id', args.run_id,
         '--summary', args.summary, '--output', str(body)], check=True, cwd=ROOT)
+    verify_staged_manifest(ROOT, service, manifest)
     check_staged_diff(ROOT)
     if args.prepare_only:
         print(f'Staged explicit run files; review body at {body}')
@@ -2142,7 +2453,7 @@ def publish(args):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     commands = parser.add_subparsers(dest='command', required=True)
-    for name in ['archive-uncertain-freeze', 'archive-partial-listing', 'partition', 'partial-suffix', 'continuation', 'supplemental', 'freeze', 'capture', 'finalize', 'post-finalize-review', 'publish', 'reselect', 'standing-unavailable-policy', 'closed-policy', 'review-policy', 'blocked-listing-policy', 'salary-review-policy', 'review-salary-line', 'mark-unavailable', 'preserve-stopped-observation', 'note-change', 'record-error', 'check-stage', 'stage-ok', 'resume-offline', 'resume-browser', 'diagnostic-authorization', 'external-threshold-authorization', 'diagnostic-pending-capture']:
+    for name in ['archive-uncertain-freeze', 'archive-partial-listing', 'partition', 'partial-suffix', 'continuation', 'supplemental', 'freeze', 'capture', 'finalize', 'post-finalize-review', 'publish', 'reselect', 'standing-unavailable-policy', 'closed-policy', 'review-policy', 'blocked-listing-policy', 'salary-review-policy', 'review-salary-line', 'mark-unavailable', 'unresolved-policy', 'upgrade-unresolved-extractor', 'mark-unresolved', 'preserve-stopped-observation', 'note-change', 'record-error', 'check-stage', 'stage-ok', 'resume-offline', 'resume-browser', 'diagnostic-authorization', 'external-threshold-authorization', 'diagnostic-pending-capture']:
         command = commands.add_parser(name)
         command.add_argument('--run-id', required=True)
         if name in ('freeze', 'capture', 'diagnostic-pending-capture'):
@@ -2219,6 +2530,14 @@ def main():
         elif name == 'mark-unavailable':
             command.add_argument('--id', required=True)
             command.add_argument('--authorization-id', required=True)
+        elif name == 'upgrade-unresolved-extractor':
+            pass
+        elif name == 'unresolved-policy':
+            command.add_argument('--authorization-id', required=True)
+            command.add_argument('--authorization-question', required=True)
+        elif name == 'mark-unresolved':
+            command.add_argument('--id', required=True)
+            command.add_argument('--authorization-id', required=True)
         elif name == 'preserve-stopped-observation':
             command.add_argument('--authorization-id', required=True)
         elif name == 'reselect':
@@ -2244,7 +2563,7 @@ def main():
         parser.error('batch-size must be positive')
     with ExitStack() as stack:
         try:
-            if args.command in ('archive-uncertain-freeze', 'archive-partial-listing', 'partition', 'partial-suffix', 'continuation', 'supplemental', 'freeze', 'capture', 'finalize', 'post-finalize-review', 'publish', 'reselect', 'standing-unavailable-policy', 'closed-policy', 'review-policy', 'blocked-listing-policy', 'salary-review-policy', 'review-salary-line', 'mark-unavailable', 'preserve-stopped-observation', 'record-error', 'stage-ok', 'resume-browser', 'resume-offline', 'diagnostic-authorization', 'external-threshold-authorization', 'diagnostic-pending-capture'):
+            if args.command in ('archive-uncertain-freeze', 'archive-partial-listing', 'partition', 'partial-suffix', 'continuation', 'supplemental', 'freeze', 'capture', 'finalize', 'post-finalize-review', 'publish', 'reselect', 'standing-unavailable-policy', 'closed-policy', 'review-policy', 'blocked-listing-policy', 'salary-review-policy', 'review-salary-line', 'mark-unavailable', 'unresolved-policy', 'upgrade-unresolved-extractor', 'mark-unresolved', 'preserve-stopped-observation', 'record-error', 'stage-ok', 'resume-browser', 'resume-offline', 'diagnostic-authorization', 'external-threshold-authorization', 'diagnostic-pending-capture'):
                 lock_run_id = args.parent_run_id if args.command in ('continuation', 'supplemental') else args.source_run_id if args.command == 'partial-suffix' else args.run_id
                 stack.enter_context(operation_locked(paths(ROOT, lock_run_id)[2]))
             globals()[args.command.replace('-', '_')](args)

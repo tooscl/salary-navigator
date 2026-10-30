@@ -5,6 +5,7 @@ import io
 import json
 from pathlib import Path
 import subprocess
+import sys
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -83,6 +84,10 @@ def review_changes(root, run_id):
         changes = json.loads(reviews[-1].read_text()).get('automation_changes', changes)
     return changes
 
+def check_dataset(root):
+    subprocess.run([sys.executable, '-X', 'utf8', 'utils/build_dataset.py', '--check'], cwd=root, check=True)
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--run-id", action="append", required=True)
@@ -99,7 +104,7 @@ def main():
     base = subprocess.check_output(["git", "show", f"{args.base}:Data/dataset/vacancies.csv"], cwd=ROOT)
     current = (ROOT / "Data/dataset/vacancies.csv").read_bytes()
     # Validate source hashes and repository-relative paths before opening batch CSVs.
-    subprocess.run(["python3", "utils/build_dataset.py", "--check"], cwd=ROOT, check=True)
+    check_dataset(ROOT)
     registry = json.loads((ROOT / "Data/dataset/sources.json").read_text())
     entries = {entry["run_id"]: entry for entry in registry["exports"]}
     batches = []

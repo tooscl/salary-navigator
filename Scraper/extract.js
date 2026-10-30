@@ -7,8 +7,13 @@
   const body = document.body?.innerText || '';
   const cards = [...document.querySelectorAll('[data-marker="item"]')];
   const title = get('item-view/title-info');
-  const blockingText = /Доступ ограничен|проблема с IP|подтвердите.{0,30}(человек|робот)|проверка безопасности|Слишком много запросов|429 Too Many Requests/i;
-  const blocked = body.includes('Доступ ограничен: проблема с IP') || headings.some(s => blockingText.test(s)) ||
+  const blockingText = /Доступ ограничен|проблема с IP|подтвердите.{0,30}(человек|робот)|проверка безопасности|Слишком много запросов/i;
+  const normalizedEvidence = [document.title, body, ...[...document.querySelectorAll('[data-marker="item-view/item-params"]')].map(e => e.innerText || '')].join(' ').replace(/\s+/g, ' ').trim();
+  const http429 = /(?:\bHTTP\s*|ошибка\s*|код\s*)(?<!\d)429(?!\d)|(?<!\d)429(?!\d)\s*(?:Too Many Requests|слишком много запросов)/i.test(normalizedEvidence) ||
+    /^\s*429\s*$/.test(normalizedEvidence) || headings.some(s => /^\s*429\s*$/.test(s));
+  const restrictionEvidence = http429 || /captcha|капч|too many requests|доступ ограничен|ограничени[ея] доступа|проблем[аы] с ip|подозрительная активность с вашего ip|ip.?адрес|подтвердите.{0,30}(человек|робот)|проверка безопасности|слишком много запросов|доступ заблокирован/i.test(normalizedEvidence);
+  const unavailableEvidence = /Объявление закрыто\.|Объявление снято с публикации\.|Оно ещё на проверке\.|Оно заблокировано после проверки\.|Объявление удалено\.|Пользователь его удалил\.|Объявление больше недоступно\.|Объявление недоступно для просмотра\./i.test(normalizedEvidence);
+  const blocked = restrictionEvidence || body.includes('Доступ ограничен: проблема с IP') || headings.some(s => blockingText.test(s)) ||
     ((!cards.length && !title) && blockingText.test(body.slice(0, 5000))) ||
     [...document.querySelectorAll('[role="dialog"],iframe[src*="captcha"]')].some(e => visible(e) && (e.tagName === 'IFRAME' || /капч|captcha|Доступ ограничен/i.test(e.innerText)));
   const base = {source_url: location.href, observed_at: new Date().toISOString(),
@@ -19,7 +24,9 @@
   if (base.state === 'UNKNOWN_PAGE') {
     const emptyHeading = headings.find(s => /^(?:По вашему запросу (?:ничего не найдено|нет объявлений)|Ничего не найдено)[.!]?$/i.test(s));
     return {...base, state: emptyHeading ? 'EMPTY_RESULT' : 'UNKNOWN_PAGE',
-      empty_evidence: emptyHeading || null, heading: text(document.querySelector('h1')), items: []};
+      empty_evidence: emptyHeading || null, heading: text(document.querySelector('h1')), items: [],
+      unresolved_evidence: {version: 1, complete: document.readyState === 'complete' && !!document.body && !!normalizedEvidence,
+        title_body_params_scanned: true, restriction: restrictionEvidence, known_unavailable: unavailableEvidence}};
   }
   const cleanURL = a => a ? new URL(a.pathname, a.origin).href : null;
   const fields = blocks => blocks.flatMap(block => block.split('\n').filter(s => s.includes(':')).map(s => {
