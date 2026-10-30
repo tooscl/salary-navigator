@@ -38,6 +38,127 @@ def raw(identity='123'):
 
 
 class RunnerTests(unittest.TestCase):
+    def test_deduplicate_queue_empty_mixed_and_tampering(self):
+        original_root = runner.ROOT
+        for all_duplicate in (True, False):
+            with self.subTest(all_duplicate=all_duplicate), tempfile.TemporaryDirectory() as directory, patch.object(runner, 'ROOT', Path(directory)):
+                root=runner.ROOT
+                for file in runner.AUTOMATION_FILES:
+                    dest=root/file; dest.parent.mkdir(parents=True,exist_ok=True); dest.write_bytes((original_root/file).read_bytes())
+                def freeze(name, identities):
+                    out,service,diag=runner.paths(root,name)
+                    page=dict(state='LISTING',source_url='https://www.avito.ru/moskva/vakansii',selected_controls=[],items=[item(str(i)) for i in identities])
+                    runner.write(out/'listing.json',page);runner.write(out/'listing_pages/0001.json',page)
+                    queue=runner.queue_from_pages([page],None);runner.write(out/'queue.json',queue)
+                    plan=dict(run_id=name,profession='',profession_scope='all',setup_seconds=1,segments='',selection_mode='first_N_unique_on_frozen_listing',listing_sha256=runner.sha(out/'listing.json'),listing_pages=[dict(file='listing_pages/0001.json',sha256=runner.sha(out/'listing_pages/0001.json'))])
+                    runner.write(service/'plan.json',plan);runner.write(diag/'checkpoint.json',dict(state='READY',completed_ids=[],next_id=queue[0]['id']))
+                    runner.save_failures(diag,runner.load_failures(diag))
+                    return out,service,diag,queue
+                identities=list(range(1,907)); known=identities if all_duplicate else identities[:-2]
+                source,source_service,source_diag,queue=freeze('source',identities);known_out,known_service,_,_=freeze('known',known)
+                original_ledger=(source_diag/'failures.json').read_bytes(); args=argparse.Namespace(source_run_id='source',run_id='child',against_run_id=['known'])
+                with patch.object(runner.subprocess,'check_output',return_value='head'), patch.object(runner,'dirty_automation',return_value=[]): runner.deduplicate_queue(args)
+                out,service,diag=runner.paths(root,'child'); child=runner.read(out/'queue.json'); info=runner.read(out/'dedup_selection.json')
+                self.assertEqual((info['source_count'],info['duplicate_excluded'],info['novel_count']), (906,906 if all_duplicate else 904,0 if all_duplicate else 2))
+                self.assertEqual(child, [] if all_duplicate else queue[-2:]); self.assertEqual((source_diag/'failures.json').read_bytes(),original_ledger)
+                runner.validate_partition(out,service)
+                with self.assertRaisesRegex(ValueError,'already exists'): runner.deduplicate_queue(args)
+                if all_duplicate:
+                    self.assertEqual(runner.read(out/'dedup-empty.json')['state'],'DEDUP_EMPTY')
+                    for function in (runner.capture,runner.finalize,runner.publish): function(argparse.Namespace(run_id='child'))
+                    self.assertEqual((source_diag/'failures.json').read_bytes(),original_ledger)
+                else:
+                    runner.write(root/'Data/dataset/sources.json',{'schema_version':'1','exports':[]})
+                    (root/'Data/README.md').write_text('# Data\n',encoding='utf8');(root/'Data/dataset/README.md').write_text('Текущий состав: old\n',encoding='utf8')
+                    def browser(job, output, diagnostics):
+                        for candidate in job['queue']: runner.write(output/'raw'/f"{candidate['id']}.json",raw(candidate['id']))
+                        return dict(state='CAPTURED',completed_ids=[candidate['id'] for candidate in job['queue']],next_id=None,stop_reason=None), 1
+                    with patch.object(runner,'preflight'), patch.object(runner,'browser',side_effect=browser), patch.object(runner,'release_browser'):
+                        runner.capture(argparse.Namespace(run_id='child',batch_size=2,retry_reason=None,tab_id=None,config=None))
+                    placements=root/'placements.json';runner.write(placements,{i['id']:{'city':'Коммунарка','region':'Москва','evidence':'пос. Коммунарка'} for i in child})
+                    runner.finalize(argparse.Namespace(run_id='child',placements=placements,review_model='test'))
+                    manifest=runner.read(service/'manifest.json')
+                    self.assertEqual(manifest['coverage']['accepted'],2)
+                    self.assertEqual(manifest['coverage']['deduplication']['duplicate_excluded'],904)
+                known_bytes=(known_out/'queue.json').read_bytes(); (known_out/'queue.json').write_bytes(known_bytes+b' ')
+                with self.assertRaisesRegex(ValueError,'known provenance'): runner.validate_partition(out,service)
+                (known_out/'queue.json').write_bytes(known_bytes)
+                source_bytes=(source/'queue.json').read_bytes(); (source/'queue.json').write_bytes(source_bytes+b' ')
+                with self.assertRaisesRegex(ValueError,'source provenance'): runner.validate_partition(out,service)
+                (source/'queue.json').write_bytes(source_bytes)
+
+    def test_deduplicate_queue_rejects_source_after_capture(self):
+        with tempfile.TemporaryDirectory() as directory, patch.object(runner,'ROOT',Path(directory)):
+            out,service,diag=runner.paths(runner.ROOT,'source'); runner.write(out/'raw/123.json',raw()); runner.write(diag/'checkpoint.json',dict(state='READY',completed_ids=['123']))
+            args=argparse.Namespace(source_run_id='source',run_id='child',against_run_id=['known'])
+            with patch.object(runner,'verified_frozen_queue',return_value=({},[item()])):
+                with self.assertRaisesRegex(ValueError,'before any capture'): runner.deduplicate_queue(args)
+            self.assertFalse(runner.paths(runner.ROOT,'child')[0].exists())
+
+    def test_branch_only_freeze_caps_at_30_pages(self):
+        original_root=runner.ROOT
+        with tempfile.TemporaryDirectory() as directory, patch.object(runner,'ROOT',Path(directory)):
+            for file in runner.AUTOMATION_FILES:
+                dest=runner.ROOT/file;dest.parent.mkdir(parents=True,exist_ok=True);dest.write_bytes((original_root/file).read_bytes())
+            counter={'page':0}
+            def browser(job,out,diag):
+                counter['page']+=1;n=counter['page']
+                page=dict(state='LISTING',source_url=f'https://www.avito.ru/moskva/vakansii?p={n}',heading='Работа',
+                    observed_at=f'2026-10-30T00:00:{n:02d}Z',selected_controls=[],profession_filter={'observed':False,'selected_count':0},
+                    items=[item(str(1000+n))],listing_item_audit={'malformed':0},
+                    pagination={'current_pages':[str(n)],'next_url':f'https://www.avito.ru/moskva/vakansii?p={n+1}','end_confirmed':False})
+                runner.write(diag/'listing.json',page)
+                return {'state':'READY','completed_ids':[]},0.01
+            args=argparse.Namespace(run_id='sweep_branch',url='https://www.avito.ru/moskva/vakansii?p=1',limit=None,candidate_limit=None,
+                all_pages=True,branch_only=True,max_pages=30,geography='Москва',profession='',profession_scope='all',segments='',
+                filter_evidence='base',ui_next=False,tab_id=None,resume=False,accept_saved=False,human_instruction=None,
+                agent_model='test',config=None,retry_reason=None)
+            with patch.object(runner,'ensure_allowed'),patch.object(runner,'preflight'),patch.object(runner,'browser',side_effect=browser),patch.object(runner,'release_browser'),patch.object(runner,'dirty_automation',return_value=[]),patch.object(runner.subprocess,'check_output',return_value='head'):
+                runner.freeze(args)
+            out,service,_=runner.paths(runner.ROOT,'sweep_branch');plan=runner.read(service/'plan.json')
+            self.assertEqual((len(plan['listing_pages']),plan['listing_end_reason'],len(runner.read(out/'queue.json'))),(30,'page_cap_30',30))
+
+    def test_branch_only_freeze_accepts_verified_empty_result(self):
+        original_root=runner.ROOT
+        with tempfile.TemporaryDirectory() as directory, patch.object(runner,'ROOT',Path(directory)):
+            for file in runner.AUTOMATION_FILES:
+                dest=runner.ROOT/file;dest.parent.mkdir(parents=True,exist_ok=True);dest.write_bytes((original_root/file).read_bytes())
+            def browser(job,out,diag):
+                page=dict(state='EMPTY_RESULT',source_url=job['url'],heading='Ничего не найдено',observed_at='2026-10-30T00:00:00Z',
+                    selected_controls=[],profession_filter={'observed':False,'selected_count':0},items=[],empty_evidence='Ничего не найдено')
+                runner.write(diag/'listing.json',page)
+                return {'state':'READY','completed_ids':[]},0.01
+            args=argparse.Namespace(run_id='empty_branch',url='https://www.avito.ru/moskva/vakansii',limit=None,candidate_limit=None,
+                all_pages=True,branch_only=True,max_pages=30,geography='Москва',profession='',profession_scope='all',segments='',
+                filter_evidence='base',ui_next=False,tab_id=None,resume=False,accept_saved=False,human_instruction=None,
+                agent_model='test',config=None,retry_reason=None)
+            with patch.object(runner,'ensure_allowed'),patch.object(runner,'preflight'),patch.object(runner,'browser',side_effect=browser),patch.object(runner,'release_browser'),patch.object(runner,'dirty_automation',return_value=[]),patch.object(runner.subprocess,'check_output',return_value='head'):
+                runner.freeze(args)
+            out,service,diag=runner.paths(runner.ROOT,'empty_branch')
+            self.assertEqual(runner.read(out/'queue.json'),[])
+            self.assertEqual(runner.read(service/'plan.json')['listing_end_reason'],'empty_result')
+            self.assertEqual(runner.read(diag/'checkpoint.json')['state'],'EMPTY_RESULT')
+            self.assertTrue((service/'empty-listing.json').exists())
+
+    def test_branch_only_freeze_detects_repeated_page(self):
+        original_root=runner.ROOT
+        with tempfile.TemporaryDirectory() as directory, patch.object(runner,'ROOT',Path(directory)):
+            for file in runner.AUTOMATION_FILES:
+                dest=runner.ROOT/file;dest.parent.mkdir(parents=True,exist_ok=True);dest.write_bytes((original_root/file).read_bytes())
+            def browser(job,out,diag):
+                page=dict(state='LISTING',source_url=job['url'],heading='Работа',observed_at='2026-10-30T00:00:00Z',
+                    selected_controls=[],profession_filter={'observed':False,'selected_count':0},items=[item('123')],listing_item_audit={'malformed':0},
+                    pagination={'current_pages':['1'],'next_url':job['url'],'end_confirmed':False})
+                runner.write(diag/'listing.json',page);return {'state':'READY','completed_ids':[]},0.01
+            args=argparse.Namespace(run_id='repeat_branch',url='https://www.avito.ru/moskva/vakansii',limit=None,candidate_limit=None,
+                all_pages=True,branch_only=True,max_pages=30,geography='Москва',profession='',profession_scope='all',segments='',
+                filter_evidence='base',ui_next=False,tab_id=None,resume=False,accept_saved=False,human_instruction=None,
+                agent_model='test',config=None,retry_reason=None)
+            with patch.object(runner,'ensure_allowed'),patch.object(runner,'preflight'),patch.object(runner,'browser',side_effect=browser),patch.object(runner,'release_browser'),patch.object(runner,'dirty_automation',return_value=[]),patch.object(runner.subprocess,'check_output',return_value='head'):
+                runner.freeze(args)
+            _,service,_=runner.paths(runner.ROOT,'repeat_branch')
+            self.assertEqual(runner.read(service/'plan.json')['listing_end_reason'],'repeated_next_link')
+
     def test_partition_url_guard_requires_explicit_audit(self):
         guard = 'Scraper/skills/collect-avito/scripts/browser_batch.js'
         plan = {'partition': {'index': 3}}

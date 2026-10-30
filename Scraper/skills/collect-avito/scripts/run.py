@@ -27,9 +27,13 @@ from check_capture import check
 from failure_log import ensure_allowed, record as record_failure, succeeded, HumanRequired, authorize_offline, authorize_browser, operation_locked, locked, load as load_failures, save as save_failures
 from preflight import find_aside, aside_command
 from utils.dataset_pr import validate_automation_changes
+from sweep_mode import (init_sweep as sweep_init_impl, register_branch as sweep_register_impl,
+    set_branch_status as sweep_status_impl, materialize as sweep_materialize_impl,
+    validate_materialized as validate_sweep_materialized, render_report as sweep_report_impl,
+    demo_export as sweep_demo_impl)
 
 AUTOMATION_FILES = ['Scraper/skills/collect-avito/references/top-professions.json', 'utils/title_flags.py', 'Scraper/extract.js', 'Scraper/skills/collect-avito/SKILL.md'] + [
-    'Scraper/skills/collect-avito/scripts/' + name for name in ('run.py', 'browser_batch.js', 'check_capture.py', 'failure_log.py', 'preflight.py')]
+    'Scraper/skills/collect-avito/scripts/' + name for name in ('run.py', 'sweep_mode.py', 'browser_batch.js', 'check_capture.py', 'failure_log.py', 'preflight.py')]
 
 
 class CollectionStopped(RuntimeError, ValueError):
@@ -705,8 +709,14 @@ def freeze(args):
     avito_url(args.url)
     candidate_limit = getattr(args, 'candidate_limit', None)
     all_pages = getattr(args, 'all_pages', False)
+    branch_only = getattr(args, 'branch_only', False)
+    max_pages = getattr(args, 'max_pages', None)
     if (all_pages and (args.limit is not None or candidate_limit is not None)) or (not all_pages and (args.limit is None or args.limit < 1)) or (candidate_limit is not None and candidate_limit < args.limit):
         raise ValueError('Use a positive --limit or --all-pages; candidate limit requires a numeric target')
+    if branch_only and not all_pages:
+        raise ValueError('Sweep branch freeze uses --branch-only with --all-pages')
+    if max_pages is not None and (not branch_only or not 1 <= max_pages <= 30):
+        raise ValueError('--max-pages is only for branch-only freeze and must be 1..30')
     accept_saved = getattr(args, 'accept_saved', False)
     instruction = getattr(args, 'human_instruction', None)
     if accept_saved and (not args.resume or not instruction or not instruction.strip()):
@@ -719,6 +729,8 @@ def freeze(args):
     request = dict(url=args.url, limit=args.limit, candidate_limit=getattr(args, 'candidate_limit', None), geography=args.geography,
                    profession=args.profession, segments=args.segments, filter_evidence=args.filter_evidence)
     request.update(all_pages=all_pages, profession_scope=getattr(args, 'profession_scope', None))
+    if branch_only:
+        request.update(branch_only=True, max_pages=max_pages)
     ui_next = getattr(args, 'ui_next', False)
     if ui_next:
         if not getattr(args, 'tab_id', None): raise ValueError('UI Next requires an explicit --tab-id')
@@ -760,10 +772,14 @@ def freeze(args):
         target = len(queue_from_pages(pages, None))
         if not target or (not all_pages and target >= args.limit):
             raise ValueError('Saved pages must contain a nonempty incomplete selection')
-    while not pages or target is None or len(queue_from_pages(pages, target, False)) < target:
+    empty_saved = bool(pages and pages[0].get('state') == 'EMPTY_RESULT')
+    while not empty_saved and (not pages or target is None or len(queue_from_pages(pages, target, False)) < target):
         url = args.url if not pages else pages[-1].get('pagination', {}).get('next_url')
         if not url:
             listing_end_reason = 'confirmed_end' if pages[-1].get('pagination', {}).get('end_confirmed') else 'no_next_link'
+            break
+        if max_pages is not None and len(pages) >= max_pages:
+            listing_end_reason = f'page_cap_{max_pages}'
             break
         avito_url(url)
         if any(same_observed_url(url, p['source_url']) for p in pages):
@@ -780,10 +796,20 @@ def freeze(args):
             for name in ('sandbox.json', 'listing.json', 'checkpoint.json'):
                 (diag/name).unlink(missing_ok=True)
             write(pending, {'url': url})
-            cp, _ = browser(dict(mode='freeze', url=url, completed_ids=[], tab_id=getattr(args, 'tab_id', None), allow_navigation=bool(pages), ui_next=ui_next, previous=pages[-1] if pages and ui_next else None, first=pages[0] if pages and ui_next else None), out, diag)
+            cp, _ = browser(dict(mode='freeze', url=url, completed_ids=[], tab_id=getattr(args, 'tab_id', None), allow_navigation=bool(pages), ui_next=ui_next, allow_empty=branch_only, previous=pages[-1] if pages and ui_next else None, first=pages[0] if pages and ui_next else None), out, diag)
         if cp['state'] != 'READY':
             raise CollectionStopped(f'Stopped: {cp["state"]}; inspect local diagnostics', cp['state'])
         page = read(diag / 'listing.json')
+        if page.get('state') == 'EMPTY_RESULT':
+            if not branch_only or pages or page.get('items') or not page.get('empty_evidence'):
+                raise ValueError('Unexpected or unverified empty listing')
+            path = page_dir / '0001.json'
+            write(path, page)
+            pages.append(page); page_paths.append(path)
+            pending.unlink(missing_ok=True)
+            listing_end_reason = 'empty_result'
+            release_browser(diag)
+            break
         if pages and ui_next:
             validate_ui_transition(pages[0], pages[-1], page)
         elif not same_observed_url(url, page.get('source_url', '')):
@@ -810,7 +836,7 @@ def freeze(args):
         raise ValueError('Remote selection requires the observed Удалённо filter')
     if candidate_limit is not None and candidate_limit < args.limit:
         raise ValueError('Candidate limit must be at least the target limit')
-    queue = queue_from_pages(pages, target, require_full=False)
+    queue = [] if listing.get('state') == 'EMPTY_RESULT' else queue_from_pages(pages, target, require_full=False)
     continuation_info = read(diag/'continuation.json') if (diag/'continuation.json').exists() else None
     if continuation_info:
         provenance = out/'continuation-provenance'
@@ -826,7 +852,8 @@ def freeze(args):
                 available_listing_exhausted=listing_end_reason == 'confirmed_end', listing_pages=[dict(file=str(p.relative_to(out)), sha256=sha(p)) for p in page_paths]))
             print(json.dumps({'state': 'EMPTY', 'listing_end_reason': listing_end_reason}))
             return
-        raise ValueError('No vacancies were observed; cannot create an empty capture queue')
+        if not (branch_only and listing_end_reason == 'empty_result'):
+            raise ValueError('No vacancies were observed; cannot create an empty capture queue')
     write(out / 'listing.json', listing)
     write(out / 'queue.json', queue)
     write(service / 'plan.json', dict(run_id=args.run_id, geography=args.geography,
@@ -841,6 +868,7 @@ def freeze(args):
         saved_selection_authorization={'instruction': instruction, 'at': datetime.now(timezone.utc).isoformat(), 'original_request': request, 'pending': saved_pending} if accept_saved else None,
         requested_limit=args.limit, available_unique=len(queue),
         listing_end_reason=listing_end_reason, available_listing_exhausted=listing_end_reason == 'confirmed_end', continuation=continuation_info,
+        branch_only=branch_only, max_pages=max_pages,
         candidate_limit=candidate_limit,
         created_at=datetime.now(timezone.utc).isoformat(), instruction_version=instruction_version(ROOT/'Scraper/skills/collect-avito/SKILL.md'),
         extractor_sha256=sha(ROOT / 'Scraper/extract.js'), instruction_sha256=sha(SCRIPTS.parent / 'SKILL.md'),
@@ -849,8 +877,11 @@ def freeze(args):
         execution_model=args.agent_model,
         automation_sha256={file: sha(ROOT/file) for file in AUTOMATION_FILES},
         uncommitted_automation_files=dirty_automation(ROOT)))
-    cp.update(next_id=queue[0]['id'], capture_seconds=0)
+    cp.update(state='READY' if queue else 'EMPTY_RESULT', next_id=queue[0]['id'] if queue else None, capture_seconds=0)
     write(diag / 'checkpoint.json', cp)
+    if not queue:
+        write(service/'empty-listing.json', {'state':'EMPTY_RESULT','evidence':listing.get('empty_evidence'),
+            'listing_end_reason':listing_end_reason,'listing_sha256':sha(out/'listing.json')})
     print(json.dumps({'state': 'READY', 'queued': len(queue), 'heading': listing.get('heading'),
                       'selected_controls': listing.get('selected_controls'),
                       'requested_limit': args.limit, 'listing_end_reason': listing_end_reason,
@@ -1422,8 +1453,114 @@ def supplemental(args):
     print(json.dumps({'run_id':args.run_id, 'queued':len(queue)}, ensure_ascii=False))
 
 
+def verified_frozen_queue(out, service):
+    plan = read(service/'plan.json'); queue = read(out/'queue.json')
+    if plan.get('selection_mode') != 'first_N_unique_on_frozen_listing' or any(plan.get(k) for k in ('partition','continuation','partial_suffix','supplement','deduplication')):
+        raise ValueError('Deduplication requires an ordinary frozen queue')
+    validate_plan_profession(plan, out/'listing.json')
+    if not queue or not plan.get('listing_pages') or queue_from_pages([read(out/p['file']) for p in plan['listing_pages']], len(queue)) != queue:
+        raise ValueError('Frozen queue differs from listing pages')
+    if len({x['id'] for x in queue}) != len(queue): raise ValueError('Frozen queue IDs are not unique')
+    manifest_path = service/'manifest.json'
+    if manifest_path.exists():
+        manifest = read(manifest_path); files = {k.replace('\\', '/'): v for k,v in manifest['files'].items()}
+        for f in (service/'plan.json', out/'queue.json'):
+            key = f.relative_to(ROOT).as_posix(); record = files.get(key)
+            if not record or record['sha256'] != sha(f) or record['bytes'] != f.stat().st_size:
+                raise ValueError('Frozen artifact does not match its completed manifest')
+    return plan, queue
+
+
+def validate_deduplication(out, service):
+    plan = read(service/'plan.json'); info = plan['deduplication']; prov = out/'dedup-provenance'
+    source_out, source_service, _ = paths(ROOT, info['source_run_id'])
+    if read(service/'diagnostics/shared-ledger.json') != {'parent_run_id': info['source_run_id']}:
+        raise ValueError('Deduplicated child must use source ledger')
+    if read(source_service/'dedup-child.json') != {'child_run_id': plan['run_id']}:
+        raise ValueError('Source child assignment differs')
+    source_plan_path = prov/'source-plan.json'; source_queue_path = prov/'source-queue.json'
+    for local, original, expected in ((source_plan_path,source_service/'plan.json',info['source_plan_sha256']), (source_queue_path,source_out/'queue.json',info['source_queue_sha256'])):
+        if sha(local) != expected or sha(original) != expected: raise ValueError('Dedup source provenance changed')
+    parent = read(source_plan_path); source_queue = read(source_queue_path)
+    validate_plan_profession(parent, out/'listing.json')
+    if queue_from_pages([read(out/x['file']) for x in parent['listing_pages']], len(source_queue)) != source_queue:
+        raise ValueError('Dedup source queue differs from frozen listing')
+    known = set()
+    for entry in info['against']:
+        known_out, known_service, _ = paths(ROOT, entry['run_id'])
+        for name, original, digest in ((entry['plan_file'],known_service/'plan.json',entry['plan_sha256']), (entry['queue_file'],known_out/'queue.json',entry['queue_sha256'])):
+            if sha(prov/name) != digest or sha(original) != digest: raise ValueError('Dedup known provenance changed')
+        known_plan, known_queue = verified_frozen_queue(known_out, known_service)
+        known.update(x['id'] for x in known_queue)
+    novel = [item for item in source_queue if item['id'] not in known]
+    excluded = [item['id'] for item in source_queue if item['id'] in known]
+    if plan.get('run_id') != service.name or plan.get('limit') != len(novel) or len({e['run_id'] for e in info['against']}) != len(info['against']): raise ValueError('Deduplicated child metadata differs')
+    if (len(source_queue) != info['source_count'] or len(novel) != info['novel_count'] or excluded != info['duplicate_ids'] or len(excluded) != info['duplicate_excluded'] or read(out/'queue.json') != novel):
+        raise ValueError('Deduplicated queue or counts differ')
+    for field in ('geography','profession','profession_scope','segments','filter_evidence','listing_url','listing_request_url','listing_sha256','listing_pages','selected_controls'):
+        if plan.get(field) != parent.get(field): raise ValueError('Deduplicated filters differ from source')
+    if read(out/'dedup_selection.json') != info: raise ValueError('Dedup selection differs from plan')
+    if not novel:
+        empty = read(out/'dedup-empty.json')
+        if empty != {'state':'DEDUP_EMPTY','source_count':len(source_queue),'duplicate_excluded':len(excluded),'novel_count':0}: raise ValueError('Empty dedup result differs')
+    elif (out/'dedup-empty.json').exists(): raise ValueError('Nonempty dedup queue cannot have empty marker')
+    return info
+
+
+def deduplicate_queue(args):
+    source_out, source_service, source_diag = paths(ROOT, args.source_run_id)
+    out, service, diag = paths(ROOT, args.run_id)
+    ensure_allowed(source_diag, 'deduplicate-queue')
+    if out.exists() or service.exists() or (source_service/'dedup-child.json').exists(): raise ValueError('Derivative or source assignment already exists')
+    against = args.against_run_id
+    if not against or len(set(against)) != len(against) or args.source_run_id in against or args.run_id in against or args.run_id == args.source_run_id:
+        raise ValueError('Distinct source, child and known run IDs required')
+    parent, source_queue = verified_frozen_queue(source_out, source_service)
+    with locked(source_diag):
+        if not (source_diag/'failures.json').exists(): save_failures(source_diag, load_failures(source_diag))
+    cp = read(source_diag/'checkpoint.json')
+    if (source_service/'manifest.json').exists() or (source_service/'partition.json').exists() or any((source_out/'raw').glob('*.json')) or cp.get('completed_ids') or cp.get('state') != 'READY':
+        raise ValueError('Source must be frozen before any capture')
+    known_runs = []; known = set()
+    for index, run_id in enumerate(against):
+        known_out, known_service, _ = paths(ROOT, run_id)
+        _, queue = verified_frozen_queue(known_out, known_service)
+        known.update(item['id'] for item in queue)
+        known_runs.append(dict(run_id=run_id,plan_file=f'known-{index:03d}-plan.json',queue_file=f'known-{index:03d}-queue.json',plan_sha256=sha(known_service/'plan.json'),queue_sha256=sha(known_out/'queue.json')))
+    novel = [item for item in source_queue if item['id'] not in known]; excluded = [item['id'] for item in source_queue if item['id'] in known]
+    info = dict(source_run_id=args.source_run_id,source_plan_sha256=sha(source_service/'plan.json'),source_queue_sha256=sha(source_out/'queue.json'),against=known_runs,source_count=len(source_queue),duplicate_excluded=len(excluded),novel_count=len(novel),duplicate_ids=excluded)
+    out.mkdir(parents=True); diag.mkdir(parents=True); prov=out/'dedup-provenance'; prov.mkdir()
+    shutil.copy2(source_service/'plan.json',prov/'source-plan.json'); shutil.copy2(source_out/'queue.json',prov/'source-queue.json')
+    for entry in known_runs:
+        known_out, known_service, _ = paths(ROOT, entry['run_id'])
+        shutil.copy2(known_service/'plan.json',prov/entry['plan_file']); shutil.copy2(known_out/'queue.json',prov/entry['queue_file'])
+    shutil.copy2(source_out/'listing.json',out/'listing.json')
+    for page in parent['listing_pages']:
+        target = out/page['file']; target.parent.mkdir(parents=True,exist_ok=True); shutil.copy2(source_out/page['file'],target)
+    write(out/'queue.json',novel); write(out/'dedup_selection.json',info)
+    if not novel: write(out/'dedup-empty.json',dict(state='DEDUP_EMPTY',source_count=len(source_queue),duplicate_excluded=len(excluded),novel_count=0))
+    plan = dict(parent,run_id=args.run_id,limit=len(novel),available_unique=len(novel),deduplication=info,
+        instruction_version=instruction_version(SCRIPTS.parent/'SKILL.md'),instruction_sha256=sha(SCRIPTS.parent/'SKILL.md'),
+        code_git_commit=subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip(),
+        automation_sha256={file:sha(ROOT/file) for file in AUTOMATION_FILES},uncommitted_automation_files=dirty_automation(ROOT))
+    write(service/'plan.json',plan); write(diag/'shared-ledger.json',{'parent_run_id':args.source_run_id})
+    write(diag/'checkpoint.json',dict(state='READY' if novel else 'DEDUP_EMPTY',completed_ids=[],next_id=novel[0]['id'] if novel else None,capture_seconds=0))
+    for name in ('automation_changes.json','aside-target.local.json'):
+        if (source_diag/name).exists(): shutil.copy2(source_diag/name,diag/name)
+    write(source_service/'dedup-child.json',{'child_run_id':args.run_id})
+    validate_deduplication(out,service)
+    print(json.dumps({'state':'READY' if novel else 'DEDUP_EMPTY','run_id':args.run_id,'source_count':len(source_queue),'duplicate_excluded':len(excluded),'novel_count':len(novel)},ensure_ascii=False))
+
+
 def validate_partition(out, service):
     plan = read(service/'plan.json')
+    if plan.get('sweep'):
+        validate_sweep_materialized(ROOT, out, service)
+        return
+    if plan.get('deduplication'):
+        validate_deduplication(out, service)
+        return
+    if (service/'dedup-child.json').exists(): raise ValueError('Source queue assigned to deduplicated child')
     if plan.get('supplement'):
         validate_supplement(out, service)
         return
@@ -1606,10 +1743,14 @@ def verify_partition_url_guard(plan, changed):
 def capture(args):
     out, service, diag = paths(ROOT, args.run_id)
     validate_partition(out, service)
+    if (out/'dedup-empty.json').exists():
+        print(json.dumps({'state':'DEDUP_EMPTY','run_id':args.run_id})); return
     ensure_allowed(diag, 'capture', getattr(args, 'retry_reason', None), action=True)
     if (service / 'manifest.json').exists():
         raise ValueError('Completed run is immutable')
     plan = read(service / 'plan.json')
+    if plan.get('branch_only'):
+        raise ValueError('Sweep branch runs contain listing evidence only; materialize the sweep capture queue')
     validate_plan_profession(plan, out / 'listing.json')
     preflight(getattr(args, 'config', None), diag)
     changed = {file for file, value in plan['automation_sha256'].items() if sha(ROOT/file) != value}
@@ -1812,6 +1953,16 @@ def reviewed_row(data, item, regions, plan, override=None):
     row.update(city__source=city_source,
                city__evidence=plan['listing_url'] if city_source == 'search_filter' else location,
                city_anomaly=anomaly)
+    memberships = item.get('sweep_memberships') or []
+    if memberships:
+        first = memberships[0]
+        row.update(discovery_slices='; '.join(record['branch_id'] for record in memberships),
+            discovery_branch_count=str(len(memberships)),
+            discovery_memberships_json=json.dumps(memberships, ensure_ascii=False, separators=(',', ':')),
+            first_discovery_filter=first.get('filter') or '',
+            first_discovery_value=first.get('value') or '',
+            first_discovery_page=first.get('page') or '',
+            first_discovery_position=first.get('position') or '')
     # Parameter labels may be new, but cannot replace identity or provenance.
     if set(fields) & set(row):
         raise ValueError('Parameter collides with metadata')
@@ -1861,11 +2012,15 @@ def partial_prefix_selection(out, service, queue, instruction):
 def finalize(args):
     out, service, diag = paths(ROOT, args.run_id)
     validate_partition(out, service)
+    if (out/'dedup-empty.json').exists():
+        print(json.dumps({'state':'DEDUP_EMPTY','run_id':args.run_id})); return
     ensure_allowed(diag, 'finalize', getattr(args, 'retry_reason', None), action=True)
     if (service / 'manifest.json').exists():
         raise ValueError('Finalized run exists; do not overwrite')
     started = time.perf_counter()
     queue, plan = read(out / 'queue.json'), read(service / 'plan.json')
+    if plan.get('branch_only'):
+        raise ValueError('Sweep branch runs are not exported; materialize the unique sweep queue')
     validate_plan_profession(plan, out / 'listing.json')
     correction = None
     if getattr(args, 'profession_from_observed_controls', False):
@@ -1966,7 +2121,7 @@ def finalize(args):
     (ROOT / 'Data/dataset/manifest.json').write_bytes(manifest_bytes)
     manifest = dict(run_id=args.run_id, dataset_id=args.run_id, status='complete',
         schema=dict(columns=columns, unknown_policy='empty_not_zero'), collection=plan,
-        coverage=dict(planned=len(queue), accepted=len(rows), unavailable=unavailable, unresolved_observations=unresolved, unique_ids=[r['id'] for r in rows], errors=[], partial=partial,
+        coverage=dict(planned=len(queue), accepted=len(rows), unavailable=unavailable, unresolved_observations=unresolved, deduplication=plan.get('deduplication'), sweep=plan.get('sweep'), unique_ids=[r['id'] for r in rows], errors=[], partial=partial,
             limitations=['Visible rendered parameters only; enrichment not run; placement on site; live route unverified']),
         timing=dict(setup_seconds=plan['setup_seconds'], capture_seconds=read(diag/'checkpoint.json').get('capture_seconds'),
             review_export_seconds=time.perf_counter()-started, publication_seconds=None),
@@ -2378,6 +2533,8 @@ def verify_staged_manifest(root, service, manifest):
 def publish(args):
     out, service, diag = paths(ROOT, args.run_id)
     validate_partition(out, service)
+    if (out/'dedup-empty.json').exists():
+        print(json.dumps({'state':'DEDUP_EMPTY','run_id':args.run_id})); return
     ensure_allowed(diag, 'publish', getattr(args, 'retry_reason', None), action=True)
     manifest = read(service / 'manifest.json')
     if manifest['status'] != 'complete':
@@ -2430,8 +2587,12 @@ def publish(args):
     git('add', '--', *files)
     stage_pinned_provenance(ROOT, service, manifest)
     body = diag / 'pr.md'
+    info = manifest.get('collection', {}).get('deduplication')
+    summary = args.summary
+    if info:
+        summary += f" Дедупликация: исходная очередь {info['source_count']}, повторов исключено {info['duplicate_excluded']}, новых ID {info['novel_count']}; сравнено с: {', '.join(x['run_id'] for x in info['against'])}."
     subprocess.run([sys.executable, 'utils/dataset_pr.py', '--run-id', args.run_id,
-        '--summary', args.summary, '--output', str(body)], check=True, cwd=ROOT)
+        '--summary', summary, '--output', str(body)], check=True, cwd=ROOT)
     verify_staged_manifest(ROOT, service, manifest)
     check_staged_diff(ROOT)
     if args.prepare_only:
@@ -2450,20 +2611,108 @@ def publish(args):
     print(result.strip())
 
 
+def sweep_metadata():
+    return dict(instruction_version=instruction_version(SCRIPTS.parent/'SKILL.md'),
+        instruction_sha256=sha(SCRIPTS.parent/'SKILL.md'),
+        code_git_commit=subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip(),
+        automation_sha256={file:sha(ROOT/file) for file in AUTOMATION_FILES},
+        uncommitted_automation_files=dirty_automation(ROOT))
+
+
+def sweep_init(args):
+    print(json.dumps(sweep_init_impl(ROOT, args.run_id, args.spec, sweep_metadata()), ensure_ascii=False))
+
+
+def sweep_snapshot(args):
+    if not re.fullmatch(r'[A-Za-z0-9][A-Za-z0-9_-]{0,79}', args.name):
+        raise ValueError('Use a path-safe snapshot name')
+    avito_url(args.url)
+    sweep_data = ROOT/'Data/avito_sweeps'/args.run_id/'observations'/args.name
+    sweep_service = ROOT/'Scraper/sweeps'/args.run_id
+    if not (sweep_service/'plan.json').exists():
+        raise ValueError('Initialize the sweep before observations')
+    target = sweep_service/'observations'/f'{args.name}.json'
+    if target.exists() or sweep_data.exists():
+        raise ValueError('Sweep snapshot name already exists')
+    diag = sweep_service/'observations'/f'{args.name}.diagnostics'
+    preflight(args.config, diag)
+    checkpoint, _ = browser(dict(mode='freeze', url=args.url, completed_ids=[], tab_id=args.tab_id,
+        allow_navigation=False, ui_next=False), sweep_data, diag)
+    if checkpoint.get('state') != 'READY':
+        raise CollectionStopped('Sweep snapshot requires a stable listing or verified empty result', checkpoint.get('state'))
+    listing = read(diag/'listing.json')
+    if listing.get('state') not in ('LISTING','EMPTY_RESULT'):
+        raise ValueError('Sweep snapshot is not a listing')
+    write(target, listing)
+    release_browser(diag)
+    print(json.dumps({'state':'READY','snapshot':str(target.relative_to(ROOT)),
+        'selected_controls':listing.get('selected_controls',[]),
+        'available_filter_controls':listing.get('available_filter_controls',[])},ensure_ascii=False))
+
+
+def sweep_register_branch(args):
+    result = sweep_register_impl(ROOT, args.run_id, args.branch_id, args.branch_run_id, args.reset_evidence)
+    print(json.dumps(result, ensure_ascii=False))
+
+
+def sweep_set_branch_status(args):
+    print(json.dumps(sweep_status_impl(ROOT, args.run_id, args.branch_id, args.status, args.reason), ensure_ascii=False))
+
+
+def sweep_materialize(args):
+    print(json.dumps(sweep_materialize_impl(ROOT, args.run_id, args.capture_run_id,
+        sweep_metadata(), args.allow_partial), ensure_ascii=False))
+
+
+def sweep_report(args):
+    print(json.dumps(sweep_report_impl(ROOT, args.run_id), ensure_ascii=False))
+
+
+def sweep_demo_export(args):
+    print(json.dumps(sweep_demo_impl(ROOT, args.run_id, args.source_run_id, args.limit), ensure_ascii=False))
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     commands = parser.add_subparsers(dest='command', required=True)
-    for name in ['archive-uncertain-freeze', 'archive-partial-listing', 'partition', 'partial-suffix', 'continuation', 'supplemental', 'freeze', 'capture', 'finalize', 'post-finalize-review', 'publish', 'reselect', 'standing-unavailable-policy', 'closed-policy', 'review-policy', 'blocked-listing-policy', 'salary-review-policy', 'review-salary-line', 'mark-unavailable', 'unresolved-policy', 'upgrade-unresolved-extractor', 'mark-unresolved', 'preserve-stopped-observation', 'note-change', 'record-error', 'check-stage', 'stage-ok', 'resume-offline', 'resume-browser', 'diagnostic-authorization', 'external-threshold-authorization', 'diagnostic-pending-capture']:
+    for name in ['sweep-init', 'sweep-snapshot', 'sweep-register-branch', 'sweep-set-branch-status', 'sweep-materialize', 'sweep-report', 'sweep-demo-export', 'archive-uncertain-freeze', 'archive-partial-listing', 'partition', 'partial-suffix', 'deduplicate-queue', 'continuation', 'supplemental', 'freeze', 'capture', 'finalize', 'post-finalize-review', 'publish', 'reselect', 'standing-unavailable-policy', 'closed-policy', 'review-policy', 'blocked-listing-policy', 'salary-review-policy', 'review-salary-line', 'mark-unavailable', 'unresolved-policy', 'upgrade-unresolved-extractor', 'mark-unresolved', 'preserve-stopped-observation', 'note-change', 'record-error', 'check-stage', 'stage-ok', 'resume-offline', 'resume-browser', 'diagnostic-authorization', 'external-threshold-authorization', 'diagnostic-pending-capture']:
         command = commands.add_parser(name)
         command.add_argument('--run-id', required=True)
         if name in ('freeze', 'capture', 'diagnostic-pending-capture'):
             command.add_argument('--tab-id', help='Explicitly authorized Aside browser targetId')
             command.add_argument('--config', type=Path, help='Local config also used by setup_workspace/preflight')
-        if name in ('archive-uncertain-freeze', 'archive-partial-listing', 'post-finalize-review'):
+        if name == 'sweep-init':
+            command.add_argument('--spec', type=Path, required=True)
+        elif name == 'sweep-snapshot':
+            command.add_argument('--name', required=True)
+            command.add_argument('--url', required=True)
+            command.add_argument('--tab-id', required=True)
+            command.add_argument('--config', type=Path)
+        elif name == 'sweep-register-branch':
+            command.add_argument('--branch-id', required=True)
+            command.add_argument('--branch-run-id', required=True)
+            command.add_argument('--reset-evidence', type=Path)
+        elif name == 'sweep-set-branch-status':
+            command.add_argument('--branch-id', required=True)
+            command.add_argument('--status', choices=['unavailable','skipped','error'], required=True)
+            command.add_argument('--reason', required=True)
+        elif name == 'sweep-materialize':
+            command.add_argument('--capture-run-id', required=True)
+            command.add_argument('--allow-partial', action='store_true')
+        elif name == 'sweep-demo-export':
+            command.add_argument('--source-run-id', required=True)
+            command.add_argument('--limit', type=int,
+                help='Optional deterministic row limit for a review-sized demonstration CSV')
+        elif name == 'sweep-report':
+            pass
+        elif name in ('archive-uncertain-freeze', 'archive-partial-listing', 'post-finalize-review'):
             command.add_argument('--reason', required=True)
         elif name == 'partition':
             command.add_argument('--batch-size', type=int, required=True)
             command.add_argument('--prefix', required=True)
+        elif name == 'deduplicate-queue':
+            command.add_argument('--source-run-id', required=True)
+            command.add_argument('--against-run-id', required=True, action='append')
         elif name == 'supplemental':
             command.add_argument('--parent-run-id', required=True)
             command.add_argument('--observation', required=True, help='Listing JSON filename in parent diagnostics')
@@ -2475,6 +2724,8 @@ def main():
         elif name == 'freeze':
             command.add_argument('--retry-reason')
             command.add_argument('--ui-next', action='store_true', help='Click observed Next in explicit tab and verify landed page')
+            command.add_argument('--branch-only', action='store_true', help='Freeze listing evidence for a sweep branch; never capture this run')
+            command.add_argument('--max-pages', type=int, help='Finite page cap for --branch-only, at most 30')
             command.add_argument('--resume', action='store_true', help='Recover an interrupted freeze with identical inputs')
             command.add_argument('--accept-saved', action='store_true', help='Offline: accept the incomplete saved listing with explicit human instruction')
             command.add_argument('--human-instruction', help='Explicit instruction to accept exactly the saved listing')
@@ -2563,11 +2814,11 @@ def main():
         parser.error('batch-size must be positive')
     with ExitStack() as stack:
         try:
-            if args.command in ('archive-uncertain-freeze', 'archive-partial-listing', 'partition', 'partial-suffix', 'continuation', 'supplemental', 'freeze', 'capture', 'finalize', 'post-finalize-review', 'publish', 'reselect', 'standing-unavailable-policy', 'closed-policy', 'review-policy', 'blocked-listing-policy', 'salary-review-policy', 'review-salary-line', 'mark-unavailable', 'unresolved-policy', 'upgrade-unresolved-extractor', 'mark-unresolved', 'preserve-stopped-observation', 'record-error', 'stage-ok', 'resume-browser', 'resume-offline', 'diagnostic-authorization', 'external-threshold-authorization', 'diagnostic-pending-capture'):
-                lock_run_id = args.parent_run_id if args.command in ('continuation', 'supplemental') else args.source_run_id if args.command == 'partial-suffix' else args.run_id
+            if args.command in ('archive-uncertain-freeze', 'archive-partial-listing', 'partition', 'partial-suffix', 'deduplicate-queue', 'continuation', 'supplemental', 'freeze', 'capture', 'finalize', 'post-finalize-review', 'publish', 'reselect', 'standing-unavailable-policy', 'closed-policy', 'review-policy', 'blocked-listing-policy', 'salary-review-policy', 'review-salary-line', 'mark-unavailable', 'unresolved-policy', 'upgrade-unresolved-extractor', 'mark-unresolved', 'preserve-stopped-observation', 'record-error', 'stage-ok', 'resume-browser', 'resume-offline', 'diagnostic-authorization', 'external-threshold-authorization', 'diagnostic-pending-capture'):
+                lock_run_id = args.parent_run_id if args.command in ('continuation', 'supplemental') else args.source_run_id if args.command in ('partial-suffix', 'deduplicate-queue') else args.run_id
                 stack.enter_context(operation_locked(paths(ROOT, lock_run_id)[2]))
             globals()[args.command.replace('-', '_')](args)
-            if args.command in ('freeze', 'capture', 'finalize', 'publish'):
+            if args.command in ('freeze', 'capture', 'finalize', 'publish') and not (paths(ROOT, args.run_id)[0]/'dedup-empty.json').exists():
                 _, _, diag = paths(ROOT, args.run_id)
                 succeeded(diag, args.command, 'Command completed successfully')
         except HumanRequired as error:
