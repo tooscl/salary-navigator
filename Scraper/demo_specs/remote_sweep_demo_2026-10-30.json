@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "entry_mode": "constraint_regions",
+  "max_pages": 30,
+  "base": {"geography": "Все регионы", "profession": "", "constraints": [{"name": "Формат работы", "value": "Удалённо"}]},
+  "routing": {"regions": ["Все регионы", "Москва"]},
+  "filter_catalog": [],
+  "branches": [
+    {
+      "id": "base_all_regions", "kind": "base",
+      "expected_slice": {"geography": "Все регионы", "profession": "", "profession_scope": "all", "segments": ""},
+      "expected_selected_controls": [
+        {"label": "По всей России", "marker": "params[127818]/3054249", "value": null},
+        {"label": "По всей России", "marker": "params[127818]/toggle", "value": "3054249"},
+        {"label": "Любой", "marker": "params[196929]/all", "value": null},
+        {"label": "Любой", "marker": "params[196929]/toggle", "value": "all"},
+        {"label": "Удалённо", "marker": "params[172815]/3286367", "value": null},
+        {"label": "Удалённо", "marker": "params[172815]/toggle", "value": "3286367"},
+        {"label": "Неважно", "marker": null, "value": "all"},
+        {"label": "Все", "marker": null, "value": "all"}
+      ]
+    },
+    {
+      "id": "region_moscow", "kind": "route", "route_dimension": "geography", "route_value": "Москва",
+      "expected_slice": {"geography": "Москва", "profession": "", "profession_scope": "all", "segments": ""},
+      "expected_selected_controls": [
+        {"label": "Только в моём регионе", "marker": "params[127818]/3054250", "value": null},
+        {"label": "Только в моём регионе", "marker": "params[127818]/toggle", "value": "3054250"},
+        {"label": "Любой", "marker": "params[196929]/all", "value": null},
+        {"label": "Любой", "marker": "params[196929]/toggle", "value": "all"},
+        {"label": "Удалённо", "marker": "params[172815]/3286367", "value": null},
+        {"label": "Удалённо", "marker": "params[172815]/toggle", "value": "3286367"},
+        {"label": "Неважно", "marker": null, "value": "all"},
+        {"label": "Все", "marker": null, "value": "all"}
+      ]
+    }
+  ]
+}

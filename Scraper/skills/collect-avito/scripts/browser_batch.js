@@ -36,7 +36,9 @@ try {
         const {observed_at, ...stableFields} = value;
         const key = JSON.stringify(stableFields);
         repeats = key === last ? repeats + 1 : 0; last = key;
-        if (repeats >= 2 && value.state === 'LISTING' && value.items.length && value.listing_item_audit?.malformed === 0 && accept(value)) return value;
+        const paginationObserved = value.pagination?.next_url || value.pagination?.end_confirmed;
+        if (repeats >= 2 && value.state === 'LISTING' && value.items.length && value.listing_item_audit?.malformed === 0 && paginationObserved && accept(value)) return value;
+        if (repeats >= 2 && value.state === 'EMPTY_RESULT' && value.empty_evidence && !(value.items || []).length && accept(value)) return value;
         await sleep(500);
       }
       throw new Error('Listing did not stabilize');
@@ -69,10 +71,15 @@ try {
       }
       if (!valid(current, n + 1)) throw new Error('Tab is not the expected completed next page');
       listing = {...current, ui_transition: {method: 'observed_ui_next', recovered, next_snapshot: nextSnapshot, from_url: previous.source_url, from_page: n, next_href: previous.pagination.next_url, observed_href: observedHref, landed_url: current.source_url, landed_page: n + 1, stability: 'three_matching_snapshots_500ms'}};
-    } else listing = job.ui_next ? await stable(l => (l.pagination?.current_pages || []).includes('1')) : await p.evaluate(extractor);
+    } else listing = job.ui_next ? await stable(l => l.state === 'EMPTY_RESULT' || (l.pagination?.current_pages || []).includes('1')) : await stable(l =>
+      (job.allow_empty && l.state === 'EMPTY_RESULT') || (Array.isArray(l.selected_controls) && l.selected_controls.length > 0 && l.profession_filter?.observed === true &&
+      ((l.pagination?.current_pages || []).length > 0 || l.pagination?.end_confirmed === true)));
     const snap = await snapshot(p, {interactive: true});
     await save('listing.json', listing);
-    if (listing.state !== 'LISTING') {
+    if (listing.state === 'EMPTY_RESULT') {
+      await checkpoint('READY', null, 'empty_result');
+      console.log('TL_LISTING=' + JSON.stringify({heading: listing.heading, controls: listing.selected_controls, items: 0, empty: true}));
+    } else if (listing.state !== 'LISTING') {
       console.log(snap.tree);
       await checkpoint(listing.state === 'NEEDS_HUMAN' ? 'NEEDS_HUMAN' : 'REVIEW_REQUIRED', null, listing.state);
     } else {

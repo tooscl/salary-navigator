@@ -7,8 +7,13 @@
   const body = document.body?.innerText || '';
   const cards = [...document.querySelectorAll('[data-marker="item"]')];
   const title = get('item-view/title-info');
-  const blockingText = /Доступ ограничен|проблема с IP|подтвердите.{0,30}(человек|робот)|проверка безопасности|Слишком много запросов|429 Too Many Requests/i;
-  const blocked = body.includes('Доступ ограничен: проблема с IP') || headings.some(s => blockingText.test(s)) ||
+  const blockingText = /Доступ ограничен|проблема с IP|подтвердите.{0,30}(человек|робот)|проверка безопасности|Слишком много запросов/i;
+  const normalizedEvidence = [document.title, body, ...[...document.querySelectorAll('[data-marker="item-view/item-params"]')].map(e => e.innerText || '')].join(' ').replace(/\s+/g, ' ').trim();
+  const http429 = /(?:\bHTTP\s*|ошибка\s*|код\s*)(?<!\d)429(?!\d)|(?<!\d)429(?!\d)\s*(?:Too Many Requests|слишком много запросов)/i.test(normalizedEvidence) ||
+    /^\s*429\s*$/.test(normalizedEvidence) || headings.some(s => /^\s*429\s*$/.test(s));
+  const restrictionEvidence = http429 || /captcha|капч|too many requests|доступ ограничен|ограничени[ея] доступа|проблем[аы] с ip|подозрительная активность с вашего ip|ip.?адрес|подтвердите.{0,30}(человек|робот)|проверка безопасности|слишком много запросов|доступ заблокирован/i.test(normalizedEvidence);
+  const unavailableEvidence = /Объявление закрыто\.|Объявление снято с публикации\.|Оно ещё на проверке\.|Оно заблокировано после проверки\.|Объявление удалено\.|Пользователь его удалил\.|Объявление больше недоступно\.|Объявление недоступно для просмотра\./i.test(normalizedEvidence);
+  const blocked = restrictionEvidence || body.includes('Доступ ограничен: проблема с IP') || headings.some(s => blockingText.test(s)) ||
     ((!cards.length && !title) && blockingText.test(body.slice(0, 5000))) ||
     [...document.querySelectorAll('[role="dialog"],iframe[src*="captcha"]')].some(e => visible(e) && (e.tagName === 'IFRAME' || /капч|captcha|Доступ ограничен/i.test(e.innerText)));
   const base = {source_url: location.href, observed_at: new Date().toISOString(),
@@ -18,8 +23,15 @@
   if (blocked) return {...base, reason: 'access_restriction_or_captcha', items: []};
   if (base.state === 'UNKNOWN_PAGE') {
     const emptyHeading = headings.find(s => /^(?:По вашему запросу (?:ничего не найдено|нет объявлений)|Ничего не найдено)[.!]?$/i.test(s));
+    const emptySelected = [...document.querySelectorAll('input[type="checkbox"]:checked,input[type="radio"]:checked,[role="checkbox"][aria-checked="true"],[role="radio"][aria-checked="true"],[role="switch"][aria-checked="true"]')]
+      .map(e => ({label: e.getAttribute('aria-label') || text(e.closest('label')) || text(e.parentElement),
+        marker: e.closest('[data-marker^="params[144170]/"]')?.getAttribute('data-marker') || e.getAttribute('data-marker') || null,
+        value: e.value || null}));
     return {...base, state: emptyHeading ? 'EMPTY_RESULT' : 'UNKNOWN_PAGE',
-      empty_evidence: emptyHeading || null, heading: text(document.querySelector('h1')), items: []};
+      empty_evidence: emptyHeading || null, heading: text(document.querySelector('h1')), items: [],
+      selected_controls: emptySelected,
+      unresolved_evidence: {version: 1, complete: document.readyState === 'complete' && !!document.body && !!normalizedEvidence,
+        title_body_params_scanned: true, restriction: restrictionEvidence, known_unavailable: unavailableEvidence}};
   }
   const cleanURL = a => a ? new URL(a.pathname, a.origin).href : null;
   const fields = blocks => blocks.flatMap(block => block.split('\n').filter(s => s.includes(':')).map(s => {
@@ -95,6 +107,22 @@
     label: e.getAttribute('aria-label') || text(e.closest('label')) || text(e.parentElement),
     marker: marker(e), value: e.value || null
   }));
+  const available_filter_controls = [...document.querySelectorAll(
+    'input[type="checkbox"],input[type="radio"],[role="checkbox"],[role="radio"],[role="switch"]'
+  )].filter(e => visible(e) || visible(e.closest('label'))).map(e => {
+    const container = e.closest('fieldset,[data-marker*="params"],[role="group"]');
+    const heading = container && [...container.querySelectorAll('legend,h2,h3,[role="heading"]')].find(visible);
+    return {
+      label: e.getAttribute('aria-label') || text(e.closest('label')) || text(e.parentElement),
+      marker: marker(e), value: e.value || null,
+      kind: e.getAttribute('role') || e.getAttribute('type') || null,
+      checked: e.checked === true || e.getAttribute('aria-checked') === 'true',
+      disabled: e.disabled === true || e.getAttribute('aria-disabled') === 'true',
+      group: text(heading) || e.getAttribute('name') || null
+    };
+  }).filter((entry, index, values) => entry.label && values.findIndex(other =>
+    JSON.stringify([other.marker, other.value, other.label, other.kind]) ===
+    JSON.stringify([entry.marker, entry.value, entry.label, entry.kind])) === index);
   const profession_filter = {
     observed: [...document.querySelectorAll('[data-marker^="params[144170]/"]')].some(e => visible(e) || visible(e.closest('label'))),
     selected_count: controls.filter(c => c.marker?.startsWith('params[144170]/') &&
@@ -125,5 +153,6 @@
   const pagination = {current_pages, next_url: !disabled ? nextURL : null, end_confirmed: !!disabled,
     evidence: effectiveNext ? {text: text(effectiveNext), label: effectiveNext.getAttribute('aria-label'), href: nextHref, disabled: !!disabled, direction: effectiveNext === disabledNext ? 'next_arrowright' : null} : null,
     limitation: 'End requires an explicitly disabled Next; missing Next alone is not proof; infinite loading and server-side result caps are not covered'};
-  return {...base, heading: text(document.querySelector('h1')), selected_controls: controls, profession_filter, items, listing_item_audit, pagination};
+  return {...base, heading: text(document.querySelector('h1')), selected_controls: controls,
+    available_filter_controls, profession_filter, items, listing_item_audit, pagination};
 })()

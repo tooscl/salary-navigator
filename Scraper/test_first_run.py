@@ -236,7 +236,7 @@ class SetupTests(unittest.TestCase):
     def test_runner_passes_explicit_config_to_its_preflight(self):
         with patch.object(runner.subprocess, 'run') as command:
             runner.preflight(Path('/private/custom/local.json'))
-        self.assertEqual(command.call_args.args[0][-2:], ['--config', '/private/custom/local.json'])
+        self.assertEqual(command.call_args.args[0][-2:], ['--config', str(Path('/private/custom/local.json'))])
         with patch.object(runner.subprocess, 'run') as command:
             runner.preflight()
         self.assertNotIn('--config', command.call_args.args[0])

@@ -1,12 +1,20 @@
 import unittest
 
-from utils.dataset_pr import browser_evidence, render, validate_automation_changes, review_changes
+from utils.dataset_pr import browser_evidence, render, validate_automation_changes, review_changes, check_dataset
 from pathlib import Path
 import tempfile
 import json
+import sys
+from unittest.mock import patch
 
 
 class PublicationTests(unittest.TestCase):
+    def test_dataset_check_uses_current_python_in_utf8_mode(self):
+        root = Path('project')
+        with patch('utils.dataset_pr.subprocess.run') as run:
+            check_dataset(root)
+            run.assert_called_once_with([sys.executable, '-X', 'utf8', 'utils/build_dataset.py', '--check'], cwd=root, check=True)
+
     def test_review_changes_uses_latest_audit_and_manifest_fallback(self):
         with tempfile.TemporaryDirectory() as temp:
             root = Path(temp); manifest = root/'Scraper/runs/example/manifest.json'

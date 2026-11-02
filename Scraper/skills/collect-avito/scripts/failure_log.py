@@ -1,7 +1,13 @@
 """Persistent per-run failure budget shared by all agents; no automatic retries."""
 from contextlib import contextmanager
 from datetime import datetime, timezone
-import fcntl
+import os
+import time
+
+if os.name == "nt":
+    import msvcrt
+else:
+    import fcntl
 import json
 import re
 
@@ -13,8 +19,10 @@ class HumanRequired(RuntimeError):
 def ledger_dir(diag):
     marker = diag / 'shared-ledger.json'
     if not marker.exists():
+        if (diag.parent / 'shared-ledger.json').exists():
+            raise HumanRequired('Local shared collection ledger missing; do not reset the budget')
         return diag
-    data = json.loads(marker.read_text())
+    data = json.loads(marker.read_text(encoding='utf-8'))
     parent = data.get('parent_run_id', '')
     if not isinstance(parent, str) or not re.fullmatch(r'[a-zA-Z0-9][a-zA-Z0-9_-]{0,119}', parent):
         raise HumanRequired('Invalid shared ledger pointer')
@@ -24,16 +32,46 @@ def ledger_dir(diag):
     return target
 
 
+def _lock(stream, blocking):
+    if os.name != 'nt':
+        fcntl.flock(stream, fcntl.LOCK_EX | (0 if blocking else fcntl.LOCK_NB))
+        return
+    # Lock the same byte in every process; do not truncate an existing lock file.
+    stream.seek(0, os.SEEK_END)
+    if stream.tell() == 0:
+        stream.write(b'\0')
+        stream.flush()
+    while True:
+        stream.seek(0)
+        try:
+            msvcrt.locking(stream.fileno(), msvcrt.LK_NBLCK, 1)
+            return
+        except OSError as exc:
+            if exc.errno not in (13, 36):
+                raise
+            if not blocking:
+                raise BlockingIOError from exc
+            time.sleep(0.05)
+
+
+def _unlock(stream):
+    if os.name == 'nt':
+        stream.seek(0)
+        msvcrt.locking(stream.fileno(), msvcrt.LK_UNLCK, 1)
+    else:
+        fcntl.flock(stream, fcntl.LOCK_UN)
+
+
 @contextmanager
 def locked(diag):
     diag = ledger_dir(diag)
     diag.mkdir(parents=True, exist_ok=True)
-    with (diag / 'failure.lock').open('a') as stream:
-        fcntl.flock(stream, fcntl.LOCK_EX)
+    with (diag / 'failure.lock').open('a+b') as stream:
+        _lock(stream, True)
         try:
             yield
         finally:
-            fcntl.flock(stream, fcntl.LOCK_UN)
+            _unlock(stream)
 
 
 @contextmanager
@@ -41,26 +79,37 @@ def operation_locked(diag):
     """Only one actual CLI action may write/navigate for this run at a time."""
     diag = ledger_dir(diag)
     diag.mkdir(parents=True, exist_ok=True)
-    with (diag / 'operation.lock').open('a') as stream:
+    with (diag / 'operation.lock').open('a+b') as stream:
         try:
-            fcntl.flock(stream, fcntl.LOCK_EX | fcntl.LOCK_NB)
+            _lock(stream, False)
         except BlockingIOError:
             raise HumanRequired('Another collector action is running for this run; do not start a duplicate') from None
         try:
             yield
         finally:
-            fcntl.flock(stream, fcntl.LOCK_UN)
+            _unlock(stream)
+
+
+def _read_ledger(path):
+    raw = path.read_bytes()
+    try:
+        return json.loads(raw.decode('utf-8'))
+    except UnicodeDecodeError:
+        # Legacy Windows runs used the system code page before UTF-8 was explicit.
+        if os.name != 'nt':
+            raise
+        return json.loads(raw.decode('cp1251'))
 
 
 def load(diag):
     diag = ledger_dir(diag)
     path = diag / 'failures.json'
-    ledger = json.loads(path.read_text()) if path.exists() else {
+    ledger = _read_ledger(path) if path.exists() else {
         'events': [], 'stages': {}, 'failures': 0, 'state': 'READY', 'retry_started': False}
     # Old stopped ledgers stay stopped. The new policy never grants human consent.
     ledger.setdefault('retry_limit', 5)
     if (diag / 'retry-limit.json').exists():
-        policy = json.loads((diag / 'retry-limit.json').read_text())
+        policy = json.loads((diag / 'retry-limit.json').read_text(encoding='utf-8'))
         if policy != {'retry_limit': 1}:
             raise HumanRequired('Invalid collection retry policy')
         ledger['retry_limit'] = 1
@@ -78,7 +127,7 @@ def save(diag, ledger):
     diag = ledger_dir(diag)
     path = diag / 'failures.json'
     temp = path.with_suffix('.json.tmp')
-    temp.write_text(json.dumps(ledger, ensure_ascii=False, indent=2) + '\n')
+    temp.write_text(json.dumps(ledger, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
     temp.replace(path)
 
 
@@ -159,7 +208,7 @@ def record(diag, stage, message, action, url=None, agent=None, immediate=False):
             f'Неудачных попыток: {ledger["failures"]}; '
             f'осталось повторов: {event["retry_budget_remaining"]}.\n'
             'Смена агента, вкладки или URL не сбрасывает счётчик. '
-            'При NEEDS_HUMAN новые переходы запрещены до инструкции человека.\n')
+            'При NEEDS_HUMAN новые переходы запрещены до инструкции человека.\n', encoding='utf-8')
         return event
 
 
@@ -205,4 +254,4 @@ def authorize_browser(diag, instruction, authorization_id):
         save(diag, ledger)
         (diag/'failure-report.md').write_text(
             'RESUMED_BY_HUMAN\n\nИстория ошибок сохранена. Разрешена новая ограниченная попытка '
-            f'с {ledger["retry_limit"]} допустимыми повторами; ограничения сайта требуют немедленной остановки.\n')
+            f'с {ledger["retry_limit"]} допустимыми повторами; ограничения сайта требуют немедленной остановки.\n', encoding='utf-8')
