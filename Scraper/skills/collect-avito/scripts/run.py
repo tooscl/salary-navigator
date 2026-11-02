@@ -1226,8 +1226,29 @@ def mark_unavailable(args):
     snap = diag/'problem.snapshot.txt'; snapshot = snap.read_text(encoding='utf-8')
     url = matches[0]['url']
     markers = [marker for marker in ALL_UNAVAILABLE_MARKERS if any(norm(line) == f'- text: "{marker}"' for line in snapshot.splitlines())]
-    if len(markers) != 1 or f'[url={url}]' not in snapshot or not closed_raw_matches(data, args.id, url, markers[0]):
+    if len(markers) != 1 or not closed_raw_matches(data, args.id, url, markers[0]):
         raise ValueError('Missing exact closed-page evidence for the pending URL')
+    tab_evidence = None
+    if f'[url={url}]' not in snapshot:
+        # A truncated snapshot URL is not identity evidence. Bind the original
+        # browser tab observation to the same stopped sandbox and full queue URL.
+        titles = re.findall(r'^- title: .*?\[url=([^\]]+)\]', snapshot, re.MULTILINE)
+        evidence = data.get('unresolved_evidence', {})
+        if (len(titles) != 1 or not titles[0].endswith('…')
+                or not url.startswith(titles[0][:-1])
+                or evidence.get('restriction') is not False or evidence.get('known_unavailable') is not True):
+            raise ValueError('Missing truncated closed-page URL evidence')
+        pointer = diag/'sandbox.json'
+        if not pointer.exists(): raise ValueError('Missing exact closed-page URL evidence')
+        sandbox = Path(read(pointer)['path']); tab = sandbox/'browser-tab.json'
+        sandbox_cp = read(sandbox/'checkpoint.json')
+        if (not tab.is_file() or read(tab).get('url') != url
+                or (sandbox/'raw'/raw.name).read_bytes() != raw.read_bytes()
+                or (sandbox/'problem.snapshot.txt').read_bytes() != snap.read_bytes()
+                or any(sandbox_cp.get(k) != cp.get(k) for k in ('state', 'stop_reason', 'next_id', 'completed_ids'))):
+            raise ValueError('Stopped sandbox URL evidence differs')
+        avito_url(url, args.id)
+        tab_evidence = tab
     if policy and markers[0] not in policy['markers']:
         raise ValueError('Observed marker is outside this authorization')
     records = unavailable_records(out, queue)
@@ -1238,7 +1259,14 @@ def mark_unavailable(args):
         sandbox = Path(read(pointer)['path'])
         if (sandbox/'raw'/raw.name).read_bytes() != raw.read_bytes() or read(sandbox/'checkpoint.json').get('next_id') != args.id:
             raise ValueError('Sandbox differs from stopped observation')
-    records.append(dict(id=args.id, url=url, status=('unavailable_under_review' if markers[0] == REVIEW_MARKER else 'unavailable_blocked_after_review' if markers[0] == BLOCKED_LISTING_MARKER else 'unavailable_deleted' if markers[0] in (DELETED_MARKER, USER_DELETED_MARKER) else 'unavailable_other' if markers[0] in OTHER_UNAVAILABLE_MARKERS else 'unavailable_closed'), evidence=markers[0],
+    tab_digest = sha(tab_evidence) if tab_evidence else None
+    if tab_evidence:
+        archive = diag/'observations'/args.id; archive.mkdir(parents=True, exist_ok=True)
+        destination = archive/(tab_digest + '.browser-tab.json')
+        if destination.exists() and destination.read_bytes() != tab_evidence.read_bytes():
+            raise ValueError('Browser tab archive collision')
+        if not destination.exists(): shutil.copy2(tab_evidence, destination)
+    records.append(dict(browser_tab_sha256=tab_digest, id=args.id, url=url, status=('unavailable_under_review' if markers[0] == REVIEW_MARKER else 'unavailable_blocked_after_review' if markers[0] == BLOCKED_LISTING_MARKER else 'unavailable_deleted' if markers[0] in (DELETED_MARKER, USER_DELETED_MARKER) else 'unavailable_other' if markers[0] in OTHER_UNAVAILABLE_MARKERS else 'unavailable_closed'), evidence=markers[0],
         snapshot_sha256=sha(snap), raw_sha256=sha(raw), observed_at=data.get('observed_at'),
         authorization_id=args.authorization_id, human_instruction=instruction,
         recorded_at=datetime.now(timezone.utc).isoformat()))
