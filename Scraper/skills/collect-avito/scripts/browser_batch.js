@@ -71,8 +71,9 @@ try {
       }
       if (!valid(current, n + 1)) throw new Error('Tab is not the expected completed next page');
       listing = {...current, ui_transition: {method: 'observed_ui_next', recovered, next_snapshot: nextSnapshot, from_url: previous.source_url, from_page: n, next_href: previous.pagination.next_url, observed_href: observedHref, landed_url: current.source_url, landed_page: n + 1, stability: 'three_matching_snapshots_500ms'}};
-    } else listing = job.ui_next ? await stable(l => l.state === 'EMPTY_RESULT' || (l.pagination?.current_pages || []).includes('1')) :
-      job.allow_empty ? await stable() : await p.evaluate(extractor);
+    } else listing = job.ui_next ? await stable(l => l.state === 'EMPTY_RESULT' || (l.pagination?.current_pages || []).includes('1')) : await stable(l =>
+      (job.allow_empty && l.state === 'EMPTY_RESULT') || (Array.isArray(l.selected_controls) && l.selected_controls.length > 0 && l.profession_filter?.observed === true &&
+      ((l.pagination?.current_pages || []).length > 0 || l.pagination?.end_confirmed === true)));
     const snap = await snapshot(p, {interactive: true});
     await save('listing.json', listing);
     if (listing.state === 'EMPTY_RESULT') {

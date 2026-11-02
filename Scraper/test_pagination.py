@@ -302,6 +302,22 @@ const first=make(url1,1);
 """
         subprocess.run(['node', '-e', script, str(runner.SCRIPTS/'browser_batch.js')], check=True, capture_output=True)
 
+    def test_reselect_preserves_multiple_freezes_and_ledger(self):
+        with tempfile.TemporaryDirectory() as directory, patch.object(runner, 'ROOT', Path(directory)):
+            out, service, diag = runner.paths(runner.ROOT, 'run')
+            runner.write(diag/'failures.json', {'state':'READY', 'events':[], 'failures':0, 'budget_start_failures':0})
+            ledger = (diag/'failures.json').read_bytes()
+            for value in (1, 2):
+                runner.write(service/'plan.json', {'attempt':value})
+                runner.write(out/'queue.json', [{'id':str(value)}])
+                runner.reselect(argparse.Namespace(run_id='run', reason='incomplete controls'))
+            self.assertEqual(runner.read(service/'superseded-freeze/plan.json')['attempt'], 1)
+            self.assertEqual(runner.read(service/'superseded-freeze-0002/plan.json')['attempt'], 2)
+            for name in ('superseded-freeze', 'superseded-freeze-0002'):
+                archive = service/name
+                self.assertEqual(runner.read(archive/'hashes.json')['plan.json'], runner.sha(archive/'plan.json'))
+            self.assertEqual((diag/'failures.json').read_bytes(), ledger)
+
     def test_archive_uncertain_pages_keeps_bytes_and_ledger(self):
         with tempfile.TemporaryDirectory() as directory, patch.object(runner, 'ROOT', Path(directory)), patch.object(runner, 'AUTOMATION_FILES', []), patch.object(runner.subprocess, 'check_output', return_value='abc'):
             out, service, diag = runner.paths(runner.ROOT, 'run')

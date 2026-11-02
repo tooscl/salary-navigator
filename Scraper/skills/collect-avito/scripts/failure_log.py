@@ -19,6 +19,8 @@ class HumanRequired(RuntimeError):
 def ledger_dir(diag):
     marker = diag / 'shared-ledger.json'
     if not marker.exists():
+        if (diag.parent / 'shared-ledger.json').exists():
+            raise HumanRequired('Local shared collection ledger missing; do not reset the budget')
         return diag
     data = json.loads(marker.read_text(encoding='utf-8'))
     parent = data.get('parent_run_id', '')

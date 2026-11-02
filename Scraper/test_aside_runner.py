@@ -50,7 +50,7 @@ class RunnerTests(unittest.TestCase):
                     page=dict(state='LISTING',source_url='https://www.avito.ru/moskva/vakansii',selected_controls=[],items=[item(str(i)) for i in identities])
                     runner.write(out/'listing.json',page);runner.write(out/'listing_pages/0001.json',page)
                     queue=runner.queue_from_pages([page],None);runner.write(out/'queue.json',queue)
-                    plan=dict(run_id=name,profession='',profession_scope='all',setup_seconds=1,segments='',selection_mode='first_N_unique_on_frozen_listing',listing_sha256=runner.sha(out/'listing.json'),listing_pages=[dict(file='listing_pages/0001.json',sha256=runner.sha(out/'listing_pages/0001.json'))])
+                    plan=dict(run_id=name,profession='',profession_scope='all',setup_seconds=1,segments='',selection_mode='first_N_unique_on_frozen_listing',listing_sha256=runner.sha(out/'listing.json'),listing_pages=[dict(file='listing_pages\\0001.json',sha256=runner.sha(out/'listing_pages/0001.json'))])
                     runner.write(service/'plan.json',plan);runner.write(diag/'checkpoint.json',dict(state='READY',completed_ids=[],next_id=queue[0]['id']))
                     runner.save_failures(diag,runner.load_failures(diag))
                     return out,service,diag,queue
@@ -62,6 +62,12 @@ class RunnerTests(unittest.TestCase):
                 self.assertEqual((info['source_count'],info['duplicate_excluded'],info['novel_count']), (906,906 if all_duplicate else 904,0 if all_duplicate else 2))
                 self.assertEqual(child, [] if all_duplicate else queue[-2:]); self.assertEqual((source_diag/'failures.json').read_bytes(),original_ledger)
                 runner.validate_partition(out,service)
+                (service/'shared-ledger.json').write_bytes((diag/'shared-ledger.json').read_bytes())
+                (diag/'shared-ledger.json').unlink()
+                runner.validate_partition(out,service)
+                with self.assertRaisesRegex(runner.HumanRequired, 'Local shared collection ledger missing'):
+                    runner.ensure_allowed(diag, 'capture')
+                (diag/'shared-ledger.json').write_bytes((service/'shared-ledger.json').read_bytes())
                 with self.assertRaisesRegex(ValueError,'already exists'): runner.deduplicate_queue(args)
                 if all_duplicate:
                     self.assertEqual(runner.read(out/'dedup-empty.json')['state'],'DEDUP_EMPTY')
@@ -200,6 +206,27 @@ const attachBrowserTab=async()=>pg, snapshot=async()=>({tree:''}), sleep=async()
             self.assertGreaterEqual(int(result.stdout.split('CALLS=')[-1]), 7)
             page = json.loads((Path(directory)/'listing.json').read_text(encoding='utf-8'))
             self.assertTrue(page['pagination']['next_url'])
+
+    def test_direct_freeze_waits_for_complete_controls_and_stops_on_protection(self):
+        script = (SCRIPTS/'browser_batch.js').read_text()
+        job = {'mode':'freeze','url':'https://www.avito.ru/all/vakansii', 'completed_ids':[], 'tab_id':'own', 'ui_next':False}
+        body = script.replace('__JOB__', json.dumps(job), 1).replace('__EXTRACTOR__', '"extract"', 1)
+        for scenario in ('delayed', 'short', 'missing', 'protection'):
+            with self.subTest(scenario=scenario), tempfile.TemporaryDirectory() as directory:
+                harness = """const fs=require('fs').promises, pwd=process.cwd(); let calls=0; const scenario=SCENARIO;
+const pg={url:()=> 'https://www.avito.ru/all/vakansii',evaluate:async()=>{calls++; if(scenario==='protection' && calls===2) return {state:'NEEDS_HUMAN'}; const ready=scenario==='short' || (scenario==='delayed' && calls>=5); return {state:'LISTING',items:[{id:'1'}],listing_item_audit:{malformed:0},selected_controls:ready?[{label:'Удалённо'}]:[],profession_filter:{observed:ready},pagination:{current_pages:ready&&scenario!=='short'?['1']:[],next_url:ready&&scenario!=='short'?'https://www.avito.ru/all/vakansii?p=2':null,end_confirmed:scenario==='short'}}}};
+const attachBrowserTab=async()=>pg, snapshot=async()=>({tree:''}), sleep=async()=>{};
+(async()=>{BODY; console.log('CALLS='+calls)})().catch(e=>{console.error(e);process.exit(1)});
+""".replace('SCENARIO',json.dumps(scenario)).replace('BODY',body)
+                result = subprocess.run(['node','-e',harness],cwd=directory,capture_output=True,text=True,check=True)
+                calls = int(result.stdout.split('CALLS=')[-1])
+                checkpoint = json.loads((Path(directory)/'checkpoint.json').read_text(encoding='utf-8'))
+                if scenario in ('delayed', 'short'):
+                    self.assertGreaterEqual(calls, 7 if scenario == 'delayed' else 3)
+                    self.assertEqual(checkpoint['state'], 'READY')
+                else:
+                    self.assertEqual(checkpoint['state'], 'NEEDS_HUMAN' if scenario == 'protection' else 'BROWSER_ERROR')
+                    self.assertEqual(calls, 2 if scenario == 'protection' else 30)
 
     def test_capture_rejects_blank_or_mismatched_actual_url(self):
         script = (SCRIPTS/'browser_batch.js').read_text()
@@ -567,12 +594,12 @@ const listBrowserTabs=async()=>[], openTab=async()=>pg, snapshot=async()=>({tree
                 body = script.replace('__JOB__', json.dumps(job), 1).replace('__EXTRACTOR__', '"extract"', 1)
                 harness = """const fs = require('fs').promises;
 const pwd = process.cwd(); let closed=0, attached=0, navigated=0;
-const pg = {url:()=> 'https://www.avito.ru/moskva/vakansii?token=secret#x', goto:async()=>{navigated++}, evaluate:async()=>({state:STATE,selected_controls:[],items:[]})};
+const pg = {url:()=> 'https://www.avito.ru/moskva/vakansii?token=secret#x', goto:async()=>{navigated++}, evaluate:async()=>({state:STATE,selected_controls:[{label:'Любой'}],profession_filter:{observed:true},items:[{id:'1'}],listing_item_audit:{malformed:0},pagination:{current_pages:['1'],end_confirmed:true}})};
 let opened=false;
 const listBrowserTabs=async()=>opened?[{targetId:'new-id',url:pg.url()}]:[];
 const openTab=async()=>{opened=true;return pg};
 const attachBrowserTab=async id=>{if(id!=='external-id')throw Error('wrong ID');attached++;return pg};
-const snapshot=async()=>({tree:'stopped'});const closeTab=async()=>{closed++};
+const snapshot=async()=>({tree:'stopped'});const closeTab=async()=>{closed++}; const sleep=async()=>{};
 (async()=>{BODY; const result=JSON.parse(await fs.readFile('browser-tab.json')); console.log('RESULT='+JSON.stringify({closed,attached,navigated,result}));})().catch(e=>{console.error(e);process.exit(1)});
 """.replace('STATE', json.dumps(state)).replace('BODY', body)
                 result = subprocess.run(['node', '-e', harness], cwd=directory, capture_output=True, text=True, check=True)
@@ -1015,6 +1042,50 @@ p.stdin.close()
             with self.assertRaisesRegex(ValueError, 'immutable'):
                 runner.import_sandbox(sandbox, out, diag)
             self.assertEqual(runner.read(out / 'raw/123.json')['title'], 'Работа')
+
+    def test_capture_reloads_checkpoint_after_interrupted_transfer_import(self):
+        with tempfile.TemporaryDirectory() as directory, patch.object(runner, 'ROOT', Path(directory)):
+            out, service, diag = runner.paths(runner.ROOT, 'resume')
+            queue = [item('123'), item('456')]
+            runner.write(out / 'queue.json', queue)
+            runner.write(service / 'plan.json', {
+                'automation_sha256': {},
+                'selection_mode': 'first_N_unique_on_frozen_listing',
+            })
+            runner.write(diag / 'checkpoint.json', {
+                'state': 'READY', 'completed_ids': [], 'next_id': '123', 'capture_seconds': 0,
+            })
+            sandbox = Path(directory) / 'aside-session'
+            runner.write(sandbox / 'raw/123.json', raw('123'))
+            runner.write(sandbox / 'checkpoint.json', {
+                'state': 'CAPTURED', 'completed_ids': ['123'], 'next_id': None,
+                'capture_seconds': 1, 'stop_reason': None,
+            })
+            runner.write(diag / 'sandbox.json', {'path': str(sandbox)})
+            seen = []
+
+            def capture_remaining(job, output, diagnostics):
+                seen.extend(candidate['id'] for candidate in job['queue'])
+                runner.write(output / 'raw/456.json', raw('456'))
+                return {
+                    'state': 'CAPTURED', 'completed_ids': ['123', '456'],
+                    'next_id': None, 'stop_reason': None,
+                }, 1
+
+            args = argparse.Namespace(run_id='resume', batch_size=30, config=None,
+                                      retry_reason=None, tab_id=None)
+            with patch.object(runner, 'validate_partition'), \
+                    patch.object(runner, 'validate_plan_profession'), \
+                    patch.object(runner, 'preflight'), \
+                    patch.object(runner, 'browser', side_effect=capture_remaining), \
+                    patch.object(runner, 'release_browser'), \
+                    patch.object(runner, 'check', return_value={
+                        'structural_check_passed': True,
+                    }):
+                runner.capture(args)
+
+            self.assertEqual(seen, ['456'])
+            self.assertEqual(runner.read(diag / 'checkpoint.json')['completed_ids'], ['123', '456'])
 
     def test_cli_human_resume_and_duplicate_checks_preserve_demo_history(self):
         with tempfile.TemporaryDirectory() as directory:

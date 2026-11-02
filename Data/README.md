@@ -233,3 +233,27 @@ avito_runs/<название_сбора>/
 - [filter18_ekaterinburg_truck_driver_20261029_part_01](avito_runs/filter18_ekaterinburg_truck_driver_20261029_part_01/exports/vacancies_flat.csv): 203 вакансий.
 
 - [remote_1500_2026-10-29_shamil](avito_runs/remote_1500_2026-10-29_shamil/exports/vacancies_flat.csv): 1485 вакансий.
+
+- [remote_moscow_2026-10-30_shamil_novel](avito_runs/remote_moscow_2026-10-30_shamil_novel/exports/vacancies_flat.csv): 490 вакансий.
+
+- [remote_continuous_r000001_s000_new](avito_runs/remote_continuous_r000001_s000_new/exports/vacancies_flat.csv): 358 вакансий.
+
+- [remote_continuous_r000001_s001_new](avito_runs/remote_continuous_r000001_s001_new/exports/vacancies_flat.csv): 78 вакансий.
+
+- [remote_continuous_r000002_s000_new](avito_runs/remote_continuous_r000002_s000_new/exports/vacancies_flat.csv): 215 вакансий.
+
+- [remote_continuous_r000002_s001_new](avito_runs/remote_continuous_r000002_s001_new/exports/vacancies_flat.csv): 24 вакансий.
+
+- [remote_continuous_r000003_s000_new](avito_runs/remote_continuous_r000003_s000_new/exports/vacancies_flat.csv): 120 вакансий.
+
+- [remote_continuous_r000003_s001_new](avito_runs/remote_continuous_r000003_s001_new/exports/vacancies_flat.csv): 14 вакансий.
+
+- [remote_continuous_r000004_s000_new](avito_runs/remote_continuous_r000004_s000_new/exports/vacancies_flat.csv): 43 вакансий.
+
+- [remote_continuous_r000004_s001_new](avito_runs/remote_continuous_r000004_s001_new/exports/vacancies_flat.csv): 14 вакансий.
+
+- [remote_continuous_r000005_s000_new](avito_runs/remote_continuous_r000005_s000_new/exports/vacancies_flat.csv): 106 вакансий.
+
+- [remote_continuous_r000005_s001_new](avito_runs/remote_continuous_r000005_s001_new/exports/vacancies_flat.csv): 27 вакансий.
+
+- [remote_continuous_r000006_s000_new](avito_runs/remote_continuous_r000006_s000_new/exports/vacancies_flat.csv): 61 вакансий.

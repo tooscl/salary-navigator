@@ -181,13 +181,13 @@ def validate_plan_profession(plan, listing_path):
     if norm(plan.get('profession') or '') != observed:
         raise ValueError('Plan profession differs from frozen listing filters; do not export inconsistent metadata')
     for index, page in enumerate(plan.get('listing_pages', [])):
-        path = listing_path.parent / page['file']
+        path = listing_path.parent / page['file'].replace('\\', '/')
         if sha(path) != page['sha256']:
             raise ValueError('Frozen listing page changed after freeze')
         if index:
             current = read(path)
             if current.get('ui_transition'):
-                validate_ui_transition(read(listing_path), read(listing_path.parent / plan['listing_pages'][index-1]['file']), current)
+                validate_ui_transition(read(listing_path), read(listing_path.parent / plan['listing_pages'][index-1]['file'].replace('\\', '/')), current)
             else:
                 validate_page_filters(read(listing_path), current)
 
@@ -214,7 +214,7 @@ def observed_profession_correction(out, service, plan, reason):
     checked = None
     previous = None
     for index, entry in enumerate(pages):
-        path = out/entry['file']
+        path = out/entry['file'].replace('\\', '/')
         if sha(path) != entry['sha256']:
             raise ValueError('Frozen page hash differs')
         page = read(path)
@@ -625,7 +625,7 @@ def archive_uncertain_freeze(args):
             if source.is_dir(): shutil.copytree(source, target)
             else: shutil.copy2(source, target)
             for item in ([target] if target.is_file() else sorted(target.rglob('*'))):
-                if item.is_file(): files[str(item.relative_to(archive))] = sha(item)
+                if item.is_file(): files[item.relative_to(archive).as_posix()] = sha(item)
     write(archive/'provenance.json', dict(reason=args.reason, files=files, at=datetime.now(timezone.utc).isoformat(),
         original_code_git_commit=subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=ROOT, text=True).strip(),
         original_automation_sha256={file: hashlib.sha256(subprocess.check_output(['git', 'show', 'HEAD:' + file], cwd=ROOT)).hexdigest() for file in AUTOMATION_FILES},
@@ -646,13 +646,17 @@ def reselect(args):
         raise ValueError('Reselection is only allowed before card capture')
     archive = service/'superseded-freeze'
     if archive.exists():
-        raise ValueError('A superseded freeze already exists; inspect it before proceeding')
+        index = 2
+        while (service/f'superseded-freeze-{index:04d}').exists():
+            index += 1
+        archive = service/f'superseded-freeze-{index:04d}'
     if not (service/'plan.json').is_file() or not (out/'queue.json').is_file():
         raise ValueError('A complete frozen plan and queue are required')
     archive.mkdir(parents=True)
     shutil.copytree(out, archive/'data')
     shutil.copy2(service/'plan.json', archive/'plan.json')
     write(archive/'reason.json', {'reason': args.reason, 'at': datetime.now(timezone.utc).isoformat()})
+    write(archive/'hashes.json', {p.relative_to(archive).as_posix(): sha(p) for p in sorted(archive.rglob('*')) if p.is_file()})
     shutil.rmtree(out)
     (service/'plan.json').unlink()
     for name in ('freeze_request.json', 'pending_listing.json', 'listing.json', 'checkpoint.json', 'sandbox.json', 'timing.json'):
@@ -670,7 +674,7 @@ def continuation(args):
     plan = read(parent_service/'plan.json')
     validate_plan_profession(plan, parent_out/'listing.json')
     queue = read(parent_out/'queue.json')
-    pages = [read(parent_out/p['file']) for p in plan['listing_pages']]
+    pages = [read(parent_out/p['file'].replace('\\', '/')) for p in plan['listing_pages']]
     if not plan.get('requested_all_pages') or not pages or queue_from_pages(pages, None) != queue:
         raise ValueError('Continuation requires a complete saved all-pages parent queue')
     next_url = pages[-1].get('pagination', {}).get('next_url')
@@ -682,8 +686,8 @@ def continuation(args):
         save_failures(parent_diag, load_failures(parent_diag))
     out.mkdir(parents=True); diag.mkdir(parents=True)
     for page in plan['listing_pages']:
-        target = out/page['file']; target.parent.mkdir(parents=True, exist_ok=True)
-        shutil.copy2(parent_out/page['file'], target)
+        target = out/page['file'].replace('\\', '/'); target.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copy2(parent_out/page['file'].replace('\\', '/'), target)
     provenance = out/'continuation-provenance'; provenance.mkdir()
     shutil.copy2(parent_service/'plan.json', provenance/'parent-plan.json')
     shutil.copy2(parent_out/'queue.json', provenance/'parent-queue.json')
@@ -849,7 +853,7 @@ def freeze(args):
     if not queue:
         if continuation_info and listing_end_reason:
             write(service/'continuation-empty.json', dict(continuation=continuation_info, listing_end_reason=listing_end_reason,
-                available_listing_exhausted=listing_end_reason == 'confirmed_end', listing_pages=[dict(file=str(p.relative_to(out)), sha256=sha(p)) for p in page_paths]))
+                available_listing_exhausted=listing_end_reason == 'confirmed_end', listing_pages=[dict(file=p.relative_to(out).as_posix(), sha256=sha(p)) for p in page_paths]))
             print(json.dumps({'state': 'EMPTY', 'listing_end_reason': listing_end_reason}))
             return
         if not (branch_only and listing_end_reason == 'empty_result'):
@@ -862,7 +866,7 @@ def freeze(args):
         listing_sha256=sha(out / 'listing.json'),
         profession_scope=getattr(args, 'profession_scope', None),
         profession_source='selected_ui_context' if getattr(args, 'profession_scope', None) else 'observed_controls',
-        listing_pages=[dict(file=str(path.relative_to(out)), sha256=sha(path), source_url=page['source_url'])
+        listing_pages=[dict(file=path.relative_to(out).as_posix(), sha256=sha(path), source_url=page['source_url'])
                        for path, page in zip(page_paths, pages)],
         selection_mode='saved_incomplete_listing' if accept_saved else ('first_N_remote_parameter_matches' if candidate_limit is not None else 'first_N_unique_on_frozen_listing'), limit=args.limit if candidate_limit is not None else len(queue), requested_all_pages=all_pages,
         saved_selection_authorization={'instruction': instruction, 'at': datetime.now(timezone.utc).isoformat(), 'original_request': request, 'pending': saved_pending} if accept_saved else None,
@@ -1178,7 +1182,11 @@ def unavailable_records(out, queue):
         if identity in ids or len(matches) != 1 or record.get('url') != matches[0]['url'] or not raw.is_file() or sha(raw) != record.get('raw_sha256'):
             raise ValueError('Unavailable record does not match frozen queue or raw')
         data = read(raw)
-        if not closed_raw_matches(data, identity, record['url'], record.get('evidence')) or not record.get('authorization_id'):
+        redirect_valid = (record.get('status') == 'unavailable_redirect' and data.get('state') == 'LISTING'
+            and data.get('source_url') == record.get('observed_url')
+            and record.get('evidence') == 'detail_redirected_to_category_listing_twice'
+            and len(record.get('observation_sha256', [])) == 2)
+        if not (redirect_valid or closed_raw_matches(data, identity, record['url'], record.get('evidence'))) or not record.get('authorization_id'):
             raise ValueError('Invalid unavailable observation')
         ids.add(identity)
     return records
@@ -1426,7 +1434,7 @@ def supplemental(args):
     if out.exists() or service.exists() or args.run_id == args.parent_run_id:
         raise ValueError('Supplement requires a new run ID')
     parent = read(parent_service/'plan.json'); validate_plan_profession(parent, parent_out/'listing.json')
-    original = read(parent_out/'queue.json'); pages = [read(parent_out/x['file']) for x in parent['listing_pages']]
+    original = read(parent_out/'queue.json'); pages = [read(parent_out/x['file'].replace('\\', '/')) for x in parent['listing_pages']]
     if queue_from_pages(pages, None) != original:
         raise ValueError('Parent queue differs from frozen pages')
     if Path(args.observation).name != args.observation or Path(args.evidence).name != args.evidence:
@@ -1458,7 +1466,7 @@ def verified_frozen_queue(out, service):
     if plan.get('selection_mode') != 'first_N_unique_on_frozen_listing' or any(plan.get(k) for k in ('partition','continuation','partial_suffix','supplement','deduplication')):
         raise ValueError('Deduplication requires an ordinary frozen queue')
     validate_plan_profession(plan, out/'listing.json')
-    if not queue or not plan.get('listing_pages') or queue_from_pages([read(out/p['file']) for p in plan['listing_pages']], len(queue)) != queue:
+    if not queue or not plan.get('listing_pages') or queue_from_pages([read(out/p['file'].replace('\\', '/')) for p in plan['listing_pages']], len(queue)) != queue:
         raise ValueError('Frozen queue differs from listing pages')
     if len({x['id'] for x in queue}) != len(queue): raise ValueError('Frozen queue IDs are not unique')
     manifest_path = service/'manifest.json'
@@ -1474,7 +1482,9 @@ def verified_frozen_queue(out, service):
 def validate_deduplication(out, service):
     plan = read(service/'plan.json'); info = plan['deduplication']; prov = out/'dedup-provenance'
     source_out, source_service, _ = paths(ROOT, info['source_run_id'])
-    if read(service/'diagnostics/shared-ledger.json') != {'parent_run_id': info['source_run_id']}:
+    ledger_pointer = service/'diagnostics/shared-ledger.json'
+    if not ledger_pointer.exists(): ledger_pointer = service/'shared-ledger.json'
+    if read(ledger_pointer) != {'parent_run_id': info['source_run_id']}:
         raise ValueError('Deduplicated child must use source ledger')
     if read(source_service/'dedup-child.json') != {'child_run_id': plan['run_id']}:
         raise ValueError('Source child assignment differs')
@@ -1483,7 +1493,7 @@ def validate_deduplication(out, service):
         if sha(local) != expected or sha(original) != expected: raise ValueError('Dedup source provenance changed')
     parent = read(source_plan_path); source_queue = read(source_queue_path)
     validate_plan_profession(parent, out/'listing.json')
-    if queue_from_pages([read(out/x['file']) for x in parent['listing_pages']], len(source_queue)) != source_queue:
+    if queue_from_pages([read(out/x['file'].replace('\\', '/')) for x in parent['listing_pages']], len(source_queue)) != source_queue:
         raise ValueError('Dedup source queue differs from frozen listing')
     known = set()
     for entry in info['against']:
@@ -1531,12 +1541,20 @@ def deduplicate_queue(args):
     info = dict(source_run_id=args.source_run_id,source_plan_sha256=sha(source_service/'plan.json'),source_queue_sha256=sha(source_out/'queue.json'),against=known_runs,source_count=len(source_queue),duplicate_excluded=len(excluded),novel_count=len(novel),duplicate_ids=excluded)
     out.mkdir(parents=True); diag.mkdir(parents=True); prov=out/'dedup-provenance'; prov.mkdir()
     shutil.copy2(source_service/'plan.json',prov/'source-plan.json'); shutil.copy2(source_out/'queue.json',prov/'source-queue.json')
+    for archive in sorted(source_service.glob('superseded-freeze*')):
+        if not archive.is_dir(): continue
+        target = prov/'rejected-freezes'/archive.name
+        shutil.copytree(archive, target)
+        actual = {p.relative_to(target).as_posix(): sha(p) for p in sorted(target.rglob('*')) if p.is_file() and p != target/'hashes.json'}
+        if (target/'hashes.json').exists() and read(target/'hashes.json') != actual:
+            raise ValueError('Superseded freeze archive hash differs')
+        if not (target/'hashes.json').exists(): write(target/'hashes.json', actual)
     for entry in known_runs:
         known_out, known_service, _ = paths(ROOT, entry['run_id'])
         shutil.copy2(known_service/'plan.json',prov/entry['plan_file']); shutil.copy2(known_out/'queue.json',prov/entry['queue_file'])
     shutil.copy2(source_out/'listing.json',out/'listing.json')
     for page in parent['listing_pages']:
-        target = out/page['file']; target.parent.mkdir(parents=True,exist_ok=True); shutil.copy2(source_out/page['file'],target)
+        target = out/page['file'].replace('\\', '/'); target.parent.mkdir(parents=True,exist_ok=True); shutil.copy2(source_out/page['file'].replace('\\', '/'),target)
     write(out/'queue.json',novel); write(out/'dedup_selection.json',info)
     if not novel: write(out/'dedup-empty.json',dict(state='DEDUP_EMPTY',source_count=len(source_queue),duplicate_excluded=len(excluded),novel_count=0))
     plan = dict(parent,run_id=args.run_id,limit=len(novel),available_unique=len(novel),deduplication=info,
@@ -1590,7 +1608,7 @@ def validate_partition(out, service):
                 raise ValueError('Continuation parent provenance changed')
             parent = read(provenance/'parent-plan.json')
             original = read(provenance/'parent-queue.json')
-            pages = [read(out/p['file']) for p in plan['listing_pages']]
+            pages = [read(out/p['file'].replace('\\', '/')) for p in plan['listing_pages']]
             count = continuation_info['parent_page_count']
             if count != len(parent['listing_pages']) or plan['listing_pages'][:count] != parent['listing_pages']:
                 raise ValueError('Continuation pages differ from parent provenance')
@@ -1614,7 +1632,7 @@ def validate_partition(out, service):
     parent = read(provenance/'parent-plan.json')
     queue = read(provenance/'parent-queue.json')
     validate_plan_profession(parent, out/'listing.json')
-    pages = [read(out/item['file']) for item in parent['listing_pages']]
+    pages = [read(out/item['file'].replace('\\', '/')) for item in parent['listing_pages']]
     if queue_from_pages(pages, len(queue)) != queue:
         raise ValueError('Parent queue does not match the frozen listing')
     start, end, size, index = info['start'], info['end'], info['batch_size'], info['index']
@@ -1649,7 +1667,7 @@ def partial_suffix(args):
     for name, path in source_files.items(): shutil.copy2(path, provenance/name)
     shutil.copy2(source_out/'listing.json', out/'listing.json')
     for page in source_plan['listing_pages']:
-        target = out/page['file']; target.parent.mkdir(parents=True, exist_ok=True); shutil.copy2(source_out/page['file'], target)
+        target = out/page['file'].replace('\\', '/'); target.parent.mkdir(parents=True, exist_ok=True); shutil.copy2(source_out/page['file'].replace('\\', '/'), target)
     write(out/'queue.json', remaining)
     info = dict(source_run_id=args.source_run_id, ledger_parent_run_id=source_plan['partition']['parent_run_id'], source_hashes={name: sha(path) for name,path in source_files.items()})
     plan = dict(source_plan, run_id=args.run_id, partition=None, partial_suffix=info, limit=count, requested_limit=count, available_unique=count,
@@ -1674,7 +1692,7 @@ def partition(args):
         raise ValueError('Partition requires an unpartitioned, uncaptured parent')
     validate_plan_profession(plan, parent_out/'listing.json')
     queue = read(parent_out/'queue.json')
-    if not queue or not plan.get('listing_pages') or queue_from_pages([read(parent_out/p['file']) for p in plan['listing_pages']], len(queue)) != queue:
+    if not queue or not plan.get('listing_pages') or queue_from_pages([read(parent_out/p['file'].replace('\\', '/')) for p in plan['listing_pages']], len(queue)) != queue:
         raise ValueError('Parent queue differs from frozen listing')
     ids = [f'{args.prefix}_{i+1:02d}' for i in range((len(queue)+args.batch_size-1)//args.batch_size)]
     for child in ids:
@@ -1692,8 +1710,8 @@ def partition(args):
         out.mkdir(parents=True); diag.mkdir(parents=True)
         shutil.copy2(parent_out/'listing.json', out/'listing.json')
         for page in plan['listing_pages']:
-            target = out/page['file']; target.parent.mkdir(parents=True, exist_ok=True)
-            shutil.copy2(parent_out/page['file'], target)
+            target = out/page['file'].replace('\\', '/'); target.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copy2(parent_out/page['file'].replace('\\', '/'), target)
         provenance = out/'provenance'; provenance.mkdir()
         shutil.copy2(parent_service/'plan.json', provenance/'parent-plan.json')
         shutil.copy2(parent_out/'queue.json', provenance/'parent-queue.json')
@@ -1766,10 +1784,13 @@ def capture(args):
     validate_automation_changes(changes, changed)
     standing_unavailable_policy(argparse.Namespace(run_id=args.run_id, authorization_id=STANDING_UNAVAILABLE_ID,
         human_instruction=STANDING_UNAVAILABLE_INSTRUCTION))
-    cp, queue = read(diag / 'checkpoint.json'), read(out / 'queue.json')
+    queue = read(out / 'queue.json')
     # Recover an interrupted transfer before considering another navigation.
     if (diag / 'sandbox.json').exists():
         import_sandbox(Path(read(diag / 'sandbox.json')['path']), out, diag)
+    # import_sandbox may promote a newer checkpoint alongside recovered raw.
+    # Read it only after the transfer so the prefix check uses one snapshot.
+    cp = read(diag / 'checkpoint.json')
     if plan.get('selection_mode') == 'first_N_remote_parameter_matches':
         decisions = remote_decisions(queue, out, plan['limit'])
         accepted = sum(d['accepted'] for d in decisions)
@@ -2275,6 +2296,93 @@ def preserve_stopped_observation(args):
     print(json.dumps({'pending_id': identity, 'preserved': str(destination.relative_to(out))}))
 
 
+def retry_redirect_observation(args):
+    """Archive a detail-to-listing redirect and retry the same frozen queue ID."""
+    out, service, diag = paths(ROOT, args.run_id)
+    cp, queue = read(diag/'checkpoint.json'), read(out/'queue.json')
+    identity = cp.get('next_id')
+    if cp.get('state') != 'REVIEW_REQUIRED' or cp.get('stop_reason') != 'identity_or_template_review' or identity != args.id:
+        raise ValueError('Expected the pending identity review checkpoint')
+    matches = [item for item in queue if item['id'] == identity]
+    if len(matches) != 1:
+        raise ValueError('Expected one frozen queue item')
+    raw = out/'raw'/f'{identity}.json'; data = read(raw)
+    observed = args.observed_url.rstrip('/')
+    parsed = urlsplit(observed)
+    if (data.get('state') != 'LISTING' or data.get('source_url', '').rstrip('/') != observed
+            or parsed.scheme != 'https' or parsed.hostname not in ('avito.ru', 'www.avito.ru')
+            or not re.fullmatch(r'/[^/]+/vakansii', parsed.path) or parsed.query
+            or any(item.get('id') == identity for item in data.get('items', []))):
+        raise ValueError('Stopped raw is not the confirmed detail-to-listing redirect')
+    archive = out/'observations'/identity; archive.mkdir(parents=True, exist_ok=True)
+    destination = archive/(sha(raw) + '.json')
+    if destination.exists() and destination.read_bytes() != raw.read_bytes():
+        raise ValueError('Observation archive collision')
+    if not destination.exists(): shutil.copy2(raw, destination)
+    pointer = diag/'sandbox.json'
+    if not pointer.exists(): raise ValueError('Redirect retry requires the original sandbox')
+    sandbox = Path(read(pointer)['path'])
+    if (sandbox/'raw'/raw.name).read_bytes() != raw.read_bytes():
+        raise ValueError('Sandbox raw differs from the stopped redirect')
+    write(archive/(sha(raw) + '.provenance.json'), dict(authorization_id=args.authorization_id,
+        original_url=matches[0]['url'], observed_url=observed, raw_sha256=sha(raw),
+        preserved_at=datetime.now(timezone.utc).isoformat(), reason='detail_redirected_to_category_listing'))
+    raw.unlink(); pointer.unlink(); cp.update(state='READY', stop_reason=None)
+    write(diag/'checkpoint.json', cp)
+    print(json.dumps({'pending_id': identity, 'redirect_preserved': str(destination.relative_to(out))}))
+
+
+def mark_redirect_unavailable(args):
+    """Exclude one queue ID only after two preserved, matching category redirects."""
+    out, service, diag = paths(ROOT, args.run_id)
+    cp, queue = read(diag/'checkpoint.json'), read(out/'queue.json')
+    if cp.get('state') != 'REVIEW_REQUIRED' or cp.get('next_id') != args.id:
+        raise ValueError('Expected the pending redirect review')
+    matches = [item for item in queue if item['id'] == args.id]
+    if len(matches) != 1: raise ValueError('Expected one frozen queue item')
+    raw = out/'raw'/f'{args.id}.json'; data = read(raw)
+    observed = args.observed_url.rstrip('/')
+    if data.get('state') != 'LISTING' or data.get('source_url', '').rstrip('/') != observed:
+        raise ValueError('Current observation is not the confirmed category redirect')
+    previous = sorted((out/'observations'/args.id).glob('*.json'))
+    previous = [path for path in previous if not path.name.endswith('.provenance.json') and read(path).get('state') == 'LISTING' and read(path).get('source_url', '').rstrip('/') == observed]
+    if not previous: raise ValueError('A matching prior redirect observation is required')
+    records = unavailable_records(out, queue)
+    records.append(dict(id=args.id, url=matches[0]['url'], status='unavailable_redirect',
+        evidence='detail_redirected_to_category_listing_twice', observed_url=observed,
+        observation_sha256=[sha(previous[-1]), sha(raw)], raw_sha256=sha(raw),
+        authorization_id=args.authorization_id, recorded_at=datetime.now(timezone.utc).isoformat()))
+    write(out/'unavailable.json', records)
+    index = next(i for i,item in enumerate(queue) if item['id'] == args.id)
+    cp.update(state='READY', next_id=queue[index+1]['id'] if index+1 < len(queue) else None, stop_reason=None)
+    write(diag/'checkpoint.json', cp); (diag/'sandbox.json').unlink(missing_ok=True)
+    print(json.dumps({'unavailable_redirect': args.id, 'next_id': cp['next_id']}))
+
+
+def retry_incomplete_observation(args):
+    """Archive an unrestricted but incomplete shell and retry the same queue ID."""
+    out, service, diag = paths(ROOT, args.run_id)
+    cp, queue = read(diag/'checkpoint.json'), read(out/'queue.json')
+    if cp.get('state') != 'REVIEW_REQUIRED' or cp.get('next_id') != args.id:
+        raise ValueError('Expected the pending incomplete observation')
+    matches = [item for item in queue if item['id'] == args.id]
+    if len(matches) != 1: raise ValueError('Expected one frozen queue item')
+    raw = out/'raw'/f'{args.id}.json'; data = read(raw); evidence = data.get('unresolved_evidence', {})
+    if (data.get('state') != 'UNKNOWN_PAGE' or data.get('source_url') != matches[0]['url']
+            or evidence.get('complete') is not False or evidence.get('restriction') is not False
+            or evidence.get('known_unavailable') is not False):
+        raise ValueError('Observation is not an unrestricted incomplete page shell')
+    archive = out/'observations'/args.id; archive.mkdir(parents=True, exist_ok=True)
+    destination = archive/(sha(raw)+'.json')
+    if not destination.exists(): shutil.copy2(raw, destination)
+    write(archive/(sha(raw)+'.provenance.json'), dict(authorization_id=args.authorization_id,
+        original_url=matches[0]['url'], raw_sha256=sha(raw), preserved_at=datetime.now(timezone.utc).isoformat(),
+        reason='unrestricted_incomplete_page_shell'))
+    raw.unlink(); (diag/'sandbox.json').unlink(missing_ok=True)
+    cp.update(state='READY', stop_reason=None); write(diag/'checkpoint.json', cp)
+    print(json.dumps({'pending_id': args.id, 'incomplete_preserved': str(destination.relative_to(out))}))
+
+
 def resume_browser(args):
     _, _, diag = paths(ROOT, args.run_id)
     authorize_browser(diag, args.human_instruction, args.authorization_id)
@@ -2413,7 +2521,7 @@ def validate_completed_export(out, service):
     plan = read(service/'plan.json')
     validate_plan_profession(plan, out/'listing.json')
     for path, expected in manifest['files'].items():
-        if sha(ROOT/path) != expected['sha256']:
+        if sha(ROOT/path.replace('\\', '/')) != expected['sha256']:
             raise ValueError(f'Published artifact changed: {path}')
     correction_path = out/'exports/profession_correction.json'
     correction = read(correction_path) if correction_path.exists() else None
@@ -2548,7 +2656,7 @@ def publish(args):
     if git('branch', '--show-current') == 'main':
         raise ValueError('Publish from a codex/<run_id> branch')
     for path, expected in manifest['files'].items():
-        if sha(ROOT / path) != expected['sha256']:
+        if sha(ROOT / path.replace('\\', '/')) != expected['sha256']:
             raise ValueError(f'Published artifact changed: {path}')
     expected_automation = dict(manifest['collection'].get('automation_sha256', {}))
     expected_automation.update(manifest.get('post_capture_automation_sha256', {}))
@@ -2575,8 +2683,8 @@ def publish(args):
     files = [str(out.relative_to(ROOT)), str((service/'plan.json').relative_to(ROOT)),
         str((service/'manifest.json').relative_to(ROOT)), 'Data/dataset/sources.json',
         'Data/dataset/vacancies.csv', 'Data/dataset/manifest.json', 'Data/README.md', 'Data/dataset/README.md']
-    if (service/'superseded-freeze').exists():
-        files.append(str((service/'superseded-freeze').relative_to(ROOT)))
+    for archive in sorted(service.glob('superseded-freeze*')):
+        if archive.is_dir(): files.append(str(archive.relative_to(ROOT)))
     files += [change['file'] for change in manifest.get('automation_changes', [])]
     if any(sha(ROOT/file) != value for file,value in expected_automation.items()):
         files += [change['file'] for change in review.get('automation_changes', [])]
@@ -2675,7 +2783,7 @@ def sweep_demo_export(args):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     commands = parser.add_subparsers(dest='command', required=True)
-    for name in ['sweep-init', 'sweep-snapshot', 'sweep-register-branch', 'sweep-set-branch-status', 'sweep-materialize', 'sweep-report', 'sweep-demo-export', 'archive-uncertain-freeze', 'archive-partial-listing', 'partition', 'partial-suffix', 'deduplicate-queue', 'continuation', 'supplemental', 'freeze', 'capture', 'finalize', 'post-finalize-review', 'publish', 'reselect', 'standing-unavailable-policy', 'closed-policy', 'review-policy', 'blocked-listing-policy', 'salary-review-policy', 'review-salary-line', 'mark-unavailable', 'unresolved-policy', 'upgrade-unresolved-extractor', 'mark-unresolved', 'preserve-stopped-observation', 'note-change', 'record-error', 'check-stage', 'stage-ok', 'resume-offline', 'resume-browser', 'diagnostic-authorization', 'external-threshold-authorization', 'diagnostic-pending-capture']:
+    for name in ['sweep-init', 'sweep-snapshot', 'sweep-register-branch', 'sweep-set-branch-status', 'sweep-materialize', 'sweep-report', 'sweep-demo-export', 'archive-uncertain-freeze', 'archive-partial-listing', 'partition', 'partial-suffix', 'deduplicate-queue', 'continuation', 'supplemental', 'freeze', 'capture', 'finalize', 'post-finalize-review', 'publish', 'reselect', 'standing-unavailable-policy', 'closed-policy', 'review-policy', 'blocked-listing-policy', 'salary-review-policy', 'review-salary-line', 'mark-unavailable', 'mark-redirect-unavailable', 'unresolved-policy', 'upgrade-unresolved-extractor', 'mark-unresolved', 'preserve-stopped-observation', 'retry-redirect-observation', 'retry-incomplete-observation', 'note-change', 'record-error', 'check-stage', 'stage-ok', 'resume-offline', 'resume-browser', 'diagnostic-authorization', 'external-threshold-authorization', 'diagnostic-pending-capture']:
         command = commands.add_parser(name)
         command.add_argument('--run-id', required=True)
         if name in ('freeze', 'capture', 'diagnostic-pending-capture'):
@@ -2791,6 +2899,17 @@ def main():
             command.add_argument('--authorization-id', required=True)
         elif name == 'preserve-stopped-observation':
             command.add_argument('--authorization-id', required=True)
+        elif name == 'retry-redirect-observation':
+            command.add_argument('--id', required=True)
+            command.add_argument('--observed-url', required=True)
+            command.add_argument('--authorization-id', required=True)
+        elif name == 'mark-redirect-unavailable':
+            command.add_argument('--id', required=True)
+            command.add_argument('--observed-url', required=True)
+            command.add_argument('--authorization-id', required=True)
+        elif name == 'retry-incomplete-observation':
+            command.add_argument('--id', required=True)
+            command.add_argument('--authorization-id', required=True)
         elif name == 'reselect':
             command.add_argument('--reason', required=True)
         elif name == 'record-error':
@@ -2814,7 +2933,7 @@ def main():
         parser.error('batch-size must be positive')
     with ExitStack() as stack:
         try:
-            if args.command in ('archive-uncertain-freeze', 'archive-partial-listing', 'partition', 'partial-suffix', 'deduplicate-queue', 'continuation', 'supplemental', 'freeze', 'capture', 'finalize', 'post-finalize-review', 'publish', 'reselect', 'standing-unavailable-policy', 'closed-policy', 'review-policy', 'blocked-listing-policy', 'salary-review-policy', 'review-salary-line', 'mark-unavailable', 'unresolved-policy', 'upgrade-unresolved-extractor', 'mark-unresolved', 'preserve-stopped-observation', 'record-error', 'stage-ok', 'resume-browser', 'resume-offline', 'diagnostic-authorization', 'external-threshold-authorization', 'diagnostic-pending-capture'):
+            if args.command in ('archive-uncertain-freeze', 'archive-partial-listing', 'partition', 'partial-suffix', 'deduplicate-queue', 'continuation', 'supplemental', 'freeze', 'capture', 'finalize', 'post-finalize-review', 'publish', 'reselect', 'standing-unavailable-policy', 'closed-policy', 'review-policy', 'blocked-listing-policy', 'salary-review-policy', 'review-salary-line', 'mark-unavailable', 'mark-redirect-unavailable', 'unresolved-policy', 'upgrade-unresolved-extractor', 'mark-unresolved', 'preserve-stopped-observation', 'retry-redirect-observation', 'retry-incomplete-observation', 'record-error', 'stage-ok', 'resume-browser', 'resume-offline', 'diagnostic-authorization', 'external-threshold-authorization', 'diagnostic-pending-capture'):
                 lock_run_id = args.parent_run_id if args.command in ('continuation', 'supplemental') else args.source_run_id if args.command in ('partial-suffix', 'deduplicate-queue') else args.run_id
                 stack.enter_context(operation_locked(paths(ROOT, lock_run_id)[2]))
             globals()[args.command.replace('-', '_')](args)
