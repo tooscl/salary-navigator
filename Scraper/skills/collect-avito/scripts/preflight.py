@@ -302,7 +302,13 @@ def main():
     parser.add_argument("--json", action="store_true")
     parser.add_argument("--strict-routing", action="store_true",
                         help="Require a valid static routing config when auditing network setup")
+    for target in ('host', 'account', 'profile'): parser.add_argument('--'+target, help='Explicit Aside target for this check')
     args = parser.parse_args()
+    for target in ('host', 'account', 'profile'):
+        value=getattr(args,target); key='TL_ASIDE_'+target.upper()
+        if value:
+            if os.environ.get(key) and os.environ[key]!=value: parser.error(f'--{target} differs from {key}')
+            os.environ[key]=value
     result = run_checks(args.config, args.probe_aside, args.strict_routing)
     if args.json:
         print(json.dumps(result, ensure_ascii=False, indent=2))
