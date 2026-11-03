@@ -9,6 +9,7 @@ import os
 from pathlib import Path
 import tempfile
 import subprocess
+import shutil
 import unittest
 from unittest.mock import patch
 
@@ -38,6 +39,272 @@ def raw(identity='123'):
 
 
 class RunnerTests(unittest.TestCase):
+    def test_public_provenance_retains_private_bytes_and_raw_hash(self):
+        with tempfile.TemporaryDirectory() as directory, patch.object(runner,'ROOT',Path(directory)):
+            out,service,diag=runner.paths(runner.ROOT,'private');runner.write(diag/'checkpoint.json',dict(state='CAPTURED',next_id=None));raw=b'{"state":"UNKNOWN_PAGE"}\n';digest=hashlib.sha256(raw).hexdigest();path=out/'observations/123'/f'{digest}.provenance.json';path.parent.mkdir(parents=True);(path.parent/f'{digest}.json').write_bytes(raw)
+            runner.write(path,dict(raw_sha256=digest,sandbox_path='/Users/person/.aside/session',snapshot_sha256='abc'));original=path.read_bytes();args=argparse.Namespace(run_id='private');runner.public_provenance(args)
+            private=diag/'private-provenance/123'/path.name;self.assertEqual(private.read_bytes(),original);public=runner.read(path);self.assertNotIn('sandbox_path',public);self.assertEqual(public['private_provenance_sha256'],hashlib.sha256(original).hexdigest());self.assertEqual((path.parent/f'{digest}.json').read_bytes(),raw)
+            before=path.read_bytes();runner.public_provenance(args);self.assertEqual(path.read_bytes(),before)
+            other=out/'observations/456'/f'{digest}.provenance.json';other.parent.mkdir(parents=True);(other.parent/f'{digest}.json').write_bytes(raw);runner.write(other,dict(raw_sha256=digest,sandbox_path='/private',other='/Users/private'))
+            with self.assertRaises(ValueError): runner.public_provenance(args)
+            self.assertIn('sandbox_path',runner.read(other))
+
+    def test_joined_salary_recurring_review_and_continuation_cli(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root=Path(directory).resolve();scripts=root/'Scraper/skills/collect-avito/scripts';shutil.copytree(SCRIPTS,scripts);shutil.copytree(runner.ROOT/'utils',root/'utils',ignore=shutil.ignore_patterns('__pycache__'))
+            out,service,diag=runner.paths(root,'salary');sandbox=root/'sandbox';queue=[item('123'),item('456')];listing=dict(state='LISTING',selected_controls=courier_controls(),items=queue)
+            runner.write(out/'listing.json',listing);runner.write(out/'listing_pages/0001.json',listing);runner.write(out/'queue.json',runner.queue_from_pages([listing],2));runner.write(service/'plan.json',dict(run_id='salary',profession='Курьер',listing_sha256=runner.sha(out/'listing.json'),listing_pages=[dict(file='listing_pages/0001.json',sha256=runner.sha(out/'listing_pages/0001.json'))]))
+            cp=dict(state='REVIEW_REQUIRED',stop_reason='identity_or_template_review',next_id='123',completed_ids=[]);runner.write(diag/'checkpoint.json',cp);runner.write(sandbox/'checkpoint.json',cp);runner.write(diag/'sandbox.json',{'path':str(sandbox)});runner.write(sandbox/'browser-tab.json',{'url':queue[0]['url']})
+            blocks=['Условия\nГрафик: Сменный\nОклад83 000 - 100 000 ₽','Требования\nОпыт работы: Без опыта'];data=raw('123');data.update(params_blocks=blocks,fields=[dict(name='График',value='Сменный'),dict(name='Опыт работы',value='Без опыта')],parameter_audit=dict(rendered_complete=False,expansion_controls=[]),source_sections=[dict(marker='item-view/item-params',text=x) for x in blocks]);runner.write(out/'raw/123.json',data);runner.write(sandbox/'raw/123.json',data)
+            snap=f'- title: "Работа" [url={queue[0]["url"]}]\n- heading "Работа" [level=1]\n- text: "Оклад"\n- text: "83 000 - 100 000 ₽"\n';(diag/'problem.snapshot.txt').write_text(snap);(sandbox/'problem.snapshot.txt').write_text(snap)
+            runner.record_failure(diag,'capture','stopped','capture',immediate=True);ledger=runner.load_failures(diag);ledger['retries_started']=5;ledger['events'].extend([dict(event='recurring_ip_policy',source='s',interval_seconds=1800),dict(event='recurring_incomplete_policy',source='s',instruction='разрешаю запросы')]);runner.save_failures(diag,ledger)
+            base=[sys.executable,str(scripts/'run.py')];review=base+['review-salary-line','--run-id','salary','--id','123','--authorization-id','s','--source','s']
+            (sandbox/'problem.snapshot.txt').write_text('tampered');self.assertNotEqual(subprocess.run(review,cwd=root,capture_output=True).returncode,0);(sandbox/'problem.snapshot.txt').write_text(snap)
+            bad=dict(data);bad['params_blocks']=[blocks[0]+'\nНеизвестная строка',blocks[1]];runner.write(out/'raw/123.json',bad);self.assertNotEqual(subprocess.run(review,cwd=root,capture_output=True).returncode,0);runner.write(out/'raw/123.json',data)
+            result=subprocess.run(review,cwd=root,text=True,capture_output=True);self.assertEqual(result.returncode,0,result.stderr);self.assertEqual(runner.read(out/'raw/123.json'),data);self.assertEqual(runner.read(diag/'checkpoint.json')['next_id'],'456')
+            cont=base+['recurring-reviewed-continuation','--run-id','salary','--source','s','--id','456','--authorization-id','once'];self.assertNotEqual(subprocess.run(cont,cwd=root,capture_output=True).returncode,0)
+            ledger=runner.load_failures(diag);[e.update(at='2020-01-01T00:00:00+00:00') for e in ledger['events'] if e.get('event')=='failure'];runner.save_failures(diag,ledger);result=subprocess.run(cont,cwd=root,text=True,capture_output=True);self.assertEqual(result.returncode,0,result.stderr)
+
+    def test_visible_502_actual_cli_and_guards(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root=Path(directory).resolve();scripts=root/'Scraper/skills/collect-avito/scripts';shutil.copytree(SCRIPTS,scripts);shutil.copytree(runner.ROOT/'utils',root/'utils',ignore=shutil.ignore_patterns('__pycache__'))
+            out,service,diag=runner.paths(root,'err');sandbox=root/'sandbox';candidate=item('456');url=candidate['url'];listing=dict(state='LISTING',selected_controls=courier_controls(),items=[candidate])
+            runner.write(out/'listing.json',listing);runner.write(out/'listing_pages/0001.json',listing);runner.write(out/'queue.json',runner.queue_from_pages([listing],1));runner.write(service/'plan.json',dict(run_id='err',profession='Курьер',listing_sha256=runner.sha(out/'listing.json'),listing_pages=[dict(file='listing_pages/0001.json',sha256=runner.sha(out/'listing_pages/0001.json'))]))
+            cp=dict(state='REVIEW_REQUIRED',stop_reason='identity_or_template_review',next_id='456',completed_ids=[]);runner.write(diag/'checkpoint.json',cp);runner.write(sandbox/'checkpoint.json',cp);runner.write(diag/'sandbox.json',{'path':str(sandbox)});runner.write(sandbox/'browser-tab.json',{'url':url})
+            rawdata=dict(state='UNKNOWN_PAGE',source_url=url,heading=None,items=[],unresolved_evidence=dict(complete=True,restriction=False,known_unavailable=False));runner.write(out/'raw/456.json',rawdata);runner.write(sandbox/'raw/456.json',rawdata)
+            snapshot=f'- title: "HTTP 502" [url={url}]\n- text: "502 Error\\n Bad gateway\\n Сайт www.avito.ru не отвечает."\n';(diag/'problem.snapshot.txt').write_text(snapshot);(sandbox/'problem.snapshot.txt').write_text(snapshot)
+            runner.record_failure(diag,'capture','stopped','capture',immediate=True);ledger=runner.load_failures(diag);ledger['retries_started']=5;ledger['events'][-1]['at']='2020-01-01T00:00:00+00:00';ledger['events'].extend([dict(event='recurring_ip_policy',source='s',interval_seconds=1800),dict(event='recurring_incomplete_policy',source='s',instruction='разрешаю запросы')]);runner.save_failures(diag,ledger)
+            base=[sys.executable,str(scripts/'run.py')];cmd=base+['recurring-incomplete-attempt','--run-id','err','--source','s','--id','456','--authorization-id','once','--visible-http-502']
+            for bad in (snapshot+'CAPTCHA',snapshot+'HTTP 429',snapshot.replace('www.avito.ru не отвечает','wrong.example не отвечает'),snapshot.replace('HTTP 502','HTTP 503')):
+                (diag/'problem.snapshot.txt').write_text(bad);(sandbox/'problem.snapshot.txt').write_text(bad);self.assertNotEqual(subprocess.run(cmd,cwd=root,capture_output=True).returncode,0)
+            (diag/'problem.snapshot.txt').write_text(snapshot);(sandbox/'problem.snapshot.txt').write_text(snapshot)
+            wrong=cmd.copy();wrong[wrong.index('456')]='999';self.assertNotEqual(subprocess.run(wrong,cwd=root,capture_output=True).returncode,0)
+            recent=runner.load_failures(diag);recent['events'][0]['at']=runner.datetime.now(runner.timezone.utc).isoformat();runner.save_failures(diag,recent);self.assertNotEqual(subprocess.run(cmd,cwd=root,capture_output=True).returncode,0);recent['events'][0]['at']='2020-01-01T00:00:00+00:00';runner.save_failures(diag,recent)
+            result=subprocess.run(cmd,cwd=root,text=True,capture_output=True);self.assertEqual(result.returncode,0,result.stderr)
+            preserve=base+['retry-incomplete-observation','--run-id','err','--id','456','--authorization-id','once'];result=subprocess.run(preserve,cwd=root,text=True,capture_output=True);self.assertEqual(result.returncode,0,result.stderr)
+            self.assertEqual(runner.read(sandbox/'raw/456.json'),rawdata);self.assertFalse((out/'raw/456.json').exists());self.assertTrue(next((out/'observations/456').glob('*.provenance.json')).read_text().find('visible_http_502')>=0)
+
+    def test_address_button_offline_review_and_explicit_target_cli(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root=Path(directory).resolve();scripts=root/'Scraper/skills/collect-avito/scripts';shutil.copytree(SCRIPTS,scripts);shutil.copytree(runner.ROOT/'utils',root/'utils',ignore=shutil.ignore_patterns('__pycache__'))
+            out,service,diag=runner.paths(root,'addr');sandbox=root/'sandbox';queue=[item('123'),item('456')];listing=dict(state='LISTING',selected_controls=courier_controls(),items=queue)
+            runner.write(out/'listing.json',listing);runner.write(out/'listing_pages/0001.json',listing);runner.write(out/'queue.json',runner.queue_from_pages([listing],2));runner.write(service/'plan.json',dict(run_id='addr',profession='Курьер',listing_sha256=runner.sha(out/'listing.json'),listing_pages=[dict(file='listing_pages/0001.json',sha256=runner.sha(out/'listing_pages/0001.json'))]))
+            cp=dict(state='REVIEW_REQUIRED',stop_reason='identity_or_template_review',next_id='123',completed_ids=[]);runner.write(diag/'checkpoint.json',cp);runner.write(sandbox/'checkpoint.json',cp);runner.write(diag/'sandbox.json',{'path':str(sandbox)});runner.write(sandbox/'browser-tab.json',{'url':queue[0]['url']})
+            address='Республика, Благовещенск, улица 1';blocks=[f'Условия\nГде предстоит работать: {address}\nГрафик: Вахта','Требования\nОпыт работы: Без опыта']
+            rawdata=raw('123');rawdata.update(params_blocks=blocks,fields=[dict(name='Где предстоит работать',value=address),dict(name='График',value='Вахта'),dict(name='Опыт работы',value='Без опыта')],parameter_audit=dict(rendered_complete=False,expansion_controls=[address]),source_sections=[dict(marker='item-view/item-params',text=x) for x in blocks]);runner.write(out/'raw/123.json',rawdata);runner.write(sandbox/'raw/123.json',rawdata)
+            snap=f'- title: "Работа" [url={queue[0]["url"]}]\n- heading "Работа" [level=1]\n- text: "Где предстоит работать:"\n- button "{address}" [ref=e1]\n';(diag/'problem.snapshot.txt').write_text(snap);(sandbox/'problem.snapshot.txt').write_text(snap)
+            runner.record_failure(diag,'capture','stopped','capture',immediate=True);ledger=runner.load_failures(diag);ledger['retries_started']=5;ledger['events'].extend([dict(event='recurring_ip_policy',source='s',interval_seconds=1800),dict(event='recurring_incomplete_policy',source='s',instruction='разрешаю запросы')]);runner.save_failures(diag,ledger)
+            runner.write(diag/'aside-target.local.json',dict(TL_ASIDE_HOST='local',TL_ASIDE_ACCOUNT='u0',TL_ASIDE_PROFILE='pinned'))
+            base=[sys.executable,str(scripts/'run.py')];review=base+['review-address-button','--run-id','addr','--id','123','--source','s']
+            bad=dict(rawdata);bad['parameter_audit']=dict(rendered_complete=False,expansion_controls=[address,'Показать ещё']);runner.write(out/'raw/123.json',bad);self.assertNotEqual(subprocess.run(review,cwd=root,capture_output=True).returncode,0);runner.write(out/'raw/123.json',rawdata)
+            (sandbox/'problem.snapshot.txt').write_text('tampered');self.assertNotEqual(subprocess.run(review,cwd=root,capture_output=True).returncode,0);(sandbox/'problem.snapshot.txt').write_text(snap)
+            result=subprocess.run(review,cwd=root,text=True,capture_output=True);self.assertEqual(result.returncode,0,result.stderr);self.assertEqual(runner.read(out/'raw/123.json'),rawdata);self.assertEqual(runner.read(diag/'checkpoint.json')['next_id'],'456')
+            continuation=base+['recurring-reviewed-continuation','--run-id','addr','--source','s','--id','456','--authorization-id','one'];self.assertNotEqual(subprocess.run(continuation,cwd=root,capture_output=True).returncode,0)
+            ledger=runner.load_failures(diag);[e.update(at='2020-01-01T00:00:00+00:00') for e in ledger['events'] if e.get('event')=='failure'];runner.save_failures(diag,ledger)
+            result=subprocess.run(continuation,cwd=root,text=True,capture_output=True);self.assertEqual(result.returncode,0,result.stderr)
+            before=(diag/'failures.json').read_bytes();wrong=base+['capture','--run-id','addr','--host','local','--account','u0','--profile','other'];self.assertNotEqual(subprocess.run(wrong,cwd=root,capture_output=True).returncode,0);self.assertEqual((diag/'failures.json').read_bytes(),before)
+            env=dict(os.environ,TL_ASIDE_PROFILE='other');conflict=base+['capture','--run-id','addr','--host','local','--account','u0','--profile','pinned'];self.assertNotEqual(subprocess.run(conflict,cwd=root,env=env,capture_output=True).returncode,0);self.assertEqual((diag/'failures.json').read_bytes(),before)
+            help_result=subprocess.run(base+['capture','--help'],cwd=root,text=True,capture_output=True);self.assertIn('--profile',help_result.stdout)
+
+    def test_offline_standing_unavailable_and_scheduled_continuation_cli(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root=Path(directory).resolve();scripts=root/'Scraper/skills/collect-avito/scripts';shutil.copytree(SCRIPTS,scripts);shutil.copytree(runner.ROOT/'utils',root/'utils',ignore=shutil.ignore_patterns('__pycache__'))
+            out,service,diag=runner.paths(root,'closed');sandbox=root/'sandbox';items=[item('123'),item('456')];listing=dict(state='LISTING',selected_controls=courier_controls(),items=items)
+            runner.write(out/'listing.json',listing);runner.write(out/'listing_pages/0001.json',listing);runner.write(out/'queue.json',runner.queue_from_pages([listing],2))
+            runner.write(service/'plan.json',dict(run_id='closed',profession='Курьер',listing_sha256=runner.sha(out/'listing.json'),listing_pages=[dict(file='listing_pages/0001.json',sha256=runner.sha(out/'listing_pages/0001.json'))]))
+            cp=dict(state='REVIEW_REQUIRED',stop_reason='identity_or_template_review',next_id='123',completed_ids=[]);runner.write(diag/'checkpoint.json',cp);runner.write(sandbox/'checkpoint.json',cp);runner.write(diag/'sandbox.json',{'path':str(sandbox)})
+            raw=dict(state='DETAIL',id='123',title='Работа',source_url=items[0]['url']);runner.write(out/'raw/123.json',raw);runner.write(sandbox/'raw/123.json',raw);runner.write(sandbox/'browser-tab.json',{'url':items[0]['url']})
+            snap=f'- title: "Работа" [url={items[0]["url"]}]\n- heading "Работа" [level=1]\n- text: "Объявление снято с публикации."\n';(diag/'problem.snapshot.txt').write_text(snap);(sandbox/'problem.snapshot.txt').write_text(snap)
+            runner.write(out/'standing_unavailable_policy.json',dict(authorization_id=runner.STANDING_UNAVAILABLE_ID,human_instruction=runner.STANDING_UNAVAILABLE_INSTRUCTION,markers=list(runner.ALL_UNAVAILABLE_MARKERS)))
+            ledger=runner.load_failures(diag);ledger['events'].append(dict(event='project_unavailable_policy',authorization_id=runner.STANDING_UNAVAILABLE_ID,instruction=runner.STANDING_UNAVAILABLE_INSTRUCTION,source=runner.STANDING_UNAVAILABLE_SOURCE));runner.save_failures(diag,ledger)
+            runner.record_failure(diag,'capture','stopped','capture',immediate=True);ledger=runner.load_failures(diag);ledger['retries_started']=ledger['retry_limit'];ledger['events'].append(dict(event='recurring_ip_policy',source='s',interval_seconds=1800));runner.save_failures(diag,ledger)
+            base=[sys.executable,str(scripts/'run.py')];mark=base+['mark-unavailable','--run-id','closed','--id','123','--authorization-id',runner.STANDING_UNAVAILABLE_ID,'--offline-standing']
+            (sandbox/'problem.snapshot.txt').write_text('tampered');self.assertNotEqual(subprocess.run(mark,cwd=root,capture_output=True).returncode,0);(sandbox/'problem.snapshot.txt').write_text(snap)
+            result=subprocess.run(mark,cwd=root,text=True,capture_output=True);self.assertEqual(result.returncode,0,result.stderr);self.assertEqual(runner.read(out/'raw/123.json'),raw);self.assertEqual(runner.read(diag/'checkpoint.json')['next_id'],'456')
+            recover=base+['recurring-unavailable-continuation','--run-id','closed','--source','s','--id','456','--authorization-id','once']
+            self.assertNotEqual(subprocess.run(recover,cwd=root,capture_output=True).returncode,0)
+            ledger=runner.load_failures(diag);[e.update(at='2020-01-01T00:00:00+00:00') for e in ledger['events'] if e.get('event')=='failure'];runner.save_failures(diag,ledger)
+            result=subprocess.run(recover,cwd=root,text=True,capture_output=True);self.assertEqual(result.returncode,0,result.stderr);self.assertEqual(runner.load_failures(diag)['bounded_pending']['id'],'456')
+
+    def test_recurring_incomplete_actual_cli_and_guards(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root=Path(directory).resolve(); scripts=root/'Scraper/skills/collect-avito/scripts'; shutil.copytree(SCRIPTS,scripts); shutil.copytree(runner.ROOT/'utils',root/'utils',ignore=shutil.ignore_patterns('__pycache__'))
+            out,service,diag=runner.paths(root,'inc'); sandbox=root/'sandbox'; candidate=item('456'); url=candidate['url']; listing=dict(state='LISTING',selected_controls=courier_controls(),items=[candidate])
+            runner.write(out/'listing.json',listing);runner.write(out/'listing_pages/0001.json',listing);runner.write(out/'queue.json',runner.queue_from_pages([listing],1))
+            runner.write(service/'plan.json',dict(run_id='inc',profession='Курьер',listing_sha256=runner.sha(out/'listing.json'),listing_pages=[dict(file='listing_pages/0001.json',sha256=runner.sha(out/'listing_pages/0001.json'))]))
+            cp=dict(state='REVIEW_REQUIRED',stop_reason='identity_or_template_review',next_id='456',completed_ids=[]);runner.write(diag/'checkpoint.json',cp);runner.write(sandbox/'checkpoint.json',cp);runner.write(diag/'sandbox.json',{'path':str(sandbox)})
+            raw=dict(state='UNKNOWN_PAGE',source_url=url,heading=None,items=[],unresolved_evidence=dict(complete=False,restriction=False,known_unavailable=False));runner.write(out/'raw/456.json',raw);runner.write(sandbox/'raw/456.json',raw);runner.write(sandbox/'browser-tab.json',{'url':url})
+            snap=f'- title: "Работа" [url={url}]\n- link "Помощь" [ref=e1]\n';(diag/'problem.snapshot.txt').write_text(snap);(sandbox/'problem.snapshot.txt').write_text(snap)
+            runner.record_failure(diag,'capture','stopped','capture',immediate=True);ledger=runner.load_failures(diag);ledger['retries_started']=ledger['retry_limit'];ledger['events'][-1]['at']='2020-01-01T00:00:00+00:00';runner.save_failures(diag,ledger)
+            base=[sys.executable,str(scripts/'run.py')];cmds=[['recurring-ip-policy','--run-id','inc','--source','s','--human-instruction','каждые 30 минут','--additional-instruction','все разрешения'],['recurring-incomplete-policy','--run-id','inc','--source','s','--human-instruction','все запросы к авито']]
+            for cmd in cmds:
+                result=subprocess.run(base+cmd,cwd=root,text=True,capture_output=True);self.assertEqual(result.returncode,0,result.stderr)
+            cmd=base+['recurring-incomplete-attempt','--run-id','inc','--source','s','--id','456','--authorization-id','once']
+            wrong=cmd.copy();wrong[wrong.index('456')]='999';self.assertNotEqual(subprocess.run(wrong,cwd=root,capture_output=True).returncode,0)
+            (sandbox/'problem.snapshot.txt').write_text('tampered');self.assertNotEqual(subprocess.run(cmd,cwd=root,capture_output=True).returncode,0);(sandbox/'problem.snapshot.txt').write_text(snap)
+            protected=snap+'CAPTCHA 429';(sandbox/'problem.snapshot.txt').write_text(protected);(diag/'problem.snapshot.txt').write_text(protected)
+            self.assertNotEqual(subprocess.run(cmd,cwd=root,capture_output=True).returncode,0);(sandbox/'problem.snapshot.txt').write_text(snap);(diag/'problem.snapshot.txt').write_text(snap)
+            data=runner.read(out/'raw/456.json');data['unresolved_evidence']['restriction']=True;runner.write(out/'raw/456.json',data)
+            self.assertNotEqual(subprocess.run(cmd,cwd=root,capture_output=True).returncode,0);runner.write(out/'raw/456.json',raw)
+            ledger=runner.load_failures(diag);ledger['events'][0]['at']=runner.datetime.now(runner.timezone.utc).isoformat();runner.save_failures(diag,ledger)
+            self.assertNotEqual(subprocess.run(cmd,cwd=root,capture_output=True).returncode,0);ledger['events'][0]['at']='2020-01-01T00:00:00+00:00';runner.save_failures(diag,ledger)
+            result=subprocess.run(cmd,cwd=root,text=True,capture_output=True);self.assertEqual(result.returncode,0,result.stderr)
+            saved=subprocess.run(base+['retry-incomplete-observation','--run-id','inc','--id','456','--authorization-id','once'],cwd=root,text=True,capture_output=True);self.assertEqual(saved.returncode,0,saved.stderr)
+            self.assertEqual(runner.read(sandbox/'raw/456.json'),raw);self.assertFalse((out/'raw/456.json').exists());self.assertEqual(runner.load_failures(diag)['retries_started'],5)
+
+    def test_capture_waits_only_for_unrestricted_incomplete_shell(self):
+        script=(SCRIPTS/'browser_batch.js').read_text(); candidate=item('123')
+        job=dict(mode='capture',queue=[candidate],completed_ids=[],close_tab=False)
+        body=script.replace('__JOB__',json.dumps(job),1).replace('__EXTRACTOR__','"extract"',1)
+        for scenario,expected_calls,expected_state in [('ready',1,'CAPTURED'),('delayed',3,'CAPTURED'),('timeout',11,'REVIEW_REQUIRED'),('blocked',2,'NEEDS_HUMAN'),('unavailable',1,'REVIEW_REQUIRED'),('wrongurl',1,'REVIEW_REQUIRED')]:
+            with self.subTest(scenario=scenario), tempfile.TemporaryDirectory() as directory:
+                harness="""const fs=require('fs').promises,pwd=process.cwd(),url=URL;let calls=0,sleeps=0;const scenario=SCENARIO;
+const pg={url:()=>scenario==='wrongurl'?'https://www.avito.ru/wrong':url,evaluate:async()=>{calls++;if(scenario==='blocked'&&calls===2)return {state:'NEEDS_HUMAN',source_url:url};if(scenario==='ready'||scenario==='delayed'&&calls===3)return {state:'DETAIL',id:'123',title:'Job',source_url:url,parameter_audit:{rendered_complete:true},fields:[{name:'x',value:'y'}]};return {state:'UNKNOWN_PAGE',source_url:url,unresolved_evidence:{complete:false,restriction:false,known_unavailable:scenario==='unavailable'}}}};
+const listBrowserTabs=async()=>[],openTab=async()=>pg,snapshot=async()=>({tree:'snapshot'}),sleep=async()=>{sleeps++};
+(async()=>{BODY;console.log('CHECK='+JSON.stringify({calls,sleeps,cp:JSON.parse(await fs.readFile('checkpoint.json','utf8'))}))})().catch(e=>{console.error(e);process.exit(1)});
+""".replace('URL',json.dumps(candidate['url'])).replace('SCENARIO',json.dumps(scenario)).replace('BODY',body)
+                result=subprocess.run(['node','-e',harness],cwd=directory,text=True,capture_output=True,check=True)
+                info=json.loads(result.stdout.split('CHECK=')[-1]);self.assertEqual(info['calls'],expected_calls);self.assertEqual(info['cp']['state'],expected_state);self.assertLessEqual(info['sleeps'],10)
+
+    def test_recurring_ip_commands_parse_and_dispatch_in_real_cli(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root=Path(directory).resolve(); scripts=root/'Scraper/skills/collect-avito/scripts'
+            shutil.copytree(SCRIPTS,scripts); shutil.copytree(runner.ROOT/'utils',root/'utils',ignore=shutil.ignore_patterns('__pycache__'))
+            out,service,diag=runner.paths(root,'cli'); sandbox=root/'sandbox'; candidate=item('456')
+            listing=dict(state='LISTING',selected_controls=courier_controls(),items=[candidate])
+            runner.write(out/'listing.json',listing); runner.write(out/'listing_pages/0001.json',listing)
+            runner.write(out/'queue.json',runner.queue_from_pages([listing],1))
+            runner.write(service/'plan.json',dict(run_id='cli',profession='Курьер',listing_sha256=runner.sha(out/'listing.json'),listing_pages=[dict(file='listing_pages/0001.json',sha256=runner.sha(out/'listing_pages/0001.json'))]))
+            cp=dict(state='NEEDS_HUMAN',stop_reason='access_restriction_or_captcha',next_id='456',completed_ids=[])
+            runner.write(diag/'checkpoint.json',cp); runner.write(sandbox/'checkpoint.json',cp); runner.write(diag/'sandbox.json',{'path':str(sandbox)})
+            raw=dict(state='NEEDS_HUMAN',reason='access_restriction_or_captcha',source_url=candidate['url'])
+            runner.write(out/'raw/456.json',raw); runner.write(sandbox/'raw/456.json',raw); runner.write(sandbox/'browser-tab.json',{'url':candidate['url']})
+            snap=f'- title: "Доступ ограничен: проблема с IP" [url={candidate["url"]}]\n- heading "Страница не загрузилась из-за проблем с IP" [level=1]\n'
+            (diag/'problem.snapshot.txt').write_text(snap,encoding='utf8'); (sandbox/'problem.snapshot.txt').write_text(snap,encoding='utf8')
+            runner.record_failure(diag,'capture','stopped','capture',immediate=True)
+            ledger=runner.load_failures(diag); ledger['retries_started']=ledger['retry_limit']; ledger['events'][-1]['at']='2020-01-01T00:00:00+00:00'; runner.save_failures(diag,ledger)
+            base=[sys.executable,str(scripts/'run.py')]
+            commands=[['recurring-ip-policy','--run-id','cli','--source','source','--human-instruction','каждые 30 минут','--additional-instruction','все разрешения'],
+                      ['recurring-ip-attempt','--run-id','cli','--source','source','--id','456','--authorization-id','attempt']]
+            for args in commands:
+                result=subprocess.run(base+args,cwd=root,text=True,capture_output=True)
+                self.assertEqual(result.returncode,0,result.stderr)
+            self.assertEqual(runner.load_failures(diag)['bounded_pending']['id'],'456')
+            self.assertTrue((out/'raw/456.json').exists())
+            preserved=subprocess.run(base+['preserve-stopped-observation','--run-id','cli','--authorization-id','attempt'],cwd=root,text=True,capture_output=True)
+            self.assertEqual(preserved.returncode,0,preserved.stderr)
+            runner.ensure_allowed(diag,'capture',action=True)
+            failed_command=['/Library/Developer/CommandLineTools/usr/bin/python3',str(scripts/'preflight.py'),'--probe-aside','--config',str(root/'Scraper/collect-avito.local.json')]
+            runner.record_failure(diag,'capture',str(subprocess.CalledProcessError(2,failed_command)),'capture')
+            ledger=runner.load_failures(diag); ledger['events'][-1]['at']='2020-01-01T00:00:00+00:00'
+            for e in ledger['events']:
+                if e.get('event')=='recurring_ip_authorization': e['at']='2020-01-01T00:00:00+00:00'
+            runner.save_failures(diag,ledger)
+            recover=base+['recurring-ip-after-preflight','--run-id','cli','--source','source','--id','456','--authorization-id','attempt-2']
+            oldbytes=(diag/'failures.json').read_bytes(); saved=next((diag/'observations/456').glob('*.problem.snapshot.txt')); snapbytes=saved.read_bytes()
+            saved.write_text('tampered',encoding='utf8'); self.assertNotEqual(subprocess.run(recover,cwd=root,capture_output=True).returncode,0); saved.write_bytes(snapbytes)
+            runner.write(out/'raw/456.json',raw); self.assertNotEqual(subprocess.run(recover,cwd=root,capture_output=True).returncode,0); (out/'raw/456.json').unlink()
+            bad=recover.copy(); bad[bad.index('456')]='999'; self.assertNotEqual(subprocess.run(bad,cwd=root,capture_output=True).returncode,0)
+            recent=runner.load_failures(diag); recent['events'][-1]['at']=runner.datetime.now(runner.timezone.utc).isoformat(); runner.save_failures(diag,recent)
+            self.assertNotEqual(subprocess.run(recover,cwd=root,capture_output=True).returncode,0); (diag/'failures.json').write_bytes(oldbytes)
+            result=subprocess.run(recover,cwd=root,text=True,capture_output=True); self.assertEqual(result.returncode,0,result.stderr)
+            self.assertEqual(runner.load_failures(diag)['bounded_pending']['state'],'reserved'); self.assertFalse((out/'raw/456.json').exists())
+
+    def test_recurring_ip_policy_claim_and_preservation(self):
+        for scenario in ('ok', 'early', 'captcha_only', 'http429', 'wrong_id', 'tampered', 'prefix'):
+            with self.subTest(scenario=scenario), tempfile.TemporaryDirectory() as directory, patch.object(runner, 'ROOT', Path(directory)):
+                root=runner.ROOT; out,service,diag=runner.paths(root,'case'); sandbox=root/'sandbox'
+                queue=[item('123'), item('456')]; queue[1]['listing_rank']=2; url=queue[1]['url']
+                runner.write(out/'queue.json',queue); runner.write(out/'listing.json',{}); runner.write(out/'listing_pages/0001.json',{})
+                runner.write(service/'plan.json',dict(run_id='case',listing_sha256='pinned',listing_pages=[dict(file='listing_pages/0001.json')]))
+                cp=dict(state='NEEDS_HUMAN',stop_reason='access_restriction_or_captcha',next_id='456',completed_ids=[] if scenario=='prefix' else ['123'])
+                runner.write(diag/'checkpoint.json',cp); runner.write(sandbox/'checkpoint.json',cp); runner.write(diag/'sandbox.json',{'path':str(sandbox)})
+                raw=dict(state='NEEDS_HUMAN',reason='access_restriction_or_captcha',source_url=url)
+                runner.write(out/'raw/456.json',raw); runner.write(sandbox/'raw/456.json',raw); runner.write(sandbox/'browser-tab.json',{'url':url})
+                snap=f'- title: "Доступ ограничен: проблема с IP" [url={url}]\n- heading "Страница не загрузилась из-за проблем с IP" [level=1]\n'
+                if scenario=='captcha_only': snap='- title: "CAPTCHA" [url='+url+']\n'
+                if scenario=='http429': snap+='- text: "HTTP 429"\n'
+                (diag/'problem.snapshot.txt').write_text(snap,encoding='utf8'); (sandbox/'problem.snapshot.txt').write_text(snap+('x' if scenario=='tampered' else ''),encoding='utf8')
+                runner.record_failure(diag,'capture','stopped','capture',immediate=True)
+                ledger=runner.load_failures(diag); ledger['retries_started']=ledger['retry_limit']
+                if scenario!='early': ledger['events'][-1]['at']='2020-01-01T00:00:00+00:00'
+                runner.save_failures(diag,ledger)
+                policy=argparse.Namespace(run_id='case',source='source',human_instruction='каждые 30 минут',additional_instruction='все разрешения')
+                runner.recurring_ip_policy(policy); runner.recurring_ip_policy(policy)
+                attempt=argparse.Namespace(run_id='case',source='source',id='999' if scenario=='wrong_id' else '456',authorization_id='attempt-1')
+                with patch.object(runner,'validate_partition'), patch.object(runner,'validate_plan_profession'), patch.object(runner,'queue_from_pages',return_value=queue), patch.object(runner,'unavailable_records',return_value=[]), patch.object(runner,'unresolved_records',return_value=[]):
+                    if scenario=='ok':
+                        before=runner.load_failures(diag); runner.recurring_ip_attempt(attempt)
+                        with self.assertRaises((ValueError,runner.HumanRequired)): runner.recurring_ip_attempt(attempt)
+                        ledger=runner.load_failures(diag); self.assertEqual(ledger['retries_started'],before['retries_started']); self.assertEqual(ledger['failures'],before['failures'])
+                        runner.preserve_stopped_observation(argparse.Namespace(run_id='case',authorization_id='attempt-1'))
+                        self.assertEqual(runner.read(diag/'checkpoint.json')['completed_ids'],['123']); self.assertEqual(runner.read(diag/'checkpoint.json')['state'],'READY')
+                        self.assertEqual(runner.read(sandbox/'raw/456.json'),raw); self.assertFalse((out/'raw/456.json').exists())
+                    else:
+                        with self.assertRaises((ValueError,runner.HumanRequired)): runner.recurring_ip_attempt(attempt)
+                        self.assertEqual(runner.load_failures(diag)['state'],'NEEDS_HUMAN'); self.assertTrue((out/'raw/456.json').exists())
+
+    def test_bounded_pending_authorization_never_replenishes_budget(self):
+        path = 'Scraper/skills/collect-avito/scripts/failure_log.py'
+        self.assertNotIn(path, runner.allowed_capture_changes({}, []))
+        self.assertIn(path, runner.allowed_capture_changes({}, [dict(file=path, reason='Guard incomplete shell preservation and authorize one pending capture without new budget', validation='passed')]))
+        for outcome in ('success', 'failure', 'interrupted'):
+            with self.subTest(outcome=outcome), tempfile.TemporaryDirectory() as directory, patch.object(runner, 'ROOT', Path(directory)):
+                _, _, diag = runner.paths(runner.ROOT, 'case')
+                runner.write(diag/'checkpoint.json', dict(state='REVIEW_REQUIRED', next_id='456'))
+                runner.record_failure(diag, 'capture', 'stop', 'capture', immediate=True)
+                ledger = runner.load_failures(diag); ledger['retries_started'] = ledger['retry_limit']; runner.save_failures(diag, ledger)
+                original = runner.load_failures(diag); counts = (original['failures'], original['retries_started'], original['retry_limit'], original['budget_start_failures'])
+                args = argparse.Namespace(run_id='case', human_instruction='Повторить 456 и продолжить очередь', authorization_id='one', pending_id_no_budget='456')
+                runner.resume_browser(args); ledger = runner.load_failures(diag)
+                self.assertEqual((ledger['failures'], ledger['retries_started'], ledger['retry_limit'], ledger['budget_start_failures']), counts)
+                with self.assertRaises(runner.HumanRequired): runner.ensure_allowed(diag, 'freeze', action=True)
+                runner.ensure_allowed(diag, 'capture', action=True)
+                with self.assertRaises(runner.HumanRequired): runner.ensure_allowed(diag, 'capture', action=True)
+                if outcome == 'success':
+                    runner.succeeded(diag, 'capture', 'one ID complete')
+                    self.assertEqual(runner.load_failures(diag)['bounded_pending']['state'], 'completed')
+                    runner.record_failure(diag, 'capture', 'next error', 'capture')
+                elif outcome == 'failure': runner.record_failure(diag, 'capture', 'pending failed', 'capture')
+                else:
+                    self.assertEqual(runner.load_failures(diag)['state'], 'RETRY_STARTED')
+                    continue
+                self.assertEqual(runner.load_failures(diag)['state'], 'NEEDS_HUMAN')
+                with self.assertRaises(runner.HumanRequired): runner.resume_browser(args)
+
+    def test_retry_incomplete_requires_authorized_matching_forensic_evidence(self):
+        for scenario in ('ok', 'old_auth', 'wrong_id', 'restriction', 'snapshot', 'prefix'):
+            with self.subTest(scenario=scenario), tempfile.TemporaryDirectory() as directory, patch.object(runner, 'ROOT', Path(directory)):
+                root = runner.ROOT; run_id = 'case'; out, service, diag = runner.paths(root, run_id); sandbox = root/'sandbox'
+                queue = [item('123'), item('456')]; queue[1]['listing_rank'] = 2
+                runner.write(out/'queue.json', queue); runner.write(out/'listing.json', {})
+                runner.write(out/'listing_pages/0001.json', {})
+                runner.write(service/'plan.json', dict(run_id=run_id, listing_pages=[dict(file='listing_pages/0001.json')], listing_sha256='pinned'))
+                cp = dict(state='REVIEW_REQUIRED', stop_reason='identity_or_template_review', next_id='456', completed_ids=['123'])
+                if scenario == 'prefix': cp['completed_ids'] = []
+                runner.write(diag/'checkpoint.json', cp); runner.write(sandbox/'checkpoint.json', cp)
+                runner.write(diag/'sandbox.json', {'path':str(sandbox)}); runner.write(sandbox/'browser-tab.json', {'url':queue[1]['url']})
+                data = dict(state='UNKNOWN_PAGE', source_url=queue[1]['url'], heading=None, items=[], unresolved_evidence=dict(complete=False, restriction=scenario == 'restriction', known_unavailable=False))
+                runner.write(out/'raw/456.json', data); runner.write(sandbox/'raw/456.json', data)
+                snap = '# note: interactive (clickable / focusable) elements only.\n- title: "Авито" [url='+queue[1]['url']+']\n- link "Помощь" [ref=e1]\n'
+                (diag/'problem.snapshot.txt').write_text(snap, encoding='utf8'); (sandbox/'problem.snapshot.txt').write_text(snap + ('tamper' if scenario == 'snapshot' else ''), encoding='utf8')
+                runner.record_failure(diag, 'capture', 'stopped', 'capture', immediate=True)
+                runner.authorize_browser(diag, 'Повторить карточку 456', 'auth')
+                if scenario == 'old_auth': runner.record_failure(diag, 'capture', 'new stop', 'capture', immediate=True)
+                args = argparse.Namespace(run_id=run_id, id='999' if scenario == 'wrong_id' else '456', authorization_id='auth')
+                original = (out/'raw/456.json').read_bytes(); plan_bytes = (service/'plan.json').read_bytes(); queue_bytes = (out/'queue.json').read_bytes()
+                with patch.object(runner, 'validate_partition'), patch.object(runner, 'validate_plan_profession'), patch.object(runner, 'queue_from_pages', return_value=queue), patch.object(runner, 'unavailable_records', return_value=[]), patch.object(runner, 'unresolved_records', return_value=[]):
+                    if scenario == 'ok': runner.retry_incomplete_observation(args)
+                    else:
+                        with self.assertRaises((ValueError, runner.HumanRequired)): runner.retry_incomplete_observation(args)
+                self.assertEqual((service/'plan.json').read_bytes(), plan_bytes); self.assertEqual((out/'queue.json').read_bytes(), queue_bytes)
+                if scenario == 'ok':
+                    digest = hashlib.sha256(original).hexdigest(); self.assertEqual((out/'observations/456'/f'{digest}.json').read_bytes(), original)
+                    self.assertFalse((out/'raw/456.json').exists()); self.assertEqual((sandbox/'raw/456.json').read_bytes(), original)
+                    self.assertEqual(runner.read(diag/'checkpoint.json')['completed_ids'], ['123'])
+                    self.assertEqual(runner.read(out/'observations/456'/f'{digest}.provenance.json')['snapshot_sha256'], runner.sha(diag/'problem.snapshot.txt'))
+                else: self.assertEqual((out/'raw/456.json').read_bytes(), original)
+
     def test_deduplicate_queue_empty_mixed_and_tampering(self):
         original_root = runner.ROOT
         for all_duplicate in (True, False):

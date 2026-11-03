@@ -9,6 +9,12 @@ from utils.build_dataset import build, digest
 
 
 class DatasetTests(unittest.TestCase):
+    def test_windows_source_paths_are_portable_without_escaping_repository(self):
+        original=self.add('one',[self.row()]);sub=self.root/'folder';sub.mkdir();target=sub/'source.csv';target.write_bytes(original.read_bytes())
+        entry=self.registry['exports'][0];entry['path']=r'folder\source.csv';self.assertEqual(len(self.result()),1);self.assertEqual(entry['path'],r'folder\source.csv')
+        for bad in (r'C:\outside.csv',r'\\server\share\source.csv',r'folder\..\outside.csv','/etc/passwd'):
+            entry['path']=bad
+            with self.assertRaises(ValueError): self.result()
     def setUp(self):
         self.temp = tempfile.TemporaryDirectory()
         self.addCleanup(self.temp.cleanup)

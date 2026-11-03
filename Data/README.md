@@ -261,3 +261,5 @@ avito_runs/<название_сбора>/
 - [vahta_50_2026-11-02_sasha](avito_runs/vahta_50_2026-11-02_sasha/exports/vacancies_flat.csv): 50 вакансий.
 
 - [vahta_1500_2026-11-02_sasha](avito_runs/vahta_1500_2026-11-02_sasha/exports/vacancies_flat.csv): 1257 вакансий.
+
+- [avito_20261102_gruzchik_all_1500](avito_runs/avito_20261102_gruzchik_all_1500/exports/vacancies_flat.csv): 1389 вакансий.

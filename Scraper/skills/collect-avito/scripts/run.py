@@ -1197,16 +1197,20 @@ def mark_unavailable(args):
     if (service/'manifest.json').exists():
         raise ValueError('Completed run is immutable')
     ledger = load_failures(diag)
-    if ledger['state'] == 'NEEDS_HUMAN' or (ledger['state'] == 'RETRY_STARTED' and not getattr(args, 'automatic', False)):
+    offline_standing = getattr(args, 'offline_standing', False)
+    if offline_standing and args.authorization_id != STANDING_UNAVAILABLE_ID: raise HumanRequired('Offline handling requires the standing project policy')
+    if not offline_standing and (ledger['state'] == 'NEEDS_HUMAN' or (ledger['state'] == 'RETRY_STARTED' and not getattr(args, 'automatic', False))):
         raise HumanRequired('Resume browser authorization is required after the stop')
     events = ledger['events']
     auth = [i for i, event in enumerate(events) if event.get('event') in ('human_browser_authorization', 'project_unavailable_policy') and event.get('authorization_id') == args.authorization_id]
-    latest_auth = max((i for i, event in enumerate(events) if event.get('event') in ('human_browser_authorization', 'project_unavailable_policy')), default=-1)
-    if not auth or latest_auth < 0 or any(event.get('state') == 'NEEDS_HUMAN' for event in events[latest_auth+1:]):
+    latest_auth = max((i for i, event in enumerate(events) if event.get('event') in ('human_browser_authorization', 'project_unavailable_policy', 'recurring_ip_authorization', 'recurring_incomplete_authorization', 'recurring_502_authorization', 'recurring_unavailable_authorization', 'recurring_reviewed_authorization')), default=-1)
+    if not auth or latest_auth < 0 or (not offline_standing and any(event.get('state') == 'NEEDS_HUMAN' for event in events[latest_auth+1:])):
         raise HumanRequired('Current human authorization required')
     instruction = events[auth[-1]]['instruction']
     policies = [read(path) for path in (out/'closed_policy.json', out/'review_policy.json', out/'blocked_listing_policy.json', out/'standing_unavailable_policy.json') if path.exists()]
     policy = next((p for p in policies if p.get('authorization_id') == args.authorization_id and p.get('human_instruction') == instruction and p.get('markers') in (list(CLOSED_MARKERS), [REVIEW_MARKER], [BLOCKED_LISTING_MARKER], list(ALL_UNAVAILABLE_MARKERS), list(LEGACY_UNAVAILABLE_MARKERS))), None)
+    if offline_standing and (ledger['state'] != 'NEEDS_HUMAN' or not policy or events[auth[-1]].get('event') != 'project_unavailable_policy'):
+        raise HumanRequired('Stopped run and recorded standing policy are required')
     if args.id not in instruction and not policy:
         raise ValueError('Human authorization must identify the unavailable ID or authorize its policy')
     cp = read(diag/'checkpoint.json')
@@ -1259,6 +1263,20 @@ def mark_unavailable(args):
         sandbox = Path(read(pointer)['path'])
         if (sandbox/'raw'/raw.name).read_bytes() != raw.read_bytes() or read(sandbox/'checkpoint.json').get('next_id') != args.id:
             raise ValueError('Sandbox differs from stopped observation')
+    if offline_standing:
+        avito_url(url, args.id)
+        plan = read(service/'plan.json'); validate_partition(out, service); validate_plan_profession(plan, out/'listing.json')
+        if not plan.get('listing_pages') or queue_from_pages([read(out/p['file'].replace('\\','/')) for p in plan['listing_pages']], len(queue)) != queue: raise ValueError('Frozen queue differs')
+        if (not pointer.exists() or (sandbox/'problem.snapshot.txt').read_bytes() != snap.read_bytes() or read(sandbox/'browser-tab.json').get('url') != url
+                or any(read(sandbox/'checkpoint.json').get(k) != cp.get(k) for k in ('state','next_id','stop_reason','completed_ids'))
+                or re.search(r'captcha|капч|доступ ограничен|проблема с ip|too many requests|http\s*429', snapshot, re.I)
+                or data.get('state') != 'DETAIL' or f'- heading "{data["title"]}" [level=1]' not in snapshot):
+            raise ValueError('Stopped evidence, heading, identity or sandbox differs')
+        evidence_archive = diag/'observations'/args.id; evidence_archive.mkdir(parents=True, exist_ok=True)
+        for source in (snap, sandbox/'browser-tab.json'):
+            dest = evidence_archive/(sha(source)+'.'+source.name)
+            if dest.exists() and dest.read_bytes() != source.read_bytes(): raise ValueError('Evidence archive collision')
+            if not dest.exists(): shutil.copy2(source,dest)
     tab_digest = sha(tab_evidence) if tab_evidence else None
     if tab_evidence:
         archive = diag/'observations'/args.id; archive.mkdir(parents=True, exist_ok=True)
@@ -1316,10 +1334,60 @@ def reviewed_capture(out, item):
     review_path = out/'offline_reviews'/f"{item['id']}.json"
     if review_path.exists():
         review = read(review_path)
-        if review.get('raw_sha256') != sha(path) or review.get('method') != 'joined_salary_line_v1' or not review.get('authorization_id'):
+        if review.get('raw_sha256') != sha(path) or review.get('method') not in ('joined_salary_line_v1', 'address_button_v1') or not review.get('authorization_id'):
             raise ValueError('Offline review provenance mismatch')
-        data = salary_line_review(data, item['id'], item['url'])
+        data = salary_line_review(data, item['id'], item['url']) if review['method'] == 'joined_salary_line_v1' else address_button_review(data, item['id'], item['url'])
     return data
+
+
+def address_button_review(data, identity, url):
+    if not check(data, identity)['structural_check_passed'] or data.get('source_url') != url: raise ValueError('Saved identity or URL mismatch')
+    audit=data.get('parameter_audit', {}); blocks=data.get('params_blocks'); fields=data.get('fields') or []
+    if audit.get('rendered_complete') is not False or not isinstance(blocks,list) or len(blocks)!=2 or not blocks[0].startswith('Условия\n') or not blocks[1].startswith('Требования\n'): raise ValueError('Expected both complete parameter blocks')
+    lines=[line.strip() for block in blocks for line in block.split('\n') if line.strip()]; parsed=[]
+    for line in lines:
+        if line in ('Условия','Требования'): continue
+        match=re.fullmatch(r'([^:]+):\s+(.+)',line)
+        if not match: raise ValueError('Unrecognised parameter line')
+        parsed.append((norm(match.group(1)),norm(match.group(2))))
+    saved=[(norm(f['name']),norm(f['value'])) for f in fields]
+    if parsed!=saved or len({name for name,value in saved})!=len(saved): raise ValueError('Fields do not match all parameter lines')
+    addresses=[value for name,value in saved if name=='Где предстоит работать']
+    controls=[norm(x) for x in audit.get('expansion_controls',[])]
+    if len(addresses)!=1 or controls!=addresses or not re.search(r'ещ[её]|показать|раскрыть',addresses[0],re.I): raise ValueError('Not an address-button false positive')
+    sections=[x.get('text') for x in data.get('source_sections',[]) if x.get('marker')=='item-view/item-params']
+    if sections != blocks: raise ValueError('Parameter source sections differ')
+    result=dict(data);result['parameter_audit']=dict(audit,rendered_complete=True,offline_review='address_button_v1')
+    return result
+
+
+def review_address_button(args):
+    out,service,diag=paths(ROOT,args.run_id);cp=read(diag/'checkpoint.json');queue=read(out/'queue.json');ledger=load_failures(diag)
+    if cp.get('state')!='REVIEW_REQUIRED' or cp.get('stop_reason')!='identity_or_template_review' or cp.get('next_id')!=args.id: raise ValueError('Expected pending review')
+    policies=[e for e in ledger['events'] if e.get('event')=='recurring_incomplete_policy' and e.get('source')==args.source]
+    if len(policies)!=1 or (ledger['state']=='NEEDS_HUMAN' and getattr(args,'automatic',False)): raise HumanRequired('Recorded request policy required')
+    matches=[x for x in queue if x['id']==args.id]
+    if len(matches)!=1: raise ValueError('Expected one queue ID')
+    index=queue.index(matches[0]);excluded={r['id'] for r in unavailable_records(out,queue)}|{r['id'] for r in unresolved_records(out,queue)}
+    if cp.get('completed_ids') != [x['id'] for x in queue[:index] if x['id'] not in excluded]: raise ValueError('Checkpoint prefix mismatch')
+    plan=read(service/'plan.json');validate_partition(out,service);validate_plan_profession(plan,out/'listing.json')
+    if plan.get('run_id')!=args.run_id or queue_from_pages([read(out/p['file'].replace('\\','/')) for p in plan['listing_pages']],len(queue))!=queue: raise ValueError('Frozen queue differs')
+    url=matches[0]['url'];avito_url(url,args.id);raw=out/'raw'/f'{args.id}.json';data=read(raw);address_button_review(data,args.id,url)
+    snap=diag/'problem.snapshot.txt';snapshot=snap.read_text(encoding='utf8');sandbox=Path(read(diag/'sandbox.json')['path']);tab=sandbox/'browser-tab.json';address=data['parameter_audit']['expansion_controls'][0]
+    if (f'[url={url}]' not in snapshot or f'- heading "{data["title"]}" [level=1]' not in snapshot or f'- text: "Где предстоит работать:"\n- button "{address}"' not in snapshot
+        or re.search(r'captcha|капч|доступ ограничен|проблема с ip|too many requests|http\s*429',snapshot,re.I)
+        or (sandbox/'raw'/raw.name).read_bytes()!=raw.read_bytes() or (sandbox/'problem.snapshot.txt').read_bytes()!=snap.read_bytes() or read(tab).get('url')!=url
+        or any(read(sandbox/'checkpoint.json').get(k)!=cp.get(k) for k in ('state','next_id','stop_reason','completed_ids'))): raise ValueError('Address-button snapshot or sandbox differs')
+    evidence=diag/'observations'/args.id;evidence.mkdir(parents=True,exist_ok=True)
+    for src in (snap,tab):
+        dst=evidence/(sha(src)+'.'+src.name)
+        if dst.exists() and dst.read_bytes()!=src.read_bytes(): raise ValueError('Evidence archive collision')
+        if not dst.exists(): shutil.copy2(src,dst)
+    dest=out/'offline_reviews'/f'{args.id}.json'
+    if dest.exists(): raise ValueError('Offline review already exists')
+    write(dest,dict(id=args.id,raw_sha256=sha(raw),method='address_button_v1',authorization_id=args.source,human_instruction=policies[0]['instruction'],snapshot_sha256=sha(snap),browser_tab_sha256=sha(tab),reviewed_at=datetime.now(timezone.utc).isoformat()))
+    cp['completed_ids'].append(args.id);cp.update(state='READY',next_id=queue[index+1]['id'] if index+1<len(queue) else None,stop_reason=None);write(diag/'checkpoint.json',cp);(diag/'sandbox.json').unlink()
+    print(json.dumps({'reviewed':args.id,'next_id':cp['next_id']}))
 
 
 def salary_policy_direct_authorized(instruction):
@@ -1372,16 +1440,19 @@ def review_salary_line(args):
     out, service, diag = paths(ROOT, args.run_id)
     if (service/'manifest.json').exists(): raise ValueError('Completed run is immutable')
     ledger = load_failures(diag); events = ledger['events']
-    if ledger['state'] == 'NEEDS_HUMAN' or (ledger['state'] == 'RETRY_STARTED' and not getattr(args, 'automatic', False)): raise HumanRequired('Current human authorization required')
-    auth = [i for i, event in enumerate(events) if event.get('event') == 'human_browser_authorization' and event.get('authorization_id') == args.authorization_id]
-    latest = max((i for i, event in enumerate(events) if event.get('event') == 'human_browser_authorization'), default=-1)
-    if not auth or latest < 0 or any(event.get('state') == 'NEEDS_HUMAN' for event in events[latest+1:]):
-        raise HumanRequired('Current browser authorization required')
-    policy_path = out/'salary_review_policy.json'
-    policy = read(policy_path) if policy_path.exists() else {}
-    policy_valid = policy.get('authorization_id') == args.authorization_id and policy.get('human_instruction') == events[auth[-1]]['instruction'] and policy.get('method') == 'joined_salary_line_v1'
-    if args.id not in events[auth[-1]]['instruction'] and not policy_valid:
-        raise HumanRequired('Authorization must identify this ID or cover this salary review')
+    source=getattr(args,'source',None)
+    if source:
+        auth=[i for i,e in enumerate(events) if e.get('event')=='recurring_incomplete_policy' and e.get('source')==source]
+        if len(auth)!=1 or args.authorization_id!=source: raise HumanRequired('Recorded request policy required')
+        if ledger['state']=='NEEDS_HUMAN' and getattr(args,'automatic',False): raise HumanRequired('Automatic review requires active capture')
+    else:
+        if ledger['state'] == 'NEEDS_HUMAN' or (ledger['state'] == 'RETRY_STARTED' and not getattr(args, 'automatic', False)): raise HumanRequired('Current human authorization required')
+        auth = [i for i, event in enumerate(events) if event.get('event') == 'human_browser_authorization' and event.get('authorization_id') == args.authorization_id]
+        latest = max((i for i, event in enumerate(events) if event.get('event') == 'human_browser_authorization'), default=-1)
+        if not auth or latest < 0 or any(event.get('state') == 'NEEDS_HUMAN' for event in events[latest+1:]): raise HumanRequired('Current browser authorization required')
+        policy_path = out/'salary_review_policy.json'; policy = read(policy_path) if policy_path.exists() else {}
+        policy_valid = policy.get('authorization_id') == args.authorization_id and policy.get('human_instruction') == events[auth[-1]]['instruction'] and policy.get('method') == 'joined_salary_line_v1'
+        if args.id not in events[auth[-1]]['instruction'] and not policy_valid: raise HumanRequired('Authorization must identify this ID or cover this salary review')
     cp = read(diag/'checkpoint.json'); queue = read(out/'queue.json')
     if cp.get('state') != 'REVIEW_REQUIRED' or cp.get('stop_reason') != 'identity_or_template_review' or cp.get('next_id') != args.id:
         raise ValueError('Expected the pending review checkpoint')
@@ -1397,10 +1468,26 @@ def review_salary_line(args):
         sandbox = Path(read(pointer)['path'])
         if (sandbox/'raw'/raw.name).read_bytes() != raw.read_bytes() or read(sandbox/'checkpoint.json').get('next_id') != args.id:
             raise ValueError('Sandbox differs from stopped observation')
+    if source:
+        plan=read(service/'plan.json');validate_partition(out,service);validate_plan_profession(plan,out/'listing.json')
+        if plan.get('run_id')!=args.run_id or queue_from_pages([read(out/p['file'].replace('\\','/')) for p in plan['listing_pages']],len(queue))!=queue: raise ValueError('Frozen queue differs')
+        data=read(raw);snap=diag/'problem.snapshot.txt';snapshot=snap.read_text(encoding='utf8');url=matches[0]['url'];avito_url(url,args.id)
+        lines=[line.strip() for block in data['params_blocks'] for line in block.split('\n') if line.strip()];salary=next(line for line in lines if re.fullmatch(r'Оклад\s*[0-9][0-9\s]*(?:\s*[-–—]\s*[0-9][0-9\s]*)?\s*₽',line));amount=norm(salary[len('Оклад'):])
+        sections=[x.get('text') for x in data.get('source_sections',[]) if x.get('marker')=='item-view/item-params']
+        if (not pointer.exists() or sections!=data['params_blocks'] or f'[url={url}]' not in snapshot or f'- heading "{data["title"]}" [level=1]' not in snapshot
+            or 'Оклад' not in snapshot or amount not in norm(snapshot) or re.search(r'captcha|капч|доступ ограничен|проблема с ip|too many requests|http\s*429',snapshot,re.I)
+            or (sandbox/'problem.snapshot.txt').read_bytes()!=snap.read_bytes() or read(sandbox/'browser-tab.json').get('url')!=url
+            or any(read(sandbox/'checkpoint.json').get(k)!=cp.get(k) for k in ('state','next_id','stop_reason','completed_ids'))): raise ValueError('Salary snapshot or sandbox differs')
+        evidence=diag/'observations'/args.id;evidence.mkdir(parents=True,exist_ok=True)
+        for src in (snap,sandbox/'browser-tab.json'):
+            dst=evidence/(sha(src)+'.'+src.name)
+            if dst.exists() and dst.read_bytes()!=src.read_bytes(): raise ValueError('Evidence archive collision')
+            if not dst.exists(): shutil.copy2(src,dst)
     dest = out/'offline_reviews'/f'{args.id}.json'
     if dest.exists(): raise ValueError('Offline review already exists')
     write(dest, dict(id=args.id, raw_sha256=sha(raw), method='joined_salary_line_v1', authorization_id=args.authorization_id,
-        human_instruction=events[auth[-1]]['instruction'], reviewed_at=datetime.now(timezone.utc).isoformat()))
+        human_instruction=events[auth[-1]]['instruction'], reviewed_at=datetime.now(timezone.utc).isoformat(),
+        **(dict(snapshot_sha256=sha(snap),browser_tab_sha256=sha(sandbox/'browser-tab.json')) if source else {})))
     cp['completed_ids'].append(args.id)
     cp.update(state='READY', next_id=queue[index+1]['id'] if index+1 < len(queue) else None, stop_reason=None)
     write(diag/'checkpoint.json', cp); pointer.unlink(missing_ok=True)
@@ -1768,7 +1855,8 @@ def allowed_capture_changes(plan, changes):
     guard = 'Scraper/skills/collect-avito/scripts/browser_batch.js'
     for c in changes:
         file = c.get('file', '').replace('\\', '/')
-        if c.get('validation', '').strip() and ((file == guard and c.get('reason') == 'Wait for pagination evidence in UI Next mode') or (file == 'Scraper/skills/collect-avito/scripts/failure_log.py' and c.get('reason') in ('Windows cross-platform shared file locking', 'Explicit UTF-8 browser scripts and shared ledger on Windows'))): permitted.add(file)
+        if file == 'Scraper/skills/collect-avito/scripts/preflight.py' and c.get('reason') == 'Explicit pinned Aside target flags' and c.get('validation', '').strip(): permitted.add(file)
+        if c.get('validation', '').strip() and ((file == guard and c.get('reason') in ('Wait for pagination evidence in UI Next mode', 'Bounded readiness for incomplete detail shell')) or (file == 'Scraper/skills/collect-avito/scripts/failure_log.py' and c.get('reason') in ('Windows cross-platform shared file locking', 'Explicit UTF-8 browser scripts and shared ledger on Windows', 'Guard incomplete shell preservation and authorize one pending capture without new budget'))): permitted.add(file)
     if plan.get('partial_suffix') or (plan.get('partition') and any(c.get('file') == guard and c.get('reason') == 'Audited URL identity guard' and c.get('validation', '').strip() for c in changes)):
         permitted.add(guard)
     return permitted
@@ -1791,6 +1879,12 @@ def capture(args):
     validate_partition(out, service)
     if (out/'dedup-empty.json').exists():
         print(json.dumps({'state':'DEDUP_EMPTY','run_id':args.run_id})); return
+    bounded = load_failures(diag).get('bounded_pending', {})
+    if bounded.get('state') == 'reserved':
+        cp = read(diag/'checkpoint.json')
+        if cp.get('state') != 'READY' or cp.get('next_id') != bounded['id'] or (out/'raw'/f"{bounded['id']}.json").exists():
+            raise HumanRequired('Preserve the authorized pending observation before capture')
+        args.batch_size = 1
     ensure_allowed(diag, 'capture', getattr(args, 'retry_reason', None), action=True)
     if (service / 'manifest.json').exists():
         raise ValueError('Completed run is immutable')
@@ -1866,13 +1960,21 @@ def capture(args):
     if not pending:
         print(json.dumps({'state': 'CAPTURED', 'captured': len(done), 'remaining': 0}))
         return
+    if bounded.get('state') == 'reserved' and pending[0]['id'] != bounded['id']:
+        raise ValueError('First pending queue ID differs from bounded authorization')
     cp2, elapsed = browser(dict(mode='capture', queue=pending[:args.batch_size], completed_ids=done, tab_id=getattr(args, 'tab_id', None),
                                previous_capture_seconds=cp.get('capture_seconds', 0)), out, diag)
+    if bounded.get('state') == 'reserved' and cp2.get('state') == 'CAPTURED':
+        if not pending or pending[0]['id'] != bounded['id'] or cp2.get('completed_ids') != done + [bounded['id']]:
+            raise ValueError('Bounded capture did not complete exactly the authorized ID')
+        captured = reviewed_capture(out, pending[0])
+        if not check(captured, bounded['id'])['structural_check_passed'] or not captured.get('parameter_audit', {}).get('rendered_complete'):
+            raise ValueError('Bounded pending capture is not structurally complete')
     cp2['capture_seconds'] = cp.get('capture_seconds', 0) + elapsed
     write(diag / 'checkpoint.json', cp2)
     print(json.dumps(dict(cp2, captured=len(cp2['completed_ids']), remaining=len(queue)-len(unavailable)-len(cp2['completed_ids']))))
     if cp2['state'] != 'CAPTURED':
-        if cp2['state'] == 'REVIEW_REQUIRED':
+        if cp2['state'] == 'REVIEW_REQUIRED' and bounded.get('state') != 'reserved':
             for policy_path in (out/'closed_policy.json', out/'review_policy.json', out/'blocked_listing_policy.json', out/'standing_unavailable_policy.json'):
                 if not policy_path.exists(): continue
                 policy = read(policy_path)
@@ -1892,6 +1994,20 @@ def capture(args):
                 else:
                     print(json.dumps({'state': 'IN_PROGRESS', 'unresolved': cp2['next_id']}))
                     return
+            policies=[e for e in load_failures(diag)['events'] if e.get('event')=='recurring_incomplete_policy']
+            if len(policies)==1:
+                try:
+                    review_address_button(argparse.Namespace(run_id=args.run_id,id=cp2['next_id'],source=policies[0]['source'],automatic=True))
+                except (ValueError, HumanRequired, OSError, KeyError):
+                    pass
+                else:
+                    print(json.dumps({'state':'IN_PROGRESS','reviewed':cp2['next_id']})); return
+                try:
+                    review_salary_line(argparse.Namespace(run_id=args.run_id,id=cp2['next_id'],source=policies[0]['source'],authorization_id=policies[0]['source'],automatic=True))
+                except (ValueError, HumanRequired, OSError, KeyError, StopIteration):
+                    pass
+                else:
+                    print(json.dumps({'state':'IN_PROGRESS','reviewed':cp2['next_id']})); return
             salary_policy = out/'salary_review_policy.json'
             if salary_policy.exists():
                 policy = read(salary_policy)
@@ -2056,6 +2172,31 @@ def partial_prefix_selection(out, service, queue, instruction):
         stop_state=cp['state'], stop_reason=cp.get('stop_reason'), next_id=next_id,
         raw_sha256={i: sha(out/'raw'/f'{i}.json') for i in ids[:cut]},
         authorization=instruction)
+
+
+def public_provenance(args):
+    """Keep private provenance bytes locally and create hash-linked public copies."""
+    out,service,diag=paths(ROOT,args.run_id)
+    if (service/'manifest.json').exists(): raise ValueError('Finalized run is immutable')
+    cp=read(diag/'checkpoint.json')
+    if cp.get('state')!='CAPTURED' or cp.get('next_id') is not None: raise ValueError('Completed capture required')
+    pending=[]
+    for path in sorted((out/'observations').glob('*/*.provenance.json')):
+        data=read(path)
+        if 'sandbox_path' not in data: continue
+        digest=path.name.removesuffix('.provenance.json');raw=path.parent/(digest+'.json')
+        if not re.fullmatch(r'[0-9a-f]{64}',digest) or not raw.exists() or sha(raw)!=digest or data.get('raw_sha256',data.get('sha256'))!=digest: raise ValueError('Archived raw provenance differs')
+        private=diag/'private-provenance'/path.parent.name/path.name
+        if private.exists() and private.read_bytes()!=path.read_bytes(): raise ValueError('Private provenance archive collision')
+        public={k:v for k,v in data.items() if k!='sandbox_path'}
+        public.update(public_schema='redacted_provenance_v1',private_provenance_sha256=sha(path))
+        if re.search(r'/Users/|/home/|\.aside[/\\]|TL_ASIDE_|profileId|target_id',json.dumps(public,ensure_ascii=False),re.I): raise ValueError('Unexpected private locator in public provenance')
+        pending.append((path,private,public))
+    for path,private,public in pending:
+        private.parent.mkdir(parents=True,exist_ok=True)
+        if not private.exists(): shutil.copy2(path,private)
+        write(path,public)
+    print(json.dumps({'public_provenance':len(pending)}))
 
 
 def finalize(args):
@@ -2234,7 +2375,7 @@ def preserve_stopped_observation(args):
     if ledger['state'] in ('NEEDS_HUMAN', 'RETRY_STARTED'):
         raise HumanRequired('Resolve the current stop or active retry before preserving an observation')
     events = ledger['events']
-    authorizations = [i for i, event in enumerate(events) if event.get('event') == 'human_browser_authorization' and event.get('authorization_id') == args.authorization_id]
+    authorizations = [i for i, event in enumerate(events) if event.get('event') in ('human_browser_authorization', 'recurring_ip_authorization') and event.get('authorization_id') == args.authorization_id]
     if not authorizations or any(event.get('state') == 'NEEDS_HUMAN' for event in events[authorizations[-1]+1:]):
         raise HumanRequired('Current browser authorization required after the stop')
     cp = read(diag/'checkpoint.json')
@@ -2247,6 +2388,13 @@ def preserve_stopped_observation(args):
     queue = read(out/'queue.json')
     if len([item for item in queue if item['id'] == identity]) != 1:
         raise ValueError('Checkpoint ID must occur once in the frozen queue')
+    recurring = events[authorizations[-1]].get('event') == 'recurring_ip_authorization'
+    if recurring:
+        if not captcha or events[authorizations[-1]].get('pending_id') != identity:
+            raise HumanRequired('Recurring authorization is limited to the stopped IP observation')
+        excluded = {r['id'] for r in unavailable_records(out, queue)} | {r['id'] for r in unresolved_records(out, queue)}
+        index = next(i for i, item in enumerate(queue) if item['id'] == identity)
+        if cp.get('completed_ids') != [item['id'] for item in queue[:index] if item['id'] not in excluded]: raise ValueError('Checkpoint prefix mismatch')
     if blank:
         instruction = events[authorizations[-1]].get('instruction', '')
         if not unresolved_retry and (identity not in instruction or 'about:blank' not in instruction):
@@ -2262,6 +2410,8 @@ def preserve_stopped_observation(args):
             raise ValueError('Raw observation does not match the stopped queue item')
         reason = data['reason']
         snapshot = diag/'problem.snapshot.txt'
+        if recurring and (sha(source) != events[authorizations[-1]].get('raw_sha256') or sha(snapshot) != events[authorizations[-1]].get('snapshot_sha256')):
+            raise ValueError('IP evidence changed after recurring claim')
     elif unresolved_retry:
         snapshot = diag/'problem.snapshot.txt'
         url = next(item['url'] for item in queue if item['id'] == identity)
@@ -2283,13 +2433,13 @@ def preserve_stopped_observation(args):
         if not other.exists() or other.read_bytes() != source.read_bytes():
             raise ValueError('Sandbox raw differs; inspect interrupted transfer')
         sandbox_cp = read(sandbox/'checkpoint.json')
-        if sandbox_cp.get('next_id') != identity or sandbox_cp.get('state') != cp.get('state') or sandbox_cp.get('stop_reason') != cp.get('stop_reason'):
+        if sandbox_cp.get('next_id') != identity or sandbox_cp.get('state') != cp.get('state') or sandbox_cp.get('stop_reason') != cp.get('stop_reason') or (recurring and sandbox_cp.get('completed_ids') != cp.get('completed_ids')):
             raise ValueError('Sandbox checkpoint differs; inspect interrupted transfer')
         if (blank or (captcha and snapshot.exists())) and (not (sandbox/'problem.snapshot.txt').exists() or (sandbox/'problem.snapshot.txt').read_bytes() != snapshot.read_bytes()):
             raise ValueError('Sandbox snapshot differs; inspect interrupted transfer')
         if captcha and (sandbox/'browser-tab.json').exists() and read(sandbox/'browser-tab.json').get('url') != data.get('source_url'):
             raise ValueError('Original browser URL differs from queue')
-    elif blank:
+    elif blank or recurring:
         raise ValueError('Blank-tab preservation requires the original sandbox')
     archive = out/'observations'/identity
     archive.mkdir(parents=True, exist_ok=True)
@@ -2321,6 +2471,8 @@ def preserve_stopped_observation(args):
     # the already archived stopped observation into the pending raw slot.
     sandbox_pointer.unlink(missing_ok=True)
     source.unlink()
+    if recurring:
+        cp.update(state='READY', stop_reason=None); write(diag/'checkpoint.json', cp)
     print(json.dumps({'pending_id': identity, 'preserved': str(destination.relative_to(out))}))
 
 
@@ -2387,25 +2539,81 @@ def mark_redirect_unavailable(args):
     print(json.dumps({'unavailable_redirect': args.id, 'next_id': cp['next_id']}))
 
 
+def visible_http_502(data, snapshot, url):
+    evidence=data.get('unresolved_evidence', {})
+    return (data.get('state')=='UNKNOWN_PAGE' and data.get('source_url')==url and data.get('heading') is None
+        and not data.get('title') and not data.get('fields') and data.get('items')==[]
+        and evidence.get('complete') is True and evidence.get('restriction') is False and evidence.get('known_unavailable') is False
+        and f'- title: "HTTP 502" [url={url}]' in snapshot and '- text: "502 Error\\n' in snapshot
+        and 'Bad gateway' in snapshot and 'Сайт www.avito.ru не отвечает.' in snapshot
+        and not re.search(r'captcha|капч|доступ ограничен|проблема с ip|too many requests|(?<!\d)429(?!\d)|http\s*(?!502\b)\d{3}\b|объявление (?:закрыто|снято|удалено|недоступно)', snapshot, re.I))
+
+
 def retry_incomplete_observation(args):
-    """Archive an unrestricted but incomplete shell and retry the same queue ID."""
+    """Preserve an authorized, evidenced incomplete shell before retrying its ID."""
     out, service, diag = paths(ROOT, args.run_id)
+    ledger = load_failures(diag)
+    events = ledger['events']
+    auth = [i for i, e in enumerate(events) if e.get('event') in ('human_browser_authorization', 'recurring_incomplete_authorization', 'recurring_502_authorization') and e.get('authorization_id') == args.authorization_id]
+    if ledger['state'] in ('NEEDS_HUMAN', 'RETRY_STARTED') or not auth or any(e.get('event') == 'failure' for e in events[auth[-1]+1:]):
+        raise HumanRequired('Fresh browser authorization after the stop is required')
+    if events[auth[-1]].get('event') == 'human_browser_authorization' and args.id not in events[auth[-1]].get('instruction', ''):
+        raise HumanRequired('Authorization must identify the pending ID')
+    if events[auth[-1]].get('event') in ('recurring_incomplete_authorization', 'recurring_502_authorization') and events[auth[-1]].get('pending_id') != args.id:
+        raise HumanRequired('Recurring authorization must match the pending ID')
+    if events[auth[-1]].get('no_new_budget') and ledger.get('bounded_pending') != dict(id=args.id, state='reserved', authorization_id=args.authorization_id):
+        raise HumanRequired('Bounded authorization does not match this pending observation')
     cp, queue = read(diag/'checkpoint.json'), read(out/'queue.json')
-    if cp.get('state') != 'REVIEW_REQUIRED' or cp.get('next_id') != args.id:
+    if cp.get('state') != 'REVIEW_REQUIRED' or cp.get('stop_reason') != 'identity_or_template_review' or cp.get('next_id') != args.id:
         raise ValueError('Expected the pending incomplete observation')
     matches = [item for item in queue if item['id'] == args.id]
     if len(matches) != 1: raise ValueError('Expected one frozen queue item')
+    plan = read(service/'plan.json')
+    if plan.get('run_id') != args.run_id or not plan.get('listing_pages') or not plan.get('listing_sha256'):
+        raise ValueError('Missing frozen plan provenance')
+    validate_partition(out, service)
+    validate_plan_profession(plan, out/'listing.json')
+    pages = [read(out/p['file'].replace('\\', '/')) for p in plan['listing_pages']]
+    if queue_from_pages(pages, len(queue)) != queue:
+        raise ValueError('Frozen queue differs from listing pages')
+    excluded = {r['id'] for r in unavailable_records(out, queue)} | {r['id'] for r in unresolved_records(out, queue)}
+    index = queue.index(matches[0])
+    if cp.get('completed_ids') != [item['id'] for item in queue[:index] if item['id'] not in excluded]:
+        raise ValueError('Checkpoint prefix mismatch')
+    url = matches[0]['url']; avito_url(url, args.id)
     raw = out/'raw'/f'{args.id}.json'; data = read(raw); evidence = data.get('unresolved_evidence', {})
-    if (data.get('state') != 'UNKNOWN_PAGE' or data.get('source_url') != matches[0]['url']
+    http502 = events[auth[-1]].get('event') == 'recurring_502_authorization'
+    if not http502 and (data.get('state') != 'UNKNOWN_PAGE' or data.get('source_url') != url
             or evidence.get('complete') is not False or evidence.get('restriction') is not False
-            or evidence.get('known_unavailable') is not False):
+            or evidence.get('known_unavailable') is not False or data.get('heading') is not None
+            or data.get('title') or data.get('fields') or data.get('items') != []):
         raise ValueError('Observation is not an unrestricted incomplete page shell')
+    snapshot = diag/'problem.snapshot.txt'; pointer = diag/'sandbox.json'
+    sandbox = Path(read(pointer)['path']); tab = sandbox/'browser-tab.json'
+    if events[auth[-1]].get('event') in ('recurring_incomplete_authorization', 'recurring_502_authorization') and (sha(raw) != events[auth[-1]].get('raw_sha256') or sha(snapshot) != events[auth[-1]].get('snapshot_sha256')):
+        raise ValueError('Incomplete evidence changed after recurring claim')
+    snap = snapshot.read_text(encoding='utf8')
+    if http502 and not visible_http_502(data,snap,url): raise ValueError('Not the evidenced visible HTTP 502 page')
+    if (f'[url={url}]' not in snap or re.search(r'captcha|429|доступ ограничен|подозрительн|объявление (?:закрыто|удалено|недоступно)', snap, re.I)
+            or '\n- heading ' in snap or (sandbox/'raw'/raw.name).read_bytes() != raw.read_bytes()
+            or (sandbox/'problem.snapshot.txt').read_bytes() != snapshot.read_bytes()
+            or any(read(sandbox/'checkpoint.json').get(k) != cp.get(k) for k in ('state', 'next_id', 'stop_reason', 'completed_ids'))
+            or read(tab).get('url') != url):
+        raise ValueError('Incomplete shell evidence or sandbox differs')
     archive = out/'observations'/args.id; archive.mkdir(parents=True, exist_ok=True)
     destination = archive/(sha(raw)+'.json')
+    if destination.exists() and destination.read_bytes() != raw.read_bytes(): raise ValueError('Observation archive collision')
     if not destination.exists(): shutil.copy2(raw, destination)
+    evidence_archive = diag/'observations'/args.id; evidence_archive.mkdir(parents=True, exist_ok=True)
+    for source in (snapshot, tab):
+        dest = evidence_archive/(sha(source)+'.'+source.name)
+        if dest.exists() and dest.read_bytes() != source.read_bytes(): raise ValueError('Evidence archive collision')
+        if not dest.exists(): shutil.copy2(source, dest)
     write(archive/(sha(raw)+'.provenance.json'), dict(authorization_id=args.authorization_id,
-        original_url=matches[0]['url'], raw_sha256=sha(raw), preserved_at=datetime.now(timezone.utc).isoformat(),
-        reason='unrestricted_incomplete_page_shell'))
+        original_url=url, raw_sha256=sha(raw), snapshot_sha256=sha(snapshot), browser_tab_sha256=sha(tab),
+        plan_sha256=sha(service/'plan.json'), queue_sha256=sha(out/'queue.json'), checkpoint_sha256=sha(diag/'checkpoint.json'),
+        sandbox_path=str(sandbox), preserved_at=datetime.now(timezone.utc).isoformat(),
+        reason='visible_http_502' if http502 else 'unrestricted_incomplete_page_shell'))
     raw.unlink(); (diag/'sandbox.json').unlink(missing_ok=True)
     cp.update(state='READY', stop_reason=None); write(diag/'checkpoint.json', cp)
     print(json.dumps({'pending_id': args.id, 'incomplete_preserved': str(destination.relative_to(out))}))
@@ -2413,8 +2621,256 @@ def retry_incomplete_observation(args):
 
 def resume_browser(args):
     _, _, diag = paths(ROOT, args.run_id)
+    pending_id = getattr(args, 'pending_id_no_budget', None)
+    if pending_id:
+        if pending_id not in args.human_instruction or not args.authorization_id.strip():
+            raise ValueError('Explicit instruction must identify the pending ID')
+        cp = read(diag/'checkpoint.json')
+        if cp.get('state') != 'REVIEW_REQUIRED' or cp.get('next_id') != pending_id:
+            raise ValueError('Authorization must match the pending review checkpoint')
+        with locked(diag):
+            ledger = load_failures(diag)
+            if ledger['state'] != 'NEEDS_HUMAN' or ledger['retries_started'] < ledger['retry_limit']:
+                raise HumanRequired('Requires an exhausted stopped budget')
+            if any(e.get('authorization_id') == args.authorization_id for e in ledger['events']):
+                raise HumanRequired('Authorization ID already used')
+            ledger['state'] = 'READY'
+            ledger['bounded_pending'] = dict(id=pending_id, state='reserved', authorization_id=args.authorization_id)
+            ledger['events'].append(dict(event='human_browser_authorization', at=datetime.now(timezone.utc).isoformat(), instruction=args.human_instruction,
+                authorization_id=args.authorization_id, pending_id=pending_id, no_new_budget=True))
+            save_failures(diag, ledger)
+        print('One pending capture authorized without replenishing the retry budget')
+        return
     authorize_browser(diag, args.human_instruction, args.authorization_id)
     print('Human browser authorization recorded; history retained, bounded retry budget active')
+
+
+def recurring_ip_policy(args):
+    """Record the user's recurring instruction once, without authorizing a read."""
+    _, _, diag = paths(ROOT, args.run_id)
+    if not args.source.strip() or not args.human_instruction.strip() or not args.additional_instruction.strip():
+        raise ValueError('Exact user instructions and stable source are required')
+    with locked(diag):
+        ledger = load_failures(diag)
+        if ledger['state'] != 'NEEDS_HUMAN': raise HumanRequired('Policy registration requires a stopped run')
+        policy = dict(event='recurring_ip_policy', source=args.source, instruction=args.human_instruction,
+                      additional_instruction=args.additional_instruction, interval_seconds=1800)
+        existing = [e for e in ledger['events'] if e.get('event') == 'recurring_ip_policy' and e.get('source') == args.source]
+        if existing:
+            if any(any(e.get(k) != v for k,v in policy.items()) for e in existing): raise ValueError('Policy source already has different terms')
+            return
+        ledger['events'].append(dict(policy, at=datetime.now(timezone.utc).isoformat()))
+        save_failures(diag, ledger)
+    print('Recurring IP policy recorded without authorizing a browser action')
+
+
+def recurring_ip_attempt(args):
+    """Claim one IP-limited pending read under a previously recorded policy."""
+    out, service, diag = paths(ROOT, args.run_id)
+    cp = read(diag/'checkpoint.json'); queue = read(out/'queue.json')
+    if cp.get('state') != 'NEEDS_HUMAN' or cp.get('stop_reason') != 'access_restriction_or_captcha' or cp.get('next_id') != args.id:
+        raise ValueError('Expected the stopped pending IP observation')
+    matches = [x for x in queue if x['id'] == args.id]
+    if len(matches) != 1: raise ValueError('Expected one pending queue ID')
+    url = matches[0]['url']; avito_url(url, args.id)
+    plan = read(service/'plan.json')
+    if plan.get('run_id') != args.run_id or not plan.get('listing_pages') or not plan.get('listing_sha256'): raise ValueError('Missing frozen plan')
+    validate_partition(out, service); validate_plan_profession(plan, out/'listing.json')
+    if queue_from_pages([read(out/p['file'].replace('\\','/')) for p in plan['listing_pages']], len(queue)) != queue: raise ValueError('Frozen queue differs')
+    excluded = {r['id'] for r in unavailable_records(out, queue)} | {r['id'] for r in unresolved_records(out, queue)}
+    if cp.get('completed_ids') != [x['id'] for x in queue[:queue.index(matches[0])] if x['id'] not in excluded]: raise ValueError('Checkpoint prefix mismatch')
+    raw = out/'raw'/f'{args.id}.json'; data = read(raw); snap = diag/'problem.snapshot.txt'
+    sandbox = Path(read(diag/'sandbox.json')['path']); tab = sandbox/'browser-tab.json'; text = snap.read_text(encoding='utf8')
+    if (data.get('state') != 'NEEDS_HUMAN' or data.get('reason') != 'access_restriction_or_captcha' or data.get('source_url') != url
+            or f'- title: "Доступ ограничен: проблема с IP" [url={url}]' not in text
+            or 'Страница не загрузилась из-за проблем с IP' not in text or re.search(r'\b429\b', text)
+            or (sandbox/'raw'/raw.name).read_bytes() != raw.read_bytes() or (sandbox/'problem.snapshot.txt').read_bytes() != snap.read_bytes()
+            or any(read(sandbox/'checkpoint.json').get(k) != cp.get(k) for k in ('state','next_id','stop_reason','completed_ids')) or read(tab).get('url') != url):
+        raise ValueError('IP evidence, identity or original sandbox differs')
+    with locked(diag):
+        ledger = load_failures(diag); events = ledger['events']
+        policies = [e for e in events if e.get('event') == 'recurring_ip_policy' and e.get('source') == args.source]
+        failures = [e for e in events if e.get('event') == 'failure']
+        if ledger['state'] != 'NEEDS_HUMAN' or ledger['retries_started'] < ledger['retry_limit'] or len(policies) != 1 or not failures:
+            raise HumanRequired('Requires a stopped exhausted budget and registered recurring policy')
+        if any(e.get('authorization_id') == args.authorization_id for e in events) or not args.authorization_id.strip():
+            raise HumanRequired('Attempt ID must be new and nonempty')
+        last = datetime.fromisoformat(failures[-1]['at'])
+        previous = [datetime.fromisoformat(e['at']) for e in events if e.get('event') in ('recurring_ip_authorization', 'recurring_incomplete_authorization', 'recurring_502_authorization', 'recurring_unavailable_authorization', 'recurring_reviewed_authorization') and e.get('source') == args.source]
+        now = datetime.now(timezone.utc)
+        if (now - max([last] + previous)).total_seconds() < policies[0]['interval_seconds']:
+            raise HumanRequired('Thirty-minute interval has not elapsed')
+        ledger['state'] = 'READY'
+        ledger['bounded_pending'] = dict(id=args.id, state='reserved', authorization_id=args.authorization_id)
+        events.append(dict(event='recurring_ip_authorization', at=now.isoformat(), source=args.source,
+            authorization_id=args.authorization_id, pending_id=args.id, no_new_budget=True,
+            failure_at=failures[-1]['at'], raw_sha256=sha(raw), snapshot_sha256=sha(snap)))
+        save_failures(diag, ledger)
+    print('One recurring IP attempt claimed without new retry budget')
+
+
+def recurring_reviewed_continuation(args):
+    out,service,diag=paths(ROOT,args.run_id);cp=read(diag/'checkpoint.json');queue=read(out/'queue.json')
+    if cp.get('state')!='READY' or cp.get('next_id')!=args.id or (out/'raw'/f'{args.id}.json').exists() or (diag/'sandbox.json').exists(): raise ValueError('Expected next unread pending ID')
+    matches=[i for i,x in enumerate(queue) if x['id']==args.id]
+    if len(matches)!=1 or matches[0]==0: raise ValueError('Invalid next ID')
+    index=matches[0]-1; previous=queue[index];review=read(out/'offline_reviews'/f"{previous['id']}.json")
+    if review.get('method') not in ('address_button_v1','joined_salary_line_v1') or review.get('authorization_id')!=args.source: raise ValueError('Expected reviewed observation from this policy')
+    reviewed_capture(out,previous); evidence=diag/'observations'/previous['id']/(review['snapshot_sha256']+'.problem.snapshot.txt')
+    if sha(evidence)!=review['snapshot_sha256'] or f'[url={previous["url"]}]' not in evidence.read_text(encoding='utf8'): raise ValueError('Review evidence differs')
+    plan=read(service/'plan.json');validate_partition(out,service);validate_plan_profession(plan,out/'listing.json')
+    if plan.get('run_id')!=args.run_id or queue_from_pages([read(out/p['file'].replace('\\','/')) for p in plan['listing_pages']],len(queue))!=queue: raise ValueError('Frozen queue differs')
+    excluded={r['id'] for r in unavailable_records(out,queue)}|{r['id'] for r in unresolved_records(out,queue)}
+    if cp.get('completed_ids')!=[x['id'] for x in queue[:index+1] if x['id'] not in excluded]: raise ValueError('Checkpoint prefix mismatch')
+    with locked(diag):
+        ledger=load_failures(diag);events=ledger['events'];policies=[e for e in events if e.get('event')=='recurring_ip_policy' and e.get('source')==args.source];failures=[e for e in events if e.get('event')=='failure']
+        if ledger['state']!='NEEDS_HUMAN' or ledger['retries_started']<ledger['retry_limit'] or len(policies)!=1 or not failures or not any(e.get('event')=='recurring_incomplete_policy' and e.get('source')==args.source for e in events): raise HumanRequired('Stopped exhausted budget and policies required')
+        if datetime.fromisoformat(review['reviewed_at'])<datetime.fromisoformat(failures[-1]['at']): raise ValueError('Review predates last failure')
+        if not args.authorization_id.strip() or any(e.get('authorization_id')==args.authorization_id for e in events): raise HumanRequired('Attempt ID must be new')
+        times=[datetime.fromisoformat(failures[-1]['at'])]+[datetime.fromisoformat(e['at']) for e in events if e.get('event') in ('recurring_ip_authorization','recurring_incomplete_authorization','recurring_502_authorization','recurring_unavailable_authorization','recurring_reviewed_authorization') and e.get('source')==args.source];now=datetime.now(timezone.utc)
+        if (now-max(times)).total_seconds()<policies[0]['interval_seconds']: raise HumanRequired('Thirty-minute interval has not elapsed')
+        ledger['state']='READY';ledger['bounded_pending']=dict(id=args.id,state='reserved',authorization_id=args.authorization_id)
+        events.append(dict(event='recurring_reviewed_authorization',at=now.isoformat(),source=args.source,authorization_id=args.authorization_id,pending_id=args.id,no_new_budget=True,reviewed_id=previous['id'],snapshot_sha256=review['snapshot_sha256']));save_failures(diag,ledger)
+    print('One post-review pending read claimed without new budget')
+
+
+def recurring_unavailable_continuation(args):
+    out, service, diag = paths(ROOT, args.run_id); cp=read(diag/'checkpoint.json'); queue=read(out/'queue.json')
+    if cp.get('state') != 'READY' or cp.get('next_id') != args.id or (out/'raw'/f'{args.id}.json').exists() or (diag/'sandbox.json').exists(): raise ValueError('Expected next unread pending ID')
+    plan=read(service/'plan.json'); validate_partition(out,service); validate_plan_profession(plan,out/'listing.json')
+    if plan.get('run_id') != args.run_id or not plan.get('listing_pages') or queue_from_pages([read(out/p['file'].replace('\\','/')) for p in plan['listing_pages']],len(queue)) != queue: raise ValueError('Frozen queue differs')
+    records=unavailable_records(out,queue)
+    if not records: raise ValueError('No standing unavailable observation')
+    record=records[-1]; index=next((i for i,x in enumerate(queue) if x['id']==record['id']),None)
+    if index is None or index+1>=len(queue) or queue[index+1]['id']!=args.id or record.get('authorization_id')!=STANDING_UNAVAILABLE_ID: raise ValueError('Unavailable record does not precede pending ID')
+    excluded={r['id'] for r in records}|{r['id'] for r in unresolved_records(out,queue)}
+    if cp.get('completed_ids') != [x['id'] for x in queue[:index+1] if x['id'] not in excluded]: raise ValueError('Checkpoint prefix mismatch')
+    evidence=diag/'observations'/record['id']/(record['snapshot_sha256']+'.problem.snapshot.txt')
+    if sha(evidence)!=record['snapshot_sha256'] or f'[url={record["url"]}]' not in evidence.read_text(encoding='utf8'): raise ValueError('Unavailable evidence differs')
+    with locked(diag):
+        ledger=load_failures(diag); events=ledger['events']; policies=[e for e in events if e.get('event')=='recurring_ip_policy' and e.get('source')==args.source]; failures=[e for e in events if e.get('event')=='failure']
+        if ledger['state']!='NEEDS_HUMAN' or ledger['retries_started']<ledger['retry_limit'] or len(policies)!=1 or not failures or not any(e.get('event')=='project_unavailable_policy' and e.get('authorization_id')==STANDING_UNAVAILABLE_ID for e in events): raise HumanRequired('Stopped exhausted budget and standing policies required')
+        if datetime.fromisoformat(record['recorded_at']) < datetime.fromisoformat(failures[-1]['at']): raise ValueError('Unavailable decision predates last failure')
+        if not args.authorization_id.strip() or any(e.get('authorization_id')==args.authorization_id for e in events): raise HumanRequired('Attempt ID must be new')
+        times=[datetime.fromisoformat(failures[-1]['at'])]+[datetime.fromisoformat(e['at']) for e in events if e.get('event') in ('recurring_ip_authorization','recurring_incomplete_authorization','recurring_502_authorization','recurring_unavailable_authorization', 'recurring_reviewed_authorization') and e.get('source')==args.source]
+        now=datetime.now(timezone.utc)
+        if (now-max(times)).total_seconds()<policies[0]['interval_seconds']: raise HumanRequired('Thirty-minute interval has not elapsed')
+        ledger['state']='READY';ledger['bounded_pending']=dict(id=args.id,state='reserved',authorization_id=args.authorization_id)
+        events.append(dict(event='recurring_unavailable_authorization',at=now.isoformat(),source=args.source,authorization_id=args.authorization_id,pending_id=args.id,no_new_budget=True,unavailable_id=record['id'],snapshot_sha256=record['snapshot_sha256']))
+        save_failures(diag,ledger)
+    print('One post-unavailable pending read claimed without new budget')
+
+
+def recurring_incomplete_policy(args):
+    _, _, diag = paths(ROOT, args.run_id)
+    if not args.source.strip() or not args.human_instruction.strip(): raise ValueError('Exact instruction and source required')
+    with locked(diag):
+        ledger = load_failures(diag); events = ledger['events']
+        if not any(e.get('event') == 'recurring_ip_policy' and e.get('source') == args.source for e in events): raise HumanRequired('Recurring interval policy missing')
+        previous = [e for e in events if e.get('event') == 'recurring_incomplete_policy' and e.get('source') == args.source]
+        if previous:
+            if len(previous) != 1 or previous[0].get('instruction') != args.human_instruction: raise ValueError('Existing policy differs')
+            return
+        events.append(dict(event='recurring_incomplete_policy', source=args.source, instruction=args.human_instruction, at=datetime.now(timezone.utc).isoformat()))
+        save_failures(diag, ledger)
+    print('Recurring incomplete-shell instruction recorded')
+
+
+def recurring_incomplete_attempt(args):
+    out, service, diag = paths(ROOT, args.run_id)
+    cp, queue = read(diag/'checkpoint.json'), read(out/'queue.json')
+    if cp.get('state') != 'REVIEW_REQUIRED' or cp.get('stop_reason') != 'identity_or_template_review' or cp.get('next_id') != args.id: raise ValueError('Expected pending incomplete observation')
+    matches = [x for x in queue if x['id'] == args.id]
+    if len(matches) != 1: raise ValueError('Pending ID differs from queue')
+    url = matches[0]['url']; avito_url(url, args.id)
+    plan = read(service/'plan.json')
+    if plan.get('run_id') != args.run_id or not plan.get('listing_pages') or not plan.get('listing_sha256'): raise ValueError('Missing frozen plan')
+    validate_partition(out, service); validate_plan_profession(plan, out/'listing.json')
+    if queue_from_pages([read(out/p['file'].replace('\\','/')) for p in plan['listing_pages']], len(queue)) != queue: raise ValueError('Frozen queue differs')
+    excluded = {r['id'] for r in unavailable_records(out, queue)} | {r['id'] for r in unresolved_records(out, queue)}
+    if cp.get('completed_ids') != [x['id'] for x in queue[:queue.index(matches[0])] if x['id'] not in excluded]: raise ValueError('Checkpoint prefix mismatch')
+    raw = out/'raw'/f'{args.id}.json'; data = read(raw); ev = data.get('unresolved_evidence', {}); snap = diag/'problem.snapshot.txt'
+    sandbox = Path(read(diag/'sandbox.json')['path']); tab = sandbox/'browser-tab.json'; text = snap.read_text(encoding='utf8')
+    is502=getattr(args,'visible_http_502',False)
+    if is502 and not visible_http_502(data,text,url): raise ValueError('Not the evidenced visible HTTP 502 page')
+    if ((not is502 and (data.get('state') != 'UNKNOWN_PAGE' or data.get('source_url') != url or ev.get('complete') is not False or ev.get('restriction') is not False
+            or ev.get('known_unavailable') is not False or data.get('heading') is not None or data.get('title') or data.get('fields') or data.get('items') != []
+            or f'[url={url}]' not in text or re.search(r'captcha|429|доступ ограничен|подозрительн|объявление (?:закрыто|удалено|недоступно)', text, re.I) or '\n- heading ' in text))
+            or (sandbox/'raw'/raw.name).read_bytes() != raw.read_bytes() or (sandbox/'problem.snapshot.txt').read_bytes() != snap.read_bytes()
+            or any(read(sandbox/'checkpoint.json').get(k) != cp.get(k) for k in ('state','next_id','stop_reason','completed_ids')) or read(tab).get('url') != url):
+        raise ValueError('Incomplete shell evidence or sandbox differs')
+    with locked(diag):
+        ledger=load_failures(diag); events=ledger['events']
+        interval=[e for e in events if e.get('event')=='recurring_ip_policy' and e.get('source')==args.source]
+        policies=[e for e in events if e.get('event')=='recurring_incomplete_policy' and e.get('source')==args.source]
+        failures=[e for e in events if e.get('event')=='failure']
+        if ledger['state']!='NEEDS_HUMAN' or ledger['retries_started']<ledger['retry_limit'] or len(interval)!=1 or len(policies)!=1 or not failures: raise HumanRequired('Stopped exhausted budget and policies required')
+        if not args.authorization_id.strip() or any(e.get('authorization_id')==args.authorization_id for e in events): raise HumanRequired('Attempt ID must be new')
+        times=[datetime.fromisoformat(failures[-1]['at'])]+[datetime.fromisoformat(e['at']) for e in events if e.get('event') in ('recurring_ip_authorization','recurring_incomplete_authorization','recurring_502_authorization','recurring_unavailable_authorization', 'recurring_reviewed_authorization') and e.get('source')==args.source]
+        now=datetime.now(timezone.utc)
+        if (now-max(times)).total_seconds()<interval[0]['interval_seconds']: raise HumanRequired('Thirty-minute interval has not elapsed')
+        ledger['state']='READY'; ledger['bounded_pending']=dict(id=args.id,state='reserved',authorization_id=args.authorization_id)
+        events.append(dict(event='recurring_502_authorization' if is502 else 'recurring_incomplete_authorization',at=now.isoformat(),source=args.source,authorization_id=args.authorization_id,pending_id=args.id,no_new_budget=True,raw_sha256=sha(raw),snapshot_sha256=sha(snap)))
+        save_failures(diag,ledger)
+    print('One recurring '+('visible HTTP 502' if is502 else 'incomplete-shell')+' attempt claimed without new budget')
+
+
+def recurring_ip_after_preflight(args):
+    """Reclaim an already preserved IP observation after the evidenced preflight failure."""
+    out, service, diag = paths(ROOT, args.run_id)
+    cp, queue = read(diag/'checkpoint.json'), read(out/'queue.json')
+    if cp.get('state') != 'READY' or cp.get('stop_reason') is not None or cp.get('next_id') != args.id or (out/'raw'/f'{args.id}.json').exists() or (diag/'sandbox.json').exists():
+        raise ValueError('Expected preserved pending ID without a new raw or sandbox')
+    matches = [item for item in queue if item['id'] == args.id]
+    if len(matches) != 1: raise ValueError('Expected one pending queue ID')
+    url = matches[0]['url']; avito_url(url, args.id)
+    plan = read(service/'plan.json')
+    if plan.get('run_id') != args.run_id or not plan.get('listing_sha256') or not plan.get('listing_pages'): raise ValueError('Missing frozen plan')
+    validate_partition(out, service); validate_plan_profession(plan, out/'listing.json')
+    if queue_from_pages([read(out/p['file'].replace('\\','/')) for p in plan['listing_pages']], len(queue)) != queue: raise ValueError('Frozen queue differs')
+    excluded = {r['id'] for r in unavailable_records(out, queue)} | {r['id'] for r in unresolved_records(out, queue)}
+    if cp.get('completed_ids') != [x['id'] for x in queue[:queue.index(matches[0])] if x['id'] not in excluded]: raise ValueError('Checkpoint prefix mismatch')
+    expected_raw = set(cp['completed_ids']) | excluded
+    if {p.stem for p in (out/'raw').glob('*.json')} != expected_raw: raise ValueError('Raw observations do not match the completed prefix')
+    with locked(diag):
+        ledger = load_failures(diag); events = ledger['events']; bounded = ledger.get('bounded_pending', {})
+        if ledger['state'] != 'NEEDS_HUMAN' or ledger['retries_started'] < ledger['retry_limit'] or bounded.get('state') != 'failed' or bounded.get('id') != args.id:
+            raise HumanRequired('Expected a failed exhausted bounded attempt')
+        policies = [e for e in events if e.get('event') == 'recurring_ip_policy' and e.get('source') == args.source]
+        claims = [e for e in events if e.get('event') == 'recurring_ip_authorization' and e.get('authorization_id') == bounded.get('authorization_id') and e.get('source') == args.source]
+        if len(policies) != 1 or len(claims) != 1 or len(events) < 2 or events[-2].get('event') != 'bounded_pending_started' or events[-2].get('id') != args.id:
+            raise ValueError('Missing matching prior policy, claim or started action')
+        failure = events[-1]
+        command = ['/Library/Developer/CommandLineTools/usr/bin/python3', str(SCRIPTS/'preflight.py'), '--probe-aside', '--config', str(ROOT/'Scraper/collect-avito.local.json')]
+        expected_message = str(subprocess.CalledProcessError(2, command))
+        if failure.get('event') != 'failure' or failure.get('stage') != 'capture' or failure.get('state') != 'NEEDS_HUMAN' or failure.get('message') != expected_message:
+            raise ValueError('Last failure is not the evidenced preflight command failure')
+        claim = claims[0]; archive = out/'observations'/args.id; digest = claim.get('raw_sha256', '')
+        source = archive/(digest+'.json'); provenance = read(archive/(digest+'.provenance.json'))
+        snapshot = diag/'observations'/args.id/(claim.get('snapshot_sha256','')+'.problem.snapshot.txt')
+        tab = diag/'observations'/args.id/(provenance.get('browser_tab_sha256','')+'.browser-tab.json')
+        original = read(source); sandbox = Path(provenance.get('sandbox_path',''))
+        if (sha(source) != digest or provenance.get('sha256') != digest or provenance.get('authorization_id') != bounded['authorization_id']
+                or provenance.get('snapshot_sha256') != claim.get('snapshot_sha256') or sha(snapshot) != claim.get('snapshot_sha256')
+                or sha(tab) != provenance.get('browser_tab_sha256') or read(tab).get('url') != url
+                or original.get('source_url') != url or original.get('state') != 'NEEDS_HUMAN' or original.get('reason') != 'access_restriction_or_captcha'
+                or f'- title: "Доступ ограничен: проблема с IP" [url={url}]' not in snapshot.read_text(encoding='utf8')
+                or (sandbox/'raw'/f'{args.id}.json').read_bytes() != source.read_bytes()
+                or (sandbox/'problem.snapshot.txt').read_bytes() != snapshot.read_bytes()
+                or read(sandbox/'browser-tab.json').get('url') != url
+                or read(sandbox/'checkpoint.json').get('completed_ids') != cp.get('completed_ids')
+                or read(sandbox/'checkpoint.json').get('next_id') != args.id):
+            raise ValueError('Original IP provenance or sandbox differs')
+        if not args.authorization_id.strip() or any(e.get('authorization_id') == args.authorization_id for e in events): raise HumanRequired('Attempt ID must be new and nonempty')
+        now = datetime.now(timezone.utc); last = datetime.fromisoformat(failure['at'])
+        attempts = [datetime.fromisoformat(e['at']) for e in events if e.get('event') in ('recurring_ip_authorization', 'recurring_incomplete_authorization', 'recurring_502_authorization', 'recurring_unavailable_authorization', 'recurring_reviewed_authorization') and e.get('source') == args.source]
+        if (now-max([last]+attempts)).total_seconds() < policies[0]['interval_seconds']: raise HumanRequired('Thirty-minute interval has not elapsed')
+        ledger['state'] = 'READY'; ledger['bounded_pending'] = dict(id=args.id, state='reserved', authorization_id=args.authorization_id)
+        events.append(dict(event='recurring_ip_authorization', at=now.isoformat(), source=args.source, authorization_id=args.authorization_id,
+            pending_id=args.id, no_new_budget=True, failure_at=failure['at'], raw_sha256=digest,
+            snapshot_sha256=claim['snapshot_sha256'], preserved_before_preflight=True, previous_authorization_id=bounded['authorization_id']))
+        save_failures(diag, ledger)
+    print('One preserved IP observation reclaimed after preflight failure; no new budget')
 
 
 def diagnostic_pending_capture(args):
@@ -2811,13 +3267,25 @@ def sweep_demo_export(args):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     commands = parser.add_subparsers(dest='command', required=True)
-    for name in ['sweep-init', 'sweep-snapshot', 'sweep-register-branch', 'sweep-set-branch-status', 'sweep-materialize', 'sweep-report', 'sweep-demo-export', 'archive-uncertain-freeze', 'archive-partial-listing', 'partition', 'partial-suffix', 'deduplicate-queue', 'continuation', 'supplemental', 'freeze', 'capture', 'finalize', 'post-finalize-review', 'publish', 'reselect', 'standing-unavailable-policy', 'closed-policy', 'review-policy', 'blocked-listing-policy', 'salary-review-policy', 'review-salary-line', 'mark-unavailable', 'mark-redirect-unavailable', 'unresolved-policy', 'upgrade-unresolved-extractor', 'mark-unresolved', 'preserve-stopped-observation', 'retry-redirect-observation', 'retry-incomplete-observation', 'note-change', 'record-error', 'check-stage', 'stage-ok', 'resume-offline', 'resume-browser', 'diagnostic-authorization', 'external-threshold-authorization', 'diagnostic-pending-capture']:
+    for name in ['public-provenance', 'review-address-button', 'recurring-reviewed-continuation', 'recurring-unavailable-continuation', 'recurring-incomplete-policy', 'recurring-incomplete-attempt', 'recurring-ip-after-preflight', 'recurring-ip-policy', 'recurring-ip-attempt', 'sweep-init', 'sweep-snapshot', 'sweep-register-branch', 'sweep-set-branch-status', 'sweep-materialize', 'sweep-report', 'sweep-demo-export', 'archive-uncertain-freeze', 'archive-partial-listing', 'partition', 'partial-suffix', 'deduplicate-queue', 'continuation', 'supplemental', 'freeze', 'capture', 'finalize', 'post-finalize-review', 'publish', 'reselect', 'standing-unavailable-policy', 'closed-policy', 'review-policy', 'blocked-listing-policy', 'salary-review-policy', 'review-salary-line', 'mark-unavailable', 'mark-redirect-unavailable', 'unresolved-policy', 'upgrade-unresolved-extractor', 'mark-unresolved', 'preserve-stopped-observation', 'retry-redirect-observation', 'retry-incomplete-observation', 'note-change', 'record-error', 'check-stage', 'stage-ok', 'resume-offline', 'resume-browser', 'diagnostic-authorization', 'external-threshold-authorization', 'diagnostic-pending-capture']:
         command = commands.add_parser(name)
         command.add_argument('--run-id', required=True)
-        if name in ('freeze', 'capture', 'diagnostic-pending-capture'):
+        if name == 'review-address-button':
+            command.add_argument('--source', required=True); command.add_argument('--id', required=True)
+        elif name == 'recurring-incomplete-policy':
+            command.add_argument('--source', required=True); command.add_argument('--human-instruction', required=True)
+        elif name == 'recurring-ip-policy':
+            command.add_argument('--source', required=True); command.add_argument('--human-instruction', required=True); command.add_argument('--additional-instruction', required=True)
+        elif name in ('recurring-reviewed-continuation', 'recurring-unavailable-continuation', 'recurring-incomplete-attempt', 'recurring-ip-attempt', 'recurring-ip-after-preflight'):
+            command.add_argument('--source', required=True); command.add_argument('--id', required=True); command.add_argument('--authorization-id', required=True)
+            if name == 'recurring-incomplete-attempt': command.add_argument('--visible-http-502', action='store_true', help='Require an exact saved visible HTTP 502 page')
+        elif name in ('freeze', 'capture', 'diagnostic-pending-capture'):
             command.add_argument('--tab-id', help='Explicitly authorized Aside browser targetId')
             command.add_argument('--config', type=Path, help='Local config also used by setup_workspace/preflight')
-        if name == 'sweep-init':
+            for target in ('host', 'account', 'profile'): command.add_argument('--'+target, help='Explicit Aside target; must match the pinned run')
+        if name in ('public-provenance', 'review-address-button', 'recurring-reviewed-continuation', 'recurring-unavailable-continuation', 'recurring-incomplete-policy', 'recurring-incomplete-attempt', 'recurring-ip-policy', 'recurring-ip-attempt', 'recurring-ip-after-preflight'):
+            pass
+        elif name == 'sweep-init':
             command.add_argument('--spec', type=Path, required=True)
         elif name == 'sweep-snapshot':
             command.add_argument('--name', required=True)
@@ -2904,6 +3372,7 @@ def main():
         elif name == 'review-salary-line':
             command.add_argument('--id', required=True)
             command.add_argument('--authorization-id', required=True)
+            command.add_argument('--source', help='Previously recorded recurring request policy source')
         elif name == 'standing-unavailable-policy':
             command.add_argument('--authorization-id', default=STANDING_UNAVAILABLE_ID)
             command.add_argument('--human-instruction', default=STANDING_UNAVAILABLE_INSTRUCTION)
@@ -2915,6 +3384,7 @@ def main():
             command.add_argument('--authorization-id', required=True)
             command.add_argument('--authorization-question', help='Exact preceding question when the saved answer confirms it')
         elif name == 'mark-unavailable':
+            command.add_argument('--offline-standing', action='store_true')
             command.add_argument('--id', required=True)
             command.add_argument('--authorization-id', required=True)
         elif name == 'upgrade-unresolved-extractor':
@@ -2953,15 +3423,28 @@ def main():
             command.add_argument('--human-instruction', required=True)
             if name in ('resume-browser', 'diagnostic-authorization', 'external-threshold-authorization'):
                 command.add_argument('--authorization-id', required=True, help='Stable ID for this fresh human instruction; reuse on CLI retries')
+            if name == 'resume-browser': command.add_argument('--pending-id-no-budget', help='Authorize one pending ID without replenishing an exhausted retry budget')
         else:
             for flag in ['file', 'reason', 'validation']:
                 command.add_argument('--' + flag, required=True)
     args = parser.parse_args()
+    for target in ('host', 'account', 'profile'):
+        value = getattr(args, target, None); key = 'TL_ASIDE_'+target.upper()
+        if value:
+            if os.environ.get(key) and os.environ[key] != value: parser.error(f'--{target} differs from {key}')
+            os.environ[key] = value
+    if args.command in ('freeze', 'capture', 'diagnostic-pending-capture'):
+        target_file = paths(ROOT, args.run_id)[2]/'aside-target.local.json'
+        if target_file.exists():
+            pinned = read(target_file)
+            for target in ('host', 'account', 'profile'):
+                value = getattr(args, target, None)
+                if value and value != pinned.get('TL_ASIDE_'+target.upper()): parser.error(f'--{target} differs from the pinned run target')
     if args.command == 'capture' and args.batch_size < 1:
         parser.error('batch-size must be positive')
     with ExitStack() as stack:
         try:
-            if args.command in ('archive-uncertain-freeze', 'archive-partial-listing', 'partition', 'partial-suffix', 'deduplicate-queue', 'continuation', 'supplemental', 'freeze', 'capture', 'finalize', 'post-finalize-review', 'publish', 'reselect', 'standing-unavailable-policy', 'closed-policy', 'review-policy', 'blocked-listing-policy', 'salary-review-policy', 'review-salary-line', 'mark-unavailable', 'mark-redirect-unavailable', 'unresolved-policy', 'upgrade-unresolved-extractor', 'mark-unresolved', 'preserve-stopped-observation', 'retry-redirect-observation', 'retry-incomplete-observation', 'record-error', 'stage-ok', 'resume-browser', 'resume-offline', 'diagnostic-authorization', 'external-threshold-authorization', 'diagnostic-pending-capture'):
+            if args.command in ('public-provenance', 'review-address-button', 'recurring-reviewed-continuation', 'recurring-unavailable-continuation', 'recurring-incomplete-policy', 'recurring-incomplete-attempt', 'recurring-ip-after-preflight', 'recurring-ip-policy', 'recurring-ip-attempt', 'archive-uncertain-freeze', 'archive-partial-listing', 'partition', 'partial-suffix', 'deduplicate-queue', 'continuation', 'supplemental', 'freeze', 'capture', 'finalize', 'post-finalize-review', 'publish', 'reselect', 'standing-unavailable-policy', 'closed-policy', 'review-policy', 'blocked-listing-policy', 'salary-review-policy', 'review-salary-line', 'mark-unavailable', 'mark-redirect-unavailable', 'unresolved-policy', 'upgrade-unresolved-extractor', 'mark-unresolved', 'preserve-stopped-observation', 'retry-redirect-observation', 'retry-incomplete-observation', 'record-error', 'stage-ok', 'resume-browser', 'resume-offline', 'diagnostic-authorization', 'external-threshold-authorization', 'diagnostic-pending-capture'):
                 lock_run_id = args.parent_run_id if args.command in ('continuation', 'supplemental') else args.source_run_id if args.command in ('partial-suffix', 'deduplicate-queue') else args.run_id
                 stack.enter_context(operation_locked(paths(ROOT, lock_run_id)[2]))
             globals()[args.command.replace('-', '_')](args)

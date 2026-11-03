@@ -136,6 +136,15 @@ def ensure_allowed(diag, stage, retry_reason=None, *, action=False):
     diag = ledger_dir(diag)
     with locked(diag):
         ledger = load(diag)
+        bounded = ledger.get('bounded_pending')
+        if bounded and bounded.get('state') == 'reserved':
+            if stage != 'capture': raise HumanRequired('Only the authorized pending capture is allowed')
+            if action:
+                bounded['state'] = 'started'
+                ledger.update(state='RETRY_STARTED', retry_started=True, retry_action_started=True, active_retry_stage='capture')
+                ledger['events'].append(dict(at=datetime.now(timezone.utc).isoformat(), event='bounded_pending_started', id=bounded['id']))
+                save(diag, ledger)
+            return
         if ledger['state'] == 'NEEDS_HUMAN':
             if stage in ledger.get('offline_authorization', {}).get('stages', []):
                 return
@@ -172,6 +181,7 @@ def succeeded(diag, stage, evidence):
             if ledger.get('active_retry_stage') != stage:
                 raise ValueError('Success must confirm the active retry stage')
             ledger['state'] = 'RECOVERED'
+            if ledger.get('bounded_pending', {}).get('state') == 'started': ledger['bounded_pending']['state'] = 'completed'
             ledger['retry_started'] = False
             ledger.pop('retry_action_started', None)
             ledger.pop('active_retry_stage', None)
@@ -187,6 +197,9 @@ def record(diag, stage, message, action, url=None, agent=None, immediate=False):
         if ledger['state'] == 'RETRY_STARTED' and ledger.get('active_retry_stage') != stage and not immediate:
             raise ValueError('Record the actual active retry stage; another stage cannot cancel it')
         stopped = ledger['state'] == 'NEEDS_HUMAN'
+        if ledger.get('bounded_pending', {}).get('state') in ('reserved', 'started'):
+            ledger['bounded_pending']['state'] = 'failed'
+            immediate = True
         ledger.pop('offline_authorization', None)
         ledger['retry_started'] = False
         ledger.pop('retry_action_started', None)

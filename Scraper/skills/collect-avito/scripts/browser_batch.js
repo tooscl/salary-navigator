@@ -97,8 +97,18 @@ try {
         if (added.length === 1) targetId = added[0].targetId;
       } else await p.goto(item.url);
       await saveTab();
+      let data = await p.evaluate(extractor);
+      // Only an observed incomplete, unrestricted shell may still be loading.
+      // Never navigate again, delay ready cards, or wait through protection/identity errors.
+      for (let i = 0; i < 10; i++) {
+        const ev = data.unresolved_evidence;
+        if (data.state !== 'UNKNOWN_PAGE' || ev?.complete !== false || ev?.restriction !== false ||
+            ev?.known_unavailable !== false || safeUrl(p.url()) !== safeUrl(item.url) ||
+            safeUrl(data.source_url) !== safeUrl(item.url)) break;
+        await sleep(500);
+        data = await p.evaluate(extractor);
+      }
       const snap = await snapshot(p, {interactive: true});
-      const data = await p.evaluate(extractor);
       // Preserve the observation before deciding whether it can enter the dataset.
       await save('raw/' + item.id + '.json', data);
       const validFields = Array.isArray(data.fields) && data.fields.length > 0 &&

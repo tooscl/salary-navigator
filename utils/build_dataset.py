@@ -5,7 +5,7 @@ import hashlib
 import io
 import json
 from datetime import datetime
-from pathlib import Path
+from pathlib import Path, PureWindowsPath
 
 try:
     from . import title_flags
@@ -36,6 +36,16 @@ def parts(value):
     return [item.strip() for item in value.split(";") if item.strip()]
 
 
+def repository_path(value):
+    """Read historical Windows separators without accepting absolute or escaping paths."""
+    if not isinstance(value, str) or not value or PureWindowsPath(value).drive:
+        raise ValueError('Expected a relative repository path')
+    path = Path(value.replace('\\', '/'))
+    if path.is_absolute() or '..' in path.parts:
+        raise ValueError('Expected a relative repository path')
+    return path
+
+
 def build(root, registry):
     """Return deterministic output bytes; reject ambiguous observations."""
     if registry.get("schema_version") != VERSION or not registry.get("exports"):
@@ -47,7 +57,7 @@ def build(root, registry):
         if not run_id or not source or run_id in runs:
             raise ValueError("Expected unique nonempty run_id and nonempty source")
         runs.add(run_id)
-        path = Path(entry["path"])
+        path = repository_path(entry["path"])
         if path.is_absolute() or ".." in path.parts or not (root / path).resolve().is_relative_to(root.resolve()):
             raise ValueError(f"Source must be inside repository: {path}")
         data = (root / path).read_bytes()
@@ -55,7 +65,7 @@ def build(root, registry):
             raise ValueError(f"Source SHA-256 mismatch: {path}")
         correction = entry.get('profession_correction')
         if correction:
-            correction_path = Path(correction['path'])
+            correction_path = repository_path(correction['path'])
             if correction_path.is_absolute() or '..' in correction_path.parts or not (root / correction_path).resolve().is_relative_to(root.resolve()):
                 raise ValueError('Profession correction must be inside repository')
             if digest((root / correction_path).read_bytes()) != correction['sha256']:
