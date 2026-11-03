@@ -257,3 +257,7 @@ avito_runs/<название_сбора>/
 - [remote_continuous_r000005_s001_new](avito_runs/remote_continuous_r000005_s001_new/exports/vacancies_flat.csv): 27 вакансий.
 
 - [remote_continuous_r000006_s000_new](avito_runs/remote_continuous_r000006_s000_new/exports/vacancies_flat.csv): 61 вакансий.
+
+- [vahta_50_2026-11-02_sasha](avito_runs/vahta_50_2026-11-02_sasha/exports/vacancies_flat.csv): 50 вакансий.
+
+- [vahta_1500_2026-11-02_sasha](avito_runs/vahta_1500_2026-11-02_sasha/exports/vacancies_flat.csv): 1257 вакансий.

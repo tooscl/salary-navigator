@@ -1586,6 +1586,45 @@ p.stdin.close()
             runner.write(out/'raw/123.json', dict(data, heading='Changed'))
             with self.assertRaisesRegex(ValueError, 'raw'): runner.unavailable_records(out, runner.read(out/'queue.json'))
 
+    def test_truncated_closed_snapshot_requires_matching_sandbox_evidence(self):
+        with tempfile.TemporaryDirectory() as directory, patch.object(runner, 'ROOT', Path(directory)):
+            out, service, diag = runner.paths(runner.ROOT, 'truncated')
+            url = item()['url']; data = dict(state='UNKNOWN_PAGE', heading='Объявление не посмотреть', source_url=url,
+                unresolved_evidence=dict(restriction=False, known_unavailable=True))
+            runner.write(out/'raw/123.json', data); runner.write(out/'queue.json', [item('123'), item('456')])
+            runner.write(service/'plan.json', dict(selection_mode='saved_incomplete_listing'))
+            cp = dict(state='REVIEW_REQUIRED', stop_reason='identity_or_template_review', next_id='123', completed_ids=[])
+            runner.write(diag/'checkpoint.json', cp)
+            snap = diag/'problem.snapshot.txt'; snap.write_text(f'- title: "404" [url={url[:30]}…]\n- text: "Объявление закрыто."\n', encoding='utf8')
+            sandbox = Path(directory)/'sandbox'; runner.write(diag/'sandbox.json', dict(path=str(sandbox)))
+            runner.write(sandbox/'checkpoint.json', cp); runner.write(sandbox/'raw/123.json', data)
+            (sandbox/'problem.snapshot.txt').write_bytes(snap.read_bytes()); runner.write(sandbox/'browser-tab.json', dict(url=url))
+            runner.record_failure(diag, 'capture', 'review', 'capture', immediate=True)
+            runner.authorize_browser(diag, 'Продолжить, исключив закрытое объявление 123', 'auth')
+            args = argparse.Namespace(run_id='truncated', id='123', authorization_id='auth')
+            for altered in (dict(url=item('456')['url']), dict(url='about:blank')):
+                runner.write(sandbox/'browser-tab.json', altered)
+                with self.assertRaisesRegex(ValueError, 'evidence'): runner.mark_unavailable(args)
+            runner.write(sandbox/'browser-tab.json', dict(url=url))
+            runner.write(sandbox/'raw/123.json', dict(data, source_url=item('456')['url']))
+            with self.assertRaisesRegex(ValueError, 'evidence'): runner.mark_unavailable(args)
+            runner.write(sandbox/'raw/123.json', data)
+            runner.write(sandbox/'checkpoint.json', dict(cp, next_id='456'))
+            with self.assertRaisesRegex(ValueError, 'evidence'): runner.mark_unavailable(args)
+            runner.write(sandbox/'checkpoint.json', cp)
+            runner.write(out/'raw/123.json', dict(data, source_url=item('456')['url']))
+            with self.assertRaisesRegex(ValueError, 'evidence'): runner.mark_unavailable(args)
+            runner.write(out/'raw/123.json', data)
+            for changed in (dict(data, state='NEEDS_HUMAN'), dict(data, unresolved_evidence=dict(restriction=True, known_unavailable=True))):
+                runner.write(out/'raw/123.json', changed); runner.write(sandbox/'raw/123.json', changed)
+                with self.assertRaisesRegex(ValueError, 'evidence'): runner.mark_unavailable(args)
+            runner.write(out/'raw/123.json', data); runner.write(sandbox/'raw/123.json', data)
+            runner.mark_unavailable(args)
+            record = runner.unavailable_records(out, runner.read(out/'queue.json'))[0]
+            archived = diag/'observations/123'/(record['browser_tab_sha256'] + '.browser-tab.json')
+            self.assertEqual(archived.read_bytes(), (sandbox/'browser-tab.json').read_bytes())
+            self.assertEqual(runner.sha(archived), record['browser_tab_sha256'])
+
     def test_preserve_blank_observation_requires_exact_evidence_and_authorization(self):
         with tempfile.TemporaryDirectory() as directory, patch.object(runner, 'ROOT', Path(directory)):
             out, service, diag = runner.paths(runner.ROOT, 'blank')
