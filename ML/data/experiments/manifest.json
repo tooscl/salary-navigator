@@ -1,0 +1,90 @@
+{
+  "schema_version": 1,
+  "rules_version": "experiment_datasets_v2",
+  "source": {
+    "path": "Data/dataset/vacancies.csv",
+    "sha256": "a313d68832067ee23ddf435e199ab7c28c14aca3f05bc9a7f0e00087fd4e07fd",
+    "rows": 20138,
+    "key": [
+      "source",
+      "id"
+    ]
+  },
+  "datasets": [
+    {
+      "name": "01_location_monthly",
+      "path": "ML/data/experiments/01_location_monthly.csv",
+      "rows": 8661,
+      "sha256": "47f14db76fe9fc2abec478d2513a868d07b4240537095bec8ce9a01f5241f1d4"
+    },
+    {
+      "name": "02_remote_monthly",
+      "path": "ML/data/experiments/02_remote_monthly.csv",
+      "rows": 1906,
+      "sha256": "446da78b4f686a84e30ceb266baaf92ce963f35beba0da668c795bda097a644b"
+    },
+    {
+      "name": "03_watch",
+      "path": "ML/data/experiments/03_watch.csv",
+      "rows": 3244,
+      "sha256": "e07b08cf378c11587ecef8bab63d7492e2a81ba81f5c7e956c94418d8e5b24c2"
+    },
+    {
+      "name": "04_other",
+      "path": "ML/data/experiments/04_other.csv",
+      "rows": 6327,
+      "sha256": "0685f0a0008f09070ec2ea1c3de6ec10410987430f7eb1c3795be78444b24eb3"
+    }
+  ],
+  "schema": {
+    "columns": [
+      "source",
+      "vacancy_id",
+      "source_url",
+      "run_id",
+      "run_ids",
+      "observed_at",
+      "first_seen_at",
+      "last_seen_at",
+      "city",
+      "city_source",
+      "region",
+      "profession",
+      "segments",
+      "title",
+      "description",
+      "location_observed",
+      "employer_name_observed",
+      "date_raw",
+      "salary_raw",
+      "salary_lower_rub",
+      "salary_upper_rub",
+      "salary_value_kind",
+      "salary_period",
+      "salary_period_evidence",
+      "salary_tax_basis",
+      "salary_parse_status",
+      "work_schedule",
+      "employment_type",
+      "work_format",
+      "registration_method",
+      "work_hours_per_day",
+      "pay_frequency",
+      "experience",
+      "watch_duration_days",
+      "analysis_status",
+      "export_eligibility",
+      "full_parameters_read",
+      "listing_rank",
+      "listing_promoted",
+      "views_total",
+      "views_today",
+      "experiment_dataset",
+      "work_mode",
+      "pay_mode",
+      "extra_attributes_json"
+    ],
+    "encoding": "utf-8-sig",
+    "extra_attributes": "Non-empty source columns not promoted to the clean schema."
+  }
+}
