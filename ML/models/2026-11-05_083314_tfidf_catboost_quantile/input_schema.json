@@ -1,0 +1,69 @@
+{
+  "text_columns": [
+    "title",
+    "description",
+    "benefits"
+  ],
+  "text_template": "title, description, benefits joined by '\\n'; every field passed through delete_salary",
+  "benefits_source": "extra_attributes_json['Что получают работники']",
+  "extra_attribute_columns": {
+    "company_sphere": "Сфера деятельности компании",
+    "enterprise_type": "Тип предприятия",
+    "medical_book": "Медкнижка",
+    "self_employment": "Статус самозанятости",
+    "internship": "Стажировка",
+    "driving_licence": "Категория водительских прав",
+    "work_regime": "Режим работы",
+    "shifts": "Смены",
+    "candidate_groups": "В том числе для кандидатов"
+  },
+  "categorical_columns": [
+    "city",
+    "region",
+    "profession",
+    "employer_name_observed",
+    "work_schedule",
+    "employment_type",
+    "work_format",
+    "registration_method",
+    "work_hours_per_day",
+    "pay_frequency",
+    "experience",
+    "company_sphere",
+    "enterprise_type",
+    "medical_book",
+    "self_employment",
+    "internship",
+    "driving_licence",
+    "work_regime",
+    "shifts",
+    "candidate_groups",
+    "salary_value_kind"
+  ],
+  "missing_category": "__MISSING__",
+  "city_fallback": "city_from_location(location_observed) when city is empty",
+  "text_encoder": "text_encoder.joblib: TfidfVectorizer -> TruncatedSVD",
+  "tfidf_params": {
+    "analyzer": "char_wb",
+    "ngram_range": [
+      3,
+      5
+    ],
+    "min_df": 3,
+    "max_features": 150000,
+    "sublinear_tf": true,
+    "lowercase": true
+  },
+  "target_transform": "log1p",
+  "inverse_transform": "sort, add calibration shifts (calibration.json), sort, expm1",
+  "calibration": "calibration.json",
+  "quantiles": [
+    0.25,
+    0.5,
+    0.75
+  ],
+  "models": {
+    "salary_lower_rub": "salary_lower_rub.cbm",
+    "salary_upper_rub": "salary_upper_rub.cbm"
+  }
+}

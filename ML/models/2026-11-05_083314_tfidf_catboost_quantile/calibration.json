@@ -1,0 +1,33 @@
+{
+  "method": "per-quantile additive shift of predicted log1p(salary), fitted on validation",
+  "apply": "log_pred = sort(sort(model.predict(X)) + shifts); rub = expm1(log_pred)",
+  "quantiles": [
+    0.25,
+    0.5,
+    0.75
+  ],
+  "shifts": {
+    "salary_lower_rub": [
+      -0.02258751925809932,
+      0.0038288545185505285,
+      0.042294486661505815
+    ],
+    "salary_upper_rub": [
+      -0.03601374630336274,
+      -4.0869400399934364e-05,
+      0.04051184673903396
+    ]
+  },
+  "rub_multipliers": {
+    "salary_lower_rub": [
+      0.977665668874944,
+      1.0038361939462233,
+      1.0432016424897055
+    ],
+    "salary_upper_rub": [
+      0.9646270333361521,
+      0.9999591314347427,
+      1.0413436461558647
+    ]
+  }
+}

@@ -1,0 +1,499 @@
+{
+  "experiment_id": "2026-11-05_083314_tfidf_catboost_quantile",
+  "status": "executed",
+  "dataset": {
+    "file_path": [
+      "ML/data/experiments/01_location_monthly.csv",
+      "ML/data/experiments/04_other.csv"
+    ],
+    "file_sha256": {
+      "01_location_monthly.csv": "304af0116acf17c9caaa140b60b39535a995c8b0f3f3d4f5d97f680d6ab9daeb",
+      "04_other.csv": "5f7f64ee50a60f8d0b2d3b47ddbd864d680e73e3309faded1b7ac6a13268d80f"
+    },
+    "rows_by_file": {
+      "01_location_monthly.csv": 6003,
+      "04_other.csv": 2657
+    },
+    "other_rows_rule": "pay_mode == 'non_rate_amount' and work_mode in ['unknown_unanchored', 'non_remote_explicit']",
+    "passport_path": null,
+    "passport_sha256": null,
+    "dataset_id": null
+  },
+  "code_git_commit": "400166d7683cc47c7b7cac9249b37da17ca9e628",
+  "uncommitted_changes": true,
+  "environment_file": null,
+  "features": [
+    "title",
+    "description",
+    "benefits",
+    "city",
+    "region",
+    "profession",
+    "employer_name_observed",
+    "work_schedule",
+    "employment_type",
+    "work_format",
+    "registration_method",
+    "work_hours_per_day",
+    "pay_frequency",
+    "experience",
+    "company_sphere",
+    "enterprise_type",
+    "medical_book",
+    "self_employment",
+    "internship",
+    "driving_licence",
+    "work_regime",
+    "shifts",
+    "candidate_groups",
+    "salary_value_kind"
+  ],
+  "preprocessing_version": "delete_salary + char TF-IDF(3, 5) + SVD64",
+  "row_filters": {
+    "military": "extra_attributes_json.military or MILITARY_PATTERN",
+    "military_pattern": "\\bсво\\b|минобороны|министерств\\w* обороны|\\bмо рф\\b|спецопер|специальн\\w* военн|служб\\w* по контракту|контрактник|военнослужащ|вооруж\\w* сил|\\bбпла\\b|\\bдрон|\\bпво\\b|тылов|\\bв тыл\\b|\\bтылу\\b|защит\\w* неба|охран\\w* неба|добровольц|огнев\\w* групп|[(/]мог\\b|\\bваи\\b|пункт\\w* отбора|военкомат|штурмов|артиллер",
+    "monthly_salary_range_rub": [
+      10000,
+      1000000
+    ],
+    "excluded_ids_file": "excluded_ids.csv",
+    "excluded_by_reason": {
+      "salary_below_10000": 317,
+      "military_contract": 232
+    }
+  },
+  "split": {
+    "rule": "grouped random 80/10/10 stratified by profession x city (seeded); likely duplicates (same employer|title|city, all known) are kept in one split; cells with < 10 rows go to train. A time split is not used: collection order is profession -> city -> page, so it would test unseen cities/professions rather than a new period.",
+    "ids_file": "split_ids.csv",
+    "seed": 42
+  },
+  "parameters": {
+    "target_transform": "log1p",
+    "catboost": {
+      "loss_function": "MultiQuantile:alpha=0.25,0.5,0.75",
+      "eval_metric": "MultiQuantile:alpha=0.25,0.5,0.75",
+      "iterations": 1500,
+      "learning_rate": 0.05,
+      "depth": 8,
+      "l2_leaf_reg": 5.0,
+      "random_seed": 42,
+      "random_strength": 1.0,
+      "od_type": "Iter",
+      "od_wait": 100,
+      "verbose": 100,
+      "thread_count": -1,
+      "allow_writing_files": false
+    },
+    "svd_components": 64,
+    "svd_explained_variance": 0.27592207900391796,
+    "dropped_columns": [],
+    "best_iteration": {
+      "salary_lower_rub": 617,
+      "salary_upper_rub": 613
+    },
+    "calibration": {
+      "method": "per-quantile additive shift of predicted log1p(salary), fitted on validation",
+      "apply": "log_pred = sort(sort(model.predict(X)) + shifts); rub = expm1(log_pred)",
+      "quantiles": [
+        0.25,
+        0.5,
+        0.75
+      ],
+      "shifts": {
+        "salary_lower_rub": [
+          -0.02258751925809932,
+          0.0038288545185505285,
+          0.042294486661505815
+        ],
+        "salary_upper_rub": [
+          -0.03601374630336274,
+          -4.0869400399934364e-05,
+          0.04051184673903396
+        ]
+      },
+      "rub_multipliers": {
+        "salary_lower_rub": [
+          0.977665668874944,
+          1.0038361939462233,
+          1.0432016424897055
+        ],
+        "salary_upper_rub": [
+          0.9646270333361521,
+          0.9999591314347427,
+          1.0413436461558647
+        ]
+      }
+    },
+    "optuna": null
+  },
+  "metrics": {
+    "note": "validation is used for early stopping, Optuna and calibration (calibrated validation metrics are ~ideal by construction); test is the unbiased estimate",
+    "per_quantile": [
+      {
+        "split": "validation",
+        "calibration": "raw",
+        "target": "salary_lower_rub",
+        "quantile": 0.25,
+        "n": 695,
+        "pinball_rub": 7600.654250773828,
+        "pinball_log": 0.0803494534772935,
+        "mae_rub": 23055.959065751773,
+        "mae_log": 0.21305453492329135,
+        "share_below": 0.302158273381295
+      },
+      {
+        "split": "validation",
+        "calibration": "raw",
+        "target": "salary_lower_rub",
+        "quantile": 0.5,
+        "n": 695,
+        "pinball_rub": 10423.15981060888,
+        "pinball_log": 0.09585189150579702,
+        "mae_rub": 20846.31962121776,
+        "mae_log": 0.19170378301159405,
+        "share_below": 0.48201438848920863
+      },
+      {
+        "split": "validation",
+        "calibration": "raw",
+        "target": "salary_lower_rub",
+        "quantile": 0.75,
+        "n": 695,
+        "pinball_rub": 10389.538017351626,
+        "pinball_log": 0.0828866618218477,
+        "mae_rub": 22923.732230922873,
+        "mae_log": 0.21226454509572326,
+        "share_below": 0.6776978417266187
+      },
+      {
+        "split": "validation",
+        "calibration": "calibrated",
+        "target": "salary_lower_rub",
+        "quantile": 0.25,
+        "n": 695,
+        "pinball_rub": 7556.793418029439,
+        "pinball_log": 0.07973199170079896,
+        "mae_rub": 23891.290604787217,
+        "mae_log": 0.22311337099935194,
+        "share_below": 0.2503597122302158
+      },
+      {
+        "split": "validation",
+        "calibration": "calibrated",
+        "target": "salary_lower_rub",
+        "quantile": 0.5,
+        "n": 695,
+        "pinball_rub": 10420.983117725807,
+        "pinball_log": 0.09581223928512511,
+        "mae_rub": 20841.966235451615,
+        "mae_log": 0.19162447857025022,
+        "share_below": 0.5007194244604316
+      },
+      {
+        "split": "validation",
+        "calibration": "calibrated",
+        "target": "salary_lower_rub",
+        "quantile": 0.75,
+        "n": 695,
+        "pinball_rub": 10229.561212144241,
+        "pinball_log": 0.08180010022500926,
+        "mae_rub": 24821.24120113268,
+        "mae_log": 0.23123866523279926,
+        "share_below": 0.7496402877697842
+      },
+      {
+        "split": "validation",
+        "calibration": "raw",
+        "target": "salary_upper_rub",
+        "quantile": 0.25,
+        "n": 558,
+        "pinball_rub": 10045.398225864068,
+        "pinball_log": 0.07416174593023891,
+        "mae_rub": 29590.810407218574,
+        "mae_log": 0.19758910908596944,
+        "share_below": 0.34946236559139787
+      },
+      {
+        "split": "validation",
+        "calibration": "raw",
+        "target": "salary_upper_rub",
+        "quantile": 0.5,
+        "n": 558,
+        "pinball_rub": 13572.520970732063,
+        "pinball_log": 0.08954809456407108,
+        "mae_rub": 27145.041941464126,
+        "mae_log": 0.17909618912814215,
+        "share_below": 0.5
+      },
+      {
+        "split": "validation",
+        "calibration": "raw",
+        "target": "salary_upper_rub",
+        "quantile": 0.75,
+        "n": 558,
+        "pinball_rub": 13056.517950733485,
+        "pinball_log": 0.07819634312202446,
+        "mae_rub": 29639.06776900948,
+        "mae_log": 0.1975663674910887,
+        "share_below": 0.6559139784946236
+      },
+      {
+        "split": "validation",
+        "calibration": "calibrated",
+        "target": "salary_upper_rub",
+        "quantile": 0.25,
+        "n": 558,
+        "pinball_rub": 9860.048870100225,
+        "pinball_log": 0.07256190946273247,
+        "mae_rub": 31276.169548722326,
+        "mae_log": 0.2123963093026379,
+        "share_below": 0.25089605734767023
+      },
+      {
+        "split": "validation",
+        "calibration": "calibrated",
+        "target": "salary_upper_rub",
+        "quantile": 0.5,
+        "n": 558,
+        "pinball_rub": 13572.56581298149,
+        "pinball_log": 0.08954809456407105,
+        "mae_rub": 27145.13162596298,
+        "mae_log": 0.1790961891281421,
+        "share_below": 0.5
+      },
+      {
+        "split": "validation",
+        "calibration": "calibrated",
+        "target": "salary_upper_rub",
+        "quantile": 0.75,
+        "n": 558,
+        "pinball_rub": 12714.738512680415,
+        "pinball_log": 0.0762848179591775,
+        "mae_rub": 31897.157423862525,
+        "mae_log": 0.2139992405349118,
+        "share_below": 0.7491039426523297
+      },
+      {
+        "split": "test",
+        "calibration": "raw",
+        "target": "salary_lower_rub",
+        "quantile": 0.25,
+        "n": 654,
+        "pinball_rub": 8415.658751256557,
+        "pinball_log": 0.08757120278315078,
+        "mae_rub": 25295.459979705487,
+        "mae_log": 0.22972107998396346,
+        "share_below": 0.3333333333333333
+      },
+      {
+        "split": "test",
+        "calibration": "raw",
+        "target": "salary_lower_rub",
+        "quantile": 0.5,
+        "n": 654,
+        "pinball_rub": 11348.877224479047,
+        "pinball_log": 0.1024190419461184,
+        "mae_rub": 22697.754448958094,
+        "mae_log": 0.2048380838922368,
+        "share_below": 0.4801223241590214
+      },
+      {
+        "split": "test",
+        "calibration": "raw",
+        "target": "salary_lower_rub",
+        "quantile": 0.75,
+        "n": 654,
+        "pinball_rub": 10994.425139587382,
+        "pinball_log": 0.08550419182708298,
+        "mae_rub": 23585.517743792334,
+        "mae_log": 0.21598576323202404,
+        "share_below": 0.6422018348623854
+      },
+      {
+        "split": "test",
+        "calibration": "calibrated",
+        "target": "salary_lower_rub",
+        "quantile": 0.25,
+        "n": 654,
+        "pinball_rub": 8327.457995455648,
+        "pinball_log": 0.08627468174049102,
+        "mae_rub": 26075.102813377966,
+        "mae_log": 0.23842179752769355,
+        "share_below": 0.28593272171253825
+      },
+      {
+        "split": "test",
+        "calibration": "calibrated",
+        "target": "salary_lower_rub",
+        "quantile": 0.5,
+        "n": 654,
+        "pinball_rub": 11338.186582595812,
+        "pinball_log": 0.10236721020038093,
+        "mae_rub": 22676.373165191624,
+        "mae_log": 0.20473442040076187,
+        "share_below": 0.4908256880733945
+      },
+      {
+        "split": "test",
+        "calibration": "calibrated",
+        "target": "salary_lower_rub",
+        "quantile": 0.75,
+        "n": 654,
+        "pinball_rub": 10725.633401898896,
+        "pinball_log": 0.0835031424897694,
+        "mae_rub": 25331.86916183714,
+        "mae_log": 0.23313090788814977,
+        "share_below": 0.7507645259938838
+      },
+      {
+        "split": "test",
+        "calibration": "raw",
+        "target": "salary_upper_rub",
+        "quantile": 0.25,
+        "n": 499,
+        "pinball_rub": 12313.976529734184,
+        "pinball_log": 0.08614789526156504,
+        "mae_rub": 37575.58210643441,
+        "mae_log": 0.23479251629560483,
+        "share_below": 0.3046092184368738
+      },
+      {
+        "split": "test",
+        "calibration": "raw",
+        "target": "salary_upper_rub",
+        "quantile": 0.5,
+        "n": 499,
+        "pinball_rub": 16567.08321738468,
+        "pinball_log": 0.10185529346344843,
+        "mae_rub": 33134.16643476936,
+        "mae_log": 0.20371058692689686,
+        "share_below": 0.4529058116232465
+      },
+      {
+        "split": "test",
+        "calibration": "raw",
+        "target": "salary_upper_rub",
+        "quantile": 0.75,
+        "n": 499,
+        "pinball_rub": 16645.570828881988,
+        "pinball_log": 0.08902371208302808,
+        "mae_rub": 35494.71487936809,
+        "mae_log": 0.21865685056019643,
+        "share_below": 0.6412825651302605
+      },
+      {
+        "split": "test",
+        "calibration": "calibrated",
+        "target": "salary_upper_rub",
+        "quantile": 0.25,
+        "n": 499,
+        "pinball_rub": 12203.167213736095,
+        "pinball_log": 0.08571500846192333,
+        "mae_rub": 39570.775854379805,
+        "mae_log": 0.25193361584800283,
+        "share_below": 0.23246492985971945
+      },
+      {
+        "split": "test",
+        "calibration": "calibrated",
+        "target": "salary_upper_rub",
+        "quantile": 0.5,
+        "n": 499,
+        "pinball_rub": 16567.357104501887,
+        "pinball_log": 0.1018572181746897,
+        "mae_rub": 33134.714209003774,
+        "mae_log": 0.2037144363493794,
+        "share_below": 0.4529058116232465
+      },
+      {
+        "split": "test",
+        "calibration": "calibrated",
+        "target": "salary_upper_rub",
+        "quantile": 0.75,
+        "n": 499,
+        "pinball_rub": 16205.8738992131,
+        "pinball_log": 0.08654065786553736,
+        "mae_rub": 37832.719898033116,
+        "mae_log": 0.23394666549473198,
+        "share_below": 0.7194388777555111
+      }
+    ],
+    "intervals": [
+      {
+        "split": "validation",
+        "calibration": "raw",
+        "target": "salary_lower_rub",
+        "n": 695,
+        "coverage_p25_p75": 0.37553956834532376,
+        "median_width_rub": 15311.908137439867,
+        "median_relative_width": 0.18835606985820008
+      },
+      {
+        "split": "validation",
+        "calibration": "calibrated",
+        "target": "salary_lower_rub",
+        "n": 695,
+        "coverage_p25_p75": 0.49928057553956834,
+        "median_width_rub": 21144.1983696603,
+        "median_relative_width": 0.257619974675171
+      },
+      {
+        "split": "validation",
+        "calibration": "raw",
+        "target": "salary_upper_rub",
+        "n": 558,
+        "coverage_p25_p75": 0.3064516129032258,
+        "median_width_rub": 18295.57368443763,
+        "median_relative_width": 0.16706045464012953
+      },
+      {
+        "split": "validation",
+        "calibration": "calibrated",
+        "target": "salary_upper_rub",
+        "n": 558,
+        "coverage_p25_p75": 0.4982078853046595,
+        "median_width_rub": 26959.967368071048,
+        "median_relative_width": 0.24474163815734562
+      },
+      {
+        "split": "test",
+        "calibration": "raw",
+        "target": "salary_lower_rub",
+        "n": 654,
+        "coverage_p25_p75": 0.308868501529052,
+        "median_width_rub": 16815.14474417379,
+        "median_relative_width": 0.201302854499692
+      },
+      {
+        "split": "test",
+        "calibration": "calibrated",
+        "target": "salary_lower_rub",
+        "n": 654,
+        "coverage_p25_p75": 0.4648318042813456,
+        "median_width_rub": 22233.255228493083,
+        "median_relative_width": 0.268570475228624
+      },
+      {
+        "split": "test",
+        "calibration": "raw",
+        "target": "salary_upper_rub",
+        "n": 499,
+        "coverage_p25_p75": 0.3366733466933868,
+        "median_width_rub": 24539.765030714916,
+        "median_relative_width": 0.19020051188017095
+      },
+      {
+        "split": "test",
+        "calibration": "calibrated",
+        "target": "salary_upper_rub",
+        "n": 499,
+        "coverage_p25_p75": 0.48697394789579157,
+        "median_width_rub": 34857.24723916821,
+        "median_relative_width": 0.2704203366270371
+      }
+    ]
+  },
+  "model_path": "ML/models/2026-11-05_083314_tfidf_catboost_quantile",
+  "input_schema_path": "ML/models/2026-11-05_083314_tfidf_catboost_quantile/input_schema.json",
+  "conclusion": null
+}
