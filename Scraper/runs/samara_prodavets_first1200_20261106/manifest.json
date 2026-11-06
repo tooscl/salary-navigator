@@ -1,0 +1,3563 @@
+{
+  "run_id": "samara_prodavets_first1200_20261106",
+  "dataset_id": "samara_prodavets_first1200_20261106",
+  "status": "complete",
+  "schema": {
+    "columns": [
+      "id",
+      "city",
+      "profession",
+      "segments",
+      "title",
+      "salary_raw",
+      "source_url",
+      "observed_at",
+      "description",
+      "location_observed",
+      "employer_name_observed",
+      "date_raw",
+      "views_total",
+      "views_today",
+      "listing_rank",
+      "listing_promoted",
+      "full_parameters_read",
+      "analysis_status",
+      "export_eligibility",
+      "read_status_parameters",
+      "read_status_description",
+      "read_status_location",
+      "read_limitations",
+      "enrichment_status",
+      "enriched_fields",
+      "enrichment_version",
+      "military",
+      "military_keywords",
+      "military_rule_version",
+      "city__source",
+      "city__evidence",
+      "city_anomaly",
+      "График",
+      "Занятость",
+      "Способ оформления",
+      "Частота выплат",
+      "Сфера деятельности компании",
+      "Что получают работники",
+      "Опыт работы",
+      "В том числе для кандидатов",
+      "Ассортимент",
+      "Смены",
+      "Медкнижка",
+      "Количество рабочих часов в день",
+      "С чем надо работать",
+      "Стажировка",
+      "Количество рабочих дней в неделю",
+      "Режим работы",
+      "Можно заканчивать в 17:00",
+      "Длительность вахты"
+    ],
+    "unknown_policy": "empty_not_zero"
+  },
+  "collection": {
+    "run_id": "samara_prodavets_first1200_20261106",
+    "geography": "Самара",
+    "profession": "Продавец",
+    "segments": "",
+    "filter_evidence": "Same-origin link visibly labeled Самара with observed href /samara, followed by visible Работа и подработка category; final page h1 Вакансии по профессии Продавец в Самаре; geography control Самара, район, метро; selected exact checkbox Продавец (name=Продавец,value=3235382,checked=true); search input empty; no other filters selected; default sorting unchanged.",
+    "listing_url": "https://www.avito.ru/samara/vakansii/prodavec-ASgBAgICAUTUzBHs~IoD?context=H4sIAAAAAAAA_wFMALP_YToyOntzOjg6ImZyb21QYWdlIjtzOjE1OiJzaG9ydGN1dHNXaWRnZXQiO3M6MToieSI7czoxNjoiWmRmZEkydHJPcmJyT1BPNSI7fSUkGPhMAAAA",
+    "listing_request_url": "https://www.avito.ru/samara/vakansii/prodavec-ASgBAgICAUTUzBHs~IoD?context=H4sIAAAAAAAA_wFMALP_YToyOntzOjg6ImZyb21QYWdlIjtzOjE1OiJzaG9ydGN1dHNXaWRnZXQiO3M6MToieSI7czoxNjoiWmRmZEkydHJPcmJyT1BPNSI7fSUkGPhMAAAA&localPriority=0",
+    "selected_controls": [
+      {
+        "label": "Продавец",
+        "marker": "params[144170]/checkbox/3235382",
+        "value": null
+      },
+      {
+        "label": "Продавец",
+        "marker": "params[144170]/checkbox/toggle",
+        "value": "3235382"
+      },
+      {
+        "label": "Неважно",
+        "marker": "params[172815]/all",
+        "value": null
+      },
+      {
+        "label": "Неважно",
+        "marker": "params[172815]/toggle",
+        "value": "all"
+      },
+      {
+        "label": "Неважно",
+        "marker": null,
+        "value": "all"
+      },
+      {
+        "label": "Все",
+        "marker": null,
+        "value": "all"
+      }
+    ],
+    "listing_sha256": "03fcd8a5e251bb9d0bdbac6e7dfed57098989ab523c7e90729ba23170ac4a153",
+    "profession_scope": null,
+    "profession_source": "observed_controls",
+    "listing_pages": [
+      {
+        "file": "listing_pages/0001.json",
+        "sha256": "03fcd8a5e251bb9d0bdbac6e7dfed57098989ab523c7e90729ba23170ac4a153",
+        "source_url": "https://www.avito.ru/samara/vakansii/prodavec-ASgBAgICAUTUzBHs~IoD?context=H4sIAAAAAAAA_wFMALP_YToyOntzOjg6ImZyb21QYWdlIjtzOjE1OiJzaG9ydGN1dHNXaWRnZXQiO3M6MToieSI7czoxNjoiWmRmZEkydHJPcmJyT1BPNSI7fSUkGPhMAAAA"
+      },
+      {
+        "file": "listing_pages/0002.json",
+        "sha256": "c7520427ef08fd305d5b58a90a7ec1c00fa6d407993d32c5f8cf5912601a09ac",
+        "source_url": "https://www.avito.ru/samara/vakansii/prodavec-ASgBAgICAUTUzBHs~IoD?context=H4sIAAAAAAAA_wFMALP_YToyOntzOjg6ImZyb21QYWdlIjtzOjE1OiJzaG9ydGN1dHNXaWRnZXQiO3M6MToieSI7czoxNjoiSWVBd0hoS2N2amN6ZjN5QyI7fXOwQ4pMAAAA&p=2"
+      },
+      {
+        "file": "listing_pages/0003.json",
+        "sha256": "9ddec3ef3f3de5bb13361b59fe2014cb3c3dc475b0ec8e00b4f786ef5a94c157",
+        "source_url": "https://www.avito.ru/samara/vakansii/prodavec-ASgBAgICAUTUzBHs~IoD?context=H4sIAAAAAAAA_wFMALP_YToyOntzOjg6ImZyb21QYWdlIjtzOjE1OiJzaG9ydGN1dHNXaWRnZXQiO3M6MToieSI7czoxNjoiSWVBd0hoS2N2amN6ZjN5QyI7fXOwQ4pMAAAA&p=3"
+      },
+      {
+        "file": "listing_pages/0004.json",
+        "sha256": "562bbf140e0813a8472db58586a415964b00805ae9e6c0aee4cc357a62755f41",
+        "source_url": "https://www.avito.ru/samara/vakansii/prodavec-ASgBAgICAUTUzBHs~IoD?context=H4sIAAAAAAAA_wFMALP_YToyOntzOjg6ImZyb21QYWdlIjtzOjE1OiJzaG9ydGN1dHNXaWRnZXQiO3M6MToieSI7czoxNjoiSWVBd0hoS2N2amN6ZjN5QyI7fXOwQ4pMAAAA&p=4"
+      },
+      {
+        "file": "listing_pages/0005.json",
+        "sha256": "325fa0bd0e3595743a4178845ce3a631517030b7d12547bcc6471c8ef69bd530",
+        "source_url": "https://www.avito.ru/samara/vakansii/prodavec-ASgBAgICAUTUzBHs~IoD?context=H4sIAAAAAAAA_wFMALP_YToyOntzOjg6ImZyb21QYWdlIjtzOjE1OiJzaG9ydGN1dHNXaWRnZXQiO3M6MToieSI7czoxNjoiSWVBd0hoS2N2amN6ZjN5QyI7fXOwQ4pMAAAA&p=5"
+      },
+      {
+        "file": "listing_pages/0006.json",
+        "sha256": "61371a9f7642f4dc30c6787273427d9ea161347a6064d94d667c768c07bfba9a",
+        "source_url": "https://www.avito.ru/samara/vakansii/prodavec-ASgBAgICAUTUzBHs~IoD?context=H4sIAAAAAAAA_wFMALP_YToyOntzOjg6ImZyb21QYWdlIjtzOjE1OiJzaG9ydGN1dHNXaWRnZXQiO3M6MToieSI7czoxNjoiSWVBd0hoS2N2amN6ZjN5QyI7fXOwQ4pMAAAA&p=6"
+      },
+      {
+        "file": "listing_pages/0007.json",
+        "sha256": "4abc7aaca789a0a1e435d257fa2d25f399b0331a0ed4bfd86614db4b1a42c8a8",
+        "source_url": "https://www.avito.ru/samara/vakansii/prodavec-ASgBAgICAUTUzBHs~IoD?context=H4sIAAAAAAAA_wFMALP_YToyOntzOjg6ImZyb21QYWdlIjtzOjE1OiJzaG9ydGN1dHNXaWRnZXQiO3M6MToieSI7czoxNjoiSWVBd0hoS2N2amN6ZjN5QyI7fXOwQ4pMAAAA&p=7"
+      },
+      {
+        "file": "listing_pages/0008.json",
+        "sha256": "9768e35d710cb168f10bb52170db1b6f8aaba428c68ea7a683f3806b06114c40",
+        "source_url": "https://www.avito.ru/samara/vakansii/prodavec-ASgBAgICAUTUzBHs~IoD?context=H4sIAAAAAAAA_wFMALP_YToyOntzOjg6ImZyb21QYWdlIjtzOjE1OiJzaG9ydGN1dHNXaWRnZXQiO3M6MToieSI7czoxNjoiSWVBd0hoS2N2amN6ZjN5QyI7fXOwQ4pMAAAA&p=8"
+      }
+    ],
+    "selection_mode": "first_N_unique_on_frozen_listing",
+    "limit": 362,
+    "requested_all_pages": false,
+    "saved_selection_authorization": null,
+    "requested_limit": 1200,
+    "available_unique": 362,
+    "listing_end_reason": "confirmed_end",
+    "available_listing_exhausted": true,
+    "continuation": null,
+    "branch_only": false,
+    "max_pages": null,
+    "candidate_limit": null,
+    "created_at": "2026-11-05T22:36:10.146276+00:00",
+    "instruction_version": "1.8.0",
+    "extractor_sha256": "f58b1a87a67a588aa4c1d22ab9a387824e37f8f97aa8ba0099396397d5492880",
+    "instruction_sha256": "108afbd3100be081299c83b61388640c6ff86729b48a696faaff1a3c0d99bf28",
+    "code_git_commit": "fba883d17a813a9b0467fd00907fef1cc921fcb4",
+    "setup_seconds": 41.51090240001213,
+    "live_route_verified": false,
+    "execution_model": "gpt-6-luna",
+    "automation_sha256": {
+      "Scraper/skills/collect-avito/references/top-professions.json": "ec283ea09c0b283fca77bbf4c9818facf99410bc572018acd2f357f4107f83de",
+      "utils/title_flags.py": "6fd8d2cf699b7c417fa69453cb4d7e37c2ff3c47832668335649d1d911db9160",
+      "Scraper/extract.js": "f58b1a87a67a588aa4c1d22ab9a387824e37f8f97aa8ba0099396397d5492880",
+      "Scraper/skills/collect-avito/SKILL.md": "108afbd3100be081299c83b61388640c6ff86729b48a696faaff1a3c0d99bf28",
+      "Scraper/skills/collect-avito/scripts/run.py": "252f4f556d119361762b5c4a2997f2754583285a55b1f2c50018b5f6ffdfb859",
+      "Scraper/skills/collect-avito/scripts/sweep_mode.py": "c9503c211bfc09e90761fa6c33c7862ef50f4f93b42a916d43c2373a4f9fe73d",
+      "Scraper/skills/collect-avito/scripts/browser_batch.js": "adc9527827d113de645573c84fb9c1cba3ea370289ae44b6e57a9d4d2706f23e",
+      "Scraper/skills/collect-avito/scripts/check_capture.py": "530f984a99217860ca30c90b87e38c533283c37853ed90be02d139ee48e82505",
+      "Scraper/skills/collect-avito/scripts/failure_log.py": "6a31147cc3fefe08c2e04072b6342f60ca898c1a641d57dc3e3fb4c9ab307f54",
+      "Scraper/skills/collect-avito/scripts/preflight.py": "f0256513b5fc1e08c634db2786ad201bf3ab8ccdc24e150aea5466bfc603c7fc"
+    },
+    "uncommitted_automation_files": [
+      "Scraper/skills/collect-avito/references/top-professions.json",
+      "utils/title_flags.py",
+      "Scraper/extract.js",
+      "Scraper/skills/collect-avito/SKILL.md",
+      "Scraper/skills/collect-avito/scripts/run.py",
+      "Scraper/skills/collect-avito/scripts/sweep_mode.py",
+      "Scraper/skills/collect-avito/scripts/browser_batch.js",
+      "Scraper/skills/collect-avito/scripts/check_capture.py",
+      "Scraper/skills/collect-avito/scripts/failure_log.py",
+      "Scraper/skills/collect-avito/scripts/preflight.py"
+    ],
+    "city_anomaly_policy": "blank"
+  },
+  "coverage": {
+    "planned": 362,
+    "accepted": 362,
+    "unavailable": [],
+    "unresolved_observations": [],
+    "deduplication": null,
+    "sweep": null,
+    "unique_ids": [
+      "8489640362",
+      "8190862474",
+      "8263878072",
+      "8044770510",
+      "8189957980",
+      "3256286482",
+      "4343656106",
+      "8126991544",
+      "8083556824",
+      "2581395409",
+      "8575025472",
+      "8452435667",
+      "2301691457",
+      "8421492487",
+      "4236346223",
+      "8211583014",
+      "7667286865",
+      "8441915015",
+      "8470668389",
+      "8423266868",
+      "8364592970",
+      "8482304443",
+      "8514782009",
+      "8609493486",
+      "8453668915",
+      "8515316670",
+      "8000094307",
+      "8358666547",
+      "2555870590",
+      "8281503524",
+      "8171087918",
+      "8511950069",
+      "4598693250",
+      "8346869389",
+      "8372403818",
+      "8445037616",
+      "4103774181",
+      "8216960957",
+      "4229242842",
+      "8270826479",
+      "8556951131",
+      "8413342441",
+      "8400847801",
+      "7300481180",
+      "8350932476",
+      "7677890465",
+      "8278734009",
+      "8398162811",
+      "8401458876",
+      "4292086216",
+      "8335598584",
+      "3015744638",
+      "7764392375",
+      "8257582912",
+      "8320004297",
+      "2938004644",
+      "4483869446",
+      "8383571361",
+      "2977484288",
+      "8258601316",
+      "8490639198",
+      "8193744790",
+      "7288377192",
+      "8315765519",
+      "8370553412",
+      "8197436732",
+      "7692198580",
+      "8405444773",
+      "8312125788",
+      "4164687852",
+      "2025189642",
+      "8438338876",
+      "2715155059",
+      "2679824883",
+      "8274478783",
+      "8103997235",
+      "8264513998",
+      "4069099293",
+      "3324866078",
+      "8450697882",
+      "8302339464",
+      "8431788571",
+      "7436480304",
+      "4105299265",
+      "8439459599",
+      "8133111708",
+      "7353844164",
+      "3447086437",
+      "8197818517",
+      "8135821122",
+      "8386621497",
+      "8334752935",
+      "7259785620",
+      "8449071908",
+      "7268112673",
+      "8373429718",
+      "7640484383",
+      "7843418589",
+      "8557356368",
+      "8423321140",
+      "8448166010",
+      "2778006329",
+      "4720022367",
+      "8421944091",
+      "8239591795",
+      "8289813622",
+      "8440031853",
+      "8343996884",
+      "8485423884",
+      "8222220010",
+      "8414066980",
+      "8376810093",
+      "8306261129",
+      "7756693732",
+      "8174461696",
+      "8370316469",
+      "8321477589",
+      "1810158914",
+      "8503530944",
+      "8544049264",
+      "8423427865",
+      "8422639289",
+      "8331949149",
+      "8355733940",
+      "3551432922",
+      "8236774843",
+      "7986722914",
+      "3148358167",
+      "8312605708",
+      "8193265652",
+      "8390739760",
+      "8440766026",
+      "8466970386",
+      "4069036524",
+      "8470218575",
+      "4771959446",
+      "8372052439",
+      "8141894770",
+      "7512308398",
+      "8408553129",
+      "8514576448",
+      "7803815035",
+      "8458872910",
+      "8517017026",
+      "8482810213",
+      "8485150469",
+      "3879726476",
+      "8401594327",
+      "2490416963",
+      "8513832786",
+      "8574854544",
+      "8382219445",
+      "8283748725",
+      "8448581555",
+      "8463727630",
+      "8469951524",
+      "7576138191",
+      "4260470621",
+      "8483435577",
+      "8514555898",
+      "8424927309",
+      "8431465876",
+      "8390277251",
+      "8471045516",
+      "8481412823",
+      "8400332308",
+      "8575531894",
+      "8445442258",
+      "8347481472",
+      "8331983526",
+      "8338183304",
+      "8575110532",
+      "8368591370",
+      "8368552763",
+      "8459606780",
+      "8452562376",
+      "778576838",
+      "8387857284",
+      "8259641806",
+      "8498848463",
+      "8364370128",
+      "8381038441",
+      "8436899603",
+      "8340142267",
+      "8364110795",
+      "8459057814",
+      "8416854258",
+      "8483675078",
+      "8328741377",
+      "8366253313",
+      "8441015497",
+      "8382552988",
+      "2355674106",
+      "8420434007",
+      "8512503496",
+      "8489853083",
+      "8442130940",
+      "8400585246",
+      "8503417951",
+      "8420686069",
+      "8408812057",
+      "8420722511",
+      "8200118884",
+      "8490778093",
+      "8372164832",
+      "8431155494",
+      "7843751524",
+      "8264108615",
+      "8451138882",
+      "8499561893",
+      "8369328990",
+      "8577337227",
+      "8369477513",
+      "8407969574",
+      "8459191599",
+      "8470146191",
+      "7843091501",
+      "8347614977",
+      "8331971946",
+      "8441246758",
+      "8515426943",
+      "8367903448",
+      "8408032479",
+      "8401130381",
+      "8420552182",
+      "8441169535",
+      "8499526120",
+      "8382460936",
+      "8545185403",
+      "7939396255",
+      "8431553880",
+      "8437874989",
+      "7843827740",
+      "8368684420",
+      "8521540484",
+      "7939226028",
+      "8347583352",
+      "8489042635",
+      "8366351614",
+      "8400948294",
+      "8413657195",
+      "8544473627",
+      "8470648905",
+      "8556917925",
+      "8328206397",
+      "8408591754",
+      "8470188279",
+      "8398197637",
+      "8490440096",
+      "8521036808",
+      "8423001283",
+      "8337918265",
+      "8471126599",
+      "8452190182",
+      "8347562966",
+      "8470607262",
+      "8482209664",
+      "8483549762",
+      "8467511784",
+      "8471079822",
+      "8347888439",
+      "8469921578",
+      "8491549633",
+      "8457895823",
+      "8423628732",
+      "8404844133",
+      "8445037297",
+      "8366400508",
+      "8490464155",
+      "7843190776",
+      "8422063521",
+      "8457891144",
+      "7939743702",
+      "8398525730",
+      "8441227758",
+      "8369387416",
+      "8369353570",
+      "8414820406",
+      "8423707240",
+      "8438786973",
+      "8470211478",
+      "8557389239",
+      "8408797457",
+      "8390015939",
+      "8490060310",
+      "8414055527",
+      "8463219526",
+      "8259059319",
+      "7939551193",
+      "8035177305",
+      "8398028594",
+      "7939859705",
+      "8259025094",
+      "8514311709",
+      "7843319300",
+      "7939401879",
+      "8413629565",
+      "8388571753",
+      "7939690986",
+      "8531233782",
+      "8445728626",
+      "8391582766",
+      "8388698275",
+      "8296453000",
+      "8417975786",
+      "8382288789",
+      "8482033522",
+      "8355839737",
+      "8259169705",
+      "8315431536",
+      "8459507557",
+      "8515694679",
+      "8347448808",
+      "7939023528",
+      "8521043293",
+      "8514935273",
+      "8401566276",
+      "8364028802",
+      "8531392068",
+      "8259831117",
+      "8410287584",
+      "8521027745",
+      "8423688256",
+      "8379979356",
+      "8522187183",
+      "8513872974",
+      "8482136933",
+      "8337964830",
+      "8522786528",
+      "8503694813",
+      "8440303085",
+      "8609350822",
+      "8391312693",
+      "8483455727",
+      "8402726454",
+      "8576660110",
+      "8503495370",
+      "8606861379",
+      "8459722705",
+      "8459487121",
+      "8545069618",
+      "8399729664",
+      "8338564270",
+      "8431248677",
+      "8469130800",
+      "8463661809",
+      "8399894975",
+      "8400351026",
+      "8423153379",
+      "8414384170",
+      "8517358978",
+      "8360186737",
+      "8471130861",
+      "8413856162",
+      "8575530052",
+      "7356604224",
+      "8268007105",
+      "3422681923",
+      "3223621416",
+      "3481074502",
+      "8268595681",
+      "8123977937"
+    ],
+    "errors": [],
+    "partial": null,
+    "limitations": [
+      "Visible rendered parameters only; enrichment not run; placement on site; live route unverified"
+    ]
+  },
+  "timing": {
+    "setup_seconds": 41.51090240001213,
+    "capture_seconds": 469.0105757000856,
+    "review_export_seconds": 3.7187301000813022,
+    "publication_seconds": null
+  },
+  "review_model": "gpt-6.1-terra",
+  "automation_changes": [
+    {
+      "file": "Scraper/skills/collect-avito/references/vacancy-entry-routes.md",
+      "reason": "Record the observed Samara fallback route and profession-filtered URL after the geography autocomplete rejected exact and qualified input.",
+      "validation": "Read the live UI evidence: same-origin /samara regional link, visible Работа и подработка category, final h1/geography/checked profession/empty search; parsed companion JSON with python -m json.tool."
+    },
+    {
+      "file": "Scraper/skills/collect-avito/references/vacancy-entry-routes.json",
+      "reason": "Add machine-readable Samara route evidence while preserving its profession-filtered scope.",
+      "validation": "Parsed with python -m json.tool; values match the live UI evidence and exact observed filtered URL."
+    }
+  ],
+  "profession_correction": null,
+  "post_capture_automation_sha256": {},
+  "files": {
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\exports\\vacancies.json": {
+      "bytes": 1588571,
+      "sha256": "2da75a71416ef7c36487cbc8d302e07625c28b028c8f9ca03326e2fc6fdd3565"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\exports\\vacancies_flat.csv": {
+      "bytes": 1120812,
+      "sha256": "3af7cca40c1493bf5b64015f02246736e1398e4ccc3fa95544bffa6dc17fef34"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\exports\\validation.json": {
+      "bytes": 197,
+      "sha256": "c1798573db69e56ebf84ed7ce94103379b8da8f8bb6d6db1896d8e5e9baa7f3b"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\listing.json": {
+      "bytes": 50307,
+      "sha256": "03fcd8a5e251bb9d0bdbac6e7dfed57098989ab523c7e90729ba23170ac4a153"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\listing_pages\\0001.json": {
+      "bytes": 50307,
+      "sha256": "03fcd8a5e251bb9d0bdbac6e7dfed57098989ab523c7e90729ba23170ac4a153"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\listing_pages\\0002.json": {
+      "bytes": 50740,
+      "sha256": "c7520427ef08fd305d5b58a90a7ec1c00fa6d407993d32c5f8cf5912601a09ac"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\listing_pages\\0003.json": {
+      "bytes": 50367,
+      "sha256": "9ddec3ef3f3de5bb13361b59fe2014cb3c3dc475b0ec8e00b4f786ef5a94c157"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\listing_pages\\0004.json": {
+      "bytes": 51167,
+      "sha256": "562bbf140e0813a8472db58586a415964b00805ae9e6c0aee4cc357a62755f41"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\listing_pages\\0005.json": {
+      "bytes": 51188,
+      "sha256": "325fa0bd0e3595743a4178845ce3a631517030b7d12547bcc6471c8ef69bd530"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\listing_pages\\0006.json": {
+      "bytes": 51562,
+      "sha256": "61371a9f7642f4dc30c6787273427d9ea161347a6064d94d667c768c07bfba9a"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\listing_pages\\0007.json": {
+      "bytes": 49214,
+      "sha256": "4abc7aaca789a0a1e435d257fa2d25f399b0331a0ed4bfd86614db4b1a42c8a8"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\listing_pages\\0008.json": {
+      "bytes": 33506,
+      "sha256": "9768e35d710cb168f10bb52170db1b6f8aaba428c68ea7a683f3806b06114c40"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\observations\\8574854544\\814694eed0d83e3fe9932465aa99a8b05c8cfe69209eb11a9c9a8dd4bb0dd43c.json": {
+      "bytes": 242,
+      "sha256": "814694eed0d83e3fe9932465aa99a8b05c8cfe69209eb11a9c9a8dd4bb0dd43c"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\observations\\8574854544\\814694eed0d83e3fe9932465aa99a8b05c8cfe69209eb11a9c9a8dd4bb0dd43c.provenance.json": {
+      "bytes": 636,
+      "sha256": "3683cd86b41ccecdd8c5b2e4094c150503a1ef8b74a54044ccde256999a66d9d"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\observations\\8574854544\\e927d6de610e793ab45c70e0c1fd532eceef2afa8c2dbb5806855b81bae2b675.json": {
+      "bytes": 242,
+      "sha256": "e927d6de610e793ab45c70e0c1fd532eceef2afa8c2dbb5806855b81bae2b675"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\observations\\8574854544\\e927d6de610e793ab45c70e0c1fd532eceef2afa8c2dbb5806855b81bae2b675.provenance.json": {
+      "bytes": 628,
+      "sha256": "52932a93fe730af6e7527ce36ffb6ec9e6dba3b56356694f3a3b9c93f74f007b"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\queue.json": {
+      "bytes": 175352,
+      "sha256": "c113673c500f107be6eeae5152eaead9bfd834a7517b144b3dfc84152fcaba06"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\1810158914.json": {
+      "bytes": 7107,
+      "sha256": "482ef84939182a1bc4cda1f760ca4b8b8e6f18e8fbd0b5017c5097af21a9dd4a"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\2025189642.json": {
+      "bytes": 9194,
+      "sha256": "b922720aa53f946420ec6bca657d453d615ba4220b8d34899af6bd03f31b621d"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\2301691457.json": {
+      "bytes": 12045,
+      "sha256": "22e7dba2ffa9f5fa177a18389abd7bc9143f7b233050a4ba26e4530fed79333c"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\2355674106.json": {
+      "bytes": 8896,
+      "sha256": "2794f8011f7d1d5e7c58bb31fcda396f902facea6124237926ea9ef6ab0ccb88"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\2490416963.json": {
+      "bytes": 5816,
+      "sha256": "cb2425c27a3a30555ae7233a6b071112772f4b5c9c7dc7b877c05efbcfb3d8e1"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\2555870590.json": {
+      "bytes": 10068,
+      "sha256": "ce7b341be7909cbebf854800306b649ed097150b0e9fbfd0b3717a8371c43c4c"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\2581395409.json": {
+      "bytes": 5869,
+      "sha256": "6d762812cbec8b12d262853e90d3b91beb866808226c01c0af9737039aa48742"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\2679824883.json": {
+      "bytes": 12200,
+      "sha256": "c074aaaea8b1fe990eef86bc18f63a3135cd8332f743721477781f73407cb836"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\2715155059.json": {
+      "bytes": 15105,
+      "sha256": "7d29b0f48139a08d1d2439aefd9271a2e8c069727332e3cce55d9ef507475796"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\2778006329.json": {
+      "bytes": 7971,
+      "sha256": "08e64753d30a894ab07983f5a0ce540bbabe44c80bcceaf309c0333e3477d6d0"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\2938004644.json": {
+      "bytes": 12017,
+      "sha256": "66edfc4bf35da7e66fae0f9090fa84e81fec4831d50967ac0fc31ac0403cf3fa"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\2977484288.json": {
+      "bytes": 8580,
+      "sha256": "d2471e1adfee7d2368c398d4fd192e71bcbd8a3f89190595585247053c8b5cde"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\3015744638.json": {
+      "bytes": 6350,
+      "sha256": "bf79c69d96e2d8c5d7437634d763493012f65fe8b0b3a23d9cc6f8347d3d0c5b"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\3148358167.json": {
+      "bytes": 5795,
+      "sha256": "0d4fabf324c2e1feae2d8faf2afc2c364cd98623b9c4a5693c8e779850b15aeb"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\3223621416.json": {
+      "bytes": 7187,
+      "sha256": "1993d0d6a78b1c2ebb9c6e936f9c68f43f0852643b229bc62444f0234164a5e1"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\3256286482.json": {
+      "bytes": 12105,
+      "sha256": "414ecadcb11f299b0c222ce400692c64d778f1a5270b0e50633ba61b8bd7004e"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\3324866078.json": {
+      "bytes": 12121,
+      "sha256": "c425ee54dfa4f724f914a7018c228459c5e9628d110ffcbd0d9faef1f9e52bd7"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\3422681923.json": {
+      "bytes": 6283,
+      "sha256": "93400b3c7137c8dc531bc7fd1e68c3ee4374f91d949f1a1200bdf8b589091a59"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\3447086437.json": {
+      "bytes": 7960,
+      "sha256": "98c565d36992f760ca8c7aeddb041b0b653971eda912079278df87530e6ce105"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\3481074502.json": {
+      "bytes": 8613,
+      "sha256": "cbcdcd3dcf83d43e621fb860ba78738068333d14db6dfa093ef5eb5a17b8d781"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\3551432922.json": {
+      "bytes": 10562,
+      "sha256": "430d79d624afe65279f2d6e8d40c4d3c589aeea12e98466902a8dd3031230fc4"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\3879726476.json": {
+      "bytes": 14044,
+      "sha256": "84b82115c7bfb735ce0befdc0dab0eb2698977be84d86d037d1cf8b2100e0177"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\4069036524.json": {
+      "bytes": 9490,
+      "sha256": "c9dd24db2695f2ba420860b87b14358dd9fa70630b6eb16d9e840f41e1d529f8"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\4069099293.json": {
+      "bytes": 10588,
+      "sha256": "c0cccef62bc03d38e151577b3d8ece52da60541bb86a492119b2615e70b95f8b"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\4103774181.json": {
+      "bytes": 9442,
+      "sha256": "74cd6bd4aed7b8bb4918f73fabacf3a62c34595fcc260496046c0fe9eb965b56"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\4105299265.json": {
+      "bytes": 9890,
+      "sha256": "a4a8a0343158d99658704bbc1f060d13d60a7180db86690aa9018b205e5379db"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\4164687852.json": {
+      "bytes": 9636,
+      "sha256": "e4911becc96c7cc4712455a1e5ae89e2c8349481e605b227302d669ef1893b13"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\4229242842.json": {
+      "bytes": 8906,
+      "sha256": "65a0de4d81e2f0d42e18464adbdbd007bfaa07f6896896fb875ea2a5438b56b0"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\4236346223.json": {
+      "bytes": 11512,
+      "sha256": "e6f77894239fdfd05d514fb356c7b1b86b53971fc9dd2e147a1bd5a914ad4595"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\4260470621.json": {
+      "bytes": 14668,
+      "sha256": "c96d2f12784212b808954594a8c0ce5d911b88a985f0e1ffb7a75aad53fc919e"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\4292086216.json": {
+      "bytes": 15323,
+      "sha256": "919fcae7f41392aa9d256c59d290950a0d2ecb356281786fe052cd0e08a96183"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\4343656106.json": {
+      "bytes": 12683,
+      "sha256": "664c92dd5788adf394ac0c96b9e7bc7649885ef2e1bab2b10681a5e48a7dfe7f"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\4483869446.json": {
+      "bytes": 14809,
+      "sha256": "65d36633512f337206b0b777e37e88d7a57bfc9b100cd644367c36b904fe1839"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\4598693250.json": {
+      "bytes": 16710,
+      "sha256": "1f89a995f88bf84d3a9f0cf0078cb795d243e1981d1f15a55198e8cfcfc1f464"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\4720022367.json": {
+      "bytes": 8423,
+      "sha256": "f32ed67c29884c23a91d9700c37ef89d7bb221a8a3bfbb3093c5ecb9e7bbf1e8"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\4771959446.json": {
+      "bytes": 15230,
+      "sha256": "40dee5144f5fa06345be76fbd85d0071948abffee41f0e530ed809b48a9cf6e7"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\7259785620.json": {
+      "bytes": 13462,
+      "sha256": "3e9717135c948f4944b1e854b22178831b64173315d15f845e56d63c29371ca2"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\7268112673.json": {
+      "bytes": 12101,
+      "sha256": "5d83b7a8d3eb025bb6dbc057b5e79118d1c18d6cb69245261870c0468e72da52"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\7288377192.json": {
+      "bytes": 14899,
+      "sha256": "d78fe56f9efad284062e5ba7c2f5ca8a66e0ef1cb993f6c166c01d1bf128ae39"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\7300481180.json": {
+      "bytes": 12030,
+      "sha256": "f17ca29a2454d21e150969c248c5b24fa1b1582d52a556696803102699bab6af"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\7353844164.json": {
+      "bytes": 5593,
+      "sha256": "20d380daefb311b1d3d8d93bf11858c9744644e0fef275086f4185da081cea02"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\7356604224.json": {
+      "bytes": 13159,
+      "sha256": "8790e1dc7c7eb8c7e9088edf5c7963b9d42cbc9146da8f8dfa20133dc0827172"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\7436480304.json": {
+      "bytes": 12369,
+      "sha256": "e331cd62fc52d042913213b216ae56815cfcf0cbee766579231f7441ae7d3d41"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\7512308398.json": {
+      "bytes": 14772,
+      "sha256": "45a30b58ce66f0c9b1ebbb218444a6f18d69fb0b8bb4ce827c8f548ac7d0005a"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\7576138191.json": {
+      "bytes": 14618,
+      "sha256": "75e72e99fe1d928dbb55581fabfbde73951d3d336cd4e307dadb3c1956b8e3c3"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\7640484383.json": {
+      "bytes": 8609,
+      "sha256": "021d763be044533981139b83b2aa99683b7b4714371d3fe8639dcbcbfedc16fd"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\7667286865.json": {
+      "bytes": 13650,
+      "sha256": "3bfb1ec79f9571301e30d44397709d956c8719039f6c7a46f97c76457a3a36ad"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\7677890465.json": {
+      "bytes": 16880,
+      "sha256": "705d7daf7d2422d7883ff5225e1ef4a851300b413f713860f2e6fde5d9278dc9"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\7692198580.json": {
+      "bytes": 9579,
+      "sha256": "3f337106b7e6a4bd8d92898b70b1e08ec3b479a2cb961e84ddf244c4a733a403"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\7756693732.json": {
+      "bytes": 20298,
+      "sha256": "9e35c3dde38add7436a80fa6d7992aa33c4f812ba61e9f78d4efbdc6a6490aeb"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\7764392375.json": {
+      "bytes": 12958,
+      "sha256": "ae0df639b801d09fd5ff202462d66c75bc4ba472642a5ac47001f2fa9a362a57"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\778576838.json": {
+      "bytes": 6233,
+      "sha256": "c1ee26e2471770be9abebf3cfb404d215ed78bb2a5bf27a4657754260f53b5db"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\7803815035.json": {
+      "bytes": 13324,
+      "sha256": "de553a5a1c9bdd41bf443a62d03aba551b8b799e8181bf91465b26d7ead6cdb9"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\7843091501.json": {
+      "bytes": 13903,
+      "sha256": "6e846a08f4d308724f167956a881416b8a7eb3ea6b52c71c82988cbe62fb8c9b"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\7843190776.json": {
+      "bytes": 13912,
+      "sha256": "8a1ba132bc7fe0aa4797e4c4c0990a2a245f359e1cfc991d651b0248c6d29af0"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\7843319300.json": {
+      "bytes": 14040,
+      "sha256": "86e226c80696e54faf1cf8ea51025975b6c104de6921b76b9365c70441d661d1"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\7843418589.json": {
+      "bytes": 14329,
+      "sha256": "a1330cd0fe43db39241fbbaf042ca9ffecc4b9cef2fe49ba406f345e7e7bb340"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\7843751524.json": {
+      "bytes": 13949,
+      "sha256": "27250cd61d9fd602f30323639e0224b5ccd3770236086eddb9388f7e2cf07738"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\7843827740.json": {
+      "bytes": 13672,
+      "sha256": "f3ef07a997e2774b9289468784a9f77fa4e509394082e5c9906b8a77a69dc76a"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\7939023528.json": {
+      "bytes": 13497,
+      "sha256": "fa968fc3adecf29565b724b9781f967de5dcd1606380cbc55f1019846cbb4500"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\7939226028.json": {
+      "bytes": 12296,
+      "sha256": "5a6c15b8e3dda771948a22da9830dd537457050aeeb2c93758231612548a62df"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\7939396255.json": {
+      "bytes": 12174,
+      "sha256": "200a60c67573ad821a64bd58f9f050dc79d1e78e62a60248f8aa39f13131d95a"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\7939401879.json": {
+      "bytes": 12709,
+      "sha256": "5a857ac3049d7f4f54ab9d17806ef3fab235e49c6931eb3c3829a4ff585b58cb"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\7939551193.json": {
+      "bytes": 12380,
+      "sha256": "afba1263ddc26b60078708179af1e53be07006268a0f3698c37888a9427d7733"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\7939690986.json": {
+      "bytes": 12045,
+      "sha256": "615cca0e8162533c4e592dc56f95553b896189e76aa8394b7bbd4627696e5f6b"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\7939743702.json": {
+      "bytes": 12469,
+      "sha256": "b662f5f6dd7f63fa2bdb45f76fdf78169524647d246c004653aeb06d4bb50aad"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\7939859705.json": {
+      "bytes": 12392,
+      "sha256": "8f4539616969009045bf4b09fe8122ed809590e47ad6831cb25bbce92c73ded2"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\7986722914.json": {
+      "bytes": 10871,
+      "sha256": "1a588ddbb5c6e4524a7214115a62bda3a3ea40111bf06f77e9b768945b2c18db"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8000094307.json": {
+      "bytes": 14349,
+      "sha256": "de542ab9ba8b2faeaa110be01beef609ee72c0b1ed452f136f49572d2f0d9c65"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8035177305.json": {
+      "bytes": 12244,
+      "sha256": "290612f0d41da1607fbc9ace57864e3d8270fd13f29ca9e054032e1c276957ca"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8044770510.json": {
+      "bytes": 7333,
+      "sha256": "785c887e27ade0e465fcf9c88025dc79cc66c53fcbea3ffa0c57d38c6328e2fe"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8083556824.json": {
+      "bytes": 9391,
+      "sha256": "e548ab4f23032158eab2b5864f38bcb80fc8d613cd514be587611b6f0509514d"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8103997235.json": {
+      "bytes": 8696,
+      "sha256": "cb853a256ede3b408e1aebc20919877794b583996b81faed8043d2de5a6d16a2"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8123977937.json": {
+      "bytes": 6696,
+      "sha256": "2b0154261ebc34116a2cef3d528d64c745ad859e9c7edb9cfe4b886498128e84"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8126991544.json": {
+      "bytes": 11143,
+      "sha256": "6b218bd6a6f63100461d278d11ca0adf754d500b745ac0af70a459133b04aa62"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8133111708.json": {
+      "bytes": 8182,
+      "sha256": "a80af85ebdb556908d959d13979672fb1783e8f66b732d819062b17122b8869f"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8135821122.json": {
+      "bytes": 12068,
+      "sha256": "6ca6a4ab621cb80f458a20d181dc80e23fb9e4f515d761d44ae58fdeeab8fc2a"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8141894770.json": {
+      "bytes": 11755,
+      "sha256": "38c2b29b24b8329a848843ca1364385bf68faf4ed08d76ffae6c239bdf189a68"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8171087918.json": {
+      "bytes": 12073,
+      "sha256": "a5873735a1b6ea8b43bca63c2ccf4cd1290f1354412a884b86e07c0d99a1ed12"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8174461696.json": {
+      "bytes": 10141,
+      "sha256": "394bb11e9cbc2b0fd5520c523af7b906e6f0f84b5df5780b5bd4430274d7f39b"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8189957980.json": {
+      "bytes": 14419,
+      "sha256": "2f542e0c4ffb5128c2da061ba7840493932bd7e97e9ed4fe0c5e3e09fc4d25c4"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8190862474.json": {
+      "bytes": 14378,
+      "sha256": "edc3d4ca3480f5e35271fdf4a72bfb4e3ef7bea7c25f5437f0c11d9d37d952c0"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8193265652.json": {
+      "bytes": 9632,
+      "sha256": "f794024874ee299a31d997a11180973d7e36a087a33949794a34eedc19a75b6d"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8193744790.json": {
+      "bytes": 9748,
+      "sha256": "0a097b27b1b57fe39cd42790cdea532085782543a81cee2918b2e94c35af16e8"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8197436732.json": {
+      "bytes": 9020,
+      "sha256": "c2dfd10b19c334cc6baaf9568f0f7aabc53657551070f7dea0bad1c49b5bf522"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8197818517.json": {
+      "bytes": 9530,
+      "sha256": "c583e32ac1d8bc3d445958f5fdb2039faf699dfa52b911746acb73115fe13847"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8200118884.json": {
+      "bytes": 16312,
+      "sha256": "c0ffcefedf162d969ce351111e6c97c87e1f6c4356051920f5462949f50aa7ec"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8211583014.json": {
+      "bytes": 14247,
+      "sha256": "1e613c78d4dbc95418feaa9bc51eec2ba995b51655c749895421438e4be86766"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8216960957.json": {
+      "bytes": 9780,
+      "sha256": "c1864df73b1079a5b3a9fcc098f990cd708e977d6cf967be291e2b1bde004d84"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8222220010.json": {
+      "bytes": 7801,
+      "sha256": "fe011350b3da69b1c1bfcd59754a31409984c762775519cb9a5bc7c2fa93d158"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8236774843.json": {
+      "bytes": 10458,
+      "sha256": "73df4aa7b600fe2dc42a2376710395cce5c79d724a0fbae4258d5ca75e7517d7"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8239591795.json": {
+      "bytes": 14984,
+      "sha256": "426f52e768690839992de93c8b69bbb673fcced9931147c9275c7b009cab87e8"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8257582912.json": {
+      "bytes": 12905,
+      "sha256": "8c5776eb216db6a40e0db95124e0e4ddfd5058e88f2aa610748280871c104105"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8258601316.json": {
+      "bytes": 11718,
+      "sha256": "a95f04502f10b7693a2f646dae480078fb4cc18f646f10b44f4f9bab8db8d7e5"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8259025094.json": {
+      "bytes": 11648,
+      "sha256": "382bbe13eae5e62676eb01223a58ea937f23e11b7606ae68dfdd159105c336ca"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8259059319.json": {
+      "bytes": 11653,
+      "sha256": "151697db1cac4a9403d65afd52be841f718b42ed7316c0f0afac1d7960bfa181"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8259169705.json": {
+      "bytes": 12311,
+      "sha256": "63d556965e87c896b9179b8eaa804937a6761c9b8523cc6212bc32593f5f0717"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8259641806.json": {
+      "bytes": 12256,
+      "sha256": "7e494f23beb4d49be9d318a8ecea35a6503720ac0570631d99d3291ec99ff7d2"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8259831117.json": {
+      "bytes": 12222,
+      "sha256": "a5c37e7ebd581757263655dda328c2800ac2d128660d5f50eb4cd450429dec4a"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8263878072.json": {
+      "bytes": 15106,
+      "sha256": "798caffad2d09177e27f19052178a310f2cfe941839d0a8e2fc5a0b51309e1a7"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8264108615.json": {
+      "bytes": 12431,
+      "sha256": "974945ad03001c43d9c044d433dc40320d86a4e1b868afb354d4021ab226a493"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8264513998.json": {
+      "bytes": 14920,
+      "sha256": "4f9bad81796ca7410486dfdefc650a7922e5a8415d9196569b7276bcba9c04ab"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8268007105.json": {
+      "bytes": 10666,
+      "sha256": "a270fbe9ac26ecb1faaa9baaddd08c3c51fec8894730130b7873db46e5aa16f3"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8268595681.json": {
+      "bytes": 12332,
+      "sha256": "861c7e63a3ad884485a80e6d2c6defc70d5320d7903a753c25613add7197c629"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8270826479.json": {
+      "bytes": 8015,
+      "sha256": "6863ebabdc7461b23f80a57d60e5548cccb11d79a68c3668c3e710fa0a1a31fa"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8274478783.json": {
+      "bytes": 16321,
+      "sha256": "398e88c6c96786bd659cb64b8a6a7aa7be58bed23cfc688fe4961c7a5c0d875c"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8278734009.json": {
+      "bytes": 10537,
+      "sha256": "b859c2a57f3c842a48651d7f45e9a5789b77e89a1f544d7e959b7f0409989c44"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8281503524.json": {
+      "bytes": 10487,
+      "sha256": "2647e5663cd2df6878c9e2617f78c42b1cc55b7a4bbac132d07e06d4905f3897"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8283748725.json": {
+      "bytes": 12168,
+      "sha256": "2539a6e22c3b915d40cf556bc657710c5dc997da23755995754f0effeb78ba45"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8289813622.json": {
+      "bytes": 14402,
+      "sha256": "980bc73835c1968564dcd559717f81c8282a2b53f0c9af61a3b4c883ccf3dff3"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8296453000.json": {
+      "bytes": 15235,
+      "sha256": "0406c140225439c8827a1cce130902c6904d876213217acae60c3c08bee3fbfa"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8302339464.json": {
+      "bytes": 9350,
+      "sha256": "5623e870298a31e74f1d6d2a16e8a792deaa26ea2905946c183f6a33449372f7"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8306261129.json": {
+      "bytes": 14060,
+      "sha256": "c9736d8ea5297b3d7cc5028cbe420e32e44146f91521e6670f601fc558330551"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8312125788.json": {
+      "bytes": 8542,
+      "sha256": "ee721313338351d05ec1bf5e6d0e087f20a489e4bdf60c97f042a7db6806f28e"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8312605708.json": {
+      "bytes": 7301,
+      "sha256": "6c5acf84be042889629c80e191e1237c6f9c6a2c3c79c898cf5991b78fab1716"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8315431536.json": {
+      "bytes": 14269,
+      "sha256": "68b299c785f7f119df54c9903f8f3037c2b9a29bdcf0bd8ff8fb6e10786adb40"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8315765519.json": {
+      "bytes": 10439,
+      "sha256": "49b16c45588850b6131844ad5327001c60770d3e085b95d4b4d08da726ecec72"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8320004297.json": {
+      "bytes": 19457,
+      "sha256": "26a7c27f54d1af7f64b89719a80a38e146726248cdb294d93c2c3d8ea8c9a867"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8321477589.json": {
+      "bytes": 14334,
+      "sha256": "79736013d2dd1830066425223821d781898896e5b2c1bea4dfa76fc1ef94ff43"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8328206397.json": {
+      "bytes": 13225,
+      "sha256": "7460ce49b6365b2e5d024f5c6fe351210c53be5ec370a7c35eb8822f329c7e68"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8328741377.json": {
+      "bytes": 9536,
+      "sha256": "8b3316f36adf1f95a15550297ebb10216dcae790bb3ccd3cebf296d9ae968b23"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8331949149.json": {
+      "bytes": 9526,
+      "sha256": "eaeea6795d8a88344f1709c527393b686301ba911256b808e5aaa2e815d9e829"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8331971946.json": {
+      "bytes": 13158,
+      "sha256": "b48366408dc0873806154c773cab6afd7c8c73062ddbae758f1505bf55033e04"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8331983526.json": {
+      "bytes": 11783,
+      "sha256": "84d1adbab82ec0cbace6e707eaecc72cc1e07f2b0e90f0114940083aa59d9809"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8334752935.json": {
+      "bytes": 11689,
+      "sha256": "44dff8d00e21b63644452acac9d820021843cddd4f1cd31f4797a128f9f11e12"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8335598584.json": {
+      "bytes": 13979,
+      "sha256": "ea9d11c450ce0b4fe8fa110f7d75bd99cf4445480317292007b3be132e1361e3"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8337918265.json": {
+      "bytes": 13356,
+      "sha256": "f47622c2416b6367c24410c1bbaadcec5df99511af81c732dd546d8278c9ff65"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8337964830.json": {
+      "bytes": 13686,
+      "sha256": "e0f6f3af4865c89a47b54e81373c566fc06d49d9cf6f672f51d26882103069cb"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8338183304.json": {
+      "bytes": 14597,
+      "sha256": "290ee65e6ca874b8851216de37894db3a4fedf00d4ca6ad048208e39431e4fca"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8338564270.json": {
+      "bytes": 13828,
+      "sha256": "4b4c8ddfa4c6f06725e23fa3c16b58c9cacfafedf49dd47b57f1de6e92265e9e"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8340142267.json": {
+      "bytes": 17542,
+      "sha256": "ec1a8a62e962f3057ddc26f8f0b10c764c4092a851f27340e268d6984f5a7a91"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8343996884.json": {
+      "bytes": 8444,
+      "sha256": "ea2ba2135cd51031a9f7d2e97e22cbec908a33bbdce6d226763e1d3cab14b260"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8346869389.json": {
+      "bytes": 11087,
+      "sha256": "f8521563d34ec6c7f016a980c249b7b6ad6bc6249e01ec0e0fa0d4b8ca5485d6"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8347448808.json": {
+      "bytes": 12192,
+      "sha256": "d7338fb71cb60c1e3fe87d551abb0e00720c6ed8abee279ba64ff5ccb4d967a2"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8347481472.json": {
+      "bytes": 8772,
+      "sha256": "bd8e4b19a3098dbd58be89e2ce2204cf34d6a457dc09482db506166dd99c28f5"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8347562966.json": {
+      "bytes": 13353,
+      "sha256": "0a81a79b8112c4cb0c3662ee1edc4f3c65628b719a98665d04b84270c6279663"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8347583352.json": {
+      "bytes": 13325,
+      "sha256": "a5726380dede0345a8a17b66487f917ad8323f83d2c53d8db62fe4d460e10d68"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8347614977.json": {
+      "bytes": 8411,
+      "sha256": "2798f406770a263e77ffac2be3a9c1a598fa041e4eb3c1ae0d32bafdf79d34c5"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8347888439.json": {
+      "bytes": 13463,
+      "sha256": "8ce4e08b5d2e08b9f28e3439720a3d760b7b24b232f412f31d714e3dc52a8172"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8350932476.json": {
+      "bytes": 14682,
+      "sha256": "3dbd828eaa50362f8ee7584fe196a00b9a4683c75968a2cf07205b2e3f4f03c5"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8355733940.json": {
+      "bytes": 12529,
+      "sha256": "495e74950f76c86d5b488a6db3682ff4604815bf16c1a102c49aaa7be24a7a66"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8355839737.json": {
+      "bytes": 12238,
+      "sha256": "5bb42884e572bd335c69a536ddcb291284f74a8ebf6a08997e75d27eb4b322ad"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8358666547.json": {
+      "bytes": 10545,
+      "sha256": "94137228f58a276ac687019e30f764a1ec4a8ab5e3714f8282f7d014d31bfe4d"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8360186737.json": {
+      "bytes": 12340,
+      "sha256": "ccd2530e93aa863eb799129d30d8591db7240118754e3298c5c0bd3120238c55"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8364028802.json": {
+      "bytes": 11477,
+      "sha256": "ee85836423ad69099cffd75839900e0f891cf3d720e88c969bc64a6a591545cf"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8364110795.json": {
+      "bytes": 13170,
+      "sha256": "6c83c5bb314700d714e581ebc49d4e6ac75259c2ccca541c77dc4b7497b9c10a"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8364370128.json": {
+      "bytes": 4778,
+      "sha256": "9397a26decda26c4c5fa615962f026b2717ad034c0d6dada2ac9b6d089cfcb12"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8364592970.json": {
+      "bytes": 10379,
+      "sha256": "e9226356a7abb90572c2c9edd2ea0add7bd9a24675e2a83ba73416f925d18c21"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8366253313.json": {
+      "bytes": 13171,
+      "sha256": "80db92017fa51cdaf9ce1e90e065d3e8d1be7cc94875c3508438d8c4c3bc923c"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8366351614.json": {
+      "bytes": 11792,
+      "sha256": "3d3a7806adbbc0914cb8906f0aef85ca29a3cbb3e294798b8386925f18ed6eb3"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8366400508.json": {
+      "bytes": 13345,
+      "sha256": "c4bd3d8a1d23d19d045e4ea7f74201cd014486ebb11bb098e6cd93d1ba1191b6"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8367903448.json": {
+      "bytes": 13122,
+      "sha256": "30a0c89c48f87e557bd666a457151278b2f7fe9c4461b0d98711155c718ea380"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8368552763.json": {
+      "bytes": 8424,
+      "sha256": "43561800bab6bdcd1d86e7c9848fd0d974ea602d66d49f1f92bceb90362acb35"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8368591370.json": {
+      "bytes": 9343,
+      "sha256": "fafe9f36330944fff38db16eb301a3861c7921214a054d820898221d7ec6896d"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8368684420.json": {
+      "bytes": 11843,
+      "sha256": "8796e215361f6b2a3ba040a5b2dd18f3aa85ff4dbcca019acbcdec80a5d86cd3"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8369328990.json": {
+      "bytes": 15098,
+      "sha256": "9dceb249be2aaa223a451d6e6473ebdbdfe5a3cb3cbb73be3826b9a98489b783"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8369353570.json": {
+      "bytes": 13280,
+      "sha256": "50618e159029f83093beb583131f87859aac3c0cc1be6f9a74194c4a610b9b12"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8369387416.json": {
+      "bytes": 13238,
+      "sha256": "ab5e84cb11b211822bcce294a811aecf10dba5f2cc5d88eee0f68229561eae52"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8369477513.json": {
+      "bytes": 8274,
+      "sha256": "cb2d3f61931c58dee97e659f9fb590a9a664f0063905337380efc150615fb153"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8370316469.json": {
+      "bytes": 13485,
+      "sha256": "12a703764bc7aa0f931d2e29fa32f948d571ba066e78c6bef42862efa48a614f"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8370553412.json": {
+      "bytes": 16283,
+      "sha256": "fe850eab65c7522f60acbaeb4d0888ccf981b73c92e012108ca25dff205e5908"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8372052439.json": {
+      "bytes": 6898,
+      "sha256": "c3f6391f564ee067e7126716372d0b054b2b58fc3a5c3df382a5de7024b314eb"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8372164832.json": {
+      "bytes": 11584,
+      "sha256": "cbf830d396caf4975a9b94e169cbe1c6a46bb7c0ea85efd626a77f6dcef65822"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8372403818.json": {
+      "bytes": 12055,
+      "sha256": "776714dd64bc96df6acb3fb4df6472749d0c6d82360e0bb40e20d309bc782c5b"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8373429718.json": {
+      "bytes": 11836,
+      "sha256": "023faff72cdf2ec7e389987097e88b0019ec966466cfb1182fd50b975d5157d2"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8376810093.json": {
+      "bytes": 14153,
+      "sha256": "7f26986586dd8038ef514dbd8a8b659356692e276c96663116d5e3e8d75af434"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8379979356.json": {
+      "bytes": 15867,
+      "sha256": "56a0b2a634c2558ee50c61061056c8df711b2a101714e2530c02de827b708be0"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8381038441.json": {
+      "bytes": 12389,
+      "sha256": "b14453f4283acfa79289ceac12984b8516a729a765639eca8404c1df43de6d9f"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8382219445.json": {
+      "bytes": 13318,
+      "sha256": "a5e3ac988c7557aaabde78f5eb87fafec4f513194737a251b2e246f7d4dd1cfb"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8382288789.json": {
+      "bytes": 13831,
+      "sha256": "fc011197b49ec6759e35313c8457503d633b24b173cc867e6cd4210b48c7288d"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8382460936.json": {
+      "bytes": 13306,
+      "sha256": "27503b31eb404451e3d03832e039cbd8590a2a0ffd499513a619960fdb7ef16c"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8382552988.json": {
+      "bytes": 11837,
+      "sha256": "ba8ba79864963d528303749fcc90cbaecfd0697ae4d62ab85fd3adcb276b62e0"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8383571361.json": {
+      "bytes": 11144,
+      "sha256": "b71b3e80f6f08243cc145603ea78c5470f4d1a80d8a72556b0af362686efd994"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8386621497.json": {
+      "bytes": 13486,
+      "sha256": "f2c9a940680024b9dbfb3f98e6cc34fa70e82db53a7a40d7b6bf76cb762aa503"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8387857284.json": {
+      "bytes": 14441,
+      "sha256": "a0c231a739d2aee5a90480091118e56ce322596be650c9a7e6360c35a5610926"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8388571753.json": {
+      "bytes": 15232,
+      "sha256": "cf1872e9edd3433671b78f13d46583152eb0a95b7a91fa90552b162481cfc08b"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8388698275.json": {
+      "bytes": 14437,
+      "sha256": "8b7a26f55f8b17e3b5075eb2040d8361c227ae2e831fd53ac0e7a4019c2a0b67"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8390015939.json": {
+      "bytes": 13349,
+      "sha256": "5c753b4a00dc716029eb11aa700265cfa3d22c31185ecd6dc9810d65a057b8af"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8390277251.json": {
+      "bytes": 13287,
+      "sha256": "e7d388717ae17e2196728db1b4bbe271089ebeafbcc1ca74371b8620538362a6"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8390739760.json": {
+      "bytes": 14461,
+      "sha256": "bc5d47cc730d98ae5fb5b519c33b3485ea41361a0a14b33f705933a39f15ae33"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8391312693.json": {
+      "bytes": 13676,
+      "sha256": "34a7cb9ab600d94ba88379f5666d56fdf63aca1faa5c28be2c4a5b116378597a"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8391582766.json": {
+      "bytes": 15058,
+      "sha256": "21ee6d47fd08ab3ea8d6960d99c508a5d43164e268a756f2867ead966dbb9348"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8398028594.json": {
+      "bytes": 13302,
+      "sha256": "9285c55f877f18b4e8fb624339585dfccb25471e68248df4621c21daf6f5437a"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8398162811.json": {
+      "bytes": 10315,
+      "sha256": "244894abfd4f8eb0a71ad0616dd2b47e0ff05e6d307f6cb17574aa736dc3b2d0"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8398197637.json": {
+      "bytes": 13170,
+      "sha256": "e2c9861872ac4cda39bd2dff3cab9a543c09537e6b2b19f74131e7b004acdaac"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8398525730.json": {
+      "bytes": 13314,
+      "sha256": "c7598dba17cd8f9d5a64f04d44bf9788c29a2cb4f56b4334dc50ea6911a18b51"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8399729664.json": {
+      "bytes": 11843,
+      "sha256": "c80374c5525aa651c1f4f40893003fd0685771db6de3abdcc92d88e3f5c79ebc"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8399894975.json": {
+      "bytes": 12346,
+      "sha256": "0e02948738aece236cad6d27a0f577b987f1d354fe15cb2bc62cc4e0c366355c"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8400332308.json": {
+      "bytes": 12015,
+      "sha256": "a38c68583128ec6ee57933cacdb19342f08661b46af6d4b8abcc2a02190dcd42"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8400351026.json": {
+      "bytes": 12330,
+      "sha256": "72a6db057a24d188a7573c68b520f283ff7b4341d0fff174587ff2a8e30fc21f"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8400585246.json": {
+      "bytes": 11813,
+      "sha256": "195305baa9a68b1b44ec80d973740a9ccb9b8918cdcd59201f7a99591bb9808f"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8400847801.json": {
+      "bytes": 13804,
+      "sha256": "464c9572140393650acf9b8b442d689d8311cd36900325fe965bb86fa839940d"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8400948294.json": {
+      "bytes": 13294,
+      "sha256": "93225a287b1a7f3caf86236a3d660a9e64e65a8ccc19475ceab7a731be0ad735"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8401130381.json": {
+      "bytes": 13164,
+      "sha256": "4894feb89c8a8841d239090bac86209cecc562b433896afc65443fcb38e7b4cd"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8401458876.json": {
+      "bytes": 12448,
+      "sha256": "decd67e4d4aade4107346958aafb6b5ca742ca633f621b1ad87e60aebbdfe634"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8401566276.json": {
+      "bytes": 12402,
+      "sha256": "092eaf18ba4443ef1a1e76ac52d0724cf41789ad137613ae6e055bf094272ced"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8401594327.json": {
+      "bytes": 13046,
+      "sha256": "d058aeab03123d69fee43d01fa91349bfacada54add97dd85464389aa7228d0f"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8402726454.json": {
+      "bytes": 11495,
+      "sha256": "f249482a38dabacde43fb5da8fa081cc1cd879342a6163cac797819f01b56c17"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8404844133.json": {
+      "bytes": 13350,
+      "sha256": "c18f84dbbba6941219c23399d1025e7e6567e3ab646c4fb5725939a5512ecd92"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8405444773.json": {
+      "bytes": 13755,
+      "sha256": "71b4b00a1c0d05712f380b2878020ea2f55725e01924db1a3a4c7bcd8e85171f"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8407969574.json": {
+      "bytes": 13349,
+      "sha256": "bdac636b4fd5fb7bf0ecb1c2bd12bc4eca6ef03da1d56a4261fc81a6277a7f05"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8408032479.json": {
+      "bytes": 12933,
+      "sha256": "8296d645fb56e9536b325fdf41eda218b64ec6c255b85e1731d062c774922405"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8408553129.json": {
+      "bytes": 11071,
+      "sha256": "8b4a61edfc19c7eaafe668cfe9338114e02e18ccc22e48b16dca09ee6fa29d58"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8408591754.json": {
+      "bytes": 13458,
+      "sha256": "b8cc039cf448ccac3979d10897ae1eba66fd71b7c592c060c6b4b607df7c5ede"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8408797457.json": {
+      "bytes": 13305,
+      "sha256": "898a67178f84dfdc9e06d08da6dc53faf7a036b354a9490bfb5c424928f216a0"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8408812057.json": {
+      "bytes": 17362,
+      "sha256": "1bf64260c695aed3d13d38660e60ea387440100cc0a1c73d776d9a07b4f5430a"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8410287584.json": {
+      "bytes": 13367,
+      "sha256": "57d9a4e34a0db19b5840642fa150ec04beb2542f7882e2296a1fbdfc198ed273"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8413342441.json": {
+      "bytes": 9096,
+      "sha256": "8c6e79356e32bf6862ca3d10ab650eca959a9d994a3524dcd871887ba95e9624"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8413629565.json": {
+      "bytes": 15262,
+      "sha256": "fb037e9036760a5700f69ded3c170a84e327b25115f7ff83f429ddcebe4c0872"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8413657195.json": {
+      "bytes": 13331,
+      "sha256": "fb702dd47bed39a8c2411b9efb2e3927d5fc893dd2d5475614254305ccc55e77"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8413856162.json": {
+      "bytes": 12350,
+      "sha256": "c62851495d7df65b09b53d193afd0ca7ed0b00e9b97fd7a4a55122fe06e983d2"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8414055527.json": {
+      "bytes": 13369,
+      "sha256": "941416bada95e65cb87bf7f7fd5dfc8a16be866a5941d72709280a986a65f6aa"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8414066980.json": {
+      "bytes": 17322,
+      "sha256": "e4f284f4ce078426011c022ad8d69e2ef9a57821201d86b88dc92a2fbc751743"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8414384170.json": {
+      "bytes": 12350,
+      "sha256": "a7b3321ad90105dc62ed5eaa2bbd9c121f4d510b7af1dd8b78b3c1fa435484fa"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8414820406.json": {
+      "bytes": 13198,
+      "sha256": "ea06408950f4639d18adabe2088ce1067bad68b15cdd8fa72be0c2c4af7f9e3f"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8416854258.json": {
+      "bytes": 14477,
+      "sha256": "727b11eec3d9aa35de3fb026b45549d668be4bc9da5e10887607f6c92d6a7b48"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8417975786.json": {
+      "bytes": 12366,
+      "sha256": "121e12fea138c4b60521222cc600578082cf162ec5113eb0cf81c713ee59ad3f"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8420434007.json": {
+      "bytes": 13069,
+      "sha256": "4997edb307d17b4a097be5946e742ca222a6c30958bbc0f4c25026d26959ed75"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8420552182.json": {
+      "bytes": 13275,
+      "sha256": "b5ffde33358c6e09225d3d7a8a05d34d40149888173b2cd4a1732be11a3b684d"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8420686069.json": {
+      "bytes": 17329,
+      "sha256": "f6d69acbfbf6debb3fbed1d961e2449d09fa97e4653d38334f2ffd61b722784a"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8420722511.json": {
+      "bytes": 15276,
+      "sha256": "41dab3e855141349a44d1e297875325d73a0f412b7fc68f1e15c338f3fa8e9a8"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8421492487.json": {
+      "bytes": 8588,
+      "sha256": "4eeadb90a0a2a2f83e8e640c096c47895f9ed57fcc5c2d502094abcf997c7c28"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8421944091.json": {
+      "bytes": 11257,
+      "sha256": "9ed4fc5b5490568ed1739c82e8c589e3536916419f3ef4d1a2038711f4907997"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8422063521.json": {
+      "bytes": 13191,
+      "sha256": "2638e1ba20172fc95d65c604d4ba79152ee296d73f25607bc6fb047b27fc2db5"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8422639289.json": {
+      "bytes": 17170,
+      "sha256": "f264a073f9a8305c2e9cec789ae1c2b33b78eb72426c8c10feb83b8f12c29d13"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8423001283.json": {
+      "bytes": 13313,
+      "sha256": "64288f30f1ca87acc93ef57dca15a6e29f70a59a4acb96ccecb935f1140c97b7"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8423153379.json": {
+      "bytes": 12356,
+      "sha256": "a951c5e7e96d542811f7a7cc850ca1592ac0b81ec52fc3f3566080d6f945b5f3"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8423266868.json": {
+      "bytes": 12524,
+      "sha256": "f75f70dc3d99a15ad3bbaf0233886e81a70efee87a235cbb605062c8d9f1c3fc"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8423321140.json": {
+      "bytes": 9487,
+      "sha256": "2e91eba0f1c49371daf149241e60fc2f2c5dcb27f85cc2dbe43d239c34083e58"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8423427865.json": {
+      "bytes": 12903,
+      "sha256": "1d9e94541874634ccac8ddad308485b0a79ece36647928c18945c458a124556d"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8423628732.json": {
+      "bytes": 13185,
+      "sha256": "4cad57df7d267b11f79c882d2b2394ac1122a52afc2bcfd79fd0ef9c17bf0c73"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8423688256.json": {
+      "bytes": 12332,
+      "sha256": "3aba13bb158a4076d36f4b423f36df919daea25e47207a0ab92b9d0348e288e6"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8423707240.json": {
+      "bytes": 9509,
+      "sha256": "1e7fd221dda0d09b532e8a7639910306beeb34efc77fa137e85e76c4cda9bbc4"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8424927309.json": {
+      "bytes": 8269,
+      "sha256": "ab44601c513fbd28e842c2d6557b06fc5d6439fa7c074dee54e719c367e9f6ad"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8431155494.json": {
+      "bytes": 15322,
+      "sha256": "ecc760283099f7e1613e8bd5fe14056d25a8b0644a9fbc5013ba7f83ea36b63a"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8431248677.json": {
+      "bytes": 13698,
+      "sha256": "243a57164ccd5ea4ec470229c1e4d67479772611cc41d642fa81afb36f0b8214"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8431465876.json": {
+      "bytes": 9693,
+      "sha256": "574e2b53434ca3909b98ecdabcb548cee88d7cd0c28b73747af664a451db461d"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8431553880.json": {
+      "bytes": 13171,
+      "sha256": "6e6b90cc540791c38d3f7226f23b76fd2e8d1f6186e93356a22c2e8fa1d1a6d9"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8431788571.json": {
+      "bytes": 10495,
+      "sha256": "fda3971bee9b94e9e8d6af2b332c9fb3e6f8e334b80bb32f4d82398f0aac4178"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8436899603.json": {
+      "bytes": 14951,
+      "sha256": "4a52f735c6b8bc6ed6554bcfdea3dcfdf739e4fa8c00fb598076d07056382961"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8437874989.json": {
+      "bytes": 13205,
+      "sha256": "931a4e1423f23adfda532b02461dc3003bdae83240a0e66c64e9c191e55e14a8"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8438338876.json": {
+      "bytes": 9118,
+      "sha256": "7e4403739c335bbb6a288085f4bf4f8dd2fae5e72037cb00fe333c88414fe0ef"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8438786973.json": {
+      "bytes": 14286,
+      "sha256": "fb610a40d1dbfd060499472c61c6fa5c5643ca216c3fcc7e15fd72b1b18ae5de"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8439459599.json": {
+      "bytes": 9616,
+      "sha256": "fce84040be8a95b512fa9fb8de11dcf5fb5ea286af2dd922ca0f1a3300cf2773"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8440031853.json": {
+      "bytes": 6362,
+      "sha256": "4f67bfc5dc438cea8e621359f2e7014bbc7536aa0fe666bd01c951ac23c329cb"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8440303085.json": {
+      "bytes": 11477,
+      "sha256": "7931c15d6f07f770d95ba2c2ccd31e9ac8b06beb41d931c4def4a52a9810defb"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8440766026.json": {
+      "bytes": 11199,
+      "sha256": "9d749431f18f814dff2a4592b663cfb49a2a27fd9d566451d0d7ac6546dec3c6"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8441015497.json": {
+      "bytes": 8459,
+      "sha256": "3b45746437a62c5f6f6f5ef49327d19c3134e9f7828d18ac354e7e4045655b66"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8441169535.json": {
+      "bytes": 13119,
+      "sha256": "6e2a89a9acff4679e3ca897a83a2df2118b0eb62a7170fbd75cdae76693672da"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8441227758.json": {
+      "bytes": 13180,
+      "sha256": "4d66e26bf2365008eba30d9e722ee500ef67a4b02323350e7e7ef4a223df143a"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8441246758.json": {
+      "bytes": 13353,
+      "sha256": "3b8cd61bfac051070646985f7f4d7c5518fc2b56511e37fe4d289a5ec0a748cc"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8441915015.json": {
+      "bytes": 7887,
+      "sha256": "cd6fb8e30d9d4941846d69b7da8dad7ae2f3f31928de3267b72a739e70951789"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8442130940.json": {
+      "bytes": 12395,
+      "sha256": "f5f5328813f91fab12095a863cdc01240e0263c08c23c6c41499e1aaee42017a"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8445037297.json": {
+      "bytes": 13441,
+      "sha256": "5f458597fad1474dbaa3795b38c2f096f992c4e0d02d4fdcf6595a0fa6c5facf"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8445037616.json": {
+      "bytes": 9837,
+      "sha256": "6d937be940b3765ff9dd7abb2072935fa58cd7ed56c5ca7362159d55114cd701"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8445442258.json": {
+      "bytes": 8498,
+      "sha256": "c696d807ef0b2e3742dce9ed08939e54c5471aab184974d104cf2e999e2a13ae"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8445728626.json": {
+      "bytes": 13798,
+      "sha256": "d2c861b4f9008fff718c39ddff2da850588a40c8a348725cb739e594a46ca158"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8448166010.json": {
+      "bytes": 15013,
+      "sha256": "67e6d3847f696e5125c547c56be28a402a7061cd22de862dc107e80d89f26796"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8448581555.json": {
+      "bytes": 19697,
+      "sha256": "8d210c351e20ebadb52d1a9ad6143975a9e625ff71fc2571d4f4c3c90be7b19e"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8449071908.json": {
+      "bytes": 14331,
+      "sha256": "305b7e87234705b287cc9b6a485599ee6affc31723eae0df71e35ae8e52a2b2d"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8450697882.json": {
+      "bytes": 11870,
+      "sha256": "8b1fcbc5e84b3b757f55ca0ee89c3f98306e7919972d827e2f5fd3e6291fe038"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8451138882.json": {
+      "bytes": 10777,
+      "sha256": "7ae41ef458079deca0886a2f9e52aa547aa843ba0bc6a4d446cc2a74ce018a67"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8452190182.json": {
+      "bytes": 11775,
+      "sha256": "14388fe13c058541af833cfd7687841e8923a44f5915b3c4e78138dfd4be4474"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8452435667.json": {
+      "bytes": 12888,
+      "sha256": "65c2ed9e43e66ff1a35763a59fbb2e9410608abd84b12ddf2e9b3d593bd1db7f"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8452562376.json": {
+      "bytes": 15730,
+      "sha256": "d9325ff3626f164be057c25f9c7b2da6dc55405821834c01206f2577d67dfda1"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8453668915.json": {
+      "bytes": 11322,
+      "sha256": "ec7a818e71d26ca85bf0d15eb79325a4f7508533489559c58cdcd990921f60ec"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8457891144.json": {
+      "bytes": 13234,
+      "sha256": "410cb6449615db861371e679eb2936edbd21bcfa2de660c74ab3ec8b16a5192f"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8457895823.json": {
+      "bytes": 13076,
+      "sha256": "54c43d3cc92714027ba893a572746f36bb99db6f3fc78b506bd6ae894572dc05"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8458872910.json": {
+      "bytes": 12859,
+      "sha256": "4117b714c3a51ca2545c5d75e35b2cb725938a91f280d2ebeeef117647a89f46"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8459057814.json": {
+      "bytes": 11814,
+      "sha256": "46814be67d79cf14c3e38a5ef33043668b84c4b5fc1dfd96dc16b7fabbb7e932"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8459191599.json": {
+      "bytes": 12917,
+      "sha256": "32e4a83090584d9b2a46d2e4cc2592b7afa256f8a22ca36fe6f3027f7f08aa53"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8459487121.json": {
+      "bytes": 13695,
+      "sha256": "8741b5c8a9262f3afcc4a2c0d235568f8bbf3c6b0d32095d43eef61b988a6cfb"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8459507557.json": {
+      "bytes": 14448,
+      "sha256": "0e25f91936394cd8316421fc52cd781e7ee594f8a5b6d78c0f1f7486324040b8"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8459606780.json": {
+      "bytes": 11829,
+      "sha256": "0af76d30cb9af8ee85b51590d062c5e4a9b0dea635160b668b480fe8119cebf8"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8459722705.json": {
+      "bytes": 13686,
+      "sha256": "12340ecef423a1146ceadd038ed71a74dd057a67e648599ef5e18ed25c737ba8"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8463219526.json": {
+      "bytes": 11603,
+      "sha256": "604e8f15d35e476eaa47e12135eadc4d6e253b54175f687d1938823c5fbd95f7"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8463661809.json": {
+      "bytes": 11327,
+      "sha256": "eeb12e07938a1d232263c197b2638f9985271b09bd94bf6b2ea5ef85bdd53088"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8463727630.json": {
+      "bytes": 11611,
+      "sha256": "5238cddabb07d970e33d9aff31b733b978bd3d7e4b946222ff6631128e4ce74e"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8466970386.json": {
+      "bytes": 14441,
+      "sha256": "1f644ac4a20c6a2b1c41a63ee860a120c4d2bc740edf657578e3e3e24030d34a"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8467511784.json": {
+      "bytes": 13309,
+      "sha256": "d24d3498a190053bd22072b0e8f2599e802d276fcec804a9514fd210eae0f9be"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8469130800.json": {
+      "bytes": 11509,
+      "sha256": "0ab7936b2b32e2416ffe7fa484ab9d755fff6adba067257cbb1e2b76d7b10711"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8469921578.json": {
+      "bytes": 13205,
+      "sha256": "91916f36ba177f08b93455e59ee808a0153645dbd8fe7deedd3c3116c0f41663"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8469951524.json": {
+      "bytes": 11810,
+      "sha256": "960752e3f4d49bedd0927fa9827c547dc74797e88f9239256109036a637fd72c"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8470146191.json": {
+      "bytes": 12713,
+      "sha256": "15149187571dbdd4a215ccb2f9542b9b75d474d51268ba20d6ad0c2b9ab6ead1"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8470188279.json": {
+      "bytes": 13366,
+      "sha256": "2aff2781aa6464fdbdd17d020cf5016fe66fbe6db51a440209f6162b8087ff9c"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8470211478.json": {
+      "bytes": 13331,
+      "sha256": "2483fdfa898ae0301feb6e613e5b12f0ac21b6be63e68c4398bf1172320e4824"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8470218575.json": {
+      "bytes": 14210,
+      "sha256": "6049e15da644c66997b22708ceb016981a3dbabe22171969f28ddea8f04b203b"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8470607262.json": {
+      "bytes": 13336,
+      "sha256": "1f4da977d3631513d8e85a48e904c8da12eeaa13783602426d376f521a91cdcd"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8470648905.json": {
+      "bytes": 13152,
+      "sha256": "643d397cc9d43e55cc44e104bf106faa784806d9f698795dd42a91a53a62c625"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8470668389.json": {
+      "bytes": 13710,
+      "sha256": "09e6e5b260a1bd3dccfbf31030420df67d54475f6d473d2129f64166522ebaff"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8471045516.json": {
+      "bytes": 9377,
+      "sha256": "231aa759c5a4a3908a6463fa575a42d85fe682de721c617fe491d0b5f51427be"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8471079822.json": {
+      "bytes": 13156,
+      "sha256": "9bd313f153fd9bd22fd9c9b320b4c31c7a7e833c0a8e92a9fa79afc43b77c14a"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8471126599.json": {
+      "bytes": 13359,
+      "sha256": "6f1ba6fc296e114c087a31786751b7f7d2081c5f6263f20ef83af6bc7210c328"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8471130861.json": {
+      "bytes": 12372,
+      "sha256": "669d74c0d26d53b57f952117b75d118bff6b9199d47d0be1cdbec5fdf1a5dcd4"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8481412823.json": {
+      "bytes": 11386,
+      "sha256": "5d2ae8405a156dac55b97a1a6d3f2bb517f7c24f7521dd6560d28e737343be53"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8482033522.json": {
+      "bytes": 15247,
+      "sha256": "7ebb5a78265dbc41ab4c71bb0c0a36cc9f65c5094219c694c04e3e09f959b30c"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8482136933.json": {
+      "bytes": 14486,
+      "sha256": "68eea2bcc482efab694588f22fd55454de520d1b9cc04fdabf0d20e7af3151c5"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8482209664.json": {
+      "bytes": 13376,
+      "sha256": "09e505f9f77036c0c29e21c2e522519705c12adb6afdc02c3bd4862f047052ad"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8482304443.json": {
+      "bytes": 10526,
+      "sha256": "823e437fa932bec34679a8b25c59eb941b64aa1563dcb8c25feffb6c9b72cdad"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8482810213.json": {
+      "bytes": 7507,
+      "sha256": "75716bdd3fcda75938261fa160f54cb15b0d7eb2ec7a44e6f5b3deb51d65dd46"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8483435577.json": {
+      "bytes": 8266,
+      "sha256": "b4c07db3dbcbb431db2d5dec7031e2eeaaa0942e036844ec4549f61ccb09dff6"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8483455727.json": {
+      "bytes": 13775,
+      "sha256": "88ae88636ebe44a1c669609e43bf7e99cc7d7f0f63770d58143aca9b24278c25"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8483549762.json": {
+      "bytes": 13202,
+      "sha256": "345085a2b62118192c0860c290aa0a03dda318c1568b5490149b7a2658c7802a"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8483675078.json": {
+      "bytes": 11843,
+      "sha256": "01cc034b26d00318bc67e93a7dfd4cd25473ab23ca3033fb2d6941b0977dfb73"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8485150469.json": {
+      "bytes": 11769,
+      "sha256": "92da39655a2daa150790c49b49917ba2c165dba42786d33b0cb1ab7f4990815c"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8485423884.json": {
+      "bytes": 11914,
+      "sha256": "5d31a61b931cb21febb38fae3608da98e77e93f47baf09f8d6ed8a8aea616d6f"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8489042635.json": {
+      "bytes": 13149,
+      "sha256": "acb4cd228ddb191b7e8ade77bdb2d3695b989dd55aa46fdc514df5550b4ef3b0"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8489640362.json": {
+      "bytes": 13879,
+      "sha256": "5574503814e99ff415dd2037008f2a4aa7ad55bde785677efff3d66992cda9d2"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8489853083.json": {
+      "bytes": 7280,
+      "sha256": "8bfcd0d6d2d4a8b1918c9b6e2fb9c015d9732e694d573b6da5bfea05394706ba"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8490060310.json": {
+      "bytes": 13354,
+      "sha256": "f3bc79dcb4fb23361249a9816a9115c8c9df8fd8b583c52b5c68acc95a7a0acf"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8490440096.json": {
+      "bytes": 13320,
+      "sha256": "42e58502087549957dbcde0b9ae31c4a0a5e5ea7c36888ffe591a5e0ac1ce62f"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8490464155.json": {
+      "bytes": 13352,
+      "sha256": "1f5f41567094b5428c0055878192d4e907b82e30f96be9b58794aa08ba85d0a9"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8490639198.json": {
+      "bytes": 12083,
+      "sha256": "15289797045ea8c3599ca5142dfa26da0e6463877f8d03883a16b9ad8debdeb1"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8490778093.json": {
+      "bytes": 15265,
+      "sha256": "0e789a37aefcccab88aa0b0abf8d8417c743d6d1cfb6c308501e251bbc1a0094"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8491549633.json": {
+      "bytes": 13141,
+      "sha256": "b7ec0bf1cee481047620416cb684d5b55aa18487beff7b473aa0bc6e0013c192"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8498848463.json": {
+      "bytes": 8452,
+      "sha256": "b563b308b59f28f80e6b8793ed73ef50301db7d12a2fb6bd453f5940fdcc5f65"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8499526120.json": {
+      "bytes": 13341,
+      "sha256": "8b102c74148b81ae57e0d97672a215d0e8fc962816e94679c5caabaee5468b6a"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8499561893.json": {
+      "bytes": 13180,
+      "sha256": "1781d4e4d3031fbdc5f17a38e0edd92b66bdff508a7e313f305d282685e7a28c"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8503417951.json": {
+      "bytes": 7063,
+      "sha256": "60798c53e12a08251a60b66ababa8984f0b19aa752e6b36c934ac96e7b45dbd0"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8503495370.json": {
+      "bytes": 11319,
+      "sha256": "d1d09329818f76cb013c3023d01edfd62514ded45e41867d0afd1a4c21ff6a56"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8503530944.json": {
+      "bytes": 5240,
+      "sha256": "d5ccf99123aa156d11cc37df1117871b72b6871911137205bd0ce1d95061b0c2"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8503694813.json": {
+      "bytes": 11493,
+      "sha256": "f5980eead0584f233b126f426cef434131748a357df68cf6c82b6eae4a1f6a11"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8511950069.json": {
+      "bytes": 13076,
+      "sha256": "e5f3269b2e1ec193caa4875812c6674921b9af67da3a0e5a2744cc964e2f3d0b"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8512503496.json": {
+      "bytes": 8453,
+      "sha256": "822ca5fafd06a9872c9cd66b31c3199059a96b47cd91bd0c745b4c0a726e6a24"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8513832786.json": {
+      "bytes": 15854,
+      "sha256": "cf71c47aaa24580a53fb68e6b6717ac4cd14b08388ffe5c7c2134f1332f4ec82"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8513872974.json": {
+      "bytes": 11313,
+      "sha256": "881a6dbc8e9bb565c3ff8404d14ad39ea35d38a18466e593afa09c5225514c01"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8514311709.json": {
+      "bytes": 12865,
+      "sha256": "0d974be767cb391bc80789541731cda3da1dd1b1c44a3a69b80eaf7aa99980e4"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8514555898.json": {
+      "bytes": 11303,
+      "sha256": "62c9353b8bdf9c4088a00628cc8812b7c86c55aebe7fe022cc32aa669f65f173"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8514576448.json": {
+      "bytes": 8972,
+      "sha256": "93c554f2bc88453ddf71857604ea7d4369e1fd7f865fab8c287f954baa304194"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8514782009.json": {
+      "bytes": 16678,
+      "sha256": "04887f146843a00e03f8c674263e4db9160fe785953c1e66fde57403aee30952"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8514935273.json": {
+      "bytes": 11501,
+      "sha256": "f4cb4c39287b78be23806189961a0913db9220695945e9c9148f25d0608dba1e"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8515316670.json": {
+      "bytes": 16655,
+      "sha256": "5a1b70fc5f3c183f52ac636a0372de14b51bdd653579577ad11e1b52a1686264"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8515426943.json": {
+      "bytes": 13352,
+      "sha256": "5a00372ef0673c63914c8f859bf3560de86082847d5601a0a65ba5b1845c9b3c"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8515694679.json": {
+      "bytes": 13341,
+      "sha256": "c29af78292fbecc957c8d1bcdf122615bb98e9ddd8125401fb68da99efcb8e06"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8517017026.json": {
+      "bytes": 7697,
+      "sha256": "05efa4364abccc46070f5d1fb7419223fce61959663eb662641c0fa0dd7ab5a1"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8517358978.json": {
+      "bytes": 12360,
+      "sha256": "0de18f55c91eb92a34c250ecd75eb22990b7f73bdc86a0843d7c4871dff28b19"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8521027745.json": {
+      "bytes": 12352,
+      "sha256": "4b2c5733a4a0cd5ca2b5ceb9d8e0ced1b657b6d639685dadf7f882840922129e"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8521036808.json": {
+      "bytes": 11421,
+      "sha256": "8ae9abbdf08d9e5fa231c07148607a49ff4e219dc00c3dca322c4dea61e2c202"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8521043293.json": {
+      "bytes": 14879,
+      "sha256": "6294b1cdea8a77b362a62a457e127655b196e06c74ed5330c379d7b4582a6a29"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8521540484.json": {
+      "bytes": 13301,
+      "sha256": "1dbd356d8095e219957172363af89bed3abe18a270d9c20b5197c44fd6630a11"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8522187183.json": {
+      "bytes": 11459,
+      "sha256": "058f323943bbb105214e378a705a54e8705e34f6d8544fa3a7f74d95f8fb6c17"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8522786528.json": {
+      "bytes": 11337,
+      "sha256": "5a16773bb27695a0271c399e54162d851f306e3f2a50b161f6ac9d4d27b80ff2"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8531233782.json": {
+      "bytes": 11882,
+      "sha256": "0525d296cef49e92c42c8a9afa1c486d6c0c92c8b0b2ec694aacf58fa7e71cfb"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8531392068.json": {
+      "bytes": 11487,
+      "sha256": "95b9c210bf562077f9f80bca99e105875a26de0641d8037046eec7a75a73fb57"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8544049264.json": {
+      "bytes": 11717,
+      "sha256": "c9af9beb5798707bfa6e03455d5e95883eecc11de656793f848ca839c1431fa3"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8544473627.json": {
+      "bytes": 13336,
+      "sha256": "5e564dfbe1656e8b41396695581adede363023ba07c515cc0c969fbc11affb7e"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8545069618.json": {
+      "bytes": 13742,
+      "sha256": "3fecddb433977de2ccff0b04b30842dfb032a1237ebfafa3de7b513095cd2d5e"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8545185403.json": {
+      "bytes": 13294,
+      "sha256": "c205727b2540d33a48befa5825e48184d158b9b42dd7b2783d6ce6399d9f83ae"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8556917925.json": {
+      "bytes": 13340,
+      "sha256": "000f57898215d876d5b0de79b4d98dfef9e85573bd2751381d8064a97082191e"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8556951131.json": {
+      "bytes": 15401,
+      "sha256": "b95e8b8ca86c5342d08647ca344b392065a561d008a4a90581199e076acb4867"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8557356368.json": {
+      "bytes": 9596,
+      "sha256": "24b2a26f872ef02864e44a4c8072ab859f3e2bd9ed30cdbed53f75d6d5b576b7"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8557389239.json": {
+      "bytes": 13314,
+      "sha256": "1f643a85323dd0de62c28607a8d6a79fe3a1f62540e19568c2fd4268429e50d6"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8574854544.json": {
+      "bytes": 13077,
+      "sha256": "711b874da36165cee29a85ee2054b46b917f734f6cab0e72a28feac8f62cdf67"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8575025472.json": {
+      "bytes": 18083,
+      "sha256": "4002f03a52bdd4a1274c71554ed81190a4df516475569c8a15cfeb49aa330af1"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8575110532.json": {
+      "bytes": 14279,
+      "sha256": "045d65c996f5d1df59fc998248d7cdfd7fcf5ce8c58c60a1e207ec5b7e568931"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8575530052.json": {
+      "bytes": 12396,
+      "sha256": "22c638a4e5bc7c5ffabf3dc359829ce52935d41527bd47115d70be3af4e3f802"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8575531894.json": {
+      "bytes": 13338,
+      "sha256": "0dea7f10c0f633d5b308e5bdc7809f1233764cd0a0b3b533eaec9d6f3e4d4576"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8576660110.json": {
+      "bytes": 11487,
+      "sha256": "50795a6f9e96542cec276f85b6a3ebe0335a12720cf5d37fa89271646c064a68"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8577337227.json": {
+      "bytes": 8275,
+      "sha256": "13c42d8b7c9688fca9018be1a71512c34128f8c7d6ca3c2a47e1bb0fa9102e56"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8606861379.json": {
+      "bytes": 11397,
+      "sha256": "87006b058eaf5df0291744b25708cadd09ce3230a74030cd9dd49759f45c2903"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8609350822.json": {
+      "bytes": 11319,
+      "sha256": "0563f181ef0b8d408fc8aadb03ed0b73b84a85e7829400db57b3c8779b6adac1"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\raw\\8609493486.json": {
+      "bytes": 12593,
+      "sha256": "6cda9f00bf49585cb4221d61f80444323df5335dfae37d729867414d143bee6e"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\1810158914.json": {
+      "bytes": 878,
+      "sha256": "26b09b8a2a19cd2ec8e8aa7572efcaa9aff4cc8cd5720186b1ed3366d44d32a7"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\2025189642.json": {
+      "bytes": 888,
+      "sha256": "c12279e2ea9e1b19c7a4d6500646fa2c27f015d6c0540d8d9851256825bea0b5"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\2301691457.json": {
+      "bytes": 891,
+      "sha256": "8c47d1b1f02bafe5da9e7deabeb7efd2005e8ed9e4955ec1f85f830898644403"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\2355674106.json": {
+      "bytes": 867,
+      "sha256": "111540fdec3b66f029a6ba3c87330095689230c5b9eb6f6dcbcb7e828f61a9c3"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\2490416963.json": {
+      "bytes": 888,
+      "sha256": "4180766661422a0d317c4fe1bd115b230b6fcb7d45597c5250ceeb515c3d2b7b"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\2555870590.json": {
+      "bytes": 870,
+      "sha256": "c4edd094acd4faf2d2f5f24a6758dbcd44c036c3a640e43f05757d94ca9e52a6"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\2581395409.json": {
+      "bytes": 832,
+      "sha256": "bfb40a28373255e82e5b27fe137f5cde23b582ba601d6c929935a680175e8485"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\2679824883.json": {
+      "bytes": 798,
+      "sha256": "843a7d008d0a72e143280b68a0a3dab55153ee4f481117bb5e54dbb73029ed86"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\2715155059.json": {
+      "bytes": 793,
+      "sha256": "f4de57b4ccc45bc3e71416cdbba08a77a0b538edbb03efa07a4564978c57220f"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\2778006329.json": {
+      "bytes": 875,
+      "sha256": "1b1b5fcbb2232db8bae00537415442d625bf11f22b58c82b8f4ca43a3339ca94"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\2938004644.json": {
+      "bytes": 825,
+      "sha256": "01d3417129c63f9be6d3428c1424ef8978ad189d190611648ad3a537e684803e"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\2977484288.json": {
+      "bytes": 865,
+      "sha256": "ab106130b9e15e845ac92f0083bcd71ec3cba9711f8214c95188f51a6f4f9d79"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\3015744638.json": {
+      "bytes": 883,
+      "sha256": "1c68998210dffc83ae1b55d74ef57814e82788570a0216ea68b3b2467ebeca83"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\3148358167.json": {
+      "bytes": 799,
+      "sha256": "4e746f55eaf1e9d04fd62cb2b99717235b7bdddf76c87ae8a9888e5aa9d5f481"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\3223621416.json": {
+      "bytes": 866,
+      "sha256": "462c9a7662a3869dd7abee873446786b20a5b8e7fd66b850c3873b1cb707bc86"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\3256286482.json": {
+      "bytes": 884,
+      "sha256": "cfdce8e798caf8f88316d654f5ec9b933a69de94db9b5b5dafc7c75586edb600"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\3324866078.json": {
+      "bytes": 886,
+      "sha256": "1c82eb9e9969e1664867b0b12990d923ec36d37df3ce23ecd4d096d56ee9ecb7"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\3422681923.json": {
+      "bytes": 793,
+      "sha256": "c625f8044c122adf806769ff4f6edeed5fbfe471bff0e5ce8b887e3fb5818f22"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\3447086437.json": {
+      "bytes": 917,
+      "sha256": "812d2a83e7cdca3712c5b2aab92c3f85983d8c1c9e99345eefe8ee98e690622a"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\3481074502.json": {
+      "bytes": 883,
+      "sha256": "b3850eb0ec115ade395ec53f8ca5a04599dc178b442d1679b556426d3b26c4de"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\3551432922.json": {
+      "bytes": 871,
+      "sha256": "e0ab53df0cb8844138f0b18d183b1fae512974735a9e2f6519098c7fd5a927ff"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\3879726476.json": {
+      "bytes": 886,
+      "sha256": "75ba0f0e374bc9e3f487696431ab4a6bfae1b48cd50f31eb4a259a252fd07161"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\4069036524.json": {
+      "bytes": 891,
+      "sha256": "964de71c730930112de3b4fb7c4358a684f8fa6c2562e5086f4950f1530206eb"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\4069099293.json": {
+      "bytes": 865,
+      "sha256": "e2d3ed0a4f224aa19951ff837f616f853e5da3ac8d748ee3998fee92528afe8f"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\4103774181.json": {
+      "bytes": 868,
+      "sha256": "e423762739db3abd86165a4778c5196e315ef68f6f3998f6fe565019eea36c75"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\4105299265.json": {
+      "bytes": 886,
+      "sha256": "6c392fb2f97a26a18f196fa916cc01044308fad91b15fda0bfff4ce7ae729a6e"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\4164687852.json": {
+      "bytes": 794,
+      "sha256": "c9eaa9f0cc1896bac7fd09015d01146fd3233bb38907222bfc8f48cf09909ec5"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\4229242842.json": {
+      "bytes": 879,
+      "sha256": "cc86787b146924e277e02787a1b141955125e6a8d4080c22a1bce0dd032bf495"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\4236346223.json": {
+      "bytes": 889,
+      "sha256": "c5f59f92936a934341386c487d6ea0f09950c6e4132fc042715921fbf60efe25"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\4260470621.json": {
+      "bytes": 806,
+      "sha256": "a23f82edf03af0780b05cd1bb79ccd7bbca146f054ac84f64d5e26037fddbe38"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\4292086216.json": {
+      "bytes": 882,
+      "sha256": "325a2ba9cb27a53102267f46c1b210f4b0b461d9964bcc3f7eee642894c34da2"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\4343656106.json": {
+      "bytes": 798,
+      "sha256": "e6b102c625e1c69ebd3071bd7a5aaf92907ee217977300f750494a55bedc292c"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\4483869446.json": {
+      "bytes": 813,
+      "sha256": "7d50f901cfcab5823d48c5fd5e304805078c58ea9dbb9d929811ae1e8c55e41a"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\4598693250.json": {
+      "bytes": 787,
+      "sha256": "fa3b0246a00713c7b6ce91215b57a7318c1ffb21a760e01918a370691e058195"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\4720022367.json": {
+      "bytes": 880,
+      "sha256": "b8e8cf633e7cdc8f40a4fe020fa96aca6fc0dbeff135262f7e5a7d1eae720acc"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\4771959446.json": {
+      "bytes": 886,
+      "sha256": "9e71f914d36528831a5a7c087c0300a3ff4153a6f6fe65060bf6672fc07f5d7c"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\7259785620.json": {
+      "bytes": 807,
+      "sha256": "d49c7ec63602ea97007b3ceb3b18c7432fc4b17ccd1c8175d8342a096ef938a7"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\7268112673.json": {
+      "bytes": 812,
+      "sha256": "56b2f02f487055f1ee470096c31a552d0f934c6a68958297c12ecc095fe64fe3"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\7288377192.json": {
+      "bytes": 887,
+      "sha256": "34967ef50065b5b1c5a05a5ec1ef47a6fe65ad9240e5e9b70b15f78db239eb0f"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\7300481180.json": {
+      "bytes": 884,
+      "sha256": "51107a4615a73c76347bba00aa51187002099fabd70e85504dcf63f4dd3c6da4"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\7353844164.json": {
+      "bytes": 888,
+      "sha256": "dee713e1fb7c3e9e5bf8c3f04e048502cccfe61a2ebf0e8ff5f59e505f6dcb32"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\7356604224.json": {
+      "bytes": 880,
+      "sha256": "56499e71ead3cee7daaa0e66f0d2362afc17147e9e5e0516d9015586dc7b2827"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\7436480304.json": {
+      "bytes": 801,
+      "sha256": "d3e0734ac6d3c16cc49d24a446ff20aefc4bfaedf57e6d53247927483d0b6216"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\7512308398.json": {
+      "bytes": 866,
+      "sha256": "e39ca3f618861abd3344dc936dd6393c7ce1e9fe59486693a4e6cb48202fc7b3"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\7576138191.json": {
+      "bytes": 874,
+      "sha256": "c49e51bde45dab8f58e3089fb110cce29435f0a06c3e8ce2727e517d78a9c2ec"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\7640484383.json": {
+      "bytes": 819,
+      "sha256": "9d2a3574f1b5648b576b1832f16ef7655d2cb8731ec30abe528395aed33ddd9f"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\7667286865.json": {
+      "bytes": 873,
+      "sha256": "568759a47130810949d165dec2b7fb98525039b7f374be69e074eb2567f8e4d0"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\7677890465.json": {
+      "bytes": 884,
+      "sha256": "7b29d50007f566f162ff334a2167fef9749864f37fa3f3a08b12d6156c86b980"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\7692198580.json": {
+      "bytes": 792,
+      "sha256": "9aed38e9feed5d79c6577df94e4b2fc470fd8351b405107ddaddbbb5440e5fe9"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\7756693732.json": {
+      "bytes": 882,
+      "sha256": "ed0a7d380345f940910a9bae804e25ece34360e7f5154fdc634c03310dc59a39"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\7764392375.json": {
+      "bytes": 793,
+      "sha256": "4a0b5fb8afe1099dab8a9a0cd5b3c1c9c1f616b1a141b8f5397c7dfe3642f149"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\778576838.json": {
+      "bytes": 883,
+      "sha256": "845bbc2af7fd7aaa6e5b94155c0d32414183a8b44ea8d43d18f54889f4857e1b"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\7803815035.json": {
+      "bytes": 774,
+      "sha256": "13184b3db28d662f529d9dccd995c1943a9ffed96e13e22a4f7669651cf71d7c"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\7843091501.json": {
+      "bytes": 774,
+      "sha256": "f36e4d2c4057d8953ce1ca59c9a09ab2e432edf92bc69d7b69a2d11609f9a608"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\7843190776.json": {
+      "bytes": 804,
+      "sha256": "8a00d258b9faca8ec96777d1c259c26548f0a30797876704dcaf5be67b75ce55"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\7843319300.json": {
+      "bytes": 888,
+      "sha256": "9c2e99a70d099b7b88b60ff246453b3f66ea63650d866ba3fe722c578d5a4a45"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\7843418589.json": {
+      "bytes": 795,
+      "sha256": "74724ba00306cac6979d7ea33eec75208f14642976228ffcf366d7c956090cee"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\7843751524.json": {
+      "bytes": 888,
+      "sha256": "c8aef70925245604491c489d7424ee165c9afcbed239cd91e805f65b17c2b042"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\7843827740.json": {
+      "bytes": 889,
+      "sha256": "07eadf39da5ecce7e898ff4058d7754d11548eeb3ca06e1093ad25cbbd5699d1"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\7939023528.json": {
+      "bytes": 836,
+      "sha256": "8c25a0364892d5e76ad31f22640cc731a159c3e5c2664b5e5915a54dc3f1f5ab"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\7939226028.json": {
+      "bytes": 821,
+      "sha256": "b26844f09ac22c8a8c0932499484cf6bffd401318bcf23e2f114444f8a46718b"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\7939396255.json": {
+      "bytes": 861,
+      "sha256": "2f5a7f6183b53ae91dc3c9cde4617a9fffe4204ccb94163be4f7eb8d5a47774e"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\7939401879.json": {
+      "bytes": 871,
+      "sha256": "dcb9f4c4db423d7280f9f506f5bb3ceb5932712628d4cfc4530d5c5624af6c27"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\7939551193.json": {
+      "bytes": 865,
+      "sha256": "5c4708395c251951d21f09233c1dbe09bcd88b1df2d0cb001187650163095b88"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\7939690986.json": {
+      "bytes": 771,
+      "sha256": "0ee0bbca620d874d6927a4f766064af5719d8d3c540631a50698ca8da7aa6ec3"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\7939743702.json": {
+      "bytes": 875,
+      "sha256": "d3dbc5f426f8c3ef540bc5c6fa5b9601dfe043e00d87bcaadd6843c545e50859"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\7939859705.json": {
+      "bytes": 891,
+      "sha256": "72bc0903e1cb660bf9ad73a5cde6552499dd798389c3e1b83a900749b069705f"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\7986722914.json": {
+      "bytes": 774,
+      "sha256": "291b26b3eb2b356c883052eab6753d14201fad6f3bfeb491745b38335b1e8f72"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8000094307.json": {
+      "bytes": 864,
+      "sha256": "445705b522368f3cf7e893be2df42c821aa77eef5e84e3383f5db44c5f3600e6"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8035177305.json": {
+      "bytes": 817,
+      "sha256": "61ab5f785f382c022a3af0c32e66d2cb194396d8ea009a343c3c404d3f038b5e"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8044770510.json": {
+      "bytes": 885,
+      "sha256": "4e05565cef1979528cd838ec372c9ad4f2eac066d2143a7836f5a4b43ef96014"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8083556824.json": {
+      "bytes": 865,
+      "sha256": "8ab574fd5e715679360bbbccf54325a96ca6e793472b9d76daa797e7bff24abf"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8103997235.json": {
+      "bytes": 865,
+      "sha256": "58950a4e0d6fb405469b84b3a401b2311efeeadb68a107b7f3fb8fe6f98e097f"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8123977937.json": {
+      "bytes": 812,
+      "sha256": "28e70de926049166e265257051e7003aa788ade85cd6cb6b0f3714bdff4f6c8b"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8126991544.json": {
+      "bytes": 891,
+      "sha256": "fede25e0b3aea05354c11851e38291ed9f6e58ee4cf109a6ac3f60a3cb75bb92"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8133111708.json": {
+      "bytes": 794,
+      "sha256": "a13d3b640357fbd0e6c1c70bc028429b497c33689d19e286ca1280ba2ffe9747"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8135821122.json": {
+      "bytes": 986,
+      "sha256": "812d6e16630945429f770dff8ca8cf120d96c1c7638bf6a794bfefe47b9bdf03"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8141894770.json": {
+      "bytes": 881,
+      "sha256": "ab88952969745416407a10bc1a113505430f999c4d4a58fc416d9239e9dd1031"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8171087918.json": {
+      "bytes": 891,
+      "sha256": "531424108de78c156d8817a2ecf734d02899cc1a7833b82498b18920dc2077d5"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8174461696.json": {
+      "bytes": 793,
+      "sha256": "0dcdbb942fd3a5fc1d869d95170513f2aa428d8054afb036f7998a0e52ec1233"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8189957980.json": {
+      "bytes": 774,
+      "sha256": "7c70e197e65e42a0dbf955305d8b1d55da2b27c5ee8a2e4995c12478c0066583"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8190862474.json": {
+      "bytes": 774,
+      "sha256": "cdde7e9cf80a62d1d72f8b7ac8c34ec4c1ffd9848f31947ae664f90f9c16edf7"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8193265652.json": {
+      "bytes": 804,
+      "sha256": "b5e30533482cc077c0c78c062e6eb06d61de3de3afcd16a6e21c626338520b36"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8193744790.json": {
+      "bytes": 880,
+      "sha256": "7b8c1772dfb807f921057b7b61450a5bbd9df23a791ab5301eaac10ebbb0e8d7"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8197436732.json": {
+      "bytes": 795,
+      "sha256": "71df7e89dee0cfe479b92400ee1767387f7ee797724685bf911889a1b7c69fcf"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8197818517.json": {
+      "bytes": 830,
+      "sha256": "b3a96258baf52dad5fd5df966b3c521d83b74d7d910c775c40ce23bcbca7f66f"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8200118884.json": {
+      "bytes": 774,
+      "sha256": "ef27ed8a9ea1b269350e367c09069d2db0749414b5d28479fa09f74e3379c0bd"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8211583014.json": {
+      "bytes": 874,
+      "sha256": "b88755659e590852970f6717847d785e0d07044062e78afcee5a4c62d6fd76eb"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8216960957.json": {
+      "bytes": 874,
+      "sha256": "6cdf2b19469c1737bec56db1c77314efbd06cb4f7684c5066da11034215c4051"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8222220010.json": {
+      "bytes": 867,
+      "sha256": "fe62df5b1e2b6e7ebeede3a62fff87f943264b108ce6062b9cd9adfbe55b36f9"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8236774843.json": {
+      "bytes": 874,
+      "sha256": "7caf6a3ca1840f8fb344709e712bfa6558a74cf4c1f7d62698adda85b19f61dd"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8239591795.json": {
+      "bytes": 877,
+      "sha256": "44a12ab0ddc63fedb6ef6406546d54724b53f1fde6b95e8ef37a32322214d6ee"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8257582912.json": {
+      "bytes": 809,
+      "sha256": "a69d571b7105e590cfe50cd91dbffe0cba81d631d79bf21688539a83427abd3a"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8258601316.json": {
+      "bytes": 794,
+      "sha256": "5db41a97a2e5fb8e856f414f0088d960534fd739fda78238e7c54c5b690a9dda"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8259025094.json": {
+      "bytes": 795,
+      "sha256": "59f580b39c1184d2ad6ffda4f9e9aaab0358df970ece6791c1d087ab2a116eb3"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8259059319.json": {
+      "bytes": 845,
+      "sha256": "fd902e09d4161e98ee98a0030b4d9bb44ac1351f0db577c6fe669e2cee58fb55"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8259169705.json": {
+      "bytes": 855,
+      "sha256": "52b7c33bfdb04b3c1ae095ffa9f41746aa5ba291f018ca54a63b1735dc0cb3ac"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8259641806.json": {
+      "bytes": 845,
+      "sha256": "3008f5f98e0cc66ae56337e0f0c11f714edf1d9cb56b928ada694c687665cf2b"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8259831117.json": {
+      "bytes": 829,
+      "sha256": "8fb059fd2e4efbeafedb2acdded23cc6cdcd8d48be21b2b363f80a8865ba3329"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8263878072.json": {
+      "bytes": 886,
+      "sha256": "5feb0b32c7cd87ec331bb203d4b1f391950ebc40d12e7e28e7f78051ddb2230b"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8264108615.json": {
+      "bytes": 930,
+      "sha256": "a5b5d2ccec46b24a088a52bda5deaba2f4aa77298c4921a979d4756e17daffb8"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8264513998.json": {
+      "bytes": 878,
+      "sha256": "5f8c419a4beec48f901fed0ba723df4323bd9c5c9f6f33e6621fec62879a1449"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8268007105.json": {
+      "bytes": 840,
+      "sha256": "3dbb30f12a90d4e62a1887f84c466280202771f7623400dd557d557371bd4d9a"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8268595681.json": {
+      "bytes": 886,
+      "sha256": "2b3be305bc4e569f00a30358cfed2234ba5e6192ee401a16000f178d57feb03e"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8270826479.json": {
+      "bytes": 855,
+      "sha256": "26b57489a2f6adffa8eb7042eef5f6f23d5ea4127de0e94f1460be83b22affee"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8274478783.json": {
+      "bytes": 832,
+      "sha256": "94a1147d2efe99102ecab600722ecd5adbd1243f291c86f8afafd00c7f9a46fb"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8278734009.json": {
+      "bytes": 836,
+      "sha256": "66d4ccf1c462233e1af2feb658b46d81064fd6a0ccb244bb2e096e1a413d0c2a"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8281503524.json": {
+      "bytes": 812,
+      "sha256": "9082c7ecc5027e17ad5cf2c94228390a07e49ab559d4687c46bc10190e85ca15"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8283748725.json": {
+      "bytes": 810,
+      "sha256": "6be1559fb4bab833d2315d3341452be28880c943fcae4d74b9aeeb89e336b3fb"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8289813622.json": {
+      "bytes": 877,
+      "sha256": "32679a4e01b503cbb35888905e37abcf96aaac9d564e3c557f466312410322a7"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8296453000.json": {
+      "bytes": 876,
+      "sha256": "82fa173cab3b846b256a2f47b243986b92880861f12c49efaa65e520b14f4580"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8302339464.json": {
+      "bytes": 804,
+      "sha256": "7ac01459daf3ceee6f6d273f9e72335701da003114c41b85e98ecd6b8329ddf9"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8306261129.json": {
+      "bytes": 795,
+      "sha256": "824094f8899398f3a76f0214fad1076c6702beef6ceadeeabe015be2c0902290"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8312125788.json": {
+      "bytes": 774,
+      "sha256": "29a5a44459cd2c74940a1b9617b0c79b92caa6f17ddf50e72c7508b04a8fa4fe"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8312605708.json": {
+      "bytes": 774,
+      "sha256": "4d102081f2bcec0fb2c70489274a00744d2c1c1b1ea1f6ca958ffc27674ac7ba"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8315431536.json": {
+      "bytes": 795,
+      "sha256": "abd3b60aefab56dbad0ed59071c51e210304f6935f0891a4c7f261183fd83046"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8315765519.json": {
+      "bytes": 774,
+      "sha256": "fb19747d187ced4dde045732b930f7b6334ad0351ca752e0e38e87a136015f95"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8320004297.json": {
+      "bytes": 814,
+      "sha256": "28408fc54a12e0350c47fef0dde33897d9b628796bf76debf47d1a39e686d0b1"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8321477589.json": {
+      "bytes": 812,
+      "sha256": "5d21498fec83dfbc274ae3d315c82b9a20085d253b2ef6fba45adfd3a51709a1"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8328206397.json": {
+      "bytes": 881,
+      "sha256": "5f935ac52ede6856cf13ccce7dfc744c42a15cdad1346ba8faf18761d7d04d70"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8328741377.json": {
+      "bytes": 891,
+      "sha256": "481022f98f838bbbf1fddf8b686283bad9e0959d500c8129bc3b1aae9e8bb286"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8331949149.json": {
+      "bytes": 887,
+      "sha256": "d799b0cb500b1af59ab74a410cbc9a2d0e73f035b7ebb2439ea22c8f942fb251"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8331971946.json": {
+      "bytes": 803,
+      "sha256": "9c9b7ada1e2479806f0eda028774968810c88487ede0cd7628533a61a4ffcf23"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8331983526.json": {
+      "bytes": 878,
+      "sha256": "5a026c4eb3193950b4c5cef9e68446c6f050f9b6b424dffe058655cf70cd4d1d"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8334752935.json": {
+      "bytes": 886,
+      "sha256": "9ba81b4e465ff8d00a0d7ed5b16a678637f7ede738faf8e3fa9c45d310931757"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8335598584.json": {
+      "bytes": 800,
+      "sha256": "143059965783390c9abb9f6377442f1e549ba5d4883f4225da2e295291163699"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8337918265.json": {
+      "bytes": 874,
+      "sha256": "e1cfabd40ec340b2fac4f47ef3b0c24aa2202c624b63a6766debbbfc9b603641"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8337964830.json": {
+      "bytes": 797,
+      "sha256": "51691a5c18391d1fa6d439181e670b119afc4e43ba360b1a9f3b8f807d0af672"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8338183304.json": {
+      "bytes": 889,
+      "sha256": "288cf858a273186c4cd921af52c81f6e7c3e98c94332b294faf5f03cb3d70e0c"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8338564270.json": {
+      "bytes": 869,
+      "sha256": "7d946dd03c29983aa6f8599cbbc37fa2971b635c6c8b563b60461afbe9a29d0a"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8340142267.json": {
+      "bytes": 886,
+      "sha256": "a2b7e07befe81f1dd2b586ddfb093bdbeff5f3b412a5e6d766067f2033eaeca2"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8343996884.json": {
+      "bytes": 875,
+      "sha256": "101a57dd6ad74c21886ccd0de7c38ea8cbc98ca76c1e256856aad9615bd6980d"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8346869389.json": {
+      "bytes": 874,
+      "sha256": "08e87fc8f8f67460afc1d85b2d75f77cee206667818a7c4574cff43739a64ee3"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8347448808.json": {
+      "bytes": 813,
+      "sha256": "827f6339ec9cf4cf86f2833a3d43e7f1a7d5148043e22036090646aee9bed83e"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8347481472.json": {
+      "bytes": 867,
+      "sha256": "8263c026ebb2ff4fe61941a9879035451f6bb8cb9abbd382492ce252520640b8"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8347562966.json": {
+      "bytes": 870,
+      "sha256": "df1ca2b3f9bc09432cf56be95d5b0eb0f0b8a8966fe50136198b3f52793545ca"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8347583352.json": {
+      "bytes": 881,
+      "sha256": "91d30eea0e4ebe940b99a077b7b856a4f4074fd7223cfb18df207b4dcfa6a12c"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8347614977.json": {
+      "bytes": 867,
+      "sha256": "a3f0085605b44b977790298a509a51b4da058aec7f5d25456fec4adce63a66de"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8347888439.json": {
+      "bytes": 980,
+      "sha256": "0c9fd3e92630af4eb3bbd510d8312555272c31642a2eeb3141c3bb4b29108936"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8350932476.json": {
+      "bytes": 891,
+      "sha256": "7ef4629e4c7d618b5ebe667fe487d783cdfb43cbe1c92c923116756dfdf2014d"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8355733940.json": {
+      "bytes": 891,
+      "sha256": "4af75444103a04b5a82e97a0705e9ea283bbfbdb81d12d5893283f8853b64174"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8355839737.json": {
+      "bytes": 823,
+      "sha256": "c010be5fdbf5778927f3eb95e727ac6e2c58fddfd996ce6f4a693b42e5945751"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8358666547.json": {
+      "bytes": 881,
+      "sha256": "32bfbe46361bb134748bc1db2fa6f557b4e7c28882e554d9779572a59a8225c4"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8360186737.json": {
+      "bytes": 877,
+      "sha256": "7fa385713c223fae14108d03b8713fcfd0a2f58bb288319678a652dc29dc8157"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8364028802.json": {
+      "bytes": 876,
+      "sha256": "b407abae81efefa0e6931ed44da15f24962e6adfac310ef4f8641a2e46899b5d"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8364110795.json": {
+      "bytes": 873,
+      "sha256": "30497f4d6f7411ec17bee072bd0941dd9ed8b32c76faa852bce268ea13b715cb"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8364370128.json": {
+      "bytes": 801,
+      "sha256": "380644f1a1c2476b0751de0c43df53ada7a73f8f883507e93f9462ec28afe26e"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8364592970.json": {
+      "bytes": 886,
+      "sha256": "35221139fe7e01b633a593b30d094b5de0d4d5905545d71914341cd6999d7dc2"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8366253313.json": {
+      "bytes": 809,
+      "sha256": "ee44a979a47526ed1b790f9b3601419b86e1e327a8c7859f6e9540bb4a4fff31"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8366351614.json": {
+      "bytes": 882,
+      "sha256": "9e9365b2dfaa1fc3470778f319a0657479b8019e63c2ff46bc9be1322ddef224"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8366400508.json": {
+      "bytes": 881,
+      "sha256": "2289a46d59643af8fddb300edc04f63c08c25c189d6eb3d42dff6105e981d903"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8367903448.json": {
+      "bytes": 792,
+      "sha256": "250428bc66c018ede8ae6b22ebf35edde25a288ee51e8bd9a88913dd4af942c6"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8368552763.json": {
+      "bytes": 876,
+      "sha256": "92335a1d524b29de4ddb30e3b8e7f6d00758efae1ff890aae80c9d5486fbe34b"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8368591370.json": {
+      "bytes": 804,
+      "sha256": "9bb799dd35bd9abf8fb663b8ff9d5f5a8fe5bb8fc63cfe6b20dc32bce25387a0"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8368684420.json": {
+      "bytes": 875,
+      "sha256": "0d451e933e0829c4cc681da47ba22cae9f5ac6aa9cf7776e034288c61086a9a6"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8369328990.json": {
+      "bytes": 813,
+      "sha256": "94e57ed0dcdd93529f81ae6a950527b9f7d4344aa1ba6135e00ebd7327b56e82"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8369353570.json": {
+      "bytes": 855,
+      "sha256": "7bc7550a605e1d176b5adfb609762a536923a86aec992345bdf8dd806fedb850"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8369387416.json": {
+      "bytes": 805,
+      "sha256": "c7ce41a01b28767481ff1509f5f2acb46b01ef46dd763e9485656a231a9060fe"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8369477513.json": {
+      "bytes": 794,
+      "sha256": "e9c1a8ccd4ff26a8b0ed2c3c389903c5449fc390fa270aaef00e824c04970681"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8370316469.json": {
+      "bytes": 787,
+      "sha256": "5d208df50fd31b6daa0a991b50fc7758d59a77de368b0845ba5c8abd4c19e2dc"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8370553412.json": {
+      "bytes": 870,
+      "sha256": "af35add543f25a29e405ab10ae87717f525ae6c928ed73808e6113e6a3d99c27"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8372052439.json": {
+      "bytes": 806,
+      "sha256": "bd1130e385ecca6b73095e4940a2ea68d7cd8e324d13942890bf808c02a345b0"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8372164832.json": {
+      "bytes": 859,
+      "sha256": "1a2c081e3b0fc7324c1a6c1f746988220083615816e8f65ac757bff1cca6684e"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8372403818.json": {
+      "bytes": 887,
+      "sha256": "94833d73caee146b669ec287c51f763af87f7dcfc4cf5a942dc4391c537faa35"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8373429718.json": {
+      "bytes": 821,
+      "sha256": "a01debb95ee7b772e36c17c1d5950730204f8c05457525260f65990c38d458a7"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8376810093.json": {
+      "bytes": 804,
+      "sha256": "20b02198e5d4118dee3aa15816a14f4fec48ea10d8803e4b44f00f0356eccfe1"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8379979356.json": {
+      "bytes": 877,
+      "sha256": "1c3d2314d639378e82f79ae63a6be947aab85863edc0874969f41c498edd54d2"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8381038441.json": {
+      "bytes": 866,
+      "sha256": "5b6646f52180bbf775f217319ad5adc39adf0e6bcf3cf487c80849aa6f2b9490"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8382219445.json": {
+      "bytes": 851,
+      "sha256": "05ea844e97082c2073023fc2526cd04c5b22652259c236147e883f2a51b44198"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8382288789.json": {
+      "bytes": 874,
+      "sha256": "994d393cbae89a890067e24b26daa1a08a4aee8e601de9e4604e454586dd18a2"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8382460936.json": {
+      "bytes": 874,
+      "sha256": "c3ddb1ba53b2deec383da1b97809000f656164ef8363001918cb5cf5259aeb78"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8382552988.json": {
+      "bytes": 891,
+      "sha256": "678bb561e72cc4b5d12bb93e172194b52146b0081c34ba539f31d1f94048b3ea"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8383571361.json": {
+      "bytes": 793,
+      "sha256": "72f5bf211fde2adc49b1bd78b66be703c3d5a0dc452557b9a114d3e32fb206f1"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8386621497.json": {
+      "bytes": 774,
+      "sha256": "9984d13e45bd402ea03fdc5b7730847b1f8ddc9f7596bbe07abd270c139409cf"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8387857284.json": {
+      "bytes": 874,
+      "sha256": "6472c711b103d8f00c28091142bfe3fdfac17b9a7c8fac87217a837984246a8d"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8388571753.json": {
+      "bytes": 872,
+      "sha256": "f48cbb4c1f1b77c5633dd64b2b51ed42720ed7433ef572017b1eb605c5c689d8"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8388698275.json": {
+      "bytes": 874,
+      "sha256": "2f97fad12d372af8c151114cf1527a857302339fd244967d4eaa9044470aa0f7"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8390015939.json": {
+      "bytes": 869,
+      "sha256": "8a30fc3478f0aa471b342e146a1b482084fb9f454ccc932d2de84ac00f594a41"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8390277251.json": {
+      "bytes": 869,
+      "sha256": "dc23d1b3a7aa8ea25b4aeeab62a448b052aecc1df1b90bdebc9c887eda45a7c0"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8390739760.json": {
+      "bytes": 885,
+      "sha256": "0c5bc2bb1685b2c14c419f7663579f1daa39fb69894ea2387fb23f9d209c66c4"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8391312693.json": {
+      "bytes": 795,
+      "sha256": "0034673431cd314dcde3a4a1df7bfa38a053e6c44d80034b4eb7da79412774b0"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8391582766.json": {
+      "bytes": 793,
+      "sha256": "7602f92d48f66a9b57528fa76ceb1a494efbda5cd77b6c376b0a2732efca33bd"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8398028594.json": {
+      "bytes": 887,
+      "sha256": "df114ec433df84f78976c9ad0e31d0ba9dbc0886b806abe8c76e66ec415d7b52"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8398162811.json": {
+      "bytes": 807,
+      "sha256": "e1748653ad57942917e8401c135653328984c6026b1562dd6196ee9cf173d661"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8398197637.json": {
+      "bytes": 803,
+      "sha256": "527818cf32ca6b1a459a6d20a57eff790eccadcee1404c3539235a341f66118b"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8398525730.json": {
+      "bytes": 864,
+      "sha256": "0eff88da85c7ef831860e77837793c28350f209c05b22154e129585dc12df4e4"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8399729664.json": {
+      "bytes": 874,
+      "sha256": "1780d42adae9456f4ffdf7ae04eb731d31771f569ef082e30c71869aef3e605a"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8399894975.json": {
+      "bytes": 876,
+      "sha256": "52dbb1b75b82aac6eddff05d3527f2b35a6ac181ea7e84dc5fb39a99083ed908"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8400332308.json": {
+      "bytes": 774,
+      "sha256": "5012fdcefddec297db29978227525d9be6c4fba41a99ecdfad16a80af1150322"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8400351026.json": {
+      "bytes": 868,
+      "sha256": "04a231e7df249c1549502802f5bc8eb5bcceee02702003747d00437c9838aae0"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8400585246.json": {
+      "bytes": 880,
+      "sha256": "94afd9632ef102c2956b674c6546cbf79c03d117b6612965d6c4973102aac0c4"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8400847801.json": {
+      "bytes": 949,
+      "sha256": "d542c183e27495df5dd40d0712e360597653437b01ce3ec17f68626a8ffa310b"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8400948294.json": {
+      "bytes": 868,
+      "sha256": "fbfa089e87b99488730b5feb10a536d64320c8c144d90fa7d1dd4193c7f88b8f"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8401130381.json": {
+      "bytes": 803,
+      "sha256": "6e98b0355204f33d86464dbad116d0d6a37fc2314474a43fdaa3ff7a67f47377"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8401458876.json": {
+      "bytes": 882,
+      "sha256": "d151efd92796feb2dc84779fe2801934b2819a6c4d21e3e959f043d057197006"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8401566276.json": {
+      "bytes": 949,
+      "sha256": "03adaf2f19761a6ca8cca6cf0971eeb7a1acfbf01b6eaa437390540b94313286"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8401594327.json": {
+      "bytes": 869,
+      "sha256": "8abbd741252d724a3ceb93ef47ca4a97a4cac155e4aec490cac912d101b1934e"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8402726454.json": {
+      "bytes": 874,
+      "sha256": "b24fd1aea75bbb20cffb107047c9be6ee77527f2cff6303ffeee55a9c60d06b1"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8404844133.json": {
+      "bytes": 866,
+      "sha256": "dc3c28d640da1380078b721924dd6ea1cc067ecb7a3840a929fbe2ae816de893"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8405444773.json": {
+      "bytes": 891,
+      "sha256": "77e3fd3de161c1886f92f1a070aa4fea7e52bb4014d519a583d67e9998828995"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8407969574.json": {
+      "bytes": 900,
+      "sha256": "c8b35ca9bc5508d97557eeea13398bc626cc906ddfc33f8061d135fd8239b954"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8408032479.json": {
+      "bytes": 860,
+      "sha256": "e82c853d8d70bc8aa03fa0dffbf777b0b6a2b4e7ca8d8961d577c07fb29c393b"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8408553129.json": {
+      "bytes": 883,
+      "sha256": "e86ecb5c4c746c99b42bdc3914a258096020ce699c25c91052271ce463a027d3"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8408591754.json": {
+      "bytes": 807,
+      "sha256": "7829d11b9d35cd50a196b548605aabec703e6958989ab9f288f97d7acde4866d"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8408797457.json": {
+      "bytes": 869,
+      "sha256": "0bce60a1351428182e1cee4b7388938b4946e5dfbe4d8c86976a95a287300674"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8408812057.json": {
+      "bytes": 875,
+      "sha256": "b1582b2346003cda001bd53ee47beff4efda54cb7bb9bd605240c51ce281e114"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8410287584.json": {
+      "bytes": 891,
+      "sha256": "e90a9b6bb4c043bc7829dea48b15a48bb25a0569468549d33ba1c243029edec0"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8413342441.json": {
+      "bytes": 984,
+      "sha256": "369face4554c191c3f397ab2fd019549f61a7b7525b9c7ac581fc692bd1dcea7"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8413629565.json": {
+      "bytes": 887,
+      "sha256": "8310a4be0bd5e7271379a9c71012cc4785132f29009967764dbea902f4783f29"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8413657195.json": {
+      "bytes": 880,
+      "sha256": "ed722a0b8e868de4cb9a1ca58d893c8f53fbbde45f7e6f05e988819748f1fabe"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8413856162.json": {
+      "bytes": 876,
+      "sha256": "0e3c15f06ffe9f02c7848c42a4acf9bff411fefcd8e75c56c83cc1653ecd7ca3"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8414055527.json": {
+      "bytes": 884,
+      "sha256": "a0a5a88f4b0022022c0689180261b4a64ab094ac3b0068874ca58918077e55f7"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8414066980.json": {
+      "bytes": 867,
+      "sha256": "1321a084a13bd871a613afe0f3dd772ed2d5ddb12b1726f83d43c7734afeac0d"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8414384170.json": {
+      "bytes": 884,
+      "sha256": "cd26b4306e118a8ab372c7a9c0be60686b0f978d04c987ada01f6f109d15d246"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8414820406.json": {
+      "bytes": 806,
+      "sha256": "3694b08c325bd1fc1e57b48910b57b2d10936d971ffc0abec707ff8730083a71"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8416854258.json": {
+      "bytes": 884,
+      "sha256": "ee870ac0d21fcccd71a115afba6544e1cd19983c053e8d9faa66c62afab4deef"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8417975786.json": {
+      "bytes": 876,
+      "sha256": "117d273fa071ce4d6c266061e73703704677e8489ef257987a937eb619e4d666"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8420434007.json": {
+      "bytes": 888,
+      "sha256": "24c57f078d9648854d06d1193e087e8c7f75738493debe5a0d40df97343fa4d6"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8420552182.json": {
+      "bytes": 870,
+      "sha256": "b101f0317120ae95ddf40d141a342a624f24a5e3a299d5ef88188fa0d268b981"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8420686069.json": {
+      "bytes": 870,
+      "sha256": "63aea1c9923e7bb67c36a2932d0b61ef86e0f79a962c5b5095aac56ac3cec99f"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8420722511.json": {
+      "bytes": 774,
+      "sha256": "50b7ddd42fcfff0ca52ad48bc6902e53d7a30defddcce0e39964c73318a15047"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8421492487.json": {
+      "bytes": 812,
+      "sha256": "27381c9f8d88444ded0c243ee0a9ef80ac7a819a977d567b1a5a692de5cc5271"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8421944091.json": {
+      "bytes": 774,
+      "sha256": "5a36f1c16c29ba92d6eebd1c5866c2dc1ff5335189f070911af442a95aacefd8"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8422063521.json": {
+      "bytes": 794,
+      "sha256": "f93917c7d036647089252e092177005a524f8e8189218a099a5d8c83de330b34"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8422639289.json": {
+      "bytes": 794,
+      "sha256": "25660da161a1fa1782234bbe82fd381d5ade78832d252cec66a1582b7d73f8c0"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8423001283.json": {
+      "bytes": 871,
+      "sha256": "81283bea71583746b689b0ecefdbf919ae574f5774d724b0abd45cc9d42cec66"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8423153379.json": {
+      "bytes": 885,
+      "sha256": "6cf3afd8859b0aa2ff0a4107ba0495465961404747bfe8bd267922544e065838"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8423266868.json": {
+      "bytes": 798,
+      "sha256": "c4fbd31d161afe589dd3278827fa2f4b051443b5284569977f633fb0466f2ac7"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8423321140.json": {
+      "bytes": 877,
+      "sha256": "3a520e6e7e83b5ce7db4a3a55570abad77de21400824bb696f9b36b7f9c0f80c"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8423427865.json": {
+      "bytes": 806,
+      "sha256": "c069d5236f76609b8d68bb1ce5927b5f6426b4c1931609620bc8fa4dcc478e20"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8423628732.json": {
+      "bytes": 803,
+      "sha256": "a897f18a7197ce8ae0ebfd8abd3504a4ca68211d7cbd2de9d08cce5620fcb324"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8423688256.json": {
+      "bytes": 872,
+      "sha256": "4af45d8c0ce8865ea58a5e919b05f93788b1eaf6801a06f34b86149cad435349"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8423707240.json": {
+      "bytes": 880,
+      "sha256": "45d13b52e38df9756852639bf7f771548753f10ec256a363f2ad2bf400869c8a"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8424927309.json": {
+      "bytes": 799,
+      "sha256": "82da3e5b9edfcc010713f52f758e9b2075cc5aac307cd17a293b6ae2f875ec2a"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8431155494.json": {
+      "bytes": 774,
+      "sha256": "1d3f2bebc2142dcce26672c58537cbbd5dfb9b88c6350ed35285158c16c8dcb0"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8431248677.json": {
+      "bytes": 809,
+      "sha256": "7cab4aad4ecbb0ac4d467f654eba4df64ffd99f933daeda5e4d12a88387db3e2"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8431465876.json": {
+      "bytes": 800,
+      "sha256": "feee2d570bc42008d7765b1728a372c002359c186e8bd3c57d85825c754ab24e"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8431553880.json": {
+      "bytes": 794,
+      "sha256": "2a6fa7928b1a989b7c07d7e04e0dc65c87417b266643b02e9fa7210ad3ea9453"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8431788571.json": {
+      "bytes": 876,
+      "sha256": "6bcb7c6a319339163b757afe0ffd3e8d95c68295de9f94756a8e6cf178d4e01a"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8436899603.json": {
+      "bytes": 810,
+      "sha256": "57241a6338e8a53c72ba79b51049a85b7d4edee127c103efc70ceea6a88f8bcd"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8437874989.json": {
+      "bytes": 807,
+      "sha256": "f676bbf910eb82d0e4c745ac99544e097a3c05f548c1e33953e562bcebc39188"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8438338876.json": {
+      "bytes": 774,
+      "sha256": "5e918677f282264a52cb50c8aa65920ac7b1b602fe9852cc12cbf2dc3f511136"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8438786973.json": {
+      "bytes": 801,
+      "sha256": "3af994415166bc8a54a6f27b36fcd2292db601af24185e27872938ac37c250da"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8439459599.json": {
+      "bytes": 984,
+      "sha256": "cf21f7ad60d24791aa731d833603a0cb6d0805bad042ac5f0f0bbddf54a92bc5"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8440031853.json": {
+      "bytes": 797,
+      "sha256": "bce994b7752e15bebf7e409a8614d86bce01ae41e72f214d8b139b6eb529cdd3"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8440303085.json": {
+      "bytes": 871,
+      "sha256": "41adbe84960afa66f52c3476cd714a5d8c64804ad8dbf050698e0a475e180f7a"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8440766026.json": {
+      "bytes": 794,
+      "sha256": "7f3676776e9df61d8b2cbf4a444a66c442222e792b54f3e6b29a0b817a997835"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8441015497.json": {
+      "bytes": 884,
+      "sha256": "382d61433affeb29091536b332a816c90452cd2ed7f1f0d3c56d1eeb8f35d47a"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8441169535.json": {
+      "bytes": 794,
+      "sha256": "a8281899988271543c9acef874dad121c7b1917dba2594851079b06a785e692c"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8441227758.json": {
+      "bytes": 803,
+      "sha256": "561a410a741ac7bd00727202345ae7502f04a5f5d719d23bb4ca867cd4b6a88f"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8441246758.json": {
+      "bytes": 885,
+      "sha256": "855894fff964ddc8eabd800e1114fd7e367a3fdb10c8f3499641cdfe600c25e9"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8441915015.json": {
+      "bytes": 842,
+      "sha256": "06469d94bd88304b14332869c28372f2d547a6fe1d05070889f2e09d45f715aa"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8442130940.json": {
+      "bytes": 787,
+      "sha256": "84ea75919b8f4d5ee2bc58586349295a48a69d39bc9c674af9a5616c831d5dc6"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8445037297.json": {
+      "bytes": 904,
+      "sha256": "ee367e3b54512305f63e014a037fc87afde8c9df4f102d8d1a8c4a7ed436748b"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8445037616.json": {
+      "bytes": 794,
+      "sha256": "4935049cd4162cd2d88c426a006c20aaa212b37999f9d9abd42ac55ef9a87b2d"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8445442258.json": {
+      "bytes": 888,
+      "sha256": "5e4d363cb3cb894983d70a70727dd4f00a664111c2219878a089796ae490c762"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8445728626.json": {
+      "bytes": 822,
+      "sha256": "5c3df4de0b1d9f0233f05f5d01699f410acedc2346bc5189fe796c8f1b92e8fe"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8448166010.json": {
+      "bytes": 888,
+      "sha256": "d42e902fde130f7753035142056abadf51f65b348ac80a56b0f2dc45bb3744c3"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8448581555.json": {
+      "bytes": 893,
+      "sha256": "4e5ee4f6d73f454a7c4b7c5905427706c52042f9dedf97f720c7959d36cf5b48"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8449071908.json": {
+      "bytes": 802,
+      "sha256": "cb59e820d5cd22657c2b54735d64fa4e5dc8d8068ec03389041244833bc29f60"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8450697882.json": {
+      "bytes": 882,
+      "sha256": "a263db6efd64ecb209481d95d33724a0eb0084e213c1cec61da499d924be32e6"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8451138882.json": {
+      "bytes": 795,
+      "sha256": "0235c113d52ef2a3b7a1e0a47201abde5e8a67eb29e5a2d3c0c3f5d2874cb6d7"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8452190182.json": {
+      "bytes": 866,
+      "sha256": "f6ad17ec4fe0adb9de0b73419ccacc5baea32bfae363273585c349811dcbf305"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8452435667.json": {
+      "bytes": 880,
+      "sha256": "6a4abd7810364bd5b17fc3b3b6ff4bcfa87636b20035647181c5634e7a6a8105"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8452562376.json": {
+      "bytes": 814,
+      "sha256": "90037a6bfaf3cd5e3743b43c14d4a8dce9800e9cb4becd1a1a07267788a19aae"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8453668915.json": {
+      "bytes": 886,
+      "sha256": "e0925a0d7150bfd0a095ce52c797f14068c0acb1b95e40bf92a61bf0dff07340"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8457891144.json": {
+      "bytes": 827,
+      "sha256": "ace66839377edc37f4f56151d048c5e57573a57451186bd9e89e26f4b76be2d5"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8457895823.json": {
+      "bytes": 870,
+      "sha256": "fb42f5682faa10cf47f7529931b349eff26aea4af34d846336fe72716aff2d02"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8458872910.json": {
+      "bytes": 876,
+      "sha256": "834475a5f0fe5d1b1f0f2e0797c2e165c4fa8385c56260aa921ba3ddd25a3017"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8459057814.json": {
+      "bytes": 880,
+      "sha256": "911dfd3801de5a4995191ec87817a40e617a59f4f9377229de3ee93478ff21d9"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8459191599.json": {
+      "bytes": 800,
+      "sha256": "1fc1442fa246c75d4ebc92230846032d2cf224dcecdcd41bdfeae761b906a8d2"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8459487121.json": {
+      "bytes": 806,
+      "sha256": "95f42f57164a46af814e4f3a851e55f3dbb0513afb30e01d5e25a490f581cc20"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8459507557.json": {
+      "bytes": 876,
+      "sha256": "b349a5338ca1ba4d657ce68affd08651e254476dee00e788d6ec74fa80ed7a88"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8459606780.json": {
+      "bytes": 871,
+      "sha256": "b69bd1eaa9e59b058b8627c1a3b77aa25f09426da32b7a4d24cfc306d0a3289a"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8459722705.json": {
+      "bytes": 801,
+      "sha256": "e790d3b373747cd6fb2de796190ed88b862002ccbfc286502ca52035e3c3b71c"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8463219526.json": {
+      "bytes": 875,
+      "sha256": "22fd6a1c86eb13de8b9972d78db3d6b428ba68826af10e9af563c9a4f663a578"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8463661809.json": {
+      "bytes": 795,
+      "sha256": "e5835b0f06e2c7bba88f004c916685226231a6ec94f414b4537457c55e2fd9df"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8463727630.json": {
+      "bytes": 879,
+      "sha256": "e5c9820fa0de2241088181182de135080b501fcbc0d8d038530f66c5f016e8a2"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8466970386.json": {
+      "bytes": 876,
+      "sha256": "9fc4a2562670bded257342e7921ccd4e7682de7dd5f4c740d20344fc41567a35"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8467511784.json": {
+      "bytes": 862,
+      "sha256": "05d9d7d88bd6bd7781b4380ff300a15c345e8ba6b4864765237a590e6335cdb8"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8469130800.json": {
+      "bytes": 884,
+      "sha256": "3d9598f148ca3f2ddea27cc956796530f95f60f1b8627cab4997214ca4d1c29c"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8469921578.json": {
+      "bytes": 800,
+      "sha256": "060dabcd22fb1176217e54d49c88b290c7b2d3f3740a60830045c89cbf224321"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8469951524.json": {
+      "bytes": 871,
+      "sha256": "f6f0cecf09d096134ed9d0eff5ac8495bf28879ed1036469cc75d344806e6121"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8470146191.json": {
+      "bytes": 790,
+      "sha256": "c04ce96570af9e24f9512eace8c976d555fa39f106be61588a017e562aa18ec2"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8470188279.json": {
+      "bytes": 884,
+      "sha256": "0824a43ae73c27aa8a9c8c5d55caffcf633bcf087cc5d8e0b8abc01637ef2fec"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8470211478.json": {
+      "bytes": 874,
+      "sha256": "7bc02f228f07ecffdeab60ad263e5e2e313d2bf8e20de7d5d35e24041338b2d4"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8470218575.json": {
+      "bytes": 883,
+      "sha256": "170d33d2191279046314a5ef6a270dd715c087e51f2679c802075281265d4bfd"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8470607262.json": {
+      "bytes": 870,
+      "sha256": "851a247f65b46eab408d231e80be9cb23e805793a9d5220fe0bf9108bcd4b706"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8470648905.json": {
+      "bytes": 796,
+      "sha256": "52b693607ed45195b215c525118e1cf774ba6955158ef2d8aedbcae4ad378d28"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8470668389.json": {
+      "bytes": 811,
+      "sha256": "29e42f3a525b76a526d4c5ec9b38f66a32a7f00748aaa51cecbc2704bd73b540"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8471045516.json": {
+      "bytes": 816,
+      "sha256": "583324b936e707cc2bc6e44db28dbf9f3c8da36574a657aa596d7c452a53ac89"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8471079822.json": {
+      "bytes": 794,
+      "sha256": "b82d07e155f66752b84eeb2a6afb6a68445df37255c92017c48ac4ec6e52c056"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8471126599.json": {
+      "bytes": 880,
+      "sha256": "68fb2f4263ca126c2d69097817bdcfb2e2da5a2f5395361f87ef42716d9d1221"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8471130861.json": {
+      "bytes": 887,
+      "sha256": "f5b5c5ab2dec62c6c5d7f967537e1c69188eeda1c91f3d71df831a5b51f41dc2"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8481412823.json": {
+      "bytes": 886,
+      "sha256": "8488fb3ea288c8456db3b6d474b82ae06b1657e8e14856e3e2951389448027e9"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8482033522.json": {
+      "bytes": 884,
+      "sha256": "c6ba7f1eb2fc50140007a4e59d03647dca47b9e3ed4f1d23320281f8e995dfb5"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8482136933.json": {
+      "bytes": 855,
+      "sha256": "63cd2e3156ab7393425ccbecdbc7d4acff31081cedd8767a81199f0dc4aade7f"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8482209664.json": {
+      "bytes": 882,
+      "sha256": "6ec4a59c5685936f83c1761669fbc4552b2830dfb4988bf739beba3ec083293c"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8482304443.json": {
+      "bytes": 774,
+      "sha256": "909a09bbc4f553cd0d67147589b26782acfbaa28c8649f7cc13864f0ef6605e3"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8482810213.json": {
+      "bytes": 876,
+      "sha256": "37bfd9c4a5da677ca952fec8588bcc0bf0e3a7ff2c7e044f52e9ee7c27784313"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8483435577.json": {
+      "bytes": 800,
+      "sha256": "195bf6506b886769f752ad01ccda23c68d31ce26efb1397a62dcc39fe12859cf"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8483455727.json": {
+      "bytes": 836,
+      "sha256": "6b46c22c8423be67c1f550a2b09c2ef1435a4550ece0c4d0aab8a15c44d7b6ca"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8483549762.json": {
+      "bytes": 809,
+      "sha256": "3c039812fabd516cf9e27d7fbb9f0cff875250662d135abfb1af25c9276eb31b"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8483675078.json": {
+      "bytes": 888,
+      "sha256": "18597157a02aade2c726ead294e0637343f293130a7181848416078fe8e3df2c"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8485150469.json": {
+      "bytes": 861,
+      "sha256": "8e528560e0dc9c754f71d4618ab84bbc64a57c49a410458ffcaaef3a96c7861f"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8485423884.json": {
+      "bytes": 792,
+      "sha256": "695757b87c0aedc247e633f010c5d2be8086ecca59fb55a81bdcbd2fc8852b54"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8489042635.json": {
+      "bytes": 796,
+      "sha256": "eea33703872d8a14ccd8ce8b1b725501e513b2ca7c11efebaecc4be975d74175"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8489640362.json": {
+      "bytes": 878,
+      "sha256": "7a4af0cd745fd91906027444599a6df87a95faa9afdf26a43c875167d47499c2"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8489853083.json": {
+      "bytes": 890,
+      "sha256": "717c289a82e31825d45474e67916641adc6243c20ae07de1f31933d12fa0980b"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8490060310.json": {
+      "bytes": 873,
+      "sha256": "a971728527c8ddf729c15a55f4f2466ef6ceaeade59d069b94991f02b003bb63"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8490440096.json": {
+      "bytes": 868,
+      "sha256": "a002d6edd92855482d2bc502f13ca4526f60c48b31ebf9e1520a8c02a340a96d"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8490464155.json": {
+      "bytes": 873,
+      "sha256": "0f7f96a8bb6d5d5697c489503727853b554d408495405a2d67ae6310b5d7f9f0"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8490639198.json": {
+      "bytes": 886,
+      "sha256": "c9e95c5d09b1184d54adf9d2d41feb7aca889425e256d3dadd25d3fc1b78ebe0"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8490778093.json": {
+      "bytes": 774,
+      "sha256": "1c202f1d44a67db48fc325dc53c275811d5a34092c57c9ad9d6bce5bc7579b06"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8491549633.json": {
+      "bytes": 779,
+      "sha256": "8adad05bfcd29d3b6f5bf04b6cb18dd3fda1d22b6a76b95ff1c79542c41eea73"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8498848463.json": {
+      "bytes": 879,
+      "sha256": "ebc17b8782939eec274531e145219d0ec4c7f1fdffc2fcc65c73c4f9f2eeef71"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8499526120.json": {
+      "bytes": 884,
+      "sha256": "30551f4a116204620ddb1bf9bdd4ca436de5df922b41dc68a42cbfdc2e6032b4"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8499561893.json": {
+      "bytes": 796,
+      "sha256": "dbd5739ef6fcd4fff04514730841c3acae7495de14f18d76f236352990aa729c"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8503417951.json": {
+      "bytes": 882,
+      "sha256": "f507729fd690ab9ceafb306f824906937e3ce79dde585483286803b7c916383c"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8503495370.json": {
+      "bytes": 797,
+      "sha256": "af73cfec50b226d4d9cfc6ff265b3c7aba08e50886f8fb5e6717c5ff79d7794d"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8503530944.json": {
+      "bytes": 874,
+      "sha256": "351686bffc10234f1b01e6131d9ede4ab9331c55f9b771014cb46311dbddab1c"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8503694813.json": {
+      "bytes": 874,
+      "sha256": "27fdb229c327cb2012899dbc9a06c5ed8cbe5950660c7531adc3dd3633222a83"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8511950069.json": {
+      "bytes": 846,
+      "sha256": "0adbf1ae48b26ba01fb3022478a1b775a27b5c1ae5275b668c7e90b32a797665"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8512503496.json": {
+      "bytes": 872,
+      "sha256": "7b02f17dc11044062e820ff95dae203ef18af335b5c908a92f6b3f025551ae90"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8513832786.json": {
+      "bytes": 858,
+      "sha256": "44a26c384ced07711e660e95ed9b54c5bac9205fc35f2fac6384e90c2e45d66b"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8513872974.json": {
+      "bytes": 801,
+      "sha256": "03827b7414b75db563fdf4bddb09210104d516565072313957a8548cdc4ebcb1"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8514311709.json": {
+      "bytes": 787,
+      "sha256": "56fff28f80f4543c3ce1927b30b405eb591dfcb52209500ce13a3ab09283195c"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8514555898.json": {
+      "bytes": 881,
+      "sha256": "c9ed117d7a0fc8ae48fe7ea5617d19aca4023169be2b5d5fabb2f4f6e2e9bf77"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8514576448.json": {
+      "bytes": 866,
+      "sha256": "6adf90e864f061f67c294e9c86b336cd6856b0a5f0b738700cee5a77de661ad3"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8514782009.json": {
+      "bytes": 887,
+      "sha256": "6050964e8db1fee719eae87acb1c9c67d9bb386d715ea3e7feb03752a587677d"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8514935273.json": {
+      "bytes": 883,
+      "sha256": "126757b6297cabd28faef7c33a821c2b331f03f5a94795eac2f97738984c7c5a"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8515316670.json": {
+      "bytes": 876,
+      "sha256": "6fab799eefe4a452dfa0a5bfbb9670a5123a9ce83d447d273da998b84e5e3487"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8515426943.json": {
+      "bytes": 811,
+      "sha256": "9e01c946db53950a256e5d24ec178d6edff6081556c29e7f933d16332a5b85cb"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8515694679.json": {
+      "bytes": 887,
+      "sha256": "6dc22912f0f80ef797ca71dc09faadeb20d46b66f5892a51add974b6e5ca55ba"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8517017026.json": {
+      "bytes": 832,
+      "sha256": "747101cebb75fe28b005c03a7be434b3b12fae4bfb7df5e7cdfbd96c8bd0444a"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8517358978.json": {
+      "bytes": 887,
+      "sha256": "617d66d9765d3a158a4a4e0a350adbcacf9e569e913d048e12ab47bc4bb33994"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8521027745.json": {
+      "bytes": 884,
+      "sha256": "a98425397139116bcc86830d40df6f9c87961ff3b689fce318899e5496aa3fd8"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8521036808.json": {
+      "bytes": 794,
+      "sha256": "dcd60920e22bce1c4271af65f6815878a86628cdd6019641b0f95196388c8189"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8521043293.json": {
+      "bytes": 881,
+      "sha256": "b861fc880ce44658b8161c6aa66602f36f1e827a474c03f8c03f249c45fbf0f5"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8521540484.json": {
+      "bytes": 864,
+      "sha256": "e4bb9d97eb04f1d922d911f7f9302c3f506d8c99471f11dc76bb8d09d6f51dc2"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8522187183.json": {
+      "bytes": 859,
+      "sha256": "b3c80baa0ed1f398214d9d21afc6414b61b28d30e3340d69345adc727ec6c8b9"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8522786528.json": {
+      "bytes": 809,
+      "sha256": "a7769bcb8860e26b433dc9ce992ebc03f9c51023921740f8077406ff54bcd103"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8531233782.json": {
+      "bytes": 888,
+      "sha256": "a226148103b835dd8e512d3c35e4110b3ae0b44abe804721b5b0911e6e11f0e0"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8531392068.json": {
+      "bytes": 877,
+      "sha256": "31114a44edab305e8651ab1ec5719875abd712cdfbdb90e3bd7bd86eb845ca5d"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8544049264.json": {
+      "bytes": 865,
+      "sha256": "7ef0c30d6be8d421102b788153b5f0e12cc67271bee35f05249981e3ec2e1019"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8544473627.json": {
+      "bytes": 873,
+      "sha256": "dedf6822f0a1ce6fd5f5c3323dba0d46cb0a1773400c7ef003f94254cfb68f52"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8545069618.json": {
+      "bytes": 829,
+      "sha256": "ad522118334a8ce7ac755d2107e354df30d9cfcc6b019e2eaa599797befac36e"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8545185403.json": {
+      "bytes": 870,
+      "sha256": "6e30f12b85564c606a9f593ef62f967f3bce7704333c357ff16b80ccbda53385"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8556917925.json": {
+      "bytes": 884,
+      "sha256": "dee34945f8b33295cf013aee810c5b6f8303c93adec63c557cc9c75d21b0ed48"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8556951131.json": {
+      "bytes": 986,
+      "sha256": "05a65a6dfb3ab57818b9406e91037c7ebab21e9d3af6a86c06d09f0fd0d661f8"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8557356368.json": {
+      "bytes": 886,
+      "sha256": "f2d29d6f59e4fb4dbde5a9d0eab1433380964f60c856a90cbf3cb3af7a8b43b4"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8557389239.json": {
+      "bytes": 871,
+      "sha256": "e017ae9a8fe6899993e1a96b1ce9ae147a52af80c8aa549aeffba086a20c2c46"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8574854544.json": {
+      "bytes": 891,
+      "sha256": "a91f6c90a526ffbbdf9a3671b12c4b9ac667d328589eae341762db4000160cb5"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8575025472.json": {
+      "bytes": 812,
+      "sha256": "e7c0fb1c28ea052028cd0aabd5a62f4f83980631347db1569e547b8055d83815"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8575110532.json": {
+      "bytes": 866,
+      "sha256": "688f640e22f65133e019fbfc8c02a58376a53e49774866d4bae748349eacc446"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8575530052.json": {
+      "bytes": 968,
+      "sha256": "059cee274213095d2d77ab3a63025644156ea26d4bb3c809a81f9a2780d6c9d7"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8575531894.json": {
+      "bytes": 884,
+      "sha256": "141ce90df384085bc45d38c450afa45c52f1c752e18260f691d9d0379e7510f6"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8576660110.json": {
+      "bytes": 876,
+      "sha256": "742acb7f406469f54f1f92581cbd301f3864e2e5624d1a5b00f80aaccd084879"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8577337227.json": {
+      "bytes": 791,
+      "sha256": "4dd25bdd1a8df373572bd4ba595b89c116646b76b5a75c38321f4b29ce026f99"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8606861379.json": {
+      "bytes": 836,
+      "sha256": "73a46444d113a9518869d60c974b9bfd49e0a34e345acf64edb97ad65f5ec7d4"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8609350822.json": {
+      "bytes": 794,
+      "sha256": "f8de7664e23f1700777c51996043783485d4a69b2eba73815619cf18188f8cab"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\reviewed\\8609493486.json": {
+      "bytes": 797,
+      "sha256": "a4f24843fb246fab5faa155ffe707092667b990c8e49460beb6f62f13e3c5623"
+    },
+    "Data\\avito_runs\\samara_prodavets_first1200_20261106\\standing_unavailable_policy.json": {
+      "bytes": 907,
+      "sha256": "8c648d9bb469af351335c6c69800c0cc61b90e0dd5ce8061a992aedbac9179e4"
+    },
+    "Scraper\\runs\\samara_prodavets_first1200_20261106\\plan.json": {
+      "bytes": 7626,
+      "sha256": "6ab99c6c2e644de91d4efe3bd0013fecac950ba91784f904aafc4700debb55ef"
+    }
+  }
+}
