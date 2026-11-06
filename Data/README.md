@@ -265,3 +265,9 @@ avito_runs/<название_сбора>/
 - [avito_20261102_gruzchik_all_1500](avito_runs/avito_20261102_gruzchik_all_1500/exports/vacancies_flat.csv): 1389 вакансий.
 
 - [samara_prodavets_first1200_20261106](avito_runs/samara_prodavets_first1200_20261106/exports/vacancies_flat.csv): 362 вакансий.
+
+- [avito-yakutsk-20261106](avito_runs/avito-yakutsk-20261106/exports/vacancies_flat.csv): 1240 вакансий.
+
+- [avito-amga-20261106](avito_runs/avito-amga-20261106/exports/vacancies_flat.csv): 1244 вакансий.
+
+- [avito-kamchatskiy-kray-20261106](avito_runs/avito-kamchatskiy-kray-20261106/exports/vacancies_flat.csv): 1071 вакансий.
