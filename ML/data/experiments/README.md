@@ -10,12 +10,21 @@ These four CSV files are mutually exclusive, reproducible views of
 | `03_watch.csv` | Every vacancy whose schedule is `Вахта`. |
 | `04_other.csv` | Every remaining vacancy: explicit rates per shift/hour/week, variable pay, no amount, military contracts, likely rates and city-less rows. |
 
-Rules (`rules_version` in `manifest.json`, currently `experiment_datasets_v2`):
+Rules (`rules_version` in `manifest.json`, currently `experiment_datasets_v3`):
 
 - `city` is taken from the card; when the enrichment left it empty (an address
   without a reviewed placement entry, e.g. Колпино, Шушары, Видное) the
-  settlement is recovered from `location_observed`. `city_source` says which:
-  `card`, `location_observed` or `missing`.
+  settlement is recovered from `location_observed` by `locate_city` in
+  `utils/build_experiment_datasets.py`: address parts are matched against a
+  gazetteer of Russian cities (`utils/data/russian_cities.csv`, from
+  [hflabs/city](https://github.com/hflabs/city), CC BY-SA 4.0, plus hand-added
+  cities in `utils/data/russian_cities_extra.csv`); homonyms are resolved by
+  the region in the address. On rows that do have a card city the parser
+  agrees in 98.9 % of cases (the rest are Moscow districts such as
+  Зеленоград, returned as Москва). `city_source` says where `city` came from:
+  `card`, `location_observed` (gazetteer city), `location_settlement`
+  (village / township, e.g. `пос. Койсуг`), `location_unlisted` (a name not in
+  the gazetteer, kept as written) or `missing`.
 - An amount without a period is treated as monthly only when its largest number
   is at least 10 000 rub; smaller ones (`2 800 — 3 480 ₽`, `от 4 000 ₽`) are
   almost always rates per shift and get `pay_mode=low_amount_likely_rate` in 04.

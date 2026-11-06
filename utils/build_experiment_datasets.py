@@ -14,7 +14,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 SOURCE_PATH = Path("Data/dataset/vacancies.csv")
 OUTPUT_DIRECTORY = Path("ML/data/experiments")
-RULES_VERSION = "experiment_datasets_v2"
+RULES_VERSION = "experiment_datasets_v3"
 # A non-rate amount whose largest number is below this is almost surely a rate
 # per shift or hour written without "за смену"/"в час" (median ~4 000 rub,
 # 11-12 h shifts, weekly payouts), not a monthly salary.
@@ -89,43 +89,171 @@ def is_variable_pay(value: str) -> bool:
     return any(marker in text for marker in ("сдель", "процент", "%", "бонус", "преми"))
 
 
-FEDERAL_CITIES = {"Москва", "Санкт-Петербург", "Севастополь"}
-REGION_PART_RE = re.compile(r"обл\.|област|край|республик|автономн|\bао\b", re.IGNORECASE)
-DISTRICT_PART_RE = re.compile(r"р-н|район|г\.\s*о\.|округ|поселение|муниципальн", re.IGNORECASE)
-CITY_PREFIX_RE = re.compile(r"^(г\.|город)\s*", re.IGNORECASE)
-# Metro / travel-time tail glued to the name: "Одинцово Одинцово 16–20 мин."
-TRAVEL_TAIL_RE = re.compile(r"\s+\S.*?(\d+[–-]\d+|от \d+|до \d+)\s*мин.*$")
+# ---------------------------------------------------------------------------
+# City from an Avito address
+# ---------------------------------------------------------------------------
+# Gazetteer: the 1 117 Russian cities of hflabs/city (DaData), CC BY-SA 4.0,
+# https://github.com/hflabs/city. Columns: city, region, region_type, population.
+CITIES_PATH = Path(__file__).resolve().parent / "data" / "russian_cities.csv"
+# Real cities missing from hflabs/city, added by hand (same columns).
+CITIES_EXTRA_PATH = Path(__file__).resolve().parent / "data" / "russian_cities_extra.csv"
+FEDERAL_CITIES = {"москва": "Москва", "санкт-петербург": "Санкт-Петербург", "севастополь": "Севастополь"}
+REGION_PART_RE = re.compile(r"обл\.|област|край|республик|автономн|\bао\b|\bаобл\b", re.IGNORECASE)
+DISTRICT_PART_RE = re.compile(r"р-н|район|г\.\s*о\.|округ|поселение|муниципальн|сельсовет|направление", re.IGNORECASE)
+# A part that is a street, building or similar: the settlement comes before it.
+STREET_PART_RE = re.compile(
+    r"(^|\s)(ул\.|улица|пр\.|просп|пр-т|проспект|ш\.|шоссе|пер\.|переулок|б-р|бульвар|наб\.|набережная|пл\.|площадь"
+    r"|проезд|туп\.|тупик|аллея|линия|мкр|микрорайон|кв-л|квартал|тракт|дор\.|дорога|стр\.|к\d|д\.\s*\d)",
+    re.IGNORECASE,
+)
+CITY_PREFIX_RE = re.compile(r"^(г\.|г\s|город\s)\s*", re.IGNORECASE)
+# Rural settlements kept as they are when no gazetteer city is found.
+SETTLEMENT_RE = re.compile(
+    r"^(пос\.|посёлок|поселок|п\.|пгт|рп|р\.п\.|с\.|село|дер\.|д\.|деревня|ст-ца|станица|х\.|хутор|аул|сл\.|слобода)\s",
+    re.IGNORECASE,
+)
+# Scraper notes and metro hints that are not part of the address.
+SERVICE_NOTE_RE = re.compile(r"\([^)]*\)|;.*$|\bрядом\b.*$", re.IGNORECASE)
+# Metro / travel-time tail: 'Казань Кремлёвская до 5 мин. Площадь Тукая 16–20 мин.'
+# is cut at the first time marker, leaving 'Казань Кремлёвская'.
+TRAVEL_TIME_RE = re.compile(r"\s(до\s|от\s)?\d+([–-]\d+)?\s*мин.*$", re.IGNORECASE)
+NON_ADDRESS_PARTS = {"россия", "рф"}
+
+_CITIES: dict[str, list[tuple[str, str, int]]] | None = None
+
+
+def _norm(text: str) -> str:
+    return " ".join(text.casefold().replace("ё", "е").strip(" .").split())
+
+
+def gazetteer() -> dict[str, list[tuple[str, str, int]]]:
+    """normalized city name -> [(name, normalized region, population)], largest first."""
+    global _CITIES
+    if _CITIES is None:
+        cities: dict[str, list[tuple[str, str, int]]] = {}
+        for path in (CITIES_PATH, CITIES_EXTRA_PATH):
+            if not path.exists():
+                continue
+            with path.open(encoding="utf-8", newline="") as stream:
+                for row in csv.DictReader(stream):
+                    entry = (row["city"], _norm(row["region"]), int(row["population"] or 0))
+                    cities.setdefault(_norm(row["city"]), []).append(entry)
+        _CITIES = {key: sorted(value, key=lambda e: -e[2]) for key, value in cities.items()}
+    return _CITIES
+
+
+# 'муниципальное образование Город Екатеринбург', 'г.о. Волгоград' -> the city name.
+MUNICIPAL_PREFIX_RE = re.compile(
+    r"^(муниципальное образование|городской округ|г\.\s*о\.|го)\s+(город\s+|г\.\s*)?", re.IGNORECASE
+)
+# A word followed by one of these is a district name ('Советский район'),
+# not a city, even if a city of that name exists.
+DISTRICT_SUFFIX_RE = re.compile(r"^(район|г\.\s*о\.|городской|муниципальный|сельсовет|округ)\b", re.IGNORECASE)
+# A lowercase street type right after the word means a street ('Московский пр.'),
+# while a capitalised word is a metro station ('Екатеринбург Площадь 1905 года').
+STREET_SUFFIX_RE = re.compile(r"^(ул\.|улица|пр\.|просп|пр-т|ш\.|шоссе|пер\.|б-р|наб\.|пл\.|проезд|туп\.|аллея|линия|тракт)")
+
+
+def _gazetteer_city(part: str, region_text: str) -> str:
+    """Longest run of leading words of `part` that is a known city ('Нижний
+    Новгород Горьковская 5–10 мин.' -> 'Нижний Новгород'). Homonyms are told
+    apart by the region named in the address, else the most populous wins."""
+    text = CITY_PREFIX_RE.sub("", MUNICIPAL_PREFIX_RE.sub("", part.strip()))
+    words = text.split()
+    region = _norm(region_text)
+    for size in range(min(3, len(words)), 0, -1):
+        candidates = gazetteer().get(_norm(" ".join(words[:size])))
+        if not candidates:
+            continue
+        rest = " ".join(words[size:])
+        if DISTRICT_SUFFIX_RE.match(rest) or STREET_SUFFIX_RE.match(rest):
+            return ""  # 'Советский район р-н Советский', 'Московский пр.'
+        in_region = [c for c in candidates if region and c[1].split()[0] in region]
+        return (in_region or candidates)[0][0]
+    return ""
+
+
+def _looks_like_name(part: str) -> bool:
+    """A bare settlement name not in the gazetteer ('Луганск')."""
+    words = part.split()
+    return (
+        0 < len(words) <= 3
+        and words[0][:1].isupper()
+        and not any(ch.isdigit() for ch in part)
+        and not DISTRICT_PART_RE.search(part)
+        and not SETTLEMENT_RE.match(part)
+    )
+
+
+def locate_city(location: str | None) -> tuple[str, str]:
+    """(settlement, kind) from an Avito address; kind is 'city' (gazetteer),
+    'settlement' (village / township not in the gazetteer) or '' (not found).
+
+    'Москва, Кленовый б-р ...'                                  -> ('Москва', 'city')
+    'Свердловская обл., Екатеринбург, ул. ...'                   -> ('Екатеринбург', 'city')
+    'Московская обл., Ленинский г.о., Видное, ...'               -> ('Видное', 'city')
+    'Нижегородская обл., Нижний Новгород Горьковская 5–10 мин.'  -> ('Нижний Новгород', 'city')
+    'Ростовская обл., Аксайский р-н, пос. Койсуг, ул. ...'      -> ('пос. Койсуг', 'settlement')
+    """
+    text = SERVICE_NOTE_RE.sub("", inline(location))
+    parts = [part.strip() for part in text.split(",") if part.strip() and _norm(part) not in NON_ADDRESS_PARTS]
+    if not parts:
+        return "", ""
+    first_words = _norm(CITY_PREFIX_RE.sub("", parts[0])).split()
+    for size in (2, 1):  # 'Санкт-Петербург Адмиралтейская' still starts with the city
+        if " ".join(first_words[:size]) in FEDERAL_CITIES:
+            return FEDERAL_CITIES[" ".join(first_words[:size])], "city"
+    region_text = parts[0] if REGION_PART_RE.search(parts[0]) else ""
+    # Scan up to the first street-like part: a gazetteer city at the start of a
+    # part wins at once; villages and unknown names are kept as fallbacks.
+    settlements, others = [], []
+    for part in parts[1 if region_text else 0 :]:
+        part = TRAVEL_TIME_RE.sub("", part).strip()
+        if not part:
+            continue
+        if SETTLEMENT_RE.match(part):
+            settlements.append(part)
+            continue
+        city = _gazetteer_city(part, region_text)
+        if city:
+            return city, "city"
+        if STREET_PART_RE.search(part):
+            break
+        others.append(part)
+    if settlements:
+        words = []
+        for word in settlements[0].split():
+            if any(ch.isdigit() for ch in word):
+                break
+            words.append(word)
+        return " ".join(words[:4]), "settlement"
+    for part in others:
+        if _looks_like_name(part):
+            return CITY_PREFIX_RE.sub("", part).strip(), "unlisted"
+    return "", ""
 
 
 def city_from_location(location: str | None) -> str:
-    """Settlement from an Avito address.
-
-    'Москва, Кленовый б-р ...'                        -> 'Москва'
-    'Свердловская обл., Екатеринбург, ул. ...'         -> 'Екатеринбург'
-    'Московская обл., Ленинский г.о., Видное, ...'     -> 'Видное'
-    """
-    parts = [part.strip() for part in inline(location).split(",") if part.strip()]
-    if not parts:
-        return ""
-    if parts[0] in FEDERAL_CITIES:
-        return parts[0]
-    start = 1 if REGION_PART_RE.search(parts[0]) and len(parts) > 1 else 0
-    for part in parts[start:]:
-        if DISTRICT_PART_RE.search(part):
-            continue
-        return TRAVEL_TAIL_RE.sub("", CITY_PREFIX_RE.sub("", part)).strip()
-    return ""
+    return locate_city(location)[0]
 
 
 def resolved_city(row: dict[str, str]) -> tuple[str, str]:
     """(city, city_source). The enrichment leaves `city` empty for addresses it
     has no reviewed placement for (Колпино, Шушары, Видное, ...); the address
-    itself is still on the card, so the settlement is taken from it."""
+    itself is still on the card, so the settlement is taken from it:
+    'location_observed' = a gazetteer city, 'location_settlement' = a village or
+    township, 'missing' = nothing usable."""
     city = inline(row.get("city"))
     if city:
         return city, "card"
-    city = city_from_location(row.get("location_observed"))
-    return (city, "location_observed") if city else ("", "missing")
+    city, kind = locate_city(row.get("location_observed"))
+    if kind == "city":
+        return city, "location_observed"
+    if kind == "settlement":
+        return city, "location_settlement"
+    if kind == "unlisted":
+        return city, "location_unlisted"
+    return "", "missing"
 
 
 def is_military(row: dict[str, str]) -> bool:
