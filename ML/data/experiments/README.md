@@ -10,7 +10,7 @@ These four CSV files are mutually exclusive, reproducible views of
 | `03_watch.csv` | Every vacancy whose schedule is `Вахта`. |
 | `04_other.csv` | Every remaining vacancy: explicit rates per shift/hour/week, variable pay, no amount, military contracts, likely rates and city-less rows. |
 
-Rules (`rules_version` in `manifest.json`, currently `experiment_datasets_v4`):
+Rules (`rules_version` in `manifest.json`, currently `experiment_datasets_v5`):
 
 - `city` is taken from the card; when the enrichment left it empty (an address
   without a reviewed placement entry, e.g. Колпино, Шушары, Видное) the

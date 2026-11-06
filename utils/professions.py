@@ -39,7 +39,7 @@ PROFESSION_PATTERNS: dict[str, re.Pattern[str]] = {
     # assembly (furniture, drones), a bare "кладовщик" is a storekeeper: both
     # are left to the query label.
     PICKER: re.compile(
-        _W + r"(?:комплектовщ|упаковщ|сортировщ|стикеровщ|отборщ"
+        _W + r"(?:комплектовщ|упаковщ|фасовщ|сортировщ|стикеровщ|отборщ"
         r"|сборщик\w*[\s\-/]+(?:\w+[\s\-/]+)?(?:заказ|товар|на склад|склад|интернет|онлайн))"
     ),
     # "погрузчик" contains "грузчик": the word-start guard keeps forklift

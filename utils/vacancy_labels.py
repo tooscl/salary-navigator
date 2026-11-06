@@ -22,7 +22,7 @@ except ImportError:  # Direct `python3 utils/build_dataset.py` entry point.
     from build_experiment_datasets import CITIES_EXTRA_PATH, CITIES_PATH, resolved_city
     from professions import resolve_profession
 
-VERSION = 'vacancy_labels_v1'
+VERSION = 'vacancy_labels_v2'
 COLUMNS = ('profession_resolved', 'profession_source', 'city_resolved', 'city_resolved_source',
            'labels_rule_version')
 _HERE = Path(__file__).resolve().parent

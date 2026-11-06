@@ -66,6 +66,15 @@ class ExperimentDatasetTests(unittest.TestCase):
                          ("Одинцово", "city"))
         self.assertEqual(locate_city("Ростовская обл., Аксайский р-н, пос. Койсуг, ул. Луговая, 5"),
                          ("пос. Койсуг", "settlement"))
+        # Urban-type settlements with a dot, a glued metro station, Ukrainian 'городская община'.
+        self.assertEqual(locate_city("Московская обл., Богородский г.о., рп. Обухово, Кудиновское ш., 2А"),
+                         ("рп. Обухово", "settlement"))
+        self.assertEqual(locate_city("Московская обл., Ленинский г.о., пгт. Боброво Бутово от 31 мин. Улица "
+                                     "Скобелевская от 31 мин."), ("пгт. Боброво", "settlement"))
+        self.assertEqual(locate_city("Амурская обл., Селемджинский р-н, пгт. Февральск"), ("пгт. Февральск", "settlement"))
+        self.assertEqual(locate_city("Мариупольская городская община, Мариуполь, Греческая пл."),
+                         ("Мариуполь", "unlisted"))
+        self.assertEqual(locate_city("Алчевский городской совет, Алчевск, ул. Горького"), ("Алчевск", "unlisted"))
         self.assertEqual(locate_city("Россия"), ("", ""))
         self.assertEqual(locate_city("Московская обл., Одинцовский г.о., Минское шоссе, 43-й километр"), ("", ""))
 

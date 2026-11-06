@@ -19,7 +19,7 @@ except ModuleNotFoundError:  # imported as utils.build_experiment_datasets
 ROOT = Path(__file__).resolve().parents[1]
 SOURCE_PATH = Path("Data/dataset/vacancies.csv")
 OUTPUT_DIRECTORY = Path("ML/data/experiments")
-RULES_VERSION = "experiment_datasets_v4"
+RULES_VERSION = "experiment_datasets_v5"
 # A non-rate amount whose largest number is below this is almost surely a rate
 # per shift or hour written without "за смену"/"в час" (median ~4 000 rub,
 # 11-12 h shifts, weekly payouts), not a monthly salary.
@@ -108,7 +108,11 @@ CITIES_PATH = Path(__file__).resolve().parent / "data" / "russian_cities.csv"
 CITIES_EXTRA_PATH = Path(__file__).resolve().parent / "data" / "russian_cities_extra.csv"
 FEDERAL_CITIES = {"москва": "Москва", "санкт-петербург": "Санкт-Петербург", "севастополь": "Севастополь"}
 REGION_PART_RE = re.compile(r"обл\.|област|край|республик|автономн|\bао\b|\bаобл\b", re.IGNORECASE)
-DISTRICT_PART_RE = re.compile(r"р-н|район|г\.\s*о\.|округ|поселение|муниципальн|сельсовет|направление", re.IGNORECASE)
+# 'городская община', 'городской совет': Ukrainian-style municipalities written
+# before the city ('Мариупольская городская община, Мариуполь').
+DISTRICT_PART_RE = re.compile(
+    r"р-н|район|г\.\s*о\.|округ|поселение|муниципальн|сельсовет|направление|общин|совет", re.IGNORECASE
+)
 # A part that is a street, building or similar: the settlement comes before it.
 STREET_PART_RE = re.compile(
     r"(^|\s)(ул\.|улица|пр\.|просп|пр-т|проспект|ш\.|шоссе|пер\.|переулок|б-р|бульвар|наб\.|набережная|пл\.|площадь"
@@ -117,8 +121,10 @@ STREET_PART_RE = re.compile(
 )
 CITY_PREFIX_RE = re.compile(r"^(г\.|г\s|город\s)\s*", re.IGNORECASE)
 # Rural settlements kept as they are when no gazetteer city is found.
+# The dot is optional: 'пгт. Боброво', 'пгт Боброво', 'рп. Обухово'.
 SETTLEMENT_RE = re.compile(
-    r"^(пос\.|посёлок|поселок|п\.|пгт|рп|р\.п\.|с\.|село|дер\.|д\.|деревня|ст-ца|станица|х\.|хутор|аул|сл\.|слобода)\s",
+    r"^(пос|посёлок|поселок|п|пгт|рп|р\.\s?п|рабочий посёлок|рабочий поселок|с|село|дер|д|деревня|ст-ца|станица|х|хутор"
+    r"|аул|сл|слобода)\.?\s",
     re.IGNORECASE,
 )
 # Scraper notes and metro hints that are not part of the address.
@@ -217,11 +223,14 @@ def locate_city(location: str | None) -> tuple[str, str]:
     # part wins at once; villages and unknown names are kept as fallbacks.
     settlements, others = [], []
     for part in parts[1 if region_text else 0 :]:
-        part = TRAVEL_TIME_RE.sub("", part).strip()
+        stripped = TRAVEL_TIME_RE.sub("", part).strip()
+        had_travel_time, part = stripped != part.strip(), stripped
         if not part:
             continue
         if SETTLEMENT_RE.match(part):
-            settlements.append(part)
+            # 'пгт. Боброво Бутово от 31 мин.': with a metro tail the station
+            # name is glued on, so only the first name word is kept.
+            settlements.append(" ".join(part.split()[:2]) if had_travel_time else part)
             continue
         city = _gazetteer_city(part, region_text)
         if city:
