@@ -12,6 +12,112 @@ from Scraper.test_aside_runner import runner, item, courier_controls
 
 
 class PaginationTests(unittest.TestCase):
+    def test_cleared_restriction_recapture_cli_dispatch(self):
+        with tempfile.TemporaryDirectory() as directory, patch.object(runner,'ROOT',Path(directory)):
+            argv=['run.py','recapture-cleared-restriction','--run-id','run','--id','123','--tab-id','new','--authorization-id','auth','--retry-reason','cleared']
+            with patch('sys.argv',argv),patch.object(runner,'recapture_cleared_restriction') as action:
+                runner.main();self.assertEqual(action.call_args.args[0].id,'123')
+
+    def test_cleared_restriction_recapture_preserves_original_until_verified(self):
+        for scenario in ('success','blocked','wrong_id','missing_auth'):
+            with self.subTest(scenario=scenario), tempfile.TemporaryDirectory() as directory, ExitStack() as stack:
+                root=Path(directory);stack.enter_context(patch.object(runner,'ROOT',root))
+                for name in ('validate_partition','validate_plan_profession','preflight','verify_partition_url_guard','validate_automation_changes'):
+                    stack.enter_context(patch.object(runner,name))
+                out,service,diag=runner.paths(root,'run');queue=[item('123'),item('456')];url=queue[0]['url']
+                runner.write(out/'queue.json',queue);runner.write(out/'listing.json',{});runner.write(out/'listing_pages/0001.json',{})
+                runner.write(service/'plan.json',dict(run_id='run',listing_pages=[{'file':'listing_pages/0001.json'}],automation_sha256={}))
+                cp=dict(state='NEEDS_HUMAN',stop_reason='access_restriction_or_captcha',next_id='123',completed_ids=[])
+                runner.write(diag/'checkpoint.json',cp);runner.write(diag/'sandbox.json',{'path':str(root/'deleted-sandbox')});runner.write(diag/'browser-tab.json',dict(target_id='old',url=url))
+                old=dict(state='NEEDS_HUMAN',reason='access_restriction_or_captcha',source_url=url,items=[]);runner.write(out/'raw/123.json',old)
+                snap=f'- title: "Доступ ограничен: проблема с IP" [url={url}]\n';(diag/'problem.snapshot.txt').write_text(snap)
+                runner.record_failure(diag,'capture','restriction','capture',immediate=True)
+                runner.authorize_browser(diag,'IP ограничение снято, повторить ID 123','auth')
+                runner.record_failure(diag,'capture','old raw present','capture');before=runner.load_failures(diag);oldbytes=(out/'raw/123.json').read_bytes()
+                stack.enter_context(patch.object(runner,'queue_from_pages',return_value=queue))
+                def fake_browser(job,stage,stage_diag):
+                    self.assertEqual((out/'raw/123.json').read_bytes(),oldbytes)
+                    if scenario=='blocked': return dict(state='NEEDS_HUMAN',completed_ids=[]),1
+                    fresh=dict(state='DETAIL',id='999' if scenario=='wrong_id' else '123',source_url=url,title='Работа',observed_at='2026-11-06T00:00:00Z',fields=[{'name':'График','value':'Вахта'}],parameter_audit={'rendered_complete':True})
+                    runner.write(stage/'raw/123.json',fresh);return dict(state='CAPTURED',completed_ids=['123']),1
+                action=stack.enter_context(patch.object(runner,'browser',side_effect=fake_browser))
+                args=argparse.Namespace(run_id='run',id='123',tab_id='new',authorization_id='bad' if scenario=='missing_auth' else 'auth',retry_reason='Confirmed cleared restriction',config=None)
+                if scenario=='success':
+                    runner.recapture_cleared_restriction(args);self.assertEqual(runner.read(out/'raw/123.json')['state'],'DETAIL');self.assertEqual(runner.read(diag/'checkpoint.json')['next_id'],'456')
+                    self.assertEqual(next((out/'observations/123').glob('*.json')).read_bytes(),oldbytes)
+                    self.assertEqual(runner.load_failures(diag)['failures'],before['failures'])
+                else:
+                    with self.assertRaises((ValueError,runner.HumanRequired)):runner.recapture_cleared_restriction(args)
+                    self.assertEqual((out/'raw/123.json').read_bytes(),oldbytes)
+                    if scenario=='missing_auth':action.assert_not_called()
+                    else:self.assertEqual(runner.load_failures(diag)['state'],'NEEDS_HUMAN')
+    def test_authorized_resume_switches_to_ui_next_without_changing_request(self):
+        with tempfile.TemporaryDirectory() as directory, ExitStack() as stack:
+            root = Path(directory)
+            stack.enter_context(patch.object(runner, 'ROOT', root))
+            stack.enter_context(patch.object(runner, 'preflight'))
+            first = 'https://www.avito.ru/yakutsk/vakansii?context=observed'
+            next_url = 'https://www.avito.ru/moskva/vakansii?context=observed&p=2'
+            out, _, diag = runner.paths(root, 'run')
+            request = dict(url=first, limit=1500, candidate_limit=None, geography='Якутск', profession='', segments='', filter_evidence='Observed Yakutsk', all_pages=False, profession_scope=None)
+            runner.write(diag/'freeze_request.json', request)
+            original = (diag/'freeze_request.json').read_bytes()
+            runner.write(out/'listing_pages/0001.json', dict(state='LISTING', source_url=first,
+                heading='Работа и вакансии в Якутске', items=[item('1')], selected_controls=[],
+                pagination=dict(current_pages=['1'], next_url=next_url)))
+            runner.write(diag/'pending_listing.json', {'url': next_url})
+            runner.record_failure(diag, 'filters', 'First failure', 'filters')
+            runner.ensure_allowed(diag, 'filters', 'Corrected', action=True)
+            runner.record_failure(diag, 'filters', 'Second failure', 'filters')
+            runner.authorize_browser(diag, 'Resume via UI Next', 'auth-1', unbounded_retries=True)
+            args = argparse.Namespace(run_id='run', resume=True, url=first, limit=1500,
+                geography='Якутск', profession='', segments='', filter_evidence='Observed Yakutsk',
+                ui_next=True, tab_id='own-tab', resume_route_authorization_id='auth-1', retry_reason='Corrected technical error')
+            args.geography = 'Москва'
+            with self.assertRaisesRegex(ValueError, 'preserve the original'):
+                runner.freeze(args)
+            args.geography = 'Якутск'
+            runner.record_failure(diag, 'freeze', 'Subsequent technical error', 'freeze')
+            browser = stack.enter_context(patch.object(runner, 'browser', side_effect=RuntimeError('browser double stopped')))
+            with self.assertRaisesRegex(RuntimeError, 'browser double stopped'):
+                runner.freeze(args)
+            self.assertTrue(browser.call_args.args[0]['ui_next'])
+            self.assertEqual(browser.call_args.args[0]['previous']['source_url'], first)
+            self.assertEqual((diag/'freeze_request.json').read_bytes(), original)
+            events = runner.load_failures(diag)['events']
+            self.assertEqual([e['authorization_id'] for e in events if e['event'] == 'freeze_route_override'], ['auth-1'])
+            runner.record_failure(diag, 'freeze', 'CAPTCHA', 'freeze', immediate=True)
+            with self.assertRaises(runner.HumanRequired):
+                runner.freeze(args)
+            self.assertEqual(browser.call_count, 1)
+
+    def test_cross_region_next_is_rejected_before_navigation(self):
+        with tempfile.TemporaryDirectory() as directory, ExitStack() as stack:
+            root = Path(directory)
+            first = 'https://www.avito.ru/yakutsk/vakansii?context=observed'
+            next_url = 'https://www.avito.ru/moskva/vakansii?context=observed&p=2'
+            args = argparse.Namespace(run_id='run', resume=False, url=first, limit=2,
+                geography='Якутск', profession='', segments='', filter_evidence='Observed Yakutsk')
+            def first_page(job, out, diag):
+                page = dict(state='LISTING', source_url=first, heading='Работа и вакансии в Якутске',
+                    selected_controls=[], profession_filter=dict(observed=True, selected_count=0),
+                    items=[item('1')], pagination=dict(next_url=next_url, end_confirmed=False))
+                cp = dict(state='READY', completed_ids=[])
+                runner.write(diag/'listing.json', page)
+                runner.write(diag/'checkpoint.json', cp)
+                return cp, 0
+            stack.enter_context(patch.object(runner, 'ROOT', root))
+            stack.enter_context(patch.object(runner, 'preflight'))
+            stack.enter_context(patch.object(runner, 'release_browser'))
+            browser = stack.enter_context(patch.object(runner, 'browser', side_effect=first_page))
+            with self.assertRaisesRegex(ValueError, 'Listing region/category changed between pages'):
+                runner.freeze(args)
+            self.assertEqual(browser.call_count, 1)
+            self.assertEqual(browser.call_args.args[0]['url'], first)
+            out, _, diag = runner.paths(root, args.run_id)
+            self.assertEqual(runner.read(out/'listing_pages/0001.json')['pagination']['next_url'], next_url)
+            self.assertFalse((diag/'pending_listing.json').exists())
+
     def test_external_threshold_authorization_preserves_budget_and_rejects_hard_stop(self):
         with tempfile.TemporaryDirectory() as directory, patch.object(runner, 'ROOT', Path(directory)):
             diag = runner.paths(runner.ROOT, 'run')[2]
@@ -94,6 +200,64 @@ class PaginationTests(unittest.TestCase):
             self.assertEqual(ledger['failures'], 1)
             self.assertEqual(ledger['budget_start_failures'], 0)
             self.assertEqual(sum(e['event'] == 'pending_diagnostic_started' for e in ledger['events']), 2)
+
+    def test_pending_diagnostic_accounts_for_verified_skips_in_prefix(self):
+        for scenario in ('valid', 'gap', 'later_skip'):
+            with self.subTest(scenario=scenario), tempfile.TemporaryDirectory() as directory, ExitStack() as stack:
+                root=Path(directory); stack.enter_context(patch.object(runner,'ROOT',root))
+                for name in ('validate_partition','validate_plan_profession','preflight','verify_partition_url_guard','validate_automation_changes'):
+                    stack.enter_context(patch.object(runner,name))
+                stack.enter_context(patch.object(runner,'unavailable_records',return_value=[{'id':'2'}]))
+                stack.enter_context(patch.object(runner,'unresolved_records',return_value=[]))
+                stack.enter_context(patch.object(runner,'user_skipped_records',return_value=[{'id':'5' if scenario=='later_skip' else '3'}]))
+                out,service,diag=runner.paths(root,'run'); (out/'raw').mkdir(parents=True); diag.mkdir(parents=True)
+                queue=[item(str(i)) for i in range(1,6)]; runner.write(out/'queue.json',queue); runner.write(out/'listing.json',{})
+                runner.write(service/'plan.json',{'automation_sha256':{}})
+                completed=['1'] if scenario=='gap' else ['1','4']
+                runner.write(diag/'checkpoint.json',{'state':'BROWSER_ERROR','stop_reason':'Error: Session with given id not found.','completed_ids':completed,'next_id':'5'})
+                runner.record_failure(diag,'capture','Session gone','capture')
+                args=argparse.Namespace(run_id='run',id='5',human_instruction='Diagnostic 5',authorization_id='auth',connection_evidence='Tab restored',tab_id='own',config=None)
+                def browser(job,out,diag):
+                    cp={'state':'CAPTURED','completed_ids':['1','4','5']}; runner.write(diag/'checkpoint.json',cp); return cp,1
+                stack.enter_context(patch.object(runner,'reviewed_capture',return_value={'parameter_audit':{'rendered_complete':True}}))
+                stack.enter_context(patch.object(runner,'check',return_value={'structural_check_passed':True}))
+                action=stack.enter_context(patch.object(runner,'browser',side_effect=browser))
+                if scenario=='valid':
+                    runner.diagnostic_pending_capture(args); self.assertEqual(action.call_count,1)
+                else:
+                    with self.assertRaisesRegex(ValueError,'queue prefix'): runner.diagnostic_pending_capture(args)
+                    action.assert_not_called()
+
+    def test_missing_target_diagnostic_requires_matching_owned_evidence(self):
+        for scenario in ('ok', 'missing', 'mismatch', 'same_target', 'same_id', 'bad_suffix'):
+            with self.subTest(scenario=scenario), tempfile.TemporaryDirectory() as directory, ExitStack() as stack:
+                root=Path(directory);stack.enter_context(patch.object(runner,'ROOT',root))
+                for name in ('validate_partition','validate_plan_profession','preflight','verify_partition_url_guard','validate_automation_changes'):
+                    stack.enter_context(patch.object(runner,name))
+                out,service,diag=runner.paths(root,'run');sandbox=root/'sandbox';(out/'raw').mkdir(parents=True);diag.mkdir(parents=True)
+                candidate=item('123');runner.write(out/'queue.json',[candidate]);runner.write(out/'listing.json',{});runner.write(service/'plan.json',{'automation_sha256':{}})
+                stop='Error: No open browser tab found for targetId OLD123'+(' extra' if scenario=='bad_suffix' else '')
+                cp=dict(state='BROWSER_ERROR',stop_reason=stop,next_id='123',completed_ids=[])
+                runner.write(diag/'checkpoint.json',cp);runner.write(sandbox/'checkpoint.json',cp);runner.write(diag/'sandbox.json',{'path':str(sandbox)})
+                (diag/'diagnostic-original').mkdir(); (diag/'diagnostic-original'/'prior.txt').write_text('prior evidence')
+                tab=dict(target_id='OLD123',ownership='external',url=candidate['url'])
+                if scenario!='missing':runner.write(diag/'browser-tab.json',tab)
+                runner.write(sandbox/'browser-tab.json',dict(tab,target_id='OTHER' if scenario=='mismatch' else 'OLD123'))
+                runner.record_failure(diag,'capture','tab missing','capture')
+                ledger=runner.load_failures(diag);ledger['events'].append(dict(event='pending_diagnostic_started',run_id='run',pending_id='123' if scenario=='same_id' else '42',authorization_id='prior'));runner.save_failures(diag,ledger)
+                args=argparse.Namespace(run_id='run',id='123',human_instruction='Diagnostic 123',authorization_id='new',connection_evidence='New tab ready',tab_id='OLD123' if scenario=='same_target' else 'NEW456',config=None)
+                def browser(job,out,diag):
+                    result=dict(state='CAPTURED',completed_ids=['123']);runner.write(diag/'checkpoint.json',result);return result,1
+                stack.enter_context(patch.object(runner,'reviewed_capture',return_value={'parameter_audit':{'rendered_complete':True}}))
+                stack.enter_context(patch.object(runner,'check',return_value={'structural_check_passed':True}))
+                action=stack.enter_context(patch.object(runner,'browser',side_effect=browser))
+                if scenario=='ok':
+                    runner.diagnostic_pending_capture(args);self.assertEqual(action.call_count,1)
+                    self.assertEqual((diag/'diagnostic-original'/'prior.txt').read_text(),'prior evidence')
+                    self.assertTrue((diag/'diagnostic-original-123'/'hashes.json').exists())
+                else:
+                    with self.assertRaises((ValueError,runner.HumanRequired,OSError)):runner.diagnostic_pending_capture(args)
+                    action.assert_not_called()
 
     def simulate(self, count=5000, all_pages=False, interrupt=None, scope=None, cycle=False, blocked=False, requested=None, repeat_items=False, confirmed_end=False):
         with tempfile.TemporaryDirectory() as directory, ExitStack() as stack:
@@ -299,6 +463,32 @@ const first=make(url1,1);
  const result=JSON.parse(writes['listing.json']);
  if(clicks!==Number(!recovering)||result.source_url!==url2||result.ui_transition.next_href!==href||result.ui_transition.recovered!==recovering||cp.state!=='READY'||(scenario==='delayed' && polls<5)) process.exit(1);
 }})().catch(()=>process.exit(2));
+"""
+        subprocess.run(['node', '-e', script, str(runner.SCRIPTS/'browser_batch.js')], check=True, capture_output=True)
+
+    def test_ui_next_rotated_context_click_and_wrong_landing(self):
+        script = r"""
+const fs0=require('fs'), source=fs0.readFileSync(process.argv[1],'utf8');
+const saved='https://www.avito.ru/yakutsk/vakansii?context=old&localPriority=0';
+const live='https://www.avito.ru/yakutsk/vakansii?context=new&localPriority=0';
+const oldHref='https://www.avito.ru/moskva/vakansii?context=old&p=2';
+const href='https://www.avito.ru/moskva/vakansii?context=new&p=2';
+const make=(url,n,next)=>({state:'LISTING',source_url:url,observed_at:String(Math.random()),heading:'Работа и вакансии в Якутске',selected_controls:[],listing_context:{geography:'Якутск',search:''},items:[{id:'1'}],listing_item_audit:{malformed:0},pagination:{current_pages:[String(n)],next_url:next,evidence:{href:new URL(next).pathname+new URL(next).search}}});
+const first=make(saved,1,oldHref);
+(async()=>{for(const wrong of [false,true]) {
+ let current=make(live,1,href),clicks=0; const writes={};
+ global.pwd='sandbox'; global.fs={mkdir:async()=>{},writeFile:async(n,v)=>writes[n]=v,rename:async(a,b)=>writes[b]=writes[a],readFile:async(n)=>writes[n]};
+ global.attachBrowserTab=async()=>({url:()=>current.source_url,evaluate:async()=>current,locator:()=>({click:async()=>{clicks++; current=make(wrong?href:'https://www.avito.ru/yakutsk/vakansii?context=new&p=2',2,href)}})});
+ global.snapshot=async(_p,o)=>({tree:o.selector?'- link "Следующая страница" [ref=e7]':'- listing'});
+ global.sleep=async()=>{}; global.tlCollectorPage=null;
+ const job={mode:'freeze',url:oldHref,completed_ids:[],tab_id:'tab',ui_next:true,previous:first,first,geography:'Якутск'};
+ await eval('(async()=>{'+source.replace('__JOB__',JSON.stringify(job)).replace('__EXTRACTOR__',JSON.stringify('extract'))+'})()');
+ const cp=JSON.parse(writes['checkpoint.json']);
+ if(clicks!==1) process.exit(1);
+ if(wrong) {if(cp.state!=='BROWSER_ERROR'||writes['listing.json']) process.exit(2); continue;}
+ const t=JSON.parse(writes['listing.json']).ui_transition;
+ if(cp.state!=='READY'||t.from_url!==saved||t.live_from_url!==live||t.next_href!==oldHref||t.live_next_url!==href) process.exit(3);
+}})().catch(()=>process.exit(4));
 """
         subprocess.run(['node', '-e', script, str(runner.SCRIPTS/'browser_batch.js')], check=True, capture_output=True)
 

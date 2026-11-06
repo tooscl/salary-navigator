@@ -12,6 +12,43 @@ spec.loader.exec_module(failure_log)
 
 
 class FailureBudgetTests(unittest.TestCase):
+    def test_unbounded_authorization_preserves_history_and_access_stops(self):
+        with tempfile.TemporaryDirectory() as directory:
+            diag = Path(directory)
+            failure_log.record(diag, 'freeze', 'First technical error', 'freeze')
+            failure_log.ensure_allowed(diag, 'freeze', 'Corrected', action=True)
+            failure_log.record(diag, 'freeze', 'Second technical error', 'freeze')
+            before = failure_log.load(diag)
+            failure_log.authorize_browser(diag, 'Resume this queue with unbounded technical retries', 'auth-1', unbounded_retries=True)
+            authorized = failure_log.load(diag)
+            self.assertEqual(authorized['events'][:-1], before['events'])
+            self.assertEqual(authorized['failures'], 2)
+            self.assertEqual(authorized['retries_started'], 1)
+            self.assertEqual(authorized['state'], 'READY')
+            self.assertEqual(authorized['events'][-1]['authorization_id'], 'auth-1')
+            self.assertTrue(authorized['events'][-1]['unbounded_retries'])
+            for attempt in range(8):
+                failure_log.record(diag, 'freeze', f'Technical error {attempt}', 'freeze')
+                failure_log.ensure_allowed(diag, 'freeze', 'Corrected technical issue', action=True)
+            self.assertGreater(failure_log.load(diag)['retries_started'], 5)
+            failure_log.record(diag, 'freeze', 'CAPTCHA', 'freeze', immediate=True)
+            with self.assertRaises(failure_log.HumanRequired):
+                failure_log.ensure_allowed(diag, 'freeze', 'Retry', action=True)
+            with self.assertRaises(failure_log.HumanRequired):
+                failure_log.authorize_browser(diag, 'Resume technical retries', 'auth-2', unbounded_retries=True)
+            self.assertEqual(failure_log.load(diag)['state'], 'NEEDS_HUMAN')
+
+    def test_unbounded_authorization_accepts_classified_exhaustion_only(self):
+        with tempfile.TemporaryDirectory() as directory:
+            diag = Path(directory)
+            for attempt in range(6):
+                failure_log.record(diag, 'freeze', 'Technical error', 'freeze')
+                if attempt < 5:
+                    failure_log.ensure_allowed(diag, 'freeze', 'Corrected', action=True)
+            self.assertEqual(failure_log.load(diag)['state'], 'NEEDS_HUMAN')
+            failure_log.authorize_browser(diag, 'Resume this queue', 'auth-1', unbounded_retries=True)
+            self.assertEqual(failure_log.load(diag)['state'], 'READY')
+
     def test_exact_demo_duplicate_check_then_success_allows_freeze(self):
         with tempfile.TemporaryDirectory() as directory:
             diag = Path(directory)
