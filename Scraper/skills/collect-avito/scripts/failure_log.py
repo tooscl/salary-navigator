@@ -161,7 +161,7 @@ def ensure_allowed(diag, stage, retry_reason=None, *, action=False):
         if ledger['failures'] > ledger['budget_start_failures'] and ledger['state'] != 'RECOVERED':
             if not retry_reason or not retry_reason.strip():
                 raise HumanRequired('Retry requires --retry-reason describing the observed correction')
-            if ledger['retries_started'] >= ledger['retry_limit']:
+            if not ledger.get('unbounded_retries') and ledger['retries_started'] >= ledger['retry_limit']:
                 raise HumanRequired('NEEDS_HUMAN: retry budget exhausted; fresh human instruction required')
             ledger['retries_started'] += 1
             ledger['retry_started'] = True
@@ -207,11 +207,13 @@ def record(diag, stage, message, action, url=None, agent=None, immediate=False):
         current = ledger['stages'].setdefault(stage, {'failures': 0, 'state': 'RETRY_AVAILABLE'})
         current['failures'] += 1
         ledger['failures'] += 1
-        ledger['state'] = 'NEEDS_HUMAN' if stopped or immediate or ledger['retries_started'] >= ledger['retry_limit'] or ((diag/'retry-limit.json').exists() and ledger['failures'] - ledger['budget_start_failures'] >= 2) else 'RETRY_AVAILABLE'
+        exhausted = not ledger.get('unbounded_retries') and (ledger['retries_started'] >= ledger['retry_limit'] or ((diag/'retry-limit.json').exists() and ledger['failures'] - ledger['budget_start_failures'] >= 2))
+        ledger['state'] = 'NEEDS_HUMAN' if stopped or immediate or exhausted else 'RETRY_AVAILABLE'
         current['state'] = ledger['state']
         event = dict(at=datetime.now(timezone.utc).isoformat(), stage=stage, event='failure',
             attempt=ledger['failures'], state=ledger['state'], message=message,
-            action=action, url=url, agent=agent, retry_budget_remaining=0 if ledger['state'] == 'NEEDS_HUMAN' else ledger['retry_limit'] - ledger['retries_started'])
+            action=action, url=url, agent=agent, immediate=immediate,
+            retry_budget_remaining=0 if ledger['state'] == 'NEEDS_HUMAN' else (None if ledger.get('unbounded_retries') else ledger['retry_limit'] - ledger['retries_started']))
         ledger['events'].append(event)
         save(diag, ledger)
         # Compact report contains no DOM dumps, tokens or local session contents.
@@ -239,32 +241,53 @@ def authorize_offline(diag, instruction):
         save(diag, ledger)
 
 
-def authorize_browser(diag, instruction, authorization_id):
+def authorize_browser(diag, instruction, authorization_id, *, unbounded_retries=False):
     """Explicit human consent starts a bounded new budget, never erases history."""
+    if unbounded_retries and ledger_dir(diag) != diag:
+        raise HumanRequired('Unbounded authorization cannot apply to a shared ledger')
     diag = ledger_dir(diag)
     if not instruction.strip() or not authorization_id.strip():
         raise ValueError('Fresh human instruction and a stable authorization-id are required')
     with locked(diag):
         ledger = load(diag)
-        if any(e.get('event') == 'human_browser_authorization' and e.get('authorization_id') == authorization_id
-               for e in ledger['events']):
+        prior = next((e for e in ledger['events'] if e.get('event') == 'human_browser_authorization' and e.get('authorization_id') == authorization_id), None)
+        if prior:
+            if bool(prior.get('unbounded_retries')) != unbounded_retries:
+                raise HumanRequired('Authorization ID already used for a different scope')
             if ledger['state'] == 'NEEDS_HUMAN':
                 raise HumanRequired('This human authorization was already used; a fresh instruction is required')
             return  # Replayed CLI invocation cannot replenish the budget.
-        if ledger['state'] != 'NEEDS_HUMAN':
+        if unbounded_retries:
+            failures = [e for e in ledger['events'] if e.get('event') == 'failure']
+            if ledger['failures'] < 2 or ledger['state'] not in ('RETRY_AVAILABLE', 'NEEDS_HUMAN'):
+                raise HumanRequired('Unbounded authorization requires a stopped run with at least two failures')
+            # An old NEEDS_HUMAN event without an explicit cause is ambiguous: fail closed.
+            since_auth = []
+            for event in reversed(ledger['events']):
+                if event.get('event') == 'human_browser_authorization':
+                    break
+                if event.get('event') == 'failure':
+                    since_auth.append(event)
+            if ledger['state'] == 'NEEDS_HUMAN' and (not failures or not since_auth or any(e.get('immediate') is not False for e in since_auth)):
+                raise HumanRequired('Immediate or unclassified stop cannot be overridden by unbounded retries')
+            ledger['unbounded_retries'] = True
+        elif ledger['state'] != 'NEEDS_HUMAN':
             raise ValueError('Browser resume requires a stopped run')
+        else:
+            ledger.pop('unbounded_retries', None)
         ledger.pop('offline_authorization', None)
         ledger.pop('active_retry_stage', None)
         ledger.pop('retry_action_started', None)
         ledger['budget_start_failures'] = ledger['failures']
-        ledger['retries_started'] = 0
+        if not unbounded_retries:
+            ledger['retries_started'] = 0
         ledger['retry_limit'] = 1 if (diag / 'retry-limit.json').exists() else 5
         ledger['retry_started'] = False
         ledger['state'] = 'READY'
         ledger['events'].append(dict(at=datetime.now(timezone.utc).isoformat(),
             event='human_browser_authorization', instruction=instruction,
-            authorization_id=authorization_id, budget_start_failures=ledger['failures'], retry_limit=ledger['retry_limit']))
+            authorization_id=authorization_id, budget_start_failures=ledger['failures'], retry_limit=ledger['retry_limit'], unbounded_retries=unbounded_retries))
         save(diag, ledger)
         (diag/'failure-report.md').write_text(
-            'RESUMED_BY_HUMAN\n\nИстория ошибок сохранена. Разрешена новая ограниченная попытка '
-            f'с {ledger["retry_limit"]} допустимыми повторами; ограничения сайта требуют немедленной остановки.\n', encoding='utf-8')
+            'RESUMED_BY_HUMAN\n\nИстория ошибок сохранена. Разрешены повторы: '
+            f'{"без ограничения числа" if unbounded_retries else ledger["retry_limit"]}; ограничения сайта требуют немедленной остановки.\n', encoding='utf-8')

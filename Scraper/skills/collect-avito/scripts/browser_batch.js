@@ -47,12 +47,17 @@ try {
     if (job.ui_next && job.previous) {
       const previous = job.previous, first = job.first;
       const pageNo = u => { const n = new URL(u).searchParams.getAll('p'); if (n.length > 1 || (n.length && !/^[1-9]\d*$/.test(n[0]))) throw new Error('Invalid page number'); return Number(n[0] || 1); };
-      const checked = l => JSON.stringify((l.selected_controls || []).filter(c => (c.marker || '').startsWith('params[144170]/checkbox/')).map(c => [c.marker, c.value, c.label]).sort());
-      const valid = (l, n) => l.state === 'LISTING' && new URL(l.source_url).pathname === new URL(first.source_url).pathname && pageNo(l.source_url) === n && (l.pagination?.current_pages || []).includes(String(n)) && l.heading === first.heading && checked(l) === checked(first);
+      const checked = l => JSON.stringify((l.selected_controls || []).map(c => [c.marker, c.value, c.label]).sort());
+      const valid = (l, n) => l.state === 'LISTING' && new URL(l.source_url).origin === new URL(first.source_url).origin && new URL(l.source_url).pathname === new URL(first.source_url).pathname && pageNo(l.source_url) === n && (l.pagination?.current_pages || []).includes(String(n)) && l.heading === first.heading && checked(l) === checked(first);
       let current = await stable();
       const n = pageNo(previous.source_url);
+      const rotated = valid(current, n) && current.source_url !== previous.source_url;
+      const contextValid = l => Boolean(job.geography && l.listing_context?.geography === job.geography && l.listing_context?.search === '');
+      if (job.geography && !contextValid(current)) throw new Error('Listing lacks matching visible geography or empty search');
+      const liveFromUrl = current.source_url;
+      const liveContext = current.listing_context || null;
       let recovered = true, observedHref = previous.pagination?.evidence?.href || null, nextSnapshot = null;
-      if (valid(current, n) && current.source_url === previous.source_url) {
+      if (valid(current, n)) {
         recovered = false;
         const snapBefore = await snapshot(p, {selector: '[aria-label="Следующая страница"]', interactive: true});
         const line = snapBefore.tree.split('\n').find(x => /link "Следующая страница"/.test(x));
@@ -64,13 +69,13 @@ try {
           current_next: current.pagination?.next_url || null, observed_href: observedHref,
           resolved_href: resolvedHref, ref_found: Boolean(ref), scoped_snapshot: snapBefore.tree};
         await save('next-comparison.json', comparison);
-        if (!ref || !observedHref || resolvedHref !== previous.pagination?.next_url || current.pagination?.next_url !== previous.pagination?.next_url)
+        if (!ref || !observedHref || resolvedHref !== current.pagination?.next_url || (!rotated && current.pagination?.next_url !== previous.pagination?.next_url))
           throw new Error('Observed Next differs from saved page; see next-comparison.json');
         await p.locator(ref[1]).click();
-        current = await stable(l => valid(l, n + 1));
+        current = await stable(l => valid(l, n + 1) && (!job.geography || contextValid(l)));
       }
-      if (!valid(current, n + 1)) throw new Error('Tab is not the expected completed next page');
-      listing = {...current, ui_transition: {method: 'observed_ui_next', recovered, next_snapshot: nextSnapshot, from_url: previous.source_url, from_page: n, next_href: previous.pagination.next_url, observed_href: observedHref, landed_url: current.source_url, landed_page: n + 1, stability: 'three_matching_snapshots_500ms'}};
+      if (!valid(current, n + 1) || (job.geography && !contextValid(current))) throw new Error('Tab is not the expected completed next page');
+      listing = {...current, ui_transition: {method: 'observed_ui_next', recovered, next_snapshot: nextSnapshot, from_url: previous.source_url, live_from_url: liveFromUrl, live_context: liveContext, from_page: n, next_href: previous.pagination.next_url, observed_href: observedHref, live_next_url: observedHref ? new URL(observedHref, liveFromUrl).href : null, landed_url: current.source_url, landed_page: n + 1, stability: 'three_matching_snapshots_500ms'}};
     } else listing = job.ui_next ? await stable(l => l.state === 'EMPTY_RESULT' || (l.pagination?.current_pages || []).includes('1')) : await stable(l =>
       (job.allow_empty && l.state === 'EMPTY_RESULT') || (Array.isArray(l.selected_controls) && l.selected_controls.length > 0 && l.profession_filter?.observed === true &&
       ((l.pagination?.current_pages || []).length > 0 || l.pagination?.end_confirmed === true)));
@@ -100,15 +105,25 @@ try {
       let data = await p.evaluate(extractor);
       // Only an observed incomplete, unrestricted shell may still be loading.
       // Never navigate again, delay ready cards, or wait through protection/identity errors.
+      let readinessWaits = 0;
       for (let i = 0; i < 10; i++) {
         const ev = data.unresolved_evidence;
-        if (data.state !== 'UNKNOWN_PAGE' || ev?.complete !== false || ev?.restriction !== false ||
-            ev?.known_unavailable !== false || safeUrl(p.url()) !== safeUrl(item.url) ||
+        const shell = data.state === 'UNKNOWN_PAGE' && ev?.complete === false && ev?.restriction === false && ev?.known_unavailable === false;
+        const detailHydrating = data.state === 'DETAIL' && data.id === item.id &&
+          data.parameter_audit?.rendered_complete === false && Array.isArray(data.fields) && data.fields.length === 0 &&
+          Array.isArray(data.params_blocks) && data.params_blocks.length === 0;
+        if ((!shell && !detailHydrating) || safeUrl(p.url()) !== safeUrl(item.url) ||
             safeUrl(data.source_url) !== safeUrl(item.url)) break;
         await sleep(500);
+        readinessWaits++;
         data = await p.evaluate(extractor);
       }
       const snap = await snapshot(p, {interactive: true});
+      if (readinessWaits === 10 && data.state === 'DETAIL' && data.id === item.id &&
+          safeUrl(p.url()) === safeUrl(item.url) && safeUrl(data.source_url) === safeUrl(item.url) &&
+          data.parameter_audit?.rendered_complete === false && Array.isArray(data.fields) && data.fields.length === 0 &&
+          Array.isArray(data.params_blocks) && data.params_blocks.length === 0)
+        data = {...data, readiness_wait: {attempts: 10, interval_ms: 500, same_url_and_id: true}};
       // Preserve the observation before deciding whether it can enter the dataset.
       await save('raw/' + item.id + '.json', data);
       const validFields = Array.isArray(data.fields) && data.fields.length > 0 &&

@@ -72,7 +72,7 @@
     const canonical = s => s.replace(/\s+/g, ' ').trim();
     const names = parsedFields.map(f => canonical(f.name));
     const expansionControls = paramElements.flatMap(e => [...e.querySelectorAll('button,a,[role="button"]')])
-      .filter(visible).map(text).filter(s => /ещ[её]|показать|раскрыть/i.test(s));
+      .filter(visible).map(text).filter(s => /^(?:ещ[её]|показать|раскрыть)(?:\s|$)/iu.test(s));
     const renderedComplete = blocks.some(b => /^Условия(?:\n|$)/.test(b)) &&
       blocks.some(b => /^Требования(?:\n|$)/.test(b)) && parsedFields.length > 0 &&
       parsedFields.every(f => f.name && f.value) && new Set(names).size === names.length &&
@@ -153,6 +153,10 @@
   const pagination = {current_pages, next_url: !disabled ? nextURL : null, end_confirmed: !!disabled,
     evidence: effectiveNext ? {text: text(effectiveNext), label: effectiveNext.getAttribute('aria-label'), href: nextHref, disabled: !!disabled, direction: effectiveNext === disabledNext ? 'next_arrowright' : null} : null,
     limitation: 'End requires an explicitly disabled Next; missing Next alone is not proof; infinite loading and server-side result caps are not covered'};
-  return {...base, heading: text(document.querySelector('h1')), selected_controls: controls,
+  const geoControl = document.querySelector('[data-marker="search-form/change-location"]');
+  const searchControl = document.querySelector('input[placeholder="Поиск по объявлениям"]');
+  const listing_context = {geography: visible(geoControl) ? text(geoControl) : null,
+    search: visible(searchControl) ? searchControl.value : null};
+  return {...base, heading: text(document.querySelector('h1')), selected_controls: controls, listing_context,
     available_filter_controls, profession_filter, items, listing_item_audit, pagination};
 })()

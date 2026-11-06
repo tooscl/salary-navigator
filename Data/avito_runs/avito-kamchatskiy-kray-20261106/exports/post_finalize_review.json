@@ -1,0 +1,168 @@
+{
+  "method": "post_finalize_validation_v1",
+  "reason": "Recorded and validated partial-prefix and public provenance redaction changes; preserved source hashes and remaining IDs; raw and accepted CSV remain unchanged.",
+  "original_manifest_sha256": "eca80d3169d9c736402d0476c3893ca4932b5f9f7343f66e4d365a29a3f0930c",
+  "previous_automation_sha256": {
+    "Scraper/skills/collect-avito/references/top-professions.json": "e3e72638b17b48f825ec6f2fefb963662494f679ae4b0cef1bebedba889610dd",
+    "utils/title_flags.py": "9c9456cb3fb0df5791630049c9c85987381091dbb9ba18bc3fb3314b8cccbeb6",
+    "Scraper/extract.js": "fa0a0e0c7df0877d15ea4f94e5fed14df514241cb51771cda18cacc04574e8b0",
+    "Scraper/skills/collect-avito/SKILL.md": "6fdbcfa7faeef1dffa9188af0527c0468c206f1372f9dfdf56f881f9de7bcb92",
+    "Scraper/skills/collect-avito/scripts/run.py": "bd08110e6ac246ea70d6e023bf262477218b70f47404a6cf568fa175c869b7f0",
+    "Scraper/skills/collect-avito/scripts/sweep_mode.py": "718a956a316df71c47ee3a4c5d3670fa011a5b16e9948393d68216702b140a56",
+    "Scraper/skills/collect-avito/scripts/browser_batch.js": "7572ff4aa773cd86ccd3d8ca3a2de6c9586b482ab6f1371dbfa152b165588eb4",
+    "Scraper/skills/collect-avito/scripts/check_capture.py": "aa746849317f9768af5aae08b394b9379539f6e268c1fc69e4ed13bd06a4657f",
+    "Scraper/skills/collect-avito/scripts/failure_log.py": "08dfd259fad4166a08acb1b056bf3cd14daede277385bd91c7e49680959475a4",
+    "Scraper/skills/collect-avito/scripts/preflight.py": "492a0d898990aee198f26bf6577d0876360dcc6ec69e274835cd77cdaa768974"
+  },
+  "automation_changes": [
+    {
+      "file": "Scraper/skills/collect-avito/scripts/run.py",
+      "reason": "Stage cleared restriction recapture before replacing archived raw",
+      "validation": "133 offline tests passed, one skipped; CLI and staging regressions passed"
+    },
+    {
+      "file": "Scraper/skills/collect-avito/SKILL.md",
+      "reason": "Document one-card recapture after cleared restriction",
+      "validation": "133 offline tests passed, one skipped; CLI and staging regressions passed"
+    },
+    {
+      "file": "Scraper/test_pagination.py",
+      "reason": "Test archived restriction staged recapture and hard stops",
+      "validation": "133 offline tests passed, one skipped; CLI and staging regressions passed"
+    },
+    {
+      "file": "Scraper/skills/collect-avito/scripts/failure_log.py",
+      "reason": "Adds durable user-authorized detail-skip evidence and preserves retry/failure history.",
+      "validation": "Terra offline review; 133 tests passed with one skip plus CLI and staging checks."
+    },
+    {
+      "file": "Scraper/test_failure_log.py",
+      "reason": "Regression coverage for persistent skip-policy and failure-ledger outcomes.",
+      "validation": "Terra offline review; 133 tests passed with one skip plus CLI and staging checks."
+    },
+    {
+      "file": "Scraper/skills/collect-avito/scripts/run.py",
+      "reason": "Support authorized ordinary queue partial prefix and offline protected pending archive",
+      "validation": "138 offline tests passed, one skipped"
+    },
+    {
+      "file": "Scraper/skills/collect-avito/SKILL.md",
+      "reason": "Document ordinary partial prefix and offline pending preservation",
+      "validation": "138 offline tests passed, one skipped"
+    },
+    {
+      "file": "Scraper/test_aside_runner.py",
+      "reason": "Verify ordinary partial export exclusions hashes and protected pending archive",
+      "validation": "138 offline tests passed, one skipped"
+    },
+    {
+      "file": "Scraper/extract.js",
+      "reason": "Frozen collector includes audited address-control label boundary",
+      "validation": "138 offline tests passed, one skipped; extractor label and browser doubles verified"
+    },
+    {
+      "file": "Scraper/skills/collect-avito/scripts/browser_batch.js",
+      "reason": "Frozen collector includes bounded detail readiness observation",
+      "validation": "138 offline tests passed, one skipped; extractor label and browser doubles verified"
+    },
+    {
+      "file": "Scraper/skills/collect-avito/scripts/run.py",
+      "reason": "Stage cleared restriction recapture before replacing archived raw",
+      "validation": "133 offline tests passed, one skipped; CLI and staging regressions passed"
+    },
+    {
+      "file": "Scraper/skills/collect-avito/SKILL.md",
+      "reason": "Document one-card recapture after cleared restriction",
+      "validation": "133 offline tests passed, one skipped; CLI and staging regressions passed"
+    },
+    {
+      "file": "Scraper/test_pagination.py",
+      "reason": "Test archived restriction staged recapture and hard stops",
+      "validation": "133 offline tests passed, one skipped; CLI and staging regressions passed"
+    },
+    {
+      "file": "Scraper/skills/collect-avito/scripts/failure_log.py",
+      "reason": "Adds durable user-authorized detail-skip evidence and preserves retry/failure history.",
+      "validation": "Terra offline review; 133 tests passed with one skip plus CLI and staging checks."
+    },
+    {
+      "file": "Scraper/test_failure_log.py",
+      "reason": "Regression coverage for persistent skip-policy and failure-ledger outcomes.",
+      "validation": "Terra offline review; 133 tests passed with one skip plus CLI and staging checks."
+    },
+    {
+      "file": "Scraper/skills/collect-avito/scripts/run.py",
+      "reason": "Support authorized ordinary queue partial prefix and offline protected pending archive",
+      "validation": "138 offline tests passed, one skipped"
+    },
+    {
+      "file": "Scraper/skills/collect-avito/SKILL.md",
+      "reason": "Document ordinary partial prefix and offline pending preservation",
+      "validation": "138 offline tests passed, one skipped"
+    },
+    {
+      "file": "Scraper/test_aside_runner.py",
+      "reason": "Verify ordinary partial export exclusions hashes and protected pending archive",
+      "validation": "138 offline tests passed, one skipped"
+    },
+    {
+      "file": "Scraper/extract.js",
+      "reason": "Frozen collector includes audited address-control label boundary",
+      "validation": "138 offline tests passed, one skipped; extractor label and browser doubles verified"
+    },
+    {
+      "file": "Scraper/skills/collect-avito/scripts/browser_batch.js",
+      "reason": "Frozen collector includes bounded detail readiness observation",
+      "validation": "138 offline tests passed, one skipped; extractor label and browser doubles verified"
+    },
+    {
+      "file": "Scraper/skills/collect-avito/scripts/run.py",
+      "reason": "Project public provenance into index with immutable audit",
+      "validation": "159 offline tests passed, one skipped; staged byte privacy regression passed"
+    },
+    {
+      "file": "Scraper/skills/collect-avito/SKILL.md",
+      "reason": "Document post-finalize private provenance projection",
+      "validation": "159 offline tests passed, one skipped; staged byte privacy regression passed"
+    },
+    {
+      "file": "Scraper/test_aside_runner.py",
+      "reason": "Verify staged public projection and private locator guard",
+      "validation": "159 offline tests passed, one skipped; staged byte privacy regression passed"
+    },
+    {
+      "file": "Scraper/skills/collect-avito/scripts/run.py",
+      "reason": "Audited post-finalize provenance redaction and staged privacy guard",
+      "validation": "161 offline tests passed, one skipped"
+    },
+    {
+      "file": "Scraper/skills/collect-avito/SKILL.md",
+      "reason": "Document audited post-finalize provenance redaction",
+      "validation": "161 offline tests passed, one skipped"
+    },
+    {
+      "file": "Scraper/test_aside_runner.py",
+      "reason": "Verify redaction rollback hashes immutability and staged privacy",
+      "validation": "161 offline tests passed, one skipped"
+    }
+  ],
+  "previous_review_sha256": null,
+  "current_automation_sha256": {
+    "Scraper/extract.js": "fa0a0e0c7df0877d15ea4f94e5fed14df514241cb51771cda18cacc04574e8b0",
+    "Scraper/skills/collect-avito/SKILL.md": "9307840c781a9742b6b002e0bde884cc86dd139cab0cb37c4a41912155870457",
+    "Scraper/skills/collect-avito/references/top-professions.json": "e3e72638b17b48f825ec6f2fefb963662494f679ae4b0cef1bebedba889610dd",
+    "Scraper/skills/collect-avito/scripts/browser_batch.js": "7572ff4aa773cd86ccd3d8ca3a2de6c9586b482ab6f1371dbfa152b165588eb4",
+    "Scraper/skills/collect-avito/scripts/check_capture.py": "aa746849317f9768af5aae08b394b9379539f6e268c1fc69e4ed13bd06a4657f",
+    "Scraper/skills/collect-avito/scripts/failure_log.py": "08dfd259fad4166a08acb1b056bf3cd14daede277385bd91c7e49680959475a4",
+    "Scraper/skills/collect-avito/scripts/preflight.py": "492a0d898990aee198f26bf6577d0876360dcc6ec69e274835cd77cdaa768974",
+    "Scraper/skills/collect-avito/scripts/run.py": "a9399ac2feb903695250ecbbd990bd4cb09153c11544b0d7f5fdc60f934422e7",
+    "Scraper/skills/collect-avito/scripts/sweep_mode.py": "718a956a316df71c47ee3a4c5d3670fa011a5b16e9948393d68216702b140a56",
+    "Scraper/test_aside_runner.py": "a3be87446a4526ff00bfc50605713194341d49eacff94b9251cfa5fffbf43d3e",
+    "Scraper/test_failure_log.py": "a82528cd58262443da6d8c0b174ad33d13441e7a3ba8c53d68cc1af8b371efe1",
+    "Scraper/test_pagination.py": "aa123255c29eb26b40f9badcbc58d7402261b26e9c413579a5b218857454fe64",
+    "utils/build_dataset.py": "bdcfc99358540a24692bf4560805734d270821a9dcd7410e7ab257241342a5bd",
+    "utils/test_build_dataset.py": "114a825a91a7d1b65fa213557199d77831276f4ca1c91418c8547f11bf10a427",
+    "utils/title_flags.py": "9c9456cb3fb0df5791630049c9c85987381091dbb9ba18bc3fb3314b8cccbeb6"
+  },
+  "validation": "Partition, plan, page hashes, URL chain, raw, correction, CSV IDs and profession, dataset check and offline regression suites passed"
+}

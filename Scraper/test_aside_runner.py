@@ -39,6 +39,78 @@ def raw(identity='123'):
 
 
 class RunnerTests(unittest.TestCase):
+    def test_finalized_provenance_redaction_preserves_raw_and_audits(self):
+        with tempfile.TemporaryDirectory() as directory,patch.object(runner,'ROOT',Path(directory)):
+            root=runner.ROOT;out,service,diag=runner.paths(root,'run');data=b'{"state":"NEEDS_HUMAN"}\n';digest=hashlib.sha256(data).hexdigest()
+            raw=out/'observations/123'/f'{digest}.json';raw.parent.mkdir(parents=True);raw.write_bytes(data)
+            provenance=raw.with_name(digest+'.provenance.json');runner.write(provenance,{'raw_sha256':digest,'sandbox_path':'/Users/private/.aside/session','reason':'restriction'})
+            csvfile=out/'exports/vacancies_flat.csv';csvfile.parent.mkdir();csvfile.write_text('id\n123\n');queue=out/'queue.json';runner.write(queue,[{'id':'123'}])
+            entries={p.relative_to(root).as_posix():{'bytes':p.stat().st_size,'sha256':runner.sha(p)} for p in (raw,provenance,csvfile,queue)}
+            manifest={'status':'complete','files':entries,'coverage':{'accepted':1}};runner.write(service/'manifest.json',manifest)
+            before={p:p.read_bytes() for p in (raw,provenance,csvfile,queue,service/'manifest.json')}
+            original_write=runner.write
+            def fail_audit(path,value):
+                if path == out/'exports/provenance_redaction_audit.json': raise OSError('simulated audit failure')
+                return original_write(path,value)
+            with patch.object(runner,'validate_completed_export',return_value=manifest),patch.object(runner,'write',side_effect=fail_audit):
+                with self.assertRaises(OSError):runner.redact_finalized_provenance(argparse.Namespace(run_id='run'))
+            for p in before:self.assertEqual(p.read_bytes(),before[p])
+            with patch.object(runner,'validate_completed_export',return_value=manifest):
+                runner.redact_finalized_provenance(argparse.Namespace(run_id='run'))
+            after=runner.read(service/'manifest.json');audit=runner.read(out/'exports/provenance_redaction_audit.json')
+            self.assertEqual(audit['original_manifest_sha256'],hashlib.sha256(before[service/'manifest.json']).hexdigest())
+            private=diag/'private-provenance/123'/provenance.name;self.assertEqual(private.read_bytes(),before[provenance])
+            self.assertEqual((diag/'private-provenance/original-manifest.json').read_bytes(),before[service/'manifest.json'])
+            self.assertNotIn('sandbox_path',runner.read(provenance));self.assertEqual(runner.read(provenance)['private_provenance_sha256'],hashlib.sha256(before[provenance]).hexdigest())
+            for p in (raw,csvfile,queue):self.assertEqual(p.read_bytes(),before[p])
+            runner.validate_provenance_redaction(out,service,after)
+            with patch.object(runner,'validate_completed_export',return_value=after):runner.redact_finalized_provenance(argparse.Namespace(run_id='run'))
+            private.write_text('{}')
+            with self.assertRaisesRegex(ValueError,'bytes differ'):runner.validate_provenance_redaction(out,service,after)
+
+    def test_finalized_provenance_redaction_cli_dispatch(self):
+        with tempfile.TemporaryDirectory() as directory,patch.object(runner,'ROOT',Path(directory)):
+            with patch('sys.argv',['run.py','redact-finalized-provenance','--run-id','run']),patch.object(runner,'redact_finalized_provenance') as action:
+                runner.main();self.assertEqual(action.call_args.args[0].run_id,'run')
+
+    def test_staged_privacy_guard_rejects_private_run_locator(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root=Path(directory);subprocess.run(['git','init','-q'],cwd=root,check=True)
+            out,service,_=runner.paths(root,'run');path=out/'exports/info.json';runner.write(path,{'public':'ok'})
+            subprocess.run(['git','add','--',str(out.relative_to(root))],cwd=root,check=True)
+            runner.verify_staged_run_privacy(root,out,service)
+            runner.write(path,{'sandbox_path':'/Users/private/.aside/session'});subprocess.run(['git','add','--',str(out.relative_to(root))],cwd=root,check=True)
+            with self.assertRaisesRegex(ValueError,'private locator'):runner.verify_staged_run_privacy(root,out,service)
+
+    def test_address_expansion_label_does_not_match_blagoveshchensk(self):
+        source=(runner.ROOT/'Scraper/extract.js').read_text(encoding='utf8')
+        import re
+        expression=re.search(r'filter\(s => (/.+?/iu)\.test\(s\)\)',source)
+        self.assertIsNotNone(expression)
+        code="const f="+expression.group(1)+"; if(f.test('Амурская обл., Благовещенск, пл. Ленина') || !f.test('Показать ещё') || !f.test('Ещё') || !f.test('Раскрыть параметры')) process.exit(1);"
+        subprocess.run(['node','-e',code],check=True)
+        before=source.replace(expression.group(1),'/ещ[её]|показать|раскрыть/i')
+        self.assertTrue(runner.audited_address_label_fix({'extractor_sha256':hashlib.sha256(before.encode()).hexdigest()}))
+        self.assertFalse(runner.audited_address_label_fix({'extractor_sha256':'unrelated'}))
+
+    def test_direct_address_button_review_preserves_raw_and_budget(self):
+        with tempfile.TemporaryDirectory() as directory, patch.object(runner,'ROOT',Path(directory)):
+            root=runner.ROOT;out,service,diag=runner.paths(root,'case');sandbox=root/'sandbox'; queue=[item('123'),item('456')]; url=queue[0]['url']
+            runner.write(out/'queue.json',queue);runner.write(out/'listing.json',{});runner.write(out/'listing_pages/0001.json',{})
+            runner.write(service/'plan.json',{'run_id':'case','listing_pages':[{'file':'listing_pages/0001.json'}]})
+            cp=dict(state='REVIEW_REQUIRED',stop_reason='identity_or_template_review',next_id='123',completed_ids=[])
+            runner.write(diag/'checkpoint.json',cp);runner.write(sandbox/'checkpoint.json',cp);runner.write(diag/'sandbox.json',{'path':str(sandbox)});runner.write(sandbox/'browser-tab.json',{'url':url})
+            address='Амурская обл., Благовещенск, пл. Ленина';blocks=[f'Условия\nГде предстоит работать: {address}\nГрафик: Вахта','Требования\nОпыт работы: Без опыта']
+            data=raw('123');data.update(params_blocks=blocks,fields=[dict(name='Где предстоит работать',value=address),dict(name='График',value='Вахта'),dict(name='Опыт работы',value='Без опыта')],parameter_audit=dict(rendered_complete=False,expansion_controls=[address]),source_sections=[dict(marker='item-view/item-params',text=x) for x in blocks])
+            runner.write(out/'raw/123.json',data);runner.write(sandbox/'raw/123.json',data)
+            snap=f'- title: "Работа" [url={url}]\n- heading "Работа" [level=1]\n- text: "Где предстоит работать:"\n- button "{address}" [ref=e1]\n';(diag/'problem.snapshot.txt').write_text(snap);(sandbox/'problem.snapshot.txt').write_text(snap)
+            ledger=runner.load_failures(diag);ledger.update(unbounded_retries=True);ledger['events'].append(dict(event='human_browser_authorization',authorization_id='auth',instruction='Continue technical fixes',unbounded_retries=True));runner.save_failures(diag,ledger)
+            runner.record_failure(diag,'capture','stopped','capture',immediate=True);before=runner.load_failures(diag);original=(out/'raw/123.json').read_bytes()
+            with patch.object(runner,'validate_partition'),patch.object(runner,'validate_plan_profession'),patch.object(runner,'queue_from_pages',return_value=queue):
+                runner.review_address_button(argparse.Namespace(run_id='case',id='123',source='auth'))
+            after=runner.load_failures(diag);self.assertEqual(after['state'],'RECOVERED')
+            self.assertEqual((after['failures'],after['retries_started']),(before['failures'],before['retries_started']))
+            self.assertEqual((out/'raw/123.json').read_bytes(),original);self.assertEqual(runner.read(diag/'checkpoint.json')['next_id'],'456')
     def test_public_provenance_retains_private_bytes_and_raw_hash(self):
         with tempfile.TemporaryDirectory() as directory, patch.object(runner,'ROOT',Path(directory)):
             out,service,diag=runner.paths(runner.ROOT,'private');runner.write(diag/'checkpoint.json',dict(state='CAPTURED',next_id=None));raw=b'{"state":"UNKNOWN_PAGE"}\n';digest=hashlib.sha256(raw).hexdigest();path=out/'observations/123'/f'{digest}.provenance.json';path.parent.mkdir(parents=True);(path.parent/f'{digest}.json').write_bytes(raw)
@@ -156,15 +228,17 @@ class RunnerTests(unittest.TestCase):
         script=(SCRIPTS/'browser_batch.js').read_text(); candidate=item('123')
         job=dict(mode='capture',queue=[candidate],completed_ids=[],close_tab=False)
         body=script.replace('__JOB__',json.dumps(job),1).replace('__EXTRACTOR__','"extract"',1)
-        for scenario,expected_calls,expected_state in [('ready',1,'CAPTURED'),('delayed',3,'CAPTURED'),('timeout',11,'REVIEW_REQUIRED'),('blocked',2,'NEEDS_HUMAN'),('unavailable',1,'REVIEW_REQUIRED'),('wrongurl',1,'REVIEW_REQUIRED')]:
+        for scenario,expected_calls,expected_state in [('ready',1,'CAPTURED'),('delayed',3,'CAPTURED'),('detail_delayed',3,'CAPTURED'),('detail_timeout',11,'REVIEW_REQUIRED'),('detail_blocked',2,'NEEDS_HUMAN'),('detail_wrong_id',1,'REVIEW_REQUIRED'),('timeout',11,'REVIEW_REQUIRED'),('blocked',2,'NEEDS_HUMAN'),('unavailable',1,'REVIEW_REQUIRED'),('wrongurl',1,'REVIEW_REQUIRED')]:
             with self.subTest(scenario=scenario), tempfile.TemporaryDirectory() as directory:
                 harness="""const fs=require('fs').promises,pwd=process.cwd(),url=URL;let calls=0,sleeps=0;const scenario=SCENARIO;
-const pg={url:()=>scenario==='wrongurl'?'https://www.avito.ru/wrong':url,evaluate:async()=>{calls++;if(scenario==='blocked'&&calls===2)return {state:'NEEDS_HUMAN',source_url:url};if(scenario==='ready'||scenario==='delayed'&&calls===3)return {state:'DETAIL',id:'123',title:'Job',source_url:url,parameter_audit:{rendered_complete:true},fields:[{name:'x',value:'y'}]};return {state:'UNKNOWN_PAGE',source_url:url,unresolved_evidence:{complete:false,restriction:false,known_unavailable:scenario==='unavailable'}}}};
+const pg={url:()=>scenario==='wrongurl'?'https://www.avito.ru/wrong':url,evaluate:async()=>{calls++;if((scenario==='blocked'||scenario==='detail_blocked')&&calls===2)return {state:'NEEDS_HUMAN',source_url:url};if(scenario==='ready'||(scenario==='delayed'||scenario==='detail_delayed')&&calls===3)return {state:'DETAIL',id:'123',title:'Job',source_url:url,parameter_audit:{rendered_complete:true},fields:[{name:'x',value:'y'}]};if(scenario.startsWith('detail_'))return {state:'DETAIL',id:scenario==='detail_wrong_id'?'999':'123',title:'Job',source_url:url,parameter_audit:{rendered_complete:false},fields:[],params_blocks:[]};return {state:'UNKNOWN_PAGE',source_url:url,unresolved_evidence:{complete:false,restriction:false,known_unavailable:scenario==='unavailable'}}}};
 const listBrowserTabs=async()=>[],openTab=async()=>pg,snapshot=async()=>({tree:'snapshot'}),sleep=async()=>{sleeps++};
 (async()=>{BODY;console.log('CHECK='+JSON.stringify({calls,sleeps,cp:JSON.parse(await fs.readFile('checkpoint.json','utf8'))}))})().catch(e=>{console.error(e);process.exit(1)});
 """.replace('URL',json.dumps(candidate['url'])).replace('SCENARIO',json.dumps(scenario)).replace('BODY',body)
                 result=subprocess.run(['node','-e',harness],cwd=directory,text=True,capture_output=True,check=True)
                 info=json.loads(result.stdout.split('CHECK=')[-1]);self.assertEqual(info['calls'],expected_calls);self.assertEqual(info['cp']['state'],expected_state);self.assertLessEqual(info['sleeps'],10)
+                if scenario=='detail_timeout':
+                    observed=json.loads((Path(directory)/'raw/123.json').read_text());self.assertEqual(observed['readiness_wait'],{'attempts':10,'interval_ms':500,'same_url_and_id':True})
 
     def test_recurring_ip_commands_parse_and_dispatch_in_real_cli(self):
         with tempfile.TemporaryDirectory() as directory:
@@ -304,6 +378,166 @@ const listBrowserTabs=async()=>[],openTab=async()=>pg,snapshot=async()=>({tree:'
                     self.assertEqual(runner.read(diag/'checkpoint.json')['completed_ids'], ['123'])
                     self.assertEqual(runner.read(out/'observations/456'/f'{digest}.provenance.json')['snapshot_sha256'], runner.sha(diag/'problem.snapshot.txt'))
                 else: self.assertEqual((out/'raw/456.json').read_bytes(), original)
+
+    def test_detail_hydration_one_authorized_retry_preserves_evidence(self):
+        for scenario in ('ok', 'restriction', 'wrong_id', 'snapshot'):
+            with self.subTest(scenario=scenario), tempfile.TemporaryDirectory() as directory, patch.object(runner, 'ROOT', Path(directory)):
+                root=runner.ROOT; out,service,diag=runner.paths(root,'case'); sandbox=root/'sandbox'
+                queue=[item('123')]; url=queue[0]['url']
+                runner.write(out/'queue.json',queue); runner.write(out/'listing.json',{}); runner.write(out/'listing_pages/0001.json',{})
+                runner.write(service/'plan.json',dict(run_id='case',listing_pages=[dict(file='listing_pages/0001.json')],listing_sha256='pinned'))
+                cp=dict(state='REVIEW_REQUIRED',stop_reason='identity_or_template_review',next_id='123',completed_ids=[])
+                runner.write(diag/'checkpoint.json',cp); runner.write(sandbox/'checkpoint.json',cp)
+                runner.write(diag/'sandbox.json',{'path':str(sandbox)}); runner.write(sandbox/'browser-tab.json',{'url':url})
+                data=dict(state='DETAIL',id='999' if scenario=='wrong_id' else '123',source_url=url,title='Job',observed_at='2026-11-06T07:56:29Z',fields=[],params_blocks=[],parameter_audit={'rendered_complete':False})
+                runner.write(out/'raw/123.json',data); runner.write(sandbox/'raw/123.json',data)
+                snap=f'- title: "Авито" [url={url}]\n- heading "Job" [level=1]\n- heading "Условия" [level=2]\n- heading "Требования" [level=2]\n'+('CAPTCHA' if scenario=='restriction' else '')
+                (diag/'problem.snapshot.txt').write_text(snap); (sandbox/'problem.snapshot.txt').write_text(snap+('changed' if scenario=='snapshot' else ''))
+                runner.record_failure(diag,'capture','stopped','capture',immediate=True)
+                before=runner.load_failures(diag)
+                args=argparse.Namespace(run_id='case',pending_id_no_budget='123',detail_hydration=True,unbounded_retries=False,human_instruction='Повторить карточку 123',authorization_id='human-1')
+                if scenario!='ok':
+                    with self.assertRaises(ValueError): runner.resume_browser(args)
+                    self.assertEqual(runner.load_failures(diag)['state'],'NEEDS_HUMAN'); continue
+                runner.resume_browser(args)
+                auth=runner.load_failures(diag); self.assertEqual(auth['failures'],before['failures']); self.assertEqual(auth['retries_started'],before['retries_started'])
+                original=(out/'raw/123.json').read_bytes(); old_snap=(diag/'problem.snapshot.txt').read_bytes()
+                with patch.object(runner,'validate_partition'), patch.object(runner,'validate_plan_profession'), patch.object(runner,'queue_from_pages',return_value=queue), patch.object(runner,'unavailable_records',return_value=[]), patch.object(runner,'unresolved_records',return_value=[]):
+                    runner.retry_incomplete_observation(argparse.Namespace(run_id='case',id='123',authorization_id='human-1'))
+                digest=hashlib.sha256(original).hexdigest()
+                self.assertEqual((out/'observations/123'/f'{digest}.json').read_bytes(),original)
+                self.assertTrue(any(p.read_bytes()==old_snap for p in (diag/'observations/123').glob('*.problem.snapshot.txt')))
+                self.assertFalse((out/'raw/123.json').exists())
+                self.assertEqual(runner.load_failures(diag)['bounded_pending']['state'],'reserved')
+
+    def test_user_skip_preserves_evidence_and_accounts_queue(self):
+        for scenario in ('ok', 'restriction', 'wrong_id', 'snapshot'):
+            with self.subTest(scenario=scenario), tempfile.TemporaryDirectory() as directory, patch.object(runner, 'ROOT', Path(directory)):
+                root=runner.ROOT; out,service,diag=runner.paths(root,runner.USER_SKIP_RUN); sandbox=root/'sandbox'
+                queue=[item(runner.USER_SKIP_ID),item('123')]; url=queue[0]['url']; runner.write(out/'queue.json',queue)
+                cp=dict(state='REVIEW_REQUIRED',stop_reason='identity_or_template_review',next_id=runner.USER_SKIP_ID,completed_ids=[])
+                runner.write(diag/'checkpoint.json',cp); runner.write(sandbox/'checkpoint.json',cp)
+                runner.write(diag/'sandbox.json',{'path':str(sandbox)}); runner.write(sandbox/'browser-tab.json',{'url':url})
+                data=dict(state='UNKNOWN_PAGE',source_url=url,heading=None,items=[],unresolved_evidence=dict(complete=False,restriction=scenario=='restriction',known_unavailable=False))
+                raw=out/'raw'/f'{runner.USER_SKIP_ID}.json'; runner.write(raw,data); runner.write(sandbox/'raw'/raw.name,data)
+                snap=f'- title: "Авито" [url={url}]\n- link "Помощь" [ref=e1]\n'
+                (diag/'problem.snapshot.txt').write_text(snap); (sandbox/'problem.snapshot.txt').write_text(snap+('changed' if scenario=='snapshot' else ''))
+                runner.record_failure(diag,'capture','stopped','capture',immediate=True); before=runner.load_failures(diag); original=raw.read_bytes()
+                args=argparse.Namespace(run_id=runner.USER_SKIP_RUN,id='999' if scenario=='wrong_id' else runner.USER_SKIP_ID,human_instruction='Пропустить 8557245056',authorization_id='skip-1')
+                if scenario!='ok':
+                    with self.assertRaises(ValueError): runner.mark_user_skipped(args)
+                    self.assertEqual(runner.load_failures(diag)['state'],'NEEDS_HUMAN'); continue
+                runner.mark_user_skipped(args)
+                after=runner.load_failures(diag); self.assertEqual(after['state'],'RECOVERED')
+                for field in ('failures','retries_started','retry_limit','budget_start_failures'): self.assertEqual(after[field],before[field])
+                self.assertEqual(raw.read_bytes(),original); self.assertEqual((sandbox/'raw'/raw.name).read_bytes(),original)
+                checkpoint=runner.read(diag/'checkpoint.json'); self.assertEqual(checkpoint['next_id'],'123'); self.assertEqual(checkpoint['completed_ids'],[])
+                records=runner.user_skipped_records(out,queue); self.assertEqual(records[0]['status'],'user_skipped')
+                self.assertEqual(records[0]['reason'],'user_directed_incomplete_observation')
+                raw.write_text('{}')
+                with self.assertRaises(ValueError): runner.user_skipped_records(out,queue)
+
+    def test_user_skip_cli_parses_only_its_own_arguments(self):
+        with tempfile.TemporaryDirectory() as directory, patch.object(runner, 'ROOT', Path(directory)):
+            argv=['run.py','mark-user-skipped','--run-id',runner.USER_SKIP_RUN,'--id',runner.USER_SKIP_ID,
+                  '--human-instruction','Пропустить 8557245056','--authorization-id','skip-1']
+            with patch('sys.argv',argv), patch.object(runner,'mark_user_skipped') as action:
+                runner.main()
+            self.assertEqual(action.call_count,1)
+            args=action.call_args.args[0]
+            self.assertEqual((args.run_id,args.id,args.authorization_id),(runner.USER_SKIP_RUN,runner.USER_SKIP_ID,'skip-1'))
+            self.assertFalse(hasattr(args,'file'))
+
+    def test_standing_user_skip_classifies_and_preserves_only_authorized_evidence(self):
+        for scenario in ('blocked', 'shell', '404', 'captcha', '429', 'detail', 'unrecognized'):
+            with self.subTest(scenario=scenario), tempfile.TemporaryDirectory() as directory, patch.object(runner,'ROOT',Path(directory)):
+                root=runner.ROOT; out,service,diag=runner.paths(root,'case'); sandbox=root/'sandbox'; queue=[item('123'),item('456')]; url=queue[0]['url']
+                runner.write(out/'queue.json',queue)
+                cp=dict(state='REVIEW_REQUIRED',stop_reason='identity_or_template_review',next_id='123',completed_ids=[])
+                runner.write(diag/'checkpoint.json',cp); runner.write(sandbox/'checkpoint.json',cp); runner.write(diag/'sandbox.json',{'path':str(sandbox)}); runner.write(sandbox/'browser-tab.json',{'url':url})
+                ev=dict(complete=scenario=='blocked',restriction=False,known_unavailable=scenario=='blocked')
+                data=dict(state='UNKNOWN_PAGE',source_url=url,heading='Объявление не посмотреть' if scenario=='blocked' else None,items=[],unresolved_evidence=ev)
+                if scenario=='detail': data.update(state='DETAIL',id='123',fields=[],params_blocks=[])
+                runner.write(out/'raw/123.json',data); runner.write(sandbox/'raw/123.json',data)
+                title='Ошибка 404. Страница не найдена' if scenario=='404' else 'Авито'
+                snap=f'- title: "{title}" [url={url}]\n'
+                if scenario=='blocked': snap+='- heading "Объявление не посмотреть" [level=1]\n- text: "Оно заблокировано после проверки."\n'
+                if scenario=='captcha': snap+='- heading "CAPTCHA" [level=1]\n'
+                if scenario=='429': snap+='- text: "Ошибка 429"\n'
+                if scenario=='unrecognized': data['unresolved_evidence']['complete']=True; runner.write(out/'raw/123.json',data); runner.write(sandbox/'raw/123.json',data)
+                (diag/'problem.snapshot.txt').write_text(snap); (sandbox/'problem.snapshot.txt').write_text(snap)
+                runner.record_failure(diag,'capture','stopped','capture',immediate=True); before=runner.load_failures(diag)
+                runner.user_skip_policy(argparse.Namespace(run_id='case',authorization_id='policy-1',human_instruction='Пропускать подтверждённые недоступные и неполные карточки'))
+                args=argparse.Namespace(run_id='case',id='123',authorization_id='policy-1')
+                if scenario not in ('blocked','shell','404'):
+                    with self.assertRaises(ValueError): runner.mark_policy_skipped(args)
+                    self.assertEqual(runner.load_failures(diag)['state'],'NEEDS_HUMAN'); continue
+                original=(out/'raw/123.json').read_bytes(); runner.mark_policy_skipped(args)
+                after=runner.load_failures(diag); self.assertEqual(after['state'],'RECOVERED')
+                self.assertEqual((after['failures'],after['retries_started']),(before['failures'],before['retries_started']))
+                self.assertEqual((out/'raw/123.json').read_bytes(),original)
+                record=runner.user_skipped_records(out,queue)[0]
+                self.assertEqual(record['reason'],{'blocked':'unavailable: Оно заблокировано после проверки.','shell':'incomplete_shell','404':'unavailable: exact 404 page title'}[scenario])
+                self.assertEqual(runner.read(diag/'checkpoint.json')['next_id'],'456')
+
+    def test_standing_skip_cli_and_capture_continue(self):
+        with tempfile.TemporaryDirectory() as directory, patch.object(runner,'ROOT',Path(directory)):
+            for command,extra,target in (
+                ('user-skip-policy',['--human-instruction','standing instruction','--authorization-id','p1'],'user_skip_policy'),
+                ('mark-policy-skipped',['--id','123','--authorization-id','p1'],'mark_policy_skipped')):
+                with patch('sys.argv',['run.py',command,'--run-id','case']+extra), patch.object(runner,target) as action:
+                    runner.main(); self.assertEqual(action.call_count,1)
+            args=argparse.Namespace(run_id='case')
+            with patch.object(runner,'_capture_batch',side_effect=['USER_SKIPPED','USER_SKIPPED',None]) as batch:
+                runner.capture(args); self.assertEqual(batch.call_count,3)
+
+    def test_detail_skip_requires_wait_matching_identity_and_no_parser_failure(self):
+        with tempfile.TemporaryDirectory() as directory, patch.object(runner,'ROOT',Path(directory)):
+            root=runner.ROOT;out,_,diag=runner.paths(root,'case');sandbox=root/'sandbox';queue=[item('123'),item('456')];url=queue[0]['url']
+            runner.write(out/'queue.json',queue);cp=dict(state='REVIEW_REQUIRED',stop_reason='identity_or_template_review',next_id='123',completed_ids=[])
+            runner.write(diag/'checkpoint.json',cp);runner.write(sandbox/'checkpoint.json',cp);runner.write(diag/'sandbox.json',{'path':str(sandbox)});runner.write(sandbox/'browser-tab.json',{'url':url})
+            data=raw('123');data.update(fields=[],params_blocks=[],parameter_audit=dict(rendered_complete=False,expansion_controls=[]),readiness_wait=dict(attempts=10,interval_ms=500,same_url_and_id=True))
+            snap=f'- title: "Работа" [url={url}]\n- heading "Работа" [level=1]\n'
+            self.assertEqual(runner.skip_reason(data,snap,'123',url),'incomplete_detail_after_wait')
+            for bad,s in ((dict(data,id='999'),snap),(dict(data,readiness_wait=None),snap),(dict(data,fields=[{'name':'x','value':'y'}]),snap),(data,snap+'- heading "Условия" [level=2]\n'),(data,snap+'- heading "CAPTCHA" [level=1]\n'),(data,snap.replace('title: "Работа"','title: "Ошибка 404"'))):
+                with self.assertRaises(ValueError):runner.skip_reason(bad,s,'123',url)
+            runner.write(out/'raw/123.json',data);runner.write(sandbox/'raw/123.json',data);(diag/'problem.snapshot.txt').write_text(snap);(sandbox/'problem.snapshot.txt').write_text(snap)
+            runner.record_failure(diag,'capture','stopped','capture',immediate=True);before=runner.load_failures(diag)
+            runner.user_detail_skip_policy(argparse.Namespace(run_id='case',authorization_id='detail-1',human_instruction='Skip individual incomplete cards after wait'))
+            runner.mark_policy_skipped(argparse.Namespace(run_id='case',id='123',authorization_id='detail-1'))
+            record=runner.user_skipped_records(out,queue)[0];self.assertEqual(record['reason'],'incomplete_detail_after_wait')
+            after=runner.load_failures(diag);self.assertEqual(after['failures'],before['failures']);self.assertEqual(runner.read(diag/'checkpoint.json')['next_id'],'456')
+            next_data=raw('456');next_data.update(fields=[],params_blocks=[],parameter_audit=dict(rendered_complete=False,expansion_controls=[]),readiness_wait=dict(attempts=10,interval_ms=500,same_url_and_id=True))
+            next_snap=f'- title: "Работа" [url={queue[1]["url"]}]\n- heading "Работа" [level=1]\n'
+            next_cp=dict(state='REVIEW_REQUIRED',stop_reason='identity_or_template_review',next_id='456',completed_ids=[])
+            runner.write(diag/'checkpoint.json',next_cp);runner.write(sandbox/'checkpoint.json',next_cp);runner.write(diag/'sandbox.json',{'path':str(sandbox)});runner.write(sandbox/'browser-tab.json',{'url':queue[1]['url']})
+            runner.write(out/'raw/456.json',next_data);runner.write(sandbox/'raw/456.json',next_data);(diag/'problem.snapshot.txt').write_text(next_snap);(sandbox/'problem.snapshot.txt').write_text(next_snap)
+            with self.assertRaisesRegex(ValueError,'parser failure'):runner.mark_policy_skipped(argparse.Namespace(run_id='case',id='456',authorization_id='detail-1'))
+
+    def test_user_skip_is_excluded_and_counted_in_final_export(self):
+        with tempfile.TemporaryDirectory() as directory, patch.object(runner, 'ROOT', Path(directory)):
+            root=runner.ROOT; out,service,diag=runner.paths(root,runner.USER_SKIP_RUN); sandbox=root/'sandbox'
+            runner.write(root/'Data/dataset/sources.json',{'schema_version':'1','exports':[]})
+            (root/'Data/README.md').write_text('# Data\n'); (root/'Data/dataset/README.md').write_text('Текущий состав: старый\n')
+            skip=item(runner.USER_SKIP_ID); queue=[skip,item()]; url=skip['url']; runner.write(out/'queue.json',queue)
+            runner.write(out/'listing.json',{'selected_controls':courier_controls()})
+            runner.write(service/'plan.json',{'setup_seconds':1,'profession':'Курьер','segments':'all'})
+            cp=dict(state='REVIEW_REQUIRED',stop_reason='identity_or_template_review',next_id=runner.USER_SKIP_ID,completed_ids=[],capture_seconds=0.5)
+            runner.write(diag/'checkpoint.json',cp); runner.write(sandbox/'checkpoint.json',cp); runner.write(diag/'sandbox.json',{'path':str(sandbox)}); runner.write(sandbox/'browser-tab.json',{'url':url})
+            observation=dict(state='UNKNOWN_PAGE',source_url=url,heading=None,items=[],unresolved_evidence=dict(complete=False,restriction=False,known_unavailable=False))
+            runner.write(out/f'raw/{runner.USER_SKIP_ID}.json',observation); runner.write(sandbox/f'raw/{runner.USER_SKIP_ID}.json',observation)
+            snap=f'- title: "Авито" [url={url}]\n'; (diag/'problem.snapshot.txt').write_text(snap); (sandbox/'problem.snapshot.txt').write_text(snap)
+            runner.record_failure(diag,'capture','stopped','capture',immediate=True)
+            runner.mark_user_skipped(argparse.Namespace(run_id=runner.USER_SKIP_RUN,id=runner.USER_SKIP_ID,human_instruction='Пропустить 8557245056',authorization_id='skip-1'))
+            runner.write(out/'raw/123.json',raw())
+            placements=root/'placements.json'; runner.write(placements,{'123':{'city':'Коммунарка','region':'Москва','evidence':'пос. Коммунарка'}})
+            runner.finalize(argparse.Namespace(run_id=runner.USER_SKIP_RUN,placements=placements,review_model='test'))
+            manifest=runner.read(service/'manifest.json'); validation=runner.read(out/'exports/validation.json')
+            self.assertEqual(manifest['coverage']['user_skipped_count'],1)
+            self.assertEqual(manifest['coverage']['user_skipped_observations'][0]['id'],runner.USER_SKIP_ID)
+            self.assertEqual(validation['accepted'],1)
+            with (out/'exports/vacancies_flat.csv').open(encoding='utf-8-sig',newline='') as stream:
+                self.assertEqual([row['id'] for row in csv.DictReader(stream)],['123'])
 
     def test_deduplicate_queue_empty_mixed_and_tampering(self):
         original_root = runner.ROOT
@@ -563,6 +797,60 @@ const listBrowserTabs=async()=>[], openTab=async()=>pg, snapshot=async()=>({tree
                 runner.write(out/'raw/456.json', dict(raw('456'), parameter_audit={'rendered_complete': False}))
                 with self.assertRaises(ValueError): runner.partial_prefix_selection(out, service, queue, 'publish prefix')
             self.assertEqual(before, ((service/'plan.json').read_bytes(), (out/'queue.json').read_bytes()))
+
+    def test_ordinary_partial_prefix_with_verified_skips_and_suffix_guard(self):
+        with tempfile.TemporaryDirectory() as directory, patch.object(runner,'ROOT',Path(directory)):
+            out,service,diag=runner.paths(runner.ROOT,'run');queue=[item(str(i)) for i in range(1,6)]
+            runner.write(out/'queue.json',queue);runner.write(service/'plan.json',{'selection_mode':'first_N_unique_on_frozen_listing'})
+            for i in range(1,5):runner.write(out/f'raw/{i}.json',raw(str(i)))
+            cp=dict(state='NEEDS_HUMAN',next_id='5',completed_ids=['1','3'],stop_reason='access_restriction_or_captcha');runner.write(diag/'checkpoint.json',cp)
+            with patch.object(runner,'unavailable_records',return_value=[{'id':'2'}]),patch.object(runner,'unresolved_records',return_value=[]),patch.object(runner,'user_skipped_records',return_value=[{'id':'4'}]):
+                with self.assertRaisesRegex(ValueError,'instruction'):runner.partial_prefix_selection(out,service,queue,'')
+                result=runner.partial_prefix_selection(out,service,queue,'Publish verified prefix')
+                self.assertEqual(result['method'],'ordinary_prefix_v1');self.assertEqual(result['accepted_ids'],['1','3']);self.assertEqual(result['skipped_ids'],['2']);self.assertEqual(result['user_skipped_ids'],['4']);self.assertEqual(result['unresolved_ids'],['5']);self.assertEqual(set(result['raw_sha256']),{'1','2','3','4'})
+                runner.write(diag/'checkpoint.json',dict(cp,completed_ids=['1']))
+                with self.assertRaisesRegex(ValueError,'queue prefix'):runner.partial_prefix_selection(out,service,queue,'Publish verified prefix')
+                runner.write(diag/'checkpoint.json',cp);runner.write(out/'raw/5.json',raw('5'))
+                with self.assertRaisesRegex(ValueError,'Unresolved raw'):runner.partial_prefix_selection(out,service,queue,'Publish verified prefix')
+
+    def test_archive_partial_pending_keeps_protection_and_evidence(self):
+        for scenario in ('ok','no_authorization','bad_snapshot'):
+            with self.subTest(scenario=scenario),tempfile.TemporaryDirectory() as directory,patch.object(runner,'ROOT',Path(directory)):
+                out,_,diag=runner.paths(runner.ROOT,'run');sandbox=runner.ROOT/'sandbox';queue=[item('123')];url=queue[0]['url'];runner.write(out/'queue.json',queue)
+                cp=dict(state='NEEDS_HUMAN',stop_reason='access_restriction_or_captcha',next_id='123',completed_ids=[]);runner.write(diag/'checkpoint.json',cp);runner.write(sandbox/'checkpoint.json',cp);runner.write(diag/'sandbox.json',{'path':str(sandbox)});runner.write(sandbox/'browser-tab.json',{'url':url})
+                data=dict(state='NEEDS_HUMAN',reason='access_restriction_or_captcha',source_url=url,items=[]);runner.write(out/'raw/123.json',data);runner.write(sandbox/'raw/123.json',data)
+                snap=f'- title: "Доступ ограничен: проблема с IP" [url={url}]\n';(diag/'problem.snapshot.txt').write_text(snap);(sandbox/'problem.snapshot.txt').write_text(snap+('changed' if scenario=='bad_snapshot' else ''))
+                runner.record_failure(diag,'capture','restricted','capture',immediate=True)
+                if scenario!='no_authorization':runner.authorize_offline(diag,'Publish verified prefix')
+                args=argparse.Namespace(run_id='run',id='123',human_instruction='Publish verified prefix');original=(out/'raw/123.json').read_bytes();before=runner.load_failures(diag)
+                if scenario!='ok':
+                    with self.assertRaises((ValueError,runner.HumanRequired)):runner.archive_partial_pending(args)
+                    self.assertEqual((out/'raw/123.json').read_bytes(),original);continue
+                runner.archive_partial_pending(args);digest=hashlib.sha256(original).hexdigest()
+                self.assertEqual((out/'observations/123'/f'{digest}.json').read_bytes(),original);self.assertFalse((out/'raw/123.json').exists())
+                after=runner.load_failures(diag);self.assertEqual(after,before);self.assertEqual(runner.read(diag/'checkpoint.json'),cp)
+
+    def test_archive_partial_pending_cli_parses_only_its_arguments(self):
+        with tempfile.TemporaryDirectory() as directory,patch.object(runner,'ROOT',Path(directory)):
+            argv=['run.py','archive-partial-pending','--run-id','run','--id','123','--human-instruction','Publish verified prefix']
+            with patch('sys.argv',argv),patch.object(runner,'archive_partial_pending') as action:
+                runner.main();self.assertEqual(action.call_args.args[0].id,'123')
+
+    def test_ordinary_partial_finalize_and_validate_excludes_skipped_rows(self):
+        with tempfile.TemporaryDirectory() as directory,patch.object(runner,'ROOT',Path(directory)):
+            root=runner.ROOT;out,service,diag=runner.paths(root,'run');queue=[item('123'),item('456'),item('789')]
+            runner.write(root/'Data/dataset/sources.json',{'schema_version':'1','exports':[]});(root/'Data/README.md').write_text('# Data\n');(root/'Data/dataset/README.md').write_text('Текущий состав: старый\n')
+            runner.write(out/'queue.json',queue);runner.write(out/'listing.json',{'selected_controls':courier_controls()});runner.write(out/'raw/123.json',raw('123'));runner.write(out/'raw/456.json',raw('456'))
+            runner.write(service/'plan.json',{'setup_seconds':1,'profession':'Курьер','segments':'all','selection_mode':'first_N_unique_on_frozen_listing'})
+            runner.write(diag/'checkpoint.json',dict(state='NEEDS_HUMAN',stop_reason='access_restriction_or_captcha',next_id='789',completed_ids=['123'],capture_seconds=1))
+            runner.record_failure(diag,'capture','restricted','capture',immediate=True);runner.authorize_offline(diag,'Publish verified prefix')
+            placements=root/'placements.json';runner.write(placements,{'123':{'city':'Коммунарка','region':'Москва','evidence':'пос. Коммунарка'}})
+            args=argparse.Namespace(run_id='run',placements=placements,review_model='test',partial_prefix=True,partial_instruction='Publish verified prefix')
+            with patch.object(runner,'user_skipped_records',return_value=[{'id':'456'}]):
+                with self.assertRaises(runner.HumanRequired):runner.finalize(argparse.Namespace(**{**vars(args),'partial_instruction':'Different instruction'}))
+                runner.finalize(args);manifest=runner.validate_completed_export(out,service)
+                self.assertEqual(manifest['coverage']['partial']['user_skipped_ids'],['456']);self.assertEqual(manifest['coverage']['partial']['unresolved_ids'],['789'])
+                with (out/'exports/vacancies_flat.csv').open(encoding='utf-8-sig',newline='') as stream:self.assertEqual([x['id'] for x in csv.DictReader(stream)],['123'])
 
     def test_instruction_version_tracks_skill_and_rejects_ambiguous_declarations(self):
         with tempfile.TemporaryDirectory() as directory:
@@ -1157,7 +1445,7 @@ p.stdin.close()
             def run(command, **kwargs):
                 return subprocess.CompletedProcess(command,0,stdout=json.dumps({'state':'OPEN','url':'https://github.com/example/repo/pull/1'}))
             args = argparse.Namespace(run_id=run_id, retry_reason=None, summary='Sample', title='Data', prepare_only=False)
-            with patch.object(runner,'ROOT',root), patch.object(runner.subprocess,'check_output',side_effect=output), patch.object(runner.subprocess,'run',side_effect=run), patch.object(runner,'stage_pinned_provenance'), patch.object(runner,'verify_staged_manifest'):
+            with patch.object(runner,'ROOT',root), patch.object(runner.subprocess,'check_output',side_effect=output), patch.object(runner.subprocess,'run',side_effect=run), patch.object(runner,'stage_pinned_provenance'), patch.object(runner,'verify_staged_manifest'), patch.object(runner,'verify_staged_run_privacy'):
                 with self.assertRaises(subprocess.CalledProcessError):
                     runner.publish(args)
                 runner.record_failure(diag,'publish','push failed','push')
