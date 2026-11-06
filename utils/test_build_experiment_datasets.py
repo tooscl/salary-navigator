@@ -69,6 +69,15 @@ class ExperimentDatasetTests(unittest.TestCase):
         self.assertEqual(locate_city("Россия"), ("", ""))
         self.assertEqual(locate_city("Московская обл., Одинцовский г.о., Минское шоссе, 43-й километр"), ("", ""))
 
+    def test_profession_from_title_overrides_query_label(self):
+        clean = output_row(row(title="Продавец-кассир", profession="Кассир"), "01_location_monthly", list(row()))
+        self.assertEqual((clean["profession"], clean["profession_source"], clean["profession_query"]),
+                         ("Продавец", "title", "Кассир"))
+        clean = output_row(row(title="Сотрудник склада", profession="Грузчик"), "01_location_monthly", list(row()))
+        self.assertEqual((clean["profession"], clean["profession_source"]), ("Грузчик", "query"))
+        clean = output_row(row(title="Бариста", profession=""), "01_location_monthly", list(row()))
+        self.assertEqual((clean["profession"], clean["profession_source"]), ("", "none"))
+
     def test_low_amount_and_military_are_not_monthly(self):
         self.assertEqual(pay_mode(row(salary_raw="2 800 — 3 480 ₽ на руки")), "low_amount_likely_rate")
         self.assertEqual(dataset_for(row(salary_raw="от 4 000 ₽")), "04_other")

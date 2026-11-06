@@ -25,6 +25,9 @@ Run from the repository root or directly:
     python ML/experiments/expiriemnts.py --trials 0          # default parameters, no search
     python ML/experiments/expiriemnts.py --trials 100 --timeout 3600
     python ML/experiments/expiriemnts.py --study-name <name> # resume a study
+    python ML/experiments/expiriemnts.py --cv 5              # 5-fold CV, mean +- std, no Optuna
+    python ML/experiments/expiriemnts.py --cv 5 --drop-employer
+    python ML/experiments/expiriemnts.py --final             # the model for the navigator (see run_final)
     python ML/experiments/expiriemnts.py --data ML/data/experiments/02_remote_monthly.csv
 """
 
@@ -128,6 +131,10 @@ MIN_MONTHLY_RUB = 10_000
 MAX_MONTHLY_RUB = 1_000_000
 
 SPLIT_FRACTIONS = (0.80, 0.10, 0.10)
+# Cross-validation (--cv K): each fold is test once (1/K of rows); of the rest,
+# this share of ALL rows is validation (early stopping + calibration), the
+# remainder is train (~70 % with K=5).
+CV_VALIDATION_SHARE = 0.10
 # profession x city cells with fewer rows than this go entirely to train.
 MIN_STRATUM_ROWS = 10
 SPLIT_RULE = (
@@ -219,6 +226,20 @@ def exclusion_reasons(df: pd.DataFrame, military_flag: pd.Series) -> pd.Series:
     return reasons
 
 
+def build_features(df: pd.DataFrame, extras: pd.DataFrame | None = None) -> pd.DataFrame:
+    """Model inputs from rows in the experiment-dataset schema, salary amounts redacted.
+
+    Used for training and for scoring new vacancies (predict_corridor)."""
+    extras = extra_attributes(df) if extras is None else extras
+    features = pd.concat([df[FEATURE_COLUMNS], extras[list(EXTRA_ATTRIBUTE_FEATURES) + ["benefits"]]], axis=1)
+    for column in features.columns:
+        # Only strings: delete_salary(NaN) would return the string 'nan'.
+        features[column] = features[column].map(lambda v: delete_salary(v) if isinstance(v, str) else v)
+        features[column] = features[column].replace("", pd.NA)
+    features[SALARY_KIND_COLUMN] = df[SALARY_KIND_COLUMN]
+    return features
+
+
 def load_dataset(data_path: Path) -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame, pd.DataFrame]:
     """Return kept rows, redacted features, salary bounds and excluded rows."""
     df = read_raw_rows(data_path)
@@ -233,13 +254,7 @@ def load_dataset(data_path: Path) -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFr
     print("Rows by file:", df["data_file"].value_counts().to_dict())
     print(f"Excluded {len(excluded)} rows:", excluded["reason"].value_counts().to_dict())
 
-    features = pd.concat([df[FEATURE_COLUMNS], extras[list(EXTRA_ATTRIBUTE_FEATURES) + ["benefits"]]], axis=1)
-    for column in features.columns:
-        # Only strings: delete_salary(NaN) would return the string 'nan'.
-        features[column] = features[column].map(lambda v: delete_salary(v) if isinstance(v, str) else v)
-        features[column] = features[column].replace("", pd.NA)
-    features[SALARY_KIND_COLUMN] = df[SALARY_KIND_COLUMN]
-
+    features = build_features(df, extras)
     targets = df[TARGET_COLUMNS].apply(pd.to_numeric, errors="coerce").astype(float)
     assert targets.notna().any(axis=1).all(), "A training row has no salary target"
     assert (targets.isna() | (targets > 0)).all().all(), "Salary bounds must be positive for log1p"
@@ -250,36 +265,51 @@ def load_dataset(data_path: Path) -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFr
 # 2. Split
 # --------------------------------------------------------------------------
 
-def assign_splits(df: pd.DataFrame, features: pd.DataFrame) -> pd.DataFrame:
-    """Grouped random 80/10/10 split stratified by profession x city.
+def duplicate_groups(df: pd.DataFrame, features: pd.DataFrame) -> tuple[pd.Series, pd.Series]:
+    """Per row: likely-duplicate group and profession x city stratum.
 
     A group is a likely duplicate only when employer, title and city are all
     known and identical after salary redaction. Otherwise a vacancy is its own
-    group, so missing employer names cannot merge unrelated ads. Inside every
-    profession x city cell groups are shuffled with a fixed seed, so each cell
-    is represented in train, validation and test in roughly 80/10/10 shares.
+    group, so missing employer names cannot merge unrelated ads.
     """
     duplicate_fields = features[["employer_name_observed", "title", "city"]].fillna("").astype(str)
     has_fingerprint = duplicate_fields.ne("").all(axis=1)
     fingerprint = duplicate_fields.agg("|".join, axis=1)
     fallback_group = "vacancy:" + df["source"].astype(str) + ":" + df["vacancy_id"].astype(str)
     duplicate_group = fingerprint.where(has_fingerprint, fallback_group)
-
     stratum = (
         features["profession"].fillna("__MISSING__").astype(str) + " | " + features["city"].fillna("__MISSING__").astype(str)
     )
+    return duplicate_group, stratum
+
+
+def group_positions(duplicate_group: pd.Series, stratum: pd.Series, seed: int) -> pd.DataFrame:
+    """Groups shuffled (seeded) inside every stratum; `position` in [0, 1] is the
+    share of the cell's rows up to the middle of the group, so a big group is
+    placed by its centre and cannot push a whole cell past a boundary."""
     groups = (
         pd.DataFrame({"duplicate_group": duplicate_group, "stratum": stratum, "rows": 1})
         .groupby("duplicate_group", as_index=False)
         .agg(stratum=("stratum", "first"), rows=("rows", "sum"))
         .sort_values("duplicate_group", kind="stable")
     )
-    groups["random_key"] = np.random.default_rng(RANDOM_SEED).random(len(groups))
+    groups["random_key"] = np.random.default_rng(seed).random(len(groups))
     groups = groups.sort_values(["stratum", "random_key"], kind="stable")
-    stratum_rows = groups.groupby("stratum")["rows"].transform("sum")
-    # Share of the cell's rows up to the middle of this group: a big group is
-    # placed by its centre, so it cannot push a whole cell past a boundary.
-    groups["position"] = (groups.groupby("stratum")["rows"].cumsum() - groups["rows"] / 2) / stratum_rows
+    groups["stratum_rows"] = groups.groupby("stratum")["rows"].transform("sum")
+    groups["position"] = (groups.groupby("stratum")["rows"].cumsum() - groups["rows"] / 2) / groups["stratum_rows"]
+    return groups
+
+
+def assign_splits(df: pd.DataFrame, features: pd.DataFrame) -> pd.DataFrame:
+    """Grouped random 80/10/10 split stratified by profession x city.
+
+    Inside every profession x city cell duplicate groups are shuffled with a
+    fixed seed, so each cell is represented in train, validation and test in
+    roughly 80/10/10 shares.
+    """
+    duplicate_group, stratum = duplicate_groups(df, features)
+    groups = group_positions(duplicate_group, stratum, RANDOM_SEED)
+    stratum_rows = groups["stratum_rows"]
 
     groups["split"] = "test"
     groups.loc[groups["position"] < SPLIT_FRACTIONS[0] + SPLIT_FRACTIONS[1], "split"] = "validation"
@@ -296,6 +326,42 @@ def assign_splits(df: pd.DataFrame, features: pd.DataFrame) -> pd.DataFrame:
     assert assignment.groupby("duplicate_group")["split"].nunique().max() == 1
     assert set(assignment["split"]) == {"train", "validation", "test"}
     return assignment
+
+
+def assign_cv_splits(df: pd.DataFrame, features: pd.DataFrame, n_folds: int) -> pd.DataFrame:
+    """Grouped K-fold stratified by profession x city, plus an inner split.
+
+    `fold` (0..K-1): every row is in the test fold exactly once. For fold k the
+    remaining rows are divided again (another seed, same grouping and
+    stratification) so that CV_VALIDATION_SHARE of ALL rows become validation
+    (early stopping + calibration) and the rest is train. Duplicates never
+    cross a boundary.
+    """
+    duplicate_group, stratum = duplicate_groups(df, features)
+    groups = group_positions(duplicate_group, stratum, RANDOM_SEED)
+    groups["fold"] = np.minimum((groups["position"] * n_folds).astype(int), n_folds - 1)
+    # Inner order: a second shuffle; validation = first share of the non-test part.
+    inner = group_positions(duplicate_group, stratum, RANDOM_SEED + 1).set_index("duplicate_group")["position"]
+    groups["inner_position"] = groups["duplicate_group"].map(inner)
+
+    assignment = df[["source", "vacancy_id", "data_file"]].copy()
+    assignment["duplicate_group"] = duplicate_group
+    assignment["stratum"] = stratum
+    by_group = groups.set_index("duplicate_group")
+    assignment["fold"] = assignment["duplicate_group"].map(by_group["fold"])
+    assignment["inner_position"] = assignment["duplicate_group"].map(by_group["inner_position"])
+    assert assignment["fold"].notna().all() and assignment.groupby("duplicate_group")["fold"].nunique().max() == 1
+    assert set(assignment["fold"]) == set(range(n_folds)), "A fold is empty"
+    return assignment
+
+
+def cv_fold_split(assignment: pd.DataFrame, fold: int, n_folds: int) -> pd.Series:
+    """train / validation / test labels for one CV fold."""
+    validation_share_of_rest = CV_VALIDATION_SHARE / (1 - 1 / n_folds)
+    split = pd.Series("train", index=assignment.index)
+    split[assignment["inner_position"] < validation_share_of_rest] = "validation"
+    split[assignment["fold"] == fold] = "test"
+    return split
 
 
 # --------------------------------------------------------------------------
@@ -477,23 +543,28 @@ def prepare_data(data_path: Path) -> dict[str, object]:
     split_assignment = assign_splits(df, features)
     profession = features["profession"].fillna("__MISSING__")
     print(pd.crosstab(profession, split_assignment["split"]))
-
-    parts = {}
-    for name in ("train", "validation", "test"):
-        index = split_assignment.index[split_assignment["split"] == name]
-        part_features = features.loc[index]
-        parts[name] = {
-            "features": part_features,
-            "texts": make_text(part_features),
-            "targets": targets.loc[index].reset_index(drop=True),
-        }
     return {
         "data_path": data_path,
         "excluded": excluded,
         "split_assignment": split_assignment,
-        "parts": parts,
+        "parts": make_parts(features, targets, split_assignment["split"]),
         "text_encoders": {},
     }
+
+
+def make_parts(features: pd.DataFrame, targets: pd.DataFrame, split: pd.Series) -> dict[str, dict]:
+    """Features, texts, targets and original row index for train / validation / test."""
+    parts = {}
+    for name in ("train", "validation", "test"):
+        index = split.index[split == name]
+        part_features = features.loc[index]
+        parts[name] = {
+            "index": index,
+            "features": part_features,
+            "texts": make_text(part_features),
+            "targets": targets.loc[index].reset_index(drop=True),
+        }
+    return parts
 
 
 def default_config() -> dict[str, object]:
@@ -692,6 +763,442 @@ def run_experiment(
 
 
 # --------------------------------------------------------------------------
+# Cross-validation
+# --------------------------------------------------------------------------
+
+def pooled_metrics(oof: pd.DataFrame, by: list[str]) -> pd.DataFrame:
+    """Metrics of calibrated out-of-fold P50 / P25-P75, pooled over all folds."""
+    rows = []
+    for target in TARGET_COLUMNS:
+        part = oof[oof[f"{target}_actual"].notna()]
+        for key, group in ([((), part)] if not by else part.groupby(by)):
+            actual = group[f"{target}_actual"].to_numpy()
+            p25, p50, p75 = (group[f"{target}_p{q}"].to_numpy() for q in (25, 50, 75))
+            ape = np.abs(actual - p50) / actual
+            pinball = np.mean([
+                pinball_loss(np.log1p(actual), np.log1p(group[f"{target}_p{int(q * 100)}"].to_numpy()), q)
+                for q in QUANTILES
+            ])
+            key = key if isinstance(key, tuple) else (key,)
+            rows.append(
+                dict(zip(by, key))
+                | {
+                    "target": target,
+                    "n": len(group),
+                    "median_salary": float(np.median(actual)),
+                    "mae_rub": float(np.mean(np.abs(actual - p50))),
+                    "median_abs_error_rub": float(np.median(np.abs(actual - p50))),
+                    "mape": float(np.mean(ape)),
+                    "median_ape": float(np.median(ape)),
+                    "pinball_log": float(pinball),
+                    "share_below_p50": float(np.mean(actual < p50)),
+                    "coverage_p25_p75": float(np.mean((actual >= p25) & (actual <= p75))),
+                }
+            )
+    return pd.DataFrame(rows)
+
+
+def run_cv(
+    data_path: Path = DEFAULT_DATA_PATH, n_folds: int = 5, config: dict[str, object] | None = None
+) -> dict[str, object]:
+    """Grouped stratified K-fold: every vacancy is predicted exactly once by a
+    model that never saw it (out-of-fold). Text encoder, CatBoost and the
+    calibration shifts are refitted inside every fold."""
+    config = config or default_config()
+    config["catboost"] = dict(config["catboost"], verbose=0)
+    df, features, targets, excluded = load_dataset(data_path)
+    assignment = assign_cv_splits(df, features, n_folds)
+
+    fold_metrics, fold_intervals, oof_parts = [], [], []
+    best_iterations = {target: [] for target in TARGET_COLUMNS}
+    for fold in range(n_folds):
+        split = cv_fold_split(assignment, fold, n_folds)
+        prepared = {"parts": make_parts(features, targets, split), "text_encoders": {}}
+        fitted = fit_models(prepared, config)
+        for target, model in fitted["models"].items():
+            best_iterations[target].append(model.get_best_iteration() + 1)
+        calibration = calibrate(fitted, prepared["parts"])
+        metrics, intervals = evaluate(fitted, prepared["parts"], ("test",), calibration)
+        fold_metrics.append(metrics.assign(fold=fold))
+        fold_intervals.append(intervals.assign(fold=fold))
+
+        test = prepared["parts"]["test"]
+        oof = pd.DataFrame(
+            {
+                "row": test["index"],
+                "fold": fold,
+                "profession": features.loc[test["index"], "profession"].fillna("Без профессии").to_numpy(),
+                "city": features.loc[test["index"], "city"].fillna("__MISSING__").to_numpy(),
+            }
+        )
+        for target, model in fitted["models"].items():
+            predicted = predict_quantiles(model, fitted["frames"]["test"], calibration[target])
+            raw_log = predict_log_quantiles(model, fitted["frames"]["test"])
+            oof[f"{target}_actual"] = test["targets"][target].to_numpy()
+            for i, q in enumerate((25, 50, 75)):
+                oof[f"{target}_p{q}"] = predicted[:, i]  # calibrated on this fold's validation
+                oof[f"{target}_rawlog_p{q}"] = raw_log[:, i]  # before any calibration
+        oof_parts.append(oof)
+        cal_test = intervals[intervals["calibration"] == "calibrated"]
+        print(
+            f"fold {fold + 1}/{n_folds}: train {len(split[split == 'train'])}, val {len(split[split == 'validation'])}, "
+            f"test {len(split[split == 'test'])}; coverage "
+            + " / ".join(f"{v:.3f}" for v in cal_test["coverage_p25_p75"]),
+            flush=True,
+        )
+
+    fold_metrics, fold_intervals = pd.concat(fold_metrics), pd.concat(fold_intervals)
+    oof = pd.concat(oof_parts, ignore_index=True)
+    oof = oof.join(df[["source", "vacancy_id"]], on="row")
+
+    p50 = fold_metrics[fold_metrics["quantile"] == 0.5]
+    per_fold = p50.merge(
+        fold_intervals[["fold", "calibration", "target", "coverage_p25_p75", "median_relative_width"]],
+        on=["fold", "calibration", "target"],
+    )
+    summary = (
+        per_fold.groupby(["calibration", "target"])[
+            ["pinball_log", "mae_rub", "mape", "median_ape", "share_below", "coverage_p25_p75", "median_relative_width"]
+        ]
+        .agg(["mean", "std"])
+        .round(4)
+    )
+    summary.columns = [f"{metric}_{stat}" for metric, stat in summary.columns]
+    return {
+        "data_path": data_path,
+        "n_folds": n_folds,
+        "config": config,
+        "excluded": excluded,
+        "features": features,
+        "targets": targets,
+        "best_iterations": best_iterations,
+        "assignment": assignment,
+        "fold_metrics": fold_metrics,
+        "fold_intervals": fold_intervals,
+        "summary": summary.reset_index(),
+        "oof": oof,
+        "pooled": pooled_metrics(oof, []),
+        "pooled_by_profession": pooled_metrics(oof, ["profession"]),
+    }
+
+
+def save_cv(results: dict[str, object]) -> Path:
+    """CV artefacts: per-fold metrics, mean +- std, pooled out-of-fold metrics."""
+    experiment_id = f"{datetime.now():%Y-%m-%d_%H%M%S}_{EXPERIMENT_NAME}_cv{results['n_folds']}"
+    experiment_dir = EXPERIMENTS_DIR / experiment_id
+    experiment_dir.mkdir(parents=True, exist_ok=False)
+    for name in ("fold_metrics", "fold_intervals", "summary", "oof", "pooled", "pooled_by_profession"):
+        results[name].to_csv(experiment_dir / f"cv_{name}.csv", index=False)
+    results["assignment"][["source", "vacancy_id", "stratum", "fold"]].to_csv(experiment_dir / "cv_folds.csv", index=False)
+
+    data_path = Path(results["data_path"]).resolve()
+    manifest = json.loads((DATA_DIR / "manifest.json").read_text("utf-8")) if (DATA_DIR / "manifest.json").exists() else {}
+    script = Path(__file__).resolve().relative_to(ROOT).as_posix()
+    git_status = _git("status", "--porcelain", "--", script)
+    passport = {
+        "experiment_id": experiment_id,
+        "status": "executed",
+        "evaluation": (
+            f"grouped stratified {results['n_folds']}-fold CV (profession x city, duplicates together, seed "
+            f"{RANDOM_SEED}); per fold: test = 1/{results['n_folds']}, validation = {CV_VALIDATION_SHARE:.0%} of all "
+            "rows (early stopping + calibration), rest train. No model is saved: every fold refits."
+        ),
+        "dataset": {
+            "file_path": data_path.relative_to(ROOT).as_posix(),
+            "file_sha256": _sha256(data_path),
+            "rows": int(len(results["assignment"])),
+            "rules_version": manifest.get("rules_version"),
+        },
+        "code_git_commit": _git("rev-parse", "HEAD"),
+        "uncommitted_changes": None if git_status is None else bool(git_status),
+        "row_filters": {"excluded_by_reason": results["excluded"]["reason"].value_counts().to_dict()},
+        "parameters": {
+            "catboost": results["config"]["catboost"],
+            "svd_components": results["config"]["svd_components"],
+            "dropped_columns": results["config"]["drop_columns"],
+            "tfidf_params": {k: list(v) if isinstance(v, tuple) else v for k, v in TFIDF_PARAMS.items()},
+        },
+        "metrics": {
+            "fold_mean_std": results["summary"].to_dict(orient="records"),
+            "pooled_out_of_fold_calibrated": results["pooled"].to_dict(orient="records"),
+        },
+        "conclusion": None,
+    }
+    (experiment_dir / "experiment.json").write_text(json.dumps(passport, ensure_ascii=False, indent=2), "utf-8")
+    return experiment_dir
+
+
+# --------------------------------------------------------------------------
+# Final model (--final): CV estimate + calibration from out-of-fold
+# predictions + one model trained on all rows
+# --------------------------------------------------------------------------
+
+FINAL_DROP_COLUMNS = ["employer_name_observed"]  # 5-fold CV: no gain from it (0.103 vs 0.104 pinball)
+CALIBRATION_GROUP_COLUMN = "profession"
+CALIBRATION_MISSING_GROUP = "Без профессии"
+# A profession gets its own multipliers only with at least this many
+# out-of-fold predictions for the bound; smaller and unseen ones use global.
+CALIBRATION_MIN_ROWS = 200
+GLOBAL_GROUP = "__global__"
+
+
+def calibration_groups(features: pd.DataFrame) -> pd.Series:
+    return features[CALIBRATION_GROUP_COLUMN].fillna(CALIBRATION_MISSING_GROUP).astype(str)
+
+
+def fit_shift_table(raw_log: np.ndarray, actual: np.ndarray, groups: np.ndarray, min_rows: float) -> dict[str, list]:
+    """Per-group log shifts (see fit_calibration) + a global fallback."""
+    residuals = np.log1p(actual)[:, None] - raw_log
+    table = {GLOBAL_GROUP: [float(np.quantile(residuals[:, i], q)) for i, q in enumerate(QUANTILES)]}
+    for group in np.unique(groups):
+        mask = groups == group
+        if mask.sum() >= min_rows:
+            table[str(group)] = [float(np.quantile(residuals[mask, i], q)) for i, q in enumerate(QUANTILES)]
+    return table
+
+
+def apply_shift_table(raw_log: np.ndarray, groups: np.ndarray, table: dict[str, list]) -> np.ndarray:
+    """Calibrated P25/P50/P75 in rubles."""
+    shifts = np.array([table.get(str(group), table[GLOBAL_GROUP]) for group in groups])
+    return np.expm1(np.sort(raw_log + shifts, axis=1))
+
+
+def oof_variant(oof: pd.DataFrame, how: str) -> pd.DataFrame:
+    """Out-of-fold predictions under one calibration scheme.
+
+    raw                  no calibration
+    fold_validation      shifts from each fold's own validation split (what --cv reports)
+    global_crossfit      one set of shifts, learnt on the OTHER folds' out-of-fold predictions
+    profession_crossfit  per-profession shifts, learnt on the OTHER folds' out-of-fold predictions
+    Cross-fitting keeps the check honest: a fold is never calibrated on itself.
+    """
+    out = oof.copy()
+    if how == "fold_validation":
+        return out
+    for target in TARGET_COLUMNS:
+        raw = out[[f"{target}_rawlog_p{q}" for q in (25, 50, 75)]].to_numpy()
+        actual = out[f"{target}_actual"].to_numpy()
+        has = ~np.isnan(actual)
+        if how == "raw":
+            predicted = np.expm1(raw)
+        else:
+            groups = out["profession"].to_numpy() if how == "profession_crossfit" else np.full(len(out), "all")
+            min_rows = CALIBRATION_MIN_ROWS if how == "profession_crossfit" else np.inf
+            predicted = np.full(raw.shape, np.nan)
+            for fold in np.unique(out["fold"]):
+                fit_mask = has & (out["fold"].to_numpy() != fold)
+                apply_mask = out["fold"].to_numpy() == fold
+                table = fit_shift_table(raw[fit_mask], actual[fit_mask], groups[fit_mask], min_rows)
+                predicted[apply_mask] = apply_shift_table(raw[apply_mask], groups[apply_mask], table)
+        for i, q in enumerate((25, 50, 75)):
+            out[f"{target}_p{q}"] = predicted[:, i]
+    return out
+
+
+def fit_final_models(
+    features: pd.DataFrame, targets: pd.DataFrame, config: dict[str, object], best_iterations: dict[str, list]
+) -> dict[str, object]:
+    """Text encoder + one CatBoost per bound on ALL rows. No rows are held out,
+    so the number of trees is the mean best iteration of the CV folds."""
+    categorical_columns = [c for c in CATEGORICAL_COLUMNS if c not in config["drop_columns"]]
+    texts = make_text(features)
+    vectorizer, svd = fit_text_encoder(texts, config["svd_components"])
+    frame = build_model_frame(features, svd.transform(vectorizer.transform(texts)), categorical_columns)
+    params = {k: v for k, v in config["catboost"].items() if k not in ("od_type", "od_wait")}
+    models, iterations = {}, {}
+    for target in TARGET_COLUMNS:
+        mask = targets[target].notna().to_numpy()
+        iterations[target] = int(round(np.mean(best_iterations[target])))
+        model = CatBoostRegressor(**(params | {"iterations": iterations[target], "verbose": 0}))
+        model.fit(frame.loc[mask], np.log1p(targets[target].to_numpy()[mask]), cat_features=categorical_columns)
+        models[target] = model
+    importance = pd.DataFrame(
+        {"feature": frame.columns}
+        | {f"{target}_importance": model.get_feature_importance() for target, model in models.items()}
+    )
+    importance["mean_importance"] = importance.filter(like="_importance").mean(axis=1)
+    return {
+        "models": models,
+        "iterations": iterations,
+        "vectorizer": vectorizer,
+        "svd": svd,
+        "categorical_columns": categorical_columns,
+        "feature_importance": importance.sort_values("mean_importance", ascending=False, ignore_index=True),
+    }
+
+
+def run_final(data_path: Path = DEFAULT_DATA_PATH, n_folds: int = 5) -> dict[str, object]:
+    config = default_config()
+    config["drop_columns"] = list(FINAL_DROP_COLUMNS)
+    cv = run_cv(data_path, n_folds, config)
+    oof = cv["oof"]
+
+    comparison, comparison_by_profession = [], []
+    for how in ("raw", "fold_validation", "global_crossfit", "profession_crossfit"):
+        variant = oof_variant(oof, how)
+        comparison.append(pooled_metrics(variant, []).assign(calibration=how))
+        comparison_by_profession.append(pooled_metrics(variant, ["profession"]).assign(calibration=how))
+
+    calibration_tables = {}
+    for target in TARGET_COLUMNS:
+        has = oof[f"{target}_actual"].notna().to_numpy()
+        calibration_tables[target] = fit_shift_table(
+            oof.loc[has, [f"{target}_rawlog_p{q}" for q in (25, 50, 75)]].to_numpy(),
+            oof.loc[has, f"{target}_actual"].to_numpy(),
+            oof.loc[has, "profession"].to_numpy(),
+            CALIBRATION_MIN_ROWS,
+        )
+
+    final = fit_final_models(cv["features"], cv["targets"], cv["config"], cv["best_iterations"])
+    return {
+        "cv": cv,
+        "config": cv["config"],
+        "comparison": pd.concat(comparison, ignore_index=True),
+        "comparison_by_profession": pd.concat(comparison_by_profession, ignore_index=True),
+        "calibration_tables": calibration_tables,
+        "final": final,
+    }
+
+
+def save_final(results: dict[str, object]) -> Path:
+    """Experiment folder (CV evidence) + model folder (what the navigator loads)."""
+    cv, final = results["cv"], results["final"]
+    experiment_id = f"{datetime.now():%Y-%m-%d_%H%M%S}_{EXPERIMENT_NAME}_final"
+    experiment_dir, model_dir = EXPERIMENTS_DIR / experiment_id, MODELS_DIR / experiment_id
+    experiment_dir.mkdir(parents=True, exist_ok=False)
+    model_dir.mkdir(parents=True, exist_ok=False)
+
+    for name in ("fold_metrics", "fold_intervals", "summary", "oof"):
+        cv[name].to_csv(experiment_dir / f"cv_{name}.csv", index=False)
+    cv["assignment"][["source", "vacancy_id", "stratum", "fold"]].to_csv(experiment_dir / "cv_folds.csv", index=False)
+    results["comparison"].to_csv(experiment_dir / "calibration_comparison.csv", index=False)
+    results["comparison_by_profession"].to_csv(experiment_dir / "calibration_comparison_by_profession.csv", index=False)
+    final["feature_importance"].to_csv(experiment_dir / "feature_importance.csv", index=False)
+    cv["excluded"].to_csv(experiment_dir / "excluded_ids.csv", index=False)
+
+    for target, model in final["models"].items():
+        model.save_model(str(model_dir / f"{target}.cbm"))
+    joblib.dump({"vectorizer": final["vectorizer"], "svd": final["svd"]}, model_dir / "text_encoder.joblib")
+    calibration = {
+        "method": (
+            "per-profession additive shifts of predicted log1p(salary), learnt on out-of-fold "
+            f"predictions of {cv['n_folds']}-fold CV; professions with < {CALIBRATION_MIN_ROWS} rows "
+            f"and unseen ones use '{GLOBAL_GROUP}'"
+        ),
+        "group_column": CALIBRATION_GROUP_COLUMN,
+        "missing_group": CALIBRATION_MISSING_GROUP,
+        "quantiles": list(QUANTILES),
+        "shifts": results["calibration_tables"],
+        "rub_multipliers": {
+            target: {group: [round(float(np.exp(s)), 4) for s in shifts] for group, shifts in table.items()}
+            for target, table in results["calibration_tables"].items()
+        },
+    }
+    (model_dir / "calibration.json").write_text(json.dumps(calibration, ensure_ascii=False, indent=2), "utf-8")
+    input_schema = {
+        "input": "rows in the experiment-dataset schema (ML/data/experiments/*.csv); see build_features",
+        "text_columns": TEXT_COLUMNS,
+        "extra_attribute_columns": EXTRA_ATTRIBUTE_FEATURES,
+        "categorical_columns": final["categorical_columns"],
+        "text_encoder": "text_encoder.joblib: TfidfVectorizer -> TruncatedSVD",
+        "target_transform": TARGET_TRANSFORM,
+        "apply": "raw = sort(model.predict(X)); rub = expm1(sort(raw + shifts[profession or __global__]))",
+        "models": {target: f"{target}.cbm" for target in final["models"]},
+        "trees": final["iterations"],
+        "usage": "from expiriemnts import load_final_model, predict_corridor",
+    }
+    (model_dir / "input_schema.json").write_text(json.dumps(input_schema, ensure_ascii=False, indent=2), "utf-8")
+
+    data_path = Path(cv["data_path"]).resolve()
+    manifest = json.loads((DATA_DIR / "manifest.json").read_text("utf-8")) if (DATA_DIR / "manifest.json").exists() else {}
+    script = Path(__file__).resolve().relative_to(ROOT).as_posix()
+    git_status = _git("status", "--porcelain", "--", script)
+    headline = results["comparison"][results["comparison"]["calibration"] == "profession_crossfit"]
+    passport = {
+        "experiment_id": experiment_id,
+        "status": "executed",
+        "evaluation": (
+            f"model quality = grouped stratified {cv['n_folds']}-fold CV (out-of-fold predictions for every row); "
+            "calibration checked by cross-fitting (each fold calibrated on the other folds). The final model is "
+            "trained on all rows and has no held-out test of its own."
+        ),
+        "dataset": {
+            "file_path": data_path.relative_to(ROOT).as_posix(),
+            "file_sha256": _sha256(data_path),
+            "rows": int(len(cv["assignment"])),
+            "rules_version": manifest.get("rules_version"),
+        },
+        "code_git_commit": _git("rev-parse", "HEAD"),
+        "uncommitted_changes": None if git_status is None else bool(git_status),
+        "row_filters": {"excluded_by_reason": cv["excluded"]["reason"].value_counts().to_dict()},
+        "features": TEXT_COLUMNS + final["categorical_columns"],
+        "parameters": {
+            "catboost": results["config"]["catboost"],
+            "trees_final": final["iterations"],
+            "trees_per_fold": cv["best_iterations"],
+            "svd_components": results["config"]["svd_components"],
+            "dropped_columns": results["config"]["drop_columns"],
+        },
+        "metrics": {
+            "headline_pooled_out_of_fold_profession_calibrated": headline.to_dict(orient="records"),
+            "fold_mean_std_fold_validation_calibrated": cv["summary"].to_dict(orient="records"),
+            "calibration_comparison_file": "calibration_comparison.csv",
+        },
+        "model_path": model_dir.relative_to(ROOT).as_posix(),
+        "input_schema_path": (model_dir / "input_schema.json").relative_to(ROOT).as_posix(),
+        "conclusion": None,
+    }
+    (experiment_dir / "experiment.json").write_text(json.dumps(passport, ensure_ascii=False, indent=2), "utf-8")
+    return experiment_dir
+
+
+def load_final_model(model_dir: Path) -> dict[str, object]:
+    """Everything predict_corridor needs, from an ML/models/<id>_final folder."""
+    model_dir = Path(model_dir)
+    schema = json.loads((model_dir / "input_schema.json").read_text("utf-8"))
+    calibration = json.loads((model_dir / "calibration.json").read_text("utf-8"))
+    encoder = joblib.load(model_dir / "text_encoder.joblib")
+    models = {}
+    for target, file_name in schema["models"].items():
+        models[target] = CatBoostRegressor()
+        models[target].load_model(str(model_dir / file_name))
+    return {
+        "models": models,
+        "vectorizer": encoder["vectorizer"],
+        "svd": encoder["svd"],
+        "categorical_columns": schema["categorical_columns"],
+        "shifts": calibration["shifts"],
+    }
+
+
+def predict_corridor(bundle: dict[str, object], rows: pd.DataFrame) -> pd.DataFrame:
+    """Market P25/P50/P75 for the lower ("от") and upper ("до") bound of every
+    row, and, where the row states a salary, a verdict below / in / above the
+    market (P25-P75 corridor)."""
+    rows = rows.reset_index(drop=True)
+    features = build_features(rows)
+    texts = make_text(features)
+    frame = build_model_frame(
+        features, bundle["svd"].transform(bundle["vectorizer"].transform(texts)), bundle["categorical_columns"]
+    )
+    groups = calibration_groups(features).to_numpy()
+    out = rows[[c for c in ("source", "vacancy_id", "title", "city", "profession") if c in rows]].copy()
+    for target, model in bundle["models"].items():
+        predicted = apply_shift_table(predict_log_quantiles(model, frame), groups, bundle["shifts"][target])
+        for i, q in enumerate((25, 50, 75)):
+            out[f"{target}_p{q}"] = np.round(predicted[:, i], -2)
+        if target in rows:
+            stated = pd.to_numeric(rows[target], errors="coerce")
+            out[f"{target}_stated"] = stated
+            out[f"{target}_verdict"] = np.select(
+                [stated < out[f"{target}_p25"], stated > out[f"{target}_p75"], stated.notna()],
+                ["ниже рынка", "выше рынка", "в рынке"],
+                default="",
+            )
+    return out
+
+
+# --------------------------------------------------------------------------
 # 6. Saving (layout and passport fields follow ML/README.md)
 # --------------------------------------------------------------------------
 
@@ -834,7 +1341,46 @@ if __name__ == "__main__":
     parser.add_argument("--trials", type=int, default=OPTUNA_TRIALS, help="Optuna trials, 0 = no search")
     parser.add_argument("--timeout", type=int, default=OPTUNA_TIMEOUT_SECONDS, help="Optuna time limit, seconds")
     parser.add_argument("--study-name", default=None, help="resume this Optuna study from the SQLite storage")
+    parser.add_argument("--cv", type=int, default=0, help="K-fold cross-validation instead of one split (no Optuna)")
+    parser.add_argument("--drop-employer", action="store_true", help="with --cv: do not use employer_name_observed")
+    parser.add_argument(
+        "--final", action="store_true",
+        help="CV estimate + per-profession calibration from out-of-fold predictions + model on all rows",
+    )
     arguments = parser.parse_args()
+
+    pd.set_option("display.width", 200)
+    if arguments.final:
+        final_results = run_final(arguments.data, arguments.cv or 5)
+        output_dir = save_final(final_results)
+        shown = ["calibration", "target", "n", "mape", "median_ape", "pinball_log", "share_below_p50", "coverage_p25_p75"]
+        print("\nOut-of-fold quality by calibration scheme (profession_crossfit = the saved model's scheme):")
+        print(final_results["comparison"][shown].round(3).to_string(index=False))
+        by_prof = final_results["comparison_by_profession"]
+        print("\nCoverage P25-P75 by profession, global vs per-profession calibration (cross-fitted):")
+        print(
+            by_prof[by_prof["calibration"].isin(["global_crossfit", "profession_crossfit"])]
+            .pivot_table(index=["target", "profession"], columns="calibration", values="coverage_p25_p75")
+            .round(3)
+            .to_string()
+        )
+        print("\nTrees in the final model:", final_results["final"]["iterations"])
+        print("Saved to", output_dir.relative_to(ROOT).as_posix(), "and", (MODELS_DIR / output_dir.name).relative_to(ROOT).as_posix())
+        raise SystemExit(0)
+    if arguments.cv:
+        cv_config = default_config()
+        if arguments.drop_employer:
+            cv_config["drop_columns"] = ["employer_name_observed"]
+        cv_results = run_cv(arguments.data, arguments.cv, cv_config)
+        output_dir = save_cv(cv_results)
+        print("\nMean +- std over folds (test, P50 and P25-P75):")
+        print(cv_results["summary"].to_string(index=False))
+        print("\nPooled out-of-fold, calibrated:")
+        print(cv_results["pooled"].round(3).to_string(index=False))
+        print("\nPooled out-of-fold by profession, calibrated:")
+        print(cv_results["pooled_by_profession"].round(3).to_string(index=False))
+        print("\nSaved to", output_dir.relative_to(ROOT).as_posix())
+        raise SystemExit(0)
 
     experiment_results = run_experiment(arguments.data, arguments.trials, arguments.timeout, arguments.study_name)
     output_dir = save_experiment(experiment_results)

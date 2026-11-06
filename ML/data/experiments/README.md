@@ -10,7 +10,7 @@ These four CSV files are mutually exclusive, reproducible views of
 | `03_watch.csv` | Every vacancy whose schedule is `Вахта`. |
 | `04_other.csv` | Every remaining vacancy: explicit rates per shift/hour/week, variable pay, no amount, military contracts, likely rates and city-less rows. |
 
-Rules (`rules_version` in `manifest.json`, currently `experiment_datasets_v3`):
+Rules (`rules_version` in `manifest.json`, currently `experiment_datasets_v4`):
 
 - `city` is taken from the card; when the enrichment left it empty (an address
   without a reviewed placement entry, e.g. Колпино, Шушары, Видное) the
@@ -25,6 +25,18 @@ Rules (`rules_version` in `manifest.json`, currently `experiment_datasets_v3`):
   `card`, `location_observed` (gazetteer city), `location_settlement`
   (village / township, e.g. `пос. Койсуг`), `location_unlisted` (a name not in
   the gazetteer, kept as written) or `missing`.
+- `profession` is taken from the **title** by `utils/professions.py` when the
+  title names one of the six professions; otherwise the scraper's label is kept.
+  The scraper's label is the search query that found the ad, so it is empty for
+  catch-all runs (all vacancies of a city, remote, watch) and wrong when Avito
+  returns neighbouring jobs (the `кассир` query also returns
+  `Продавец-консультант`, the `грузчик` query returns couriers). The original
+  label stays in `profession_query`; `profession_source` is `title`, `query` or
+  `none`. With several professions in a title (`Продавец-кассир`,
+  `Грузчик-комплектовщик`) the first one is taken. A driver is a truck driver
+  only with a truck marker in the title (category C/E, газель, самосвал, фура,
+  tonnage, …); `Водитель категории В`, taxi, forklift and `водитель-экспедитор на
+  своём авто` are not matched and keep the query label.
 - An amount without a period is treated as monthly only when its largest number
   is at least 10 000 rub; smaller ones (`2 800 — 3 480 ₽`, `от 4 000 ₽`) are
   almost always rates per shift and get `pay_mode=low_amount_likely_rate` in 04.

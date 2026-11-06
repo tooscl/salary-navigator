@@ -8,9 +8,10 @@ from datetime import datetime
 from pathlib import Path, PureWindowsPath
 
 try:
-    from . import title_flags
+    from . import title_flags, vacancy_labels
 except ImportError:  # Direct `python3 utils/build_dataset.py` entry point.
     import title_flags
+    import vacancy_labels
 
 ROOT = Path(__file__).resolve().parents[1]
 VERSION = "1"
@@ -19,6 +20,8 @@ METADATA = ["source", "region", "first_seen_at", "last_seen_at", "run_id",
 GENERATED = {"source", "region", "first_seen_at", "last_seen_at", "run_id", "run_ids"}
 REQUIRED = {"id", "source_url", "observed_at", "city", "profession", "title",
             "description", "salary_raw", "analysis_status", "export_eligibility"}
+# Recomputed from the latest observation on every build; never taken from exports.
+DERIVED = tuple(title_flags.COLUMNS) + tuple(vacancy_labels.COLUMNS)
 
 
 def digest(data):
@@ -133,7 +136,7 @@ def build(root, registry):
             if status == "completed" and not version:
                 raise ValueError(f"Missing enrichment version: {identity}")
             for field in fields:
-                if (field in REQUIRED or field in METADATA or field in title_flags.COLUMNS or field.endswith(("__source", "__evidence"))
+                if (field in REQUIRED or field in METADATA or field in DERIVED or field.endswith(("__source", "__evidence"))
                         or not row.get(field) or row.get(field + "__source") != "description"
                         or not row.get(field + "__evidence")
                         or row[field + "__evidence"] not in row["description"]):
@@ -146,8 +149,8 @@ def build(root, registry):
             raise ValueError(f"Empty export: {path}")
         inputs.append(dict(entry, rows=len(seen)))
     columns = ["source", "id", "city", "region", "profession"] + [
-        name for name in columns if name not in {"id", "city", "profession"} and name not in METADATA and name not in title_flags.COLUMNS
-    ] + list(title_flags.COLUMNS) + [name for name in METADATA if name not in {"source", "region"}]
+        name for name in columns if name not in {"id", "city", "profession"} and name not in METADATA and name not in DERIVED
+    ] + list(DERIVED) + [name for name in METADATA if name not in {"source", "region"}]
     output = io.StringIO(newline="")
     writer = csv.DictWriter(output, fieldnames=columns, lineterminator="\n")
     writer.writeheader()
@@ -156,7 +159,7 @@ def build(root, registry):
         # Identical-time changes have no defensible 'latest' winner.
         for previous, current in zip(observations, observations[1:]):
             if previous[0] == current[0]:
-                comparable = lambda row: {k: v for k, v in row.items() if k != "run_id" and k not in title_flags.COLUMNS and v != ""}
+                comparable = lambda row: {k: v for k, v in row.items() if k != "run_id" and k not in DERIVED and v != ""}
                 if comparable(previous[2]) != comparable(current[2]):
                     raise ValueError(f"Conflicting observations at same timestamp: {key}")
         latest = dict(observations[-1][2])
@@ -164,6 +167,7 @@ def build(root, registry):
                       last_seen_at=latest["observed_at"],
                       run_ids="; ".join(sorted({item[1] for item in observations})))
         latest.update(title_flags.military_flags(latest["title"]))
+        latest.update(vacancy_labels.vacancy_labels(latest))
         writer.writerow(latest)
     csv_bytes = output.getvalue().encode("utf-8-sig")
     manifest = {"schema_version": VERSION, "builder_version": VERSION,
@@ -171,6 +175,10 @@ def build(root, registry):
                 "title_flags": {"version": title_flags.VERSION,
                                 "sha256": digest(Path(title_flags.__file__).read_bytes()),
                                 "source": "title", "policy": "keyword_signal_not_exclusion"},
+                "vacancy_labels": {"version": vacancy_labels.VERSION,
+                                   "sha256": {path.name: digest(path.read_bytes()) for path in vacancy_labels.DEPENDENCIES},
+                                   "source": "title, profession, city, location_observed",
+                                   "policy": "added_next_to_observed_columns_not_replacing"},
                 "rows": len(records), "columns": columns, "sha256": digest(csv_bytes),
                 "inputs": inputs, "update_policy": "latest_complete_observation",
                 "geography": "placement_on_site", "empty_value": "unknown_not_zero"}

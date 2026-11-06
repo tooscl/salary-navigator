@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
-  "rules_version": "experiment_datasets_v3",
+  "rules_version": "experiment_datasets_v4",
   "source": {
     "path": "Data/dataset/vacancies.csv",
-    "sha256": "a313d68832067ee23ddf435e199ab7c28c14aca3f05bc9a7f0e00087fd4e07fd",
-    "rows": 20138,
+    "sha256": "11e45de2888f860adfb2ad02f0d166452937e75faae9f3fc2dde37115a88d8ba",
+    "rows": 20500,
     "key": [
       "source",
       "id"
@@ -14,26 +14,26 @@
     {
       "name": "01_location_monthly",
       "path": "ML/data/experiments/01_location_monthly.csv",
-      "rows": 8656,
-      "sha256": "9b88f339aa313a873d0c63add652a1b3e4da6cd7189b41fde5959bc924204e42"
+      "rows": 8951,
+      "sha256": "da1a860a9d35dc4c0aa79eeb96a155d90f9d649e8451fc2e9e68dbc73efbc73d"
     },
     {
       "name": "02_remote_monthly",
       "path": "ML/data/experiments/02_remote_monthly.csv",
       "rows": 1906,
-      "sha256": "1696e9878f299763c061b6b77e5a2baba446c5b6844fda20dedeef8ce47311ec"
+      "sha256": "17a14d70893a44db42d9174eb92a010bcfed3d86b116dd80963d173a56f39d15"
     },
     {
       "name": "03_watch",
       "path": "ML/data/experiments/03_watch.csv",
-      "rows": 3244,
-      "sha256": "f248f6ccb26edf4b73e11dee23e760c406cd7939b5e06941d91aa0895419961b"
+      "rows": 3246,
+      "sha256": "1b3e387c14b12373eef526fb44b44c11b1f431e8470047becba25e2a55fde78e"
     },
     {
       "name": "04_other",
       "path": "ML/data/experiments/04_other.csv",
-      "rows": 6332,
-      "sha256": "c78eba71437333fcc9b1858cbde5e363b375724b493220f6eb8999e1a07b6587"
+      "rows": 6397,
+      "sha256": "0e28cd2c8aa4c0703b94709f5c3379626e05c1ecb7c82ae1bc9c24e728ffd23f"
     }
   ],
   "schema": {
@@ -50,6 +50,8 @@
       "city_source",
       "region",
       "profession",
+      "profession_source",
+      "profession_query",
       "segments",
       "title",
       "description",

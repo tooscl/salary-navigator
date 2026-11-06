@@ -10,11 +10,16 @@ import json
 import re
 from pathlib import Path
 
+try:
+    from professions import resolve_profession
+except ModuleNotFoundError:  # imported as utils.build_experiment_datasets
+    from utils.professions import resolve_profession
+
 
 ROOT = Path(__file__).resolve().parents[1]
 SOURCE_PATH = Path("Data/dataset/vacancies.csv")
 OUTPUT_DIRECTORY = Path("ML/data/experiments")
-RULES_VERSION = "experiment_datasets_v3"
+RULES_VERSION = "experiment_datasets_v4"
 # A non-rate amount whose largest number is below this is almost surely a rate
 # per shift or hour written without "за смену"/"в час" (median ~4 000 rub,
 # 11-12 h shifts, weekly payouts), not a monthly salary.
@@ -29,8 +34,8 @@ DATASETS = (
 
 CORE_COLUMNS = [
     "source", "vacancy_id", "source_url", "run_id", "run_ids", "observed_at", "first_seen_at", "last_seen_at",
-    "city", "city_source", "region", "profession", "segments", "title", "description", "location_observed",
-    "employer_name_observed",
+    "city", "city_source", "region", "profession", "profession_source", "profession_query", "segments", "title",
+    "description", "location_observed", "employer_name_observed",
     "date_raw", "salary_raw", "salary_lower_rub", "salary_upper_rub", "salary_value_kind", "salary_period",
     "salary_period_evidence", "salary_tax_basis", "salary_parse_status", "work_schedule", "employment_type",
     "work_format", "registration_method", "work_hours_per_day", "pay_frequency", "experience", "watch_duration_days",
@@ -52,7 +57,11 @@ SOURCE_COLUMNS = {
     "views_today": "views_today",
 }
 
-RAW_CORE_COLUMNS = set(SOURCE_COLUMNS.values())
+# Derived in the shared CSV by utils/vacancy_labels.py and recomputed here, so
+# they are not copied into extra_attributes_json.
+SHARED_LABEL_COLUMNS = {"profession_resolved", "profession_source", "city_resolved", "city_resolved_source",
+                        "labels_rule_version"}
+RAW_CORE_COLUMNS = set(SOURCE_COLUMNS.values()) | SHARED_LABEL_COLUMNS
 AMOUNT_RE = re.compile(r"(?<!\d)(\d{1,3}(?:[ \u00a0]\d{3})+|\d{2,6})(?!\d)")
 SPACE_RE = re.compile(r"[\t\f\v ]+")
 
@@ -348,6 +357,10 @@ def output_row(row: dict[str, str], dataset: str, source_headers: list[str]) -> 
     result = {column: clean_value(row.get(source_column)) for column, source_column in SOURCE_COLUMNS.items()}
     result.update(salary_fields(row, dataset))
     result["city"], result["city_source"] = resolved_city(row)
+    # The scraper's label is the search query that found the ad; the title
+    # says what the job is (utils/professions.py).
+    result["profession_query"] = result["profession"]
+    result["profession"], result["profession_source"] = resolve_profession(result["title"], result["profession_query"])
     result["experiment_dataset"] = dataset
     result["work_mode"] = work_mode(row)
     result["pay_mode"] = pay_mode(row)

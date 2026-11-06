@@ -56,6 +56,29 @@ class DatasetTests(unittest.TestCase):
         self.add('new', [row])
         self.assertEqual(self.result()[0]['military'], 'False')
 
+    def test_vacancy_labels_are_added_next_to_observed_columns(self):
+        row = self.row(location_observed='Москва, Тверская ул., 1')
+        row.update(title='Продавец-кассир', profession='Кассир')
+        self.add('one', [row])
+        row = self.result()[0]
+        self.assertEqual((row['profession'], row['profession_resolved'], row['profession_source']),
+                         ('Кассир', 'Продавец', 'title'))
+        self.assertEqual((row['city'], row['city_resolved'], row['city_resolved_source']),
+                         ('Москва', 'Москва', 'card'))
+        self.assertTrue(row['labels_rule_version'])
+
+    def test_vacancy_labels_fill_gaps_without_touching_observed_values(self):
+        row = self.row(location_observed='Московская обл., Ленинский г.о., Видное, Школьная ул.')
+        row.update(title='Бариста', profession='', city='')
+        self.add('one', [row])
+        self.registry['exports'][0]['unknown_city_placements'] = {
+            '1': {'region': 'Московская область', 'evidence': 'Видное'}}
+        result = self.result()[0]
+        self.assertEqual((result['profession'], result['profession_resolved'], result['profession_source']),
+                         ('', '', 'none'))
+        self.assertEqual((result['city'], result['city_resolved'], result['city_resolved_source']),
+                         ('', 'Видное', 'location_observed'))
+
     def test_same_observation_different_derived_flags_does_not_conflict(self):
         row = self.row(); row['title'] = 'Военный водитель'
         self.add('old', [row])

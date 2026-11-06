@@ -1,12 +1,24 @@
 {
   "schema_version": "1",
   "builder_version": "1",
-  "builder_sha256": "0c33796b00a7b5f9073397fb8c4bf9936465a49c59d9f52411a96a12c22cde5d",
+  "builder_sha256": "c0a43f10a4eb888293d116ce20c874a86be657621e26a54462a3af23e260914c",
   "title_flags": {
     "version": "military_title_v1",
     "sha256": "6fd8d2cf699b7c417fa69453cb4d7e37c2ff3c47832668335649d1d911db9160",
     "source": "title",
     "policy": "keyword_signal_not_exclusion"
+  },
+  "vacancy_labels": {
+    "version": "vacancy_labels_v1",
+    "sha256": {
+      "vacancy_labels.py": "ac733ef6d5ac8f5182f10fa71513655e0e529099522bcb64bb07caad16d50326",
+      "professions.py": "1125bfa4cbd9516656b7a5b4dfa5ec2827b46545fd616a40cbd46fa0e1dccfd1",
+      "build_experiment_datasets.py": "74248a8ea999bfc5844df04b1888e625a302ecd38eedfc64efbd1a25a84316e1",
+      "russian_cities.csv": "611a658963ef70be3edb3bbbb920e68f04b2e853de728c293d5148ad5db00254",
+      "russian_cities_extra.csv": "bc8f3a75a3461cf9897691e8c48e3c15e3a193c965e6bf364120f7228be9dc81"
+    },
+    "source": "title, profession, city, location_observed",
+    "policy": "added_next_to_observed_columns_not_replacing"
   },
   "rows": 20500,
   "columns": [
@@ -123,6 +135,11 @@
     "military",
     "military_keywords",
     "military_rule_version",
+    "profession_resolved",
+    "profession_source",
+    "city_resolved",
+    "city_resolved_source",
+    "labels_rule_version",
     "first_seen_at",
     "last_seen_at",
     "run_id",
@@ -131,7 +148,7 @@
     "enriched_fields",
     "enrichment_version"
   ],
-  "sha256": "6a69196549be068156dc1840385f5a247a358f161da9900f7d7bf614fdec4649",
+  "sha256": "11e45de2888f860adfb2ad02f0d166452937e75faae9f3fc2dde37115a88d8ba",
   "inputs": [
     {
       "run_id": "20261028-spb-50-all",
