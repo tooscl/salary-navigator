@@ -20,7 +20,7 @@
     "source": "title, profession, city, location_observed",
     "policy": "added_next_to_observed_columns_not_replacing"
   },
-  "rows": 26590,
+  "rows": 26685,
   "columns": [
     "source",
     "id",
@@ -150,7 +150,7 @@
     "enriched_fields",
     "enrichment_version"
   ],
-  "sha256": "4deabcd86a00d08adb3079f87745a79173a9a5e54d1e74988dedfd5cf1a9eaa8",
+  "sha256": "f9794a405e5fe42d6ddb0a733aa04aa1ba2c1a99fb480f04e58b295310c170d1",
   "inputs": [
     {
       "run_id": "20261028-spb-50-all",
@@ -5020,6 +5020,35 @@
         }
       },
       "rows": 184
+    },
+    {
+      "run_id": "20261109-krasnodar-kladovshchik",
+      "source": "avito",
+      "path": "Data/avito_runs/20261109-krasnodar-kladovshchik/exports/vacancies_flat.csv",
+      "sha256": "86b5fae26a0f426bb90a70e4e787d8d9a16ebc3888f20f646a035afca6c69bda",
+      "placement_regions": {
+        "Краснодар": "Краснодарский край",
+        "Российский": "Краснодарский край",
+        "Дружелюбный": "Краснодарский край",
+        "Октябрьский": "Краснодарский край",
+        "Индустриальный": "Краснодарский край",
+        "Ленина": "Краснодарский край",
+        "Елизаветинская": "Краснодарский край"
+      },
+      "enrichment_status": "not_run",
+      "unknown_city_placements": {
+        "7599044247": {
+          "region": "Краснодарский край",
+          "evidence": "Краснодарский край, г.о. Краснодар, пос. Берёзовый, посёлок Лекраспром, ул. Скульптора Коломойцева, 40 р-н Прикубанский",
+          "region_unknown": false
+        },
+        "8260636886": {
+          "region": "Краснодарский край",
+          "evidence": "Краснодарский край, г.о. Краснодар, территория МТФ-1 Отделение 4 р-н Карасунский",
+          "region_unknown": false
+        }
+      },
+      "rows": 107
     },
     {
       "run_id": "20261109-krasnodar-komplektovshchik",
