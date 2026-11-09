@@ -273,3 +273,5 @@ avito_runs/<название_сбора>/
 - [avito-kamchatskiy-kray-20261106](avito_runs/avito-kamchatskiy-kray-20261106/exports/vacancies_flat.csv): 1071 вакансий.
 
 - [20261109-ekb-kassir-smenny](avito_runs/20261109-ekb-kassir-smenny/exports/vacancies_flat.csv): 335 вакансий.
+
+- [20261109-ekb-kassir-bez-opyta](avito_runs/20261109-ekb-kassir-bez-opyta/exports/vacancies_flat.csv): 352 вакансий.
