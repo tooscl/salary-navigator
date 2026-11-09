@@ -293,3 +293,5 @@ avito_runs/<название_сбора>/
 - [20261109-krasnodar-komplektovshchik](avito_runs/20261109-krasnodar-komplektovshchik/exports/vacancies_flat.csv): 131 вакансий.
 
 - [20261109-krasnodar-prodavec](avito_runs/20261109-krasnodar-prodavec/exports/vacancies_flat.csv): 277 вакансий.
+
+- [20261109-krasnodar-voditel-gruzovogo](avito_runs/20261109-krasnodar-voditel-gruzovogo/exports/vacancies_flat.csv): 388 вакансий.
