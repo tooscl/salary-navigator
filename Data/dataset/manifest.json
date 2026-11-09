@@ -20,7 +20,7 @@
     "source": "title, profession, city, location_observed",
     "policy": "added_next_to_observed_columns_not_replacing"
   },
-  "rows": 28954,
+  "rows": 29143,
   "columns": [
     "source",
     "id",
@@ -150,7 +150,7 @@
     "enriched_fields",
     "enrichment_version"
   ],
-  "sha256": "1564a8b6ebffd1a471b45b7150fa4d87ac5ebcf4ee4f5a263748a39f7680ed48",
+  "sha256": "fdff3f6356aca36d8ed531e46ded7067b723e836ce258977e6dbd0338708583d",
   "inputs": [
     {
       "run_id": "20261028-spb-50-all",
@@ -5363,6 +5363,24 @@
         }
       },
       "rows": 228
+    },
+    {
+      "run_id": "20261110-ryazan-komplektovshchik",
+      "source": "avito",
+      "path": "Data/avito_runs/20261110-ryazan-komplektovshchik/exports/vacancies_flat.csv",
+      "sha256": "3eb039256c6ebdba61e22a5f0956d17cd733e04897118b1c9b9b147bf84bfd07",
+      "placement_regions": {
+        "Рязань": "Рязанская область"
+      },
+      "enrichment_status": "not_run",
+      "unknown_city_placements": {
+        "8398320051": {
+          "region": "Рязанская область",
+          "evidence": "Рязанская обл., Сасовское направление Московской железной дороги, станция Лесок р-н Октябрьский",
+          "region_unknown": false
+        }
+      },
+      "rows": 211
     },
     {
       "run_id": "20261110-ryazan-kurer",

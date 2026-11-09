@@ -311,3 +311,5 @@ avito_runs/<название_сбора>/
 - [20261110-ryazan-ohrannik](avito_runs/20261110-ryazan-ohrannik/exports/vacancies_flat.csv): 407 вакансий.
 
 - [20261110-ryazan-sklad](avito_runs/20261110-ryazan-sklad/exports/vacancies_flat.csv): 148 вакансий.
+
+- [20261110-ryazan-komplektovshchik](avito_runs/20261110-ryazan-komplektovshchik/exports/vacancies_flat.csv): 211 вакансий.
