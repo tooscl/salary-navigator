@@ -1,0 +1,89 @@
+{
+  "method": "post_finalize_validation_v1",
+  "reason": "Добавлено проверяемое отдельное преобразование размещения из неизменного raw; исходный экспорт сохранён.",
+  "original_manifest_sha256": "b35d00e626992d21f1b9a5ba6e5da66d20c8eea8fc0c618e8c974f5e34c13701",
+  "previous_automation_sha256": {
+    "Scraper/skills/collect-avito/references/top-professions.json": "e3e72638b17b48f825ec6f2fefb963662494f679ae4b0cef1bebedba889610dd",
+    "utils/title_flags.py": "9c9456cb3fb0df5791630049c9c85987381091dbb9ba18bc3fb3314b8cccbeb6",
+    "Scraper/extract.js": "fa0a0e0c7df0877d15ea4f94e5fed14df514241cb51771cda18cacc04574e8b0",
+    "Scraper/skills/collect-avito/SKILL.md": "4033fe896dc13c66a540d768bbc76800f3bcc41b806a5e8dbdc4881e7080b593",
+    "Scraper/skills/collect-avito/scripts/run.py": "4bcbecab78fdf74298b784f17150688377853000566f88a803982a6e7f1de0d4",
+    "Scraper/skills/collect-avito/scripts/sweep_mode.py": "718a956a316df71c47ee3a4c5d3670fa011a5b16e9948393d68216702b140a56",
+    "Scraper/skills/collect-avito/scripts/browser_batch.js": "7572ff4aa773cd86ccd3d8ca3a2de6c9586b482ab6f1371dbfa152b165588eb4",
+    "Scraper/skills/collect-avito/scripts/check_capture.py": "aa746849317f9768af5aae08b394b9379539f6e268c1fc69e4ed13bd06a4657f",
+    "Scraper/skills/collect-avito/scripts/failure_log.py": "08dfd259fad4166a08acb1b056bf3cd14daede277385bd91c7e49680959475a4",
+    "Scraper/skills/collect-avito/scripts/preflight.py": "492a0d898990aee198f26bf6577d0876360dcc6ec69e274835cd77cdaa768974"
+  },
+  "automation_changes": [
+    {
+      "file": "Scraper/skills/collect-avito/SKILL.md",
+      "reason": "При freeze локальная версия совпадала по SHA-256 с опубликованной в PR #120.",
+      "validation": "Сверены SHA-256 и опубликованная версия main; 129 тестов Scraper.test_first_run пройдены для PR #120."
+    },
+    {
+      "file": "Scraper/skills/collect-avito/scripts/run.py",
+      "reason": "При freeze локальная версия совпадала по SHA-256 с опубликованной в PR #120.",
+      "validation": "Сверены SHA-256 и опубликованная версия main; 129 тестов Scraper.test_first_run пройдены для PR #120."
+    },
+    {
+      "file": "Scraper/test_first_run.py",
+      "reason": "Регрессионное покрытие изменений PR #120, присутствовавших при freeze.",
+      "validation": "129 тестов Scraper.test_first_run пройдены для PR #120."
+    },
+    {
+      "file": "Scraper/skills/collect-avito/SKILL.md",
+      "reason": "При freeze локальная версия совпадала по SHA-256 с опубликованной в PR #120.",
+      "validation": "Сверены SHA-256 и опубликованная версия main; 129 тестов Scraper.test_first_run пройдены для PR #120."
+    },
+    {
+      "file": "Scraper/skills/collect-avito/scripts/run.py",
+      "reason": "При freeze локальная версия совпадала по SHA-256 с опубликованной в PR #120.",
+      "validation": "Сверены SHA-256 и опубликованная версия main; 129 тестов Scraper.test_first_run пройдены для PR #120."
+    },
+    {
+      "file": "Scraper/test_first_run.py",
+      "reason": "Регрессионное покрытие изменений PR #120, присутствовавших при freeze.",
+      "validation": "129 тестов Scraper.test_first_run пройдены для PR #120."
+    },
+    {
+      "file": "utils/placement_transform.py",
+      "reason": "Воспроизводимое преобразование пустых городов из подтверждённого raw без изменения завершённого экспорта.",
+      "validation": "Регрессионные тесты utils.test_placement_transform и utils.test_build_dataset пройдены."
+    },
+    {
+      "file": "utils/build_dataset.py",
+      "reason": "Проверяемое преобразование географии после finalize с сохранением исходного паспорта и времени наблюдения.",
+      "validation": "47 тестов utils.test_placement_transform, utils.test_build_dataset и Scraper.test_first_run пройдены; dataset --check."
+    },
+    {
+      "file": "utils/test_placement_transform.py",
+      "reason": "Проверяемое преобразование географии после finalize с сохранением исходного паспорта и времени наблюдения.",
+      "validation": "47 тестов utils.test_placement_transform, utils.test_build_dataset и Scraper.test_first_run пройдены; dataset --check."
+    },
+    {
+      "file": "Scraper/skills/collect-avito/SKILL.md",
+      "reason": "Проверяемое преобразование географии после finalize с сохранением исходного паспорта и времени наблюдения.",
+      "validation": "47 тестов utils.test_placement_transform, utils.test_build_dataset и Scraper.test_first_run пройдены; dataset --check."
+    }
+  ],
+  "previous_review_sha256": null,
+  "current_automation_sha256": {
+    "Scraper/extract.js": "fa0a0e0c7df0877d15ea4f94e5fed14df514241cb51771cda18cacc04574e8b0",
+    "Scraper/skills/collect-avito/SKILL.md": "d0d2d66f2514912cda58592db5016aad290f0b934ebc09b513fc03c729e04b7a",
+    "Scraper/skills/collect-avito/references/top-professions.json": "e3e72638b17b48f825ec6f2fefb963662494f679ae4b0cef1bebedba889610dd",
+    "Scraper/skills/collect-avito/scripts/browser_batch.js": "7572ff4aa773cd86ccd3d8ca3a2de6c9586b482ab6f1371dbfa152b165588eb4",
+    "Scraper/skills/collect-avito/scripts/check_capture.py": "aa746849317f9768af5aae08b394b9379539f6e268c1fc69e4ed13bd06a4657f",
+    "Scraper/skills/collect-avito/scripts/failure_log.py": "08dfd259fad4166a08acb1b056bf3cd14daede277385bd91c7e49680959475a4",
+    "Scraper/skills/collect-avito/scripts/preflight.py": "492a0d898990aee198f26bf6577d0876360dcc6ec69e274835cd77cdaa768974",
+    "Scraper/skills/collect-avito/scripts/run.py": "4bcbecab78fdf74298b784f17150688377853000566f88a803982a6e7f1de0d4",
+    "Scraper/skills/collect-avito/scripts/sweep_mode.py": "718a956a316df71c47ee3a4c5d3670fa011a5b16e9948393d68216702b140a56",
+    "Scraper/test_aside_runner.py": "536268d2d996072aabf201cabbcb9704ef9e82b76639f37d2e740c506ff79ea1",
+    "Scraper/test_first_run.py": "3076deb5325cddf1e7dcf3635c3214a843c372e42e2b6efb3d9680778dd9279c",
+    "utils/build_dataset.py": "ee5e569cc5cea2d5f7bf875082e9f99220277e21d8b142eb3a9a0b6ae43f9f7d",
+    "utils/placement_transform.py": "6f860342ad62f1a8ed10b62354297da7c2e7e27e1a9d170b34e484416ec399b6",
+    "utils/test_build_dataset.py": "114a825a91a7d1b65fa213557199d77831276f4ca1c91418c8547f11bf10a427",
+    "utils/test_placement_transform.py": "bc42a1e78994685aaca1510f93174c719320f62acb33f039a1fb39e94e2a975d",
+    "utils/title_flags.py": "9c9456cb3fb0df5791630049c9c85987381091dbb9ba18bc3fb3314b8cccbeb6"
+  },
+  "validation": "Partition, plan, page hashes, URL chain, raw, correction, CSV IDs and profession, dataset check and offline regression suites passed"
+}

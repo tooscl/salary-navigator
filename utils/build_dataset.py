@@ -8,10 +8,11 @@ from datetime import datetime
 from pathlib import Path, PureWindowsPath
 
 try:
-    from . import title_flags, vacancy_labels
+    from . import title_flags, vacancy_labels, placement_transform
 except ImportError:  # Direct `python3 utils/build_dataset.py` entry point.
     import title_flags
     import vacancy_labels
+    import placement_transform
 
 ROOT = Path(__file__).resolve().parents[1]
 VERSION = "1"
@@ -54,7 +55,7 @@ def build(root, registry):
     if registry.get("schema_version") != VERSION or not registry.get("exports"):
         raise ValueError("Expected schema_version=1 and nonempty exports")
     records, columns, inputs = {}, [], []
-    runs = set()
+    runs, transformations = set(), set()
     for entry in sorted(registry["exports"], key=lambda item: item["run_id"]):
         run_id, source = entry["run_id"], entry["source"]
         if not run_id or not source or run_id in runs:
@@ -66,6 +67,28 @@ def build(root, registry):
         data = (root / path).read_bytes()
         if digest(data) != entry["sha256"]:
             raise ValueError(f"Source SHA-256 mismatch: {path}")
+        transform = entry.get('transformation')
+        if transform:
+            spec_path = repository_path(transform['path'])
+            if not (root / spec_path).resolve().is_relative_to(root.resolve()):
+                raise ValueError('Transformation must be inside repository')
+            spec_bytes = (root / spec_path).read_bytes()
+            if digest(spec_bytes) != transform['sha256']:
+                raise ValueError('Transformation SHA-256 mismatch')
+            spec = json.loads(spec_bytes)
+            ident = spec['transformation_id']
+            directory = Path('Data/transformations') / ident
+            if spec_path != directory / 'transformation.json' or path != directory / 'vacancies_flat.csv':
+                raise ValueError('Unexpected transformation artifact paths')
+            if ident in transformations or spec['source_run_id'] != run_id:
+                raise ValueError('Duplicate transformation or mismatched source run')
+            transformations.add(ident)
+            if placement_transform.render(root, spec) != data:
+                raise ValueError('Transformed CSV does not match source and decisions')
+            for identity, decision in spec['placements'].items():
+                if (entry['placement_regions'].get(decision['city']) != decision['region'] or
+                        identity in entry.get('unknown_city_placements', {})):
+                    raise ValueError('Transformed placement registry mismatch')
         correction = entry.get('profession_correction')
         if correction:
             correction_path = repository_path(correction['path'])
@@ -172,6 +195,7 @@ def build(root, registry):
     csv_bytes = output.getvalue().encode("utf-8-sig")
     manifest = {"schema_version": VERSION, "builder_version": VERSION,
                 "builder_sha256": digest(Path(__file__).read_bytes()),
+                "placement_transform_sha256": digest(Path(placement_transform.__file__).read_bytes()),
                 "title_flags": {"version": title_flags.VERSION,
                                 "sha256": digest(Path(title_flags.__file__).read_bytes()),
                                 "source": "title", "policy": "keyword_signal_not_exclusion"},

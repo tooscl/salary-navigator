@@ -1548,12 +1548,15 @@ p.stdin.close()
             out, service, diag = runner.paths(root, run_id)
             runner.write(service/'plan.json', {})
             runner.write(service/'manifest.json', dict(status='complete', files={}, collection={}, coverage={'accepted':1}))
-            state = {'commits': 0, 'pushes': 0}
+            runner.write(root/'Data/dataset/sources.json', {'exports':[{'run_id':run_id,'path':'Data/transformations/t/vacancies_flat.csv','transformation':{'path':'Data/transformations/t/transformation.json'}}]})
+            state = {'commits': 0, 'pushes': 0, 'transform_staged': False}
             def output(command, **kwargs):
                 if command[:2] == ['git','branch']:
                     return 'codex/publish_retry'
                 if command[:5] == ['git','diff','--cached','--name-only']:
                     return (out/'raw/123.json').relative_to(root).as_posix() if not state['commits'] else ''
+                if command[:2] == ['git','add']:
+                    state['transform_staged'] = ('Data/transformations/t/vacancies_flat.csv' in command and 'Data/transformations/t/transformation.json' in command)
                 if command[:2] == ['git','commit']:
                     state['commits'] += 1
                 if command[:2] == ['git','push']:
@@ -1572,7 +1575,7 @@ p.stdin.close()
                 runner.record_failure(diag,'publish','push failed','push')
                 args.retry_reason = 'Connection restored'
                 runner.publish(args)
-            self.assertEqual(state, {'commits':1,'pushes':2})
+            self.assertEqual(state, {'commits':1,'pushes':2,'transform_staged':True})
 
     def test_publish_stages_pinned_provenance_bytes_and_rejects_changed_index(self):
         with tempfile.TemporaryDirectory() as directory:
@@ -1602,6 +1605,7 @@ p.stdin.close()
             out, service, diag = runner.paths(runner.ROOT, 'publish_guard')
             runner.write(service/'plan.json', {})
             runner.write(service/'manifest.json', dict(status='complete', files={}, collection={}, coverage={'accepted':1}))
+            runner.write(runner.ROOT/'Data/dataset/sources.json', {'exports':[{'run_id':'publish_guard'}]})
             def output(command, **kwargs):
                 if command[:2] == ['git', 'branch']: return 'codex/publish_guard'
                 if command[:4] == ['git', 'diff', '--cached', '--name-only']: return 'unrelated/file.py'

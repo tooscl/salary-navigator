@@ -1,0 +1,2605 @@
+{
+  "run_id": "20261110-ryazan-prodavec",
+  "dataset_id": "20261110-ryazan-prodavec",
+  "status": "complete",
+  "schema": {
+    "columns": [
+      "id",
+      "city",
+      "profession",
+      "segments",
+      "title",
+      "salary_raw",
+      "source_url",
+      "observed_at",
+      "description",
+      "location_observed",
+      "employer_name_observed",
+      "date_raw",
+      "views_total",
+      "views_today",
+      "listing_rank",
+      "listing_promoted",
+      "full_parameters_read",
+      "analysis_status",
+      "export_eligibility",
+      "read_status_parameters",
+      "read_status_description",
+      "read_status_location",
+      "read_limitations",
+      "enrichment_status",
+      "enriched_fields",
+      "enrichment_version",
+      "military",
+      "military_keywords",
+      "military_rule_version",
+      "city__source",
+      "city__evidence",
+      "city_anomaly",
+      "График",
+      "Занятость",
+      "Способ оформления",
+      "Частота выплат",
+      "Сфера деятельности компании",
+      "Что получают работники",
+      "Опыт работы",
+      "В том числе для кандидатов",
+      "Ассортимент",
+      "Количество рабочих часов в день",
+      "Смены",
+      "Медкнижка",
+      "С чем надо работать",
+      "Количество рабочих дней в неделю",
+      "Режим работы",
+      "Стажировка",
+      "Тип предприятия",
+      "Длительность вахты",
+      "Можно заканчивать в 17:00"
+    ],
+    "unknown_policy": "empty_not_zero"
+  },
+  "collection": {
+    "run_id": "20261110-ryazan-prodavec",
+    "geography": "Рязань",
+    "profession": "Продавец",
+    "segments": "",
+    "filter_evidence": "Рязань; единственная профессия Продавец; заголовок, URL и пустой поиск подтверждены; доп. фильтры не заданы.",
+    "listing_url": "https://www.avito.ru/ryazan/vakansii/prodavec-ASgBAgICAUTUzBHs~IoD?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6IldzcXFMUERxSTZiWXljaW0iO33o3wz_JgAAAA",
+    "listing_request_url": "https://www.avito.ru/ryazan/vakansii/prodavec-ASgBAgICAUTUzBHs~IoD?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6IldzcXFMUERxSTZiWXljaW0iO33o3wz_JgAAAA&localPriority=0",
+    "selected_controls": [
+      {
+        "label": "Продавец",
+        "marker": "params[144170]/checkbox/3235382",
+        "value": null
+      },
+      {
+        "label": "Продавец",
+        "marker": "params[144170]/checkbox/toggle",
+        "value": "3235382"
+      },
+      {
+        "label": "Любой",
+        "marker": "params[196929]/all",
+        "value": null
+      },
+      {
+        "label": "Любой",
+        "marker": "params[196929]/toggle",
+        "value": "all"
+      },
+      {
+        "label": "Неважно",
+        "marker": "params[172815]/all",
+        "value": null
+      },
+      {
+        "label": "Неважно",
+        "marker": "params[172815]/toggle",
+        "value": "all"
+      },
+      {
+        "label": "Неважно",
+        "marker": null,
+        "value": "all"
+      },
+      {
+        "label": "Все",
+        "marker": null,
+        "value": "all"
+      }
+    ],
+    "listing_sha256": "c44e3d248abb6c41daa93418eaffa7b5c4abb6a1804f74071d6ba7a1c71653c3",
+    "profession_scope": null,
+    "profession_source": "observed_controls",
+    "listing_pages": [
+      {
+        "file": "listing_pages/0001.json",
+        "sha256": "c44e3d248abb6c41daa93418eaffa7b5c4abb6a1804f74071d6ba7a1c71653c3",
+        "source_url": "https://www.avito.ru/ryazan/vakansii/prodavec-ASgBAgICAUTUzBHs~IoD?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6IldzcXFMUERxSTZiWXljaW0iO33o3wz_JgAAAA"
+      },
+      {
+        "file": "listing_pages/0002.json",
+        "sha256": "a13b7639f8aba3d5b01af5969b194a0bbb87e1ab16258b6a8fc06945eeee1df1",
+        "source_url": "https://www.avito.ru/ryazan/vakansii/prodavec-ASgBAgICAUTUzBHs~IoD?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6IlBOZnVKV09WQndpV0EyUmMiO33BjC-1JgAAAA&p=2"
+      },
+      {
+        "file": "listing_pages/0003.json",
+        "sha256": "e331a8f135f2f467f7082a81435ec174fbf0d97b8c61589dcbf7df4e02b9cb22",
+        "source_url": "https://www.avito.ru/ryazan/vakansii/prodavec-ASgBAgICAUTUzBHs~IoD?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6IlBOZnVKV09WQndpV0EyUmMiO33BjC-1JgAAAA&p=3"
+      },
+      {
+        "file": "listing_pages/0004.json",
+        "sha256": "3cfe29f9a52fa37af944e7ec791ffb62b4208a5178c82aee302f90ac542fd3dd",
+        "source_url": "https://www.avito.ru/ryazan/vakansii/prodavec-ASgBAgICAUTUzBHs~IoD?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6IlBOZnVKV09WQndpV0EyUmMiO33BjC-1JgAAAA&p=4"
+      },
+      {
+        "file": "listing_pages/0005.json",
+        "sha256": "59eabbcbe509b70b2f73dd5de8e9e4ff4ea819ce5590ed184c45f36f63e91a27",
+        "source_url": "https://www.avito.ru/ryazan/vakansii/prodavec-ASgBAgICAUTUzBHs~IoD?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6IlBOZnVKV09WQndpV0EyUmMiO33BjC-1JgAAAA&p=5"
+      },
+      {
+        "file": "listing_pages/0006.json",
+        "sha256": "52578daf6834ecda0026efa7127cd37811145ae09c57b0d72b2dd23abb886389",
+        "source_url": "https://www.avito.ru/ryazan/vakansii/prodavec-ASgBAgICAUTUzBHs~IoD?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6IlBOZnVKV09WQndpV0EyUmMiO33BjC-1JgAAAA&p=6"
+      }
+    ],
+    "selection_mode": "first_N_unique_on_frozen_listing",
+    "limit": 258,
+    "requested_all_pages": true,
+    "saved_selection_authorization": null,
+    "requested_limit": null,
+    "available_unique": 258,
+    "listing_end_reason": "confirmed_end",
+    "available_listing_exhausted": true,
+    "continuation": null,
+    "branch_only": false,
+    "max_pages": null,
+    "candidate_limit": null,
+    "created_at": "2026-11-09T22:33:20.753813+00:00",
+    "instruction_version": "1.8.1",
+    "extractor_sha256": "fa0a0e0c7df0877d15ea4f94e5fed14df514241cb51771cda18cacc04574e8b0",
+    "instruction_sha256": "4033fe896dc13c66a540d768bbc76800f3bcc41b806a5e8dbdc4881e7080b593",
+    "code_git_commit": "3a0d52a3fed65d07d20fd4ad9c44e46aa9a3b233",
+    "setup_seconds": 21.323638082947582,
+    "live_route_verified": false,
+    "execution_model": "gpt-6.1-terra",
+    "automation_sha256": {
+      "Scraper/skills/collect-avito/references/top-professions.json": "e3e72638b17b48f825ec6f2fefb963662494f679ae4b0cef1bebedba889610dd",
+      "utils/title_flags.py": "9c9456cb3fb0df5791630049c9c85987381091dbb9ba18bc3fb3314b8cccbeb6",
+      "Scraper/extract.js": "fa0a0e0c7df0877d15ea4f94e5fed14df514241cb51771cda18cacc04574e8b0",
+      "Scraper/skills/collect-avito/SKILL.md": "4033fe896dc13c66a540d768bbc76800f3bcc41b806a5e8dbdc4881e7080b593",
+      "Scraper/skills/collect-avito/scripts/run.py": "4bcbecab78fdf74298b784f17150688377853000566f88a803982a6e7f1de0d4",
+      "Scraper/skills/collect-avito/scripts/sweep_mode.py": "718a956a316df71c47ee3a4c5d3670fa011a5b16e9948393d68216702b140a56",
+      "Scraper/skills/collect-avito/scripts/browser_batch.js": "7572ff4aa773cd86ccd3d8ca3a2de6c9586b482ab6f1371dbfa152b165588eb4",
+      "Scraper/skills/collect-avito/scripts/check_capture.py": "aa746849317f9768af5aae08b394b9379539f6e268c1fc69e4ed13bd06a4657f",
+      "Scraper/skills/collect-avito/scripts/failure_log.py": "08dfd259fad4166a08acb1b056bf3cd14daede277385bd91c7e49680959475a4",
+      "Scraper/skills/collect-avito/scripts/preflight.py": "492a0d898990aee198f26bf6577d0876360dcc6ec69e274835cd77cdaa768974"
+    },
+    "uncommitted_automation_files": [
+      "Scraper/skills/collect-avito/SKILL.md",
+      "Scraper/skills/collect-avito/scripts/run.py"
+    ],
+    "city_anomaly_policy": "blank"
+  },
+  "coverage": {
+    "planned": 258,
+    "accepted": 258,
+    "unavailable": [],
+    "unresolved_observations": [],
+    "user_skipped_observations": [],
+    "user_skipped_count": 0,
+    "user_skip_policy": null,
+    "user_detail_skip_policy": null,
+    "deduplication": null,
+    "sweep": null,
+    "unique_ids": [
+      "8499283733",
+      "8410384010",
+      "8463226427",
+      "8414747951",
+      "8030129635",
+      "7774279563",
+      "4558512027",
+      "7486074162",
+      "8254815242",
+      "8216701790",
+      "8314832039",
+      "7592770614",
+      "8171901062",
+      "2613168832",
+      "8323780425",
+      "8420553065",
+      "8413252643",
+      "8499080552",
+      "7391039669",
+      "8200834351",
+      "7797220295",
+      "8521740678",
+      "8376007909",
+      "8372213469",
+      "4015089076",
+      "8328129849",
+      "1604918966",
+      "8467026576",
+      "3487453504",
+      "8382785262",
+      "8287338211",
+      "3161047938",
+      "8296576783",
+      "8351393473",
+      "7368208755",
+      "8348261752",
+      "8298450496",
+      "7720511399",
+      "8437530968",
+      "8288676057",
+      "8044791515",
+      "8044795339",
+      "8521165183",
+      "8445602299",
+      "8400862151",
+      "3939197606",
+      "8404356714",
+      "7819963303",
+      "8008089504",
+      "4070353925",
+      "8374645021",
+      "7844501327",
+      "8513477466",
+      "3970893206",
+      "4078457506",
+      "4599167864",
+      "8432390184",
+      "8437986315",
+      "7961154664",
+      "8517483491",
+      "2141679789",
+      "3855063382",
+      "8351006468",
+      "3993790029",
+      "8040411241",
+      "7854235121",
+      "8273608277",
+      "8490836457",
+      "8127541817",
+      "8315486188",
+      "8144742952",
+      "8458595782",
+      "8413406462",
+      "8517115269",
+      "8153123376",
+      "8259767021",
+      "7969488967",
+      "4457368412",
+      "8423101210",
+      "8370711507",
+      "8491623287",
+      "2141955736",
+      "8408275166",
+      "8389921132",
+      "8499500853",
+      "7508676425",
+      "8429920675",
+      "3087300060",
+      "3434989370",
+      "8400034096",
+      "8577351220",
+      "8514621205",
+      "7843784130",
+      "8390558824",
+      "8242795541",
+      "8414604247",
+      "8444894172",
+      "8390167860",
+      "4424918819",
+      "8435382240",
+      "8422817019",
+      "8491507600",
+      "8441934941",
+      "8473556322",
+      "8400696964",
+      "4741554073",
+      "8029194707",
+      "8379744454",
+      "8276404864",
+      "7950546231",
+      "8545809861",
+      "2403896949",
+      "8513139918",
+      "8364706027",
+      "8455069056",
+      "8383786326",
+      "7695233831",
+      "8488915357",
+      "7763954999",
+      "8370767382",
+      "4230523334",
+      "8440817851",
+      "8441075827",
+      "8557233704",
+      "8222975569",
+      "8557232844",
+      "8163687610",
+      "8398357872",
+      "8313255417",
+      "8588854482",
+      "8575227369",
+      "8441801401",
+      "3828467604",
+      "865270678",
+      "8452481469",
+      "8306444606",
+      "8347202349",
+      "8153483061",
+      "8340060337",
+      "8317180364",
+      "8078302342",
+      "2160796834",
+      "8379898193",
+      "8275884995",
+      "8364297735",
+      "8413714145",
+      "8553482403",
+      "8398239999",
+      "7321172144",
+      "4425392960",
+      "8347789791",
+      "8142690283",
+      "8577422208",
+      "8410759795",
+      "8430749265",
+      "8333535257",
+      "8390969019",
+      "8040633016",
+      "8410046767",
+      "8452529684",
+      "8432322589",
+      "8413507884",
+      "8467026232",
+      "8483750538",
+      "8491696908",
+      "8422326538",
+      "8405327946",
+      "8490064894",
+      "8498929194",
+      "8430864590",
+      "8512688011",
+      "8282471928",
+      "8390470706",
+      "8185682001",
+      "8440113735",
+      "2915791085",
+      "8422265466",
+      "8406494919",
+      "8153843136",
+      "8470260527",
+      "8482254147",
+      "8413492843",
+      "8398450482",
+      "8408364367",
+      "8355291394",
+      "8368113892",
+      "8152953137",
+      "8401520034",
+      "8484842626",
+      "8370244320",
+      "8320956575",
+      "8368334225",
+      "8422067870",
+      "8414107626",
+      "8369148484",
+      "4315271460",
+      "8400668136",
+      "8459537306",
+      "7321510365",
+      "8185681393",
+      "4390385246",
+      "4244801888",
+      "8264285843",
+      "7843745971",
+      "8391423135",
+      "8367723411",
+      "8142981689",
+      "7843859042",
+      "8221251683",
+      "8471042665",
+      "7888562977",
+      "8489361052",
+      "8515207236",
+      "8514326972",
+      "7749190892",
+      "7717453554",
+      "8165284692",
+      "7749691709",
+      "8328088503",
+      "8517700743",
+      "8332450450",
+      "4549594750",
+      "8576383804",
+      "7843890500",
+      "8552952822",
+      "8520988187",
+      "8259102702",
+      "8359866616",
+      "8382236202",
+      "8381903835",
+      "8438245633",
+      "4550327779",
+      "3967512838",
+      "8544227256",
+      "8405486469",
+      "8452468169",
+      "8283520448",
+      "8490845757",
+      "8513983717",
+      "8311625097",
+      "8543628008",
+      "8444992027",
+      "8310939511",
+      "7813271398",
+      "8557752634",
+      "3749689056",
+      "8400761949",
+      "8514307735",
+      "8311135968",
+      "8577048895",
+      "8420231860",
+      "3857034641",
+      "8283664468",
+      "8452718312",
+      "8542931225",
+      "2821761022",
+      "8280311786",
+      "8340003857"
+    ],
+    "errors": [],
+    "partial": null,
+    "limitations": [
+      "Visible rendered parameters only; enrichment not run; placement on site; live route unverified"
+    ]
+  },
+  "timing": {
+    "setup_seconds": 21.323638082947582,
+    "capture_seconds": 357.732951041311,
+    "review_export_seconds": 2.8124379999935627,
+    "publication_seconds": null
+  },
+  "review_model": "gpt-6.1-terra",
+  "automation_changes": [
+    {
+      "file": "Scraper/skills/collect-avito/SKILL.md",
+      "reason": "При freeze локальная версия совпадала по SHA-256 с опубликованной в PR #120.",
+      "validation": "Сверены SHA-256 и опубликованная версия main; 129 тестов Scraper.test_first_run пройдены для PR #120."
+    },
+    {
+      "file": "Scraper/skills/collect-avito/scripts/run.py",
+      "reason": "При freeze локальная версия совпадала по SHA-256 с опубликованной в PR #120.",
+      "validation": "Сверены SHA-256 и опубликованная версия main; 129 тестов Scraper.test_first_run пройдены для PR #120."
+    },
+    {
+      "file": "Scraper/test_first_run.py",
+      "reason": "Регрессионное покрытие изменений PR #120, присутствовавших при freeze.",
+      "validation": "129 тестов Scraper.test_first_run пройдены для PR #120."
+    }
+  ],
+  "profession_correction": null,
+  "post_capture_automation_sha256": {},
+  "files": {
+    "Data/avito_runs/20261110-ryazan-prodavec/exports/vacancies.json": {
+      "bytes": 1079979,
+      "sha256": "7419efc26bbd45cbf3a4c102807a64d2c1b8e509e53a6c27cf0d60f6bb6fc5ea"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/exports/vacancies_flat.csv": {
+      "bytes": 764825,
+      "sha256": "3680a06573429fd1884c7a0d705210e9eb9fa67fd45adddc043d79d1203e4278"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/exports/validation.json": {
+      "bytes": 223,
+      "sha256": "67ec58f2bfa64c01f208478161d5575c23b276743e057255afdbceb688b33a6b"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/listing.json": {
+      "bytes": 51375,
+      "sha256": "c44e3d248abb6c41daa93418eaffa7b5c4abb6a1804f74071d6ba7a1c71653c3"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/listing_pages/0001.json": {
+      "bytes": 51375,
+      "sha256": "c44e3d248abb6c41daa93418eaffa7b5c4abb6a1804f74071d6ba7a1c71653c3"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/listing_pages/0002.json": {
+      "bytes": 51707,
+      "sha256": "a13b7639f8aba3d5b01af5969b194a0bbb87e1ab16258b6a8fc06945eeee1df1"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/listing_pages/0003.json": {
+      "bytes": 51749,
+      "sha256": "e331a8f135f2f467f7082a81435ec174fbf0d97b8c61589dcbf7df4e02b9cb22"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/listing_pages/0004.json": {
+      "bytes": 51800,
+      "sha256": "3cfe29f9a52fa37af944e7ec791ffb62b4208a5178c82aee302f90ac542fd3dd"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/listing_pages/0005.json": {
+      "bytes": 52144,
+      "sha256": "59eabbcbe509b70b2f73dd5de8e9e4ff4ea819ce5590ed184c45f36f63e91a27"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/listing_pages/0006.json": {
+      "bytes": 31988,
+      "sha256": "52578daf6834ecda0026efa7127cd37811145ae09c57b0d72b2dd23abb886389"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/queue.json": {
+      "bytes": 121531,
+      "sha256": "94d7026a518f9c7fa096ae81434de091fcace8bb19c03a4494363bb991ed2a46"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/1604918966.json": {
+      "bytes": 10303,
+      "sha256": "1337c8c599a1df6ef4bf01e7a394c46b4676333382e762cc838d2c87c17c7bdb"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/2141679789.json": {
+      "bytes": 5686,
+      "sha256": "78a37bb694f91cf2808d79fb39153774d32c0807fdb78d7baa9c02097ab449ba"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/2141955736.json": {
+      "bytes": 8798,
+      "sha256": "2efd5b1d21a42ce8bc2857d538867349c065b1d9079d529fede8aac247658743"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/2160796834.json": {
+      "bytes": 9182,
+      "sha256": "78326ee8e8c52b3d0f2a74d7b05fd0e55725f3005be556806391bf7c97132c19"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/2403896949.json": {
+      "bytes": 8438,
+      "sha256": "4cdcc0f1e5946da6469e621c8e285197727a90a10d6b53bf248862007251aebf"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/2613168832.json": {
+      "bytes": 7044,
+      "sha256": "25a42905cb7f64403c745b73214d5042642ff1643acf1d98c3769bf8dbb1d604"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/2821761022.json": {
+      "bytes": 5768,
+      "sha256": "63cf4ec84f34ea963c2c968469a1bb85bb0b586ead25a22770bc50bea6961632"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/2915791085.json": {
+      "bytes": 8498,
+      "sha256": "01570ec7673f2b5e21308ee5790c056f841e57c5245c377c027a05dc495f8d05"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/3087300060.json": {
+      "bytes": 9129,
+      "sha256": "de08d545219fefc7a07b68574c7179ae28332146a072e5910026c8ef33d15766"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/3161047938.json": {
+      "bytes": 10060,
+      "sha256": "d1e6dfbb8bda929601797f7d112299da0013d412531dad134318e3657f2db266"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/3434989370.json": {
+      "bytes": 12797,
+      "sha256": "af9c94da64ddf8876b13b729bccb90e5caaef3fccad3d05a3ce49be6fe9b08e7"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/3487453504.json": {
+      "bytes": 7161,
+      "sha256": "28d5e063d242e346d758c737125b2b1e6a334c242f3a84a4788895e8eb2ca89c"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/3749689056.json": {
+      "bytes": 12071,
+      "sha256": "ef35472cb72c0a5c7b3c995c516f70d7d75ff0c4dee15d5217663b4dfa619488"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/3828467604.json": {
+      "bytes": 12657,
+      "sha256": "c36ca3f23c5f64299630452b6474f0f6ffd855ff930d76872f9d51270b74a58c"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/3855063382.json": {
+      "bytes": 11009,
+      "sha256": "8beb5d71cce0d2364bb3f4d236c7bfb611442a8a3973ee9f5e3cf19401904dae"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/3857034641.json": {
+      "bytes": 7351,
+      "sha256": "79febf2cf99f37056f71ae1629b5e1301872ee44efe98258c0fea903e4828a94"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/3939197606.json": {
+      "bytes": 12070,
+      "sha256": "40a3f89afb0d84e25ab6bdfb89f351bfb3f052a60678cec536f4614f8e2451e3"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/3967512838.json": {
+      "bytes": 14434,
+      "sha256": "af846811fee596eae3052e575715f38718437134c04651c6891c2b8e21ce78b5"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/3970893206.json": {
+      "bytes": 6498,
+      "sha256": "724c1abd6b77a663ffccd086f559d299ca55e39897c47d1c31ee86ef55e219f6"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/3993790029.json": {
+      "bytes": 8064,
+      "sha256": "89c1efaa2f753f916424388267d38740819998e0dc59316bd983ee0dbf364f5b"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/4015089076.json": {
+      "bytes": 7186,
+      "sha256": "4e41a86a2519513c60470f4b1a6ebf8f5fa715e818c94f7043f3ac6e95af9ec0"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/4070353925.json": {
+      "bytes": 12044,
+      "sha256": "15f1c3820090325b03c41d6b8bcda3a50e43720eda06f5cd94d907f72ccf03d4"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/4078457506.json": {
+      "bytes": 7176,
+      "sha256": "d7859121922d9ebb43824fda29d79fa8849827f5af7ac2359d862a315ba75fcf"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/4230523334.json": {
+      "bytes": 12335,
+      "sha256": "7033d8adac7b2cc15fe0378aaad1f8a5b6dbeb6b43eb8c50d56ce80fe82eee86"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/4244801888.json": {
+      "bytes": 7134,
+      "sha256": "6198adc21fca587077a3cc779d7f4bf4e91321b9b7e58ad8a2f023ea8623d6b3"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/4315271460.json": {
+      "bytes": 20657,
+      "sha256": "c6a77367b0864ae98d8f1fc57c126fd484b90d80087ea3ba9691c20a2827290b"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/4390385246.json": {
+      "bytes": 12287,
+      "sha256": "c55cba2600d2ee48ea68b99406633c9a71eb83042b087c7823d417b957853fe6"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/4424918819.json": {
+      "bytes": 16931,
+      "sha256": "3f47c6b4508bff2ec775707ac58b80232043b23ad2471ae6785d6400eafb2475"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/4425392960.json": {
+      "bytes": 5600,
+      "sha256": "a96d65060e5e0ba5630cd24650014e978cf168fd7428509c2d6955bd881a22fd"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/4457368412.json": {
+      "bytes": 10501,
+      "sha256": "3dc6ec42e3ab798e9b31f600c2b91b3fbac625d1843f79379b6d7843321326b9"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/4549594750.json": {
+      "bytes": 12730,
+      "sha256": "dab853cbfb4540ce3694c2d51718412d8464328d160c89956097b3d42e837d00"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/4550327779.json": {
+      "bytes": 12747,
+      "sha256": "0794654b50bdbaa5d2adaa99bbe0c56fa4aa046baacccc4569afadf45b578410"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/4558512027.json": {
+      "bytes": 13142,
+      "sha256": "81faada9a29246822bea0d79ba2b7c5722d984cbfd7c6e11f105482a43f1bbc7"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/4599167864.json": {
+      "bytes": 14942,
+      "sha256": "341c3e29f37a87987c6471a1fbd8f535840c6aabbc30e99956ccd04f402f01c0"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/4741554073.json": {
+      "bytes": 14302,
+      "sha256": "60d7003ccb92ef6dffa5633cd8ebee7c34169a3a031fbbc330554d0102ff8c4a"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/7321172144.json": {
+      "bytes": 8019,
+      "sha256": "78c1ea8481699d205c5467878ddee6d48e44338684a4812ee55fded46e59474f"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/7321510365.json": {
+      "bytes": 8151,
+      "sha256": "f796be147f12962941e6602162056b8e1e1978ee2b5e1712362b39772a35cf5b"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/7368208755.json": {
+      "bytes": 17383,
+      "sha256": "c2c01cef5a3e53ef92c4b4baa671a6a5193ec4a3e52bec0ee64711aa75feaf91"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/7391039669.json": {
+      "bytes": 11388,
+      "sha256": "a293b8759a4bd491db957d7af90e18e963741daceb73b2a9184d19d19aec82cd"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/7486074162.json": {
+      "bytes": 14364,
+      "sha256": "dde25df51049e9682563358f9405de4af6778844d36cc884f89e1a7c70a7fd26"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/7508676425.json": {
+      "bytes": 7909,
+      "sha256": "949efd18a58f7f0c3e402bc68d6aef69e61c8f0f537c40af88c5f85237e05654"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/7592770614.json": {
+      "bytes": 18081,
+      "sha256": "50d629a6c2c1697fb7bf2d1477e73558b653dce17111c5e4bcb750b38307b742"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/7695233831.json": {
+      "bytes": 12745,
+      "sha256": "f59bc2a6c0ccd94b2f70f1585a4a826c74501ba9e5bfcf69f049c82921ae3fd2"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/7717453554.json": {
+      "bytes": 12402,
+      "sha256": "1f78c509348c280bd6eacb1c2db754f3f6820caa24b97dbfc4fb9efad0e4ea5a"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/7720511399.json": {
+      "bytes": 16992,
+      "sha256": "10335d3e8784ebc526540dc4c8cd518374e42212a89f304757a932e3988d4079"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/7749190892.json": {
+      "bytes": 12261,
+      "sha256": "c49e2740afbcf343e9cd1df394ddb9cc53cdc0db6096b2cdb07154b17a79e790"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/7749691709.json": {
+      "bytes": 12355,
+      "sha256": "d0f09859d788ab8502fb862984484a80fbbf9ce9b1f615a16358fc9079613ce3"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/7763954999.json": {
+      "bytes": 16035,
+      "sha256": "0489ff4365704be3e6bfdac7800bdc015ad2c4cbbea993620a01c70c8b4e9fe1"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/7774279563.json": {
+      "bytes": 14387,
+      "sha256": "b1859cfc395894bfb0f9589e648da114dbc99ef98ef004416556bdf8d1d5d9dc"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/7797220295.json": {
+      "bytes": 14316,
+      "sha256": "1bcf7ec9b4fffbb3efb095c1354301695ab70b19f335d6fda4505a2dfdd6468b"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/7813271398.json": {
+      "bytes": 12329,
+      "sha256": "b36772c500764ccb04c2b49ef7348452384e7786fd0c7c8c575fc9ccfb3facb0"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/7819963303.json": {
+      "bytes": 7903,
+      "sha256": "9034812315b5b499767ab17dfdb09a13dff42b7ebb53db586b6949c28daee904"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/7843745971.json": {
+      "bytes": 13690,
+      "sha256": "444eff097f812392692cbd0e5fc9bc58804094900f0c1df599ef37f25459e52a"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/7843784130.json": {
+      "bytes": 13710,
+      "sha256": "da1520120777bb3387f5330f51cd5587e526d6e8d7b3555d1100cfebe446d051"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/7843859042.json": {
+      "bytes": 13880,
+      "sha256": "312c3948c879f274d74c07c9ea95e29f3bbe1da28df9b5666d6ad4d24370dcc1"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/7843890500.json": {
+      "bytes": 13281,
+      "sha256": "e4a949679ef2886ebd0573b4fb34a4e6c372613c63bc29d129d4f5f4f2bb834c"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/7844501327.json": {
+      "bytes": 14311,
+      "sha256": "6e24313efdbc81aeee25fec12dd941bdbd831e90ac331fe7908fe843cbc6e1a3"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/7854235121.json": {
+      "bytes": 11608,
+      "sha256": "ed3ed4fe921239794828ad9a2c54635d91bead88747992a0b346eb933d473d53"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/7888562977.json": {
+      "bytes": 14967,
+      "sha256": "d6ddd331eafeca4e476e50322b403f80178639ab712f5bd8e25eb6f4a98a9058"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/7950546231.json": {
+      "bytes": 9551,
+      "sha256": "7cfe8af63d6865bd0334d62c0ad13456754743ef0b960d02a2271a4b96ff573d"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/7961154664.json": {
+      "bytes": 8891,
+      "sha256": "1c1dcda130065950a4728632c5ea0a54d486e2f7d6fac0d9202b4c643b6b5fb3"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/7969488967.json": {
+      "bytes": 15076,
+      "sha256": "d4b99f278a40a290dc9991e8404f5ef9170a89f60ef122d793b3632d3d01efa8"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8008089504.json": {
+      "bytes": 11951,
+      "sha256": "ed43acbb06e8879602a72f44aee375c8c64057fe9db92c79315350f802b9ccad"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8029194707.json": {
+      "bytes": 17103,
+      "sha256": "bfa5544c0b6261b2bd3d9c7f49eeb120159f14c62468b3c5159ab53542c1b2a7"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8030129635.json": {
+      "bytes": 14426,
+      "sha256": "20a9402f850bff7288a03d0146d0faaf036610036297e287846f32d9731f079a"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8040411241.json": {
+      "bytes": 11188,
+      "sha256": "1542c4fec78ddf81128c2ca37156dc9bd8be6abef3864abc0e10ebe2ad2060ec"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8040633016.json": {
+      "bytes": 7556,
+      "sha256": "1dac518acdc135967458954e22914ba652f80b08912530b9902fdb301a2c3009"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8044791515.json": {
+      "bytes": 9689,
+      "sha256": "db1b412495f664f78f07411ce76e44d21cd1b8f0618b7f475832a53188bec668"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8044795339.json": {
+      "bytes": 8995,
+      "sha256": "8f37a8dbf0f6dc0400a0f123dd4fc961505fae40ab47a1f45d6325e63e80dde8"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8078302342.json": {
+      "bytes": 9241,
+      "sha256": "3249ae246ee109f410883efb274d1d0144a619586aafd16ae0af66854d8f2fec"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8127541817.json": {
+      "bytes": 13625,
+      "sha256": "8f99625b48b3979698666777e883d33c20659f0e2711f2c067752911822eea7d"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8142690283.json": {
+      "bytes": 7517,
+      "sha256": "befe3568eb973bdd2347f82bc25cdf256267c701332ea6d159a84ffc719624d1"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8142981689.json": {
+      "bytes": 9068,
+      "sha256": "3228b7a601e53f12be8ac3c872d6fd0e935ad9affcd7308e7635270b9bb57843"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8144742952.json": {
+      "bytes": 15152,
+      "sha256": "a8ef7f58648c56e2761ffe0abf1e90ed1cb86ce80953fa3d8941f1b96d059684"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8152953137.json": {
+      "bytes": 9524,
+      "sha256": "77cc21403f32fbd879c45d11082bf37922efa34f8052bdf0bb8c3e96e75a18c7"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8153123376.json": {
+      "bytes": 9685,
+      "sha256": "5625e4360efb6f181d1d9e935e266d688c7c7ab7230b2d141cd4a4afd5df8579"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8153483061.json": {
+      "bytes": 9122,
+      "sha256": "1c427de642caef43932eeca64031911d3af20e13f45b99e603074ddb4ea2cfdb"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8153843136.json": {
+      "bytes": 9557,
+      "sha256": "ddd79fa24ecf1135dbcc4b8fde0137bfa7fd2a82b3741ea9e51f20be8a4ece34"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8163687610.json": {
+      "bytes": 8214,
+      "sha256": "80d7caf09756ab8acf460447b65bacdbd5d4801f2f7b925518701ee8f11e2a9a"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8165284692.json": {
+      "bytes": 12305,
+      "sha256": "3c880ad9ef8ba2f06f19674a018b980b9447e23b497d52041720b7be9c6f8f07"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8171901062.json": {
+      "bytes": 17926,
+      "sha256": "393a1c6c6890143922ef38091ddda7e1f98c72ea56a82bec366432788d20a147"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8185681393.json": {
+      "bytes": 11592,
+      "sha256": "61e7c8e8bc1f277f2c85a0041bdf752ef8c1af80bba6132aebc1de0652f521a5"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8185682001.json": {
+      "bytes": 9595,
+      "sha256": "f89c1eccf6744182417e7f1e359cffd1bf4be99ac3e4c9f872bedc9e5c5de94e"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8200834351.json": {
+      "bytes": 6287,
+      "sha256": "4fc518784c79bb95042b7f781828881c62f3feb82fdef06d161f34d41d3ca450"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8216701790.json": {
+      "bytes": 15323,
+      "sha256": "bba135468ebdfb2784c3231fc6be820c927e7b229312e335f0d020550dbe8c64"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8221251683.json": {
+      "bytes": 7222,
+      "sha256": "305cd85994bd12db270066a95938eefb92c3a85b03896b9ef05e1daca09837dd"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8222975569.json": {
+      "bytes": 8616,
+      "sha256": "5d45af8ab3e4066c7dc3bcc1e8a6144ed74739f553f6d074d1774bd3442f3eac"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8242795541.json": {
+      "bytes": 13104,
+      "sha256": "4d519af2134db0f8fcb5ebd6d63ba2e4f51331b49a617f5ade1f497912371583"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8254815242.json": {
+      "bytes": 14913,
+      "sha256": "86055844f4061a3b79e26368103dfb5f983eb9ceba846d155241e3db516816d9"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8259102702.json": {
+      "bytes": 11649,
+      "sha256": "1eed654bd3e26d3104a5a3e8f91e22edff231fe653af978e35b0a987cadb1650"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8259767021.json": {
+      "bytes": 9552,
+      "sha256": "c095ea1c30a422004acd502664ef3d3aaeeec9db86fbb498ca8e7e0fa014d34b"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8264285843.json": {
+      "bytes": 12115,
+      "sha256": "fb0b12582076e35c75d80f652e09bd51aeb175d48c4fecc1556e5243a0c47f85"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8273608277.json": {
+      "bytes": 11515,
+      "sha256": "5750212ffb17a6aaede419df92eafeae70b45450d3bbfaa02f6bfff78f4143a1"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8275884995.json": {
+      "bytes": 14053,
+      "sha256": "4d4e3ac144f4d94a0254baf39c4178a3621dc3b6dbeb840f79836de1195e8080"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8276404864.json": {
+      "bytes": 17563,
+      "sha256": "9798f0ba8306e99f8abd16f31952879898ccaf7bfa0bbb02bbb1ce13322b9565"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8280311786.json": {
+      "bytes": 7784,
+      "sha256": "206bc46872461bf00d1cfca88bc7f79c622db57c4599c541730f1821e3d8e4ec"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8282471928.json": {
+      "bytes": 20764,
+      "sha256": "a98f1c45c8f25c7fe9cae80b568f87090f19975340b903d3102aadd9bf1a5bcb"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8283520448.json": {
+      "bytes": 12254,
+      "sha256": "36a9cbf329c12375387395295275d14fe189cb199acc4d10b50448e7a9fffb22"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8283664468.json": {
+      "bytes": 8355,
+      "sha256": "709399b2ccbef90eb41cf31d38539d65907a680de81715e087e8b4a9d0dfbcd7"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8287338211.json": {
+      "bytes": 8699,
+      "sha256": "8ebfc27b4a88685364d0151e1cd5cbe8b5660a73d813c4347de5febf2df0b640"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8288676057.json": {
+      "bytes": 12005,
+      "sha256": "e17177493e3a6105eda7eb7b3f508501e57b144837ce656d457ffe480b21e12c"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8296576783.json": {
+      "bytes": 8109,
+      "sha256": "ca9fb979aba138b8ae9677e86212f5d73a10fab757b09c5cbb6a9c56279a4101"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8298450496.json": {
+      "bytes": 9084,
+      "sha256": "34dbc583c6caf983dfd9f98e959eaf6652038046e89c3156da65b5c1ae8b4556"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8306444606.json": {
+      "bytes": 8869,
+      "sha256": "c9408ca254edc9a5bf7e9e49da02871e66ac3b81d9a01ea11c58047117de7e63"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8310939511.json": {
+      "bytes": 14480,
+      "sha256": "00a2e87a5473984b793570cb5cc7a38a3bc8bda4b2bdc66e5062fc402237156b"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8311135968.json": {
+      "bytes": 14516,
+      "sha256": "f98ed6a4db0aca5a651e8e634581f7d21e5550efbe72dfcea698296556c83d9e"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8311625097.json": {
+      "bytes": 13781,
+      "sha256": "36a1120065a5d183a364d5fe5622d142670b6b88200b14abab45ddc5100da190"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8313255417.json": {
+      "bytes": 11658,
+      "sha256": "705ca173c05a4b2c5653a193e78c47d62223e68c3d5bd907b9695faa1e6f3ffa"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8314832039.json": {
+      "bytes": 14253,
+      "sha256": "7948123df77b7f143bd22ebcdf9813c967c32cca2ac7d44e23b087856eebbe68"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8315486188.json": {
+      "bytes": 17358,
+      "sha256": "a3e4df3663a6e10c60c418a5e631391acb5ef027c738281ef64063ffcb163902"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8317180364.json": {
+      "bytes": 10442,
+      "sha256": "5a8a7f28af6a7318a1a0b63e7102aac0ad1c7d0837eae00977804d6cb2d2e948"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8320956575.json": {
+      "bytes": 10245,
+      "sha256": "4d65cc1688f78b8060a3f8e4f6d6cbe2477f6834bcf24d14c0f69d1bfd6e6eee"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8323780425.json": {
+      "bytes": 8177,
+      "sha256": "bc14171060de12dab7399fb83b5daec20936448d533eea57e19bd96d90a0f25f"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8328088503.json": {
+      "bytes": 11064,
+      "sha256": "0e2145dceebf96585fc676381c8ef9ea0b54a894621b2572cf043280583e6768"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8328129849.json": {
+      "bytes": 12479,
+      "sha256": "6e54e9a29a38c45d7d6c9063b627c038af9776be1fdd92548cd254d9e3ff6398"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8332450450.json": {
+      "bytes": 10972,
+      "sha256": "f259f27c88025b1e1112f0bfe65271ea35be183d6e0ade63a29243fcfaf85d88"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8333535257.json": {
+      "bytes": 13500,
+      "sha256": "5861681513fa4e0c5407cd820e2ccf8098e494fbd9de6db5f58fdf135bd78e31"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8340003857.json": {
+      "bytes": 8650,
+      "sha256": "097ddd046abc6a5d5494f56314120ebc687899047cf14895b99c88130ef96012"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8340060337.json": {
+      "bytes": 13087,
+      "sha256": "7a4aba4d59de8003b22af984e0682195c05b167d25ed7d43ffa9db034bfcbafe"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8347202349.json": {
+      "bytes": 8742,
+      "sha256": "0907cfe8c35190e4d5eba9d033158c205bdfee1ffbf3717e285664abf6ece31d"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8347789791.json": {
+      "bytes": 4510,
+      "sha256": "5015b4b65c013c2510f64e79bf9cdc52417efcd89cba89ffbcef27fac2b9bf1f"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8348261752.json": {
+      "bytes": 6921,
+      "sha256": "23180a006229883d09e145163f76c10a2c1bcf1b1a129d71c189a48d8461a938"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8351006468.json": {
+      "bytes": 10887,
+      "sha256": "023473f3e66ffc950601dc17e93b2148fea6170f0f8cbfa301687e4c9dac264f"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8351393473.json": {
+      "bytes": 10782,
+      "sha256": "571dbb54ff1ed635017dc8370dbc8ed6e79520ad64cee68b2d5beb6884d13b31"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8355291394.json": {
+      "bytes": 12240,
+      "sha256": "044dbd926b77e47a67fbd132359b51ce30a6239eddc321e96a0aa28a47a68d32"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8359866616.json": {
+      "bytes": 14069,
+      "sha256": "9ed64c5a76516020a30ae1e23b4154fb68d5d8d05294862a56538fba96173f10"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8364297735.json": {
+      "bytes": 9860,
+      "sha256": "86368018abe8f6bea282c96868f24cd179e1d3276c1e4d054c542cdf0423e64b"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8364706027.json": {
+      "bytes": 13627,
+      "sha256": "d7e22978e23c12ae4b7bb03e6278d887dd4aa7160ab069140b0e0dd15181ac99"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8367723411.json": {
+      "bytes": 13779,
+      "sha256": "1ae1e716a22f596df187e19ed70367463033c7edcbeb5cb41c34f08f198101d1"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8368113892.json": {
+      "bytes": 15363,
+      "sha256": "8d688722122a77b0c5d86587c9b60d18fd288bbf75c4aca4053d61230b589df6"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8368334225.json": {
+      "bytes": 15349,
+      "sha256": "e8b5ffa2a43d70d56fc62387f5433d0caeb533c9542fbedfbe0ef70086e30a3a"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8369148484.json": {
+      "bytes": 14684,
+      "sha256": "ddce73082aa47679109b102aea12df08aa65da3cf974231ff6d9bc71ae36a550"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8370244320.json": {
+      "bytes": 8591,
+      "sha256": "e4acf80872c89e1f90a970f7a39803001bf15778a754322ffc663fb8cf89726b"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8370711507.json": {
+      "bytes": 12470,
+      "sha256": "baf780723405c04f80d7c4969826538d28bb5035478c2c01bc868daa90f09a0f"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8370767382.json": {
+      "bytes": 18243,
+      "sha256": "c549f75fa4b204a12c2f7a8ee5ae3fab66190a04b0a359fb66d1161bd4ba7ee1"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8372213469.json": {
+      "bytes": 14329,
+      "sha256": "919e605a0fb6870288bb37c6ed93828abfec14c5ae38e9bee356b0fc9a03918d"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8374645021.json": {
+      "bytes": 11283,
+      "sha256": "8c4a06aa697fc40d7bc5bd63f96d7810a041c0728b66f3796a3ca3bb5e258efa"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8376007909.json": {
+      "bytes": 8701,
+      "sha256": "ea077358bc93608217d9060e234bc4a961c38e9a60dbaf01a1d15dbdaf4d1a5f"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8379744454.json": {
+      "bytes": 9783,
+      "sha256": "8a8c2d20b8a115ee56d04d139ca52bc621bda81f328e8422e0ad81d776095d0f"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8379898193.json": {
+      "bytes": 12868,
+      "sha256": "b9bbdaa2cb7a0fb8ca33261065042d0a6547924093e8c8cc3c351ba60db3ebd2"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8381903835.json": {
+      "bytes": 11545,
+      "sha256": "5a1d57b9f6e7d03c5b10ed119ae6046ca1f79f75744319594563272e1d55c546"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8382236202.json": {
+      "bytes": 14444,
+      "sha256": "c12d3b23a0c79b950cb8e5e2b55518290831779002db8c915737896f11f056b0"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8382785262.json": {
+      "bytes": 10757,
+      "sha256": "a7f12f1d401d8520985d40a27e198a3729b2bc8b44b0563bb8c9e62f0e3565a2"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8383786326.json": {
+      "bytes": 15933,
+      "sha256": "b12c139585d606865a14cf0109915559fecc6be45e92356eef129770613aea23"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8389921132.json": {
+      "bytes": 12262,
+      "sha256": "04798024b926f423edee31b689ae71160c707faddbef0aaf4f38b4e6bbf4f975"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8390167860.json": {
+      "bytes": 14397,
+      "sha256": "25c15c106d106cbe46f404b10bcb11eedb5cc1942c7e1feb4e8dcd081206ae47"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8390470706.json": {
+      "bytes": 15348,
+      "sha256": "95526c317905ea812ebc08a29dd9e35c11577585798fa0a7835663c3f932c00a"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8390558824.json": {
+      "bytes": 13307,
+      "sha256": "c3c87d38bf05faf39ee98fae87a384c3e6606aa7bc312a006514f28d4d252b37"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8390969019.json": {
+      "bytes": 10688,
+      "sha256": "9ac824615ca9b24cf35d5bdf355e8635e03077a4d723c5c365833c0ac2173a47"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8391423135.json": {
+      "bytes": 15621,
+      "sha256": "78a8f35370f71a7e82269d378a0d681d9a1f6add2f6f75978ee65a66df65bf57"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8398239999.json": {
+      "bytes": 11347,
+      "sha256": "e5438f89ae7282b42b9ffa4d77451653c61b15d845f1e1ec89ef9d542429c6fc"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8398357872.json": {
+      "bytes": 13191,
+      "sha256": "bd56dd4bb7927647797ebd3760452738d1d87038e8fb60a42b5ca659f769b84f"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8398450482.json": {
+      "bytes": 11582,
+      "sha256": "26a70bd331510be1c6008aea3a4ef304734d1a464d55098558a02f1cfc78c3d1"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8400034096.json": {
+      "bytes": 13816,
+      "sha256": "63ff3310f87400fa217325a9c41eb0a234987dd24c552552e752e9904b86eda5"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8400668136.json": {
+      "bytes": 13061,
+      "sha256": "68164b890ab6f862427409e570da1cf144557498e180e3c14d712d444c060e61"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8400696964.json": {
+      "bytes": 11190,
+      "sha256": "f2add4b37e722feb02e7ad4a2f7e6644fe8efed2fadd928665f0160adaf35023"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8400761949.json": {
+      "bytes": 10082,
+      "sha256": "272dec7b343a1bfd730c58f8e6b98641ef6eefdc52b7a2c01100d056e312df67"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8400862151.json": {
+      "bytes": 7628,
+      "sha256": "420d57f2d889d77089c9a6141bfc7083fcef8a70a2e44dce5698040f0bf2399b"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8401520034.json": {
+      "bytes": 14036,
+      "sha256": "aab05cbacc49300f7db462b676337d1fb43578322da2b2c9cdbd88fbd9102b9a"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8404356714.json": {
+      "bytes": 11833,
+      "sha256": "d59e36d3fa6b1cb4e89f7eccff7ca48d017fcaa04898d6370fe4a1c33e1c8c2b"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8405327946.json": {
+      "bytes": 13026,
+      "sha256": "f024ea66a44abd6301320baea98c943ec264b33a32c46fb96ccec0f6e6a6c4b6"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8405486469.json": {
+      "bytes": 11603,
+      "sha256": "aba684520aa0fdaff81a30551d30d672b7b4431431f37269483ff6ab318b6991"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8406494919.json": {
+      "bytes": 12196,
+      "sha256": "660524a9990263c95cc9b1d272b1ec86be3df37682f4bc46f7cd401133e468f7"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8408275166.json": {
+      "bytes": 13043,
+      "sha256": "0963dd8c052e41dd6c5230495237f31b3e2b4c2784c5bc58515885b9d78b0bfa"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8408364367.json": {
+      "bytes": 9604,
+      "sha256": "fa215b5ba9f70999103eab94f986a157be00514210629b68a0746ee958fe93a7"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8410046767.json": {
+      "bytes": 8442,
+      "sha256": "93d996ef70c5d5f3880fb5ba7c8ee269819c25c3a87f443603041de7e611a0f0"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8410384010.json": {
+      "bytes": 14211,
+      "sha256": "8988eec0088658260d744105dbdd04a13f42f1fa854b63176c68ad84fa263cd6"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8410759795.json": {
+      "bytes": 8802,
+      "sha256": "459be7b172f7cd137d0e8fcc0218727bb89f99c759a60853219dcf040afe75e8"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8413252643.json": {
+      "bytes": 10070,
+      "sha256": "ddb557e5b48be0fb81d05822f74e043554f36eb2b8cd1e82f23051f01a6ed521"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8413406462.json": {
+      "bytes": 6868,
+      "sha256": "22b8780dbc311761c941a549dff850f9f47561f117f20ea8ddc47ce68a16197f"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8413492843.json": {
+      "bytes": 11364,
+      "sha256": "ba2dc8736bea910887ff91bab9d4dc2077ef519871846a3c8d9dcc4d721b911c"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8413507884.json": {
+      "bytes": 13965,
+      "sha256": "96493947f867268dab21fa484aaa19fdd59abd227782cb5681de006c05c3b2a4"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8413714145.json": {
+      "bytes": 13328,
+      "sha256": "6149c3a6390a572fc68ba1da740d93e60abd7ef1f240e953361f2b0767e6f70b"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8414107626.json": {
+      "bytes": 14825,
+      "sha256": "51c4e19fd99dcb8d5e766941c307c1ed0c9afdfc1df90f5b80c20fc7b5fd40fe"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8414604247.json": {
+      "bytes": 12540,
+      "sha256": "789faa03ff2c9ff711d4be001548344cebd492b9e62be588fd557e02731dc25c"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8414747951.json": {
+      "bytes": 8639,
+      "sha256": "7add3d66cdf58a31ad308ce1c0f89c8d87ecade07e8480e1a62dbd30f1d2a15e"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8420231860.json": {
+      "bytes": 11458,
+      "sha256": "45a3b54ab5876cb23f2f66b3963e3fd77854facdfe2abb4acaafb5dcf41f3a47"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8420553065.json": {
+      "bytes": 14233,
+      "sha256": "47f78574422465c07e2d21f46432eacfda6d0504d1c047af3489bdc3eca3fd5c"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8422067870.json": {
+      "bytes": 12530,
+      "sha256": "7cd5926d91bdae3d91dbfa03cd84421655f37312e87ca2d0db66fe4402ab2370"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8422265466.json": {
+      "bytes": 10907,
+      "sha256": "b084b9146d478513dcab6b35c5883856c78327e904200c8e20cb48e012fc4abc"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8422326538.json": {
+      "bytes": 11457,
+      "sha256": "116fb3ca26a344723d25c52683afeb5487e358ef0f3751f86ed4871bbb4c4ce4"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8422817019.json": {
+      "bytes": 10001,
+      "sha256": "bb9f61d60b9f28a62e21fef7a339d6766542e1b2fa0c886cc366853ae9dfe4c6"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8423101210.json": {
+      "bytes": 7660,
+      "sha256": "28d97c0849dfc88826e2fc43abda488d36cb7aff718ef6181121eb26cfe0eecf"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8429920675.json": {
+      "bytes": 12487,
+      "sha256": "6052c100ab1bee4b5d5f6b18f12235e49d2009277dbca5e007fc75bc3acae77b"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8430749265.json": {
+      "bytes": 14097,
+      "sha256": "b7970f5071a4fc79414cd37f69c0bc3b1b82aca6af8e08e36c902c50d63d3c11"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8430864590.json": {
+      "bytes": 13053,
+      "sha256": "8d9ef074c610167259460b41559bfa6d03822b7e4de4a2f652f913889af8f6d2"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8432322589.json": {
+      "bytes": 10123,
+      "sha256": "3fadf4c2e2ef6d514e1b1c183f2c21eb6c8939c8646cf5be0af828c7ef71be22"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8432390184.json": {
+      "bytes": 15286,
+      "sha256": "f53f2eac2370ad184aa9b61b386a7a97df3c8e638c3234592283370828007f6f"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8435382240.json": {
+      "bytes": 12019,
+      "sha256": "defe03edd04bec262a745a47adbb21fc8d06bd0909e2abe6411523ca30c504dd"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8437530968.json": {
+      "bytes": 7863,
+      "sha256": "4078288eca199acf27ed2c7a31ab35438f1252d9e374fe180cf04d50c2423b65"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8437986315.json": {
+      "bytes": 16468,
+      "sha256": "7961cb16672027c468fd67821bf10a9e7a61b7da07e428948920ca35e70202a1"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8438245633.json": {
+      "bytes": 11593,
+      "sha256": "d2b8154c475b7a531229193d41b8bbc4f2858187d5e80ef67a8390148a7558d6"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8440113735.json": {
+      "bytes": 13026,
+      "sha256": "0a0a23c833851f6789d466362d4d44acdf6a81886e018a409184a9012d6530f7"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8440817851.json": {
+      "bytes": 16225,
+      "sha256": "0971a8828312e4883fcfae471ebabe63f86856abfac8f4451e7b662522ed7b28"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8441075827.json": {
+      "bytes": 11186,
+      "sha256": "e32b0cbaf78dc05ac17e09ee35fed424b4723cdda3e3d0cc9b63512fc546588e"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8441801401.json": {
+      "bytes": 8043,
+      "sha256": "7cb7f51239d24506593ecebc4ccb7d440e184687ba8506bf8558ac4ddf986ce8"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8441934941.json": {
+      "bytes": 11802,
+      "sha256": "70ddf19ec39d2416bc24826bab6c998d306f97d3d3e0183cd0f64d220a3624cc"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8444894172.json": {
+      "bytes": 14060,
+      "sha256": "e81eb4cbfae862994aad7ae6c1972445fd8c3ec7decbe2c6f7a92cfa4b427afd"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8444992027.json": {
+      "bytes": 13074,
+      "sha256": "354c797788cca86363067d9477f4cabd2dc5276cefeb5ce21c5640884976f10f"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8445602299.json": {
+      "bytes": 9846,
+      "sha256": "544537fc37f424eed05a0324dfcd38c48912e68ded82d91c911b84bbc4da193c"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8452468169.json": {
+      "bytes": 11662,
+      "sha256": "66e3dde0f902532e599120d852e25479c04579d3d242a79ebca87064334c7ea3"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8452481469.json": {
+      "bytes": 15596,
+      "sha256": "07ac2860e120ea8396d101c3d0ed873129e3ddc3d65c87104b2cf3875a9a7d14"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8452529684.json": {
+      "bytes": 12901,
+      "sha256": "e33b2878dff2d3f8af9360378883ae57d2db247436ba9fa759b2dbf5bc8c8105"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8452718312.json": {
+      "bytes": 9200,
+      "sha256": "fc25d353f6cbd4c75e7ec8a42df76f6d3dafbb1631fb241821efa3a839c85c8b"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8455069056.json": {
+      "bytes": 11028,
+      "sha256": "e6f63223182edbde3a2ab1e460304e12310735f96a581aceffc7814ae6e0d668"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8458595782.json": {
+      "bytes": 16440,
+      "sha256": "14c6600b7fcb7faacc633d234438be12c5f5dc0bc3447245bd4698126c27fe95"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8459537306.json": {
+      "bytes": 11340,
+      "sha256": "2c01bf6e1e3c8f8b723f25f8318a601a14a56e4fa5d5f0c6ae63675e9af55b35"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8463226427.json": {
+      "bytes": 10138,
+      "sha256": "fe94642219f45b8486fac23563df0967e7e049db65f778e05a9781d8f539c2b1"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8467026232.json": {
+      "bytes": 10676,
+      "sha256": "787c7dd5e8cf40410d0b82246e6b6d06b1527d62af45fb1293b2ab5bf1d44625"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8467026576.json": {
+      "bytes": 10723,
+      "sha256": "fb68cee2d67608c9072733e59c454023f424ee49ef563d8cb87e0bf8a7f34e7a"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8470260527.json": {
+      "bytes": 14509,
+      "sha256": "c18af89c4c580d51cdcc01c6d7350bc3f165cb4dba15b7c329e0f34cf75bb2b4"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8471042665.json": {
+      "bytes": 11607,
+      "sha256": "f41b1533af9062c7395c7f9d8ec22d62495945e43fcf36d45e1ebad01dc2b652"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8473556322.json": {
+      "bytes": 16515,
+      "sha256": "3e4bf06324a2e09b559feee480c438716ad3ade5836e6db39b3235875f92ccb5"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8482254147.json": {
+      "bytes": 13061,
+      "sha256": "404736d463a825eb60fedfd1dd88d67294eadf9d1f11f5d6e693d76befb277b4"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8483750538.json": {
+      "bytes": 14823,
+      "sha256": "6906e6be24eeec30b9e6233bda8b9a8018539dea162a92a8b1884fb1044a3b36"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8484842626.json": {
+      "bytes": 11944,
+      "sha256": "f05a766d3b5504b97dd47b1375f26bccb798761f063f1f9174bfb5b63965c337"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8488915357.json": {
+      "bytes": 18199,
+      "sha256": "3a8985c2f3bfa9b622f0eec1a6ba04d030c1a1ae997dfd0bef2ef4a458f12daa"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8489361052.json": {
+      "bytes": 11637,
+      "sha256": "db080defc685f267fc67aaf3a2ba4aef47d6fe443506aed2de74b859e61c946a"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8490064894.json": {
+      "bytes": 13031,
+      "sha256": "8e554d580de7b36b9635c48b6dff3070d4384344dbdb5cacaf9c18bbb0ff56bc"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8490836457.json": {
+      "bytes": 8223,
+      "sha256": "0e20ac5f1e40bffc8e67f82e0aa8fbd113656b9c5b48e4e9c3bba94d00a57037"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8490845757.json": {
+      "bytes": 11548,
+      "sha256": "8e086d566373ad7494a41a4c8926ef16cbccd149d22d7a1a587d3e6475b7e3d6"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8491507600.json": {
+      "bytes": 8248,
+      "sha256": "029c70030a41854829db84a4433011233bd18bf5f927a75c7015bc6c5bc121e2"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8491623287.json": {
+      "bytes": 9508,
+      "sha256": "42cd2ce1ad0bf8eb656cd02d602f1016bc9df129e6402b4f1c109820cc3e8cde"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8491696908.json": {
+      "bytes": 13046,
+      "sha256": "60f0f307ecb90a74cb278466cab6fe10ef70d804a8086a3e5e5625183dde8dae"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8498929194.json": {
+      "bytes": 15717,
+      "sha256": "1ed9fec249a1b666058d72ee0e44c266f2ffb8c8f4315bee56a8977f774e16c9"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8499080552.json": {
+      "bytes": 14622,
+      "sha256": "c8e8a78aaedc73728df1af72b2e58f0bbb130e194524d10d90f1793deb9f7965"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8499283733.json": {
+      "bytes": 13683,
+      "sha256": "b9fca1f0e38acbfd3ec9c08c91447cfe1df85373ede2decce74d437e8d798bef"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8499500853.json": {
+      "bytes": 9889,
+      "sha256": "a086341ac03b5ef224f1d4d81bb2da921f99f17559f0e8b6c99bcf4eade75607"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8512688011.json": {
+      "bytes": 13063,
+      "sha256": "52991c84463cd9c02c59ce1b957990710e61442bc275ce9de859aebc41bf01c5"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8513139918.json": {
+      "bytes": 12478,
+      "sha256": "e7f56911e43e426317acda2cbfc5ee7eeb2ac70968163b09143310f806d9b387"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8513477466.json": {
+      "bytes": 8812,
+      "sha256": "0b8c8690b1f963bbe1dd99a568feec01e2aa09de068721954c03449f85fbb9bf"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8513983717.json": {
+      "bytes": 11562,
+      "sha256": "cb2eb2d35992c591d9f3e2dabd3cec2627fa8db13691752101de4964bbcfb939"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8514307735.json": {
+      "bytes": 11547,
+      "sha256": "18143ed2da7296219dbad46a96bcb428e9527db16363ced8274d82f8891e1f08"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8514326972.json": {
+      "bytes": 15743,
+      "sha256": "1a9a6d3c9fb24cfccdb6487662bc42c48f15c4d05a5126984ec6f6a61174a9e3"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8514621205.json": {
+      "bytes": 14989,
+      "sha256": "89f2c5f90117ac0809a48f9ac249bacfcd5e5c727afd504bc6b639cca8dd1edd"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8515207236.json": {
+      "bytes": 13313,
+      "sha256": "72bc91960df2b9139db0924710654aa61d03fc7dce3854679c59147763f13ca5"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8517115269.json": {
+      "bytes": 12464,
+      "sha256": "ba8aea3c20aafab5a41beb1739d27391569242e487ad9ae9c55c441b3dd7e725"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8517483491.json": {
+      "bytes": 10787,
+      "sha256": "78cbc6e3f6df862ba87325dc2cfcf2b4345f06b499990ad4a028d8a6708f7e95"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8517700743.json": {
+      "bytes": 11448,
+      "sha256": "9a07a95816bd1db7070f4e4c29e1e3985502f3ef1d66adc7c670f89bde441994"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8520988187.json": {
+      "bytes": 11447,
+      "sha256": "411d2ddb65ac2f75e380911cc0af38cabdaf178f6069cd19f4de544d6c0aa939"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8521165183.json": {
+      "bytes": 13758,
+      "sha256": "e864e8ee4d4fac06b82e94cdeac19a70a3dc4fd470b63a2004a73bdbbeabbfb7"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8521740678.json": {
+      "bytes": 9391,
+      "sha256": "96a1937aa7bccc0b0e7a65c3c5d7e92317c91a600c6ea7c7fd4d9418013a8aae"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8542931225.json": {
+      "bytes": 5975,
+      "sha256": "cde35a72a525c23b6247abfdd3eb77e8cf9dd2403bf5ebb6adb416c3dd730ee7"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8543628008.json": {
+      "bytes": 8580,
+      "sha256": "dac91389dc514b5e9e98ac5379ac7982727ce478f670824ff1d467c2b528e189"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8544227256.json": {
+      "bytes": 11655,
+      "sha256": "67616079ff2c03c833fe2a8d73bcf0eec196b6df4b42990c2a3ba4d5f741b1a4"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8545809861.json": {
+      "bytes": 9352,
+      "sha256": "ce59236f3c8a80bfa0c692c3f73ed62ed1f3f4e9ab87c902a0ca3b227f05f116"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8552952822.json": {
+      "bytes": 14752,
+      "sha256": "422ad68c3c6cbd7ccb1e37b0932db808ef49a532c538498f456726ab914af3d5"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8553482403.json": {
+      "bytes": 16453,
+      "sha256": "27dcccca728bc3020d58f99bd0f8e45c3bd4c58b9be43f58f1ecbb9a7b85f3ad"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8557232844.json": {
+      "bytes": 11298,
+      "sha256": "26ef8ec743258f784a09c53b94d2f09f8744fcfac8f29d47fba176509ef0b539"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8557233704.json": {
+      "bytes": 11433,
+      "sha256": "98792aaca63e8278ad510d4615b686b290d273ab789e96f7e2496a4d104ce9e6"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8557752634.json": {
+      "bytes": 11575,
+      "sha256": "977aaf5ca73423749cddd49444708dd08ed8d8da86d38db908c377ec384b879b"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8575227369.json": {
+      "bytes": 12461,
+      "sha256": "c9ef8ab68b93045fd57f8affc28320a4cdc1d49976bb4c7f4fa64ee3a6366f9a"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8576383804.json": {
+      "bytes": 15700,
+      "sha256": "a368802208da21deadb7946db407b0cc467114bb114c5775b7b0c117a5ddef77"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8577048895.json": {
+      "bytes": 15687,
+      "sha256": "97542cac60f58bcb9f7b7e59316d96500d1799ee42de34291cd48f339a5233ca"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8577351220.json": {
+      "bytes": 8833,
+      "sha256": "ae33b723a3a0329d24aded431fea416eae28ee69410bbe049ea9d24d4c7a92b0"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8577422208.json": {
+      "bytes": 15036,
+      "sha256": "33c233043857db9699cc2cb95d57ac968449961eaf7a1d44c87f1cf072e67d4c"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/8588854482.json": {
+      "bytes": 13036,
+      "sha256": "e698b01d5eba3398c79a8e7fe8a7bed62bfcef75df0b341e027cf02520de5e63"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/raw/865270678.json": {
+      "bytes": 9532,
+      "sha256": "ef6a46f91312b9f596ebd95771df1857d0adc4818ac7b3ee1e93f74a6f4a43fb"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/1604918966.json": {
+      "bytes": 826,
+      "sha256": "4e3cda4c383881bd59d9b0bc6b1b8cdf649113965e5fcc23a757456e33d71769"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/2141679789.json": {
+      "bytes": 818,
+      "sha256": "6a3fce4971e06e31cf43b1be42c031432421fba8b139cc9d234fc9f1d2cf0ca4"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/2141955736.json": {
+      "bytes": 816,
+      "sha256": "bc266941d1c7541bba34da89080a452fde644721fdf74b4afee1db9ab39b4392"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/2160796834.json": {
+      "bytes": 733,
+      "sha256": "71e5da154dfade0b250ff2e7f4eb907d0ae13cc571a3f60cd69e657ff5b837c8"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/2403896949.json": {
+      "bytes": 818,
+      "sha256": "e5e6ad4b68fba8742cb6fc59203d51d43dcb19b1b0ce8037d8143b9cf2664ff9"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/2613168832.json": {
+      "bytes": 735,
+      "sha256": "9c7e2b00cf8c6a1aac1ca34ecc43d2db803db666dbb8a63215575c27c0223cec"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/2821761022.json": {
+      "bytes": 733,
+      "sha256": "5373f16c52f92046416e6687a4d5900c127b39a50a5d06fca636e51a835e82f7"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/2915791085.json": {
+      "bytes": 929,
+      "sha256": "117ed46107d6d04a96b4a8933494e7e6b6d00a1b72634e6a704de210c6b3cfba"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/3087300060.json": {
+      "bytes": 771,
+      "sha256": "e95bdce317acbece55ef46b40af071cdb310c1a309648f48028b833a419b69fe"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/3161047938.json": {
+      "bytes": 821,
+      "sha256": "9dea3676eaaf8e5a595f7cd6e77fb93a20949526986e9844864b62489d633736"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/3434989370.json": {
+      "bytes": 745,
+      "sha256": "2a08d31cec4a429025a61706bb547bd758ade22abbb28042c2bc928a050876ec"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/3487453504.json": {
+      "bytes": 737,
+      "sha256": "a585a8fc1e688aca7d96ee0f0d09a475cf23b15b2279038780c4f4f0e5522b09"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/3749689056.json": {
+      "bytes": 743,
+      "sha256": "f1eb50c16201c4fd0af1595640bf0ce7032376f1de702ffbd1ce81e90eb5d022"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/3828467604.json": {
+      "bytes": 822,
+      "sha256": "df006509f57f7f510a9afd810fb3fd97ad56d1d34064c2ad2cc119a72d86b78f"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/3855063382.json": {
+      "bytes": 737,
+      "sha256": "9be4e7bd0583761c1f4da4861aa043c36d000ec77be785e0f556e8f631ad7ba6"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/3857034641.json": {
+      "bytes": 748,
+      "sha256": "5dc76dc66a02816ba1852e071aef567ea4d1053ff7c524bfefb7dd3d63afae3e"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/3939197606.json": {
+      "bytes": 818,
+      "sha256": "f54fb834872812fbed1d14aac129b055c0320535eb11d31086c372e92272710f"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/3967512838.json": {
+      "bytes": 897,
+      "sha256": "6bcc7fb0a9d59d2658548c75c50cfe23cbf592fe744414cdcfd95041e63d2630"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/3970893206.json": {
+      "bytes": 748,
+      "sha256": "3739413e092fea27dbe03c043a21842ad81f3106faacb83a7cd3db9a8a562fb6"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/3993790029.json": {
+      "bytes": 760,
+      "sha256": "e055151df913a4b927921613c7a8c4602153f268bb2f297c2839a28f3d67e7ea"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/4015089076.json": {
+      "bytes": 729,
+      "sha256": "4639b32493e94dffc1c04f1295472075d90db8f42a3bad9d91d7fe7fd81e26e8"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/4070353925.json": {
+      "bytes": 707,
+      "sha256": "6049723caaa558177678882258559d4dbbd22cea2dcf4f4d3e9290eb564f602f"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/4078457506.json": {
+      "bytes": 749,
+      "sha256": "8e23e04129897ecb79f97eaeb3c1c74c05f8a79830e214c668e4fd53879fb136"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/4230523334.json": {
+      "bytes": 770,
+      "sha256": "6af8f6c82554e91e401e99a05cc633d59ee765753ebe3415013046d3319df38e"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/4244801888.json": {
+      "bytes": 743,
+      "sha256": "591732f55cb7ed129573720297ef3cc4d8b4c21c14d6aad624d5697555a14ac4"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/4315271460.json": {
+      "bytes": 737,
+      "sha256": "e478cca38bb911b2c4506054c952e8a815382d998f656a0c23ff33d2e9a7b6e7"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/4390385246.json": {
+      "bytes": 741,
+      "sha256": "6ddd46b4257552fd69ab10e00e6074f48631963ee8177e4e002507cb9a42b577"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/4424918819.json": {
+      "bytes": 756,
+      "sha256": "94e0a78e87728382f5d3d8a45a7b2903b5ed9c02a5020f91f90213d56d93150f"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/4425392960.json": {
+      "bytes": 772,
+      "sha256": "24b39814222e8cd1bc2945ba440e445c1588724d495c57ebb949e4d8f4cfee49"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/4457368412.json": {
+      "bytes": 748,
+      "sha256": "704370b7c52df28c4101e0675c54193d644ac8f05d1d7f3e491f6e05502af4fb"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/4549594750.json": {
+      "bytes": 741,
+      "sha256": "b71148045ab64f72c3e550b8307eb0ae66e933fe99c00ae6d35e75b7f94f7b43"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/4550327779.json": {
+      "bytes": 826,
+      "sha256": "03a87e697d0ac4928b45fbd7e7e6e0f632665fb67170becd0c3bef4ae37fca06"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/4558512027.json": {
+      "bytes": 757,
+      "sha256": "38660852ab2d95e959fb5681f88d366431c6e5019b4b0ad5d50a4c4b467da2ba"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/4599167864.json": {
+      "bytes": 743,
+      "sha256": "5eed78351859c5b44861cf6f2f8d43e2aee036e877253d8f3be22ee2efd21dfe"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/4741554073.json": {
+      "bytes": 743,
+      "sha256": "3f63c2cf468247843a29502eb775503efaa507947e52659e07ef672db0b24b01"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/7321172144.json": {
+      "bytes": 759,
+      "sha256": "a2cc3415ffc119ff8a50cef82872eedcc9acdc8427c3ff7ffde166498e059aef"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/7321510365.json": {
+      "bytes": 818,
+      "sha256": "99b770a0570ce088932ccb0e5f483368a9bc9a332ff3e6cc1f689e2c6fef9151"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/7368208755.json": {
+      "bytes": 748,
+      "sha256": "8296bd4801a398e0b3387594ed592dfa031b105536fb9e354d1e7c4f6b758b17"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/7391039669.json": {
+      "bytes": 826,
+      "sha256": "f827164d4a8ad0db47257d8eea4af0733c8beed6fff039e040c13a72b841d7ed"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/7486074162.json": {
+      "bytes": 738,
+      "sha256": "87bd2b05b1f8524c11612efdc0100b7a94267497d018b1ba62f7898adf9c2d12"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/7508676425.json": {
+      "bytes": 762,
+      "sha256": "abc84ff2b30039e2de2cd5853e9ee8a391ef7c789baf7dc40ce409a6dbe4305a"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/7592770614.json": {
+      "bytes": 769,
+      "sha256": "045e4bc0ed611248ba6dc0138d3b4d718b95f9dfeb1e022418cac83688a3f2b0"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/7695233831.json": {
+      "bytes": 818,
+      "sha256": "6201b6c410a21e1f5b606e1dcfacac2f9fa981d6894a33e0d128f9b500354403"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/7717453554.json": {
+      "bytes": 915,
+      "sha256": "730d07d4e0cc57b37495bb558e4204f1eebba5fce1874064cce702d854583f91"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/7720511399.json": {
+      "bytes": 826,
+      "sha256": "2dcb043357be1b3e6d09b3ad1337552f59e9a450778db5114e666774f4805c3d"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/7749190892.json": {
+      "bytes": 734,
+      "sha256": "ed2739a82ec057fda4f25a97dc89388042678694c611d4f2c1595c783c0b3f93"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/7749691709.json": {
+      "bytes": 808,
+      "sha256": "afda16383739ccc9c02827c00b740c20563e05588fe3de0b549916c79dd478c7"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/7763954999.json": {
+      "bytes": 784,
+      "sha256": "60eb29c2eb5859bd6ff0b6db7777417357c810bacf1936aaa3baada13edc9808"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/7774279563.json": {
+      "bytes": 753,
+      "sha256": "ec77083bda5624c13acd63f8221843a19e84dbe447285cdeac6ec4500b099f65"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/7797220295.json": {
+      "bytes": 801,
+      "sha256": "76366e8882e6ba55bb6e942bcb31a0a931eea9ed078bcac409df47d4029841ce"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/7813271398.json": {
+      "bytes": 842,
+      "sha256": "4e072e5196aed20999ac9e00c45297930136cd78a87c2932ef86dedd96125f5d"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/7819963303.json": {
+      "bytes": 748,
+      "sha256": "3fc72f9a557e6a17576a36f2dd8bd21b6fc011c1d26b9d7ab9f27ed97b8ac37f"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/7843745971.json": {
+      "bytes": 913,
+      "sha256": "51c72d780791c75d2e8a418d8cb387106eb8f713bdc9798af6d4266b6813d166"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/7843784130.json": {
+      "bytes": 732,
+      "sha256": "5a889419d5007b2df7ec447d8ec5e7c4515408f0120acbe10e6ee986431810db"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/7843859042.json": {
+      "bytes": 707,
+      "sha256": "cb549522cf6138c03d3b9beaf2c042984627a0beb48414a6c7b8d1e74bf8ad28"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/7843890500.json": {
+      "bytes": 707,
+      "sha256": "3503b959e0c32284ce61e5c8d83d9fde5de7bc325dacbbf1dc3b47d6d31d785b"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/7844501327.json": {
+      "bytes": 780,
+      "sha256": "79540730de6de018864828f54801c0ba8b867938531210b59af4e626b63bec72"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/7854235121.json": {
+      "bytes": 749,
+      "sha256": "8630b0e719bc9743c916066d01ab884098fe55fd881423d1b8ec0707fcc4fa0b"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/7888562977.json": {
+      "bytes": 737,
+      "sha256": "0b8e6a12a647f0827b25d065e67b3ac8bf9dc84709e7cdac1d4334061105e6bd"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/7950546231.json": {
+      "bytes": 784,
+      "sha256": "9e6aedd8ae10a35f010136cc243f1106cc709cb56030bdf03a9693b3e39c25e6"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/7961154664.json": {
+      "bytes": 811,
+      "sha256": "152243c4c95fec03789749dd6d332f4b3f16e893ccea5be38c6c5963f5d9679e"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/7969488967.json": {
+      "bytes": 818,
+      "sha256": "0da92ad3bf45331dcc7002e9ce4ef3577a344e168131ed8aa1858cc6572a36f4"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8008089504.json": {
+      "bytes": 745,
+      "sha256": "23b0bba3258ed52e74825a674dca002d0c98e04ba287e73fe2704f07465c367e"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8029194707.json": {
+      "bytes": 826,
+      "sha256": "e6ec5b441ff26f7655fd15c21cb65e7365b5709947866f94bc9ace6c9c21bf1e"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8030129635.json": {
+      "bytes": 740,
+      "sha256": "c062debeca195e273aae51ea04e4d33053dd1e19e9a7ab4adb22abccc7eaf2b5"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8040411241.json": {
+      "bytes": 826,
+      "sha256": "58aa7585c1d5bbc34f55c88daf089dad3afa1edd01beb3725c4bc374aafbe4f6"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8040633016.json": {
+      "bytes": 748,
+      "sha256": "4dcd666ac439faa4ebfeaaf2f8766635797f73f3f4e7f39d711dd98000d89210"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8044791515.json": {
+      "bytes": 761,
+      "sha256": "53e9d4f67c637573ee3ce4b1a8c2e1ec3ddacfa3421ab8727205b0db29a25dab"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8044795339.json": {
+      "bytes": 936,
+      "sha256": "c34ed616dd627b2a7cb22c4b694d82de0b704014204d37fbd3c4ce9941d224fc"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8078302342.json": {
+      "bytes": 743,
+      "sha256": "f76e19d4c22f8b382e981020b8f70ee528197a37eb6638b99e41c257d16ae8a6"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8127541817.json": {
+      "bytes": 818,
+      "sha256": "f0e2f95b61430c37b49333db8a704eff3278e9b842a2e16ecbfd8a4e3239439e"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8142690283.json": {
+      "bytes": 743,
+      "sha256": "b02192b95279bccbfa683c1b02cbe252b64faf301e5c549de1adcf7c3b724e2e"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8142981689.json": {
+      "bytes": 757,
+      "sha256": "d4e03895a34eefd913bd203562887e31a1913294f4ab86ca14ef622f18b6f1ba"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8144742952.json": {
+      "bytes": 836,
+      "sha256": "616c94a91f8a94543c21ff23e68cf1a8f65308ee5b0131319af9ec62e64add56"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8152953137.json": {
+      "bytes": 816,
+      "sha256": "8c53264258504c4e83927050e38871e3087900bccbd4800032bae05aa2d03ef5"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8153123376.json": {
+      "bytes": 757,
+      "sha256": "77f363c35bb727049c530565c37ad8a6a01391ac241a82eea50ea2777c067af0"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8153483061.json": {
+      "bytes": 737,
+      "sha256": "5c50308c4365873f37722b564c8809344b5aa444effb9b2476bdde4981e53fef"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8153843136.json": {
+      "bytes": 748,
+      "sha256": "bd26fce877352ad0c56f21a4abd82ba658a287a392fecc0e33d9b8a471939d90"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8163687610.json": {
+      "bytes": 747,
+      "sha256": "0d60d23843ce0704604cbc7178e4a6d42ddac510c5c67cbffe7f831ba3578047"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8165284692.json": {
+      "bytes": 746,
+      "sha256": "b0fb88b65721453af2ca0dd12118e6d92ebc6fe2e4c9371128e8dd1aad9b4843"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8171901062.json": {
+      "bytes": 766,
+      "sha256": "4f8ce7a7c9a693c6da85da73a0a1330cd956003faf0ad137dda3678e5a6c1ea6"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8185681393.json": {
+      "bytes": 857,
+      "sha256": "b25609828466eab3c63ed0d910b2c353216635b913841ad3df6720f606d858f3"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8185682001.json": {
+      "bytes": 748,
+      "sha256": "27732dbf845d54f56830cc667bda338c431457097d5f8a6b7fd1b967129c3751"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8200834351.json": {
+      "bytes": 748,
+      "sha256": "bb527d7fb3c2646b75243212524c217557e1fbc92f80465e80bd2b89ac53abea"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8216701790.json": {
+      "bytes": 753,
+      "sha256": "332e9a2a631b07d613ad22d73018b35e504a2baab00b5753d5da51c1d5cde49a"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8221251683.json": {
+      "bytes": 741,
+      "sha256": "7138f1f5da030948e387585ecdf6fa514cd3d5e220fa99babce388761c9f3b08"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8222975569.json": {
+      "bytes": 749,
+      "sha256": "d183cb82fc221b3ecb550130c409fb56ef78256f96168f1c41332c1f1fbe020e"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8242795541.json": {
+      "bytes": 707,
+      "sha256": "fcbc0fb0a02efb88bceaaf64b478fab4dba1e3a1a3babc1b00d78e8d7af1a4bf"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8254815242.json": {
+      "bytes": 816,
+      "sha256": "1296f070d864c1223074030d1f5c55d2e5e14c43eeddb1769874380577af108a"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8259102702.json": {
+      "bytes": 750,
+      "sha256": "3cab7fdc0f8e13d749121ba802edca1de609d17f0e6cb823373a95fd217e7d47"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8259767021.json": {
+      "bytes": 784,
+      "sha256": "c43f9defee6adfd91f09334ddd0b6bcb3b51ed2b931cf424a99e717a20d19236"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8264285843.json": {
+      "bytes": 733,
+      "sha256": "818c1624bdd8ee6c6c732b3fa0bcd3a829e96e6aa71b28b23f83024b101aae9d"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8273608277.json": {
+      "bytes": 753,
+      "sha256": "8b7bf6faa8ea1360b0c96591400f3e0eb3debbadf30781e7d5e2767eec9e64ce"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8275884995.json": {
+      "bytes": 828,
+      "sha256": "d33bf55e2eb64e713ea485924c914584ed9b4b6be0786ea13ae2b42c7205fbab"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8276404864.json": {
+      "bytes": 826,
+      "sha256": "f4e2cbdef1974de76147b1364ab1f9fe6310f1cb61693120842c2c06d9d490c5"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8280311786.json": {
+      "bytes": 743,
+      "sha256": "789c00db3ba2a7e18f8684cb9ffe3c027aecdd36a65ce48c4134da56a879b472"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8282471928.json": {
+      "bytes": 775,
+      "sha256": "9e207a0d48f519efd73923377ca5a4514ee20e86c400e671a5cf369fe337f836"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8283520448.json": {
+      "bytes": 777,
+      "sha256": "9bd7c155750e6983de15191002bf6b918e5a51256a1a3db512867005b489a533"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8283664468.json": {
+      "bytes": 739,
+      "sha256": "83fd1d8ac9875bde71568d4b4ec352a2b23b3ed0450cacaa2e6925576e704de2"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8287338211.json": {
+      "bytes": 761,
+      "sha256": "5e80a289334daad98623e7060f864cb758098a8805a70a38a84a862052d99076"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8288676057.json": {
+      "bytes": 826,
+      "sha256": "f9805b56e3613db4bf64fcf33645fa08d8f6ffe35d29024a5d37d12b23567518"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8296576783.json": {
+      "bytes": 733,
+      "sha256": "8ba33b5f824ef26be681cb3fdadadc40f146dff6e16043a6a96be572a4a3fcbb"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8298450496.json": {
+      "bytes": 731,
+      "sha256": "0dc2bde128f0f0f68166828b86d8ea8420929088d1e4a815a422d60808ad939b"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8306444606.json": {
+      "bytes": 746,
+      "sha256": "237cafb5200cff5934f5957eae0fecec6fd76060698e2011b7da15822f4a849d"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8310939511.json": {
+      "bytes": 794,
+      "sha256": "17cf9d7c24d8be360790b95ffc9397cce0196ebdba071c5736e205fd9490a184"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8311135968.json": {
+      "bytes": 828,
+      "sha256": "2987f9cbe978980eba4f8d637cfb850d56bf1d0f968eaa8098f8503fbaaf0ef2"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8311625097.json": {
+      "bytes": 729,
+      "sha256": "069ec219b03ce0d274de0340884a876b4b75ad4c626740f5ed1f4c1e02318745"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8313255417.json": {
+      "bytes": 743,
+      "sha256": "b1e98730d63814a22b7a0951a731b10039d887ad5702172e1fdfa03389827996"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8314832039.json": {
+      "bytes": 744,
+      "sha256": "f1c95312f83880a7997d6c1432f97fce2cddf5fc108f2ad8824fe2ba8a0cf3af"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8315486188.json": {
+      "bytes": 818,
+      "sha256": "983479dcff807bb2fbb1d79ac413da471d66adfea4aee8e7e3e065e322d48632"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8317180364.json": {
+      "bytes": 744,
+      "sha256": "3f0d68e2ca27975fc430020aebdbc19670d729ebdaf0ae0647a6283ed0c5ceff"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8320956575.json": {
+      "bytes": 745,
+      "sha256": "fa6f826dbd21de4195838b752824bf1501c3070c0a34944b162a17ea4ff03c8e"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8323780425.json": {
+      "bytes": 818,
+      "sha256": "7e9b950ba7469caa6a99787482d23a9aabc5f9f25d9e475afdc6ad37a77455cc"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8328088503.json": {
+      "bytes": 828,
+      "sha256": "3889a45505f4a744666555b2d02646bb360f8d0a006e612045b6e198797e08c4"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8328129849.json": {
+      "bytes": 737,
+      "sha256": "b3db33eba21e4ca256342a266ec395f72cb9618ee967d1489cc35426ed5fb4fd"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8332450450.json": {
+      "bytes": 734,
+      "sha256": "d4e44eb2114b3c539c26efc203c808951919d4372541de633bc822bc39922ae6"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8333535257.json": {
+      "bytes": 744,
+      "sha256": "98b0517bbaaf91a9efb500bc146495df53680307c526f272cb734b70da7708fa"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8340003857.json": {
+      "bytes": 748,
+      "sha256": "f487b30389dc234a62a4a67bfdc0adfda26c8ae8517e3d4a860e5ed64fe09560"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8340060337.json": {
+      "bytes": 760,
+      "sha256": "2f34df4f8efd1d0bc950bdac07e79ca344276b435a6c06ad7ad50e8a85b905aa"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8347202349.json": {
+      "bytes": 798,
+      "sha256": "704e486ca6873c5a3b2e6a34c8cf77266d19f31e90a76873d378593bc3637477"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8347789791.json": {
+      "bytes": 787,
+      "sha256": "b6ac590a8fd8b90324dca38727ef18a5f7e6c4ae16cc4ab2e61790f74a635496"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8348261752.json": {
+      "bytes": 827,
+      "sha256": "1740245d860956261b81d5bf52ed85a6d7f9e9416c7b7b4de20816511e8c10ff"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8351006468.json": {
+      "bytes": 822,
+      "sha256": "39111d132576a4f85061fd748428f07c66320e159b122789ea59b27a15217893"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8351393473.json": {
+      "bytes": 822,
+      "sha256": "43109add5f176617de97463d34ec3a5696af2550b710c1dc557e17d30fa5a7f8"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8355291394.json": {
+      "bytes": 767,
+      "sha256": "efac7412b7b271e25b1326a5ec579aab801862303599af020f18a3b227697834"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8359866616.json": {
+      "bytes": 786,
+      "sha256": "5eb0ef3a3a203a4fd7f057f70f35977c0720824b5af8d4a26df29f50e0b92f58"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8364297735.json": {
+      "bytes": 812,
+      "sha256": "625f9c99df593e7bb0889345372b5dab9b54151252a89ec18aa46a8f09291642"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8364706027.json": {
+      "bytes": 744,
+      "sha256": "b3bd2d74f4a03a8df3994d0e64bb2d50c350d198bcbdad080bfedbb4bc79a605"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8367723411.json": {
+      "bytes": 781,
+      "sha256": "76012f67ba40edb37bd52bf257485c5725dc2faa8b2832a4c983c49f83b6bf50"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8368113892.json": {
+      "bytes": 750,
+      "sha256": "db81437c6869afc782304d37278c580f250e0a6fa8bf7f9b0bd0464515c2c05d"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8368334225.json": {
+      "bytes": 752,
+      "sha256": "ab36a12a1880e57c1d33a3f959b92d78ad5547080a255fab5f9b8b1d274dbed5"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8369148484.json": {
+      "bytes": 753,
+      "sha256": "5111e6c7b6cba9213b384c708a88f4d37595c7336ec5da2d187eeb5837a7abc9"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8370244320.json": {
+      "bytes": 770,
+      "sha256": "b226b457382dbebecce17737c9a6e0c67a343c5f4ade61efec3cb28dcd4866cd"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8370711507.json": {
+      "bytes": 736,
+      "sha256": "ce24d5624e8e3067e97155839adc95c82be8a58b61fe5f96624c23096abfd5ce"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8370767382.json": {
+      "bytes": 877,
+      "sha256": "9e7c404d6b7adc596e831c085b19ee9fe08a39c2ad8fe3cb5f8f28dfb47e5548"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8372213469.json": {
+      "bytes": 757,
+      "sha256": "6f7af633afab68f4a8ffc8b9dce9f3ca4639507b69c0b3cdabfb78b290bc3db8"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8374645021.json": {
+      "bytes": 822,
+      "sha256": "5d9202c93d99464e409c464d4673e8f1684ee3d1dd013f192c9b20609b7d668c"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8376007909.json": {
+      "bytes": 764,
+      "sha256": "049e3b8f7face31c4c3aff8d9c948d6fbbc29d8210dee6da189cc62f12e7ba9a"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8379744454.json": {
+      "bytes": 826,
+      "sha256": "3a300ae1f13e90149dca3c2fa6b574c8a36d7403147561a470f35e81c3f998d1"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8379898193.json": {
+      "bytes": 808,
+      "sha256": "e1aed856b1257bd660314e906311af9e7e833283c6f5d89c0ed00b40ad4c90c3"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8381903835.json": {
+      "bytes": 731,
+      "sha256": "d340ff9ff444340b6eaf4a078c6c1d6fa7661fd4c7c724b78900a3a5990021e8"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8382236202.json": {
+      "bytes": 808,
+      "sha256": "aefcbe56f63d90ccd032aa11b4cccd163efdc767bb68ef9fa71a9bae615d93b7"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8382785262.json": {
+      "bytes": 775,
+      "sha256": "01c1b579c48cb1151535e6ced5e83b54a111673084a367dd309e6e2b745f25d7"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8383786326.json": {
+      "bytes": 801,
+      "sha256": "0964a87e9a035a7a8504991e196d48c4270a3ebeba9f111ea0d2ad14e0cba6bd"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8389921132.json": {
+      "bytes": 750,
+      "sha256": "8caa793422012c5950d44c30d34740dbdca95c4642c1c106e02c815b6896e21a"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8390167860.json": {
+      "bytes": 707,
+      "sha256": "b6b819b7a50592f205eb3179b440c20619a9461333c31ed4798cba1060b2badc"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8390470706.json": {
+      "bytes": 827,
+      "sha256": "e91c0a8b27d7b6c3392be279541c61cb4a8be62f7acbbd2b3ef00117631e582d"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8390558824.json": {
+      "bytes": 822,
+      "sha256": "7e367b7dbea88a1b366778987c3478ccc64ddc5566b1dac4e49a0dc86dae609a"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8390969019.json": {
+      "bytes": 739,
+      "sha256": "007f0b0dd65fd0d37f098844f81867aa9895e6df813b24b6476f344f18e8a11f"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8391423135.json": {
+      "bytes": 768,
+      "sha256": "5ef4ebd44778cb59de3b3aa9207b12c804a856cce4411b6d1b5fc6d4a21b8773"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8398239999.json": {
+      "bytes": 807,
+      "sha256": "e5f2b813d95084b942b1debd471740698eff9cfe9ce39b73c91146451a2167a6"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8398357872.json": {
+      "bytes": 819,
+      "sha256": "c9c330256b8f5ad1c3b55ddeb0958e2dfa75bd2c7e50a31390eb3c19c68a3884"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8398450482.json": {
+      "bytes": 748,
+      "sha256": "a87b6936b475d9ffe672e2eea9a068ab6fcfb07f0d16020a8967854e89a51cfd"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8400034096.json": {
+      "bytes": 828,
+      "sha256": "14de1fa6155f86b8b0a0c157ef9b02539f5c869879a408efd1fbae042f2f082e"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8400668136.json": {
+      "bytes": 753,
+      "sha256": "290ebcc93285ed10e4cbd7ea2c0fbf2aee2c6bce01bcbc891e74434c86267839"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8400696964.json": {
+      "bytes": 739,
+      "sha256": "75545baaf56cefbca6f9f9db01af1c0f8e9b9b24233ff4ba5529ee2bf7ab07a3"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8400761949.json": {
+      "bytes": 707,
+      "sha256": "42bef176c0f029c9039634f7697375e4a84c61247c86023524f794b0f6ff09a2"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8400862151.json": {
+      "bytes": 753,
+      "sha256": "5a1d14838e7d63ce03af49ef7b93ae16d02c726553318c0512a9481fda87a886"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8401520034.json": {
+      "bytes": 774,
+      "sha256": "e979e1ecb9991a3e594f2a6a8424ccfc2d94c28a573109b45f85c4a611e4ed0d"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8404356714.json": {
+      "bytes": 840,
+      "sha256": "2143068601c10000bffdae934b39675bd2382a31660adcd3b75d3948d25f596d"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8405327946.json": {
+      "bytes": 747,
+      "sha256": "450ac82255eb9795b317644845d3a254bf5cf17f56e2a3b9881211dda22ac297"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8405486469.json": {
+      "bytes": 818,
+      "sha256": "a0ac48c5b62d89ac96ed2556858eaf6ebed68849e3326e1270b5b293d45fae54"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8406494919.json": {
+      "bytes": 733,
+      "sha256": "6c727061104191c49d82c1eebf1bd1687eba582436ff4770d10aa9ca9d3d8a3c"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8408275166.json": {
+      "bytes": 818,
+      "sha256": "dc66391bb8ff9e70e6478a56cfd3990c44a9926e20f3013fac306e9be515e360"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8408364367.json": {
+      "bytes": 762,
+      "sha256": "4ae1059a3f26990e8d76bc67285ebe11b4e61c6c8639d14355c6c26fc3e5d678"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8410046767.json": {
+      "bytes": 818,
+      "sha256": "bf99c1b8544931b89c9a6e5d4e4dcf9698510434f24c6bb1adcc135721765ec4"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8410384010.json": {
+      "bytes": 732,
+      "sha256": "a7bb5a467fba15b1ee2a3d62f42d9d77018a7b72540e96a129102027f1d9cfa2"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8410759795.json": {
+      "bytes": 788,
+      "sha256": "ea9f789ba632857034a08d1c4253712af2d5665e332b665c7bf0d00e3ccb7216"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8413252643.json": {
+      "bytes": 826,
+      "sha256": "15a8b24d461fc569433cab5884b7cfe4013a57bdd1c91c58cda9c2ea5d4eb984"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8413406462.json": {
+      "bytes": 742,
+      "sha256": "8038d61a6b73927c490d0b357009f7475528da36eb151b4344908788f94669fa"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8413492843.json": {
+      "bytes": 773,
+      "sha256": "ecef2a7312bc9db080c2d90e528975b153aeef371ee94e3c2ffd488eb39d657a"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8413507884.json": {
+      "bytes": 747,
+      "sha256": "40fe95ccdf92a9f7ba163915810ad3a94f0a2c43597485c62ed307674a1f4093"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8413714145.json": {
+      "bytes": 830,
+      "sha256": "afb2325d3f9b1549446dc0b19fbc3a36c3f5c5b3dc6c5ed3a537156f4e4950a3"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8414107626.json": {
+      "bytes": 754,
+      "sha256": "4b61c47456adc95dc87afdf6622a2fa240cca52047a5a5fafcaeb6029bdc1dc5"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8414604247.json": {
+      "bytes": 753,
+      "sha256": "14de2804d8576b68ea678865d1ca1032fa1189084c1e12bb7febce7f87173944"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8414747951.json": {
+      "bytes": 818,
+      "sha256": "7002fddf7c7732ebfc8f197dfbfbe0320ac4f53d94a47fcc4547aa908aa73e83"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8420231860.json": {
+      "bytes": 738,
+      "sha256": "a3e62bb47670d8e60ba9e2ead95f5a46d57db3f25ae218cc0ae89d28e061d0a3"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8420553065.json": {
+      "bytes": 747,
+      "sha256": "293b304f665303923fcebc0afd2ce66841ecf73f614549ca630993d3aeba1b62"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8422067870.json": {
+      "bytes": 751,
+      "sha256": "8d310a89640c9d839948d93d74dcd97202d8dd7d50b4c9b08e7da841301fa34d"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8422265466.json": {
+      "bytes": 813,
+      "sha256": "d43e17e0da72f025c4bf1695941f5f73ccfb1dd12a253c3a0a77149ea21120bf"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8422326538.json": {
+      "bytes": 755,
+      "sha256": "d000ccd713d6e751df13e1842326c394d226a6b10f6f26584dbc683ee2f00375"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8422817019.json": {
+      "bytes": 826,
+      "sha256": "8e9c296a2ab52ece8f5fb7f264af176e8ac29c7ad3829809f9ea8245f33bf67b"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8423101210.json": {
+      "bytes": 819,
+      "sha256": "4e8d3ac327405d1c416bf015d1deb500c0a5b96e3e17d8600579ee07b08668af"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8429920675.json": {
+      "bytes": 808,
+      "sha256": "878171d26b435a1e18c60ee2c0d52ebfcf6cc4d6a7a9b4488281715ce75b4cb6"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8430749265.json": {
+      "bytes": 912,
+      "sha256": "1bc1b2fbb9355d5616ccee331f59a6d597e96f5b4c0c6a5d126cf73c5c7653e2"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8430864590.json": {
+      "bytes": 753,
+      "sha256": "806e9ffb8e0bb0877be070e0b7d26c4431c548983cf52e887715f4662d4d599d"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8432322589.json": {
+      "bytes": 782,
+      "sha256": "849472166f35240a602e71b1426b65a8fbe3312dddbb8f22a43027967996e307"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8432390184.json": {
+      "bytes": 772,
+      "sha256": "0539f713df9bfe6a0bf21fd2f5315d23b055e53f1c806bdce5e3fdc4e5be51b1"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8435382240.json": {
+      "bytes": 743,
+      "sha256": "8f9949416f31206c325788eb62e0aa337d072fe74f38d2edc8432d4e383ff5b7"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8437530968.json": {
+      "bytes": 752,
+      "sha256": "2070123f5ed1028c64d1795dcfb769a359d9da61e5c2cc2f9f036ea9ab476968"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8437986315.json": {
+      "bytes": 760,
+      "sha256": "bc752b258738b1bc036bca5a4bc2377fb5287b86294efaadfddea6688941c700"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8438245633.json": {
+      "bytes": 828,
+      "sha256": "ae55748acf5531c9c9287eb3d3ad143c818678bcb2a875b4168629d245cdaeab"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8440113735.json": {
+      "bytes": 822,
+      "sha256": "333c2fb9c81aeb21ba3cb018b0c59f9b0a1d00b4370eb79dc4b7c3b866ef321e"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8440817851.json": {
+      "bytes": 740,
+      "sha256": "eda323ae6ec84016f1cc229671557140bbd4328d8f15f62042aded11754bedd9"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8441075827.json": {
+      "bytes": 732,
+      "sha256": "5e1711dab8f6f5983e88c2d3fc1f3bb4554319b0ff36eb802ced5bf8dd82efea"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8441801401.json": {
+      "bytes": 760,
+      "sha256": "418e0d1230b0bc5db397a9ebd2ae2192b46ba4a056c3ddaea6b42a4851c6f92e"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8441934941.json": {
+      "bytes": 739,
+      "sha256": "c20b312e94a3bcd22e787195dda3df394c4615acf23a46bb09a259ef3c20e3c7"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8444894172.json": {
+      "bytes": 787,
+      "sha256": "b8063cdb79cb91490c775137bb5bd45697d1d1289528e3734a3706615567157e"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8444992027.json": {
+      "bytes": 748,
+      "sha256": "f8de7dc04d0e026cb5fb049fe2132a9da425891536b12e5b35a7c1eba397ddaa"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8445602299.json": {
+      "bytes": 745,
+      "sha256": "0df7a182633c6ec46658152fdd2b370ab3be33ead77aefbdaef7ae466ec1355c"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8452468169.json": {
+      "bytes": 884,
+      "sha256": "e947346ebba72b46b6a48a230ef88cd17459163a8762fc493a205df8dd115da3"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8452481469.json": {
+      "bytes": 785,
+      "sha256": "55e5e81137a52c6e1f9d204eb1548534615f66842cec3716dff142e739a848d7"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8452529684.json": {
+      "bytes": 748,
+      "sha256": "3c3531a7bac315f7432e6c490a43ab676e028a6a234f3bc34caed29316109877"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8452718312.json": {
+      "bytes": 737,
+      "sha256": "bb4c276665ec89c7c1378637901349590ddd734491f0b0ae262e4d7f15dfc3fb"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8455069056.json": {
+      "bytes": 762,
+      "sha256": "a8340810eb657ce0138cb92b6eaa52be27262c31d15ca02d3fe1b80dd15154d5"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8458595782.json": {
+      "bytes": 826,
+      "sha256": "45126223087932ec054b897afa559df2297e01fb980496ea626b67a732f1c440"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8459537306.json": {
+      "bytes": 800,
+      "sha256": "33e646f649a92527761e2716d5a4aba5b6afd0e11974ca3df7dc163afc6ea6fc"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8463226427.json": {
+      "bytes": 731,
+      "sha256": "de6b396fa3a5effd97ff2babbd1e867f832ba351752779103410b3f8a0427fd7"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8467026232.json": {
+      "bytes": 740,
+      "sha256": "1f24ba130e6fe5fd32c54f8eaef16fd8048c5a7a2281d1a7378527c11b458901"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8467026576.json": {
+      "bytes": 762,
+      "sha256": "4be8e86757ad35097a81979bf036994e824e04a802e0deaa52270930504dfdb5"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8470260527.json": {
+      "bytes": 795,
+      "sha256": "8c2adb87da52c2d36a42609c2bd83984b5b20e280be34011621ef314768f407e"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8471042665.json": {
+      "bytes": 826,
+      "sha256": "ac986edbc5016a770cf5b1f022f9c75ad28095b709ad3fe015adc4d16c2cb782"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8473556322.json": {
+      "bytes": 908,
+      "sha256": "a2d9cd11e904cf768106339af77f6624370521a086363d3d42cfd18b6093a828"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8482254147.json": {
+      "bytes": 753,
+      "sha256": "ba3fa9e0655b5c3edd6ef5079f5c4464f0093d13c70ba9950904bddc582d3bef"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8483750538.json": {
+      "bytes": 744,
+      "sha256": "cb4e074c8f56ad0b16c1974545448dd1af701012a5b0749237a160fc7bf3db8d"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8484842626.json": {
+      "bytes": 784,
+      "sha256": "6e387439d057a51a387152252b55d60a48da7ebe3db6431ff3dc392e507d1059"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8488915357.json": {
+      "bytes": 734,
+      "sha256": "9130dfe6bea1233a247a3855c8909685ca9af201f8993d34289d4103178972a0"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8489361052.json": {
+      "bytes": 826,
+      "sha256": "5cadd178f761ab2b6860c33bb0d468ba2536e0b08a737b0c55e11a5f3913f083"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8490064894.json": {
+      "bytes": 745,
+      "sha256": "4564343450ba00ab41edbbc919cc5d23073a7f82383258632d0e762e10c36e31"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8490836457.json": {
+      "bytes": 811,
+      "sha256": "65db6852e5dd24ddb2dfc60638841dfb929362a203f54c6b244f5b6eff6c41af"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8490845757.json": {
+      "bytes": 744,
+      "sha256": "2206c016da33a7f9bd411f7057e1652935bafe21cc935045d0f854b449e18a0d"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8491507600.json": {
+      "bytes": 749,
+      "sha256": "c4f8169b598e9ac65b31fd7bca5d9891d261ab8fb42583ad576c067b6eb44f55"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8491623287.json": {
+      "bytes": 854,
+      "sha256": "46dadb72af426a6a1d6dd2e1d02771ba6ba446a31988583bdd2dab5db02b2c2f"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8491696908.json": {
+      "bytes": 753,
+      "sha256": "4e3b4af9e2019cc09c2bde5dc5f973455d4ac2f08e86439b5ed1c8cd1eed25d4"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8498929194.json": {
+      "bytes": 748,
+      "sha256": "1f9e6ee3321dd8d7b959093016db3494c00acbd745034249a202b2aafff3e6d1"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8499080552.json": {
+      "bytes": 733,
+      "sha256": "40670588b26b3d1dcbfb24c03af8f619fc4f7291f47457cf08d1d3bf31873c16"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8499283733.json": {
+      "bytes": 735,
+      "sha256": "fa954a9b8272de6f1ba8117b886c09c986e8b0bdaed72f4f72fbeec198252332"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8499500853.json": {
+      "bytes": 760,
+      "sha256": "0d3e86c56ec3a0df11576a952e9bd4e82fe66210babfef95ce6ba168ccd5fec4"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8512688011.json": {
+      "bytes": 755,
+      "sha256": "5f3b9bd4799d2cadd0763d4605eea7cf3190e5e6cc38893b7aa549c32f81de2b"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8513139918.json": {
+      "bytes": 733,
+      "sha256": "817326f18aadcb1416795a7eaad3f284ef9fe0223378fbe2d5bcae672e6eaaf2"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8513477466.json": {
+      "bytes": 761,
+      "sha256": "fa92223042ee212abdbdbc285201349d996ef12ce8e9e3d53af9729d29743ce7"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8513983717.json": {
+      "bytes": 735,
+      "sha256": "36b51e7e2521e8e44e6ae989eb8e28c02880748f34ac896982624df7a53e352d"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8514307735.json": {
+      "bytes": 818,
+      "sha256": "e1d596a68d6846b142d021aa6619bec1514e9fb0e4ad966a5d67bce46f73d0b5"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8514326972.json": {
+      "bytes": 767,
+      "sha256": "19c15521cfef9ec3b92cf297cee71c58c6c2d6ed1922957a6613c142412ab0bd"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8514621205.json": {
+      "bytes": 786,
+      "sha256": "b6a7dd15c403d7e80f149bf07a20700c35c33cd1535ac4df2c0f8614d226c6c0"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8515207236.json": {
+      "bytes": 707,
+      "sha256": "3fb5eb0399e0f4f09379267b2a3001c3237b30f77c857df8affd6c5bd5fd148e"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8517115269.json": {
+      "bytes": 732,
+      "sha256": "a4957a22cfc48a1e564e609ceded5cb0d3a5876d204b48f4a53cf1557abc166f"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8517483491.json": {
+      "bytes": 826,
+      "sha256": "d4218001fb8095980bc6e9cf6ac2df734f56aff7fa5c50f92394354370479e5d"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8517700743.json": {
+      "bytes": 743,
+      "sha256": "d69fa3c870234cd0186aec5d2e091360a3135ec3d11df5bcfb758cae8471c25c"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8520988187.json": {
+      "bytes": 741,
+      "sha256": "28667e52e987b8a89fd34b889a26ad52c524fc1c0cea4cae84fd9b80c190aaf3"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8521165183.json": {
+      "bytes": 707,
+      "sha256": "00e31ee58779a42f0cf356ef721dbb167b847c68f8709eae2bcff7f164374ea4"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8521740678.json": {
+      "bytes": 743,
+      "sha256": "1e8ee23996ac75e692bd1df7740f136308e4056a338ceeb3bbc2b5d6321f2ea0"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8542931225.json": {
+      "bytes": 741,
+      "sha256": "1e9c15fff696543786b979fe2eec2860a94f05881c68778a231237f477cdab01"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8543628008.json": {
+      "bytes": 778,
+      "sha256": "a3fb248104d5065f858233c7540d4611756d08b3e88c0a74b57a1c6577f3a8d5"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8544227256.json": {
+      "bytes": 788,
+      "sha256": "07bd44a750601bb3690370007a895dd098d104780e2a76a6e809f1e20b1fbdca"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8545809861.json": {
+      "bytes": 771,
+      "sha256": "1aa9d71696aad9bee82984334e1be322e43ea1a8555d0b0963412098829c9675"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8552952822.json": {
+      "bytes": 773,
+      "sha256": "1bbbdf92f19c94c3071c2a0ea8c6b567a8728b69fc638f0ae651219deb7d47ec"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8553482403.json": {
+      "bytes": 840,
+      "sha256": "a754a5a6b928fb993cccf395303d16090d89d86626ee9469981a9f0442cbdd75"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8557232844.json": {
+      "bytes": 807,
+      "sha256": "5a52c559157ac92dffc6654d03e224a157683d6584562bad92392793bf1db6a8"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8557233704.json": {
+      "bytes": 733,
+      "sha256": "a46f0d4d960e41bab0a77c1a23901633056f673b5a983cf2f0346243a191d2ed"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8557752634.json": {
+      "bytes": 751,
+      "sha256": "0508d20f292efaef2856c744e6102a036060c0e3d6f1577ef3eb9f92bcda8bb5"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8575227369.json": {
+      "bytes": 731,
+      "sha256": "5dc9156d3b71ceb1bd2b99f68ba2adf7a7b87e70aad6075e6af31924b18c8c85"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8576383804.json": {
+      "bytes": 744,
+      "sha256": "8230999354a42aa053411d5259b164d4b94903234ead6e68986256c46c5c7437"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8577048895.json": {
+      "bytes": 740,
+      "sha256": "745e54c2e341e605cf162598254f9deb5349526d0dacc4c60c59230ed01e1136"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8577351220.json": {
+      "bytes": 761,
+      "sha256": "31b4abb16cddea68a08e2e6c71e8f9e51d87112fd5c0a7ce5877379c09b5d86c"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8577422208.json": {
+      "bytes": 745,
+      "sha256": "a278705d4a77a98353b153b62e1218a8451b6866afb8b1d7c42fa6400c2ca556"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/8588854482.json": {
+      "bytes": 751,
+      "sha256": "65700a75170ce958d0b6f26f8da718ef6921a66e7e533bf8d20e5531b24f331b"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/reviewed/865270678.json": {
+      "bytes": 824,
+      "sha256": "32fbd5f9a11ddca4535a03b3aeba803eef836de07fa470f937018ebcb37f3d8f"
+    },
+    "Data/avito_runs/20261110-ryazan-prodavec/standing_unavailable_policy.json": {
+      "bytes": 1011,
+      "sha256": "7a1c18520dc10340252a4933e92bb851f78d800b32c33c1017ede17529393381"
+    },
+    "Scraper/runs/20261110-ryazan-prodavec/plan.json": {
+      "bytes": 5872,
+      "sha256": "7341b6e5f712615312f415e2a32f8a585600ec0bdf57bd3a694273ac96203837"
+    }
+  }
+}

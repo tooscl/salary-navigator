@@ -313,3 +313,5 @@ avito_runs/<название_сбора>/
 - [20261110-ryazan-sklad](avito_runs/20261110-ryazan-sklad/exports/vacancies_flat.csv): 148 вакансий.
 
 - [20261110-ryazan-komplektovshchik](avito_runs/20261110-ryazan-komplektovshchik/exports/vacancies_flat.csv): 211 вакансий.
+
+- [20261110-ryazan-prodavec](avito_runs/20261110-ryazan-prodavec/exports/vacancies_flat.csv): исходный завершённый экспорт, 258 вакансий; [производное преобразование адресов](transformations/20261110-ryazan-prodavec-placement-v1/vacancies_flat.csv) зарегистрировано в общем датасете.
