@@ -25,5 +25,5 @@
 
 Воспроизвести ноутбук можно скриптом
 [build_salary_suitability_notebook.py](build_salary_suitability_notebook.py).
-Готовые таблицы и краткие выводы находятся в
-[salary_segment_results/](salary_segment_results/).
+Готовые таблицы, краткие выводы и паспорта 15 согласованных ячеек находятся в
+[salary_segment_results/](salary_segment_results/README.md).
