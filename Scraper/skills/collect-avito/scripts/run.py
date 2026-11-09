@@ -3836,6 +3836,13 @@ def publish(args):
     files = [str(out.relative_to(ROOT)), str((service/'plan.json').relative_to(ROOT)),
         str((service/'manifest.json').relative_to(ROOT)), 'Data/dataset/sources.json',
         'Data/dataset/vacancies.csv', 'Data/dataset/manifest.json', 'Data/README.md', 'Data/dataset/README.md']
+    source_entries = [e for e in read(ROOT/'Data/dataset/sources.json')['exports'] if e['run_id'] == args.run_id]
+    if len(source_entries) != 1:
+        raise ValueError('Expected exactly one registered source for this run')
+    transformation = source_entries[0].get('transformation')
+    if transformation:
+        # build_dataset --check above verified lineage and confined these paths.
+        files += [source_entries[0]['path'], transformation['path']]
     for archive in sorted(service.glob('superseded-freeze*')):
         if archive.is_dir(): files.append(str(archive.relative_to(ROOT)))
     files += [change['file'] for change in manifest.get('automation_changes', [])]
