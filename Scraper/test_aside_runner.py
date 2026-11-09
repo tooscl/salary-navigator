@@ -284,8 +284,36 @@ const listBrowserTabs=async()=>[],openTab=async()=>pg,snapshot=async()=>({tree:'
             result=subprocess.run(recover,cwd=root,text=True,capture_output=True); self.assertEqual(result.returncode,0,result.stderr)
             self.assertEqual(runner.load_failures(diag)['bounded_pending']['state'],'reserved'); self.assertFalse((out/'raw/456.json').exists())
 
+    def test_standing_run_registration_is_scoped_and_cannot_clear_stops(self):
+        with tempfile.TemporaryDirectory() as directory, patch.object(runner, 'ROOT', Path(directory)):
+            args=argparse.Namespace(run_id='fresh',goal_source='goal-123',authorization_id='source-1',
+                technical_instruction='точная техническая инструкция',ip_instruction='точная инструкция IP')
+            runner.register_standing_run(args); runner.register_standing_run(args)
+            out,service,diag=runner.paths(runner.ROOT,'fresh'); ledger=runner.load_failures(diag)
+            self.assertTrue(ledger['unbounded_retries']); self.assertEqual(ledger['state'],'READY')
+            self.assertEqual(ledger['events'][0]['technical_instruction'],args.technical_instruction)
+            self.assertEqual(ledger['events'][1]['instruction'],args.ip_instruction)
+            self.assertEqual(ledger['events'][1]['interval_seconds'],1800)
+            altered=argparse.Namespace(**{**vars(args),'goal_source':'other-goal'})
+            with self.assertRaises(runner.HumanRequired): runner.register_standing_run(altered)
+            for _ in range(6):
+                runner.record_failure(diag,'capture','technical','capture',immediate=False)
+                runner.ensure_allowed(diag,'capture',retry_reason='corrected',action=True)
+            runner.record_failure(diag,'capture','CAPTCHA','capture',immediate=True)
+            with self.assertRaises(runner.HumanRequired): runner.ensure_allowed(diag,'capture',action=True)
+            with self.assertRaises(runner.HumanRequired): runner.register_standing_run(altered)
+        with tempfile.TemporaryDirectory() as directory, patch.object(runner,'ROOT',Path(directory)):
+            _,service,_=runner.paths(runner.ROOT,'fresh');runner.write(service/'plan.json',{})
+            with self.assertRaises(runner.HumanRequired): runner.register_standing_run(args)
+        with tempfile.TemporaryDirectory() as directory, patch.object(runner,'ROOT',Path(directory)):
+            argv=['run.py','register-standing-run','--run-id','cli','--goal-source','goal',
+                  '--authorization-id','source','--technical-instruction','exact technical',
+                  '--ip-instruction','exact IP']
+            with patch.object(sys,'argv',argv): runner.main()
+            self.assertTrue(runner.load_failures(runner.paths(runner.ROOT,'cli')[2])['unbounded_retries'])
+
     def test_recurring_ip_policy_claim_and_preservation(self):
-        for scenario in ('ok', 'early', 'captcha_only', 'http429', 'wrong_id', 'tampered', 'prefix'):
+        for scenario in ('ok', 'unexhausted', 'unbounded', 'missing', 'missing_no_log', 'missing_tamper', 'missing_late', 'early', 'captcha_only', 'http429', 'wrong_id', 'tampered', 'prefix'):
             with self.subTest(scenario=scenario), tempfile.TemporaryDirectory() as directory, patch.object(runner, 'ROOT', Path(directory)):
                 root=runner.ROOT; out,service,diag=runner.paths(root,'case'); sandbox=root/'sandbox'
                 queue=[item('123'), item('456')]; queue[1]['listing_rank']=2; url=queue[1]['url']
@@ -299,21 +327,32 @@ const listBrowserTabs=async()=>[],openTab=async()=>pg,snapshot=async()=>({tree:'
                 if scenario=='captcha_only': snap='- title: "CAPTCHA" [url='+url+']\n'
                 if scenario=='http429': snap+='- text: "HTTP 429"\n'
                 (diag/'problem.snapshot.txt').write_text(snap,encoding='utf8'); (sandbox/'problem.snapshot.txt').write_text(snap+('x' if scenario=='tampered' else ''),encoding='utf8')
+                if scenario.startswith('missing'):
+                    runner.write(diag/'browser-tab.json',{'url':url}); runner.write(diag/'browser-session.local.json',{'sandbox':str(sandbox)})
+                    log=diag/'aside-123.local.log'; log.write_text(f'TL_SANDBOX={sandbox}\n'+snap+('TL_FINISHED\n[ok | 1ms]\n' if scenario!='missing_tamper' else ''),encoding='utf8')
+                    shutil.rmtree(sandbox)
                 runner.record_failure(diag,'capture','stopped','capture',immediate=True)
-                ledger=runner.load_failures(diag); ledger['retries_started']=ledger['retry_limit']
+                ledger=runner.load_failures(diag); ledger['retries_started']=2 if scenario in ('unexhausted', 'unbounded') else ledger['retry_limit']
+                if scenario == 'unbounded': ledger['unbounded_retries'] = True
                 if scenario!='early': ledger['events'][-1]['at']='2020-01-01T00:00:00+00:00'
                 runner.save_failures(diag,ledger)
                 policy=argparse.Namespace(run_id='case',source='source',human_instruction='каждые 30 минут',additional_instruction='все разрешения')
                 runner.recurring_ip_policy(policy); runner.recurring_ip_policy(policy)
-                attempt=argparse.Namespace(run_id='case',source='source',id='999' if scenario=='wrong_id' else '456',authorization_id='attempt-1')
+                attempt=argparse.Namespace(run_id='case',source='source',id='999' if scenario=='wrong_id' else '456',authorization_id='attempt-1',missing_sandbox_log=log if scenario.startswith('missing') and scenario!='missing_no_log' else None)
                 with patch.object(runner,'validate_partition'), patch.object(runner,'validate_plan_profession'), patch.object(runner,'queue_from_pages',return_value=queue), patch.object(runner,'unavailable_records',return_value=[]), patch.object(runner,'unresolved_records',return_value=[]):
-                    if scenario=='ok':
+                    if scenario in ('ok', 'unexhausted', 'unbounded', 'missing', 'missing_late'):
                         before=runner.load_failures(diag); runner.recurring_ip_attempt(attempt)
                         with self.assertRaises((ValueError,runner.HumanRequired)): runner.recurring_ip_attempt(attempt)
                         ledger=runner.load_failures(diag); self.assertEqual(ledger['retries_started'],before['retries_started']); self.assertEqual(ledger['failures'],before['failures'])
+                        if scenario=='missing_late':
+                            log.write_text('changed',encoding='utf8')
+                            with self.assertRaises(ValueError): runner.preserve_stopped_observation(argparse.Namespace(run_id='case',authorization_id='attempt-1'))
+                            continue
                         runner.preserve_stopped_observation(argparse.Namespace(run_id='case',authorization_id='attempt-1'))
                         self.assertEqual(runner.read(diag/'checkpoint.json')['completed_ids'],['123']); self.assertEqual(runner.read(diag/'checkpoint.json')['state'],'READY')
-                        self.assertEqual(runner.read(sandbox/'raw/456.json'),raw); self.assertFalse((out/'raw/456.json').exists())
+                        if scenario!='missing': self.assertEqual(runner.read(sandbox/'raw/456.json'),raw)
+                        else: self.assertFalse(sandbox.exists())
+                        self.assertFalse((out/'raw/456.json').exists())
                     else:
                         with self.assertRaises((ValueError,runner.HumanRequired)): runner.recurring_ip_attempt(attempt)
                         self.assertEqual(runner.load_failures(diag)['state'],'NEEDS_HUMAN'); self.assertTrue((out/'raw/456.json').exists())
