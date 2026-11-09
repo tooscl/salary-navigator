@@ -2848,18 +2848,31 @@ def preserve_stopped_observation(args):
             raise ValueError('Not an evidenced blank-tab observation')
         reason = 'blank_tab_before_navigation'
     sandbox_pointer = diag/'sandbox.json'
+    missing_claim = {}
     if sandbox_pointer.exists():
         sandbox = Path(read(sandbox_pointer)['path'])
+        missing_claim = events[authorizations[-1]] if recurring else {}
+        if recurring and missing_claim.get('missing_sandbox'):
+            log = diag/missing_claim['log_file']
+            if (sandbox.exists() or sha(sandbox_pointer) != missing_claim['sandbox_pointer_sha256']
+                    or sha(diag/'checkpoint.json') != missing_claim['checkpoint_sha256']
+                    or sha(diag/'browser-tab.json') != missing_claim['browser_tab_sha256']
+                    or sha(diag/'browser-session.local.json') != missing_claim['session_sha256']
+                    or sha(log) != missing_claim['log_sha256']):
+                raise ValueError('Missing-sandbox evidence changed after recurring claim')
+        else:
+            missing_claim = {}
         other = sandbox/'raw'/source.name
-        if not other.exists() or other.read_bytes() != source.read_bytes():
+        if not missing_claim and (not other.exists() or other.read_bytes() != source.read_bytes()):
             raise ValueError('Sandbox raw differs; inspect interrupted transfer')
-        sandbox_cp = read(sandbox/'checkpoint.json')
-        if sandbox_cp.get('next_id') != identity or sandbox_cp.get('state') != cp.get('state') or sandbox_cp.get('stop_reason') != cp.get('stop_reason') or (recurring and sandbox_cp.get('completed_ids') != cp.get('completed_ids')):
-            raise ValueError('Sandbox checkpoint differs; inspect interrupted transfer')
-        if (blank or (captcha and snapshot.exists())) and (not (sandbox/'problem.snapshot.txt').exists() or (sandbox/'problem.snapshot.txt').read_bytes() != snapshot.read_bytes()):
-            raise ValueError('Sandbox snapshot differs; inspect interrupted transfer')
-        if captcha and (sandbox/'browser-tab.json').exists() and read(sandbox/'browser-tab.json').get('url') != data.get('source_url'):
-            raise ValueError('Original browser URL differs from queue')
+        if not missing_claim:
+            sandbox_cp = read(sandbox/'checkpoint.json')
+            if sandbox_cp.get('next_id') != identity or sandbox_cp.get('state') != cp.get('state') or sandbox_cp.get('stop_reason') != cp.get('stop_reason') or (recurring and sandbox_cp.get('completed_ids') != cp.get('completed_ids')):
+                raise ValueError('Sandbox checkpoint differs; inspect interrupted transfer')
+            if (blank or (captcha and snapshot.exists())) and (not (sandbox/'problem.snapshot.txt').exists() or (sandbox/'problem.snapshot.txt').read_bytes() != snapshot.read_bytes()):
+                raise ValueError('Sandbox snapshot differs; inspect interrupted transfer')
+            if captcha and (sandbox/'browser-tab.json').exists() and read(sandbox/'browser-tab.json').get('url') != data.get('source_url'):
+                raise ValueError('Original browser URL differs from queue')
     elif blank or recurring:
         raise ValueError('Blank-tab preservation requires the original sandbox')
     archive = out/'observations'/identity
@@ -2870,7 +2883,8 @@ def preserve_stopped_observation(args):
     if not destination.exists():
         shutil.copy2(source, destination)
     snapshot_saved = blank or (captcha and snapshot.exists())
-    tab_saved = bool(sandbox_pointer.exists() and (sandbox/'browser-tab.json').exists() and (unresolved_retry or captcha))
+    tab_source = diag/'browser-tab.json' if recurring and missing_claim.get('missing_sandbox') else sandbox/'browser-tab.json' if sandbox_pointer.exists() else None
+    tab_saved = bool(tab_source and tab_source.exists() and (unresolved_retry or captcha))
     if snapshot_saved or tab_saved:
         evidence_archive = diag/'observations'/identity
         evidence_archive.mkdir(parents=True, exist_ok=True)
@@ -2879,7 +2893,7 @@ def preserve_stopped_observation(args):
             if snapshot_dest.exists() and snapshot_dest.read_bytes() != snapshot.read_bytes(): raise ValueError('Snapshot archive collision')
             if not snapshot_dest.exists(): shutil.copy2(snapshot, snapshot_dest)
         if tab_saved:
-            tab = sandbox/'browser-tab.json'
+            tab = tab_source
             if unresolved_retry and read(tab).get('url') != url: raise ValueError('Original browser URL differs from queue')
             tab_dest = evidence_archive/(sha(tab) + '.browser-tab.json')
             if tab_dest.exists() and tab_dest.read_bytes() != tab.read_bytes(): raise ValueError('Browser tab archive collision')
@@ -2887,7 +2901,8 @@ def preserve_stopped_observation(args):
     write(archive/(sha(source) + '.provenance.json'), dict(authorization_id=args.authorization_id,
         original_file=str(source.relative_to(out)), sha256=sha(source), observed_at=data.get('observed_at'),
         preserved_at=datetime.now(timezone.utc).isoformat(), reason=reason,
-        snapshot_sha256=sha(snapshot) if snapshot_saved else None, sandbox_path=str(sandbox) if sandbox_pointer.exists() else None, browser_tab_sha256=sha(tab) if tab_saved else None))
+        snapshot_sha256=sha(snapshot) if snapshot_saved else None, sandbox_path=str(sandbox) if sandbox_pointer.exists() else None, browser_tab_sha256=sha(tab) if tab_saved else None,
+        **(dict(sandbox_available=False, local_log_sha256=missing_claim['log_sha256']) if missing_claim else {})))
     # The old sandbox remains on disk; removing only its pointer prevents reimport of
     # the already archived stopped observation into the pending raw slot.
     sandbox_pointer.unlink(missing_ok=True)
@@ -3188,6 +3203,36 @@ def resume_browser(args):
     print('Human browser authorization recorded; history retained')
 
 
+def register_standing_run(args):
+    """Record an explicit goal-scoped standing instruction before a new run starts."""
+    out, service, diag = paths(ROOT, args.run_id)
+    fields = (args.goal_source, args.authorization_id, args.technical_instruction, args.ip_instruction)
+    if any(not value.strip() for value in fields):
+        raise ValueError('Goal source, authorization ID and exact instructions are required')
+    if (service/'plan.json').exists() or (out/'queue.json').exists() or any((out/'raw').glob('*')):
+        raise HumanRequired('Standing registration is only permitted before freeze')
+    with locked(diag):
+        ledger = load_failures(diag)
+        event = dict(event='standing_run_authorization', goal_source=args.goal_source,
+                     authorization_id=args.authorization_id, technical_instruction=args.technical_instruction,
+                     ip_instruction=args.ip_instruction, interval_seconds=1800)
+        prior = [e for e in ledger['events'] if e.get('event') == 'standing_run_authorization']
+        if prior:
+            if len(prior) != 1 or any(prior[0].get(k) != v for k, v in event.items()):
+                raise HumanRequired('Standing authorization already differs')
+            return
+        if ledger['state'] != 'READY' or ledger['failures'] or ledger['events']:
+            raise HumanRequired('Standing registration requires a fresh run ledger')
+        now = datetime.now(timezone.utc).isoformat()
+        ledger['unbounded_retries'] = True
+        ledger['events'].append(dict(event, at=now))
+        ledger['events'].append(dict(event='recurring_ip_policy', at=now, source=args.authorization_id,
+            instruction=args.ip_instruction, additional_instruction=args.technical_instruction,
+            goal_source=args.goal_source, interval_seconds=1800))
+        save_failures(diag, ledger)
+    print('Standing goal instructions recorded without authorizing a stopped run')
+
+
 def recurring_ip_policy(args):
     """Record the user's recurring instruction once, without authorizing a read."""
     _, _, diag = paths(ROOT, args.run_id)
@@ -3224,18 +3269,35 @@ def recurring_ip_attempt(args):
     if cp.get('completed_ids') != [x['id'] for x in queue[:queue.index(matches[0])] if x['id'] not in excluded]: raise ValueError('Checkpoint prefix mismatch')
     raw = out/'raw'/f'{args.id}.json'; data = read(raw); snap = diag/'problem.snapshot.txt'
     sandbox = Path(read(diag/'sandbox.json')['path']); tab = sandbox/'browser-tab.json'; text = snap.read_text(encoding='utf8')
+    missing_log = getattr(args, 'missing_sandbox_log', None)
+    missing = not sandbox.exists()
+    if missing:
+        if not missing_log: raise ValueError('Original sandbox missing; explicit local log evidence required')
+        log = Path(missing_log).resolve()
+        if log.parent != diag.resolve() or not re.fullmatch(r'aside-\d+\.local\.log', log.name):
+            raise ValueError('Expected an original local Aside log in this run diagnostics')
+        log_text = log.read_text(encoding='utf8'); session = read(diag/'browser-session.local.json')
+        saved_tab = read(diag/'browser-tab.json')
+        marker = f'TL_SANDBOX={sandbox}\n'
+        if (session.get('sandbox') != str(sandbox) or saved_tab.get('url') != url
+                or marker not in log_text or text not in log_text
+                or log_text.find(marker) > log_text.find(text)
+                or not re.search(r'(?m)^TL_FINISHED\r?\n\[ok\s*\|', log_text[log_text.find(text)+len(text):])):
+            raise ValueError('Missing-sandbox local session or completed RPC evidence differs')
+    elif missing_log:
+        raise ValueError('Missing-sandbox recovery is not applicable while sandbox exists')
     if (data.get('state') != 'NEEDS_HUMAN' or data.get('reason') != 'access_restriction_or_captcha' or data.get('source_url') != url
             or f'- title: "Доступ ограничен: проблема с IP" [url={url}]' not in text
             or 'Страница не загрузилась из-за проблем с IP' not in text or re.search(r'\b429\b', text)
-            or (sandbox/'raw'/raw.name).read_bytes() != raw.read_bytes() or (sandbox/'problem.snapshot.txt').read_bytes() != snap.read_bytes()
-            or any(read(sandbox/'checkpoint.json').get(k) != cp.get(k) for k in ('state','next_id','stop_reason','completed_ids')) or read(tab).get('url') != url):
+            or (not missing and ((sandbox/'raw'/raw.name).read_bytes() != raw.read_bytes() or (sandbox/'problem.snapshot.txt').read_bytes() != snap.read_bytes()
+            or any(read(sandbox/'checkpoint.json').get(k) != cp.get(k) for k in ('state','next_id','stop_reason','completed_ids')) or read(tab).get('url') != url))):
         raise ValueError('IP evidence, identity or original sandbox differs')
     with locked(diag):
         ledger = load_failures(diag); events = ledger['events']
         policies = [e for e in events if e.get('event') == 'recurring_ip_policy' and e.get('source') == args.source]
         failures = [e for e in events if e.get('event') == 'failure']
-        if ledger['state'] != 'NEEDS_HUMAN' or ledger['retries_started'] < ledger['retry_limit'] or len(policies) != 1 or not failures:
-            raise HumanRequired('Requires a stopped exhausted budget and registered recurring policy')
+        if ledger['state'] != 'NEEDS_HUMAN' or len(policies) != 1 or not failures:
+            raise HumanRequired('Requires a stopped run and registered recurring policy')
         if any(e.get('authorization_id') == args.authorization_id for e in events) or not args.authorization_id.strip():
             raise HumanRequired('Attempt ID must be new and nonempty')
         last = datetime.fromisoformat(failures[-1]['at'])
@@ -3247,7 +3309,10 @@ def recurring_ip_attempt(args):
         ledger['bounded_pending'] = dict(id=args.id, state='reserved', authorization_id=args.authorization_id)
         events.append(dict(event='recurring_ip_authorization', at=now.isoformat(), source=args.source,
             authorization_id=args.authorization_id, pending_id=args.id, no_new_budget=True,
-            failure_at=failures[-1]['at'], raw_sha256=sha(raw), snapshot_sha256=sha(snap)))
+            failure_at=failures[-1]['at'], raw_sha256=sha(raw), snapshot_sha256=sha(snap),
+            **(dict(missing_sandbox=True, checkpoint_sha256=sha(diag/'checkpoint.json'),
+                    browser_tab_sha256=sha(diag/'browser-tab.json'), session_sha256=sha(diag/'browser-session.local.json'),
+                    log_file=log.name, log_sha256=sha(log), sandbox_pointer_sha256=sha(diag/'sandbox.json')) if missing else {})))
         save_failures(diag, ledger)
     print('One recurring IP attempt claimed without new retry budget')
 
@@ -3849,10 +3914,13 @@ def sweep_demo_export(args):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     commands = parser.add_subparsers(dest='command', required=True)
-    for name in ['redact-finalized-provenance', 'archive-partial-pending', 'recapture-cleared-restriction', 'user-detail-skip-policy', 'user-skip-policy', 'mark-policy-skipped', 'mark-user-skipped', 'public-provenance', 'review-address-button', 'recurring-reviewed-continuation', 'recurring-unavailable-continuation', 'recurring-incomplete-policy', 'recurring-incomplete-attempt', 'recurring-ip-after-preflight', 'recurring-ip-policy', 'recurring-ip-attempt', 'sweep-init', 'sweep-snapshot', 'sweep-register-branch', 'sweep-set-branch-status', 'sweep-materialize', 'sweep-report', 'sweep-demo-export', 'archive-uncertain-freeze', 'archive-partial-listing', 'partition', 'partial-suffix', 'deduplicate-queue', 'continuation', 'supplemental', 'freeze', 'capture', 'finalize', 'post-finalize-review', 'publish', 'reselect', 'standing-unavailable-policy', 'closed-policy', 'review-policy', 'blocked-listing-policy', 'salary-review-policy', 'review-salary-line', 'mark-unavailable', 'mark-redirect-unavailable', 'unresolved-policy', 'upgrade-unresolved-extractor', 'mark-unresolved', 'preserve-stopped-observation', 'retry-redirect-observation', 'retry-incomplete-observation', 'note-change', 'record-error', 'check-stage', 'stage-ok', 'resume-offline', 'resume-browser', 'diagnostic-authorization', 'external-threshold-authorization', 'diagnostic-pending-capture']:
+    for name in ['register-standing-run', 'redact-finalized-provenance', 'archive-partial-pending', 'recapture-cleared-restriction', 'user-detail-skip-policy', 'user-skip-policy', 'mark-policy-skipped', 'mark-user-skipped', 'public-provenance', 'review-address-button', 'recurring-reviewed-continuation', 'recurring-unavailable-continuation', 'recurring-incomplete-policy', 'recurring-incomplete-attempt', 'recurring-ip-after-preflight', 'recurring-ip-policy', 'recurring-ip-attempt', 'sweep-init', 'sweep-snapshot', 'sweep-register-branch', 'sweep-set-branch-status', 'sweep-materialize', 'sweep-report', 'sweep-demo-export', 'archive-uncertain-freeze', 'archive-partial-listing', 'partition', 'partial-suffix', 'deduplicate-queue', 'continuation', 'supplemental', 'freeze', 'capture', 'finalize', 'post-finalize-review', 'publish', 'reselect', 'standing-unavailable-policy', 'closed-policy', 'review-policy', 'blocked-listing-policy', 'salary-review-policy', 'review-salary-line', 'mark-unavailable', 'mark-redirect-unavailable', 'unresolved-policy', 'upgrade-unresolved-extractor', 'mark-unresolved', 'preserve-stopped-observation', 'retry-redirect-observation', 'retry-incomplete-observation', 'note-change', 'record-error', 'check-stage', 'stage-ok', 'resume-offline', 'resume-browser', 'diagnostic-authorization', 'external-threshold-authorization', 'diagnostic-pending-capture']:
         command = commands.add_parser(name)
         command.add_argument('--run-id', required=True)
-        if name == 'archive-partial-pending':
+        if name == 'register-standing-run':
+            for flag in ('goal-source', 'authorization-id', 'technical-instruction', 'ip-instruction'):
+                command.add_argument('--' + flag, required=True)
+        elif name == 'archive-partial-pending':
             command.add_argument('--id', required=True); command.add_argument('--human-instruction', required=True)
         elif name == 'recapture-cleared-restriction':
             command.add_argument('--id', required=True); command.add_argument('--authorization-id', required=True); command.add_argument('--tab-id', required=True); command.add_argument('--retry-reason', required=True); command.add_argument('--config', type=Path)
@@ -3871,11 +3939,12 @@ def main():
         elif name in ('recurring-reviewed-continuation', 'recurring-unavailable-continuation', 'recurring-incomplete-attempt', 'recurring-ip-attempt', 'recurring-ip-after-preflight'):
             command.add_argument('--source', required=True); command.add_argument('--id', required=True); command.add_argument('--authorization-id', required=True)
             if name == 'recurring-incomplete-attempt': command.add_argument('--visible-http-502', action='store_true', help='Require an exact saved visible HTTP 502 page')
+            if name == 'recurring-ip-attempt': command.add_argument('--missing-sandbox-log', type=Path, help='Original completed Aside log when the stopped sandbox is missing')
         elif name in ('freeze', 'capture', 'diagnostic-pending-capture'):
             command.add_argument('--tab-id', help='Explicitly authorized Aside browser targetId')
             command.add_argument('--config', type=Path, help='Local config also used by setup_workspace/preflight')
             for target in ('host', 'account', 'profile'): command.add_argument('--'+target, help='Explicit Aside target; must match the pinned run')
-        if name in ('redact-finalized-provenance', 'archive-partial-pending', 'recapture-cleared-restriction', 'user-detail-skip-policy', 'user-skip-policy', 'mark-policy-skipped', 'mark-user-skipped', 'public-provenance', 'review-address-button', 'recurring-reviewed-continuation', 'recurring-unavailable-continuation', 'recurring-incomplete-policy', 'recurring-incomplete-attempt', 'recurring-ip-policy', 'recurring-ip-attempt', 'recurring-ip-after-preflight'):
+        if name in ('register-standing-run', 'redact-finalized-provenance', 'archive-partial-pending', 'recapture-cleared-restriction', 'user-detail-skip-policy', 'user-skip-policy', 'mark-policy-skipped', 'mark-user-skipped', 'public-provenance', 'review-address-button', 'recurring-reviewed-continuation', 'recurring-unavailable-continuation', 'recurring-incomplete-policy', 'recurring-incomplete-attempt', 'recurring-ip-policy', 'recurring-ip-attempt', 'recurring-ip-after-preflight'):
             pass
         elif name == 'sweep-init':
             command.add_argument('--spec', type=Path, required=True)
@@ -4041,6 +4110,8 @@ def main():
         parser.error('batch-size must be positive')
     with ExitStack() as stack:
         try:
+            if args.command == 'register-standing-run':
+                stack.enter_context(operation_locked(paths(ROOT, args.run_id)[2]))
             if args.command in ('redact-finalized-provenance', 'archive-partial-pending', 'recapture-cleared-restriction', 'user-detail-skip-policy', 'user-skip-policy', 'mark-policy-skipped', 'mark-user-skipped', 'public-provenance', 'review-address-button', 'recurring-reviewed-continuation', 'recurring-unavailable-continuation', 'recurring-incomplete-policy', 'recurring-incomplete-attempt', 'recurring-ip-after-preflight', 'recurring-ip-policy', 'recurring-ip-attempt', 'archive-uncertain-freeze', 'archive-partial-listing', 'partition', 'partial-suffix', 'deduplicate-queue', 'continuation', 'supplemental', 'freeze', 'capture', 'finalize', 'post-finalize-review', 'publish', 'reselect', 'standing-unavailable-policy', 'closed-policy', 'review-policy', 'blocked-listing-policy', 'salary-review-policy', 'review-salary-line', 'mark-unavailable', 'mark-redirect-unavailable', 'unresolved-policy', 'upgrade-unresolved-extractor', 'mark-unresolved', 'preserve-stopped-observation', 'retry-redirect-observation', 'retry-incomplete-observation', 'record-error', 'stage-ok', 'resume-browser', 'resume-offline', 'diagnostic-authorization', 'external-threshold-authorization', 'diagnostic-pending-capture'):
                 lock_run_id = args.parent_run_id if args.command in ('continuation', 'supplemental') else args.source_run_id if args.command in ('partial-suffix', 'deduplicate-queue') else args.run_id
                 stack.enter_context(operation_locked(paths(ROOT, lock_run_id)[2]))
