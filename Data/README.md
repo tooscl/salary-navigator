@@ -281,3 +281,5 @@ avito_runs/<название_сбора>/
 - [20261109-krasnodar-all](avito_runs/20261109-krasnodar-all/exports/vacancies_flat.csv): 1112 вакансий.
 
 - [20261109-krasnodar-gruzchik](avito_runs/20261109-krasnodar-gruzchik/exports/vacancies_flat.csv): 184 вакансий.
+
+- [20261109-krasnodar-upakovshchik](avito_runs/20261109-krasnodar-upakovshchik/exports/vacancies_flat.csv): 132 вакансий.
