@@ -21,7 +21,7 @@
     "source": "title, profession, city, location_observed",
     "policy": "added_next_to_observed_columns_not_replacing"
   },
-  "rows": 29544,
+  "rows": 29640,
   "columns": [
     "source",
     "id",
@@ -151,7 +151,7 @@
     "enriched_fields",
     "enrichment_version"
   ],
-  "sha256": "0cf64cca7d4611b62066502c8dde8b1dbd2caa683eb7f7e0d18884b99117cd11",
+  "sha256": "521bb3bf66cd32755693c2e143c105242617ff8fe1813112fcdd9192abc5c7d9",
   "inputs": [
     {
       "run_id": "20261028-spb-50-all",
@@ -5341,6 +5341,18 @@
         }
       },
       "rows": 1199
+    },
+    {
+      "run_id": "20261110-ryazan-fasovshchik",
+      "source": "avito",
+      "path": "Data/avito_runs/20261110-ryazan-fasovshchik/exports/vacancies_flat.csv",
+      "sha256": "c27da58de51d17e72c0eeaa775fcd0363d0b4f68b2c54ed42b38885e8cb471c1",
+      "placement_regions": {
+        "Рязань": "Рязанская область",
+        "Дядьково": "Рязанская область"
+      },
+      "enrichment_status": "not_run",
+      "rows": 111
     },
     {
       "run_id": "20261110-ryazan-gruzchik",
