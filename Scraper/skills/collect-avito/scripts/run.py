@@ -14,7 +14,7 @@ import subprocess
 import sys
 import time
 import uuid
-from threading import Thread
+from threading import Event, Thread
 from urllib.parse import urlsplit, parse_qs
 
 SCRIPTS = Path(__file__).resolve().parent
@@ -386,13 +386,20 @@ def import_sandbox(sandbox, out, diag):
                 temporary.replace(target)
 
 
-def pipe_chunks(stream):
+def pipe_chunks(stream, stoppable=False):
     """Read subprocess stdout without select(), which only accepts sockets on Windows."""
     chunks = Queue()
+    stop = Event()
 
     def read_chunks():
         try:
             while True:
+                if stoppable and os.name != 'nt':
+                    import select
+                    if stop.is_set():
+                        break
+                    if not select.select([stream], [], [], .1)[0]:
+                        continue
                 chunk = stream.read1(65536)
                 if not chunk:
                     break
@@ -403,6 +410,7 @@ def pipe_chunks(stream):
             chunks.put(None)
 
     reader = Thread(target=read_chunks, daemon=True)
+    reader.stop_reading = stop
     reader.start()
     return chunks, reader
 
@@ -487,7 +495,23 @@ def release_browser(diag):
             path.rename(destination)
 
 
-def launch_repl(command, cwd):
+def launch_repl(command, cwd, interactive=False):
+    if interactive and os.name != 'nt':
+        import pty
+        import tty
+        master, slave = pty.openpty()
+        try:
+            # Raw mode disables echo and the canonical line-length limit: the
+            # injected extractor is much larger than a terminal input line.
+            tty.setraw(slave)
+            process = subprocess.Popen(command, stdin=slave, stdout=slave, stderr=slave,
+                                       cwd=cwd, start_new_session=True)
+            process.stdin = os.fdopen(os.dup(master), 'wb')
+            process.stdout = os.fdopen(os.dup(master), 'rb')
+            return process
+        finally:
+            os.close(master)
+            os.close(slave)
     return subprocess.Popen(command, stdin=subprocess.PIPE, stdout=subprocess.PIPE,
                             stderr=subprocess.STDOUT, cwd=cwd, start_new_session=True)
 
@@ -502,8 +526,8 @@ def browser(job, out, diag):
     executable = find_aside()
     if not executable:
         raise RuntimeError('Aside CLI not found; follow collect-avito/references/FIRST_RUN.md')
-    process = launch_repl(aside_command(executable) + ['repl'], ROOT)
-    incoming, reader = pipe_chunks(process.stdout)
+    process = launch_repl(aside_command(executable) + ['repl'], ROOT, interactive=True)
+    incoming, reader = pipe_chunks(process.stdout, stoppable=os.name != 'nt')
     chunks = bytearray()
     def until(pattern, timeout, offset=0):
         deadline = time.monotonic() + timeout
@@ -528,7 +552,11 @@ def browser(job, out, diag):
     started = time.perf_counter()
     try:
         process.stdin.write(b'console.log("TL_SESSION="+pwd)\n'); process.stdin.flush()
-        sandbox = Path(until(r'TL_SESSION=([^\r\n]+)\r?\n', 20)[1].strip())
+        # Aside's interactive readline may echo our input even with terminal
+        # echo disabled. Only a complete output line is a protocol marker.
+        sandbox = Path(until(r'(?m)^TL_SESSION=([^\r\n]+)\r?\n', 20)[1].strip())
+        if not sandbox.is_absolute() or not sandbox.is_dir():
+            raise RuntimeError('Aside returned an invalid sandbox path')
         write(diag / 'sandbox.json', {'path': str(sandbox)})
         # One REPL RPC per navigation avoids Aside's per-evaluation 120s budget
         # becoming a timeout on the entire queue. No model calls between cards.
@@ -544,7 +572,7 @@ def browser(job, out, diag):
             expression = 'await eval(' + json.dumps('(async()=>{' + script + '})()') + ')\n'
             offset = len(chunks)
             process.stdin.write(expression.encode()); process.stdin.flush()
-            until(r'TL_FINISHED\r?\n', 140, offset)
+            until(r'(?m)^TL_FINISHED\r?\n', 140, offset)
             import_sandbox(sandbox, out, diag)
             cp = read(diag/'checkpoint.json')
             cp['capture_seconds'] = job.get('previous_capture_seconds', 0) + time.perf_counter()-started
@@ -557,10 +585,15 @@ def browser(job, out, diag):
                 if sum(d['accepted'] for d in decisions) >= job['selection_target']:
                     break
     finally:
+        if os.name != 'nt':
+            reader.stop_reading.set()
+            reader.join(timeout=2)
         if preserve and process.poll() is None and process.stdin and process.stdout:
             retain_repl(process, diag, sandbox, job)
         if process.stdin:
             process.stdin.close()
+        if preserve and os.name != 'nt' and process.stdout:
+            process.stdout.close()  # keeper owns its duplicate after handoff
         if not preserve:
             try:
                 process.wait(timeout=3)
@@ -1654,7 +1687,8 @@ def salary_review_policy(args):
                       and re.match(r'^\s*да(?:\s|[,!.]|$)', answer)
                       and 'всех таких случа' in answer
                       and not re.search(r'\b(?:нет|не|кроме|только)\b', answer))
-    if args.id not in instruction or not (direct or contextual):
+    standing = getattr(args, 'standing_technical', False)
+    if not standing and (args.id not in instruction or not (direct or contextual)):
         raise ValueError('Authorization must request fixing this case and continuing')
     cp = read(diag/'checkpoint.json'); queue = read(out/'queue.json')
     matches = [item for item in queue if item['id'] == args.id]
@@ -3051,7 +3085,9 @@ def retry_incomplete_observation(args):
     auth = [i for i, e in enumerate(events) if e.get('event') in ('human_browser_authorization', 'recurring_incomplete_authorization', 'recurring_502_authorization') and e.get('authorization_id') == args.authorization_id]
     if ledger['state'] in ('NEEDS_HUMAN', 'RETRY_STARTED') or not auth or any(e.get('event') == 'failure' for e in events[auth[-1]+1:]):
         raise HumanRequired('Fresh browser authorization after the stop is required')
-    if events[auth[-1]].get('event') == 'human_browser_authorization' and args.id not in events[auth[-1]].get('instruction', ''):
+    if (events[auth[-1]].get('event') == 'human_browser_authorization'
+            and args.id not in events[auth[-1]].get('instruction', '')
+            and not getattr(args, 'standing_incomplete', False)):
         raise HumanRequired('Authorization must identify the pending ID')
     if events[auth[-1]].get('event') in ('recurring_incomplete_authorization', 'recurring_502_authorization') and events[auth[-1]].get('pending_id') != args.id:
         raise HumanRequired('Recurring authorization must match the pending ID')
@@ -3926,6 +3962,7 @@ def main():
         elif name == 'salary-review-policy':
             command.add_argument('--id', required=True)
             command.add_argument('--authorization-id', required=True)
+            command.add_argument('--standing-technical', action='store_true', help='Apply an explicit standing instruction to fix technical collection issues and continue')
         elif name == 'review-salary-line':
             command.add_argument('--id', required=True)
             command.add_argument('--authorization-id', required=True)
@@ -3965,6 +4002,7 @@ def main():
         elif name == 'retry-incomplete-observation':
             command.add_argument('--id', required=True)
             command.add_argument('--authorization-id', required=True)
+            command.add_argument('--standing-incomplete', action='store_true', help='Use an explicit standing human instruction permitting incomplete-shell technical retries')
         elif name == 'reselect':
             command.add_argument('--reason', required=True)
         elif name == 'record-error':
