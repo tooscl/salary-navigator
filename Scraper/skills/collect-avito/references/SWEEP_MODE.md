@@ -92,7 +92,7 @@ python -X utf8 Scraper/skills/collect-avito/scripts/run.py freeze `
   --run-id <branch_run_id> --url '<observed URL>' --all-pages `
   --branch-only --max-pages 30 --geography '<география>' `
   --profession '<профессия>' --segments '<исходные ограничения>' `
-  --filter-evidence '<видимые controls>' --agent-model gpt-6-luna
+  --filter-evidence '<видимые controls>' --agent-model gpt-6.1-terra
 
 # После небазовой ветки снять значение, подтвердить базовые controls и сохранить snapshot reset_<branch>.
 python -X utf8 Scraper/skills/collect-avito/scripts/run.py sweep-register-branch `

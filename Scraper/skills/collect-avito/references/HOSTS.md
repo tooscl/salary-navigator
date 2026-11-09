@@ -6,7 +6,7 @@ checkout. Версия инструкции, код и файлы данных �
 
 | Исполнитель | Инструкция при открытии проекта | Навык | Модели этапов |
 |---|---|---|---|
-| Codex | `AGENTS.md` | `.agents/skills/collect-avito/SKILL.md`, вызов `$collect-avito` | `gpt-6-luna`, low → `gpt-6.1-terra`, medium |
+| Codex | `AGENTS.md` | `.agents/skills/collect-avito/SKILL.md`, вызов `$collect-avito` | `gpt-6.1-terra`, low → `gpt-6.1-terra`, medium |
 | Claude Code | `CLAUDE.md`, который направляет в `AGENTS.md` | `.claude/skills/collect-avito/SKILL.md`, вызов `/collect-avito` | `avito-capture`, Haiku → `avito-review`, Sonnet |
 
 После скачивания откройте **корень проекта** в выбранном приложении. Новую
@@ -47,13 +47,13 @@ Preflight окружения выполняет ведущий до запуск
 
 Ведущий запускает отдельного агента через `collaboration.spawn_agent`:
 
-- Браузерный этап: `fork_turns="none"`, `model="gpt-6-luna"`, `reasoning_effort="low"`.
+- Браузерный этап: `fork_turns="none"`, `model="gpt-6.1-terra"`, `reasoning_effort="low"`.
 - Проверка/исключения: `fork_turns="none"`, `model="gpt-6.1-terra"`, `reasoning_effort="medium"`.
 
-Один Luna исполняет весь сбор последовательными вызовами capture по пакетам.
-Terra подключается один раз после всех пакетов для finalize, проверки сводки
+Один агент Terra low исполняет весь сбор последовательными вызовами capture по пакетам.
+Агент проверки Terra medium подключается один раз после всех пакетов для finalize, проверки сводки
 и публикации; во время сбора — только для разбора зафиксированной ошибки.
-Успешный пакет не вызывает модельную проверку. После ремонта Luna продолжает
+Успешный пакет не вызывает модельную проверку. После ремонта агент Terra low продолжает
 с checkpoint; общий журнал и бюджет сохраняются.
 
 Модели и поля инструмента относятся к Codex. `agents/openai.yaml` — только
@@ -101,13 +101,13 @@ run_id, точные фильтры/лимит, этап, путь конфиг�
 
 | Исполнитель | freeze | finalize |
 |---|---|---|
-| Codex | `--agent-model gpt-6-luna` | `--review-model gpt-6.1-terra` |
+| Codex | `--agent-model gpt-6.1-terra` | `--review-model gpt-6.1-terra` |
 | Claude Code, если известен только alias | `--agent-model haiku` | `--review-model sonnet` |
 
 Когда полный фактический Claude ID доступен, передавайте его вместо alias.
 В итоговой сводке укажите приложение, реальную модель либо alias с оговоркой,
 ID/имена запущенных агентов, версию инструкции и commit. Не оставляйте
-`gpt-6-luna`/Terra в командах, перенесённых в Claude из примера Codex.
+`gpt-6.1-terra`/Terra в командах, перенесённых в Claude из примера Codex.
 
 ## Скачать или перенести
 

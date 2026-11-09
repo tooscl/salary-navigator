@@ -27,7 +27,7 @@
 - Для ограниченного сбора вакансий прочитайте
   [collect-avito](Scraper/skills/collect-avito/SKILL.md). Это общий навык проекта,
   а не подтверждение, что он установлен в каталоге skills каждого участника.
-  Маршрут моделей зависит от приложения: Codex — Luna low для браузерного
+  Маршрут моделей зависит от приложения: Codex — Terra low для браузерного
   пакета, Terra для проверки/исключений и PR; Claude Code — проектный
   avito-capture (Haiku), затем avito-review (Sonnet). Карта файлов/моделей —
   Scraper/skills/collect-avito/references/HOSTS.md. Ведущий явно делегирует
