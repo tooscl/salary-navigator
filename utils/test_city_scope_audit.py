@@ -63,6 +63,21 @@ class CityScopeTests(unittest.TestCase):
         result=c.audit(self.root,self.run,'Краснодар','some other region')
         self.assertEqual(next(x for x in result['decisions'] if x['id']=='1')['decision'],'unknown')
 
+    def test_explicit_other_region_is_outside_without_city(self):
+        ident='3'; address='Московская обл., неизвестный населённый пункт'
+        rawpath=f'{self.base}/raw/{ident}.json'; raw=json.loads((self.root/rawpath).read_bytes());raw['location_raw']=[address];self.put(rawpath,raw)
+        rows=list(csv.DictReader(io.StringIO((self.root/f'{self.base}/exports/vacancies_flat.csv').read_bytes().decode('utf-8-sig'))));rows[2]['location_observed']=address
+        output=io.StringIO(newline='');writer=csv.DictWriter(output,fieldnames=rows[0],lineterminator='\n');writer.writeheader();writer.writerows(rows);self.putbytes(f'{self.base}/exports/vacancies_flat.csv',output.getvalue().encode('utf-8-sig'));self.write_manifest()
+        decision=c.audit(self.root,self.run,'Краснодар','Краснодарский край')['decisions'][2]
+        self.assertEqual((decision['decision'],decision['reason'],decision['visible_region']),('outside_city','different_visible_region','Московская обл.'))
+        self.assertEqual(c.explicit_region('улица Московская'),None)
+        self.assertEqual(c.explicit_region('р-н Московский'),None)
+        self.assertEqual(c.explicit_region('Рязанская обл.'), c.explicit_region('Рязанская область'))
+
+    def test_same_region_without_city_stays_unknown(self):
+        result=c.audit(self.root,self.run,'Краснодар','Краснодарский край')
+        self.assertEqual(result['decisions'][2]['decision'],'unknown')
+
     def test_changed_raw_rejected(self):
         (self.root/f'{self.base}/raw/1.json').write_text('{}')
         with self.assertRaisesRegex(ValueError,'Source file changed'): c.audit(self.root,self.run,'Краснодар','Краснодарский край')

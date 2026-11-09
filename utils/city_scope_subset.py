@@ -4,18 +4,19 @@ import re
 from pathlib import Path
 
 try:
-    from . import city_scope_audit
+    from . import city_scope_audit, city_scope_audit_v1
 except ImportError:
     import city_scope_audit
+    import city_scope_audit_v1
 
 VERSION = 'city_remote_subset_v1'
 
 
-def make_spec(root, run, transformation_id, city, region_quote):
+def make_spec(root, run, transformation_id, city, region_quote, audit_module=city_scope_audit):
     root=Path(root).resolve()
     if not re.fullmatch(r'[a-zA-Z0-9][a-zA-Z0-9_-]*', transformation_id):
         raise ValueError('Invalid transformation ID')
-    report=city_scope_audit.audit(root,run,city,region_quote)
+    report=audit_module.audit(root,run,city,region_quote)
     manifest=json.loads((root / report['source_manifest']['path']).read_bytes())
     files=manifest['files']; base=f'Data/avito_runs/{run}'; plan_name=f'Scraper/runs/{run}/plan.json'; listing_name=f'{base}/listing.json'
     if plan_name not in files or listing_name not in files:
@@ -46,7 +47,9 @@ def make_spec(root, run, transformation_id, city, region_quote):
 def render(root, spec):
     if spec.get('version') != VERSION: raise ValueError('Unknown city subset version')
     audit=spec['audit']
-    expected=make_spec(root,spec['source_run_id'],spec['transformation_id'],audit['target_city'],audit['target_region_quote'])
+    legacy_hash = city_scope_audit_v1.sha(Path(city_scope_audit_v1.__file__).read_bytes())
+    audit_module = city_scope_audit_v1 if audit.get('audit_code_sha256') == legacy_hash else city_scope_audit
+    expected=make_spec(root,spec['source_run_id'],spec['transformation_id'],audit['target_city'],audit['target_region_quote'],audit_module)
     if spec != expected: raise ValueError('City subset audit differs from source')
     return city_scope_audit.render_included(root,spec['source_run_id'],audit)
 

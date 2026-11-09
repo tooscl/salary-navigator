@@ -1,10 +1,11 @@
 {
   "schema_version": "1",
   "builder_version": "1",
-  "builder_sha256": "e5b79900951e51cbf8273c4617ac4b08d3caee3f4e469ca5b8b8b630757ab8f1",
+  "builder_sha256": "7e581b8860e5609e72ba90ed3c5ae1c6a977d3e8e4d085217f6d787b91a2bf7c",
   "placement_transform_sha256": "6f860342ad62f1a8ed10b62354297da7c2e7e27e1a9d170b34e484416ec399b6",
-  "city_scope_audit_sha256": "5a479702590a3e2a818a1ae247b59bc018beba386c506af16e01af56b55c96fc",
-  "city_scope_subset_sha256": "31d5ce50427aeb23d63a65eb130b9bdd3b41ce005bd51491e6e2230c433e5447",
+  "city_scope_audit_sha256": "72f5fb34740ac409dc32fa05084077c9b5b0629fe35dfdfb4be461f89fc096ee",
+  "city_scope_audit_v1_sha256": "5a479702590a3e2a818a1ae247b59bc018beba386c506af16e01af56b55c96fc",
+  "city_scope_subset_sha256": "93c718349a6cebd6d056dff630312accc5ec3b5f9590448468c1e61955039a17",
   "title_flags": {
     "version": "military_title_v1",
     "sha256": "9c9456cb3fb0df5791630049c9c85987381091dbb9ba18bc3fb3314b8cccbeb6",
@@ -23,7 +24,7 @@
     "source": "title, profession, city, location_observed",
     "policy": "added_next_to_observed_columns_not_replacing"
   },
-  "rows": 29817,
+  "rows": 29842,
   "columns": [
     "source",
     "id",
@@ -153,7 +154,7 @@
     "enriched_fields",
     "enrichment_version"
   ],
-  "sha256": "4d50d1b8dcf2d8064de574ee49a8611a963f0408e3bd9a67a1902175ec164d50",
+  "sha256": "b257f78e7dba1b7332f323ebb9355d7e5280ec9b8cb9fb607a610d79adbc2fae",
   "inputs": [
     {
       "run_id": "20261028-spb-50-all",
@@ -5558,6 +5559,21 @@
         "sha256": "0775c8482be2d5a456d96f2a680258d070ee045fe2794f3f226e05a1e477e7a8"
       },
       "rows": 258
+    },
+    {
+      "run_id": "20261110-ryazan-remote-all",
+      "source": "avito",
+      "path": "Data/transformations/20261110-ryazan-remote-all-city-v1/vacancies_flat.csv",
+      "sha256": "9fc799022c7cce41007b626ec0dcaef8dcd60b627119750a6d881be1273d6fdf",
+      "placement_regions": {
+        "Рязань": "Рязанская область"
+      },
+      "enrichment_status": "not_run",
+      "transformation": {
+        "path": "Data/transformations/20261110-ryazan-remote-all-city-v1/transformation.json",
+        "sha256": "178bd05206218e70cc1f7e8529e798c7d40f917afece8d89540fb9e2e1152a2c"
+      },
+      "rows": 41
     },
     {
       "run_id": "20261110-ryazan-sklad",
