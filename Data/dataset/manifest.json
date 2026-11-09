@@ -20,7 +20,7 @@
     "source": "title, profession, city, location_observed",
     "policy": "added_next_to_observed_columns_not_replacing"
   },
-  "rows": 28829,
+  "rows": 28954,
   "columns": [
     "source",
     "id",
@@ -150,7 +150,7 @@
     "enriched_fields",
     "enrichment_version"
   ],
-  "sha256": "6aee073ad0712e3568ec946e0d8ecb288740854bffe90b3a0f8931c595567e95",
+  "sha256": "1564a8b6ebffd1a471b45b7150fa4d87ac5ebcf4ee4f5a263748a39f7680ed48",
   "inputs": [
     {
       "run_id": "20261028-spb-50-all",
@@ -5412,6 +5412,29 @@
         }
       },
       "rows": 407
+    },
+    {
+      "run_id": "20261110-ryazan-sklad",
+      "source": "avito",
+      "path": "Data/avito_runs/20261110-ryazan-sklad/exports/vacancies_flat.csv",
+      "sha256": "c4034ceb2d40bfea24df6d4c1380842e58c287262666a65c40a40772cf431721",
+      "placement_regions": {
+        "Рязань": "Рязанская область"
+      },
+      "enrichment_status": "not_run",
+      "unknown_city_placements": {
+        "7393290726": {
+          "region": "Рязанская область",
+          "evidence": "Рязанская обл., Рязанский р-н, Тюшевское сельское поселение, индустриальный промышленный парк Рязанский",
+          "region_unknown": false
+        },
+        "4086684390": {
+          "region": "Рязанская область",
+          "evidence": "Рязанская обл., г.о. Рязань р-н Железнодорожный",
+          "region_unknown": false
+        }
+      },
+      "rows": 148
     },
     {
       "run_id": "20261110-ryazan-upakovshchik",
