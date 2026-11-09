@@ -347,7 +347,7 @@ const listBrowserTabs=async()=>[],openTab=async()=>pg,snapshot=async()=>({tree:'
                 with self.assertRaises(runner.HumanRequired): runner.resume_browser(args)
 
     def test_retry_incomplete_requires_authorized_matching_forensic_evidence(self):
-        for scenario in ('ok', 'old_auth', 'wrong_id', 'restriction', 'snapshot', 'prefix'):
+        for scenario in ('ok', 'standing', 'missing_id', 'old_auth', 'wrong_id', 'restriction', 'snapshot', 'prefix'):
             with self.subTest(scenario=scenario), tempfile.TemporaryDirectory() as directory, patch.object(runner, 'ROOT', Path(directory)):
                 root = runner.ROOT; run_id = 'case'; out, service, diag = runner.paths(root, run_id); sandbox = root/'sandbox'
                 queue = [item('123'), item('456')]; queue[1]['listing_rank'] = 2
@@ -363,16 +363,16 @@ const listBrowserTabs=async()=>[],openTab=async()=>pg,snapshot=async()=>({tree:'
                 snap = '# note: interactive (clickable / focusable) elements only.\n- title: "Авито" [url='+queue[1]['url']+']\n- link "Помощь" [ref=e1]\n'
                 (diag/'problem.snapshot.txt').write_text(snap, encoding='utf8'); (sandbox/'problem.snapshot.txt').write_text(snap + ('tamper' if scenario == 'snapshot' else ''), encoding='utf8')
                 runner.record_failure(diag, 'capture', 'stopped', 'capture', immediate=True)
-                runner.authorize_browser(diag, 'Повторить карточку 456', 'auth')
+                runner.authorize_browser(diag, 'Самостоятельно повторять технические ошибки' if scenario in ('standing', 'missing_id') else 'Повторить карточку 456', 'auth')
                 if scenario == 'old_auth': runner.record_failure(diag, 'capture', 'new stop', 'capture', immediate=True)
-                args = argparse.Namespace(run_id=run_id, id='999' if scenario == 'wrong_id' else '456', authorization_id='auth')
+                args = argparse.Namespace(run_id=run_id, id='999' if scenario == 'wrong_id' else '456', authorization_id='auth', standing_incomplete=scenario == 'standing')
                 original = (out/'raw/456.json').read_bytes(); plan_bytes = (service/'plan.json').read_bytes(); queue_bytes = (out/'queue.json').read_bytes()
                 with patch.object(runner, 'validate_partition'), patch.object(runner, 'validate_plan_profession'), patch.object(runner, 'queue_from_pages', return_value=queue), patch.object(runner, 'unavailable_records', return_value=[]), patch.object(runner, 'unresolved_records', return_value=[]):
-                    if scenario == 'ok': runner.retry_incomplete_observation(args)
+                    if scenario in ('ok', 'standing'): runner.retry_incomplete_observation(args)
                     else:
                         with self.assertRaises((ValueError, runner.HumanRequired)): runner.retry_incomplete_observation(args)
                 self.assertEqual((service/'plan.json').read_bytes(), plan_bytes); self.assertEqual((out/'queue.json').read_bytes(), queue_bytes)
-                if scenario == 'ok':
+                if scenario in ('ok', 'standing'):
                     digest = hashlib.sha256(original).hexdigest(); self.assertEqual((out/'observations/456'/f'{digest}.json').read_bytes(), original)
                     self.assertFalse((out/'raw/456.json').exists()); self.assertEqual((sandbox/'raw/456.json').read_bytes(), original)
                     self.assertEqual(runner.read(diag/'checkpoint.json')['completed_ids'], ['123'])
@@ -1185,6 +1185,68 @@ const snapshot=async()=>({tree:'stopped'});const closeTab=async()=>{closed++}; c
             self.assertEqual(archived.read_bytes(), original)
             runner.release_browser(diag)  # already released
 
+    @unittest.skipIf(os.name == 'nt', 'POSIX terminal transport')
+    def test_browser_ignores_prompt_echo_and_imports_complete_batch(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            sandbox, diag, out = root/'sandbox', root/'diagnostics', root/'out'
+            sandbox.mkdir(); diag.mkdir(); out.mkdir()
+            fake = root/'fake_repl.py'
+            fake.write_text('''import json, pathlib, sys, time
+sandbox = pathlib.Path(sys.argv[1])
+line = sys.stdin.readline()
+print('repl > ' + line, end='', flush=True)
+time.sleep(.1)
+print('TL_SESSION=' + str(sandbox), flush=True)
+line = sys.stdin.readline()
+print('repl > ' + line, end='', flush=True)
+(sandbox/'received.txt').write_text(line)
+(sandbox/'checkpoint.json').write_text(json.dumps({'state':'READY','completed_ids':[]}))
+(sandbox/'listing.json').write_text(json.dumps({'items':list(range(50))}))
+print('TL_FINISHED', flush=True)
+sys.stdin.read()
+''')
+            job = {'mode': 'freeze', 'completed_ids': []}
+            with patch.object(runner, 'find_aside', return_value='fake'), \
+                    patch.object(runner, 'aside_command', return_value=[sys.executable, '-u', str(fake), str(sandbox)]):
+                checkpoint, _ = runner.browser(job, out, diag)
+            try:
+                self.assertEqual(checkpoint['state'], 'READY')
+                self.assertEqual(runner.read(diag/'sandbox.json')['path'], str(sandbox))
+                self.assertEqual(len(runner.read(diag/'listing.json')['items']), 50)
+                received = (sandbox/'received.txt').read_text()
+                self.assertTrue(received.startswith('await eval('))
+                self.assertTrue(received.endswith(')\n'))
+                self.assertGreater(len(received), sum(len(s) for s in runner.browser_sources()))
+            finally:
+                runner.release_browser(diag)
+
+    @unittest.skipIf(os.name == 'nt', 'POSIX terminal transport')
+    def test_interactive_repl_accepts_large_line_before_eof_and_keeper_releases(self):
+        with tempfile.TemporaryDirectory() as directory:
+            diag = Path(directory)
+            script = ('import sys; assert sys.stdin.isatty(); '
+                      'line=sys.stdin.buffer.readline(); '
+                      'print("LENGTH="+str(len(line)),flush=True); sys.stdin.buffer.read()')
+            proc = runner.launch_repl([sys.executable, '-u', '-c', script], diag, interactive=True)
+            try:
+                payload = b'x' * (len(runner.browser_sources()[0].encode()) + len(runner.browser_sources()[1].encode())) + b'\n'
+                proc.stdin.write(payload); proc.stdin.flush()
+                chunks, reader = runner.pipe_chunks(proc.stdout, stoppable=True)
+                output = chunks.get(timeout=10)
+                self.assertEqual(output.strip(), f'LENGTH={len(payload)}'.encode())
+                reader.stop_reading.set(); reader.join(timeout=2)
+                self.assertFalse(reader.is_alive())
+                runner.retain_repl(proc, diag, None, {})
+                info = runner.read(diag/'browser-session.local.json')
+                proc.stdin.close(); proc.stdout.close()
+                self.assertIsNone(proc.poll())
+                Path(info['release_marker']).touch()
+                proc.wait(timeout=5)
+            finally:
+                if proc.poll() is None:
+                    proc.kill(); proc.wait()
+
     def test_keeper_lifecycle_with_reused_pid_and_old_marker(self):
         with tempfile.TemporaryDirectory() as directory:
             diag = Path(directory)
@@ -1761,6 +1823,23 @@ p.stdin.close()
             invalid = dict(data, params_blocks=[data['params_blocks'][0].replace('105\u00a0000\u00a0₽', '2 360 - текст ₽'), data['params_blocks'][1]])
             with self.assertRaisesRegex(ValueError, 'exactly one'):
                 runner.salary_line_review(invalid, '123', item()['url'])
+
+    def test_standing_technical_salary_policy_preserves_instruction(self):
+        with tempfile.TemporaryDirectory() as directory, patch.object(runner, 'ROOT', Path(directory)):
+            out, _, diag = runner.paths(runner.ROOT, 'salary-standing')
+            data = raw(); data.update(params_blocks=['Условия\nГрафик: Сменный\nОклад37 000 - 88 000 ₽', 'Требования\nОпыт: Без опыта'], fields=[{'name':'График','value':'Сменный'}, {'name':'Опыт','value':'Без опыта'}], parameter_audit={'rendered_complete':False,'expansion_controls':[]})
+            runner.write(out/'raw/123.json', data); original = (out/'raw/123.json').read_bytes()
+            runner.write(out/'queue.json', [item('123')]); runner.write(diag/'checkpoint.json', dict(state='REVIEW_REQUIRED', stop_reason='identity_or_template_review', next_id='123', completed_ids=[]))
+            runner.record_failure(diag, 'capture', 'review', 'capture', immediate=True)
+            instruction = 'делай без остановок пока не сделаешь все'
+            runner.authorize_browser(diag, instruction, 'auth')
+            args = argparse.Namespace(run_id='salary-standing', id='123', authorization_id='auth')
+            with self.assertRaises(ValueError): runner.salary_review_policy(args)
+            args.standing_technical = True
+            runner.salary_review_policy(args); runner.review_salary_line(args)
+            self.assertEqual(runner.read(out/'salary_review_policy.json')['human_instruction'], instruction)
+            self.assertEqual((out/'raw/123.json').read_bytes(), original)
+            self.assertEqual(runner.reviewed_capture(out, item())['fields'][-1]['value'], '37 000 - 88 000 ₽')
 
     def test_salary_policy_accepts_affirmative_question_context_without_budget_change(self):
         with tempfile.TemporaryDirectory() as directory, patch.object(runner, 'ROOT', Path(directory)):
