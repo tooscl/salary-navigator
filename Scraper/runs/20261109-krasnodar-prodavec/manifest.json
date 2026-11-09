@@ -1,0 +1,2775 @@
+{
+  "run_id": "20261109-krasnodar-prodavec",
+  "dataset_id": "20261109-krasnodar-prodavec",
+  "status": "complete",
+  "schema": {
+    "columns": [
+      "id",
+      "city",
+      "profession",
+      "segments",
+      "title",
+      "salary_raw",
+      "source_url",
+      "observed_at",
+      "description",
+      "location_observed",
+      "employer_name_observed",
+      "date_raw",
+      "views_total",
+      "views_today",
+      "listing_rank",
+      "listing_promoted",
+      "full_parameters_read",
+      "analysis_status",
+      "export_eligibility",
+      "read_status_parameters",
+      "read_status_description",
+      "read_status_location",
+      "read_limitations",
+      "enrichment_status",
+      "enriched_fields",
+      "enrichment_version",
+      "military",
+      "military_keywords",
+      "military_rule_version",
+      "city__source",
+      "city__evidence",
+      "city_anomaly",
+      "График",
+      "Занятость",
+      "Способ оформления",
+      "Частота выплат",
+      "Сфера деятельности компании",
+      "Что получают работники",
+      "Ассортимент",
+      "Опыт работы",
+      "В том числе для кандидатов",
+      "Режим работы",
+      "Медкнижка",
+      "Количество рабочих часов в день",
+      "Смены",
+      "С чем надо работать",
+      "Стажировка",
+      "Количество рабочих дней в неделю",
+      "Можно заканчивать в 17:00",
+      "Длительность вахты"
+    ],
+    "unknown_policy": "empty_not_zero"
+  },
+  "collection": {
+    "run_id": "20261109-krasnodar-prodavec",
+    "geography": "Краснодар",
+    "profession": "Продавец",
+    "segments": "",
+    "filter_evidence": "Краснодар; единственная профессия Продавец; заголовок, URL и пустой поиск подтверждены; доп. фильтры не заданы.",
+    "listing_url": "https://www.avito.ru/krasnodar/vakansii/prodavec-ASgBAgICAUTUzBHs~IoD?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6Im1PYk92SWNISVgyWjE4MjgiO330ix34JgAAAA",
+    "listing_request_url": "https://www.avito.ru/krasnodar/vakansii/prodavec-ASgBAgICAUTUzBHs~IoD?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6Im1PYk92SWNISVgyWjE4MjgiO330ix34JgAAAA&localPriority=0",
+    "selected_controls": [
+      {
+        "label": "Продавец",
+        "marker": "params[144170]/checkbox/3235382",
+        "value": null
+      },
+      {
+        "label": "Продавец",
+        "marker": "params[144170]/checkbox/toggle",
+        "value": "3235382"
+      },
+      {
+        "label": "Любой",
+        "marker": "params[196929]/all",
+        "value": null
+      },
+      {
+        "label": "Любой",
+        "marker": "params[196929]/toggle",
+        "value": "all"
+      },
+      {
+        "label": "Неважно",
+        "marker": "params[172815]/all",
+        "value": null
+      },
+      {
+        "label": "Неважно",
+        "marker": "params[172815]/toggle",
+        "value": "all"
+      },
+      {
+        "label": "Неважно",
+        "marker": null,
+        "value": "all"
+      },
+      {
+        "label": "Все",
+        "marker": null,
+        "value": "all"
+      }
+    ],
+    "listing_sha256": "9eace9a688777df4855242befd5283b602fc5d4588ffba854ab5fd002aa3542d",
+    "profession_scope": null,
+    "profession_source": "observed_controls",
+    "listing_pages": [
+      {
+        "file": "listing_pages/0001.json",
+        "sha256": "9eace9a688777df4855242befd5283b602fc5d4588ffba854ab5fd002aa3542d",
+        "source_url": "https://www.avito.ru/krasnodar/vakansii/prodavec-ASgBAgICAUTUzBHs~IoD?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6Im1PYk92SWNISVgyWjE4MjgiO330ix34JgAAAA"
+      },
+      {
+        "file": "listing_pages/0002.json",
+        "sha256": "4e709768d75584fd19cc64e0a85c7946220e032b1c74856122ea4cf09f482107",
+        "source_url": "https://www.avito.ru/krasnodar/vakansii/prodavec-ASgBAgICAUTUzBHs~IoD?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6IlpjU3hwb2tyRldYMFNMV1YiO31JyYorJgAAAA&p=2"
+      },
+      {
+        "file": "listing_pages/0003.json",
+        "sha256": "f7bff78aed1ebdfbe2a085b927466a2e3d5249bb1a79dc3e3c832750c48ef245",
+        "source_url": "https://www.avito.ru/krasnodar/vakansii/prodavec-ASgBAgICAUTUzBHs~IoD?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6IlpjU3hwb2tyRldYMFNMV1YiO31JyYorJgAAAA&p=3"
+      },
+      {
+        "file": "listing_pages/0004.json",
+        "sha256": "38008f98392c1e1a59d55576c3cc3495cab551fe87f53fe4e12709428d173a31",
+        "source_url": "https://www.avito.ru/krasnodar/vakansii/prodavec-ASgBAgICAUTUzBHs~IoD?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6IlpjU3hwb2tyRldYMFNMV1YiO31JyYorJgAAAA&p=4"
+      },
+      {
+        "file": "listing_pages/0005.json",
+        "sha256": "993be4bc77fa43e11d2c4d1ab8a5ce3b821c1c8022a1b61c3c3b440b7174b2f1",
+        "source_url": "https://www.avito.ru/krasnodar/vakansii/prodavec-ASgBAgICAUTUzBHs~IoD?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6IlpjU3hwb2tyRldYMFNMV1YiO31JyYorJgAAAA&p=5"
+      },
+      {
+        "file": "listing_pages/0006.json",
+        "sha256": "254be7b0910c254cdb4a85d47b1c2a83b18b794e876e233b115fa11f6ede0976",
+        "source_url": "https://www.avito.ru/krasnodar/vakansii/prodavec-ASgBAgICAUTUzBHs~IoD?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6IlpjU3hwb2tyRldYMFNMV1YiO31JyYorJgAAAA&p=6"
+      }
+    ],
+    "selection_mode": "first_N_unique_on_frozen_listing",
+    "limit": 277,
+    "requested_all_pages": true,
+    "saved_selection_authorization": null,
+    "requested_limit": null,
+    "available_unique": 277,
+    "listing_end_reason": "confirmed_end",
+    "available_listing_exhausted": true,
+    "continuation": null,
+    "branch_only": false,
+    "max_pages": null,
+    "candidate_limit": null,
+    "created_at": "2026-11-09T20:30:44.235862+00:00",
+    "instruction_version": "1.8.1",
+    "extractor_sha256": "fa0a0e0c7df0877d15ea4f94e5fed14df514241cb51771cda18cacc04574e8b0",
+    "instruction_sha256": "4033fe896dc13c66a540d768bbc76800f3bcc41b806a5e8dbdc4881e7080b593",
+    "code_git_commit": "3a0d52a3fed65d07d20fd4ad9c44e46aa9a3b233",
+    "setup_seconds": 20.069543292280287,
+    "live_route_verified": false,
+    "execution_model": "gpt-6.1-terra",
+    "automation_sha256": {
+      "Scraper/skills/collect-avito/references/top-professions.json": "e3e72638b17b48f825ec6f2fefb963662494f679ae4b0cef1bebedba889610dd",
+      "utils/title_flags.py": "9c9456cb3fb0df5791630049c9c85987381091dbb9ba18bc3fb3314b8cccbeb6",
+      "Scraper/extract.js": "fa0a0e0c7df0877d15ea4f94e5fed14df514241cb51771cda18cacc04574e8b0",
+      "Scraper/skills/collect-avito/SKILL.md": "4033fe896dc13c66a540d768bbc76800f3bcc41b806a5e8dbdc4881e7080b593",
+      "Scraper/skills/collect-avito/scripts/run.py": "4bcbecab78fdf74298b784f17150688377853000566f88a803982a6e7f1de0d4",
+      "Scraper/skills/collect-avito/scripts/sweep_mode.py": "718a956a316df71c47ee3a4c5d3670fa011a5b16e9948393d68216702b140a56",
+      "Scraper/skills/collect-avito/scripts/browser_batch.js": "7572ff4aa773cd86ccd3d8ca3a2de6c9586b482ab6f1371dbfa152b165588eb4",
+      "Scraper/skills/collect-avito/scripts/check_capture.py": "aa746849317f9768af5aae08b394b9379539f6e268c1fc69e4ed13bd06a4657f",
+      "Scraper/skills/collect-avito/scripts/failure_log.py": "08dfd259fad4166a08acb1b056bf3cd14daede277385bd91c7e49680959475a4",
+      "Scraper/skills/collect-avito/scripts/preflight.py": "492a0d898990aee198f26bf6577d0876360dcc6ec69e274835cd77cdaa768974"
+    },
+    "uncommitted_automation_files": [
+      "Scraper/skills/collect-avito/SKILL.md",
+      "Scraper/skills/collect-avito/scripts/run.py"
+    ],
+    "city_anomaly_policy": "blank"
+  },
+  "coverage": {
+    "planned": 277,
+    "accepted": 277,
+    "unavailable": [],
+    "unresolved_observations": [],
+    "user_skipped_observations": [],
+    "user_skipped_count": 0,
+    "user_skip_policy": null,
+    "user_detail_skip_policy": null,
+    "deduplication": null,
+    "sweep": null,
+    "unique_ids": [
+      "8349562842",
+      "8459264537",
+      "8097698015",
+      "7208450700",
+      "8257341759",
+      "8115351401",
+      "8157986419",
+      "8435242312",
+      "8422060328",
+      "8457544928",
+      "8513988767",
+      "3465178290",
+      "8470092220",
+      "8153122760",
+      "4365464126",
+      "8516852571",
+      "3785386028",
+      "4197390006",
+      "3118261367",
+      "8523187670",
+      "8193978124",
+      "7638259871",
+      "4674114606",
+      "8393035337",
+      "7808698484",
+      "2920898020",
+      "8254309461",
+      "8512886815",
+      "8522863671",
+      "8576269522",
+      "8422911939",
+      "8364578980",
+      "473619939",
+      "2940286513",
+      "8044062733",
+      "4517806437",
+      "8328668347",
+      "8418460789",
+      "8404650290",
+      "4584870101",
+      "8440216540",
+      "8004409215",
+      "8332301524",
+      "4069712009",
+      "7813013019",
+      "7967602348",
+      "8420678579",
+      "8463823320",
+      "4505360188",
+      "8479555594",
+      "8512567423",
+      "8431304539",
+      "7564807072",
+      "8397900513",
+      "8557416714",
+      "2773626700",
+      "7980023659",
+      "3336891178",
+      "7774363245",
+      "2477323914",
+      "8398770344",
+      "3864735783",
+      "3173747935",
+      "8400819256",
+      "8472846044",
+      "8499684625",
+      "7712690038",
+      "7939578253",
+      "8503058752",
+      "8327942713",
+      "8369977195",
+      "8437332867",
+      "8472977098",
+      "8316345346",
+      "8482590152",
+      "4385376717",
+      "8369014477",
+      "8357419845",
+      "8410448072",
+      "4075358616",
+      "8341719581",
+      "8463580720",
+      "8470289193",
+      "8416254831",
+      "8556965333",
+      "8523715982",
+      "7305370768",
+      "8368183014",
+      "7785846768",
+      "8366592597",
+      "3231841552",
+      "7554976239",
+      "8440056030",
+      "4195543469",
+      "8359400626",
+      "3128833284",
+      "8445668773",
+      "4380415208",
+      "8018553810",
+      "8423420490",
+      "8401189510",
+      "7813737285",
+      "4227340425",
+      "7774204472",
+      "7326272282",
+      "7773082769",
+      "8483575291",
+      "7939473199",
+      "8575792378",
+      "8404819391",
+      "8454845733",
+      "8438928753",
+      "8386536898",
+      "8410443841",
+      "8160449641",
+      "8390607476",
+      "8515329053",
+      "3785347298",
+      "8379464360",
+      "8346006076",
+      "7988735790",
+      "4290045924",
+      "8064220313",
+      "8300821816",
+      "3480777271",
+      "7703681518",
+      "2169858911",
+      "8325535342",
+      "8574859192",
+      "8350320934",
+      "8514295844",
+      "8503402907",
+      "8557077392",
+      "8316024795",
+      "4794138683",
+      "8404273747",
+      "7416305245",
+      "8400840557",
+      "2298583723",
+      "8441331645",
+      "8405161488",
+      "7697923205",
+      "7486229587",
+      "7331686470",
+      "3673126497",
+      "8388530372",
+      "4362832383",
+      "8398202849",
+      "8414531738",
+      "7833557603",
+      "8482720847",
+      "2233279868",
+      "8407855786",
+      "8398262720",
+      "8094040961",
+      "8212873219",
+      "2808535016",
+      "8378934658",
+      "4344495394",
+      "8348168245",
+      "8129999655",
+      "8372308195",
+      "8543401746",
+      "8469991747",
+      "8413857049",
+      "8530919227",
+      "8470543884",
+      "8401220122",
+      "8355766639",
+      "8575004130",
+      "8347136156",
+      "8482948435",
+      "8342462617",
+      "8386785519",
+      "7532545177",
+      "8386011966",
+      "8431175527",
+      "8202081816",
+      "8370826688",
+      "8556903363",
+      "8489411097",
+      "7852243851",
+      "8463092999",
+      "8544236218",
+      "8309278036",
+      "8162095377",
+      "8576962963",
+      "8491760476",
+      "8423240851",
+      "8491327037",
+      "8556971684",
+      "2080377856",
+      "8442601947",
+      "8369309584",
+      "8128861388",
+      "8522464494",
+      "8557318339",
+      "8347968595",
+      "8347541510",
+      "8432186561",
+      "7276605889",
+      "8553170389",
+      "8463455129",
+      "8342893861",
+      "2840186903",
+      "8286816208",
+      "8318311628",
+      "8030295415",
+      "8491171643",
+      "4223118006",
+      "7806579271",
+      "7902852982",
+      "8472933084",
+      "8452360685",
+      "8459575933",
+      "8399941263",
+      "8452757313",
+      "8337933112",
+      "8308709056",
+      "8515720599",
+      "8331867535",
+      "8391766129",
+      "8577608265",
+      "8473657022",
+      "8348033387",
+      "8422189199",
+      "8378259950",
+      "8404178489",
+      "8398466034",
+      "8340546650",
+      "8459305664",
+      "2808017199",
+      "8368978779",
+      "8458318401",
+      "8380486998",
+      "8470525685",
+      "8463686027",
+      "8515710192",
+      "8577606212",
+      "8414417334",
+      "8445665183",
+      "8491341011",
+      "8515507543",
+      "8463397744",
+      "8437437015",
+      "8366261554",
+      "8501966612",
+      "8498952900",
+      "8401093665",
+      "8455645102",
+      "8419947757",
+      "8517082078",
+      "8381857712",
+      "8351481288",
+      "1850091882",
+      "2794824126",
+      "8184741350",
+      "8483760848",
+      "7962430770",
+      "3217474436",
+      "8406824572",
+      "2137856359",
+      "8298991295",
+      "4707630039",
+      "8323442271",
+      "8557247400",
+      "8422327108",
+      "8139821845",
+      "8040020525",
+      "3642133287",
+      "8544216717",
+      "1886913067",
+      "8414423496",
+      "7571947894",
+      "7572588010",
+      "8081599758",
+      "8340071119"
+    ],
+    "errors": [],
+    "partial": null,
+    "limitations": [
+      "Visible rendered parameters only; enrichment not run; placement on site; live route unverified"
+    ]
+  },
+  "timing": {
+    "setup_seconds": 20.069543292280287,
+    "capture_seconds": 363.2811119998805,
+    "review_export_seconds": 3.1583876670338213,
+    "publication_seconds": null
+  },
+  "review_model": "gpt-6.1-terra",
+  "automation_changes": [
+    {
+      "file": "Scraper/skills/collect-avito/scripts/run.py",
+      "reason": "Collector files were uncommitted in capture checkout at freeze; their SHA matches main after PR #120, including tested rejected-listing and prior transport fixes.",
+      "validation": "Compared plan SHA with main; 129 collector and setup tests passed for PR #120."
+    },
+    {
+      "file": "Scraper/test_aside_runner.py",
+      "reason": "Collector files were uncommitted in capture checkout at freeze; their SHA matches main after PR #120, including tested rejected-listing and prior transport fixes.",
+      "validation": "Compared plan SHA with main; 129 collector and setup tests passed for PR #120."
+    },
+    {
+      "file": "Scraper/skills/collect-avito/SKILL.md",
+      "reason": "Collector files were uncommitted in capture checkout at freeze; their SHA matches main after PR #120, including tested rejected-listing and prior transport fixes.",
+      "validation": "Compared plan SHA with main; 129 collector and setup tests passed for PR #120."
+    }
+  ],
+  "profession_correction": null,
+  "post_capture_automation_sha256": {},
+  "files": {
+    "Data/avito_runs/20261109-krasnodar-prodavec/exports/vacancies.json": {
+      "bytes": 1168845,
+      "sha256": "8dc4466a74b4eeae6ce9650d0cc3b4b3acd927a7311539dbe74bf64fecb9e1d8"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/exports/vacancies_flat.csv": {
+      "bytes": 839042,
+      "sha256": "95585935f658a64745a1fadea4fba763ec6a5aea3278e059dd41755d31dc3c41"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/exports/validation.json": {
+      "bytes": 223,
+      "sha256": "d3533d922595c480a726df4e736f768f209cb31d12b6eab5d8a7135b9ffa6ebf"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/listing.json": {
+      "bytes": 51840,
+      "sha256": "9eace9a688777df4855242befd5283b602fc5d4588ffba854ab5fd002aa3542d"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/listing_pages/0001.json": {
+      "bytes": 51840,
+      "sha256": "9eace9a688777df4855242befd5283b602fc5d4588ffba854ab5fd002aa3542d"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/listing_pages/0002.json": {
+      "bytes": 51988,
+      "sha256": "4e709768d75584fd19cc64e0a85c7946220e032b1c74856122ea4cf09f482107"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/listing_pages/0003.json": {
+      "bytes": 51501,
+      "sha256": "f7bff78aed1ebdfbe2a085b927466a2e3d5249bb1a79dc3e3c832750c48ef245"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/listing_pages/0004.json": {
+      "bytes": 53181,
+      "sha256": "38008f98392c1e1a59d55576c3cc3495cab551fe87f53fe4e12709428d173a31"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/listing_pages/0005.json": {
+      "bytes": 51441,
+      "sha256": "993be4bc77fa43e11d2c4d1ab8a5ce3b821c1c8022a1b61c3c3b440b7174b2f1"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/listing_pages/0006.json": {
+      "bytes": 41034,
+      "sha256": "254be7b0910c254cdb4a85d47b1c2a83b18b794e876e233b115fa11f6ede0976"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/queue.json": {
+      "bytes": 131202,
+      "sha256": "83dbba23a82ea702b2f89263be3332af0b2667febd640ead9ef009cd31f6002d"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/1850091882.json": {
+      "bytes": 5921,
+      "sha256": "c582d12984bede91311e0810c079e231c0727d0bab0d3e89a3b0c7cc765c83a5"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/1886913067.json": {
+      "bytes": 6116,
+      "sha256": "d0db1d0702f0de170ba1f1336dd15d056ac602893030b0790f39087aa29562e6"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/2080377856.json": {
+      "bytes": 11485,
+      "sha256": "5a47f217b6084f9d9024d309489f7f15ef20eae9e2302cd6b26697a76f787bba"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/2137856359.json": {
+      "bytes": 6362,
+      "sha256": "e54db7317e2d9c209d772f0e72b8d0546a35eb9bbc6fee56852668e02a77c634"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/2169858911.json": {
+      "bytes": 8610,
+      "sha256": "226ab6423019a710db64f80a1c0fe6d640f6b7486a07d2e86a660aeb1726fcea"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/2233279868.json": {
+      "bytes": 10709,
+      "sha256": "34689ff4b74866fe81de8b5d0da8791361401183cc2375d602c7e8b07fbda772"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/2298583723.json": {
+      "bytes": 11968,
+      "sha256": "721b72a69cbd85d25327bfb0a7a94c0c9b9e316bf470d909e5b975cd7f5faa10"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/2477323914.json": {
+      "bytes": 6977,
+      "sha256": "97a27bd02e2a69dec71d9555f43f513fa65aacdc99ae79460149dd893361fd5c"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/2773626700.json": {
+      "bytes": 7335,
+      "sha256": "724386f94b26ac858ba680a6ceda9c39f350967090cad294f6901490142ee696"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/2794824126.json": {
+      "bytes": 9346,
+      "sha256": "3c7461192e117f3b9a65f403932b51b82511b2ed3167020d633603ee070ee07d"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/2808017199.json": {
+      "bytes": 6552,
+      "sha256": "2389c355accefc2dfe68d9481a3392b6cb19104c246bd74868816f96a20aaea0"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/2808535016.json": {
+      "bytes": 9501,
+      "sha256": "530a0e97c8c5af02df06fee911910fff3da03b00763e21c72f2faac95174315e"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/2840186903.json": {
+      "bytes": 9303,
+      "sha256": "5aab05813df84330d51adea9da848e867d28f2eba2fa00014eb8bfbaf1c11879"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/2920898020.json": {
+      "bytes": 10488,
+      "sha256": "c1929693a00e0a02b604c17b4e9152d88af626674b8b6c16ae76bafd50ac9558"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/2940286513.json": {
+      "bytes": 7847,
+      "sha256": "9af215afdd2128b92b2874aef9f8f988b0d72ee69f58c48f8bd64aa1b7f7902f"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/3118261367.json": {
+      "bytes": 7546,
+      "sha256": "e21dbeb33c14eeb58b1f8940ff2174acb8abeaf5403bc5a2220d79093c5a964c"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/3128833284.json": {
+      "bytes": 8470,
+      "sha256": "ac97bfda389718267bbfdbb8fdf7664f56aba66efb4006499a5a5e6c5a781543"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/3173747935.json": {
+      "bytes": 8207,
+      "sha256": "b618955b6d989a8c6024587c44a87ede61c2ade9a165e033a2315e2b2a88a168"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/3217474436.json": {
+      "bytes": 7929,
+      "sha256": "2997dc42739f138d06c50eb8ff87176011f49ac28f9c65c38b7bb6cdc15385cf"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/3231841552.json": {
+      "bytes": 7139,
+      "sha256": "4ca7f1c2c86d5bfbb071a70c07d5a688f6f7d7838ee41c6a25ab7bef33b9c599"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/3336891178.json": {
+      "bytes": 11432,
+      "sha256": "14055d17bd345561754c72b4119a3d825d39f0801699ef8dd44bd578beeee0bb"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/3465178290.json": {
+      "bytes": 10062,
+      "sha256": "c8639fecfa2e23f464a9cd4751074f4b22d95d92f3ebb9ff084ac763f5b83e6e"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/3480777271.json": {
+      "bytes": 7827,
+      "sha256": "99dd3e36f117d76a7ed816bafadef6616c051931c58b9c23660ef8db19737469"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/3642133287.json": {
+      "bytes": 6221,
+      "sha256": "9d53f766e2aad90b9128a5bd6bc5df9eb5ea5682ede3a1839439fd6c50e1ee14"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/3673126497.json": {
+      "bytes": 6183,
+      "sha256": "de2e57d0f9f049f4e5b974ebc378ab8dd1d055a3b125a7af84cf20b292fc6e43"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/3785347298.json": {
+      "bytes": 9181,
+      "sha256": "e9d058d3e71626021262c0caad44374308cf5cef13be0a8adcc8e9a4ddfc008a"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/3785386028.json": {
+      "bytes": 16199,
+      "sha256": "d880c5537f454273af60290768f9ee4af6f7b5c9710cf6c7d44e394bd8815580"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/3864735783.json": {
+      "bytes": 15117,
+      "sha256": "3995c185ecfb039850ecdbd278b1ec07b756bf13a2b42de2ed289ba579eb1c2e"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/4069712009.json": {
+      "bytes": 12072,
+      "sha256": "a59fcd6e987b5dbd4da15fdb11f134968b3e9a882bac227857768fbeb1724f83"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/4075358616.json": {
+      "bytes": 9636,
+      "sha256": "e41d66d51569a0148456fdb0090dc25f44da835c697915aa528888c80f931f2e"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/4195543469.json": {
+      "bytes": 9614,
+      "sha256": "d6eb81aa64d447332887aad0a6b900ff77bc8c7a39b100660f067869e4c2bf40"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/4197390006.json": {
+      "bytes": 12667,
+      "sha256": "aea1021da1530cc8b6d1f326ccb456c01869853531a38080ba467f6d0fcc2522"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/4223118006.json": {
+      "bytes": 14436,
+      "sha256": "cb84e62cc6e90b105fc50bcb9dc5c9f29d1672ecad7d77caeb232a734e9476eb"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/4227340425.json": {
+      "bytes": 8958,
+      "sha256": "c7481ab8cd2e04f1be699306c643cd31c3e2e7c6aa5ecb7f09e6eb69ae017cf8"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/4290045924.json": {
+      "bytes": 10767,
+      "sha256": "c6f825eb9e8f923b2510a571cbed3bce885da8125761dc0ec522716fa8cb5081"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/4344495394.json": {
+      "bytes": 7901,
+      "sha256": "24a5f6b82cdbe822dd460ef64a6502b763871ce421697dde459d4e6358b2a1db"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/4362832383.json": {
+      "bytes": 14022,
+      "sha256": "7aec7ab9f98b0a3e2dca13c0c1c5ce9d8cb98a0e69a8287f3f989f3fe095a354"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/4365464126.json": {
+      "bytes": 14470,
+      "sha256": "048bfc7f8fe95279509f39d45df36b247ded7dd070b02f74bfafd6c7bf55e177"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/4380415208.json": {
+      "bytes": 10994,
+      "sha256": "f972483bf342154b03df42bc80c1750c8ff1e05df6120a2bfc3c809137cd8cb2"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/4385376717.json": {
+      "bytes": 8878,
+      "sha256": "a6016addc780004693747adbeefb827dd84c51e204e9f247150c5bf80907e952"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/4505360188.json": {
+      "bytes": 9013,
+      "sha256": "2136b63639edcd2ed5d339e7f1e66a47ba9a3bac52f9d2e109b08ed6983fa4dc"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/4517806437.json": {
+      "bytes": 12617,
+      "sha256": "f06ac499ccd22e1a595210db7f3a2006a4d234012e19f2dd63463c6334d5fabd"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/4584870101.json": {
+      "bytes": 10909,
+      "sha256": "22444f2d13c0abdce9cbbfffc8dad993b9a130b241e0bb45782e90632ca95f51"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/4674114606.json": {
+      "bytes": 12028,
+      "sha256": "ee9b61280124404d1a693ebb460f5dfa9c94a3fd31962c0328a3bc641489d02c"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/4707630039.json": {
+      "bytes": 7736,
+      "sha256": "b60241ada3a00fc59e87f30bfcc83fd0575273979d293bd0e5a6e916e754151c"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/473619939.json": {
+      "bytes": 7527,
+      "sha256": "7a23c3aae33a25ea505307949c157c0ea3eda2b7fb6e9783a491719cd3cf1791"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/4794138683.json": {
+      "bytes": 9033,
+      "sha256": "2a74528e8f88baeaede06ea771de36c3372e08e8f5c66b671ded89b409c2a982"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/7208450700.json": {
+      "bytes": 10795,
+      "sha256": "b6e069e4445dcc5407fe8b5f9356979ce1ffa706ed4abf5bedbeb01662467208"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/7276605889.json": {
+      "bytes": 11360,
+      "sha256": "2ab20deb148e709dc7cdfdc879b9116498888d8bd4562d4ec4d18dde1cbb86ad"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/7305370768.json": {
+      "bytes": 11671,
+      "sha256": "5abe2e0cf5b084bb4ac2ee67ea0cde2672dc96291f67daad2cee2b77ccc62d6a"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/7326272282.json": {
+      "bytes": 14373,
+      "sha256": "4fc9afa2b12e77d80649b4003a4532ec8b823e44defe79bfb6f8dbab931c0115"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/7331686470.json": {
+      "bytes": 9521,
+      "sha256": "b90dc480beb8cb5abb7e82bf4b1f8757bb8b07a263eb59f53f1251cdcf567685"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/7416305245.json": {
+      "bytes": 7636,
+      "sha256": "d1ea74e330bb9550ad57608eb7f505a14d134446290e41d0d8c35fc4bf4654dd"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/7486229587.json": {
+      "bytes": 14440,
+      "sha256": "1b2b2f78730d0698928ebfcb00e02ecdfface5f03ba598b4496bc6f8f9d87a78"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/7532545177.json": {
+      "bytes": 23587,
+      "sha256": "9228cd5ad0eba551898822c4c0f57ea038e8c0cf70feb11a34503eeb732a7100"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/7554976239.json": {
+      "bytes": 16643,
+      "sha256": "eeb978cf7c35372e73281234c2905ca328b7a36144d133ca4b41392197dcfb11"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/7564807072.json": {
+      "bytes": 19032,
+      "sha256": "927c66526fa3bd7a2edaa82305f8761b04721c159c85ab3125bfdf3efa2d3443"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/7571947894.json": {
+      "bytes": 8043,
+      "sha256": "0b9f85d2ed8e1b8fd440f119faa2e0a09aa03012cc314f26e94a97676763f71e"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/7572588010.json": {
+      "bytes": 7757,
+      "sha256": "b84a791976c1bc2beab9b20bc42eb2e5c3637946a0d2eb61c4912a03e8fb539a"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/7638259871.json": {
+      "bytes": 20724,
+      "sha256": "dc228e228c47b5835e37305750a1281cfd01ee130909e3ae4eb8c29029824281"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/7697923205.json": {
+      "bytes": 8075,
+      "sha256": "5a76eee60ab63e15e9c538542aea93afc9afea4fb327b6a81221e87a30915b5d"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/7703681518.json": {
+      "bytes": 8413,
+      "sha256": "1548491bfe88d39126d9c535767a8ea35cec943a987335460b2727bc72e20d39"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/7712690038.json": {
+      "bytes": 7300,
+      "sha256": "270bbcfde2ad9984905d9e4d20248d26a9f1b6fb84d9ae5ab87dad06818ae549"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/7773082769.json": {
+      "bytes": 14523,
+      "sha256": "3fb49585598390e9e86be0544a0c94b6e0d9e10510f3bde484b818b42df76230"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/7774204472.json": {
+      "bytes": 14441,
+      "sha256": "24e13c19dec5768436e898677702b1879f68f31055703fe1fc36c77bc5249fb7"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/7774363245.json": {
+      "bytes": 14403,
+      "sha256": "5d3f18cb4e35c66b0d721dcaf4dec3a8816c1e02264e7b71c43635abbf1d80dd"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/7785846768.json": {
+      "bytes": 7290,
+      "sha256": "ffcc3af4188762b54e3c91d3b2fcda8b5a8686488a42e1e7a0d8be78eaa7c03a"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/7806579271.json": {
+      "bytes": 14790,
+      "sha256": "969310fc6ed9b8b11327da2376bc69f2e62245a7af8d37ab734f9f93e0fa665d"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/7808698484.json": {
+      "bytes": 7781,
+      "sha256": "52ce3a9d0d539eb8a1c9d1b1895a028e241d0ad67c64b93fd6c049fca3808774"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/7813013019.json": {
+      "bytes": 11475,
+      "sha256": "9db2141c5633ff867af63f3f1953c303a4d134e8077b643d53dd2c0457e78377"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/7813737285.json": {
+      "bytes": 12620,
+      "sha256": "fdf2b0f6ae403a270d57ca6d7fdaf3a5f8f25cb63c6c1b5f7568064b9322f9bb"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/7833557603.json": {
+      "bytes": 9968,
+      "sha256": "3c63805885f4435172c205c5126f82398d7fd6f9339385827b7182827cd28476"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/7852243851.json": {
+      "bytes": 22689,
+      "sha256": "e7e9f8ffc8067c161db762155673588319c60afa7f5ffe6869e983eb9a4e05e3"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/7902852982.json": {
+      "bytes": 14275,
+      "sha256": "c13e6b5d78466b2b3d0cccd91fd2a1d06992c12896613ebc1c14bdc73f582289"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/7939473199.json": {
+      "bytes": 12575,
+      "sha256": "60f00d7f577c5c67150d6a05f3afee0cbfe0f99a94338cc8d19d2085faea2dff"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/7939578253.json": {
+      "bytes": 12588,
+      "sha256": "c14cca793025ce0167b4db57a06e50039caf183c1e33a93d83f4925326577c62"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/7962430770.json": {
+      "bytes": 7952,
+      "sha256": "840d9f6b500d0bb29da3fa88c1be6194336824733cc5fcef773d1c68d12041ef"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/7967602348.json": {
+      "bytes": 11762,
+      "sha256": "48e584ab2e084b5774e6fc405c6cd61699dc9f971ed7368d570629a61b5014af"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/7980023659.json": {
+      "bytes": 24164,
+      "sha256": "0590a0bc53478cd0f2e7a04a9f0492e1bedfb82da10d52b9969d009904cf2bc6"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/7988735790.json": {
+      "bytes": 7458,
+      "sha256": "ddeb9c60633e49f960476a7b58d2dea5c169ee99aae04f26396c9dc57b5cac74"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8004409215.json": {
+      "bytes": 8722,
+      "sha256": "08442fa8cb09598061d48f0038400dcc11e485fc7f3f08c7b0bd3346497c43af"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8018553810.json": {
+      "bytes": 9212,
+      "sha256": "7251eeac296ad18a7fe6344f7fd69446d4b09593179ebfbac15cc02c327f18a1"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8030295415.json": {
+      "bytes": 14265,
+      "sha256": "d2545bcc2eea10883ba11274b27de22143f4a93cd62bc5888df2f15ebbfd20a0"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8040020525.json": {
+      "bytes": 8111,
+      "sha256": "86d4f9546fb5527d296ac44877cb968d1134828cd766d346f850dd2d7c507534"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8044062733.json": {
+      "bytes": 22939,
+      "sha256": "ffa36f8d79bfe4cd551b890900b54db2fd27a4d0895665fd502f285e91fa685e"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8064220313.json": {
+      "bytes": 15752,
+      "sha256": "0196ae88614ce55506481e4e5b6b5aafea9b1f72e876df7bca536930c37a940c"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8081599758.json": {
+      "bytes": 9227,
+      "sha256": "57010d145ffd5b1e5cdc5ab0dd3fd97f23ee3917eee61e8f49caa55f7a79db21"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8094040961.json": {
+      "bytes": 14285,
+      "sha256": "8041536769487989e4735f2c9cb07d165565a8532c440c0a2413dc458d3ef7e4"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8097698015.json": {
+      "bytes": 10111,
+      "sha256": "2a7a2f813d044fba0e1263d80e1f661c34b4dddf622e1375677b3f161dd51122"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8115351401.json": {
+      "bytes": 13207,
+      "sha256": "5085e7671db1219de4474235f946b0ce20de2bb84962f9410331260d9e7b048d"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8128861388.json": {
+      "bytes": 14902,
+      "sha256": "0ae2b7feb9b66629d5d6e98d4b6f8563dd009b7edde1cd60600960ddec65edb3"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8129999655.json": {
+      "bytes": 17003,
+      "sha256": "58eccf29f26f4d8bcfd304699f0735c325db886857685f87a53aae1f9f0b95fa"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8139821845.json": {
+      "bytes": 8318,
+      "sha256": "f7dedc9666323cae9ed58f491b979c7096006c1a4f40f7d25514b243e4ea4ac9"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8153122760.json": {
+      "bytes": 20924,
+      "sha256": "b83118bca3edf682a4fdccffa3e71a33db7641c97d3b6cf790244938165899c1"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8157986419.json": {
+      "bytes": 14405,
+      "sha256": "fd49e7b52a4f0ed90ff675e14683c2353d1b8bce2844a1b928848ef50d495adb"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8160449641.json": {
+      "bytes": 14856,
+      "sha256": "25372d4bd1629966b2b5d14b927e1e085886e8108febc8c54b57001775f6cc9b"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8162095377.json": {
+      "bytes": 17346,
+      "sha256": "c561296da28786678bc6e22652c44bc0cda044aa4adbf8b01fd2b823c6ef86d5"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8184741350.json": {
+      "bytes": 8190,
+      "sha256": "fe07cb12322d99816a72f255baf73aad885f4fe1845847242b58921478a45a72"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8193978124.json": {
+      "bytes": 10325,
+      "sha256": "33a1e97bd34a8f23f786c180816173c716004edb87bb49954ea193f6713ca62a"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8202081816.json": {
+      "bytes": 6982,
+      "sha256": "fed39cb0a3242fc0fc6deb5821e953dd52400e65cc06260fb6545f6a8095817a"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8212873219.json": {
+      "bytes": 10719,
+      "sha256": "541b3df8aff952a718f620d75cadfbbe750c91d52cd63f63f075b548c90a2478"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8254309461.json": {
+      "bytes": 14401,
+      "sha256": "41a2e4b5a48ee76e6a57e8679341c71a2c7ebf7894cf9ed69465099338765c62"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8257341759.json": {
+      "bytes": 10084,
+      "sha256": "ca7249148fa111f4b720f7dea57e7d6e8150c5f7170c80c047d8c908fe187cfb"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8286816208.json": {
+      "bytes": 14516,
+      "sha256": "fa20c2adea9b15d03c94f24bcb080e39d69a2d9556128afe438c1c7cfad367cc"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8298991295.json": {
+      "bytes": 9392,
+      "sha256": "f01e0289e8f20e97e4920371e3a965fbc61db8f07bd79feefdc31fb0c5ba9495"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8300821816.json": {
+      "bytes": 9427,
+      "sha256": "3ba3fc987d434e48f353eac2b263300e7821f5749cbcdb4970d2ed0be449f8b1"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8308709056.json": {
+      "bytes": 11647,
+      "sha256": "0d700d3f295f50ee9dd75b230cac4327e165fc455cef43046ebee158fe8004e0"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8309278036.json": {
+      "bytes": 10747,
+      "sha256": "9afa5b54c955b8fbdaa0ec3a3c2a9b5ef6ec4bc148e5538fd99838f9c33aca71"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8316024795.json": {
+      "bytes": 7565,
+      "sha256": "105ac3aa0e1214328bbf80fcd645ab9eff20b9a0e91881164a762f3e63326368"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8316345346.json": {
+      "bytes": 16496,
+      "sha256": "99da1b26ddedc653fe1ba4dccf24e03f65e991663f2c25b664de09db1c3ee7ef"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8318311628.json": {
+      "bytes": 14427,
+      "sha256": "8ad39e7cf16d28bde7c26c82fb4304bdec0a61b3039308c46b051aa7f6130455"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8323442271.json": {
+      "bytes": 5678,
+      "sha256": "bf6d29caaec257ff38d77808a4f143d82a0817297c7978b12e5819b7ecd0c685"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8325535342.json": {
+      "bytes": 11441,
+      "sha256": "46cbe1094b9e5ca96ac92e67e86f45cb814a8f6c93a8cc4591978788b88ab84e"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8327942713.json": {
+      "bytes": 10951,
+      "sha256": "2fd1f876837e7539a0e5a2175e0db8f9fee4b639b81ed054a26e7d43edb1acf8"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8328668347.json": {
+      "bytes": 11677,
+      "sha256": "f233e363381e60c7ae7efd976854a3abc038db02d757a3cc5efebfd78d07af6b"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8331867535.json": {
+      "bytes": 10282,
+      "sha256": "7aed30f6514ec75f5dc38a1f4e4cafeaa15bec7f47025f5c208eb6ef8e8bc72c"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8332301524.json": {
+      "bytes": 9452,
+      "sha256": "97484dd815d740d0032fbd08acaa4cead5742c0ae16164d6bb0db1cd2a376adf"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8337933112.json": {
+      "bytes": 16337,
+      "sha256": "36d971abc95fd81345b2398f777acf81dd160233ba952198a0ca3ef241a0e324"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8340071119.json": {
+      "bytes": 14499,
+      "sha256": "96b9fef3408d71258a71358257c6e0d9335360d264748d09152f946f3989040a"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8340546650.json": {
+      "bytes": 18241,
+      "sha256": "bfd741fcd39c1a362c6119b18914c5c1d6e14857e26ff949137ba815d8acb3f8"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8341719581.json": {
+      "bytes": 9317,
+      "sha256": "f33918e18e1f8f897d82bc3d38dfe0612e2dd7c1cf4a0605783865e12f69587f"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8342462617.json": {
+      "bytes": 8443,
+      "sha256": "5f866abafd8e55ef30ad60e1ee7a32d4c7bc64b60fa1b6ce311bbf2fd46d0c7e"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8342893861.json": {
+      "bytes": 7539,
+      "sha256": "c2011fd438ead599746f23280a22b5213d2b91917d83ca02d679e8b01d85a8c7"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8346006076.json": {
+      "bytes": 8824,
+      "sha256": "c3d82ebea5775ccfd94013ab526136d83e64fa949f7eb520cf7416d95fa6fbe9"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8347136156.json": {
+      "bytes": 10727,
+      "sha256": "3ef82310d22ec886a335108e9cab1a80e79a48344bf4f6c47a890e1c39304d07"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8347541510.json": {
+      "bytes": 10633,
+      "sha256": "22787b204a26f144b5444ee8357a06639de9e44524796d04b0017e6a7de04add"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8347968595.json": {
+      "bytes": 10722,
+      "sha256": "5b70a1a125fa640fe6db480919c830b36c015214d8386888c21d83bb96ffc33f"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8348033387.json": {
+      "bytes": 18181,
+      "sha256": "5ebedb86500864c2abf628a594f3ce07d4fb4d3ca0c1943ee93174a045603e7d"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8348168245.json": {
+      "bytes": 10721,
+      "sha256": "19c863d918c795c5e3a392a557ce3e82590d53b8974cf795287b813077b7d910"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8349562842.json": {
+      "bytes": 13372,
+      "sha256": "aacb96666253e2bdec303a1eb459ec161747e03f751b9a6422564bd2c5effd91"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8350320934.json": {
+      "bytes": 10109,
+      "sha256": "2d88690a9703f9e4f40fc93f235e8ae0fc3c9f0bbeb638f11d9f71ff6f12e78a"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8351481288.json": {
+      "bytes": 8871,
+      "sha256": "0b533cd37b8bf3565bda689a13c339d4ad3b5f8cc1a4877af53c48e2046845b5"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8355766639.json": {
+      "bytes": 12285,
+      "sha256": "8eeb5ac3e64289c490b3d0f2c94459a9781be6aa523670300e36d2a1f8f51978"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8357419845.json": {
+      "bytes": 8250,
+      "sha256": "b9528e1b59d77bd1388e22ffd9aa282494466f10504cd8268eaa05a2577504f4"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8359400626.json": {
+      "bytes": 11625,
+      "sha256": "d1541427f0187b0472183d4a0571d58ba0642f883d8982659f5cc409250909ce"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8364578980.json": {
+      "bytes": 16010,
+      "sha256": "f9ebeb775fd0930de58a8ae06a52579b08286348b4b53fbd23da4e10cfdea06e"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8366261554.json": {
+      "bytes": 10308,
+      "sha256": "ce1998a67ad7f18c4e6d0be1e8602aa07f5c5ee165aaeaca27b2eae72bea9d3d"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8366592597.json": {
+      "bytes": 9532,
+      "sha256": "ee50166117131c808f0b51867f843a858cf802c2d66854116f0276b73678a594"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8368183014.json": {
+      "bytes": 11810,
+      "sha256": "823a76171e16805a607a5aecfe7e469ea40f48b91da94686c0e1af17c7f596b4"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8368978779.json": {
+      "bytes": 18239,
+      "sha256": "f3189adbfd128e892a9281e1db9e33912309d605166a9c3ab615f400fb24d939"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8369014477.json": {
+      "bytes": 13666,
+      "sha256": "b937f868101d6749e5b95fc584f73d3c8718be04bedb1d37f71d7ca5fb830eed"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8369309584.json": {
+      "bytes": 10720,
+      "sha256": "df94c39eba56ad46122b447980091ec3c6d71e67c0f4de3d7ac4d1a1f8933ad3"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8369977195.json": {
+      "bytes": 9439,
+      "sha256": "2502277b422c77ed3805206ea12c5a439fe1742526c981fbe08cee7de40e815f"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8370826688.json": {
+      "bytes": 10726,
+      "sha256": "b9cc6ed9241bab57df38af7bf1e4bc9c792e4f0a688f1378f19883ba01451a75"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8372308195.json": {
+      "bytes": 11175,
+      "sha256": "f57034ad14bf0acedf16cff13636446ddbee21dcbbdc11579d6251f56748b059"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8378259950.json": {
+      "bytes": 18247,
+      "sha256": "d390c6ef773980e3459305a3302c59898723d1bbad9fda472b723a4004a42ebd"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8378934658.json": {
+      "bytes": 10645,
+      "sha256": "ad52adcda0977c077e9d170a1cb28c98c87ee6225d06b013f8704b6e2e3db2b0"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8379464360.json": {
+      "bytes": 11251,
+      "sha256": "5570d75eb896e1592596275d7c4f01f84a80357e42676335644ef2e8f42f0759"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8380486998.json": {
+      "bytes": 15952,
+      "sha256": "20961798c0888fcc2902540d173dbe732b5f03a8a1b9259fc749fae2c2990335"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8381857712.json": {
+      "bytes": 10835,
+      "sha256": "7150aabac71677bc642c9d8364a0f9272f7922da9314fb361384cfb010d6d7ee"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8386011966.json": {
+      "bytes": 6711,
+      "sha256": "c48110892aa8160b442612312fde55a270b3f15133ffad1db474711425d3b5a8"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8386536898.json": {
+      "bytes": 13228,
+      "sha256": "2a9d2456324410536ffa384801a27387ab756408df113627f9b8193280656fde"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8386785519.json": {
+      "bytes": 13473,
+      "sha256": "809f4d92b8f264f23af11055a4f757a3342809878a7337537b22a841724f9874"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8388530372.json": {
+      "bytes": 19437,
+      "sha256": "d1391ab8ec2591723e64c7277436a2029e9f3ce263b4b0ce03640cfbd2c3e2b9"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8390607476.json": {
+      "bytes": 11638,
+      "sha256": "1e0afcae31ceaa49a59bd6a1ff9bfb5b80d169df3d949abc7dfc99f6f71a36c8"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8391766129.json": {
+      "bytes": 18211,
+      "sha256": "98107ddbed805ec2c3d20a33a75191a11ef9bfe40a7ec1f5df5de21803a499bd"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8393035337.json": {
+      "bytes": 12091,
+      "sha256": "88d50d650c259e35f061cee2c4d1ca38a7e98b261556c068ce1c67d6696e5eb8"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8397900513.json": {
+      "bytes": 8685,
+      "sha256": "7b3ba4aed6db19c1190f95af6dd82303183cfc4d757aaa7beec50820228592c8"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8398202849.json": {
+      "bytes": 16592,
+      "sha256": "de989c94532f9359af0afa0f14c0cf9d4ee7286b658393d834ac9c90fd666bce"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8398262720.json": {
+      "bytes": 10641,
+      "sha256": "e1a19a1b15def0bb066d06268a245f339a0486888fa41bb6c5098058e189c120"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8398466034.json": {
+      "bytes": 10220,
+      "sha256": "aea201ca40188eae1293972d5e9c0e002b40e86b27bc0f32a65840f0d07839f5"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8398770344.json": {
+      "bytes": 8871,
+      "sha256": "3415e6f099f62614d8be07966e1b1a572a071167718153d81d24095a18c9ae9c"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8399941263.json": {
+      "bytes": 16165,
+      "sha256": "ab3b65e0416f0d9583d0750d2d6e3e3eb08490ddf1408bf4f6df1b5c76c9a3e5"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8400819256.json": {
+      "bytes": 15015,
+      "sha256": "41d9c0076eb8e43e71eee77d8cf7ba3dd5913c5b34f2330d00acc121955e5da2"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8400840557.json": {
+      "bytes": 13130,
+      "sha256": "7100bd3c0aff3ca4a8a92da9ebd8aae9e713e3cb6258829e177144a0f3e2c337"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8401093665.json": {
+      "bytes": 15693,
+      "sha256": "bae1453112fdbefd9dcbda04d3e3ee249a5501de4580dc12614496032afe5d6c"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8401189510.json": {
+      "bytes": 11556,
+      "sha256": "48e61211dc7e03948a2aa16e89d741423e8da7b76c38917e29762f3844243ed0"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8401220122.json": {
+      "bytes": 10640,
+      "sha256": "05cc64a28a6b887473e89b97a59c75f490046dc3f7a23dfaf4b226e2254de2ed"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8404178489.json": {
+      "bytes": 10492,
+      "sha256": "a77226eaa18b907a7fc5f747bc00ae42ffaca1e4801b902ae974bca4f8d77751"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8404273747.json": {
+      "bytes": 4790,
+      "sha256": "831dd1d94f0c47fe270fd16b13326a15535228fbc9cb4f7412150bfa17c0b897"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8404650290.json": {
+      "bytes": 15989,
+      "sha256": "369cb6c2b40d6561a211c36eb9d244db1e508ea76d42cf8af5b36eecf53c757f"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8404819391.json": {
+      "bytes": 10069,
+      "sha256": "a9c289e5f800f94d9a872658684832b1279ae80a7be80515b683f85a528c88be"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8405161488.json": {
+      "bytes": 11494,
+      "sha256": "6faa9f20e17f110a1bfdd1742dff29021621c1bb02e99d3057a1a1a7ea87041e"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8406824572.json": {
+      "bytes": 7670,
+      "sha256": "dcbd4c535524f37dfacb83543f33637b00f5d03583d242daa31e1118a8198050"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8407855786.json": {
+      "bytes": 11489,
+      "sha256": "7249712fd322f5f0abb81183f3e139da44fc8c006c681b7e143d012d73bc8497"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8410443841.json": {
+      "bytes": 11504,
+      "sha256": "cfca9fe02fcf5af875f1f7c03b85523d94465e1ea9d63d6a518bf384102a3ece"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8410448072.json": {
+      "bytes": 11997,
+      "sha256": "277ec6c1c1255171db4f4f221eea1667f82dfac888e732bc50a8f4aad9ae284a"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8413857049.json": {
+      "bytes": 11616,
+      "sha256": "1b79477faf8fabc2ff4da6ef3967356472b86da756b31d95e290fd8f71f3c2dd"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8414417334.json": {
+      "bytes": 15724,
+      "sha256": "5297c660dbb1aeaed59a55fe24c33c0dff9cac0135fb6a5ee106bb71b1d80ddf"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8414423496.json": {
+      "bytes": 5049,
+      "sha256": "11d9b2439a04256e4e0772350fed7eaeeea0d8365ca029c4f4a93710c4f5af69"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8414531738.json": {
+      "bytes": 6919,
+      "sha256": "f04304ba5cc0d58482803ddced552372b5febea771b0998e8c3a21aa4d72b897"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8416254831.json": {
+      "bytes": 14899,
+      "sha256": "b86007868006fd5c85b0ea5f55c4564eb4d3498dd719e1caa64a048bb35823a9"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8418460789.json": {
+      "bytes": 15170,
+      "sha256": "1a13ada855b39db3cae530d8543ef060bd84f049236766b2dec2f0f3bdc81f12"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8419947757.json": {
+      "bytes": 11185,
+      "sha256": "4f53afd762e4826d1eda2f9b0907915e40e4ea960914e458db5b6850d1729e9d"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8420678579.json": {
+      "bytes": 18519,
+      "sha256": "0c228275e6b5705e3ca3aadf89d3e19ec77906d4b847770f064f3b7a90bcbeea"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8422060328.json": {
+      "bytes": 14378,
+      "sha256": "1ae90c8e136780ad852c0403caea9d63766e532d31b916617dcd19e159fb312a"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8422189199.json": {
+      "bytes": 9810,
+      "sha256": "fafdf6c81b66070b7d43d48624a0405fb5e49e92e2f7b2db9c6abbb45e9ff64c"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8422327108.json": {
+      "bytes": 6886,
+      "sha256": "0de63f33c18ba24b85e3347e2020f1b4bd0a68b759830a67ff5389522c9894c5"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8422911939.json": {
+      "bytes": 9447,
+      "sha256": "74bc3c13c74c47bef1a85923a87acabdbfd6ac54064f2baa09f00db6615e04d8"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8423240851.json": {
+      "bytes": 10318,
+      "sha256": "25fd188a5779280a12472a87d9f84f631049279c67573bb292d3e6a79e56c3b1"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8423420490.json": {
+      "bytes": 11097,
+      "sha256": "7cf38ab4523b04a681c1d6e4b68f5c39ff8a96e51b7e98eda03f4b4418da2a18"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8431175527.json": {
+      "bytes": 10718,
+      "sha256": "966fbeb74e988ef8e9bc0c14440357831cb513752575dc397116575450cb872f"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8431304539.json": {
+      "bytes": 9960,
+      "sha256": "af3417b52be2738d9d34539e25943cc642b60e41886cfa8559d1f0cada956a16"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8432186561.json": {
+      "bytes": 15739,
+      "sha256": "9f10deac021d5063e48eecfff7293073d9ce7a030176c73308bc08782f28f3d3"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8435242312.json": {
+      "bytes": 15124,
+      "sha256": "35beee3bf3bf529c13a20742d366e5707243864f55bfa5c5b43d8233449f2b9d"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8437332867.json": {
+      "bytes": 13308,
+      "sha256": "2ce99f836550c2a9a9eb72f40e164464a4b323580416828d91ba5ba82d0821a3"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8437437015.json": {
+      "bytes": 15735,
+      "sha256": "a64d961e5ade8e3a39d812de82d5a1a67a5eb85126d21dd6ef261ae5ba0b1da1"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8438928753.json": {
+      "bytes": 4188,
+      "sha256": "e6ab6788b421259df78a6b195b56de1958b350a3cb850a4f5ce19e6382a8f00f"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8440056030.json": {
+      "bytes": 7401,
+      "sha256": "c9c94d17f6537aac3bff219a9d4a44fa6b294c6616a16450eed131f234f165d2"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8440216540.json": {
+      "bytes": 14108,
+      "sha256": "96164640573ce9384502dd049b76153bc2f35f19d830fa776815263b879757d5"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8441331645.json": {
+      "bytes": 11408,
+      "sha256": "63ca4008d020de3e1f91f9040106418ba70a68f8492477c619b3ae64f88e0bec"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8442601947.json": {
+      "bytes": 13241,
+      "sha256": "51cc69ba1483dc2d9f0f2280e4af8d4dde5522f634e234bca3808e7336b24a76"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8445665183.json": {
+      "bytes": 15696,
+      "sha256": "6a17055f9aaaaa7bf28b5fc583e3af92bb591dc996ef5073cb568844247609e9"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8445668773.json": {
+      "bytes": 9603,
+      "sha256": "acdd5d089fe15d4c7ab7567ee8c4ca81d9f994ea8af6f8a341824fc9aac751f9"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8452360685.json": {
+      "bytes": 10249,
+      "sha256": "ff0dc6bd529ce45c7423aee70878469244950a84d3af21c61ff866899555de31"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8452757313.json": {
+      "bytes": 16330,
+      "sha256": "8be049e50875c4e8876f79c6c10b24c8d54801a08bbdad600e30623566060ed8"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8454845733.json": {
+      "bytes": 10019,
+      "sha256": "16374c9ebe62bdcca05071bc399ddedb63f6c0fff0c7267c262fffffba501a37"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8455645102.json": {
+      "bytes": 15956,
+      "sha256": "d4b6226d03d0238afe89c46f1043f44486b8551fc6a70d4f1e96613a75bf2389"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8457544928.json": {
+      "bytes": 8112,
+      "sha256": "6ebf0d6a79bb352452c8792a6455b16194fe1acd9662ac57ea6abf04ace180d3"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8458318401.json": {
+      "bytes": 18183,
+      "sha256": "bd35e6b6f588742b09aa7c5cd21e6246419e61e299bf7976b1c900b75b45c350"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8459264537.json": {
+      "bytes": 13791,
+      "sha256": "e2da27d4eb8c4787c2cb3e338d951e6c7c3fa840e9506fb6a1b03edad45b3473"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8459305664.json": {
+      "bytes": 18181,
+      "sha256": "2d907d5c56ee140d9ddd6fb79445a555980ac2eeaa3889e59570376ddd974957"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8459575933.json": {
+      "bytes": 10384,
+      "sha256": "cc366303d6a73b3fe9ba4100b9e00a6a8e9dd5b88b34f18b1a614cd544e42c38"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8463092999.json": {
+      "bytes": 10736,
+      "sha256": "569124aee393756db257748a7ff6888a51e2a8ba1fe6bbabeafe33a7af6cf3de"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8463397744.json": {
+      "bytes": 15789,
+      "sha256": "5703bfb5adda94989974d5415157144f0101eabaa9c9bfa4c7306ae61ebbfd59"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8463455129.json": {
+      "bytes": 9161,
+      "sha256": "fe266073d32c106747913ff666ef68a3f91dbcc43ad85c49b5f21fb4fa25ce02"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8463580720.json": {
+      "bytes": 16552,
+      "sha256": "211145b808f756b5d2b411bcece65fcfce967d495261605264e167a6a22134e4"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8463686027.json": {
+      "bytes": 15716,
+      "sha256": "4b36df56f45cd1109d2684b3e90cab28344f1650d0d7d2473d1d9f435f24116c"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8463823320.json": {
+      "bytes": 10252,
+      "sha256": "4288d2f602b0c43f9c07bfd5a97f7c75f50f2746cbe6769a7989ccc2a85e833c"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8469991747.json": {
+      "bytes": 11516,
+      "sha256": "43a97d72074d73e373f6735efc292a750c8cf8d6f3c2b05f7126ad595af916e3"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8470092220.json": {
+      "bytes": 12569,
+      "sha256": "ebfecb5432291861bb98a736aadedc31f4231a1855da0b132adaf5048050c08a"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8470289193.json": {
+      "bytes": 9993,
+      "sha256": "1f2a9d4953af2e606c2dc157495387d4998475af576ac9488d167a82174a84b7"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8470525685.json": {
+      "bytes": 15712,
+      "sha256": "b453d89f4c17ee760a468411fa076715376ce5b698a90ab5c3d35295d6a6467e"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8470543884.json": {
+      "bytes": 10712,
+      "sha256": "3f9a5286dfbc552f3e01dfa3b4330bdd04cea4d134ba81b1579748833f02dc14"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8472846044.json": {
+      "bytes": 13193,
+      "sha256": "cb91d124d3bac533d8af264eacfa43083066bec2c7de5f28ae8a2c058b9ca94e"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8472933084.json": {
+      "bytes": 4609,
+      "sha256": "95983464be0b310598130e7b534d47c36597438de4e02d03109e86906da04c1c"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8472977098.json": {
+      "bytes": 6990,
+      "sha256": "f2afd6c50c6e81da31ae06dc43be5537346fbd2e73da30331d5290a853d7367f"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8473657022.json": {
+      "bytes": 16387,
+      "sha256": "453a3dcbbe881bd7ace572e17ab47eaf8181c3cd63acae4bad4b04b23cd26687"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8479555594.json": {
+      "bytes": 11366,
+      "sha256": "bceb29b3a9feb02250cd3cf1823bd598399092044bf55eaa4a6187004548c292"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8482590152.json": {
+      "bytes": 11560,
+      "sha256": "689e5741bd1b392a82820a8411493f74f0c4c28f06a963fa7f7d95b172bca55a"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8482720847.json": {
+      "bytes": 10275,
+      "sha256": "d6a3d58418e8041001aaab87c00e33bd1af01d3f40c5de7fa05a25be10fa99b6"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8482948435.json": {
+      "bytes": 20565,
+      "sha256": "7ad8d1ca196eba0d37be345d4fa4e5fb6f0e110c0662950aed296dc8247b4d05"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8483575291.json": {
+      "bytes": 9340,
+      "sha256": "3b8cc1994a4d0784ce75a02915181fba3cce7f84c1671d116f544d2a217dca11"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8483760848.json": {
+      "bytes": 6247,
+      "sha256": "fc3703fcc87f7457a70dc87123ec9d044adc10fa2b66e59738611664fb5087e0"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8489411097.json": {
+      "bytes": 9721,
+      "sha256": "b793d751f523e5d731937a4d68b87706d05ad3ad3dd20001a95d8e9a9e424e3a"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8491171643.json": {
+      "bytes": 10237,
+      "sha256": "55ebb43b2e48eab2e3a081e19a43a61c04bb7666c0486857f2c03107ac688404"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8491327037.json": {
+      "bytes": 10636,
+      "sha256": "ab0ab92d3f392086aa0e2c880f949d8318849ad7b3e33f75182e8961f7d6e09c"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8491341011.json": {
+      "bytes": 8995,
+      "sha256": "465b9a22e23d8f2d49a2ceb6c107836cd4404a35348120de24352b1a77acb98f"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8491760476.json": {
+      "bytes": 10705,
+      "sha256": "7280fb70fb33b86cb84a8c2d44560539938a1f48620d2680c64c6465996bf584"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8498952900.json": {
+      "bytes": 15780,
+      "sha256": "01178ae754c2cb9ff7904bd58bd2144a781a3eb4370899bde95c0eb1edff1303"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8499684625.json": {
+      "bytes": 18559,
+      "sha256": "b807860b9af194b33befb05ee7b3ddd744a5cc1ce27608733bb9ee8210fe2e1d"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8501966612.json": {
+      "bytes": 15789,
+      "sha256": "f52c732d3131dae062e1764abca1378abc7281163e70df7fadc69a7ed79bffc5"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8503058752.json": {
+      "bytes": 11859,
+      "sha256": "c939f52f3afc3e1da6b6015fa18f4730eb2b3264a7dff799dd3ee9c30da60554"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8503402907.json": {
+      "bytes": 14052,
+      "sha256": "6a1638d7953b406821dbdafcc3a31f6bdeebb1cf92ff29884b29a8669419f0c5"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8512567423.json": {
+      "bytes": 6586,
+      "sha256": "24f4f1c2094fdecc0e41bb0955fa13de12611d14a6a0cb176c9f97aae2ab1a7b"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8512886815.json": {
+      "bytes": 10552,
+      "sha256": "482a91836d6bb8b55292a7b29f2c3e11d2639688e8e39f10cb5ef8fae3b0c47f"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8513988767.json": {
+      "bytes": 14388,
+      "sha256": "1b5273b78b4dd90521a87cad420e1826a66254230fa49a65d55806100ad1c480"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8514295844.json": {
+      "bytes": 12341,
+      "sha256": "4a2caaaaa7f47fd7b05af2e81562206d9e72fe86e44cdaa1165e2f3e4c8616b3"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8515329053.json": {
+      "bytes": 15346,
+      "sha256": "826d017380c6b94a003747973f1bc3aa7d19957bd4120edb4f3fb21c862b39a2"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8515507543.json": {
+      "bytes": 15715,
+      "sha256": "a0e06915d3aa7334b9f53eec21253c50c8caa766636d8df0db32e7e72efb21da"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8515710192.json": {
+      "bytes": 15737,
+      "sha256": "f3eaebf519f21ec12440a5308ffd7ae9784673853f3703666639743f5010d65e"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8515720599.json": {
+      "bytes": 14371,
+      "sha256": "3fa9bb436d0d835c95e72d90f642e417d509edc256b17fc7f072fef8e2f9687a"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8516852571.json": {
+      "bytes": 9609,
+      "sha256": "4aadb1653fb5f577fd69746949842a47bee3ef5e9b0c7fbb985c0bace0d905c6"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8517082078.json": {
+      "bytes": 15770,
+      "sha256": "869b79ab3e62359ae82baa38b86adcceff6275720a8249e5e2de41e9dd4a03a2"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8522464494.json": {
+      "bytes": 15742,
+      "sha256": "99ec5f61111e5466b6b5514a9560d2ab61c8d767a9d49b0b0f090e3e1115de97"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8522863671.json": {
+      "bytes": 9403,
+      "sha256": "b9db77640e6c2b2545589e04724336e7d91525e7715e98c8f8a59fbc4cc82b8a"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8523187670.json": {
+      "bytes": 9362,
+      "sha256": "7d675b4cf1077295d8d2bd9cdfb290fbd14e50f7126024504ed2722f660398c1"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8523715982.json": {
+      "bytes": 14267,
+      "sha256": "2df61c8fddf0bd8bed729b6eac094021eb336be5493cc2e34a70a4d2ac525f5f"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8530919227.json": {
+      "bytes": 9397,
+      "sha256": "f04ce737f28992d6439de8ffb73df7fed36cec5778934a143e9319a29d60472f"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8543401746.json": {
+      "bytes": 20427,
+      "sha256": "1d73af04c65e6e40307cc2c08a7e7e75a1c0a8c6aa3225b822d14a547f517460"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8544216717.json": {
+      "bytes": 8023,
+      "sha256": "08533970be8a15ad848293727753ead4ff492ec1052fbad67133b4964d5f907a"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8544236218.json": {
+      "bytes": 10725,
+      "sha256": "93cc147854c850cedb8934f26652f99f5b96a16fe33005c8a7726cc8d8fde190"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8553170389.json": {
+      "bytes": 5917,
+      "sha256": "5a9af6ca51980e8f87688aae5ad1e83660b6a0c6f4f146c44e00de9feb28b8a0"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8556903363.json": {
+      "bytes": 10716,
+      "sha256": "de26ed58448a9fac9bf506752cc6659d81cff8670e0e5eeca78b66da862f5ac8"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8556965333.json": {
+      "bytes": 7891,
+      "sha256": "0c7e584f7ce3c4e79b8cadd3fee512d13adb7d7487667b8017536a3811991d45"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8556971684.json": {
+      "bytes": 10718,
+      "sha256": "305e15d516f824e51c6d2752bf39d862e79aeab0d277635a1b680ba246341c64"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8557077392.json": {
+      "bytes": 10284,
+      "sha256": "a4741e42d363b65bb288e02ceb158fa23d9943f8a91763ca6cf4fd6ab343e1f3"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8557247400.json": {
+      "bytes": 5859,
+      "sha256": "5ec0bcc7b7e5a225c2ae26741fd86dee5a8c2ee9df3e39611b63d7723f1c2536"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8557318339.json": {
+      "bytes": 11366,
+      "sha256": "1007cd63a3dfdf15edde95183fe0f4d8294f5ec749a99cbc53fdfeb2e0ddee41"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8557416714.json": {
+      "bytes": 9941,
+      "sha256": "3cac099183b849c4f3ad5645aeffd800852319aafa3ef5ab06e0c0cb9fb6a6ae"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8574859192.json": {
+      "bytes": 11508,
+      "sha256": "bcba759da94e95bfadc0d5bdc6adf33986b05f5a760d5f42132e9487171b61d6"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8575004130.json": {
+      "bytes": 10724,
+      "sha256": "5cf21f3533e879ef011f7a2632a07104f80c6042f39bb550d80b5fc72200289d"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8575792378.json": {
+      "bytes": 8521,
+      "sha256": "dbe17f5deb2412a1f4763d4ad89fd8920d167e5ff274d6a8a4460d8c06c5056e"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8576269522.json": {
+      "bytes": 12643,
+      "sha256": "49394ac6da5dfa185e1b009c1c10504e595083ee1e7ef91bc4b967ae714f9221"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8576962963.json": {
+      "bytes": 10714,
+      "sha256": "12b02546852287c5761208d67fe18ee0ccbe2f6bc9a345e12560d6ada22d30da"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8577606212.json": {
+      "bytes": 15804,
+      "sha256": "b87ef1ab33f0fa3ed9d7de5137bb795f6a2b846c4553763a0f5f857cefb49bad"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/raw/8577608265.json": {
+      "bytes": 10308,
+      "sha256": "563c27e49b2d7fba34723e5eae2734452a20d98ef2bd982d8e05e360bab9e487"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/1850091882.json": {
+      "bytes": 734,
+      "sha256": "02e589532ecfba05207e08cff9d2d46549ed0065792d4b82f8f662fe17a0ebd5"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/1886913067.json": {
+      "bytes": 816,
+      "sha256": "1163de591ee66506e80ca673cd19cd4e01939f3da14265267d5d7406f4a708b4"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/2080377856.json": {
+      "bytes": 786,
+      "sha256": "19dcf0a570934029d9a3394d4d312694ace362d0a954c9552b4ecba00b05dd43"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/2137856359.json": {
+      "bytes": 777,
+      "sha256": "ea9d462057feb8d8d0a061e9d71e59936268b69d565e1e860d1400d6f94fc3e6"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/2169858911.json": {
+      "bytes": 848,
+      "sha256": "14d0e354497cf707a70b47d48e567dfb90932346301c5db28a737a1bfaa28e08"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/2233279868.json": {
+      "bytes": 811,
+      "sha256": "791f71b8560c20108eea71e7020b15bf6b5ea7b83f4252867e1aa5038e9de60b"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/2298583723.json": {
+      "bytes": 774,
+      "sha256": "42b3c422bc5302f81b2e61853753723b24b944fbc345e4c190672ec486bc24a3"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/2477323914.json": {
+      "bytes": 761,
+      "sha256": "2280775c7ead755d43076457d0b4ab3d5ef810ea6583ce6730a10bf174244207"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/2773626700.json": {
+      "bytes": 791,
+      "sha256": "e153a7cfea19480a49409de7c8106dd02e530b3e333c74d93c67feab1a83fd1b"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/2794824126.json": {
+      "bytes": 767,
+      "sha256": "61b7fd62fd49a64171d3482db95699b9c3989e506af1e7822f06d5f37e5c25f9"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/2808017199.json": {
+      "bytes": 937,
+      "sha256": "1a7f988f4d57a64f5d201f5a2cdd764dc6098a11922bc0a8c8c06397d3410ace"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/2808535016.json": {
+      "bytes": 775,
+      "sha256": "f5ca3732e01f1a61b6acba9a6d51d5b2f63adc0de5074a23aa85594c1a5f08cc"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/2840186903.json": {
+      "bytes": 871,
+      "sha256": "19c4215b338c8079abc73ee6be0b82d8367175c0731c84e6c907c3999f2c6657"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/2920898020.json": {
+      "bytes": 797,
+      "sha256": "9c246bf564f6d897e6df0e885e77947d6d5471b22796cc611771ba9990dbe4ea"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/2940286513.json": {
+      "bytes": 889,
+      "sha256": "5fd02f9657705a957f0d4b15d09f649a5d17e0ae12f3799e1a0ed4445fc7ff05"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/3118261367.json": {
+      "bytes": 879,
+      "sha256": "33c69f34e736fbf5a9d46bff4b54631fc36f7f76d179ae705b563b6803e36a62"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/3128833284.json": {
+      "bytes": 852,
+      "sha256": "c87f1633e145a85e97eb53b84605631d118097cfde389af11bee581cb4964375"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/3173747935.json": {
+      "bytes": 767,
+      "sha256": "06c6017dfe4b404d2f9ac8daeaeb94d5ee10220dee7df56f0871dc9367b20cb4"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/3217474436.json": {
+      "bytes": 840,
+      "sha256": "c0a13b9cb6aff48f30043ddd09642bc0181c981b9ff25a697628008e11b63cde"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/3231841552.json": {
+      "bytes": 767,
+      "sha256": "dff586eb885434e7d072bb3dc54b9eae125c67ce117280b7e9a758ee8a0119c3"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/3336891178.json": {
+      "bytes": 873,
+      "sha256": "cdf4acd538569aaae6255dbe32be5b3fc5df5fe415f6b7f372c3f2d102bdadf3"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/3465178290.json": {
+      "bytes": 763,
+      "sha256": "016ee4d223a44ee2a31b93c5a7a2cd40155241081893f7b458399de27e20cd6b"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/3480777271.json": {
+      "bytes": 727,
+      "sha256": "06f3000ad0edaecbbea77f018d71a8cf34e9c3558e14f1d79fdd1ae5bc4b6880"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/3642133287.json": {
+      "bytes": 811,
+      "sha256": "583957f47275681c4fa282cc5a3e215da0112e0342f8ae65180da20e1db46c39"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/3673126497.json": {
+      "bytes": 852,
+      "sha256": "e30870ba9cef6336df4b38daab3323f5ab85bfdb4eb5c7df0ae1fc18bd26f5fa"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/3785347298.json": {
+      "bytes": 855,
+      "sha256": "58b928ee6848331d8b9208280b6bb65a39accf463268e33d3fed03a7be9929bf"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/3785386028.json": {
+      "bytes": 767,
+      "sha256": "11033ff11c46696f0477c44df96b643f2d3394b740b7033512674ca8d5f824b3"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/3864735783.json": {
+      "bytes": 781,
+      "sha256": "4c74ea7683fcf972dc9f68df562844a72922c24f95e291c10254bc77f33a04d3"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/4069712009.json": {
+      "bytes": 734,
+      "sha256": "81020725bf53ad3476b73c35aad92e9f5c71e8562d5c35fd62d1ecc7d9a9d763"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/4075358616.json": {
+      "bytes": 791,
+      "sha256": "840ed80809d1e6b7104d984cd7347f8cdec72c9f821a2588e798e13aa4e3b5a5"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/4195543469.json": {
+      "bytes": 790,
+      "sha256": "fe4a0b57f30445a09a2d13ef672ca8458d43cd7925154f06635894ebc4e940fd"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/4197390006.json": {
+      "bytes": 755,
+      "sha256": "78eaad5f5aaade9807389e9558aad8b239e511ac042406017a17c67ebf6ad854"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/4223118006.json": {
+      "bytes": 780,
+      "sha256": "8b2899216eae681d0ac839a7743012baf9bb150e03b16f7ca3fc6b1c8126692b"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/4227340425.json": {
+      "bytes": 824,
+      "sha256": "e874d093619d5bec8f225f2e1e8255672687a38eb4925d75846141464d11b11f"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/4290045924.json": {
+      "bytes": 786,
+      "sha256": "6df37853b0c95ffdb0031bd40159b34c67104dd62c60257b3b2b94f9ff3567b9"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/4344495394.json": {
+      "bytes": 878,
+      "sha256": "062dad393ac68bb372ebe7f81c679da4d2ab515c403ba12622543a5192099164"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/4362832383.json": {
+      "bytes": 874,
+      "sha256": "211a41e79f0ee8e2c21d341669edf5cc798ad8bd60ed16ab340587d82f1fd82d"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/4365464126.json": {
+      "bytes": 772,
+      "sha256": "4ef75a3fe3aadd1183309f13ff205dc0158453b45607b2b936cd901907e38781"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/4380415208.json": {
+      "bytes": 780,
+      "sha256": "8032e923d3204206e7beb6ffb0480daf8ecac440bee151fc1a13039b5b3d101a"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/4385376717.json": {
+      "bytes": 763,
+      "sha256": "54eb5e1ad3cc8f0270a6a1143c54b53b0784607db3a355fe0948a9bdaddab275"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/4505360188.json": {
+      "bytes": 763,
+      "sha256": "b75e016b37eafe333e49c24c42e9f54e15396057c700e9519a7e0e61f61d8d94"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/4517806437.json": {
+      "bytes": 777,
+      "sha256": "2f22532bacdbe5ad7100b2ec77f3ddd4ea8e5e469ee228670377cf7645665137"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/4584870101.json": {
+      "bytes": 808,
+      "sha256": "dded688461378fdb93213fa431f6244bcc584d9c01b9447c934b8f18a5da9680"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/4674114606.json": {
+      "bytes": 734,
+      "sha256": "e1ea886c2b5547b159c798fdf28d80ed6fdfd620e7d02a2f07fd83b0b2901b42"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/4707630039.json": {
+      "bytes": 759,
+      "sha256": "1a6350e12504f0abed5b1dd4bc6b6584545529c9abce485b00488a902e322dc7"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/473619939.json": {
+      "bytes": 763,
+      "sha256": "d87cf2ec6ae5c34c2fa67a25b334da10f160b9eb4c36832493207e363f9f567a"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/4794138683.json": {
+      "bytes": 774,
+      "sha256": "26cc98ed4408b217fb1b51c40992693ea35ed66d7ec1154cffc59ce509e5dd41"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/7208450700.json": {
+      "bytes": 778,
+      "sha256": "53cec92af48010144a2a2e04890155fd588bc29b26d1232586d6f70591f3708b"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/7276605889.json": {
+      "bytes": 763,
+      "sha256": "a6873abbb5b602579f0f9ba3735b5c33caacaaaab831ab78f98e18c6a16ef835"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/7305370768.json": {
+      "bytes": 772,
+      "sha256": "b371b3b6db579d8069c86366eaabdd22b15f3f88da99b8d0e1ae6070d5211c0f"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/7326272282.json": {
+      "bytes": 760,
+      "sha256": "1de5b75f697db609b0d6fd28d905810cd514905c1bfac080a126b9fd55024fd6"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/7331686470.json": {
+      "bytes": 791,
+      "sha256": "1263538384e0c3235a7bf9e8bf700d743c585029e9ad7a58c0233b77425a1065"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/7416305245.json": {
+      "bytes": 786,
+      "sha256": "0e2d780e76666e0084537d0e751736f514baaacb00180c09ff352e9bbd1863c4"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/7486229587.json": {
+      "bytes": 783,
+      "sha256": "ef1a7afed8633e27096297d89bf6bd6c473383a18bd802a158e2da98fcb51ab5"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/7532545177.json": {
+      "bytes": 768,
+      "sha256": "39796155f7691df634608976a3a7e41bd8b4d0a32705dccb708a3007c69e423c"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/7554976239.json": {
+      "bytes": 803,
+      "sha256": "0fc9b669b1c2745460444353d7db5d33b0f06e8ccd31c1af8853fb405890cb2d"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/7564807072.json": {
+      "bytes": 766,
+      "sha256": "2c4928ae82c2e03a5120ab3ebeab75778d38fb453ebe43b12cdd47d8f7447d5a"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/7571947894.json": {
+      "bytes": 766,
+      "sha256": "417a80df3349f19cd45252f6b4dd85f59b68c8a903832df17d8559dacb51982a"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/7572588010.json": {
+      "bytes": 757,
+      "sha256": "23f9c777d65becc53e0f190bca28feeff4beb43d527d2a15117958f19df479a4"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/7638259871.json": {
+      "bytes": 807,
+      "sha256": "c9821eed3a3fbc160749ebcd765689c51611e2a4e533fb99b5f3d00ab490957b"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/7697923205.json": {
+      "bytes": 791,
+      "sha256": "158e1c23a98c68eeb6e7cfc380307c069e48bb38a4f8c3728aa59e9649fc0f62"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/7703681518.json": {
+      "bytes": 772,
+      "sha256": "8ea8e7a916e3ad0223bd3ef635813b874e5f42001c63a228a573714bd45e0f39"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/7712690038.json": {
+      "bytes": 784,
+      "sha256": "68bb31447decc35548081c474625e71dfc23057096b9cac22d8992d2d486ca05"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/7773082769.json": {
+      "bytes": 775,
+      "sha256": "f05fd98214d7a5635c220fb7c883ac5ebc3e0572cc670b68959c00c023fb7503"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/7774204472.json": {
+      "bytes": 767,
+      "sha256": "bd61496b1671361ef3b57ff56a9b50f7b827ef0134fdff25205a77890682c2e5"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/7774363245.json": {
+      "bytes": 764,
+      "sha256": "7b425f86e2487ee7429eabee729d787b69e13febf5552b6533ce8afbfac99128"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/7785846768.json": {
+      "bytes": 822,
+      "sha256": "460587923f7c0a0d5702cf7184e970da379c9fc5ebb740adc9de58a3c97abc0c"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/7806579271.json": {
+      "bytes": 800,
+      "sha256": "ebe1407a283be5e766537a538440165823a8fca3634073981595283c3ebe4c55"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/7808698484.json": {
+      "bytes": 770,
+      "sha256": "d8ac55c7b2d850e614f192211279573f648655319647ba0104d66e6a7f79796d"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/7813013019.json": {
+      "bytes": 776,
+      "sha256": "973e81a9001b1b5c6c91dadd39eb291c2a44387ab295ceb2a10aefbad1dd5034"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/7813737285.json": {
+      "bytes": 885,
+      "sha256": "80df281050089276b4ad3714fcd5f187a02d876c540c049313155393306875b0"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/7833557603.json": {
+      "bytes": 807,
+      "sha256": "e9a9e5c3236d1bf7556f99cf2068954732d285d6578f53e929ea67dbde2d5c9a"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/7852243851.json": {
+      "bytes": 768,
+      "sha256": "e46da967cba70b53ba6bfa5447e2e7891e4e86a4f7c88d329377e2e71caee1e5"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/7902852982.json": {
+      "bytes": 774,
+      "sha256": "0a767dda98bc4b9acb01d08a206e016a90726d113aa4769c0736418b11abb15d"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/7939473199.json": {
+      "bytes": 771,
+      "sha256": "7feb586bc22ca8e90a80a662600662cd2468244b2b9a8fe6e35eb741e7c01c2a"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/7939578253.json": {
+      "bytes": 776,
+      "sha256": "916ee0a85b8d3627bee3e4bde253543aebed72c343ffc20869b4f11a93ef65d5"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/7962430770.json": {
+      "bytes": 807,
+      "sha256": "27176a432b59a1daaa913d677564bbde522353eaf23cd20a070ad97e1b6a9288"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/7967602348.json": {
+      "bytes": 767,
+      "sha256": "d8dcaa943fce43776b960ebed0ef6c835973ddcfce0271da905e3bcbba711fd3"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/7980023659.json": {
+      "bytes": 826,
+      "sha256": "c45a6b3c49004d2b239719679b4627e11c66fd5ca5fd2666ed3991d79006b540"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/7988735790.json": {
+      "bytes": 893,
+      "sha256": "a9c593f3b2f96d78f1f0c64312234ea7852ba6777d41cffaecc3569ead732c30"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8004409215.json": {
+      "bytes": 788,
+      "sha256": "3cc019ec4aea13ae948c291e86dd081e0d0c4e6c52098889b9dc4cd6fcaf73c2"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8018553810.json": {
+      "bytes": 755,
+      "sha256": "a3ce3e5d0f16cba2be9edc79792c78caffc128c531a9da3b0c853a80949ee29e"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8030295415.json": {
+      "bytes": 778,
+      "sha256": "dc904abdbe85f473673c463836505472435369561707c707bf250b654cd48f8e"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8040020525.json": {
+      "bytes": 767,
+      "sha256": "6da136d9635700887a2ca31c08cd926b43b89f97ff02d6e77b585e9ac728d619"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8044062733.json": {
+      "bytes": 784,
+      "sha256": "bdb287b571349b6b55dfe1d823370091fe12b02741811e84e34166c58f6fa6be"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8064220313.json": {
+      "bytes": 786,
+      "sha256": "46abcc96f57bbe956d6d65c9f32883c557b0d8390d38b16e1cd583a96ebc5fbb"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8081599758.json": {
+      "bytes": 798,
+      "sha256": "169b001890f76a2a47ec81b7815c198486d099044ebe0b1103842fa8765ca7f9"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8094040961.json": {
+      "bytes": 783,
+      "sha256": "efde44f5cc5142771ad734410394bef147c2a1f7c6a8807afa55667ccdaea836"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8097698015.json": {
+      "bytes": 807,
+      "sha256": "3b81bd1a8b132699a0392e0ed961820e177cba65c5d9fe995cb6f7dd36069e7d"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8115351401.json": {
+      "bytes": 808,
+      "sha256": "8032075fbe8e8c507c133a8fa10b4b8b1c1a874928cf8429a16d4876febc31a7"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8128861388.json": {
+      "bytes": 788,
+      "sha256": "95d57639d1b533e942e55a32b1d41a6980bb699d5bc4dc2b0fdd4af94b9b37eb"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8129999655.json": {
+      "bytes": 767,
+      "sha256": "bf02c1019ce4b88779decb8aaad9626afc9591bef5f6d0cf2be1e06485140b04"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8139821845.json": {
+      "bytes": 785,
+      "sha256": "602baa2b1fabefa05db025f5fe9c4114626ea5458d51b20df1ae6ae17b745d20"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8153122760.json": {
+      "bytes": 809,
+      "sha256": "76117aa317adb9cf2e15cb6a35b2e36b59b492feda0f141fe937db1c45ac9a9b"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8157986419.json": {
+      "bytes": 734,
+      "sha256": "f57941168ffea5f1ad703b8229241ad31f5b126dc4d7004c55598ae5438f00e5"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8160449641.json": {
+      "bytes": 775,
+      "sha256": "ffe4eca7ac06f6dce397cca6520a293b045a47eb3c18812a21324eeb1e54306c"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8162095377.json": {
+      "bytes": 767,
+      "sha256": "7325d583195cfe075fa63560b6ae425204a7a6a3ab5c845a78e5f0a56641b0c5"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8184741350.json": {
+      "bytes": 781,
+      "sha256": "e1763984ca9382991950a5db6f70281b2c04a6230f0566dfff2f1796ee44fef4"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8193978124.json": {
+      "bytes": 867,
+      "sha256": "711f54bc39bd5d90fc13d02557d6fe0cd794a23689d8b7a8afa747f6d5c6303c"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8202081816.json": {
+      "bytes": 905,
+      "sha256": "493e5d45b5d2894d23ca9db435ba419aa9f5f5e9b8b439666f368779285d1ab3"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8212873219.json": {
+      "bytes": 805,
+      "sha256": "67a6f9b7b5977aca35793c75d5ca334e764fa1b9f1ca5882a57e3e068f991536"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8254309461.json": {
+      "bytes": 767,
+      "sha256": "f81c52ad65dcfb5c949037db387858d3645008e50ec2b4a59e771b99932dafef"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8257341759.json": {
+      "bytes": 784,
+      "sha256": "25b2d0efc79398435994f574d04ede1db7051e30c3db035baa2b869e6962ab12"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8286816208.json": {
+      "bytes": 818,
+      "sha256": "205ef69f274107a3131e9002cd9df21c72f908a60a1943687ffd4701af8b8be6"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8298991295.json": {
+      "bytes": 906,
+      "sha256": "effdfae7b45a70b93e42d99b3cd96d2a403e74bfcf9231504fa184bccb52aaf0"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8300821816.json": {
+      "bytes": 769,
+      "sha256": "208636e8dcab5a43d0ee08626b09999652e04e4547ba60afcca3c4f3047e767e"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8308709056.json": {
+      "bytes": 807,
+      "sha256": "b19dc8fd517f18c3101a814ca70bd7f57c8a7cd1fd851f30c2461e7aff0a24e7"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8309278036.json": {
+      "bytes": 813,
+      "sha256": "30df8e46d1046dbd489b4930fb74b89b794b2f5d59a26fc6312279a89b5af46e"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8316024795.json": {
+      "bytes": 760,
+      "sha256": "9b36aba8e7d41dca6e7f753f4dc25e2cb5d6eac1dccda549f51223e99ed702fb"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8316345346.json": {
+      "bytes": 764,
+      "sha256": "29723b6f5e47726bb3f9f44d18a8b7b9634bfbe8a957a7f7b1ce2620407e7584"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8318311628.json": {
+      "bytes": 781,
+      "sha256": "eb026fd98ccf08786fc02225ff9e10ab8f97851f3b8bfa053543d730667e2f2b"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8323442271.json": {
+      "bytes": 788,
+      "sha256": "45b0c54eb5eadf0c2c8dda4fca05d47cc13da9edfd3c18017475fe3826752c6f"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8325535342.json": {
+      "bytes": 770,
+      "sha256": "ee061512fbccce99d98ded19e054644d8b48e834da0384f0d57e913b81abbaa2"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8327942713.json": {
+      "bytes": 792,
+      "sha256": "93be82c7cb9b891cc07665217189a1ba70f1defd1d04aaa4b976ba7f945abe35"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8328668347.json": {
+      "bytes": 784,
+      "sha256": "5bc295c9293227ef8bea2f123013a85fc5693694f21c0191da53dd875a431f8e"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8331867535.json": {
+      "bytes": 774,
+      "sha256": "7154bb538f63dd0100674da87a7c678f0254f9f36327db456046260c90061f9c"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8332301524.json": {
+      "bytes": 796,
+      "sha256": "f3228b3e26d33fa25ab33903a84be689fc0319e3846670aa0a6011273f5ad0c2"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8337933112.json": {
+      "bytes": 878,
+      "sha256": "79151a27614497d4188ea3bcbee8025f46e7e61e7e423e249ff7e78982b69525"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8340071119.json": {
+      "bytes": 780,
+      "sha256": "ab78184f4151f5f4027c7521f3cc36c04141d9a24a3a15602c2deaf71204ecfa"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8340546650.json": {
+      "bytes": 788,
+      "sha256": "d64762d8b20083d9931a4199f137abdb565556c6b395409ed33f3fdc6bf90213"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8341719581.json": {
+      "bytes": 768,
+      "sha256": "5ccbf875c6159378c9335f3109a38a20d72212ab8778288349fb61659e5b3ce4"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8342462617.json": {
+      "bytes": 805,
+      "sha256": "4b07d49551ff040cbe8e375af6df77b41f540165a56e7b943f73121803482d46"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8342893861.json": {
+      "bytes": 767,
+      "sha256": "151c91e6c1b6522bb2d264d7f3aa47944945cba2db4641fe6b1178a4b2eb1960"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8346006076.json": {
+      "bytes": 768,
+      "sha256": "83e9b14d3064fa484c3c4c7754564f9976c495a12a2d91b6790da63c9e2399f5"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8347136156.json": {
+      "bytes": 807,
+      "sha256": "805a0d61d2767efb8355f22ab347566f1e99d3b3ce70e16f1fe5c23ca0a59aec"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8347541510.json": {
+      "bytes": 758,
+      "sha256": "3b83b5823e931b4d08d38b329af06e56abc2cd455f70b4ef42f53028478c150f"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8347968595.json": {
+      "bytes": 804,
+      "sha256": "dac6ca91b8a90752bde541a1e4dca79d78b63c785e5f7a8a9d7cf729040d155c"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8348033387.json": {
+      "bytes": 771,
+      "sha256": "28257da39825166556c74c863ad6b653d9cb0ab6ed7de9ce058190aedf6239a9"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8348168245.json": {
+      "bytes": 802,
+      "sha256": "caa96096e1df9ae5adb2e5a17c0eeafe6c4fe0e51a21c4a2c14ca5d8b14fe2de"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8349562842.json": {
+      "bytes": 802,
+      "sha256": "84c874d723267d185cb4a45ccd393a66421c54d943f2a9da6e0d41ccce6d814d"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8350320934.json": {
+      "bytes": 767,
+      "sha256": "d8bdc11c3ab15cf8ddcadf443778524587aa927161cffb2a77e257c7f259be46"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8351481288.json": {
+      "bytes": 787,
+      "sha256": "5fbe5434af648f9bb427706973bf57735889f10be55fb8d55638dce994d9f80b"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8355766639.json": {
+      "bytes": 810,
+      "sha256": "3fb6b752214d9c4c2df3d58ab34d470b0e8f4f311a87843483faf6e61b2aa4fa"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8357419845.json": {
+      "bytes": 809,
+      "sha256": "fc79493f8eabd634e49688bfe04ab3381f0a7a9eea154b5f7d56d816f05ae73f"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8359400626.json": {
+      "bytes": 774,
+      "sha256": "eeeb3ba47bdcc4eedf599830ffee3ff757e9a42ffa6513955969b79e35010df3"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8364578980.json": {
+      "bytes": 788,
+      "sha256": "1ae257253537657ac491fe735dc13ab374098aa2c866cb64659193cebf3446d5"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8366261554.json": {
+      "bytes": 788,
+      "sha256": "8ca31b964d31638e6ad36c626e333a1b3a226ce248cfbaebe7fb7ab653fbf565"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8366592597.json": {
+      "bytes": 792,
+      "sha256": "ef13a454349dd3fbe948a07192eeb0e4e1832c911f390cb8c5c0b8f1f8e8212b"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8368183014.json": {
+      "bytes": 807,
+      "sha256": "bf99206914b3e102b03482235d06b6299f1e2ff7a6d25dbd5b3f6147f7fcaf7b"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8368978779.json": {
+      "bytes": 793,
+      "sha256": "b3fa59401013c38276657b0f5a599d04ea2ec7a408bf8f4b57d1cea8fbae938d"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8369014477.json": {
+      "bytes": 734,
+      "sha256": "65e04b0e884eb86ed26be843252fb6b6911bbeccc72160289effe4bdcfe80c20"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8369309584.json": {
+      "bytes": 803,
+      "sha256": "373c82db82e4e85763fae7f397c1cc2d91c165b3031d04d881c4b324f57596ce"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8369977195.json": {
+      "bytes": 761,
+      "sha256": "630d592e52a33f53b183d02b1e8db3c19ef09b3117ba101d294f58d8c8e96885"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8370826688.json": {
+      "bytes": 803,
+      "sha256": "d1506b118b1e66300c0cba97154e880741561eb2be3ce0dcf84d7d71866860a7"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8372308195.json": {
+      "bytes": 785,
+      "sha256": "ea2d607b5df39e2266697f06837357e2fda0ea3308f961f09411d5168b5fe18e"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8378259950.json": {
+      "bytes": 797,
+      "sha256": "a72b6e2739e8d2f6faee0006b6cf354f0e1745f95e03b4943897b2d3e0eb9800"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8378934658.json": {
+      "bytes": 759,
+      "sha256": "6f440cdd8bfc4b287c2972b0805bed6ba082aa06ca25ba74b2eb5637e1e1f286"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8379464360.json": {
+      "bytes": 734,
+      "sha256": "91e805a1733f86aad3e616e74d73e98545a467ffaea2ed32d00c18d02895f581"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8380486998.json": {
+      "bytes": 880,
+      "sha256": "63bda8e21671f511ae5d6e490769147257e762a0cae938ef99b133961657ae13"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8381857712.json": {
+      "bytes": 761,
+      "sha256": "1818af66f1187fe17c8a3dc0f69a2eb653efb03d4a50adf99a6704365ea87c0c"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8386011966.json": {
+      "bytes": 804,
+      "sha256": "5e52ce85a4aa865fde449a36b03c6d8478b1529d85f359d8058f2afdbf4b1aa4"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8386536898.json": {
+      "bytes": 734,
+      "sha256": "0db905145e7ba2749df0422b25ff39d56d24f05ee52d82aab2b07ff5d9754a18"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8386785519.json": {
+      "bytes": 734,
+      "sha256": "65cf589e1ed594aec224a07b11ea9e09990746db9e9447a10719538302639c80"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8388530372.json": {
+      "bytes": 788,
+      "sha256": "e5882fb261a3de4c9c94a151392120c5efa13b76c01489f9aef2fd9884f0c384"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8390607476.json": {
+      "bytes": 812,
+      "sha256": "a72ac894aeb2ed5fd3738674758604f0989369a32e3ebdfce701a0853e2cd6a9"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8391766129.json": {
+      "bytes": 777,
+      "sha256": "b92e9792c0d3f4e30950f04d9e298ca93e80e59c3be71104227714c01af65725"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8393035337.json": {
+      "bytes": 879,
+      "sha256": "bfb6f8d61724f554a2ea4918e6af6f884395e01c72f7e33e399341550b216309"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8397900513.json": {
+      "bytes": 784,
+      "sha256": "605cb90f608ccd23f9e278b41984efc0402ce59940357b2cbc0ff6845d1d538e"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8398202849.json": {
+      "bytes": 882,
+      "sha256": "c4e2a7f647a6f6bcdfa8f178f240fc2c042ea5000a458a027840aba702459b94"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8398262720.json": {
+      "bytes": 756,
+      "sha256": "a3f7f4d37501a2c9a4f94e6d4eb0faba91349c548a0a95a0064f8d001be224cc"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8398466034.json": {
+      "bytes": 793,
+      "sha256": "5b3fbd2cc7782353b1c9f8065b6f677ec7ab741becbc78745a722735cef48967"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8398770344.json": {
+      "bytes": 784,
+      "sha256": "6f08197213b385cf2dc7a07e1b758b9ac77cca35852fbb9e8ec382c4aab7e85b"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8399941263.json": {
+      "bytes": 786,
+      "sha256": "358ddccaade00f8353f6868cc7d4d85687ecbc4735544a2a20e7099e5f63cea5"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8400819256.json": {
+      "bytes": 788,
+      "sha256": "92aee9a24931a8661e72b085eada8918ba81c2ec9c9c342ceded12a694e515eb"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8400840557.json": {
+      "bytes": 775,
+      "sha256": "b2e8f578f430675356eb3859a7578fd7ae1d3df3422d36ceaa9cbfe49425f391"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8401093665.json": {
+      "bytes": 754,
+      "sha256": "84467d01166b6853d3ff121c6ded847aa436f5c7e0ae2fb63032d58b2521130e"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8401189510.json": {
+      "bytes": 787,
+      "sha256": "f7a6fd49791c35f680d27fbcebb16cdbf91d40093b931f05ceac48249128ed61"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8401220122.json": {
+      "bytes": 761,
+      "sha256": "b8756309f28a45b12cc3463bc7671bfdf67d133d14f7ffea84672bd07f6793eb"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8404178489.json": {
+      "bytes": 800,
+      "sha256": "003ced6c85500ff185980e3861ce8228b02dccf1e9d9b94db0513d3d1311973b"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8404273747.json": {
+      "bytes": 770,
+      "sha256": "b3250a53fd178ae2ac145e28ab70f31e16899cf8955c860bc353625ae57389dc"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8404650290.json": {
+      "bytes": 766,
+      "sha256": "b584b649b60384eefc6a5b3e59e22cb978799e7c130e511a2e8800e14183943b"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8404819391.json": {
+      "bytes": 767,
+      "sha256": "119e1872ff83fd589087d2e9804d8c7c2c852d4fe4e4a9736df68e8fc4e6a04f"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8405161488.json": {
+      "bytes": 757,
+      "sha256": "74d5beea7ac0f2a87c616798db8bbd956dcf871f175eea754854d53a7348a69a"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8406824572.json": {
+      "bytes": 787,
+      "sha256": "76c24c32a630b90dbf8c84319007c00ce0b6562604859f8373d438a665820935"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8407855786.json": {
+      "bytes": 823,
+      "sha256": "ab71d03c4db75133033907516cce0de394a5b709fd2c9f12abadb31b0a4f743f"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8410443841.json": {
+      "bytes": 770,
+      "sha256": "2b22a7b041c77d7ac0be2edb0c90945e75dc8a3a5f5c626ebff2978ee91be605"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8410448072.json": {
+      "bytes": 734,
+      "sha256": "199b6140584ddad4a0ff449231fbbc0429c15f62f3f4a61409f1d29c96adc66a"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8413857049.json": {
+      "bytes": 801,
+      "sha256": "f9ec2d560efff98d128499e0a012c1e5fa62cb2d3e52ab9ff1e7818008146854"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8414417334.json": {
+      "bytes": 764,
+      "sha256": "35bf43a799b3d2e4303bf03d70e392952e485e0b648839e8f4c7f8deb434f63d"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8414423496.json": {
+      "bytes": 764,
+      "sha256": "2fb68cff5e7bb5339f0ff1335b81e66782b8e7f8fadf851d98331b9901ad4235"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8414531738.json": {
+      "bytes": 808,
+      "sha256": "57bfea8651b6ed13ad3a9c3244d258671834962da3f5cba168ee7dc594dc04b3"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8416254831.json": {
+      "bytes": 794,
+      "sha256": "22ede40c5d52f084e0ff762bc6f4efbe8a09702317d82d66d96bb0c05966cb17"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8418460789.json": {
+      "bytes": 878,
+      "sha256": "e528ab2369ef28aab1d1441229ad68fbe555757975f7c6a0475b4654b073ff66"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8419947757.json": {
+      "bytes": 781,
+      "sha256": "8d3edde6e56bdf5a854ddde00cac4bf87411bb0b51152e88c986571ad1b5793a"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8420678579.json": {
+      "bytes": 767,
+      "sha256": "43254f766433170b3c675b2bbad1f3095edb4d138d4fd3ce0bf0a3066f7a7bd7"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8422060328.json": {
+      "bytes": 769,
+      "sha256": "af612672ad3fd7deb768f168c48c5aefd21e9712b266a89201df8165fd8c64c5"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8422189199.json": {
+      "bytes": 805,
+      "sha256": "e1d4200e9f36c190f5799e03b75ed99b13848e12b83eab102afb5f5c113a4ac2"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8422327108.json": {
+      "bytes": 775,
+      "sha256": "f3fb9f6f8ad0a797ba2cf56a663e5c454cb6be34fc71a4534d8aa9af64c3e499"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8422911939.json": {
+      "bytes": 783,
+      "sha256": "82685dd224d6d3a04420bd545cf75061873446f136b3c7830e86ab5d4773edf9"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8423240851.json": {
+      "bytes": 778,
+      "sha256": "ecf86613b4a77ea8e8524a36ebd38e157652358c4ccbe846750c86662887d66c"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8423420490.json": {
+      "bytes": 767,
+      "sha256": "dbcc33bf2d0862f01a97591c94987067bc0fc56cb10c0e0c72fae8ca6206f214"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8431175527.json": {
+      "bytes": 803,
+      "sha256": "cc8fe2bc0cb9b377e4c495685cc95a93f6e8e77af5a6bdaea88104454641215e"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8431304539.json": {
+      "bytes": 789,
+      "sha256": "39720c51ee432270d88a3326b563ea46b726cdbf303fcefda6f4ba2362815709"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8432186561.json": {
+      "bytes": 778,
+      "sha256": "a3c285f6c9b390bf0397b8fd90870faf45c113a40cd5de4a2fa81b7d61481a9d"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8435242312.json": {
+      "bytes": 769,
+      "sha256": "c3d5b072ac91ec6695f1931c9f8b7635f2aca9b0a3863fe26d538c98fd5b2884"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8437332867.json": {
+      "bytes": 805,
+      "sha256": "78c03a3bc3bd994569946d4886885db42e74cfd09a9a165c0ce4b92969186103"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8437437015.json": {
+      "bytes": 771,
+      "sha256": "b96e8de520e1df9c6f19bae72a709cb4a75fd958d5f7620c372458e3a7a4276a"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8438928753.json": {
+      "bytes": 864,
+      "sha256": "58a29580e5aa7ccc15e5a6b3d83f9fd6b0db9550bdd6c0d0565a8d22d0669c22"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8440056030.json": {
+      "bytes": 764,
+      "sha256": "874f4411e2068f435a28ee98b5f8f0d2fc1a52f2c7904b1524df3399bdbd2878"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8440216540.json": {
+      "bytes": 796,
+      "sha256": "136e4b34b74e1d9d4a2d47b9e28394da62e5be19ad02877cd3d873dbb096ec0f"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8441331645.json": {
+      "bytes": 799,
+      "sha256": "351be6de0ce2a4716f7c3d57ea20230603f85ee656c507140e84eac104f47179"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8442601947.json": {
+      "bytes": 873,
+      "sha256": "b923f2ffdcb4d402e148cf9a72195a475e36da6d1032ce8ae2c1574b26fef7f5"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8445665183.json": {
+      "bytes": 756,
+      "sha256": "c7fa95865092f8da3078e8a2f12cfbb29deb2f00835acb05a092c089c6041d3b"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8445668773.json": {
+      "bytes": 754,
+      "sha256": "f92e8efb7f3db824a95e7291aa3acbde6edee3488f933bab47ac4469807de30b"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8452360685.json": {
+      "bytes": 760,
+      "sha256": "18d4e6a0733404eda83fd67384ed17b019736930907ceb1dde0d1fe77953d6e8"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8452757313.json": {
+      "bytes": 768,
+      "sha256": "e32e13f4ffa146835e8cd864a486c7a861c535c51eeeb41f4d8a8e0d57f82b97"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8454845733.json": {
+      "bytes": 778,
+      "sha256": "15c882d559168e04c9adc5a57464ed48a6a714e5e787121538db6adbfb758244"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8455645102.json": {
+      "bytes": 881,
+      "sha256": "72a03a89edb718f5f8daf1b73059a2d8852938ba676e9f3852478cf443008124"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8457544928.json": {
+      "bytes": 750,
+      "sha256": "51f90fe0fd5ec576542be27d7da0cbdc8884b4704d15a5055929e59923d5337f"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8458318401.json": {
+      "bytes": 765,
+      "sha256": "ee3506d2a4c38a666570abd8f85e6a8af12822a841bd9737c57059af19b129d1"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8459264537.json": {
+      "bytes": 799,
+      "sha256": "a9ba9e859ea2fd38aa95afe97fd7e4c7685e149e4e4fd3b36be454da227a0ac5"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8459305664.json": {
+      "bytes": 764,
+      "sha256": "8f4b8a2bf1b064f990244da406b8039e0e8de31ac1a1d987e0bf994cb445ee1c"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8459575933.json": {
+      "bytes": 804,
+      "sha256": "19ac6b21d9760854569aa9d1eb6c7e372ab1bb592dd4bcd83e356bd3f29df84b"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8463092999.json": {
+      "bytes": 807,
+      "sha256": "9dcd7b8fa51ec384801b6874ce0515f3410d30082a38fbc38dfb9207529b5c58"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8463397744.json": {
+      "bytes": 797,
+      "sha256": "acbc19d03b36b425ca18f20495d8710a2817e1f30d853748771aa1b6fa64120c"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8463455129.json": {
+      "bytes": 791,
+      "sha256": "060fad50a1c837e3ecbee5a559a15b9e5ecd232d8ccb59e27c5ac5f9db0dbb45"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8463580720.json": {
+      "bytes": 878,
+      "sha256": "85c8f42a20532e9e5fcc528ee1a371b484651ed2e26124cb285b87d7fb121fa6"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8463686027.json": {
+      "bytes": 765,
+      "sha256": "93cb8c1ce65f0fa73aaf9e2a04269a0758a414f756b60179dc52b07768d06635"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8463823320.json": {
+      "bytes": 774,
+      "sha256": "b5ca2eacd9cdf0a70c424b812ad450399f1f0a63fad40fbec151a82031ab8c5e"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8469991747.json": {
+      "bytes": 763,
+      "sha256": "8ed0ee04de3559475f97eae4943377885eeb6dbf889188d090649980f30767f5"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8470092220.json": {
+      "bytes": 771,
+      "sha256": "c94c5549b6535c18a1d532c300ff08980a40b6376304643737d23d1965493f88"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8470289193.json": {
+      "bytes": 766,
+      "sha256": "08e812003626b01acfed0888672f971bb1e979e12049cb900926ee5dd28fd96e"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8470525685.json": {
+      "bytes": 765,
+      "sha256": "7d302b9c713078c8962c78fa8b935cbfd41313c5c142a1fe46427ca9d8f6b128"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8470543884.json": {
+      "bytes": 802,
+      "sha256": "149db6538ca92eb1e3fb3c4e9ad584c875d7a62b271beb1792d50674a95507c7"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8472846044.json": {
+      "bytes": 805,
+      "sha256": "92170ab9bc4c23d9ca4c0f2441db15660d349c42f4c5ee575b664b5b08224ea9"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8472933084.json": {
+      "bytes": 787,
+      "sha256": "4369c9253991214b9fdf0946b7957c2c6bea5a1784b1acff469a78fe024b3947"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8472977098.json": {
+      "bytes": 857,
+      "sha256": "ebcb911ce2071905ac600887f57398e4c4a0de99f4d61aa66c982bcd13b6cd37"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8473657022.json": {
+      "bytes": 900,
+      "sha256": "0474835285e7848183e97e978f0658f5a0565e5879e2df48379c1f3cfcb66d40"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8479555594.json": {
+      "bytes": 774,
+      "sha256": "9dff0bc1f1c3a7797dd8c4b638d4077cb4c2fb90f3ee127ef25602fafd2a82d2"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8482590152.json": {
+      "bytes": 783,
+      "sha256": "bebd038e8af25b27fe66f12ce9ba9fd1417172ae9230099df61a5395ffb7fdb3"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8482720847.json": {
+      "bytes": 767,
+      "sha256": "dd8a15c675e205b957017646f195042469a4233cefb7ead9fc1e080cf7e453ea"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8482948435.json": {
+      "bytes": 780,
+      "sha256": "7d28ee835aa4f0c6c3b01ae7b1829ba3aeb53b93828d5e1d64384134a62e2748"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8483575291.json": {
+      "bytes": 796,
+      "sha256": "5b98764b49352a2285c4698af9cc9a9514dd9eb3b5b4625182221462394a4b2a"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8483760848.json": {
+      "bytes": 799,
+      "sha256": "a5036268832db371d85a39ca0389407c040e7cbf7b713b840c24596a2dd8cebf"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8489411097.json": {
+      "bytes": 823,
+      "sha256": "615ddccf54472799ed43ea54330f41b74f269c318070635d2ed754da01caea93"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8491171643.json": {
+      "bytes": 760,
+      "sha256": "c592618d258cf780ce9a0f1a4af7685fb92c0485adc101587b476f37bd507229"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8491327037.json": {
+      "bytes": 756,
+      "sha256": "f7f6bfe1bc05ab440bd0a08f539d1fea7a035cb30f6a97d0d1fac08804ed8118"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8491341011.json": {
+      "bytes": 767,
+      "sha256": "03abe566523d4bdb876252dc9e0c401d58acd93f623e4880b2d29a4c8252c53c"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8491760476.json": {
+      "bytes": 797,
+      "sha256": "ca3b8eab4f83d4620c2eb312809c628801f7efbaa1937077e91b6cdc8a5231a1"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8498952900.json": {
+      "bytes": 798,
+      "sha256": "6fb5c827c669e399c38dd9c87e897d02fbe6d6722c55d1f6bf2400b2c192cb08"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8499684625.json": {
+      "bytes": 784,
+      "sha256": "0a15619d6278a9f2ce31104fcfcd3012b7f5bddb1fe55af65e91b18ea39a5d65"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8501966612.json": {
+      "bytes": 799,
+      "sha256": "21db602401d2baedbdcf0c6168f9515970f482886990fc3cb19f936ab23e4cb8"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8503058752.json": {
+      "bytes": 807,
+      "sha256": "d2c9c219e4ad808171fb980553d6748b5e85d0fa5c5e882852f677cb5bfc1ab1"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8503402907.json": {
+      "bytes": 734,
+      "sha256": "8f7d38887d9681b2a3aa570cd03d095178d02acc2759885d7957ce9043187803"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8512567423.json": {
+      "bytes": 792,
+      "sha256": "7d3da0cb8516d4042d1c7503e2950e6e9e4aba8c5f28bf340be040d8f5c98e08"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8512886815.json": {
+      "bytes": 810,
+      "sha256": "e44d93429915ce512e00dfb80f995b60c645c53bb875b43cd15f83414d910792"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8513988767.json": {
+      "bytes": 768,
+      "sha256": "641b13931f2d16e49d5e566abbbf5dc06ca4819fc44484cc9acefbf3d0f7aa32"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8514295844.json": {
+      "bytes": 835,
+      "sha256": "48106352b538483ea1b8fb822ae76d8198cf93533c8f9527cf21d1d09af83c57"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8515329053.json": {
+      "bytes": 771,
+      "sha256": "5374b872750a86ba54af09cb2848ff39002e8052bee0c3b880e2797c0f1d210f"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8515507543.json": {
+      "bytes": 761,
+      "sha256": "2bb90adf36de1e37b47bc30330c54b6d60e74aa82e9ba1ff00b612dc17f97610"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8515710192.json": {
+      "bytes": 775,
+      "sha256": "ed770c2585907cf004f8c142d8f796a413eef58d97e6363ba0d5c8512386d50e"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8515720599.json": {
+      "bytes": 775,
+      "sha256": "79aa01b96e6f823f4d94f2dc1c98029983a7168014f03e7fae4b52e106d400a7"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8516852571.json": {
+      "bytes": 781,
+      "sha256": "f65fd519bb10efeb658ea9fadcfd3fce91582fe11887746851b44fe7f6427237"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8517082078.json": {
+      "bytes": 787,
+      "sha256": "b482e54b667d19a8ddfd4d3e7b5d57c76691bec63e5f0cf5dbfda20c65964731"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8522464494.json": {
+      "bytes": 774,
+      "sha256": "ea4abae266eac56f0dee290a20cd80c2d0db9dc3346553062311dd9d4642c03d"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8522863671.json": {
+      "bytes": 764,
+      "sha256": "8541cfe3de2c18bbce8122e57c8cdfbcb27e280bce109f9809c6833e497b4863"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8523187670.json": {
+      "bytes": 779,
+      "sha256": "5f7d0b2e6f89e9d56a74c8f42768cbb6e14c2ed5412a91257b7d83744258d8bf"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8523715982.json": {
+      "bytes": 793,
+      "sha256": "e6130fd2db1e72e1fb35c2ea761b267ac6c3d3a900eb076bb2de1cd0a72d3513"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8530919227.json": {
+      "bytes": 903,
+      "sha256": "750f4615771004c1c10580cba76387988642c632c0083e9d9ce698fce3d4794b"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8543401746.json": {
+      "bytes": 791,
+      "sha256": "59edba9425b9f99c55de5ca63e4680024974c588692b4a28d6ef03af2f98e66b"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8544216717.json": {
+      "bytes": 806,
+      "sha256": "2fbbe4fd433cf6014adfd822a33b4ec72d353784e7b45003f05de771f4e4b367"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8544236218.json": {
+      "bytes": 807,
+      "sha256": "34671b5f338aefd4b5bbad90a11479b07a4545d516c333860e6b1e30a14232b3"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8553170389.json": {
+      "bytes": 764,
+      "sha256": "d8b99ad9f81d7b1da2194fffe4c265a55ec65e39738e5d5b36364cbefe4f1441"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8556903363.json": {
+      "bytes": 799,
+      "sha256": "07b38f00bf450e6934e7f8f68bf6514cea3b611b52d1c0cc1fb0ac196bee3cfa"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8556965333.json": {
+      "bytes": 865,
+      "sha256": "904ac76c76ae8172653a1df7a98a2f740f2a6c95882059758add707111216e9a"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8556971684.json": {
+      "bytes": 805,
+      "sha256": "8bba9c80d0d580f9185d6f86b0b491b65425c0e0e3bc70dce7676fb3ce0ec7b4"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8557077392.json": {
+      "bytes": 864,
+      "sha256": "7a08d8ed16dd6175839932650463d3b459cace3139c21bc5697a12296a2e2211"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8557247400.json": {
+      "bytes": 772,
+      "sha256": "070c084e0431887b57dba5176f291300d83997e97f05aaec739b490f18407c13"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8557318339.json": {
+      "bytes": 879,
+      "sha256": "98900671bc8ad8d876782e7c779c731da5b0bb34bb7e04b3a508029727d48fcf"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8557416714.json": {
+      "bytes": 775,
+      "sha256": "6df50fb0f838cf607e788ce46c90e1db63a94c0c0f8679b09679b05c586f2200"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8574859192.json": {
+      "bytes": 768,
+      "sha256": "7b01e6b180ac248d4ef5a2f7a4b1c5d06c9d9a7a036998ea4d98f297e5334df6"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8575004130.json": {
+      "bytes": 802,
+      "sha256": "3cf9a22f897bcb8f1fe4b4c4be97f312d4437c3bb7a8d1dd689227d40c30644a"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8575792378.json": {
+      "bytes": 789,
+      "sha256": "e8ff20eb2d2a6917cf5ee12f08b11b15404f8a1a3de0c95e5be826757e99b36d"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8576269522.json": {
+      "bytes": 761,
+      "sha256": "4c5ecdd62eab6c7a4bfc953b05a50e7474f03fd4e7b670846841bc16f4e8503e"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8576962963.json": {
+      "bytes": 798,
+      "sha256": "f6a1db61b68581dde458f473d9f0a9260ef80544ae4568c72e8526d868d9891b"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8577606212.json": {
+      "bytes": 794,
+      "sha256": "1b7fabc405d09995846fd95256372eecc314f47e9af144e09b57bbadc15558fd"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/reviewed/8577608265.json": {
+      "bytes": 788,
+      "sha256": "7f9b8cc6f35246ff09795e60f964b7b347f30ad905c9286b97467ee9c44d664a"
+    },
+    "Data/avito_runs/20261109-krasnodar-prodavec/standing_unavailable_policy.json": {
+      "bytes": 1011,
+      "sha256": "7a1c18520dc10340252a4933e92bb851f78d800b32c33c1017ede17529393381"
+    },
+    "Scraper/runs/20261109-krasnodar-prodavec/plan.json": {
+      "bytes": 5911,
+      "sha256": "c3980e92ef961477f75168b7431a5e0e580d2df9ec23da19cc50e45a869aa660"
+    }
+  }
+}
