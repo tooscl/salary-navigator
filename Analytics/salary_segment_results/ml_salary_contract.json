@@ -1,0 +1,30 @@
+{
+  "segment_key": [
+    "profession_resolved",
+    "city_resolved",
+    "salary_unit",
+    "salary_tax"
+  ],
+  "target": "salary_midpoint_rub only for salary_shape in {exact, range}",
+  "in_market_rule": "q25 <= salary_midpoint_rub <= q75 within the same segment key",
+  "excluded_from_point_target": [
+    "from",
+    "to",
+    "unknown",
+    "missing"
+  ],
+  "separate_cohorts": [
+    "основная",
+    "вахта",
+    "удалённая работа"
+  ],
+  "military": "excluded",
+  "normality_required": false,
+  "strict_normalization": {
+    "month": 1,
+    "week": "52/12",
+    "day_or_shift": "workdays_per_week * 52/12, only when workdays are observed",
+    "hour": "hours_per_day * workdays_per_week * 52/12, only when both are observed",
+    "unspecified_or_piecework": null
+  }
+}
