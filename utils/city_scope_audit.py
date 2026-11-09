@@ -20,7 +20,7 @@ def visible_component(address, city):
     if not match:
         return False
     tail = re.split(r',\s*(?:ул\.|улица|пр\.|проспект|ш\.|шоссе|пер\.|переулок)', address[match.end():], maxsplit=1, flags=re.I)[0]
-    return not re.search(r'(?:^|[,;])\s*(?:с\.|село\s|д\.|деревня\s|пос\.|пос[её]лок\s|пгт\.?\s)', tail, re.I)
+    return not re.search(r'(?:^|[,;])\s*(?:с\.|село\s|д\.|деревня\s|пос\.|пос[её]лок\s|станица\s|ст\.\s*|хутор\s|х\.\s*|пгт\.?\s)', tail, re.I)
 
 
 def audit(root, run, target_city, target_region_quote):

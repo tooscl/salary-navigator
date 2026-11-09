@@ -54,6 +54,11 @@ class CityScopeTests(unittest.TestCase):
         result=c.audit(self.root,self.run,'Рязань','Рязанская обл.')
         self.assertEqual(next(x for x in result['decisions'] if x['id']=='4')['decision'],'unknown')
 
+    def test_nested_village_or_hamlet_is_not_city_evidence(self):
+        self.assertFalse(c.visible_component('Краснодарский край, Краснодар, станица Елизаветинская, ул. Степная','Краснодар'))
+        self.assertFalse(c.visible_component('Краснодарский край, Краснодар, хутор Копанской, ул. Мира','Краснодар'))
+        self.assertTrue(c.visible_component('Краснодарский край, Краснодар, ул. Мира','Краснодар'))
+
     def test_unknown_target_region_is_not_in_city(self):
         result=c.audit(self.root,self.run,'Краснодар','some other region')
         self.assertEqual(next(x for x in result['decisions'] if x['id']=='1')['decision'],'unknown')
