@@ -8,11 +8,12 @@ from datetime import datetime
 from pathlib import Path, PureWindowsPath
 
 try:
-    from . import title_flags, vacancy_labels, placement_transform
+    from . import title_flags, vacancy_labels, placement_transform, city_scope_subset
 except ImportError:  # Direct `python3 utils/build_dataset.py` entry point.
     import title_flags
     import vacancy_labels
     import placement_transform
+    import city_scope_subset
 
 ROOT = Path(__file__).resolve().parents[1]
 VERSION = "1"
@@ -83,12 +84,18 @@ def build(root, registry):
             if ident in transformations or spec['source_run_id'] != run_id:
                 raise ValueError('Duplicate transformation or mismatched source run')
             transformations.add(ident)
-            if placement_transform.render(root, spec) != data:
+            if spec.get('version') == placement_transform.VERSION:
+                transformed = placement_transform.render(root, spec)
+                for identity, decision in spec['placements'].items():
+                    if (entry['placement_regions'].get(decision['city']) != decision['region'] or
+                            identity in entry.get('unknown_city_placements', {})):
+                        raise ValueError('Transformed placement registry mismatch')
+            elif spec.get('version') == city_scope_subset.VERSION:
+                transformed = city_scope_subset.render(root, spec)
+            else:
+                raise ValueError('Unknown transformation version')
+            if transformed != data:
                 raise ValueError('Transformed CSV does not match source and decisions')
-            for identity, decision in spec['placements'].items():
-                if (entry['placement_regions'].get(decision['city']) != decision['region'] or
-                        identity in entry.get('unknown_city_placements', {})):
-                    raise ValueError('Transformed placement registry mismatch')
         correction = entry.get('profession_correction')
         if correction:
             correction_path = repository_path(correction['path'])
@@ -196,6 +203,8 @@ def build(root, registry):
     manifest = {"schema_version": VERSION, "builder_version": VERSION,
                 "builder_sha256": digest(Path(__file__).read_bytes()),
                 "placement_transform_sha256": digest(Path(placement_transform.__file__).read_bytes()),
+                "city_scope_audit_sha256": digest(Path(city_scope_subset.city_scope_audit.__file__).read_bytes()),
+                "city_scope_subset_sha256": digest(Path(city_scope_subset.__file__).read_bytes()),
                 "title_flags": {"version": title_flags.VERSION,
                                 "sha256": digest(Path(title_flags.__file__).read_bytes()),
                                 "source": "title", "policy": "keyword_signal_not_exclusion"},

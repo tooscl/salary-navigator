@@ -1,8 +1,10 @@
 {
   "schema_version": "1",
   "builder_version": "1",
-  "builder_sha256": "dbc6329ea6365d04d17555f8f4588f10bb237baeb3fc965eec03ecaa0a7ac32a",
+  "builder_sha256": "e5b79900951e51cbf8273c4617ac4b08d3caee3f4e469ca5b8b8b630757ab8f1",
   "placement_transform_sha256": "6f860342ad62f1a8ed10b62354297da7c2e7e27e1a9d170b34e484416ec399b6",
+  "city_scope_audit_sha256": "5a479702590a3e2a818a1ae247b59bc018beba386c506af16e01af56b55c96fc",
+  "city_scope_subset_sha256": "31d5ce50427aeb23d63a65eb130b9bdd3b41ce005bd51491e6e2230c433e5447",
   "title_flags": {
     "version": "military_title_v1",
     "sha256": "9c9456cb3fb0df5791630049c9c85987381091dbb9ba18bc3fb3314b8cccbeb6",
@@ -21,7 +23,7 @@
     "source": "title, profession, city, location_observed",
     "policy": "added_next_to_observed_columns_not_replacing"
   },
-  "rows": 29734,
+  "rows": 29813,
   "columns": [
     "source",
     "id",
@@ -124,9 +126,10 @@
     "С кем предстоит работать",
     "Медицинская специализация",
     "Бренд техники",
+    "Тип рекламы",
+    "Знание графических программ",
     "Площадки",
     "Категория прав тракториста-машиниста",
-    "Тип рекламы",
     "employer_profile_url",
     "read_status_employer",
     "Тип токарного станка",
@@ -134,7 +137,6 @@
     "Учёная степень",
     "Языки программирования",
     "Грейд",
-    "Знание графических программ",
     "military",
     "military_keywords",
     "military_rule_version",
@@ -151,7 +153,7 @@
     "enriched_fields",
     "enrichment_version"
   ],
-  "sha256": "506087812388a11b327080137dbfa05edde29f4039fc003343dd57105df24e7f",
+  "sha256": "2b10b7df052985df19e652b0a5df9dfb4a79fa9553aeb044bc13dbfad5a04645",
   "inputs": [
     {
       "run_id": "20261028-spb-50-all",
@@ -5247,6 +5249,21 @@
         }
       },
       "rows": 388
+    },
+    {
+      "run_id": "20261110-krasnodar-remote-all",
+      "source": "avito",
+      "path": "Data/transformations/20261110-krasnodar-remote-all-city-v1/vacancies_flat.csv",
+      "sha256": "bb9fa9ce5daaa56773f381f891b4bebd5a6860adb95537544616f6cc9bcf89f2",
+      "placement_regions": {
+        "Краснодар": "Краснодарский край"
+      },
+      "enrichment_status": "not_run",
+      "transformation": {
+        "path": "Data/transformations/20261110-krasnodar-remote-all-city-v1/transformation.json",
+        "sha256": "96be8f4f9489aa87e0b10eeabe5ef6a3d12262f14b899ebdd6b3ab608d5362ee"
+      },
+      "rows": 137
     },
     {
       "run_id": "20261110-ryazan-all",
