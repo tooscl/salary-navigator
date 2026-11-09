@@ -20,7 +20,7 @@
     "source": "title, profession, city, location_observed",
     "policy": "added_next_to_observed_columns_not_replacing"
   },
-  "rows": 28244,
+  "rows": 28457,
   "columns": [
     "source",
     "id",
@@ -150,7 +150,7 @@
     "enriched_fields",
     "enrichment_version"
   ],
-  "sha256": "2dbfc3f0e9d7d09965a508c96c205452d22fbac43f2206f4c423ddd9778192c6",
+  "sha256": "13631a291d98a878122b021478035f146a02fc1879ddedec6cda1749623fafa8",
   "inputs": [
     {
       "run_id": "20261028-spb-50-all",
@@ -5363,6 +5363,24 @@
         }
       },
       "rows": 228
+    },
+    {
+      "run_id": "20261110-ryazan-kurer",
+      "source": "avito",
+      "path": "Data/avito_runs/20261110-ryazan-kurer/exports/vacancies_flat.csv",
+      "sha256": "f9f130ac76d03adce33e030ba87d35caa33c8a69f55ebd997408b6c6b5735262",
+      "placement_regions": {
+        "Рязань": "Рязанская область"
+      },
+      "enrichment_status": "not_run",
+      "unknown_city_placements": {
+        "8543405648": {
+          "region": "Рязанская область",
+          "evidence": "Рязанская обл., Рязанский муниципальный округ, Солотчинское шоссе, 6-й километр, 6/4",
+          "region_unknown": false
+        }
+      },
+      "rows": 251
     },
     {
       "run_id": "20261110-ryazan-upakovshchik",
