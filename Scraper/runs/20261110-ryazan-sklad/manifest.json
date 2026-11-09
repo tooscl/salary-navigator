@@ -1,0 +1,1588 @@
+{
+  "run_id": "20261110-ryazan-sklad",
+  "dataset_id": "20261110-ryazan-sklad",
+  "status": "complete",
+  "schema": {
+    "columns": [
+      "id",
+      "city",
+      "profession",
+      "segments",
+      "title",
+      "salary_raw",
+      "source_url",
+      "observed_at",
+      "description",
+      "location_observed",
+      "employer_name_observed",
+      "date_raw",
+      "views_total",
+      "views_today",
+      "listing_rank",
+      "listing_promoted",
+      "full_parameters_read",
+      "analysis_status",
+      "export_eligibility",
+      "read_status_parameters",
+      "read_status_description",
+      "read_status_location",
+      "read_limitations",
+      "enrichment_status",
+      "enriched_fields",
+      "enrichment_version",
+      "military",
+      "military_keywords",
+      "military_rule_version",
+      "city__source",
+      "city__evidence",
+      "city_anomaly",
+      "График",
+      "Занятость",
+      "Способ оформления",
+      "Количество рабочих дней в неделю",
+      "Частота выплат",
+      "Сфера деятельности компании",
+      "Что получают работники",
+      "Тип предприятия",
+      "Опыт работы",
+      "В том числе для кандидатов",
+      "Медкнижка",
+      "Количество рабочих часов в день",
+      "Смены",
+      "Стажировка",
+      "Режим работы",
+      "Где предстоит работать",
+      "Длительность вахты",
+      "Можно заканчивать в 17:00",
+      "Разряд"
+    ],
+    "unknown_policy": "empty_not_zero"
+  },
+  "collection": {
+    "run_id": "20261110-ryazan-sklad",
+    "geography": "Рязань",
+    "profession": "Сотрудник склада",
+    "segments": "",
+    "filter_evidence": "Рязань; единственная профессия Сотрудник склада; заголовок, URL и пустой поиск подтверждены; доп. фильтры не заданы.",
+    "listing_url": "https://www.avito.ru/ryazan/vakansii/sotrudnik_sklada-ASgBAgICAUTUzBGG7YYD?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6IlFJa0JRcXVNZ3Y2aDNtWHMiO32eY6kHJgAAAA",
+    "listing_request_url": "https://www.avito.ru/ryazan/vakansii/sotrudnik_sklada-ASgBAgICAUTUzBGG7YYD?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6IlFJa0JRcXVNZ3Y2aDNtWHMiO32eY6kHJgAAAA&localPriority=0",
+    "selected_controls": [
+      {
+        "label": "Сотрудник склада",
+        "marker": "params[144170]/checkbox/3201859",
+        "value": null
+      },
+      {
+        "label": "Сотрудник склада",
+        "marker": "params[144170]/checkbox/toggle",
+        "value": "3201859"
+      },
+      {
+        "label": "Любой",
+        "marker": "params[196929]/all",
+        "value": null
+      },
+      {
+        "label": "Любой",
+        "marker": "params[196929]/toggle",
+        "value": "all"
+      },
+      {
+        "label": "Неважно",
+        "marker": "params[172815]/all",
+        "value": null
+      },
+      {
+        "label": "Неважно",
+        "marker": "params[172815]/toggle",
+        "value": "all"
+      },
+      {
+        "label": "Неважно",
+        "marker": null,
+        "value": "all"
+      },
+      {
+        "label": "Все",
+        "marker": null,
+        "value": "all"
+      }
+    ],
+    "listing_sha256": "9884417f1ffb687548ad193c42195c54186e4f5fc0a80305c4db9614fcce5ff2",
+    "profession_scope": null,
+    "profession_source": "observed_controls",
+    "listing_pages": [
+      {
+        "file": "listing_pages/0001.json",
+        "sha256": "9884417f1ffb687548ad193c42195c54186e4f5fc0a80305c4db9614fcce5ff2",
+        "source_url": "https://www.avito.ru/ryazan/vakansii/sotrudnik_sklada-ASgBAgICAUTUzBGG7YYD?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6IlFJa0JRcXVNZ3Y2aDNtWHMiO32eY6kHJgAAAA"
+      },
+      {
+        "file": "listing_pages/0002.json",
+        "sha256": "f212a3fd60859d18847b8f74e991d30942d2e8991de3969ae2b89b3be256477f",
+        "source_url": "https://www.avito.ru/ryazan/vakansii/sotrudnik_sklada-ASgBAgICAUTUzBGG7YYD?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6ImsxeWJVRDN1cWt3SUt6Q1UiO30Dt07UJgAAAA&p=2"
+      },
+      {
+        "file": "listing_pages/0003.json",
+        "sha256": "3c6983711c0cbe23d18fbeba1df023329b7ec6d4465f8bbdf9c308784a053674",
+        "source_url": "https://www.avito.ru/ryazan/vakansii/sotrudnik_sklada-ASgBAgICAUTUzBGG7YYD?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6ImsxeWJVRDN1cWt3SUt6Q1UiO30Dt07UJgAAAA&p=3"
+      }
+    ],
+    "selection_mode": "first_N_unique_on_frozen_listing",
+    "limit": 148,
+    "requested_all_pages": true,
+    "saved_selection_authorization": null,
+    "requested_limit": null,
+    "available_unique": 148,
+    "listing_end_reason": "confirmed_end",
+    "available_listing_exhausted": true,
+    "continuation": null,
+    "branch_only": false,
+    "max_pages": null,
+    "candidate_limit": null,
+    "created_at": "2026-11-09T22:20:02.906991+00:00",
+    "instruction_version": "1.8.1",
+    "extractor_sha256": "fa0a0e0c7df0877d15ea4f94e5fed14df514241cb51771cda18cacc04574e8b0",
+    "instruction_sha256": "4033fe896dc13c66a540d768bbc76800f3bcc41b806a5e8dbdc4881e7080b593",
+    "code_git_commit": "3a0d52a3fed65d07d20fd4ad9c44e46aa9a3b233",
+    "setup_seconds": 10.031596249900758,
+    "live_route_verified": false,
+    "execution_model": "gpt-6.1-terra",
+    "automation_sha256": {
+      "Scraper/skills/collect-avito/references/top-professions.json": "e3e72638b17b48f825ec6f2fefb963662494f679ae4b0cef1bebedba889610dd",
+      "utils/title_flags.py": "9c9456cb3fb0df5791630049c9c85987381091dbb9ba18bc3fb3314b8cccbeb6",
+      "Scraper/extract.js": "fa0a0e0c7df0877d15ea4f94e5fed14df514241cb51771cda18cacc04574e8b0",
+      "Scraper/skills/collect-avito/SKILL.md": "4033fe896dc13c66a540d768bbc76800f3bcc41b806a5e8dbdc4881e7080b593",
+      "Scraper/skills/collect-avito/scripts/run.py": "4bcbecab78fdf74298b784f17150688377853000566f88a803982a6e7f1de0d4",
+      "Scraper/skills/collect-avito/scripts/sweep_mode.py": "718a956a316df71c47ee3a4c5d3670fa011a5b16e9948393d68216702b140a56",
+      "Scraper/skills/collect-avito/scripts/browser_batch.js": "7572ff4aa773cd86ccd3d8ca3a2de6c9586b482ab6f1371dbfa152b165588eb4",
+      "Scraper/skills/collect-avito/scripts/check_capture.py": "aa746849317f9768af5aae08b394b9379539f6e268c1fc69e4ed13bd06a4657f",
+      "Scraper/skills/collect-avito/scripts/failure_log.py": "08dfd259fad4166a08acb1b056bf3cd14daede277385bd91c7e49680959475a4",
+      "Scraper/skills/collect-avito/scripts/preflight.py": "492a0d898990aee198f26bf6577d0876360dcc6ec69e274835cd77cdaa768974"
+    },
+    "uncommitted_automation_files": [
+      "Scraper/skills/collect-avito/SKILL.md",
+      "Scraper/skills/collect-avito/scripts/run.py"
+    ],
+    "city_anomaly_policy": "blank"
+  },
+  "coverage": {
+    "planned": 148,
+    "accepted": 148,
+    "unavailable": [],
+    "unresolved_observations": [],
+    "user_skipped_observations": [],
+    "user_skipped_count": 0,
+    "user_skip_policy": null,
+    "user_detail_skip_policy": null,
+    "deduplication": null,
+    "sweep": null,
+    "unique_ids": [
+      "7393290726",
+      "8378726181",
+      "8409003089",
+      "8252914248",
+      "8189631071",
+      "4181812203",
+      "2938372205",
+      "8245387928",
+      "8441572675",
+      "8303955478",
+      "8521965219",
+      "8400813495",
+      "2878359345",
+      "8575772472",
+      "8432796992",
+      "8423417276",
+      "8482470615",
+      "8318839871",
+      "8383611389",
+      "8309865672",
+      "8347324215",
+      "8423642461",
+      "8448573544",
+      "4086684390",
+      "8470511190",
+      "8359895941",
+      "7371534587",
+      "8444995424",
+      "8502715239",
+      "8034058753",
+      "3764911728",
+      "8457289805",
+      "8261559001",
+      "8439141780",
+      "8226838820",
+      "8445705801",
+      "8400590401",
+      "8419683230",
+      "8513994955",
+      "8462943784",
+      "8423679173",
+      "8448752341",
+      "7655530003",
+      "8493274644",
+      "8272656188",
+      "8479952590",
+      "8482991660",
+      "8438692998",
+      "8517012017",
+      "8389995616",
+      "8281056040",
+      "8437531756",
+      "8438919271",
+      "8425196377",
+      "8409001065",
+      "8314314822",
+      "8513953247",
+      "8229084540",
+      "8502708817",
+      "8345716695",
+      "8431767090",
+      "8004526944",
+      "8493821696",
+      "8350137438",
+      "8501834463",
+      "8543470920",
+      "8450551273",
+      "8332593873",
+      "8517643383",
+      "8370809324",
+      "8514478090",
+      "8284108015",
+      "7873284551",
+      "8370087607",
+      "8417994126",
+      "8530839974",
+      "8543358364",
+      "8431337733",
+      "8058729455",
+      "8472130382",
+      "8366742476",
+      "8360054892",
+      "8515579437",
+      "8423310873",
+      "8417939824",
+      "8445625648",
+      "8557598455",
+      "8380449342",
+      "2438019479",
+      "8543900530",
+      "8515801786",
+      "8167410593",
+      "8328169974",
+      "8482975915",
+      "8517022116",
+      "8176329280",
+      "8414829270",
+      "8473172254",
+      "8413322235",
+      "8378939519",
+      "8483805006",
+      "8260349847",
+      "8546276628",
+      "8414382336",
+      "8499260816",
+      "8494870278",
+      "8473822635",
+      "8345025828",
+      "8433798738",
+      "8522040026",
+      "8469233374",
+      "8423368568",
+      "8340508364",
+      "8490647892",
+      "8312474587",
+      "8503512893",
+      "8407607574",
+      "8342870852",
+      "8364099311",
+      "8531127558",
+      "8447545462",
+      "8483465367",
+      "8484975458",
+      "8154139267",
+      "8391117836",
+      "8423191531",
+      "8547724840",
+      "8589615395",
+      "8414061644",
+      "8521269789",
+      "8499742957",
+      "8350441269",
+      "8440854692",
+      "7882604856",
+      "8523422434",
+      "8400765854",
+      "8400248329",
+      "8482706243",
+      "8366604824",
+      "8575136148",
+      "8422751502",
+      "3579432833",
+      "8348609406",
+      "8490988953",
+      "8503750461",
+      "8366614678",
+      "8420072855",
+      "8391510420"
+    ],
+    "errors": [],
+    "partial": null,
+    "limitations": [
+      "Visible rendered parameters only; enrichment not run; placement on site; live route unverified"
+    ]
+  },
+  "timing": {
+    "setup_seconds": 10.031596249900758,
+    "capture_seconds": 214.07471454096958,
+    "review_export_seconds": 3.2248476250097156,
+    "publication_seconds": null
+  },
+  "review_model": "gpt-6.1-terra",
+  "automation_changes": [
+    {
+      "file": "Scraper/skills/collect-avito/scripts/run.py",
+      "reason": "Collector files were uncommitted in capture checkout at freeze; their SHA matches main after PR #120, including tested rejected-listing and prior transport fixes.",
+      "validation": "Compared plan SHA with main; 129 collector and setup tests passed for PR #120."
+    },
+    {
+      "file": "Scraper/test_aside_runner.py",
+      "reason": "Collector files were uncommitted in capture checkout at freeze; their SHA matches main after PR #120, including tested rejected-listing and prior transport fixes.",
+      "validation": "Compared plan SHA with main; 129 collector and setup tests passed for PR #120."
+    },
+    {
+      "file": "Scraper/skills/collect-avito/SKILL.md",
+      "reason": "Collector files were uncommitted in capture checkout at freeze; their SHA matches main after PR #120, including tested rejected-listing and prior transport fixes.",
+      "validation": "Compared plan SHA with main; 129 collector and setup tests passed for PR #120."
+    }
+  ],
+  "profession_correction": null,
+  "post_capture_automation_sha256": {},
+  "files": {
+    "Data/avito_runs/20261110-ryazan-sklad/exports/vacancies.json": {
+      "bytes": 635513,
+      "sha256": "7d53ef3d5fa015dcfed06c4ad79694e630edb8760ee6c97642cccd77622fe837"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/exports/vacancies_flat.csv": {
+      "bytes": 452596,
+      "sha256": "c4034ceb2d40bfea24df6d4c1380842e58c287262666a65c40a40772cf431721"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/exports/validation.json": {
+      "bytes": 223,
+      "sha256": "efa32ca2bdad4e0edfec9214b96341be27d931555bb854f61080e367126bcd9e"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/listing.json": {
+      "bytes": 51632,
+      "sha256": "9884417f1ffb687548ad193c42195c54186e4f5fc0a80305c4db9614fcce5ff2"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/listing_pages/0001.json": {
+      "bytes": 51632,
+      "sha256": "9884417f1ffb687548ad193c42195c54186e4f5fc0a80305c4db9614fcce5ff2"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/listing_pages/0002.json": {
+      "bytes": 52486,
+      "sha256": "f212a3fd60859d18847b8f74e991d30942d2e8991de3969ae2b89b3be256477f"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/listing_pages/0003.json": {
+      "bytes": 51346,
+      "sha256": "3c6983711c0cbe23d18fbeba1df023329b7ec6d4465f8bbdf9c308784a053674"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/queue.json": {
+      "bytes": 70932,
+      "sha256": "6791c6a112c9eea387054b3c855cc39b0b3d0dbbda456c0401bd5abbfa6c19fa"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/raw/2438019479.json": {
+      "bytes": 8675,
+      "sha256": "4b16c97587e4c540a5b73e7e6112341472e2d05f14b62777035ff25be4455406"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/raw/2878359345.json": {
+      "bytes": 8708,
+      "sha256": "e0bfe0c992ef153ef422227d538e8317c4927bc5ace82be3c41bb6f884308017"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/raw/2938372205.json": {
+      "bytes": 12022,
+      "sha256": "3cb2bb11951d122508ece13846bfd408800719114451353bef5837579e91de8f"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/raw/3579432833.json": {
+      "bytes": 7849,
+      "sha256": "3b1f8b66800bdc85fd5d724a443534eae8299791eaa693831949fa0323785159"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/raw/3764911728.json": {
+      "bytes": 12416,
+      "sha256": "0733ef2c269e32f7459d65d86f4de6308249166b5394b59ab0157add86f50d59"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/raw/4086684390.json": {
+      "bytes": 13857,
+      "sha256": "30af82484385175089fdab58394a3c655031e05d86af6b1c644058d2ad275f5b"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/raw/4181812203.json": {
+      "bytes": 9587,
+      "sha256": "6b4ff4a29c9da2f71c2e16fd4bff2d1c04a3bd93c139a285b7246917902465ce"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/raw/7371534587.json": {
+      "bytes": 10313,
+      "sha256": "ad2d659d84f310988ad2c663d3942bd7f1ca03cc23d7519ff7e9dccafc34be08"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/raw/7393290726.json": {
+      "bytes": 11898,
+      "sha256": "eb6210d42aab024d86a80a96c9948b975fe28b3ce7a8035785f151fc76a852a1"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/raw/7655530003.json": {
+      "bytes": 11114,
+      "sha256": "0b09b30fb0eeac6f2a78ecb9ab5746d73a6723645d7c2e1c42cb22c8ec414260"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/raw/7873284551.json": {
+      "bytes": 11960,
+      "sha256": "71d5b084145a146b0f40c719d0ed7354a57f19b029ee111d6a15987290956fda"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/raw/7882604856.json": {
+      "bytes": 12501,
+      "sha256": "35ba6301193a9fe90a9cb31c40e40ae42a440dbe7ceb98c756fd1d26f15d31e4"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/raw/8004526944.json": {
+      "bytes": 13549,
+      "sha256": "12effb06d9add649e8f63f4fcac25cf26d3d14d33bf06090dc524adef155a080"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/raw/8034058753.json": {
+      "bytes": 11781,
+      "sha256": "f418d9c0fdeafc0ab5b0b81258b36ee2d640c90b59d217a2805dcda9bebd8804"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/raw/8058729455.json": {
+      "bytes": 12837,
+      "sha256": "bb3772af458309ce84ecde4e203200c60df03740d83d80aa2a9a669a755689b3"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/raw/8154139267.json": {
+      "bytes": 13309,
+      "sha256": "7e5dcd7b04c0a6281eb813d2568b0297d1144de9361914f9883cfa0bac49a483"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/raw/8167410593.json": {
+      "bytes": 12697,
+      "sha256": "7659f0abba10c9c1e3d32c5a3fb77f240dc4b11b325ddbbf78eae7b3fff44aea"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/raw/8176329280.json": {
+      "bytes": 11612,
+      "sha256": "8e5c448ca54cacf604a1aa781d49a4affa0337226d139915e573bbafc0c6300c"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/raw/8189631071.json": {
+      "bytes": 7923,
+      "sha256": "172d1b869570ae04616805c93106e3afff7a103adc68caa49dec9ce3e7461aed"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/raw/8226838820.json": {
+      "bytes": 12784,
+      "sha256": "1c0593b03c1711e4adbc9489ba9fd4337dc35c3528038c6d24a719801f59f05b"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/raw/8229084540.json": {
+      "bytes": 11937,
+      "sha256": "101538db1d8e5ea130457ca2c62a6cfd1ae8c2391ceb77afa0cb708c8995ec6c"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/raw/8245387928.json": {
+      "bytes": 17971,
+      "sha256": "9c079b877406c1bece951dfcaf13d810803a8c0c8630d513b77e6e16ba01d69f"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/raw/8252914248.json": {
+      "bytes": 11903,
+      "sha256": "5c6611d64d4def439a39e02c894118d90e29dac09cf78dd7b33c73bb961157cb"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/raw/8260349847.json": {
+      "bytes": 12967,
+      "sha256": "07c582e02293c9a9e29fd8494083ac9d47c249052d03cdb90bb9eb89cfcaa812"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/raw/8261559001.json": {
+      "bytes": 5327,
+      "sha256": "8db6e0952af155b8029c6472b189dcdc4980cc31cbc4ada293655ea97d9866fc"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/raw/8272656188.json": {
+      "bytes": 9838,
+      "sha256": "cef3a78e6089bd996a0cb7b3e1d37d7fb0c1bc325d03695cad021b74a0619e4b"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/raw/8281056040.json": {
+      "bytes": 12914,
+      "sha256": "91876132ceec672dda2a5ad28ff2612721ea841c99b84917fdd519294eadf826"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/raw/8284108015.json": {
+      "bytes": 15884,
+      "sha256": "85370beda57a50e21ff33730efba3d7fa51f6bc9a3ec3f2a5814ef4b045ece27"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/raw/8303955478.json": {
+      "bytes": 15408,
+      "sha256": "698fc457577a2ad20a1ee07b36a28376a69a25e7a1382891e9480dd0969b7da5"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/raw/8309865672.json": {
+      "bytes": 13343,
+      "sha256": "92717c43fb6788910e1aceb6bd4d5de999c7a06c86ffd55aa352c8a04d8f0d90"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/raw/8312474587.json": {
+      "bytes": 19556,
+      "sha256": "6906d9dbaea713e04e5ac3df592c4cd0cd1819237ac043ed552a07fec660fdfe"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/raw/8314314822.json": {
+      "bytes": 10115,
+      "sha256": "2bbe5d8cb3267748673d9d0945720d915225d6c95e10eca492a2f29b33ec0c93"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/raw/8318839871.json": {
+      "bytes": 13812,
+      "sha256": "46ae38f49650cdb37ccc0e6e1df3b0a0a332e1343f9b7f16c4291a11a589085d"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/raw/8328169974.json": {
+      "bytes": 10127,
+      "sha256": "ed3220ae8d9326a95a8b7423d77b04a23b66f542441e9af393d4f2435c285f9d"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/raw/8332593873.json": {
+      "bytes": 4745,
+      "sha256": "64d7b407b668a01b454f4452d92a48c3a89e5609216d3b5348c1770f80d7369b"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/raw/8340508364.json": {
+      "bytes": 5036,
+      "sha256": "27baa40be7db86b9982e9998cf91628204c42b6a337ae48934f262b010d7b309"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/raw/8342870852.json": {
+      "bytes": 14785,
+      "sha256": "ee8287cac3f4e43e3f58ec7ec16e0bdd6889b4a4e54cc595d2896ef1bba4b9e7"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/raw/8345025828.json": {
+      "bytes": 6826,
+      "sha256": "42c9d60c8729eff3fac02e1bd3ae7e4b2c5e5c2f0e5b6e8a47c0149422c96e53"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/raw/8345716695.json": {
+      "bytes": 11564,
+      "sha256": "1f0cf860e3334b09df2cb70bf565318cf0d9dd946bb7d3d238e7dedb2700cfd8"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/raw/8347324215.json": {
+      "bytes": 15112,
+      "sha256": "bff945e063e305ee5dc9520d93041bd60d9c90e189434e4d29046b30c728e03a"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/raw/8348609406.json": {
+      "bytes": 8744,
+      "sha256": "b24595c417d0b74884429e6ff8ab615e1eb3be4cd435c050626e3333a85f7835"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/raw/8350137438.json": {
+      "bytes": 18456,
+      "sha256": "78f09ffbc9f2590905c9534e84fbf8c7c8599d39a6457ac4305c96e4ab24b898"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/raw/8350441269.json": {
+      "bytes": 15085,
+      "sha256": "e90139bb6d96ac940ab9ec86067fffea6b23db013b81d1f27c721f4ef7402102"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/raw/8359895941.json": {
+      "bytes": 10857,
+      "sha256": "2ff842be153d1a77b1a887ed7a09355e3b5dc99c9b9228bd5c67039a7f00d997"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/raw/8360054892.json": {
+      "bytes": 14449,
+      "sha256": "1302dbbeb3797afe58c4f858d8d76e1e9f1434b73ed53b36f86b1e6270ede703"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/raw/8364099311.json": {
+      "bytes": 10969,
+      "sha256": "fd86ca8aa890df1b13ae0d293b2211b2f05d1c13d543e0c22f58271193b4da55"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/raw/8366604824.json": {
+      "bytes": 8198,
+      "sha256": "3a6570a09454db881ef8bcea539355719475e400eb70e3c9aed627511db3c950"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/raw/8366614678.json": {
+      "bytes": 12269,
+      "sha256": "85c4de2c29db85205e3849b8ec1cb3b98848e757efefe5ac38629de2f45aafd7"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/raw/8366742476.json": {
+      "bytes": 14529,
+      "sha256": "d33b923feeb3cc4a8bc1d6e1ebec0215085585c56c283696ee3acfd0aa545f03"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/raw/8370087607.json": {
+      "bytes": 10171,
+      "sha256": "88854e860fd3eb7c06c89b8373e86ebf9dc56f1ddfec67b773d92198f600c23c"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/raw/8370809324.json": {
+      "bytes": 12598,
+      "sha256": "cb6095b36c2f0e10d0129e9f6b219a08fd629112540bb93e30693ae564166308"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/raw/8378726181.json": {
+      "bytes": 17016,
+      "sha256": "5a36a740c7a3da363b0ff1dcd5017ab12b230468d166232fe48f7eaa57a6cc64"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/raw/8378939519.json": {
+      "bytes": 9992,
+      "sha256": "c2233d1d7d8a71310f230dd101edfed5b02dbd5a6a6fe762b6a027653624fb07"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/raw/8380449342.json": {
+      "bytes": 8075,
+      "sha256": "f0ca92ea839196f40c23d64a4750a982791d98a48797561ba3e2e585b0e4fa0a"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/raw/8383611389.json": {
+      "bytes": 7270,
+      "sha256": "3dcdca2b61efea79babe1b68c968ca56ffecb6d43ddf826b068e031dcfe541be"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/raw/8389995616.json": {
+      "bytes": 15904,
+      "sha256": "f6e071e01555c15a89131c0fad09fbf4c046306510ce17e8af4a98aa36d7ad00"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/raw/8391117836.json": {
+      "bytes": 14795,
+      "sha256": "2c81c39e4b3b17bd0c6800c8f68710b1c1908bc55fea819c89278c73998a3929"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/raw/8391510420.json": {
+      "bytes": 8729,
+      "sha256": "bf5224fcea92ac000344dcc0cf260d81ea19f6b7bad2bda0bda7dc1d27513252"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/raw/8400248329.json": {
+      "bytes": 14078,
+      "sha256": "81feec4d8613a27878633b4f7c2e74044b67cb417651476d8684644ca4a761bb"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/raw/8400590401.json": {
+      "bytes": 11179,
+      "sha256": "9da763e388b7b24d75a4ffd685b667f3bea9d227fabd6ca5933b6ce5e67bf89a"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/raw/8400765854.json": {
+      "bytes": 16136,
+      "sha256": "83ad6ebf4fe47e976779f255d898e028b2a9f7e359f71f1ccffc4b1328526ea6"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/raw/8400813495.json": {
+      "bytes": 10370,
+      "sha256": "10a1c8f6eed400bc7adc91a33578535c66c72541cfcc3080add8bb7541ab3da4"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/raw/8407607574.json": {
+      "bytes": 13455,
+      "sha256": "fdb243aaa98970a1dd3075ac40103ca0f7e552d52528c3bb7c9149e82f51e283"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/raw/8409001065.json": {
+      "bytes": 15872,
+      "sha256": "36f09716845b81d543269adafbd31178296e6d1c1a5b53b16031ac984017c0cc"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/raw/8409003089.json": {
+      "bytes": 12751,
+      "sha256": "ed8395e6d30e44cbecfc7a83bfc2547eda9842132f667080148f6aa48d276795"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/raw/8413322235.json": {
+      "bytes": 17574,
+      "sha256": "873577c3f31482dad3b5b8188201a1727ed86e0226e723c91678217d88e1ce16"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/raw/8414061644.json": {
+      "bytes": 14384,
+      "sha256": "6d62c60e8bf311463feaa41cf2b3619e81d2c8b0f81dbd8319c85f5a691b8289"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/raw/8414382336.json": {
+      "bytes": 13037,
+      "sha256": "8c5105fa0b3bf1d25d8ea893d0f7b873067aa81a7d5097b8c9bb9e816f9c5198"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/raw/8414829270.json": {
+      "bytes": 10401,
+      "sha256": "aeb98ca47aaed0c830f705fa03ef4ba4222f4d84c60f3ff1c4a35837480852b8"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/raw/8417939824.json": {
+      "bytes": 12062,
+      "sha256": "d1b4712d0ee275282a2dcbf51d181f5559cedf8c27f695e5d6f53d13d00c96c6"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/raw/8417994126.json": {
+      "bytes": 14318,
+      "sha256": "a8dc3694359959d09131a02ccfa31e9da55e719241f14883f2b219469d19858f"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/raw/8419683230.json": {
+      "bytes": 13212,
+      "sha256": "163e3fd7f84d2e4892ce2e664e315ec55e6103eccf2ffc471780666d2dfdae41"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/raw/8420072855.json": {
+      "bytes": 15794,
+      "sha256": "2802f43e83b59dbe9694356631ad9d5b66e480ec14ff501a06c9b843b7755f47"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/raw/8422751502.json": {
+      "bytes": 11626,
+      "sha256": "c00d27bf59b6d3cdefaa5a9f85a49345a9d2d9243c1200a45f94141f13c3943a"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/raw/8423191531.json": {
+      "bytes": 12147,
+      "sha256": "4dec4e1d2471e6f2d5da947a2cf3f2df39632fe5c38f38c13430d2587a07563e"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/raw/8423310873.json": {
+      "bytes": 10663,
+      "sha256": "6cfa0f9851300a06223856261b986c8e740f404edfce228b5b758811f9d11ea5"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/raw/8423368568.json": {
+      "bytes": 12091,
+      "sha256": "9ec6be3561b2456f7f178b4d3ff232b8ae53e7475d2cc467bc345b1454b3e008"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/raw/8423417276.json": {
+      "bytes": 12125,
+      "sha256": "cb79019dd78074c8ae87dfa7c72ea82d19b7700556e4235baa36e64610e1668a"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/raw/8423642461.json": {
+      "bytes": 14584,
+      "sha256": "af4b63dc032dd4bf812d379e7e0f995440e025af39fe75487d700a8905f6c7a9"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/raw/8423679173.json": {
+      "bytes": 18349,
+      "sha256": "e185e6dad5b2ab5705035b7846116c6e44be25fa779b9666e11b37d5495389ce"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/raw/8425196377.json": {
+      "bytes": 14490,
+      "sha256": "53ed889d9adff6a1392c2f3b1a77bfa12d1c6d8268f9e2cf51542199b3c882d9"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/raw/8431337733.json": {
+      "bytes": 16801,
+      "sha256": "5d201e22ba640074495a6083cc42ed32e89056bacb3ef494ef0be81d0132eb4d"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/raw/8431767090.json": {
+      "bytes": 15002,
+      "sha256": "812318eff9d4d5d5a02900f4532b268180bbfc32f8a2a0dda5fa8b79ade7cab0"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/raw/8432796992.json": {
+      "bytes": 18185,
+      "sha256": "7b48c16a897f3af41d39daabcc492fd6a30524223edd027bd6a82b780b78e4bb"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/raw/8433798738.json": {
+      "bytes": 8426,
+      "sha256": "87857f6b98019393cd11c0fc34550143b2ccd5b4513043788937d2e9e15955b6"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/raw/8437531756.json": {
+      "bytes": 9245,
+      "sha256": "ce110580b885911404d86549cb392973d20f92640754e5f49f4d6aea649f4838"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/raw/8438692998.json": {
+      "bytes": 14568,
+      "sha256": "293e4cee9818f87741568df5f7d99e7b93a6ec9e031cabe597880510af0a1319"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/raw/8438919271.json": {
+      "bytes": 11200,
+      "sha256": "6561e8b4f479eaeea18b578f1d2a1cece743c256fbe49d4dcddff0e7ba48004b"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/raw/8439141780.json": {
+      "bytes": 8646,
+      "sha256": "df85cf258459cafe1cab8307e88b280dc6f0737ada20150a0f16e064af780bdc"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/raw/8440854692.json": {
+      "bytes": 10205,
+      "sha256": "6c63971f6896fd15856328a5ceb4dd6a197ce04dc4aa5e5b0caf7f38c01ac382"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/raw/8441572675.json": {
+      "bytes": 15549,
+      "sha256": "2cd6edef449d28e4761918610c1bfa1ccfc5481511df11aa0dd7aafe3e7835e5"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/raw/8444995424.json": {
+      "bytes": 5041,
+      "sha256": "cff3bf8aacb04867bb4f9d67b12d90c6fdf6db63cdf1e744ff8e5a369acb3f73"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/raw/8445625648.json": {
+      "bytes": 13579,
+      "sha256": "0be317a323dae146c02638153c39f0c7e70833ab06ddf07e9e8fe73c62b15e63"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/raw/8445705801.json": {
+      "bytes": 18687,
+      "sha256": "9c53b01138623dec7688b86dc7cbd8c4b0792fc6dfaa7d4864009b62820fb80d"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/raw/8447545462.json": {
+      "bytes": 16780,
+      "sha256": "ae2698ffdcda21692d4449da9cce89eabe884eb7032ecdb52343480b3c131a3d"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/raw/8448573544.json": {
+      "bytes": 13585,
+      "sha256": "2f257bc4e63fa391ae0161c0ff37b88b77401118be6bd3e251ee7eea876f0552"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/raw/8448752341.json": {
+      "bytes": 15822,
+      "sha256": "bec3536de144e69fb71060d0a39f9833133a591ab6ab24bd9e4379f267875bd1"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/raw/8450551273.json": {
+      "bytes": 18143,
+      "sha256": "02701217c0e02b9903535073d8793859086269d3359ba58d69e1f9db60a2858a"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/raw/8457289805.json": {
+      "bytes": 10078,
+      "sha256": "1568895d4cef582238eeae51623182a106577f97ceadc0453eab539cb88ac43f"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/raw/8462943784.json": {
+      "bytes": 11814,
+      "sha256": "d12ffda9983ec99947c870e041a566bbf51d4dc7d589f06a292fc1bb99ba16c7"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/raw/8469233374.json": {
+      "bytes": 10924,
+      "sha256": "77f94d4560d8bbab26f0858f9bbdb643b219e6cd1fbf0091b6fb219f431e34a5"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/raw/8470511190.json": {
+      "bytes": 9219,
+      "sha256": "d36ccc659f558e14243c039127a15dd58af71ed6b2204cf8d315be0cc2eeb9a6"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/raw/8472130382.json": {
+      "bytes": 12920,
+      "sha256": "b939ef241eb02bcacca5ba9811c10b674b1fb5b788e45720c58baa01b95d458f"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/raw/8473172254.json": {
+      "bytes": 12577,
+      "sha256": "e3a521597e76de7d4be080ee1aa1d8511d8228f4b0451a73ed475f52c1ae751d"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/raw/8473822635.json": {
+      "bytes": 12586,
+      "sha256": "c38fc17542f8afe9c0c322fff99d1b3ffa0269f5885968b90770207d99c8dc17"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/raw/8479952590.json": {
+      "bytes": 9012,
+      "sha256": "565fcc54a37861fbe7605b37b3aa92e5f800485f06435b4a3aa82779f6354259"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/raw/8482470615.json": {
+      "bytes": 14646,
+      "sha256": "f3adb4e8835f60b046feae0f80453cb2a7021045e18636fc1995b95f2587edbc"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/raw/8482706243.json": {
+      "bytes": 11670,
+      "sha256": "b8c6e5eba8e2679fb913b63ecee4ba118a20d97e51ddcf8958ec16ef05439411"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/raw/8482975915.json": {
+      "bytes": 15181,
+      "sha256": "e05dd7af424487a556ca7d65c40c74170773ef20bd01a70bb09947bc6e679d9a"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/raw/8482991660.json": {
+      "bytes": 13664,
+      "sha256": "96a9cc9b65b999f166cdfcf7ea0243c71e2364b4907320abbfd98455a52d30aa"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/raw/8483465367.json": {
+      "bytes": 11036,
+      "sha256": "e2dd141e712cf010bc01aabc70000e8b45407a3e1730a1c0463cb2d72fba042b"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/raw/8483805006.json": {
+      "bytes": 8105,
+      "sha256": "770ea63e1869bcd8ce8ce48a3863acb4021dcb289b2a1ca6ff627fa711c643c3"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/raw/8484975458.json": {
+      "bytes": 12932,
+      "sha256": "f5d5151bdffd89f0fc4f261fb91c310bc0b2dbed4c978cc2d76b34823ad8bdb2"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/raw/8490647892.json": {
+      "bytes": 10364,
+      "sha256": "f841700295839fa8a4ceaec302bbb1163dbfbb1a12782058f32878a3cec94be2"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/raw/8490988953.json": {
+      "bytes": 10568,
+      "sha256": "95beff716c2b13b67f7605ecc4b9f59afa140160056f82009033d2df8bd64103"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/raw/8493274644.json": {
+      "bytes": 14746,
+      "sha256": "50dccd15db86653937563cff06f531568624c6a6a67aedebf1244fa6aff9beb2"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/raw/8493821696.json": {
+      "bytes": 10917,
+      "sha256": "93bb581b8a3160cb12b5aa4ac55341eb0d4d5dacf284a3f071927e4655468239"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/raw/8494870278.json": {
+      "bytes": 12544,
+      "sha256": "14972068d0a85aa04c204d5f8f9e9da408ebb7631313ae0fcd079cd6b2f5e100"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/raw/8499260816.json": {
+      "bytes": 16425,
+      "sha256": "556070de2a83d1409a0c0fc4c9e6428de3b43a3392f47beec825a7c7e5081fb4"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/raw/8499742957.json": {
+      "bytes": 10713,
+      "sha256": "03bc89bffeaf51612727e3a5d7b0bde9696edd384a7baa24249e19b494c31b86"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/raw/8501834463.json": {
+      "bytes": 10331,
+      "sha256": "c1815ce845f56a767737b6ebca4ac74cbe157366f8e74c376755125525df2334"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/raw/8502708817.json": {
+      "bytes": 11909,
+      "sha256": "770ddf1ba58d64d3b66ef7290431050f3dbea87362d5dd6c788f9ca06da3c53d"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/raw/8502715239.json": {
+      "bytes": 6259,
+      "sha256": "7e1abee3d06cd49b76d76ca62ab4e83010046a70e81f7eb89e1f34974891e4ae"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/raw/8503512893.json": {
+      "bytes": 12813,
+      "sha256": "870cb431ee4e83971835550557b966dbeacf1e84153a5fe22d16b4aa9d84c2cc"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/raw/8503750461.json": {
+      "bytes": 12061,
+      "sha256": "ae6162666d84ba6ca14bb87ce5aa96240b6c8126e35355977a2be1e087dceda8"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/raw/8513953247.json": {
+      "bytes": 11586,
+      "sha256": "f4bbc89d9e53f3f574c40628a0f1144984fc8cb8c80029ff0513e43297fab865"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/raw/8513994955.json": {
+      "bytes": 12877,
+      "sha256": "4e759d77f6cf195a0b206eb0be546bff7f2f84cc89f8595d80f20c7a848b1681"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/raw/8514478090.json": {
+      "bytes": 14445,
+      "sha256": "09b74681d218b4646c2cf3d802f8ab1d8a1bedbf342a29309ac480183c39750b"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/raw/8515579437.json": {
+      "bytes": 11646,
+      "sha256": "679189ee0f65a472afc3ddcb642de651257fda69e2fd0ac7b88949e20ec98fb5"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/raw/8515801786.json": {
+      "bytes": 11149,
+      "sha256": "5ee2d5c771615ca988a748259c3f3ac52fdd90a5cc48c09473578d92b6da29ae"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/raw/8517012017.json": {
+      "bytes": 16725,
+      "sha256": "e02016d05cdc047a4801c04335fadda3baad454996083351355c573664d2ac1a"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/raw/8517022116.json": {
+      "bytes": 13100,
+      "sha256": "d433b8c9c8f961929cc654b975ac6d484236e13f0ae6f0d4b00627a415812a20"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/raw/8517643383.json": {
+      "bytes": 14801,
+      "sha256": "9fdab806ab73c0e57c0405590607b1bae304ce51ce07437d76c5d3b05dee6b32"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/raw/8521269789.json": {
+      "bytes": 11043,
+      "sha256": "3528a8ec412d071a00cbf4527364bcf38f05d7e73ee422fbf92f460dde5902a7"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/raw/8521965219.json": {
+      "bytes": 11485,
+      "sha256": "a5ad5a97f8d31d7d3af2326614ffa8ca9ffd0332020833238e137f80dcffe643"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/raw/8522040026.json": {
+      "bytes": 10797,
+      "sha256": "50503e8d5f9e5c15db8dd4a158753bd6361eff7b8e99121ad0684fbaf23aea9c"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/raw/8523422434.json": {
+      "bytes": 9296,
+      "sha256": "dd79ccf2a18a0fc8fd623d4dc37ebdbc773d6ecb832f6f964c507d7b45a875b6"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/raw/8530839974.json": {
+      "bytes": 15024,
+      "sha256": "89643cbb625a320d5e8ad1eb49480b40072278437aeca04b2084dca96fa88c1d"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/raw/8531127558.json": {
+      "bytes": 8614,
+      "sha256": "1e1c0105a910f49f7d8f6ebff40f8f674553f538c5e0ad6d0f0c1a97ee0d6d6e"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/raw/8543358364.json": {
+      "bytes": 14750,
+      "sha256": "8689c86ece26ecf2b09276b79f908beafadaf14b8cab573f1c23ded970dd7e89"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/raw/8543470920.json": {
+      "bytes": 11862,
+      "sha256": "c3ce0ce008b5b01d2a25751fa3daa24fde7fd018bdacb8f13b042d6c16320c6a"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/raw/8543900530.json": {
+      "bytes": 10380,
+      "sha256": "d11a56613c7660d06e43f5374192b173646369c818455dbea9ad3e8fb83eddd1"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/raw/8546276628.json": {
+      "bytes": 13162,
+      "sha256": "bb9d2e5a805aedbde28ae0d136fc970fc80ef8779740b7f28bdc7d70270554cb"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/raw/8547724840.json": {
+      "bytes": 8388,
+      "sha256": "001d2c3eac065568cd564f8ce32ff8ffcb62266f9c00794be16f902d0222a7bd"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/raw/8557598455.json": {
+      "bytes": 9648,
+      "sha256": "2dcb43c4cef4fac5704a5298fc404cd2bf8f287d6a1ba783cefdf534873071bc"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/raw/8575136148.json": {
+      "bytes": 10652,
+      "sha256": "10ed291f842b52f3c85a0ebe23a0ab52474519e43f8912259e7eb8712307158c"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/raw/8575772472.json": {
+      "bytes": 12689,
+      "sha256": "1adbb682ab391234db3959d0dca94ac43696a8ab80d88cf35e97a9f4024068a3"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/raw/8589615395.json": {
+      "bytes": 9769,
+      "sha256": "8286e4de3b532547dfa93e22d4780be5a8c5a2dd15231f72bcb3d94235ebf8ab"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/reviewed/2438019479.json": {
+      "bytes": 743,
+      "sha256": "5a32878beab97ed2a1954f76695d76614e8d363b87204f49ea4450e5015a84e5"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/reviewed/2878359345.json": {
+      "bytes": 739,
+      "sha256": "4a7ba79dfc990074ca50c2eca32511d8a079e050777ced56b1618334a19aaa3a"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/reviewed/2938372205.json": {
+      "bytes": 748,
+      "sha256": "6e914602c2553a802df6e5b107a66f7e44375269ae04418ae3daa1458e6f0528"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/reviewed/3579432833.json": {
+      "bytes": 753,
+      "sha256": "cd47e5e32984e22daca7790cca8ce03022dc23c76d0857932361685fc87220d8"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/reviewed/3764911728.json": {
+      "bytes": 707,
+      "sha256": "5188bf75c397946d553b95fe42328974b844e796c7b3c7f7db308d8fc33f88cf"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/reviewed/4086684390.json": {
+      "bytes": 786,
+      "sha256": "7a5fb786e0d99523599e8515799eb28a1ee4311894505b0f1472abe8dc4a8075"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/reviewed/4181812203.json": {
+      "bytes": 739,
+      "sha256": "d18001ece14d51a2673c3ac7b6fa17f4c42a78d874cf6fecf3cd6685ea7d553e"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/reviewed/7371534587.json": {
+      "bytes": 754,
+      "sha256": "754d716dae506c3f502c9b633b10048959a6447b2ffe6f8bd34001c5206bdd36"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/reviewed/7393290726.json": {
+      "bytes": 940,
+      "sha256": "621b880f18448f05918b3caf0cd0e29262face47783b13aafcdbb566e574d4e3"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/reviewed/7655530003.json": {
+      "bytes": 757,
+      "sha256": "49126c2d253d374bf3d391e18efff926bd703c45a75ada07e63ce377cc46dfe7"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/reviewed/7873284551.json": {
+      "bytes": 707,
+      "sha256": "135e33e8cc8ec36d2ec9bf9f12ea9b792cb4ecebedef40114b92451bb7e2c28a"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/reviewed/7882604856.json": {
+      "bytes": 733,
+      "sha256": "6bea326c47c75ccfe239c8a26f20e4e52d1f825f9a0e801d71c1b243c309f8ff"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/reviewed/8004526944.json": {
+      "bytes": 707,
+      "sha256": "d14b8d447881e8d68aa99967f60af20a90ce93fe39bab6a0cfdc61598adcd692"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/reviewed/8034058753.json": {
+      "bytes": 707,
+      "sha256": "45c28b3a09beb9682888d6a61c4fd781054c79a02dc76cacc59056573ed09d86"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/reviewed/8058729455.json": {
+      "bytes": 739,
+      "sha256": "b032fdad281dff0946c51450799457fb648dbd05622ffae6a3a55c7a8941e095"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/reviewed/8154139267.json": {
+      "bytes": 751,
+      "sha256": "7dc677cd99647454fdffc341ba29eefc33812dda47a310a4deb5a601c64cb5b3"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/reviewed/8167410593.json": {
+      "bytes": 745,
+      "sha256": "fae1d234c66600f04e3410469f3da98b217aac0ac411aed0f7fcb05ddec9f998"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/reviewed/8176329280.json": {
+      "bytes": 707,
+      "sha256": "52691615ac12cb61273a1786903d64440736f25769164e469f22d433789a9bac"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/reviewed/8189631071.json": {
+      "bytes": 768,
+      "sha256": "fb012187c794e470e3a0eafdeb2078e2598e1ba42f23d05bd5182fd4ef2b3626"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/reviewed/8226838820.json": {
+      "bytes": 707,
+      "sha256": "ec665b64516400f067a183e4ca0c1ed8b20e168ba39480ea3820fe997aad2f5b"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/reviewed/8229084540.json": {
+      "bytes": 707,
+      "sha256": "03b5258f5cdca2ab69ce5173126d4d8041be000b6be2b8865e39ae52f28d9cb8"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/reviewed/8245387928.json": {
+      "bytes": 741,
+      "sha256": "a6235caa73f0ba580c22e1d955805700fbc38573351efd86448e0a22872bee25"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/reviewed/8252914248.json": {
+      "bytes": 768,
+      "sha256": "07b6bdb1bff9b5d299137aef617f92a889b07ba867fbc29e2a7f9191c6108b3b"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/reviewed/8260349847.json": {
+      "bytes": 755,
+      "sha256": "6be7fbc27196e00c720a5a29750375c9e712f91afef48e59bcd98eec171a39fe"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/reviewed/8261559001.json": {
+      "bytes": 778,
+      "sha256": "68c84582652d6efd1a12669a409ad9d7ace443f0b04328a48b414ae46438ed42"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/reviewed/8272656188.json": {
+      "bytes": 707,
+      "sha256": "15d474197aa6ac8032bbec8572b2b533cd34b59eb6855008cbc6e9826511dd13"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/reviewed/8281056040.json": {
+      "bytes": 707,
+      "sha256": "9005987169765408409e51090b2824402b027293b38f476d4c31dab7761d7ae1"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/reviewed/8284108015.json": {
+      "bytes": 707,
+      "sha256": "8b7394bc508952cbc9499b6dc7747df4180b9f6f22d193f43360f3045f832f38"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/reviewed/8303955478.json": {
+      "bytes": 733,
+      "sha256": "683720a0a3cfbabc9241321bbb66cff41ae8919ff05caeaf268652b1da6945bd"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/reviewed/8309865672.json": {
+      "bytes": 782,
+      "sha256": "9ad67ace4e216497d7811c044ddccec65f89e092b74aef433ca7d13dc9064e5d"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/reviewed/8312474587.json": {
+      "bytes": 707,
+      "sha256": "8d255ffa557c1d113bf27aca641e2aa17be2964b9d139f908a73f9462fdc6e9d"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/reviewed/8314314822.json": {
+      "bytes": 753,
+      "sha256": "e08754c3571c802ac7d3e121ef55c7b33d4706aa0ff5154b12cbefb5025ce70a"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/reviewed/8318839871.json": {
+      "bytes": 741,
+      "sha256": "5af31806df0bcc8223423a15239300df84c5faa371ceef30c068aadb322dc803"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/reviewed/8328169974.json": {
+      "bytes": 707,
+      "sha256": "3bdd0898e8922a4edd034f5bb44ad450361ed0be2b5bbf60a7c08fb84d457d9b"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/reviewed/8332593873.json": {
+      "bytes": 707,
+      "sha256": "fc64b8103c24bd433fd854c42c94a7965b5cd99cbd3ef9eef27eea498053aabb"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/reviewed/8340508364.json": {
+      "bytes": 707,
+      "sha256": "1a83dadacaacd610677abf74d48983cf28499b7aa6d7813dd2e9e2408366c6d1"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/reviewed/8342870852.json": {
+      "bytes": 707,
+      "sha256": "aba965a56d3b55460cca285c7a8f1f210728c15e194be86cc0a213da6c07fe4f"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/reviewed/8345025828.json": {
+      "bytes": 707,
+      "sha256": "bc758fed77894c5ec9409a13cc7b0b28a3994d8c233042c9141b2a52efbda9cc"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/reviewed/8345716695.json": {
+      "bytes": 743,
+      "sha256": "7ecd3c852a300f3ba8f6a2a7c644d9f360dcd78cab505abcde9266eb9b552161"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/reviewed/8347324215.json": {
+      "bytes": 707,
+      "sha256": "9f7742002d0be4a3aeb2b325b49292ee276914f67e1c8a7f6944f13c459c8875"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/reviewed/8348609406.json": {
+      "bytes": 707,
+      "sha256": "82796cd2b2bffb6115a6743586da2c26eb08785504f76e3a496368e630fa4b21"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/reviewed/8350137438.json": {
+      "bytes": 707,
+      "sha256": "8ac969c3073bd2d08ab4630d64891da1870e59354b7e07ad311109cc2458d6cf"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/reviewed/8350441269.json": {
+      "bytes": 707,
+      "sha256": "5c33b469ba3dd4e78ed891535d9d849b670a25445d7ec0e554b87c3b2aa635c5"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/reviewed/8359895941.json": {
+      "bytes": 770,
+      "sha256": "636c59a89883fd02d33fe131ca4029515bf541f0a6d718a50cf294003d427d9a"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/reviewed/8360054892.json": {
+      "bytes": 707,
+      "sha256": "e4a1151d7f8502253c56f587c863c1347d6636803d20b00f9aa9092d891a047e"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/reviewed/8364099311.json": {
+      "bytes": 707,
+      "sha256": "c7db5058ff88568bd28a98adb0d72388e40870a2887953340261ac35c4adfe1a"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/reviewed/8366604824.json": {
+      "bytes": 707,
+      "sha256": "4bb1c68ecebb874c006379b7d2fd98acf944c7952f39e6c13f7b495906487ee7"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/reviewed/8366614678.json": {
+      "bytes": 707,
+      "sha256": "f1d8cd1e94900bd54da3336b0cfc52cc6cdeb67537fff9afcca7a4f61b4654d7"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/reviewed/8366742476.json": {
+      "bytes": 707,
+      "sha256": "b8d6b18df19bb368f467d54d6b46ffc58ac9bddd00d94459bf2ea5f9664a6ecb"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/reviewed/8370087607.json": {
+      "bytes": 707,
+      "sha256": "fc7f4020ce65860f47c4215898c9057776237f205d0e402611fc042245199e9d"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/reviewed/8370809324.json": {
+      "bytes": 707,
+      "sha256": "c032b2d7c2cd261b2d8740b797fbadb5b4311529aa6b793caa0520c11171ab51"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/reviewed/8378726181.json": {
+      "bytes": 742,
+      "sha256": "5d6e93feb799ecac4c32d2b6f3075c77fedd827d2d63ebd28eb2b408b6d4ab6c"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/reviewed/8378939519.json": {
+      "bytes": 707,
+      "sha256": "872cf010483dfeb0af213ff976826db7fc2b73f1e70ba21afe8f3fd679811236"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/reviewed/8380449342.json": {
+      "bytes": 707,
+      "sha256": "3bbad430ff49a032b0d8dd7b27fe5906f9ec492fef0814415dfcbf808e0e6e64"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/reviewed/8383611389.json": {
+      "bytes": 743,
+      "sha256": "35a4659edc5c3a3414eb246d2a50647a30ab21f12e99f8cf8e522ec865148b21"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/reviewed/8389995616.json": {
+      "bytes": 707,
+      "sha256": "56fb55fb4b029e2db1617d760b5102e693068ed42b5b4329975731502eb4deed"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/reviewed/8391117836.json": {
+      "bytes": 707,
+      "sha256": "d6ac63a269ee9a3510d550bbcf37567942dfa820c9e32506a9dfd59c1e9b9eda"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/reviewed/8391510420.json": {
+      "bytes": 707,
+      "sha256": "3518e3906a9b759db2fefa5a83c4878caff90e78e9a743e029c22589d8a5dc02"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/reviewed/8400248329.json": {
+      "bytes": 744,
+      "sha256": "7edfb2bd1de45481db9e7bee21e5ed4db0b61bafd6c1900339895b71feeff574"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/reviewed/8400590401.json": {
+      "bytes": 759,
+      "sha256": "431f93872013a02521031f9df02aa0c08691befd3bdc5bff55a3ef90a0fd83e7"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/reviewed/8400765854.json": {
+      "bytes": 707,
+      "sha256": "2c4319d27e8a7f8396bb39d0823ca8e2ced0b947cf8d958cc62da6c5f9414414"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/reviewed/8400813495.json": {
+      "bytes": 748,
+      "sha256": "f8d02d8b099aee4b4328d654438a9f91ee5a7e2ec0c7c0d1b2964f92b7113da2"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/reviewed/8407607574.json": {
+      "bytes": 740,
+      "sha256": "4ef219787e0468ee1cf2e72a8073921cac5c142d46a75d2a5abed50c8a902747"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/reviewed/8409001065.json": {
+      "bytes": 737,
+      "sha256": "c2c47baee93bb0040884c6344931280acb869f2eda2665da697443bee613f0ac"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/reviewed/8409003089.json": {
+      "bytes": 765,
+      "sha256": "3b7d1aa64f9b26daf9967d0de801f24aeb01155ea0894b2e840941ac9f62d7fe"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/reviewed/8413322235.json": {
+      "bytes": 707,
+      "sha256": "082031e148bfafb7c0d57b4ce01f0a97acf5dde6f4c43a72bcd171aedc2b5077"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/reviewed/8414061644.json": {
+      "bytes": 707,
+      "sha256": "dfac1f934ea506c028a8a29e95721030df04155f1aa185d161f535a9c9497368"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/reviewed/8414382336.json": {
+      "bytes": 707,
+      "sha256": "adb81ffb1d95b8d6d491b19ae1def5bf83a3b5ac7dc32894080c79da3ce14e7c"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/reviewed/8414829270.json": {
+      "bytes": 707,
+      "sha256": "be709277392da9ca7502b9e93897060bb9835a51d5a66ff7ad8d5e7c127d534b"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/reviewed/8417939824.json": {
+      "bytes": 707,
+      "sha256": "26e73a8dac3efc8b5ae5dd6b90d9d67c1968a0fa411314184b36cb46a25f78ae"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/reviewed/8417994126.json": {
+      "bytes": 707,
+      "sha256": "d52651c7d8573656532946b8219a9f0bbe54e99ce4488d97db25077f1dd99adb"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/reviewed/8419683230.json": {
+      "bytes": 707,
+      "sha256": "589dc757738255e8cf9f48b475e21c98fbdba459ed40e95bee5df8d9e3313c39"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/reviewed/8420072855.json": {
+      "bytes": 707,
+      "sha256": "9e3214652a58ee312cc064562a42ed49517c1f727bf82ff92e9bdc5388bb8b7b"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/reviewed/8422751502.json": {
+      "bytes": 735,
+      "sha256": "e5e262d94130027160789c7553c20d0b54cf34fc25c9d60097ef983cc5d8b20a"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/reviewed/8423191531.json": {
+      "bytes": 707,
+      "sha256": "a194c792fb447cdc8be4f9291ac001f44e673f5334b597962f45fe2383a65397"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/reviewed/8423310873.json": {
+      "bytes": 761,
+      "sha256": "bedc642724e1a51bbf76a33384236a2842512035f079dc8dc17e4ff69ade2008"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/reviewed/8423368568.json": {
+      "bytes": 707,
+      "sha256": "92810544984ed6b872d4e8f3f6f1b085d67439de8b21c91b928eb99e0c7c9a29"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/reviewed/8423417276.json": {
+      "bytes": 707,
+      "sha256": "3a81843f6b37974d0554680b73ccdc5ef27f9e67881748767e05c75c6d27e909"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/reviewed/8423642461.json": {
+      "bytes": 761,
+      "sha256": "5bcee4be3b6cad0f120a99e355f308d4bbae294c5188019a74aafbf7c8f04bae"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/reviewed/8423679173.json": {
+      "bytes": 707,
+      "sha256": "0ab516e5d3ff7f222a342ad61251b7680fdba520aa3097f48c7aad41c2dfb09b"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/reviewed/8425196377.json": {
+      "bytes": 770,
+      "sha256": "173f272ce7bfdb0c236d6a6149e6c5a8785f6c413862b2935e5dd35decd48a43"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/reviewed/8431337733.json": {
+      "bytes": 731,
+      "sha256": "95f4c56977987c4160bef6812eee27da6f7467a40174c9fa15a3565a78b59c30"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/reviewed/8431767090.json": {
+      "bytes": 707,
+      "sha256": "264e8260da24cbb63bf9047d7323a5e9dd28cf5802f86b3d1f58e3534c982c5c"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/reviewed/8432796992.json": {
+      "bytes": 707,
+      "sha256": "419400c857cdd1a3c805e0c0b6ed1bac3eadef3c8566e5f23a29b700db84a375"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/reviewed/8433798738.json": {
+      "bytes": 707,
+      "sha256": "12ad2238ca72239e2c5acd30c2f2b8a3ee6e455290731e8c8187b185184147b4"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/reviewed/8437531756.json": {
+      "bytes": 707,
+      "sha256": "253bec8bd44e246e57ff4a15ca1999027d0fbf9e186d05d242603d32b2752971"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/reviewed/8438692998.json": {
+      "bytes": 707,
+      "sha256": "2d9e526a6ba019245c31872f9c5601ddc806e036d7af80e53120669e7bb77877"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/reviewed/8438919271.json": {
+      "bytes": 707,
+      "sha256": "8c3aede37221eb06f1a3ca7f8b5792e74b9fb6be0441e3316f98fc3fc4c4ddaf"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/reviewed/8439141780.json": {
+      "bytes": 754,
+      "sha256": "42fd0368cd518d6c507885cc9a273f807f10c4e55ccf07574232a54351b49f02"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/reviewed/8440854692.json": {
+      "bytes": 707,
+      "sha256": "50e10e396007c76617cd23e93cb7fcd497ea904422c9f2009239304fef7721f9"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/reviewed/8441572675.json": {
+      "bytes": 707,
+      "sha256": "1b294c23654f743555da54e56dc6afefe08da9251d1227a5cd52a18b9c586ded"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/reviewed/8444995424.json": {
+      "bytes": 768,
+      "sha256": "b2258eda43128c2ca262475cc0092294713784e96a9c8b37b6ab52bd26330b53"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/reviewed/8445625648.json": {
+      "bytes": 744,
+      "sha256": "0960dd98089187ef68b9daf01270478c9ac3995f61e5ed49b86fbda58b29357f"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/reviewed/8445705801.json": {
+      "bytes": 707,
+      "sha256": "33adfb42cc57cd5109340a763c044269dcd07a76be84057c95d948366f58c430"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/reviewed/8447545462.json": {
+      "bytes": 707,
+      "sha256": "920d8de2c836d9c1d7fd18e08ff187528cebe7874b999fb8cd1e5b9aae3edd27"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/reviewed/8448573544.json": {
+      "bytes": 707,
+      "sha256": "462a4e57f33d3030f1e2cd68ed9fbe74b8b66d1c6b168b1e4b78cfe5f9839b77"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/reviewed/8448752341.json": {
+      "bytes": 744,
+      "sha256": "d832930a9a7f125551f056fb0c5cfc55b288773c766bb254e48bd113f3063d93"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/reviewed/8450551273.json": {
+      "bytes": 740,
+      "sha256": "9fd4eb04a27f75baad660bf97f8a0f5bc3c940330c29b03d5eafa4e34799bd67"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/reviewed/8457289805.json": {
+      "bytes": 751,
+      "sha256": "4e36a04cbeb56ce3c0ba687c1aa8540dec5505c136bbf4088e5aef31361325d1"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/reviewed/8462943784.json": {
+      "bytes": 707,
+      "sha256": "874868aa4e93b672a1253b6a858f73f19e0c626d6f84b29c2600bb84cd336a69"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/reviewed/8469233374.json": {
+      "bytes": 707,
+      "sha256": "5fed3c47042a8e9a556afaaa84f8827e78a1177daccd3b74c2cd7c4692b82eda"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/reviewed/8470511190.json": {
+      "bytes": 707,
+      "sha256": "6c5d654add66b0b25380f5ae01578fbfa42955906fff1cc56196dc5a438d01b6"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/reviewed/8472130382.json": {
+      "bytes": 707,
+      "sha256": "3b6911580e89e06287261d7ee5699cc277acef9ed8532adf8ae32aa0360aa696"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/reviewed/8473172254.json": {
+      "bytes": 707,
+      "sha256": "6c3778d93e9614922dcf56fd0ef2e11084bbc2747f85a94f948c3e3ad9c57167"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/reviewed/8473822635.json": {
+      "bytes": 707,
+      "sha256": "874586f5e2d157cfd2ed7e246cabd89aa323bc7f59cdf4897ac19ff875c44ce9"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/reviewed/8479952590.json": {
+      "bytes": 707,
+      "sha256": "7e3c5eac6a9e4a976aa0fa0d18ba7c3155eb182d617c0afdd009dcb7290dddfa"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/reviewed/8482470615.json": {
+      "bytes": 707,
+      "sha256": "2cca3e9d14e9bf3eb8278ba7fba1be3dbbcd8f9f3903ab4d7107248dbb0b6688"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/reviewed/8482706243.json": {
+      "bytes": 707,
+      "sha256": "d25aec90f85d129cd1037b1fe3391708549850d208305465853c3c5cb0231236"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/reviewed/8482975915.json": {
+      "bytes": 707,
+      "sha256": "d6657ff564aac81935f21fca89811113767ebf44732b6d4de2b9166dd79d2608"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/reviewed/8482991660.json": {
+      "bytes": 707,
+      "sha256": "ea3a33d9deaca8968ad320eddfbc34c8b4f80b12d43ed8c9a237a9b92f8f4b95"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/reviewed/8483465367.json": {
+      "bytes": 707,
+      "sha256": "9b7b3b30b2750a792ec71c3e3e8b6f2e91cf7284e2299f8c677d3aa67075b9ec"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/reviewed/8483805006.json": {
+      "bytes": 707,
+      "sha256": "347caace040e914e2faa62de01649350221d52f1809d26eb3a3d923751906fd6"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/reviewed/8484975458.json": {
+      "bytes": 707,
+      "sha256": "ca9da5273b8fde0b8a25e0b58d8ddde3e8d0796810817a21fe90598374174d6d"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/reviewed/8490647892.json": {
+      "bytes": 752,
+      "sha256": "62fe3ee337e6111523e28b1b845ca637e3bdb2daa5eb88bf470ac4acc5ca3855"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/reviewed/8490988953.json": {
+      "bytes": 707,
+      "sha256": "ff52e05cb982667e6d27ead687f14b88ca81d0899176ed7f8b3f0eef24746b05"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/reviewed/8493274644.json": {
+      "bytes": 707,
+      "sha256": "c8e3ee564e7ca047779f61e7fae47a61e43db1921d77fb53b739b5401cf90c06"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/reviewed/8493821696.json": {
+      "bytes": 707,
+      "sha256": "f8eba16a6e968c97af0b293b769502dfe87c81002d88abff9654b3ca6e2fa190"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/reviewed/8494870278.json": {
+      "bytes": 707,
+      "sha256": "f3433093a9bb291ece67d27ab20d8f5e04c3d554e3538913987462462315bd14"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/reviewed/8499260816.json": {
+      "bytes": 707,
+      "sha256": "ed1a728cd81f243882f6c23fff5b7f51a9f547a03a468f5b3b935fdc1c7a5d68"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/reviewed/8499742957.json": {
+      "bytes": 707,
+      "sha256": "e5744db5bf22a6885d41ed4419b8430daf5db5a0ca1740257878f64af0e292ab"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/reviewed/8501834463.json": {
+      "bytes": 707,
+      "sha256": "45697254d0b4b3ec013ce37510744c6fc09ae8bbf5000f359ec71638f884dccd"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/reviewed/8502708817.json": {
+      "bytes": 759,
+      "sha256": "864697e841657f36d7124a2df49cfcd04a8124e334e421b67383d45252aebef7"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/reviewed/8502715239.json": {
+      "bytes": 707,
+      "sha256": "87b5c456cb709d69d94862f0af5d842f485b75bdc1ae2dbac621611c5454466f"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/reviewed/8503512893.json": {
+      "bytes": 707,
+      "sha256": "ae7501cd97be578624c973fcea81b2915e6447824214655ce43bd22f991a55cb"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/reviewed/8503750461.json": {
+      "bytes": 707,
+      "sha256": "76ea93d69790a3bb07a53ce3e85b8ef5c1da15a4f5b3caec79cb802f444fa5ba"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/reviewed/8513953247.json": {
+      "bytes": 707,
+      "sha256": "809f61b7fc7f8dbc9f135f0c6f72e155b78c4b5a6e5b3c8826e4ef9b55cd91d9"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/reviewed/8513994955.json": {
+      "bytes": 707,
+      "sha256": "4c610ce0b390b7afa1b115b597769ec6243b3c8e555bb00138a0b8df8e24f755"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/reviewed/8514478090.json": {
+      "bytes": 707,
+      "sha256": "549015caa6452b8f0293cc79b9b8033bc5a495e5ff1bb53919ff71dd94105ae0"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/reviewed/8515579437.json": {
+      "bytes": 707,
+      "sha256": "a10e8a2a22b0b435c9069417cb86c26b9bb35fbc9d8f99dc605e20788c59195d"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/reviewed/8515801786.json": {
+      "bytes": 740,
+      "sha256": "ccd71f9b26bf90baed0a40c62fa3e909f6b8967d900d7ddc1925506382108ab4"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/reviewed/8517012017.json": {
+      "bytes": 707,
+      "sha256": "6a4728765deb798ac520c2e8d21417b71f9e953374e5a4fc3577d20fb1aff421"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/reviewed/8517022116.json": {
+      "bytes": 707,
+      "sha256": "84ee314fe55d3c44910186ba7c89ac392eb3d747168d3efeb917eb62856abc29"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/reviewed/8517643383.json": {
+      "bytes": 707,
+      "sha256": "42ef702619fb78d90e44eb1ceaaca20b2a58792d88b6ebc6ff41251581fd8d48"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/reviewed/8521269789.json": {
+      "bytes": 707,
+      "sha256": "bf641e101804efa441a09c15bb3ed502aae81fc0bb9d54cdc53017a0d6d98113"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/reviewed/8521965219.json": {
+      "bytes": 734,
+      "sha256": "55f211cb83ad01553b4e104e20bc71aa491ef0b78707e10b036bb642bd3c2985"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/reviewed/8522040026.json": {
+      "bytes": 707,
+      "sha256": "4bcded2d0d26e5699e68969452340c899626bdd13c59d4b05f10ad66e2bc45d4"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/reviewed/8523422434.json": {
+      "bytes": 707,
+      "sha256": "9c3110db3827afb3bb6eeee5f77997ebef4c91c8cb48425161e4bd3672e5add7"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/reviewed/8530839974.json": {
+      "bytes": 707,
+      "sha256": "f5a72d13aaaaf64d728b6d654055c39f9532b1dec281a194aa963045af4ce8da"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/reviewed/8531127558.json": {
+      "bytes": 707,
+      "sha256": "25fa20269e781a74a4e078a3b200cb78ac1246926284f501dee9c419964c5cb7"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/reviewed/8543358364.json": {
+      "bytes": 741,
+      "sha256": "daedd26ba54340120fdbcd4ccaf996067a56b3bbf99b3f59af58537581583513"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/reviewed/8543470920.json": {
+      "bytes": 707,
+      "sha256": "a8401d5785dfdfbdcf8a920e2bee48e80766631c7f6ff72916d9517b62eaba6b"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/reviewed/8543900530.json": {
+      "bytes": 707,
+      "sha256": "3217779aadc58151630d7af8406c48eeecfb1102f8408b7dd94ba47cc9c2193b"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/reviewed/8546276628.json": {
+      "bytes": 707,
+      "sha256": "59465a2832a890b0d6adc832f8bf9593ccdaddda1a3488d9faaa72beb23d8a6a"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/reviewed/8547724840.json": {
+      "bytes": 707,
+      "sha256": "534d711aaeccd743b3caa886ed6c83f13347d78cc81a39265a220f3e3d9da64a"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/reviewed/8557598455.json": {
+      "bytes": 707,
+      "sha256": "aaf961cdb70d19420350ba1c5efe4e7ea276ab5d93ff8eab27649b6ce565d488"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/reviewed/8575136148.json": {
+      "bytes": 735,
+      "sha256": "0a63d95c298651f09b0ec3d05294ca09631e9776817716e77d6eea7b19743ede"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/reviewed/8575772472.json": {
+      "bytes": 707,
+      "sha256": "9b98bff57768a4ce308d42cbf34c350fbe9766937dae4a997999c687a2312848"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/reviewed/8589615395.json": {
+      "bytes": 707,
+      "sha256": "678591c4f3fca5ef7f825a2e64048b4bd145698aa64be259409a8b85a4abe97b"
+    },
+    "Data/avito_runs/20261110-ryazan-sklad/standing_unavailable_policy.json": {
+      "bytes": 1011,
+      "sha256": "7a1c18520dc10340252a4933e92bb851f78d800b32c33c1017ede17529393381"
+    },
+    "Scraper/runs/20261110-ryazan-sklad/plan.json": {
+      "bytes": 5003,
+      "sha256": "502f80081675bcccddb060d45ffd75c6453c5de87e49d2fea169ec71cf7e3720"
+    }
+  }
+}
