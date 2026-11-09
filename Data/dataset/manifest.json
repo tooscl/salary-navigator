@@ -21,7 +21,7 @@
     "source": "title, profession, city, location_observed",
     "policy": "added_next_to_observed_columns_not_replacing"
   },
-  "rows": 29640,
+  "rows": 29734,
   "columns": [
     "source",
     "id",
@@ -151,7 +151,7 @@
     "enriched_fields",
     "enrichment_version"
   ],
-  "sha256": "521bb3bf66cd32755693c2e143c105242617ff8fe1813112fcdd9192abc5c7d9",
+  "sha256": "506087812388a11b327080137dbfa05edde29f4039fc003343dd57105df24e7f",
   "inputs": [
     {
       "run_id": "20261028-spb-50-all",
@@ -5376,6 +5376,29 @@
         }
       },
       "rows": 228
+    },
+    {
+      "run_id": "20261110-ryazan-kladovshchik",
+      "source": "avito",
+      "path": "Data/avito_runs/20261110-ryazan-kladovshchik/exports/vacancies_flat.csv",
+      "sha256": "ab392a984b718c369044707af6bd2d8d9d1093402d6e491b1f3bb34b20c1eac9",
+      "placement_regions": {
+        "Рязань": "Рязанская область",
+        "Тюшево": "Рязанская область",
+        "Рожок": "Рязанская область",
+        "Шумашь": "Рязанская область",
+        "Карцево": "Рязанская область",
+        "Дядьково": "Рязанская область"
+      },
+      "enrichment_status": "not_run",
+      "unknown_city_placements": {
+        "3944927452": {
+          "region": "Рязанская область",
+          "evidence": "Рязанская обл., Рязанский муниципальный округ, автодорога Рязань - Спасск, 14-й километр, 4Ж",
+          "region_unknown": false
+        }
+      },
+      "rows": 110
     },
     {
       "run_id": "20261110-ryazan-komplektovshchik",
