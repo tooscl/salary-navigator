@@ -23,6 +23,11 @@ class SubsetTests(CityScopeTests):
         self.assertEqual(s.render(self.root,spec),s.render(self.root,spec))
         self.assertEqual(before,{p:p.read_bytes() for p in before})
 
+    def test_legacy_audit_spec_still_reproduces(self):
+        old=s.make_spec(self.root,self.run,'legacy-v1','Краснодар','Краснодарский край',s.city_scope_audit_v1)
+        self.assertEqual(old['audit']['version'],'city_scope_audit_v1')
+        self.assertEqual(s.render(self.root,old),s.city_scope_audit_v1.render_included(self.root,self.run,old['audit']))
+
     def test_wrong_profession_or_missing_filter_rejected(self):
         self.put(self.plan,{'profession':'Продавец','profession_scope':'all'});self.write_manifest()
         with self.assertRaisesRegex(ValueError,'profession and remote'): self.spec()

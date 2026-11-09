@@ -204,6 +204,7 @@ def build(root, registry):
                 "builder_sha256": digest(Path(__file__).read_bytes()),
                 "placement_transform_sha256": digest(Path(placement_transform.__file__).read_bytes()),
                 "city_scope_audit_sha256": digest(Path(city_scope_subset.city_scope_audit.__file__).read_bytes()),
+                "city_scope_audit_v1_sha256": digest(Path(city_scope_subset.city_scope_audit_v1.__file__).read_bytes()),
                 "city_scope_subset_sha256": digest(Path(city_scope_subset.__file__).read_bytes()),
                 "title_flags": {"version": title_flags.VERSION,
                                 "sha256": digest(Path(title_flags.__file__).read_bytes()),

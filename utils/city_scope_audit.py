@@ -11,7 +11,7 @@ try:
 except ImportError:
     from placement_transform import checked_path, sha
 
-VERSION = 'city_scope_audit_v1'
+VERSION = 'city_scope_audit_v2'
 
 
 def visible_component(address, city):
@@ -21,6 +21,15 @@ def visible_component(address, city):
         return False
     tail = re.split(r',\s*(?:ул\.|улица|пр\.|проспект|ш\.|шоссе|пер\.|переулок)', address[match.end():], maxsplit=1, flags=re.I)[0]
     return not re.search(r'(?:^|[,;])\s*(?:с\.|село\s|д\.|деревня\s|пос\.|пос[её]лок\s|станица\s|ст\.\s*|хутор\s|х\.\s*|пгт\.?\s)', tail, re.I)
+
+
+def explicit_region(value):
+    """Recognize only an explicit federal subject in the first address component."""
+    text = ' '.join(value.split()).casefold()
+    text = re.sub(r'\s+обл\.$', ' область', text)
+    if re.fullmatch(r'(?:москва|санкт-петербург|севастополь|.+\s(?:обл\.|область|край)|республика\s.+)', text):
+        return text
+    return None
 
 
 def audit(root, run, target_city, target_region_quote):
@@ -80,7 +89,15 @@ def audit(root, run, target_city, target_region_quote):
                      raw.get('read_status', {}).get('location') == 'observed' and review.get('city') == city and
                      review.get('analysis_status') == 'validated' and address and
                      address in row.get('location_observed','') and visible_component(address,city))
-        if not confirmed:
+        first_component = address.split(',',1)[0].strip()
+        visible_region = explicit_region(first_component)
+        target_region = explicit_region(target_region_quote)
+        different_region = (raw.get('read_status', {}).get('location') == 'observed' and address and
+                            address in row.get('location_observed','') and visible_region and target_region and
+                            visible_region != target_region)
+        if different_region:
+            decision, reason = 'outside_city', 'different_visible_region'
+        elif not confirmed:
             decision, reason = 'unknown', 'visible_card_city_not_unambiguous'
         elif city == target_city and target_region_quote in address:
             decision, reason = 'in_city', 'visible_card_city_and_region'
@@ -91,7 +108,8 @@ def audit(root, run, target_city, target_region_quote):
         else:
             decision, reason = 'unknown', 'target_city_region_not_visible'
         decisions.append({'id':ident,'decision':decision,'reason':reason,'visible_address':address,
-                          'reviewed_city':city,'reviewed_region':review.get('region','')})
+                          'reviewed_city':city,'reviewed_region':review.get('region',''),
+                          **({'visible_region':first_component} if different_region else {})})
     counts = {name:sum(x['decision']==name for x in decisions) for name in ('in_city','outside_city','unknown','unavailable_or_unresolved')}
     return {'version':VERSION,'source_run_id':run,'source_manifest':{'path':manifest_name,'sha256':sha(manifest_bytes)},
             'audit_code_sha256':sha(Path(__file__).read_bytes()),'target_city':target_city,'target_region_quote':target_region_quote,

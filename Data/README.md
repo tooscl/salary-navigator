@@ -327,3 +327,5 @@ avito_runs/<название_сбора>/
 - [20261110-krasnodar-remote-bez-opyta](avito_runs/20261110-krasnodar-remote-bez-opyta/exports/vacancies_flat.csv): региональный исходный архив, 73 вакансии; [предварительное подмножество Краснодара](transformations/20261110-krasnodar-remote-bez-opyta-city-v1/vacancies_flat.csv) — 69 вакансий, полнота города не подтверждена.
 
 - [20261110-krasnodar-remote-50000](avito_runs/20261110-krasnodar-remote-50000/exports/vacancies_flat.csv): региональный исходный архив, 102 вакансии; [предварительное подмножество Краснодара](transformations/20261110-krasnodar-remote-50000-city-v1/vacancies_flat.csv) — 97 вакансий, полнота города не подтверждена.
+
+- [20261110-ryazan-remote-all](avito_runs/20261110-ryazan-remote-all/exports/vacancies_flat.csv): региональный исходный архив, 634 вакансии; [предварительное подмножество Рязани](transformations/20261110-ryazan-remote-all-city-v1/vacancies_flat.csv) — 41 вакансия, полнота города не подтверждена.
