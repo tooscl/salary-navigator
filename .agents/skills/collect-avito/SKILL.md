@@ -18,7 +18,7 @@ description: Set up and run the T&L Avito collector in Codex, including local Ha
 даже если участник сказал «продолжить». Существующий план требует resume с
 закреплённой версией. Журнал ошибок и бюджет сохраняются в обоих случаях.
 
-Маршрут Codex: `gpt-6-luna`, low, для браузерного пакета;
+Маршрут Codex: `gpt-6.1-terra`, low, для браузерного пакета;
 `gpt-6.1-terra`, medium, для проверки/исключений и PR. Для первого запуска
 следуйте общему `references/FIRST_RUN.md`. Весь код запускается из корня
 подготовленного checkout, не из `.agents/skills/collect-avito/`.
