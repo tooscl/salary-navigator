@@ -1,0 +1,3324 @@
+{
+  "run_id": "20261109-krasnodar-kurer",
+  "dataset_id": "20261109-krasnodar-kurer",
+  "status": "complete",
+  "schema": {
+    "columns": [
+      "id",
+      "city",
+      "profession",
+      "segments",
+      "title",
+      "salary_raw",
+      "source_url",
+      "observed_at",
+      "description",
+      "location_observed",
+      "employer_name_observed",
+      "date_raw",
+      "views_total",
+      "views_today",
+      "listing_rank",
+      "listing_promoted",
+      "full_parameters_read",
+      "analysis_status",
+      "export_eligibility",
+      "read_status_parameters",
+      "read_status_description",
+      "read_status_location",
+      "read_limitations",
+      "enrichment_status",
+      "enriched_fields",
+      "enrichment_version",
+      "military",
+      "military_keywords",
+      "military_rule_version",
+      "city__source",
+      "city__evidence",
+      "city_anomaly",
+      "График",
+      "Занятость",
+      "Способ оформления",
+      "Количество рабочих дней в неделю",
+      "Количество рабочих часов в день",
+      "Сфера деятельности компании",
+      "Что получают работники",
+      "Способ доставки",
+      "Вид доставки",
+      "Можно заканчивать в 17:00",
+      "Опыт работы",
+      "Статус самозанятости",
+      "Медкнижка",
+      "Частота выплат",
+      "В том числе для кандидатов",
+      "Где предстоит работать",
+      "Стажировка",
+      "Длительность вахты",
+      "Смены",
+      "Категория водительских прав",
+      "Бренд автомобиля",
+      "Возраст автомобиля",
+      "Стаж вождения",
+      "Навык мелкого ремонта автомобиля",
+      "Компания предоставляет",
+      "Автомобиль",
+      "Режим работы"
+    ],
+    "unknown_policy": "empty_not_zero"
+  },
+  "collection": {
+    "run_id": "20261109-krasnodar-kurer",
+    "geography": "Краснодар",
+    "profession": "Курьер",
+    "segments": "",
+    "filter_evidence": "Краснодар; единственная профессия Курьер; заголовок, URL и пустой поиск подтверждены; доп. фильтры не заданы.",
+    "listing_url": "https://www.avito.ru/krasnodar/vakansii/kurer-ASgBAgICAUTUzBHK64YD?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6IlExekVyTVRuMVFBcU1CeU0iO3329wbBJgAAAA",
+    "listing_request_url": "https://www.avito.ru/krasnodar/vakansii/kurer-ASgBAgICAUTUzBHK64YD?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6IlExekVyTVRuMVFBcU1CeU0iO3329wbBJgAAAA&localPriority=0",
+    "selected_controls": [
+      {
+        "label": "Курьер",
+        "marker": "params[144170]/checkbox/3201765",
+        "value": null
+      },
+      {
+        "label": "Курьер",
+        "marker": "params[144170]/checkbox/toggle",
+        "value": "3201765"
+      },
+      {
+        "label": "Любой",
+        "marker": "params[196929]/all",
+        "value": null
+      },
+      {
+        "label": "Любой",
+        "marker": "params[196929]/toggle",
+        "value": "all"
+      },
+      {
+        "label": "Неважно",
+        "marker": "params[172815]/all",
+        "value": null
+      },
+      {
+        "label": "Неважно",
+        "marker": "params[172815]/toggle",
+        "value": "all"
+      },
+      {
+        "label": "Неважно",
+        "marker": null,
+        "value": "all"
+      },
+      {
+        "label": "Все",
+        "marker": null,
+        "value": "all"
+      }
+    ],
+    "listing_sha256": "7942a0bab80b69c0e47e43b1be995279390f2b6f6f9d6ff3f002cb7490fbd623",
+    "profession_scope": null,
+    "profession_source": "observed_controls",
+    "listing_pages": [
+      {
+        "file": "listing_pages/0001.json",
+        "sha256": "7942a0bab80b69c0e47e43b1be995279390f2b6f6f9d6ff3f002cb7490fbd623",
+        "source_url": "https://www.avito.ru/krasnodar/vakansii/kurer-ASgBAgICAUTUzBHK64YD?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6IlExekVyTVRuMVFBcU1CeU0iO3329wbBJgAAAA"
+      },
+      {
+        "file": "listing_pages/0002.json",
+        "sha256": "61a150b4d0f70dfc9ba9cd196ed9464090618bd6a32f60e755f22fe685d31387",
+        "source_url": "https://www.avito.ru/krasnodar/vakansii/kurer-ASgBAgICAUTUzBHK64YD?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6IktDR3FMMHV0RnRLSmhXc0siO33aTK8LJgAAAA&p=2"
+      },
+      {
+        "file": "listing_pages/0003.json",
+        "sha256": "9b10b24914e8fa6deb6c692c2fdb9ded2bfe391f1e91facb8382ba1283c50227",
+        "source_url": "https://www.avito.ru/krasnodar/vakansii/kurer-ASgBAgICAUTUzBHK64YD?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6IktDR3FMMHV0RnRLSmhXc0siO33aTK8LJgAAAA&p=3"
+      },
+      {
+        "file": "listing_pages/0004.json",
+        "sha256": "061e022469a80649c275af310059cab38dca22fcd4e76330e7b2fd1211be106f",
+        "source_url": "https://www.avito.ru/krasnodar/vakansii/kurer-ASgBAgICAUTUzBHK64YD?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6IktDR3FMMHV0RnRLSmhXc0siO33aTK8LJgAAAA&p=4"
+      },
+      {
+        "file": "listing_pages/0005.json",
+        "sha256": "e2f2b8c999ef60c97dccb785e29ee29cbd8617c6817418d7fb055cc08f3238e1",
+        "source_url": "https://www.avito.ru/krasnodar/vakansii/kurer-ASgBAgICAUTUzBHK64YD?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6IktDR3FMMHV0RnRLSmhXc0siO33aTK8LJgAAAA&p=5"
+      },
+      {
+        "file": "listing_pages/0006.json",
+        "sha256": "521f42a6747cd1c6c230c3ad456889ea925506e43a913b823c7dd340ba3a54fe",
+        "source_url": "https://www.avito.ru/krasnodar/vakansii/kurer-ASgBAgICAUTUzBHK64YD?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6IktDR3FMMHV0RnRLSmhXc0siO33aTK8LJgAAAA&p=6"
+      },
+      {
+        "file": "listing_pages/0007.json",
+        "sha256": "162e213184543ecd5cc54e8adf1d40b3aa9ff21b3d7399faf112b68afa222a5a",
+        "source_url": "https://www.avito.ru/krasnodar/vakansii/kurer-ASgBAgICAUTUzBHK64YD?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6IktDR3FMMHV0RnRLSmhXc0siO33aTK8LJgAAAA&p=7"
+      }
+    ],
+    "selection_mode": "first_N_unique_on_frozen_listing",
+    "limit": 336,
+    "requested_all_pages": true,
+    "saved_selection_authorization": null,
+    "requested_limit": null,
+    "available_unique": 336,
+    "listing_end_reason": "confirmed_end",
+    "available_listing_exhausted": true,
+    "continuation": null,
+    "branch_only": false,
+    "max_pages": null,
+    "candidate_limit": null,
+    "created_at": "2026-11-09T19:49:42.746058+00:00",
+    "instruction_version": "1.8.1",
+    "extractor_sha256": "fa0a0e0c7df0877d15ea4f94e5fed14df514241cb51771cda18cacc04574e8b0",
+    "instruction_sha256": "4033fe896dc13c66a540d768bbc76800f3bcc41b806a5e8dbdc4881e7080b593",
+    "code_git_commit": "3a0d52a3fed65d07d20fd4ad9c44e46aa9a3b233",
+    "setup_seconds": 25.858761542011052,
+    "live_route_verified": false,
+    "execution_model": "gpt-6.1-terra",
+    "automation_sha256": {
+      "Scraper/skills/collect-avito/references/top-professions.json": "e3e72638b17b48f825ec6f2fefb963662494f679ae4b0cef1bebedba889610dd",
+      "utils/title_flags.py": "9c9456cb3fb0df5791630049c9c85987381091dbb9ba18bc3fb3314b8cccbeb6",
+      "Scraper/extract.js": "fa0a0e0c7df0877d15ea4f94e5fed14df514241cb51771cda18cacc04574e8b0",
+      "Scraper/skills/collect-avito/SKILL.md": "4033fe896dc13c66a540d768bbc76800f3bcc41b806a5e8dbdc4881e7080b593",
+      "Scraper/skills/collect-avito/scripts/run.py": "4bcbecab78fdf74298b784f17150688377853000566f88a803982a6e7f1de0d4",
+      "Scraper/skills/collect-avito/scripts/sweep_mode.py": "718a956a316df71c47ee3a4c5d3670fa011a5b16e9948393d68216702b140a56",
+      "Scraper/skills/collect-avito/scripts/browser_batch.js": "7572ff4aa773cd86ccd3d8ca3a2de6c9586b482ab6f1371dbfa152b165588eb4",
+      "Scraper/skills/collect-avito/scripts/check_capture.py": "aa746849317f9768af5aae08b394b9379539f6e268c1fc69e4ed13bd06a4657f",
+      "Scraper/skills/collect-avito/scripts/failure_log.py": "08dfd259fad4166a08acb1b056bf3cd14daede277385bd91c7e49680959475a4",
+      "Scraper/skills/collect-avito/scripts/preflight.py": "492a0d898990aee198f26bf6577d0876360dcc6ec69e274835cd77cdaa768974"
+    },
+    "uncommitted_automation_files": [
+      "Scraper/skills/collect-avito/SKILL.md",
+      "Scraper/skills/collect-avito/scripts/run.py"
+    ],
+    "city_anomaly_policy": "blank"
+  },
+  "coverage": {
+    "planned": 336,
+    "accepted": 336,
+    "unavailable": [],
+    "unresolved_observations": [],
+    "user_skipped_observations": [],
+    "user_skipped_count": 0,
+    "user_skip_policy": null,
+    "user_detail_skip_policy": null,
+    "deduplication": null,
+    "sweep": null,
+    "unique_ids": [
+      "8414797661",
+      "8227856468",
+      "8369359766",
+      "8402243275",
+      "8514356174",
+      "8315841763",
+      "3438162039",
+      "8181902343",
+      "8025019559",
+      "8423713536",
+      "8379766826",
+      "8454918657",
+      "7648793440",
+      "8306868269",
+      "8398505770",
+      "8362186134",
+      "8387071129",
+      "8349332099",
+      "8410402596",
+      "8145868003",
+      "8502430645",
+      "4849688250",
+      "4576557365",
+      "8193244683",
+      "8457936411",
+      "8345057614",
+      "8410050639",
+      "8249685245",
+      "8380537677",
+      "8256866562",
+      "8544134108",
+      "8212357423",
+      "8348085354",
+      "8348600329",
+      "8192757260",
+      "8484932134",
+      "8241953026",
+      "8440163218",
+      "8179195927",
+      "8437661393",
+      "8401678009",
+      "8369219696",
+      "8430585690",
+      "8227579190",
+      "8469110605",
+      "8083953739",
+      "7674414966",
+      "8463388833",
+      "8379107745",
+      "8400956414",
+      "8408544833",
+      "7562025859",
+      "8315528537",
+      "8577530518",
+      "7310761169",
+      "8471962823",
+      "8362293280",
+      "8347907745",
+      "8363592627",
+      "8512118325",
+      "8208239985",
+      "8513833639",
+      "8472721202",
+      "8381520465",
+      "8074072496",
+      "8348141305",
+      "8556911243",
+      "8401481706",
+      "8291089065",
+      "8378862321",
+      "8244626818",
+      "8515270257",
+      "8170746633",
+      "8136402231",
+      "8349156680",
+      "8469287309",
+      "8372089413",
+      "8422940145",
+      "8451010326",
+      "8357342961",
+      "8577430497",
+      "8177456909",
+      "8498908625",
+      "8517203501",
+      "8445275462",
+      "7856574910",
+      "8490307270",
+      "7624538407",
+      "8490067863",
+      "8222390601",
+      "8607083958",
+      "8440900972",
+      "8244163781",
+      "8306174436",
+      "8523667643",
+      "8384768443",
+      "8469024701",
+      "8423268122",
+      "8503611390",
+      "8422559726",
+      "8254379452",
+      "8577652604",
+      "7666001049",
+      "8419239836",
+      "7996065503",
+      "8212059501",
+      "7788943446",
+      "8556933700",
+      "8402073760",
+      "8410262757",
+      "8373389142",
+      "8288272210",
+      "8557497848",
+      "8410834366",
+      "7818053307",
+      "8477380115",
+      "8451283476",
+      "8483787868",
+      "8048073527",
+      "8369775979",
+      "8531353192",
+      "8489958706",
+      "8439202328",
+      "7941181793",
+      "8355648191",
+      "8410085027",
+      "8288290842",
+      "8471125251",
+      "8503673872",
+      "8489296218",
+      "8553712626",
+      "8574926050",
+      "8514157538",
+      "8422485541",
+      "7483396193",
+      "8431021563",
+      "8452116131",
+      "8451952977",
+      "8380335448",
+      "8081147634",
+      "8346855937",
+      "8545200791",
+      "8431758929",
+      "8453550137",
+      "8462998298",
+      "8311265243",
+      "8033942866",
+      "8442297567",
+      "8280848231",
+      "8455656187",
+      "8441722078",
+      "8515290702",
+      "8101442388",
+      "8522264307",
+      "8503524915",
+      "8440353166",
+      "8098698439",
+      "7487245137",
+      "8153926324",
+      "8440579595",
+      "8254050804",
+      "8370837766",
+      "8431987437",
+      "8315841932",
+      "8402707860",
+      "8544719552",
+      "8521178576",
+      "8440221376",
+      "8364820452",
+      "7930703278",
+      "8400024027",
+      "7947914266",
+      "8439105621",
+      "8408120713",
+      "8439596356",
+      "8576945359",
+      "8348426166",
+      "8402239184",
+      "8228663823",
+      "8368833519",
+      "8369942665",
+      "7991028282",
+      "8414846727",
+      "8332811961",
+      "8379137829",
+      "7762483158",
+      "7910063098",
+      "8122796302",
+      "8163991574",
+      "8470828550",
+      "8360553619",
+      "8364068649",
+      "7596085273",
+      "7465392431",
+      "8397915940",
+      "8047574457",
+      "7920177209",
+      "8335347563",
+      "7984766569",
+      "8515658527",
+      "8005245085",
+      "8476948657",
+      "8302086615",
+      "8469910172",
+      "4444743554",
+      "8193912989",
+      "8399930374",
+      "8399552527",
+      "8489070253",
+      "8480025748",
+      "8372667582",
+      "8328641168",
+      "8400409480",
+      "7203444169",
+      "8431156938",
+      "7919267931",
+      "8440243692",
+      "8607750555",
+      "7767464962",
+      "8414290996",
+      "8400121228",
+      "8449726737",
+      "8338544020",
+      "7987693471",
+      "8071574480",
+      "7753191033",
+      "8413400713",
+      "8437999767",
+      "8449631048",
+      "8370753263",
+      "8138708330",
+      "8420116096",
+      "7444081609",
+      "8298985022",
+      "8470156395",
+      "8401633970",
+      "8455612648",
+      "8489315901",
+      "8360674721",
+      "8277389910",
+      "3592572427",
+      "8459277415",
+      "8116746489",
+      "8379753615",
+      "7969037639",
+      "8556908683",
+      "8441182434",
+      "8420344071",
+      "8111570289",
+      "7908131187",
+      "7857659927",
+      "8308688260",
+      "8394866049",
+      "8130810478",
+      "8445573236",
+      "8450541860",
+      "8414661432",
+      "8414101597",
+      "8370683398",
+      "8473392174",
+      "8407081682",
+      "7650360084",
+      "8489360197",
+      "7930960375",
+      "8512638135",
+      "8520832595",
+      "8413461867",
+      "8159748381",
+      "8420348978",
+      "8520931219",
+      "7859063440",
+      "8435116466",
+      "8414141537",
+      "8467045373",
+      "7931870619",
+      "8609617143",
+      "8437968898",
+      "7870259029",
+      "8406999647",
+      "8499412287",
+      "8517601885",
+      "8395054551",
+      "8516926685",
+      "8366456192",
+      "8347262437",
+      "8544321705",
+      "8490849374",
+      "8159715638",
+      "8347209267",
+      "8459616417",
+      "8368529212",
+      "8334997034",
+      "8401959022",
+      "8360422867",
+      "8430669016",
+      "8305858172",
+      "8372619637",
+      "8370484754",
+      "8420149711",
+      "8337860849",
+      "8401745347",
+      "8402236967",
+      "8334112010",
+      "2675186661",
+      "8360613815",
+      "8491503411",
+      "8577402995",
+      "8130243886",
+      "8421913405",
+      "8544944448",
+      "8471358578",
+      "8390441710",
+      "7993550124",
+      "8336242037",
+      "7652810374",
+      "8577096962",
+      "8421943997",
+      "8515116211",
+      "8463300621",
+      "8372707776",
+      "8430892285",
+      "8458378617",
+      "7796553406",
+      "8285896494",
+      "8332263792",
+      "7947598300",
+      "8422243933",
+      "8348855975",
+      "3678673605",
+      "7533658530",
+      "8453291763",
+      "8374676357",
+      "8232680172",
+      "8318280024",
+      "8335389229",
+      "3120042054"
+    ],
+    "errors": [],
+    "partial": null,
+    "limitations": [
+      "Visible rendered parameters only; enrichment not run; placement on site; live route unverified"
+    ]
+  },
+  "timing": {
+    "setup_seconds": 25.858761542011052,
+    "capture_seconds": 491.5835068752058,
+    "review_export_seconds": 3.2316827909089625,
+    "publication_seconds": null
+  },
+  "review_model": "gpt-6.1-terra",
+  "automation_changes": [
+    {
+      "file": "Scraper/skills/collect-avito/scripts/run.py",
+      "reason": "Collector files were uncommitted in capture checkout at freeze; their SHA matches main after PR #120, including tested rejected-listing and prior transport fixes.",
+      "validation": "Compared plan SHA with main; 129 collector and setup tests passed for PR #120."
+    },
+    {
+      "file": "Scraper/test_aside_runner.py",
+      "reason": "Collector files were uncommitted in capture checkout at freeze; their SHA matches main after PR #120, including tested rejected-listing and prior transport fixes.",
+      "validation": "Compared plan SHA with main; 129 collector and setup tests passed for PR #120."
+    },
+    {
+      "file": "Scraper/skills/collect-avito/SKILL.md",
+      "reason": "Collector files were uncommitted in capture checkout at freeze; their SHA matches main after PR #120, including tested rejected-listing and prior transport fixes.",
+      "validation": "Compared plan SHA with main; 129 collector and setup tests passed for PR #120."
+    }
+  ],
+  "profession_correction": null,
+  "post_capture_automation_sha256": {},
+  "files": {
+    "Data/avito_runs/20261109-krasnodar-kurer/exports/vacancies.json": {
+      "bytes": 1583304,
+      "sha256": "b01f916ce797fb168bef622769eb4938483137cef380904c6409a22baf104de6"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/exports/vacancies_flat.csv": {
+      "bytes": 1133565,
+      "sha256": "d04e60dd28cb9cec872f62d2cec00439a2e1821bee9762097307e7ff49820c8b"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/exports/validation.json": {
+      "bytes": 223,
+      "sha256": "20f7392591c75baa7ecb00b15d2b8a54fb1c9d0af68d6523195557f0628e4ac3"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/listing.json": {
+      "bytes": 52491,
+      "sha256": "7942a0bab80b69c0e47e43b1be995279390f2b6f6f9d6ff3f002cb7490fbd623"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/listing_pages/0001.json": {
+      "bytes": 52491,
+      "sha256": "7942a0bab80b69c0e47e43b1be995279390f2b6f6f9d6ff3f002cb7490fbd623"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/listing_pages/0002.json": {
+      "bytes": 52897,
+      "sha256": "61a150b4d0f70dfc9ba9cd196ed9464090618bd6a32f60e755f22fe685d31387"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/listing_pages/0003.json": {
+      "bytes": 52918,
+      "sha256": "9b10b24914e8fa6deb6c692c2fdb9ded2bfe391f1e91facb8382ba1283c50227"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/listing_pages/0004.json": {
+      "bytes": 52751,
+      "sha256": "061e022469a80649c275af310059cab38dca22fcd4e76330e7b2fd1211be106f"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/listing_pages/0005.json": {
+      "bytes": 53331,
+      "sha256": "e2f2b8c999ef60c97dccb785e29ee29cbd8617c6817418d7fb055cc08f3238e1"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/listing_pages/0006.json": {
+      "bytes": 52884,
+      "sha256": "521f42a6747cd1c6c230c3ad456889ea925506e43a913b823c7dd340ba3a54fe"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/listing_pages/0007.json": {
+      "bytes": 47276,
+      "sha256": "162e213184543ecd5cc54e8adf1d40b3aa9ff21b3d7399faf112b68afa222a5a"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/queue.json": {
+      "bytes": 165378,
+      "sha256": "32b35077d86584f1ab1defe7d03e67a427a0d2c750fd5df173581dc165a53773"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/2675186661.json": {
+      "bytes": 21726,
+      "sha256": "49e762bf2319fed9f87a3857dae09dfbadfdac25f3c6e82dcd071c2ab98641b0"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/3120042054.json": {
+      "bytes": 7311,
+      "sha256": "7a5b19d73b0438a6c54a3ea8ca69119182f9e9a4de2722aea57d52cc2d3757cd"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/3438162039.json": {
+      "bytes": 6967,
+      "sha256": "b314fd51d2c214b5f58bc0dc13264453230d98e699858a58275a5cd98fa859d2"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/3592572427.json": {
+      "bytes": 11724,
+      "sha256": "9477430523d93004abc11eb471e14586a2de0cca823bd2da46cfd50d71e455d0"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/3678673605.json": {
+      "bytes": 5923,
+      "sha256": "cac0e2d419dcc4099171ea4a6dd007df8bb5ceaf9d0cd5891a3d19d5087930a4"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/4444743554.json": {
+      "bytes": 18471,
+      "sha256": "bf92bf143e9bffc4d30c2e9dc28f8bc8c9dfe67ba2e475c23f33217ab55390fb"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/4576557365.json": {
+      "bytes": 4771,
+      "sha256": "56f3ac71ebe7721d1741f30615c29daef3c84a66acbb5f288c86d13aa5d983cf"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/4849688250.json": {
+      "bytes": 20604,
+      "sha256": "1bf64cc236a171e55f83fd4e5fb86894b0318a3bd7d15e87b224ef6480b4e546"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/7203444169.json": {
+      "bytes": 16149,
+      "sha256": "29a9413189d39903f49b0b41f1ff2682d878c528d7fac2786452b32d1da623fc"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/7310761169.json": {
+      "bytes": 14570,
+      "sha256": "56e94d24460ce1c604391c5e72ea66f85557e424982364d315411f7cb3c4bdee"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/7444081609.json": {
+      "bytes": 13310,
+      "sha256": "de5f1c4c1ecc53453ee41e8debd302d85161407e1c4824111613624eb93bbf8e"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/7465392431.json": {
+      "bytes": 16980,
+      "sha256": "5e655dd10197e742cb78910247a4ad57f4881dd5f41403522ae684fbe9dfcc5a"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/7483396193.json": {
+      "bytes": 13591,
+      "sha256": "8c8d7a6be9d28277000bb65fc515e07250c6a4889657fcb4c254bb65020f80b1"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/7487245137.json": {
+      "bytes": 13029,
+      "sha256": "c3b0e7888034c19c520bafaffd3b7141df8a95c2fc577f073e793e1865d9a005"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/7533658530.json": {
+      "bytes": 11251,
+      "sha256": "68051a46d31e97404cba1bea470a0ea4abebde58a2c0417f279affc289206315"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/7562025859.json": {
+      "bytes": 15789,
+      "sha256": "56e52e2088f1a1539359ef677ec16ab962b9cbb9f9eb2b73082d75377847e0cf"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/7596085273.json": {
+      "bytes": 10031,
+      "sha256": "189729bd65feadfd3c1b320c6d938118fd86b57a8088b885bcbb006ce5bc168f"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/7624538407.json": {
+      "bytes": 15325,
+      "sha256": "d6fa59f9dd2afaf0731eb8736cbbc3db5bbcc41627eba5fa4df4ca48267a81eb"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/7648793440.json": {
+      "bytes": 19881,
+      "sha256": "fac9b01ac191f820c111612bd1e12fa2ec8bb7b9350c0b8e756bf30cfa041510"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/7650360084.json": {
+      "bytes": 11820,
+      "sha256": "a2a762f0dfb6013c91e9dcfbeac00bf1fc5b3f4cb2c662b546619a348b0050e5"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/7652810374.json": {
+      "bytes": 13919,
+      "sha256": "8756fa73ba1fc06330a0fcf27a3cfdea96a6b7b8ab290428c5d05a10680d3dcb"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/7666001049.json": {
+      "bytes": 11185,
+      "sha256": "fa099382d2f6b82b8a80524cd2e8d599f352e60dc98f541136c77f1258868a78"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/7674414966.json": {
+      "bytes": 14455,
+      "sha256": "5ed1fa338d1947a79a289e9217c1f65b0725eec904ce55e416a873413705157f"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/7753191033.json": {
+      "bytes": 11110,
+      "sha256": "5afd91146922ed93681da7374961700dead896270458fab81a2ba1d863c152e1"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/7762483158.json": {
+      "bytes": 13689,
+      "sha256": "e5676d8e9d8172020aec625a61b8a100fe4cb91af7d37becbd8ed823c5708d8d"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/7767464962.json": {
+      "bytes": 14858,
+      "sha256": "6fbaca747892aec0998b084e9f2fdecaa32975672fc9ce730c981a626d91e542"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/7788943446.json": {
+      "bytes": 12347,
+      "sha256": "bc73a025d478850536b6bf7603506bf26e001d933b2b8e007c4df996b478413e"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/7796553406.json": {
+      "bytes": 11118,
+      "sha256": "13ab60ea89b4808356e1324e40b4faca462c5f586fabb0d619564f5f797afc69"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/7818053307.json": {
+      "bytes": 12169,
+      "sha256": "a9149a83adb399d6d7b63cbf9f51f7ba261c2ffbb506ca00e9bd058d0e1c4c01"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/7856574910.json": {
+      "bytes": 11755,
+      "sha256": "a383fe1a4ddf9c4d830609bbffe453d5b9154b5c508b8352c9698a6d170e729f"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/7857659927.json": {
+      "bytes": 9990,
+      "sha256": "0f11a6dfb90984965520cd87d221fa8d88eba010438cbaea0ef727f66a37cf1e"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/7859063440.json": {
+      "bytes": 16393,
+      "sha256": "17fdcff3dbf6561924fc9ff25f67811ebe097ec2df1c68a5d1fce366ccab66cc"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/7870259029.json": {
+      "bytes": 16382,
+      "sha256": "a890562b7c60ed3e3fd24f0ecbf9a5f1dc018077a6361b399c5e1ca3cd8b0056"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/7908131187.json": {
+      "bytes": 13157,
+      "sha256": "ed8b789ae2ed25edd110c63c234cc8f9b93fa3621bea8fb3bb2df49284b73834"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/7910063098.json": {
+      "bytes": 12351,
+      "sha256": "b59238bd5b77c578224b94069c5d8fb9c8c098710e3da1224194396aec3f4cd2"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/7919267931.json": {
+      "bytes": 11591,
+      "sha256": "95ff2ecf10975cc0dee6593a78733fc68cfe1367a07878a1ffa1ab8246ce304b"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/7920177209.json": {
+      "bytes": 11451,
+      "sha256": "4e3f72020ba833da3b71747846936174cb400b5aaf026e2fb0d3245b92a38f76"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/7930703278.json": {
+      "bytes": 11169,
+      "sha256": "141cb752cad1eee4379f50f558bc6ddaa3efff26b49cd361242e334a87aa10fa"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/7930960375.json": {
+      "bytes": 12357,
+      "sha256": "c03803047f38d493586446b1c07fd5b8318830513d9af932c0e20a0c7cabe7ff"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/7931870619.json": {
+      "bytes": 9020,
+      "sha256": "75d7fc0fd4d17f81dcf5c54e00f5b656c8dca5dc7de1003d8277c9ab1266a45b"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/7941181793.json": {
+      "bytes": 11490,
+      "sha256": "5686410e16ea4ee13c27d250e400c1e3c68ec93f5322c0dad160d00625447df3"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/7947598300.json": {
+      "bytes": 11909,
+      "sha256": "6441c6c142be5792231c89735ca3d57c36dab4b90a8075039a4ce1984a286f80"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/7947914266.json": {
+      "bytes": 15049,
+      "sha256": "30bbc0a3a65b339059f9fdc6614717b3c8d9f5a2c0a890e23e80c1d98d18cfc9"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/7969037639.json": {
+      "bytes": 19572,
+      "sha256": "ea4c8ddc24e7c5bd596c1d447dcd9e02a78d3ea5f005f927b275872d91a4f18b"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/7984766569.json": {
+      "bytes": 12089,
+      "sha256": "3858223ad0cc19246cd4ecba4adb8df21b13aa7c0efee23c14802da6902b6c55"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/7987693471.json": {
+      "bytes": 13164,
+      "sha256": "7a705e24833a0d6aff6de4c90d782d71e1a8f16b773a855dc77c259285e8f1c0"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/7991028282.json": {
+      "bytes": 12308,
+      "sha256": "9e8fcba89305d44e430ebe54f1f6c50830155d10b837ac4618935e0d1b1c94b3"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/7993550124.json": {
+      "bytes": 11542,
+      "sha256": "8baf23821e4eecf1bab1505c44af9a7e65b6af74f192bfb6fbb4009129a8649f"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/7996065503.json": {
+      "bytes": 14826,
+      "sha256": "9c7ac6acd4d9d81973ff356d0bf0c248c977c98a0f67ed84320e0fe40616c1cc"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8005245085.json": {
+      "bytes": 13674,
+      "sha256": "c20d8d044a31fb344b93d8518a8985746ce074e391ecb890080da5786bae25a8"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8025019559.json": {
+      "bytes": 12087,
+      "sha256": "1a5b07401d35092c381b0596f8b8a9cea2bf5ed2f1b931a1d089f33b573c8fbe"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8033942866.json": {
+      "bytes": 12125,
+      "sha256": "1980357f4e830a165bcf112f0beb993f6ef39d38b37224a2dce4e84ab389c1f4"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8047574457.json": {
+      "bytes": 13127,
+      "sha256": "ac650ee7d90a24f54cd8bf579054f80d65726477eff022428b90efaa3d07aa0a"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8048073527.json": {
+      "bytes": 14501,
+      "sha256": "31111676b86a7dce8f63527aefa1f74dbb9cf12ecfcecc918ed74eb09e9cdfa3"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8071574480.json": {
+      "bytes": 17090,
+      "sha256": "18582c9c1504a0610b96d0b2104450f4e2892ff3bc542faf53ef8cec7676f70f"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8074072496.json": {
+      "bytes": 14121,
+      "sha256": "b05a7f87381b90377d6c0b0da19c596eda58934cfc6a4e0badb9c70e6baa669b"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8081147634.json": {
+      "bytes": 11259,
+      "sha256": "8a478c3e1859650b0bb002756a4d93aeb8e06ce8dafbdef852d6bbd56c5a03c0"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8083953739.json": {
+      "bytes": 12334,
+      "sha256": "dd2a7cf2418a29d567680d86e6ebe5bc8586e7f74b43096e5426114a0be856d8"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8098698439.json": {
+      "bytes": 17439,
+      "sha256": "f7677aa2fc8a2b953bf7df020d271f613b7fec2cb23a2451356b2d10dfbaee01"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8101442388.json": {
+      "bytes": 17234,
+      "sha256": "b92b8f50c9cc257b3fd488751e89b16b76a4c67b55d67ffb933cb002ae2ea3e7"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8111570289.json": {
+      "bytes": 15459,
+      "sha256": "97ebe1f2b3c8a652978e288faf74eaa9ee7e5d1b6cbf5c50158502b8a0583ab5"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8116746489.json": {
+      "bytes": 12048,
+      "sha256": "ca23e78569550ae73474a898a023a42e1c75bd619af3820d8e0a8604f715e266"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8122796302.json": {
+      "bytes": 17928,
+      "sha256": "355f19325bf9cdf8b10bc5774a3eb06c94e4d1ac143cf199b233240f1b6f0b12"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8130243886.json": {
+      "bytes": 13802,
+      "sha256": "b8b337e071b26a1830609be27212d9c121c446cd04bf7dd9f21918d4ca6896d0"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8130810478.json": {
+      "bytes": 17656,
+      "sha256": "dd58fdc55192b5a8d8ff09280920669171439c579b61a64003106e9196647071"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8136402231.json": {
+      "bytes": 15557,
+      "sha256": "6c195c58b4c8c1c93921ad89b254fc468d214f87bee46a68f56cedfb2320630a"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8138708330.json": {
+      "bytes": 12628,
+      "sha256": "0267b55fcf2a0c7553e7aeda90db40688fb9e5dc9cdba61ca7ed5330784de8bc"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8145868003.json": {
+      "bytes": 10688,
+      "sha256": "39743620aed5d60b2085251e3595ee3b135d72537c958ad53539942cc05a15b4"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8153926324.json": {
+      "bytes": 20117,
+      "sha256": "b866d030974b96ec42df36bb6db1cb66a0f8ebe9ea3828ea2160d1e881907ff1"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8159715638.json": {
+      "bytes": 24848,
+      "sha256": "09c84caa9b870f1ed7392bc4d96db8a387ad90da8d2c37d7ce73b96742920abf"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8159748381.json": {
+      "bytes": 25110,
+      "sha256": "bbbf2c58fd7b038a17d2a153667b15aeeba037ada8ef8eb54a7a5f0971766efc"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8163991574.json": {
+      "bytes": 17025,
+      "sha256": "fb65fd62fbdf344477f9b32e3fe9353d086a8bda83f35061db66bc4e34d06afc"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8170746633.json": {
+      "bytes": 12262,
+      "sha256": "5ce92d810f56da55e58aa9d117c97abc6146deb4dd9236152849429a30d719a0"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8177456909.json": {
+      "bytes": 16244,
+      "sha256": "7f26be80d6f64fa505858fc51e60b97167674d0d2956927dc2890bc291dc9e55"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8179195927.json": {
+      "bytes": 14948,
+      "sha256": "9531f56c6cd035cec2bc4e91808fb12eec5c8754ad469435ecaff90481a0dd0f"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8181902343.json": {
+      "bytes": 14790,
+      "sha256": "90cdf521e5ece5b91b2a512cd944e2207a29bc9211b009b014c416e834e9c663"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8192757260.json": {
+      "bytes": 14630,
+      "sha256": "37995d6237d17e5b310ca43616bcfebdcbf3b007e8b6f04de8ca05e72d8c1f32"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8193244683.json": {
+      "bytes": 12626,
+      "sha256": "85dec37b07e7dcb305c3d9f9ea7d1504e306b450b0b2e51f703564915bcf0899"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8193912989.json": {
+      "bytes": 21532,
+      "sha256": "d907db87535baaf6a269b23dfa7ff1ed0d2240312b200d179dedcb48ebcc28fd"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8208239985.json": {
+      "bytes": 17433,
+      "sha256": "ce413032fc4c18e50c0d63741cc1805a9b150e38c9bc9b65cdad365c64f8fdd4"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8212059501.json": {
+      "bytes": 11731,
+      "sha256": "4c652a01de27b904e8ac8e74dae0823b986781561ddf2f2fdcb9e183b45424a2"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8212357423.json": {
+      "bytes": 19780,
+      "sha256": "fbf9fb06495de48d431736426328a626af7157334dcbd0d20010985db16f587a"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8222390601.json": {
+      "bytes": 22136,
+      "sha256": "2a71bac80502a116c717a0515cff79f74546318c9b436f68b5d545fe42dbbd4b"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8227579190.json": {
+      "bytes": 11291,
+      "sha256": "4b317b6068ffd07ed20c754e3d3707edd02ea156c0a309c0b2b4ea3d421c7457"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8227856468.json": {
+      "bytes": 10643,
+      "sha256": "1512ece6facf6c12945427901b54f8d75a6722710356fce30943d0b0546a179c"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8228663823.json": {
+      "bytes": 17005,
+      "sha256": "038a98b41f205e318af022e6b7122f969d9defc815092104238aa96926a664ab"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8232680172.json": {
+      "bytes": 20112,
+      "sha256": "567dda10f104e3685c5a02002374ad02985a95c9e376ed5f0bf75d8ae0aa5ac5"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8241953026.json": {
+      "bytes": 18415,
+      "sha256": "95aa50ff20146863e9a8437b394bc7da0e823e09b57fda3efd7f8c93673212d2"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8244163781.json": {
+      "bytes": 15559,
+      "sha256": "295d4ee9b77ce519da16352686512ee9f2943f075d478b48c59e0bb2c077b5ce"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8244626818.json": {
+      "bytes": 13697,
+      "sha256": "6e2604faf040c894c3ebfcac690c34c28580a1b255836927d05a1c414112512f"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8249685245.json": {
+      "bytes": 11698,
+      "sha256": "b4e6256099f9fc5c3b2392363bd8eafc02b764717e3eafc55a51148e8bee323b"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8254050804.json": {
+      "bytes": 11073,
+      "sha256": "f1aadcbe97a0540437a002fb336c837267bb061de2343eaf731e2517613833d8"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8254379452.json": {
+      "bytes": 15671,
+      "sha256": "f486744bbc903cbc146be8babaef78e11a20fb8b81c18521ac879f1eaa7f567e"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8256866562.json": {
+      "bytes": 11363,
+      "sha256": "7771e683feb5ac6e786c2708ec6d8c5c9648edd135f4b6763d1a7eda4c8074b0"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8277389910.json": {
+      "bytes": 8766,
+      "sha256": "367a5b7ec529ca6b1584b44f86ebea077b5c981b8c49052ee73d6740577f9bd3"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8280848231.json": {
+      "bytes": 13775,
+      "sha256": "4d114a216028a8af1849d6d55f3f3e090b6b358e6c261751241d879c42008988"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8285896494.json": {
+      "bytes": 11070,
+      "sha256": "fa3840d2a1760a1cfe59d076f5204a46290e86de8a260e53cfff2a5197759f7f"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8288272210.json": {
+      "bytes": 12548,
+      "sha256": "8c7b8e707e7bc215805d0a5abf32663a1595143295c7c535299b6280cf116001"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8288290842.json": {
+      "bytes": 11199,
+      "sha256": "ca119052dd7d37f5523cac4173671f1387be2e2198146f54c16399cb19a62844"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8291089065.json": {
+      "bytes": 11935,
+      "sha256": "b0be9d72b46c063d31f3421b82bae93726a7490f857afe9a25ceb3b8063bf8ac"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8298985022.json": {
+      "bytes": 15194,
+      "sha256": "824a4db3e74b87aafef80ae3763758ff3e8c6f8187f2f13ee5582ce6b2fbdddf"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8302086615.json": {
+      "bytes": 17840,
+      "sha256": "7d727d2f8f02c5ea347f2cf8630ec786e553db1f14c09b774ce11d263b925792"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8305858172.json": {
+      "bytes": 17790,
+      "sha256": "19aadc6e901ec54932613590d04aae13be83eec99fb44d6a1e2173a3fc70164a"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8306174436.json": {
+      "bytes": 7858,
+      "sha256": "938fe9d92d311799ecc420d4a68333d527ab367faad924685710390d3d36ee86"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8306868269.json": {
+      "bytes": 14351,
+      "sha256": "a2e376871509f1648d2020c4a5e6f015f38b08be2776b70a07d14154c251fa2d"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8308688260.json": {
+      "bytes": 16082,
+      "sha256": "d6da8544c57400a32d6fba0a38070966d7e69f9ba9e294b56503c09572c1dbf5"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8311265243.json": {
+      "bytes": 16524,
+      "sha256": "bbae1d99ed88f7ea6ebcac893278216ac716bda12a1ca6ba62f6511ac352670f"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8315528537.json": {
+      "bytes": 14513,
+      "sha256": "3c24b948323bb848e05d2f95b80973c1b66bd15af406005e2ca80471de32ce66"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8315841763.json": {
+      "bytes": 16091,
+      "sha256": "6596485f568fda81c9973f28be73ebddc6d1c152120f8a5877e4138a01575f30"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8315841932.json": {
+      "bytes": 8517,
+      "sha256": "3dbc3ffcc6a03f60651b71067c7393a15a0e9d25ec3a1e430cdeb8b37449d1d4"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8318280024.json": {
+      "bytes": 18046,
+      "sha256": "d25e21ae81cfbd56e33b5bbdc2e690a7991d2bd1f996f891cfed2fdde1effa20"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8328641168.json": {
+      "bytes": 12064,
+      "sha256": "4d0d275903cd34d376a219a93fb89cc8fad80d923f2ccc9f19ee053a1eb0138e"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8332263792.json": {
+      "bytes": 12582,
+      "sha256": "dfeb1b914c2f4ca2a9fbadcdeea5579fcc7e1367577f1ae7c190338f04cd42df"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8332811961.json": {
+      "bytes": 15843,
+      "sha256": "0c8f6a378b691c5fc4c2ad9df0e936511a9aca39d31ae103be605b6cea487c4e"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8334112010.json": {
+      "bytes": 16529,
+      "sha256": "7198e0801ef3efdb2c3807047c560fe534784ef979a1a697a419351e60c65b11"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8334997034.json": {
+      "bytes": 15592,
+      "sha256": "3e3a5a3aa12098d58509dc22059644f9c1225b4bf0190e37b8e361dd1d89f49e"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8335347563.json": {
+      "bytes": 28617,
+      "sha256": "cb1b1a82ca678552a532b18bc46378464263c4e733d038d17e5855d0061ef5b8"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8335389229.json": {
+      "bytes": 5933,
+      "sha256": "dd8cc35f52facaa38f315e6f1c8de0127c47234278f9dcff06c575038d5c4b72"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8336242037.json": {
+      "bytes": 16770,
+      "sha256": "f69db0fe7c41516fc34ba308252aa45fa4b23b088f7d3d1a84789de935fdad2d"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8337860849.json": {
+      "bytes": 18224,
+      "sha256": "e39af2da5687d634072a18e7b246be7a00cc3a9a83b4505761213ca555a2c709"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8338544020.json": {
+      "bytes": 7332,
+      "sha256": "54ae6864b86a86d7785503fc34780dd71ba62ae84be51c5483cc6d1493d9fc35"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8345057614.json": {
+      "bytes": 20440,
+      "sha256": "f691b00d51fd9eb438aa1a4faf03b9e360c23cbcdda5c4578fc6dc76ee60b4f3"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8346855937.json": {
+      "bytes": 14482,
+      "sha256": "60fb8cdf75d7c1c26454db73694b3a4ebf3a7566939a29f8e2fc8274b2e32525"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8347209267.json": {
+      "bytes": 10244,
+      "sha256": "438c6d11787eae8c992ae06cad606d72745c82c492e4f9c874d179a035f7bb14"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8347262437.json": {
+      "bytes": 8929,
+      "sha256": "5d616918dc17dd519d86f5b9e4277467e0f87875df93d624e0a16e17e1e039bc"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8347907745.json": {
+      "bytes": 12705,
+      "sha256": "c7756a18da3ab47914f56d5bfd3bb1428a03fc4156bd143bf61ab2262e6d2fb8"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8348085354.json": {
+      "bytes": 8783,
+      "sha256": "f9b68e315df69d0fb7bb418be28322b4bd76d92c86f8e321ff60bf1a5f961b91"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8348141305.json": {
+      "bytes": 15857,
+      "sha256": "f36d67f037b41b3e770763c6cd2c59ae04db63bd60d9bf392d3cae470b061982"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8348426166.json": {
+      "bytes": 17016,
+      "sha256": "404969d4c6fe0de9d2641464f9c08184749ff52cd0dfa55cd82b95d9b73bce83"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8348600329.json": {
+      "bytes": 10336,
+      "sha256": "496262630027b3c498e7cdfb9cb5e6de8bb7fee17127190f0bf8373ec6418ed5"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8348855975.json": {
+      "bytes": 16886,
+      "sha256": "ade777eaa32d544f599d6658e6f58521c56dc9d75b75ebb565983c455e24c2da"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8349156680.json": {
+      "bytes": 16900,
+      "sha256": "bb32a6ed1a6201b6e91a6b99033d4dc727fdfa79c663229d608054c4b44b7cb0"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8349332099.json": {
+      "bytes": 13390,
+      "sha256": "6f66d887c673948a8d8caa8249f38fc6bf4d45b9b1b08294f0d703cb8a9f409e"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8355648191.json": {
+      "bytes": 11954,
+      "sha256": "37129101cf8f90af94065756d5c103c9bf1f612373383dd0a9b997f23802c1c8"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8357342961.json": {
+      "bytes": 13534,
+      "sha256": "95f93d2508c58e05d85d796a4e3a55c43a405534a2197e31089281fe969284df"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8360422867.json": {
+      "bytes": 7279,
+      "sha256": "c9f2a8f1aaec8a6edf7c43af57b6278748aa2f439aa22d85bea99c9b03049566"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8360553619.json": {
+      "bytes": 7201,
+      "sha256": "2c22a2d8d654a3ee146c6a09b0ef0bff4ea0202d43ab0f991e18f84089d48c40"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8360613815.json": {
+      "bytes": 17391,
+      "sha256": "8597de6f218cfc17721b118145e99b656467721d378d355161c3e7e564690123"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8360674721.json": {
+      "bytes": 16343,
+      "sha256": "4479128b5ee4b8a24a33e93f666759b2a8a25f9d16ae3c34e1a1100992430b4f"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8362186134.json": {
+      "bytes": 14528,
+      "sha256": "aeab5c5f6ba996a2413e9f70e979d2ead035aee7f92c82f92cf39872b45e8c32"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8362293280.json": {
+      "bytes": 10402,
+      "sha256": "0ba1f8f063f7e63b30886d100f02901901f7224228093d2e72632983e2de8036"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8363592627.json": {
+      "bytes": 15363,
+      "sha256": "42720baf518b52e9973c47e3c2f4051cf90ff35b892f86348b153e0d4556ce27"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8364068649.json": {
+      "bytes": 10937,
+      "sha256": "7afc6fa2283f3818207c58536706df480fcc1925bf115f687708d9b98e1782ce"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8364820452.json": {
+      "bytes": 14589,
+      "sha256": "df1c21183482fd44853aef015dcb845394cb403d0ab62cadbb5809e15b9e1b41"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8366456192.json": {
+      "bytes": 17171,
+      "sha256": "aba42ad94c3db700497b44152b3790f70565f2635cdae4d2e16726a0147fb43e"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8368529212.json": {
+      "bytes": 14135,
+      "sha256": "33ee25e98e2bf20ef53d286813d60b66ac55dbff0b55b2009fddb7a3e981a6cd"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8368833519.json": {
+      "bytes": 11978,
+      "sha256": "29689fe095b5981b322404780817621d4c37bfc3416c62c4cde0a07084c2ec08"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8369219696.json": {
+      "bytes": 12305,
+      "sha256": "183f2aa6dbbc9f873b08688f195214bb2fe26949759fff2249c905be2a9f40ac"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8369359766.json": {
+      "bytes": 19350,
+      "sha256": "d12a35fe80fffcf4fea3c449c72dccac3e49d4bc19acd5c1d1d63f8fac50c080"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8369775979.json": {
+      "bytes": 15163,
+      "sha256": "b8c7e671edf9b3688f21c73c6c3be3ba23df7caa218c7564c8dd19881aead2f8"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8369942665.json": {
+      "bytes": 13052,
+      "sha256": "ce82e92af11fc8ce8125e99e125c4d1c348cec891160141dc81f75b9c4f1dcb1"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8370484754.json": {
+      "bytes": 16922,
+      "sha256": "82d92ef67405c58baab5b0f0cbcbe303e35e4b5e55732b10f46bcb4777d41339"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8370683398.json": {
+      "bytes": 16363,
+      "sha256": "f10c763b6e59c39e31fd7b932b96a665c4bdd0672ef3f822cf2929a5ea1a9bd3"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8370753263.json": {
+      "bytes": 9908,
+      "sha256": "9231a62f52d675f5eb55d8bfd32e4c6b9fb819db5f835f83223f01f97011c6f0"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8370837766.json": {
+      "bytes": 12517,
+      "sha256": "4ffcfbdf73b81b998fe7254a90a7a6d2a471ae641e565acbcf017eb78a2e1981"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8372089413.json": {
+      "bytes": 11360,
+      "sha256": "a8789d11611c25c6f3795d263a58278c6aa1a4f93f38b92e5a3766d6c74acebb"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8372619637.json": {
+      "bytes": 13601,
+      "sha256": "abfa8bfd3f2440818abd91b561dfcbe88084761571a2db54e68fa4df05167137"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8372667582.json": {
+      "bytes": 30276,
+      "sha256": "ec00aa27b26b75a972296bb0219ef1d3bff26e3ec1bcc4663b4e5b1e1989167d"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8372707776.json": {
+      "bytes": 14414,
+      "sha256": "760543943bc780c7d30881f5fab80a03ca9107c6c5eaf0a8891ed5ca9d4e4bb0"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8373389142.json": {
+      "bytes": 12971,
+      "sha256": "2904154424636391bf02e58fe670e86469b45d49fa53691dd86e3e562ac507f4"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8374676357.json": {
+      "bytes": 10710,
+      "sha256": "d2857b8e5af09bbee8986f9800e6aa4f1132c283ba5095ce44d3289d72c1401a"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8378862321.json": {
+      "bytes": 13742,
+      "sha256": "fe0637b89724e6769d3e812e353bf2c73043ea7c13e35befc5a4b4f05318c509"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8379107745.json": {
+      "bytes": 16092,
+      "sha256": "8ea92921e51ceb7d188e6181d503904d79a78e25b6d13347893a6e476b0a6607"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8379137829.json": {
+      "bytes": 12138,
+      "sha256": "26675a171a7e68a164363ce276e2e06f9640179dafb67c35cfaa4b89896096c1"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8379753615.json": {
+      "bytes": 9414,
+      "sha256": "b336399394d4739d87333234dca8cc5b7c015a59adf340f0d3b37d79e9b9dd08"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8379766826.json": {
+      "bytes": 13471,
+      "sha256": "47cd2d5b0187841e87f2844d2c321f477f46dce60c58789d4c06dbb6bb13f4b1"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8380335448.json": {
+      "bytes": 13865,
+      "sha256": "e5e6bb4e7ce06257125836667bb44230aa9ef46e0dfeb8eda014d8013a98d8e9"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8380537677.json": {
+      "bytes": 12424,
+      "sha256": "bbaa225bf4915ff1356cb02a1a7cb341f5ecbde34c21fc89d120ba5c7351fcb6"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8381520465.json": {
+      "bytes": 17953,
+      "sha256": "1d589c5d8235210474133da5d6672d9b7acd67974ad707b3fc7d66ecc9bb375d"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8384768443.json": {
+      "bytes": 23540,
+      "sha256": "00dae32bba2ae8f031c74aa3f7ffe3c096a4a78e62fb966e03a43c3fed3c60f4"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8387071129.json": {
+      "bytes": 15534,
+      "sha256": "c937538921bc78cf2b96af13e5898dff753cb0208e89776961889a9f856d72de"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8390441710.json": {
+      "bytes": 7228,
+      "sha256": "0cc943052e4a0276b59f37ef03e9472fac52e602456212398dc663366df50578"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8394866049.json": {
+      "bytes": 14446,
+      "sha256": "9d0b368624142cdbac3589430f85b7c90adfa2123d7ebe08fd3be44a4dedf99d"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8395054551.json": {
+      "bytes": 14812,
+      "sha256": "e62c4ed391541d3233be87f72aeed5439690a9d831fbbb2671a8f38b2ef59fd6"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8397915940.json": {
+      "bytes": 11635,
+      "sha256": "436ffa33f57bed9627a4dd6b2fe938e4b259481739a0204dcd3ce07f05d09a7d"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8398505770.json": {
+      "bytes": 16663,
+      "sha256": "1d5b7456f214ff8aef4361a3595a9d4c7dc872c032c3759aed74155631431523"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8399552527.json": {
+      "bytes": 12389,
+      "sha256": "a9ab3666e87c0a42fbcb53b88620f319209d2c7cd3911dbe690d0ca1785440f1"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8399930374.json": {
+      "bytes": 12949,
+      "sha256": "fdda3b974fd565590a10a540acdd75198784a0827f9126b32f4c3c08ee49ea52"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8400024027.json": {
+      "bytes": 11261,
+      "sha256": "b1537dc692a6dfea283fdc288e2fa2ed0aeefae9bf163895cda1e2ac2272a593"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8400121228.json": {
+      "bytes": 14344,
+      "sha256": "17030303603d655e130bfc5ffb0e75c9c727e365a6c41bde6ac27627996c8008"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8400409480.json": {
+      "bytes": 17456,
+      "sha256": "02a01c78e05a53373395d2aa97d6e4ff3a96ee305a790cf85b2130020fa717e8"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8400956414.json": {
+      "bytes": 13874,
+      "sha256": "d82113f5b09b78a6c95974d844d3bb6b1f8b6b7b772ace89b106ed79e05ff061"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8401481706.json": {
+      "bytes": 12589,
+      "sha256": "412a5fa054d10867f54861f27dd6e009c681265467ad0d7d973dc4b10cdcb14a"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8401633970.json": {
+      "bytes": 11054,
+      "sha256": "ab7ff7882048b400381e4f1c2e6f2a6d41ecddb360d97de8665146fad1b68394"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8401678009.json": {
+      "bytes": 13620,
+      "sha256": "ea2c8baa85c9ce740aa9bba1bd1d7eb69dd540d15a6aa8865b8586c7f0d67629"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8401745347.json": {
+      "bytes": 19139,
+      "sha256": "8ea09a5574815d26ddb1ac9bb7bc5b5f9ec7c21dcf623b03086d8d7b9e74fb45"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8401959022.json": {
+      "bytes": 11406,
+      "sha256": "8644704d15c5e21dc4580f3572c88244e4328c98522383f252297f1f14d9b019"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8402073760.json": {
+      "bytes": 16536,
+      "sha256": "4446f8378677e0f59a8021fe3090e174d3380f0b19e44e82ac3c75240ece0ea0"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8402236967.json": {
+      "bytes": 10126,
+      "sha256": "0d04a72b25e3146679088d4b8a5bc89a4b930740703775781140f788b802944f"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8402239184.json": {
+      "bytes": 12678,
+      "sha256": "faded4c2cfe689c6d527495dea73c6a2ad49113d8d723160a09a53947d2504ef"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8402243275.json": {
+      "bytes": 12583,
+      "sha256": "c3af252e3bb6324121486104d410ede98304b4fc70ddb76c51817bc1494917df"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8402707860.json": {
+      "bytes": 17060,
+      "sha256": "6d81e5815685216ff09f1022554ac3edb8b26091d89be55c581b66289a11e834"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8406999647.json": {
+      "bytes": 9739,
+      "sha256": "a2cb1f08eb58e61478a62730db429e56e2eba978de7e0b0180020ae685bd5db2"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8407081682.json": {
+      "bytes": 13809,
+      "sha256": "512b09d5cbd7b34a76a0a0a44ba3cba106f683a719452fe9caef20cb3e7c0b61"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8408120713.json": {
+      "bytes": 13178,
+      "sha256": "f14c7f401f469dd4ddb87b68b28a34fdf4efddea9b55fe8e20af45610bc6ebcf"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8408544833.json": {
+      "bytes": 12504,
+      "sha256": "7e52ab40c00703b27bae836b83a24da9701de349e1b9df25ef2f7dfdf1392b97"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8410050639.json": {
+      "bytes": 15310,
+      "sha256": "d57508501d160c0d4dd15b9b37a9134f5e8cdf102692a616a2c101c20ff51f7b"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8410085027.json": {
+      "bytes": 30090,
+      "sha256": "13705d7c5249c946a94adecd056cde44d734bf56c6a398bfc6b837eaafba6ffe"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8410262757.json": {
+      "bytes": 10841,
+      "sha256": "9215b1f472860767c80b78fa4b50e1d027bb1ab27e89ea8a71c2a9b9211009cd"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8410402596.json": {
+      "bytes": 15969,
+      "sha256": "27b44839be59c19841f7167f6322c42690e4569d30194c2c7c463edcc8c5f893"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8410834366.json": {
+      "bytes": 9790,
+      "sha256": "ce39897a8f7262bdb3bfe6efaa59a57ab32bcf365544d01e5035283baf966eb8"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8413400713.json": {
+      "bytes": 8736,
+      "sha256": "2605e95a73285acdf253cee9a1b9a12677e45c51cf8330334e51984012e6f4f5"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8413461867.json": {
+      "bytes": 12070,
+      "sha256": "688c35bd2cdf58a99413b05eeecd0a35a984def08403558a6cc966280a1eb138"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8414101597.json": {
+      "bytes": 13746,
+      "sha256": "c8822d0e0dcbd449a70902dc9a322de4df4f68e163fe1fdea883ba62e7a49a30"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8414141537.json": {
+      "bytes": 16838,
+      "sha256": "d88b30270473069e68586f63323d069bc53877636c020d8b4910f29e11b77fdb"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8414290996.json": {
+      "bytes": 10929,
+      "sha256": "e8d4ad67d0a5634b84e4358274ce6f34133999f2e63324ad26372eff0a325684"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8414661432.json": {
+      "bytes": 15735,
+      "sha256": "8be8026be18da5f090f6cf925edeaf81f0316b4454587b10c701bb4bfb2be144"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8414797661.json": {
+      "bytes": 19698,
+      "sha256": "4296bd7e42a99bf243eff4e3b9248954b2f8c7713c6eca549af1fe74a61c4f7c"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8414846727.json": {
+      "bytes": 11088,
+      "sha256": "2e702d9c59dd60c829960dadda6ad47ec48a4ae591ceb908f743989ced774399"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8419239836.json": {
+      "bytes": 9899,
+      "sha256": "6004adcce1c140edafb30f1c75e7ad97b2202a0317974b3dcfe6970853975eaf"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8420116096.json": {
+      "bytes": 25610,
+      "sha256": "4276aa2c3131803bec2b96f82f31edcbcec053f9d1e1402524586352449fc92d"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8420149711.json": {
+      "bytes": 12641,
+      "sha256": "a25004ad9ec4a04e423deb974f3f0edd2dff22446c8e6a2b17fa043c04a8dbe7"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8420344071.json": {
+      "bytes": 12740,
+      "sha256": "d35a172d382228232d20b739e687f76826b187d3cb4ad6dc2ef5b45e71753c8e"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8420348978.json": {
+      "bytes": 18165,
+      "sha256": "8def6d0becb226fa4160a71008a061b29b2aab83501feef94d3b59b8fc1c2a28"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8421913405.json": {
+      "bytes": 14544,
+      "sha256": "8efab356e03ee0bd1522be4241e04020a070a3d79af2aebeaef944c1472e9632"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8421943997.json": {
+      "bytes": 15360,
+      "sha256": "adbb61cd57b8350124fa75a350649921c8858d67e903ea30348c9fb4efad1e6c"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8422243933.json": {
+      "bytes": 15734,
+      "sha256": "aad10b30d5b9e32433a6f37a459a7a291c760bf2df90aad4fff06a11dcc33400"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8422485541.json": {
+      "bytes": 13585,
+      "sha256": "e3f36df026fa9567bbf9a109e5a88b7a4b20c589b946bf37d9987521aa9a28a6"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8422559726.json": {
+      "bytes": 13760,
+      "sha256": "5b9fc94262ca2ab7a5ceb423c5b84358a937e0d356380c07468d21e802990eea"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8422940145.json": {
+      "bytes": 12276,
+      "sha256": "1f756308b820bc6c7115d863fbcef1374f1222f0d3125e4edf96b71c638e041a"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8423268122.json": {
+      "bytes": 15169,
+      "sha256": "401e8fad6d1ca23eb56ee89034170aa854209aca05eb83ad9f87494f3e54636b"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8423713536.json": {
+      "bytes": 14248,
+      "sha256": "b6e4f888822d65e75969415868d55a235bbe5aabd6d3d60c1f4450da03c57829"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8430585690.json": {
+      "bytes": 14348,
+      "sha256": "d457a449b99d373391e3daf16c4bf2d99cc70c2d4417e17bf34f77ae6a78f6f2"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8430669016.json": {
+      "bytes": 10016,
+      "sha256": "6824761f8d0f353a0d1c48611e21e5ade17a562a5e3a0a770d4817bded405097"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8430892285.json": {
+      "bytes": 11556,
+      "sha256": "f1aed902aba64ff4527aafdd4a8c32a8656679dbd6ee7746c55f2686424d2ce8"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8431021563.json": {
+      "bytes": 11038,
+      "sha256": "70c0937901ad884296b1a5371161f04b9a28b860758dedfdffbafcb5e5501551"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8431156938.json": {
+      "bytes": 16790,
+      "sha256": "4df17d733cd56b9ba242faea965ab7f3fd74315f468d1ef98d54976396a6fc70"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8431758929.json": {
+      "bytes": 14582,
+      "sha256": "509c9d46037f3b435a037a878b54dba74022d2c6767c538ecebda8006bec7c18"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8431987437.json": {
+      "bytes": 16504,
+      "sha256": "4a9dc82fe33ea6deb958d8bafb607ecc0d0e625eecce8ee8b6598edeb875b573"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8435116466.json": {
+      "bytes": 14057,
+      "sha256": "4ecf53eb0f62dcfdb4e5d954b19251288787a06038ff6f62317595424ce45463"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8437661393.json": {
+      "bytes": 12256,
+      "sha256": "302842007fa41c68ee591d1dfdf418812b9e7c63010b4ebe6e46c8b86398bacc"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8437968898.json": {
+      "bytes": 12525,
+      "sha256": "6a089bcdee5980e2d0ee67944cbf82bddd1b32255bf7e313e9a74a9fa6f41b88"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8437999767.json": {
+      "bytes": 11002,
+      "sha256": "a6d76368375d0af4e567acde980ac57b638f109a9c891133bd6e14cabceb8e41"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8439105621.json": {
+      "bytes": 21689,
+      "sha256": "2a02b241b02b76684b1a0a8d68bdfa7ec9608e7612652a502a2ffc05d93cb64d"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8439202328.json": {
+      "bytes": 10363,
+      "sha256": "b6789dc6f8e7223ba9917f8462c9ca07aad057c55b9f7fa53b64897dc76908b5"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8439596356.json": {
+      "bytes": 11817,
+      "sha256": "4a2cd82203084fff2221dee5428496c63a19e58f80c6f330685a35c810ba24e8"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8440163218.json": {
+      "bytes": 15522,
+      "sha256": "37cbb77a74e107b81a0c43bc0f768a5576c74595fd0c1ef15e7ac9867b36d136"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8440221376.json": {
+      "bytes": 8232,
+      "sha256": "b533e34d35ac8d434e7eb7263d09e2fe31a689798cdf53fbf5f0935b8e83a5ad"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8440243692.json": {
+      "bytes": 15899,
+      "sha256": "a79052a48767b1475027644f142c22d08727adb9eef2a67b35d4e17d98ac6b1a"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8440353166.json": {
+      "bytes": 11321,
+      "sha256": "4b0dc7e3eae08cb39cb59e825b7e3c46d516ed67777cfda0ec3fce93111506b5"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8440579595.json": {
+      "bytes": 12730,
+      "sha256": "22531ae687c5fef8f9e273be330809f7a6b4e955561210325757dd1e46d4e3ba"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8440900972.json": {
+      "bytes": 14116,
+      "sha256": "eeb8ef2e2f7345b7805776232f6fc651d932be7f51ce04c2a114b897f40b7634"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8441182434.json": {
+      "bytes": 8719,
+      "sha256": "660c7beef0d8bf009c34910026c4ecf92447d7d3db0e95d0e665851955ead703"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8441722078.json": {
+      "bytes": 13206,
+      "sha256": "3285d5e4476175b12cc361d1761a880d779c9dcec9b137b1e58d853846060135"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8442297567.json": {
+      "bytes": 11448,
+      "sha256": "e6a75492437fc187a04228e9b1f18e8c934c9f6259680560d4316a793f8bc492"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8445275462.json": {
+      "bytes": 12719,
+      "sha256": "20137b6d292e901cd888fa4b82a8290a30f91588d70a5e3ed3b2052fe1a8ffcb"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8445573236.json": {
+      "bytes": 11374,
+      "sha256": "1e4d9a9109c4e827d7880dcaee56c5964ccfc7474d09858fdfbfe681a90d9aaa"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8449631048.json": {
+      "bytes": 12098,
+      "sha256": "dd54aeee785108cb0052f72fc9a17d0c294e186219459966eaa2248794d53ccd"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8449726737.json": {
+      "bytes": 8974,
+      "sha256": "85a7fe56f92f674998c9a98617c0143bc332be59e476e481afbfd4ef87de107a"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8450541860.json": {
+      "bytes": 14807,
+      "sha256": "a4bbcc9596859c9cb7045c0b894dcbc725b3c591afae710eda5e860668bcce7d"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8451010326.json": {
+      "bytes": 19211,
+      "sha256": "65c85efd24ef16923941f0950d3e7773576ffe5d1a7dd939343013c779ca760a"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8451283476.json": {
+      "bytes": 8562,
+      "sha256": "087dc9814c5533126413a83450b55186370471fe074cbe301080133ce6a1f53f"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8451952977.json": {
+      "bytes": 13418,
+      "sha256": "2fc6def3f98be1c80e97d314f672e5d7e29fa5dbdedde3b1f2bb7a6bff53e56c"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8452116131.json": {
+      "bytes": 12682,
+      "sha256": "7172a122b3814153b70156dbc81f33d9c058eac5285f01a362d85304d2334c60"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8453291763.json": {
+      "bytes": 17476,
+      "sha256": "f948829a2c7fd1e6d77b42eb1ddaac28e9868cd6cce8dfc0be34767ce5fd1a37"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8453550137.json": {
+      "bytes": 16633,
+      "sha256": "65346efed2b261850573474acaa25c03c35d6c25b39d91b9a2dc0c460c61da55"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8454918657.json": {
+      "bytes": 14214,
+      "sha256": "ed8df1f7017a72f73ac4020759a5758ed0b5c356410f7bbc601dd40dd0aef37a"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8455612648.json": {
+      "bytes": 9692,
+      "sha256": "c7e02e331a5b6d275b0e6183b808e2a60e2557d2ff72f31b2219743f5bbdea9c"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8455656187.json": {
+      "bytes": 8853,
+      "sha256": "66d233eb9cd6a2443510e1ad41d317135bd069989bbc27fdb49eaef95c23da4c"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8457936411.json": {
+      "bytes": 9153,
+      "sha256": "80dea88fcd76b14e040ce8f0d2393a41e583129d1f8e689b2e8297d727282352"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8458378617.json": {
+      "bytes": 16884,
+      "sha256": "8f53726501c53d2f8e6a83dc944a2afcba7e6e4226fea71faed17a9e53566728"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8459277415.json": {
+      "bytes": 17044,
+      "sha256": "76fc5e4f7d147e9c9d75f6a183fc91e8c42f7e794b08823bf223037ee269ffce"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8459616417.json": {
+      "bytes": 9751,
+      "sha256": "e8c16cc0d90d322d2106001b2d682307f56577457f8ed9175db7da0003097e85"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8462998298.json": {
+      "bytes": 13737,
+      "sha256": "57190a38fabc02581eb9bec25c56b0bfa296c0bb2972b56314ad2eb54b0d6ea3"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8463300621.json": {
+      "bytes": 11352,
+      "sha256": "61dabf768d794a25f384a49697e79c9db582879aa856b78ff3d73c64bb42c86a"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8463388833.json": {
+      "bytes": 18979,
+      "sha256": "efdc37992035c424f3752d06e3aee8bfd7d0c2f4c17f159c9a196e81b13bb594"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8467045373.json": {
+      "bytes": 10858,
+      "sha256": "aba48d41ecc9b11cea0fa1cfba570bafa063f633ce7eadbb05dc822b32ef45da"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8469024701.json": {
+      "bytes": 8520,
+      "sha256": "84a5755ee2a52ddbb0fed6eb8e2553d0a4a8524fd9c17f974e239384433903e6"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8469110605.json": {
+      "bytes": 13280,
+      "sha256": "03e1325407442988dd5dc896ddc15f21ec08a2b36b5291f69dddbd3ef539c993"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8469287309.json": {
+      "bytes": 14170,
+      "sha256": "7f0a7f83ce9993ed8ec073bd7e96b3748cc5501f5035c1d53e2ca2371d62f48c"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8469910172.json": {
+      "bytes": 17231,
+      "sha256": "0e07d58b7ab84e4ef04ebc269ea7f5a843975cde06571a3b797709bac9fc7250"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8470156395.json": {
+      "bytes": 16830,
+      "sha256": "e0acad584b589cba68187f637e3367fa7004dfd2fa0af589feba696073e87446"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8470828550.json": {
+      "bytes": 13802,
+      "sha256": "a3b17bb48a7a7d758185aa561bc492389d6cc31372b59133b6bad8ad6cbae868"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8471125251.json": {
+      "bytes": 12718,
+      "sha256": "cee2be2ca5bb0e34675d81282a375091ded74a87eb9f9d07ccb6623c31e70cc7"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8471358578.json": {
+      "bytes": 13029,
+      "sha256": "5dd567358affb320d0dd9c27bcd7087d8052f148b2d01366b3a6b4f2bf17c2da"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8471962823.json": {
+      "bytes": 20755,
+      "sha256": "33eab08e41d2f66ba413b6101fa6e9b985859e40238f11c023d10710843c9738"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8472721202.json": {
+      "bytes": 9911,
+      "sha256": "de5f78a5f3b5cf3245c4ac3cffcdb437e2e3f5e79c4350f6958f03ab87091822"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8473392174.json": {
+      "bytes": 12199,
+      "sha256": "cd014471e7a2d69df183a66c6b760e926cdc25155f43c808de4d7d06e2b65652"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8476948657.json": {
+      "bytes": 12929,
+      "sha256": "9722ca9e93ba396159bbc28a0692d0d6b6875c94dc3cb5ccbe8e97e9bd655d69"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8477380115.json": {
+      "bytes": 10324,
+      "sha256": "85008c55ef782dc65904f3ccf4497bc9d0c7ed29f7bbe9d8c462977098db69f5"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8480025748.json": {
+      "bytes": 14218,
+      "sha256": "07c4671c1a9364df1f0eace7f4fefb17a7517a2874a1a33baf54542eaa0d6044"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8483787868.json": {
+      "bytes": 8518,
+      "sha256": "eb35dd9fd1d6776d6ad606c3b28f0e062158eadb1a86982c5e80d7281008d80f"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8484932134.json": {
+      "bytes": 12132,
+      "sha256": "8e6628829264854abfc4a0032a58ab197f9663f76dd44686b1b5df96967ab239"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8489070253.json": {
+      "bytes": 10141,
+      "sha256": "300adf3c1568e24691efcc1e730c2e14e155d3feef9ebc671deece09196156e3"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8489296218.json": {
+      "bytes": 18669,
+      "sha256": "41f81d3f365e03dcaa564f5e108465c7d66badb815d760dac0127c9f22d86b54"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8489315901.json": {
+      "bytes": 13071,
+      "sha256": "21ddfd1d38f521289e15c648bfa63610cef7892d2a029f3d1b86fcc0a8f3f747"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8489360197.json": {
+      "bytes": 20253,
+      "sha256": "257e03e03cd95a7ab87515487e27c91e20ddca356702e39078d2a358d74338d0"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8489958706.json": {
+      "bytes": 24577,
+      "sha256": "6d6abe3c2bf1228c1ec8f3061baf8f838c2591238a23a4dc76bdb060714c1102"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8490067863.json": {
+      "bytes": 8516,
+      "sha256": "53929aa21ad833615cb328cea4748abaa030f4e76a8aa7dabb962e39bfbfedc3"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8490307270.json": {
+      "bytes": 20221,
+      "sha256": "3e08e22451c816e0988a03ed99f19e63305e254590c34aafaca0a504c6cbc7ca"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8490849374.json": {
+      "bytes": 9956,
+      "sha256": "a32c33fb4cbd85c5dbafa1a2b3d6dc3f19cbbf88c2331c925c6c7cf94f260071"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8491503411.json": {
+      "bytes": 13169,
+      "sha256": "e76a7347f829d3eb1486a16235c93c4cc3978d906af37cb208aef0a697ba7f78"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8498908625.json": {
+      "bytes": 18663,
+      "sha256": "0741f43cfc747b2779a9be46d92c487c4562917f23d0455af29f202cead12f4c"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8499412287.json": {
+      "bytes": 13818,
+      "sha256": "c2e0dd8e95e79a19951a571d391f1505768c7970b248d53bfbb4ebcb883dafd4"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8502430645.json": {
+      "bytes": 13845,
+      "sha256": "aa4cd5beed10a3eab5d459e5f3319c17159f37497e6797aa22533b23e6a1c22b"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8503524915.json": {
+      "bytes": 14610,
+      "sha256": "72c675633d18ad97d12e865d6dae1bf29e4cdb696d77a9a9d6bf36c9746188f3"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8503611390.json": {
+      "bytes": 10482,
+      "sha256": "89a27150f17c4795f8e2121a221e68ca2451336b9bc3d8d08f123c3e3dd1db1c"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8503673872.json": {
+      "bytes": 14841,
+      "sha256": "50abf1ea4d24ea71190a0ebdd41800d18eca08a8882bb6767736106db76812e8"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8512118325.json": {
+      "bytes": 9643,
+      "sha256": "a6ca6e15ae79350277fd73a195e5aeda6df922e4dd00c1a18418d03f63f0211f"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8512638135.json": {
+      "bytes": 13238,
+      "sha256": "b7eda90a3a7f89632179781af5fc2f991a6316be60953b8e81a2f5967a3195a5"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8513833639.json": {
+      "bytes": 11140,
+      "sha256": "a46bfe72e61998281a6e5b827e22b4e4a016504f4d787fd918176ed4bdc3eb40"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8514157538.json": {
+      "bytes": 8713,
+      "sha256": "38734089f30162e46f5e8401f854fb44696a41a6d3723ca66d8c41537910baea"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8514356174.json": {
+      "bytes": 14629,
+      "sha256": "6ffaf2a33a752b9f4165e4d975509a78efa411827f4731c7fd63ad4d332ecab5"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8515116211.json": {
+      "bytes": 13945,
+      "sha256": "a95ef46558d569daf2460a44e0b3d9363929121984125636e7241969413bf139"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8515270257.json": {
+      "bytes": 19719,
+      "sha256": "c3759b6a9a31ca6ef33103149e28223e397cce5a8b0a571d8b6fa77c6657ab14"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8515290702.json": {
+      "bytes": 17249,
+      "sha256": "002f8dd7e468035b45214cbf3242a90182466545217d8ddd4390b1422a421b5b"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8515658527.json": {
+      "bytes": 12855,
+      "sha256": "d7128a990a01c388d331152ea8371adfcdd9cd294cc81497af028aa47266f711"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8516926685.json": {
+      "bytes": 16255,
+      "sha256": "b2a01f87ca2613f145ee803137711ed3e3918a43b5863832ed4b483350d11b0b"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8517203501.json": {
+      "bytes": 7912,
+      "sha256": "eb4e3c1e5905aa67ff82d128d6a69054b9f2e16ae8c02d3ca4fc60e1c1ab6e46"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8517601885.json": {
+      "bytes": 17159,
+      "sha256": "44726302b42f156fc0b1bb4cc6f5fe7a3195eed91c1ebf85b5a3eeb7e52a4d77"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8520832595.json": {
+      "bytes": 7155,
+      "sha256": "7bcd0ad0398889f9b604244f612e9637e6629dd90c2e5f67cb94e4f05ba88e25"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8520931219.json": {
+      "bytes": 11137,
+      "sha256": "0efb85e1de25e335b5290cbec1c32e9115a74557952bec72d056b114210afc43"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8521178576.json": {
+      "bytes": 16608,
+      "sha256": "57cd6aa7106400e696ab726994fa8d09c1089c976c52eb2f2c155fcb5327e50c"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8522264307.json": {
+      "bytes": 22135,
+      "sha256": "7310883b1f389589cbcb4ec462fea985c68904a8daf5f92e95c17f03ddaf749c"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8523667643.json": {
+      "bytes": 12396,
+      "sha256": "ca3ee7ff1627fbacfdff39a275673f06a798ee6e01be89f60a231ec17a2c34b9"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8531353192.json": {
+      "bytes": 8496,
+      "sha256": "ae913c36bc6795cb80299ae44f2d8dceb866c6a6fddf0e6088b817d99da77418"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8544134108.json": {
+      "bytes": 16947,
+      "sha256": "bf6f1eb4057ed16f16edfc696d78b7c8e1da15c197fe3c8eb883154cf6ceb45a"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8544321705.json": {
+      "bytes": 9036,
+      "sha256": "def53e6dc9bfc27b13d3b3da0170b57744231ee8d2fbc11045a4a5bff6122ca2"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8544719552.json": {
+      "bytes": 31646,
+      "sha256": "295b5facf48257f127935845e2c6fa1c268022a67c94bd2f214cb60ef6182b32"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8544944448.json": {
+      "bytes": 18577,
+      "sha256": "5f2a5d19c0061fa12e7cd4ef44fe0c01692f272f9b4cf475ee41b7ca9909ef31"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8545200791.json": {
+      "bytes": 16476,
+      "sha256": "4ad5cc63ceb2a2b3e6970d2d5ed093ab6b8801369483c89c8af478d73dd7b328"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8553712626.json": {
+      "bytes": 18651,
+      "sha256": "f7ad4657c73681cd4c59ccc66f95578cf673242ddce559c38e9ef3d96ef89fee"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8556908683.json": {
+      "bytes": 9321,
+      "sha256": "6f973e81eef71f0aadd50cbe04b5a359cb50cd52548dd442fac355d722ed7734"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8556911243.json": {
+      "bytes": 12869,
+      "sha256": "fb3efcc7941f4021743a987d8c1ff3c2fbf13d257195086e85c17667fad7fffe"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8556933700.json": {
+      "bytes": 11634,
+      "sha256": "ea8c85b77c916ef90b554db8a9e230f8beb6665c48e9e91c713618e502b80a36"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8557497848.json": {
+      "bytes": 8514,
+      "sha256": "0872d82d3e4b9934847481d9a023df547aa52257f643b4aac5acf925bb575f96"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8574926050.json": {
+      "bytes": 12699,
+      "sha256": "ba50bb8a3fbf8d57bdcc2d4c594a5cca989e43fc6625a5327dbd37c3a0ad6d54"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8576945359.json": {
+      "bytes": 14592,
+      "sha256": "19b07580426c09879e68ad132b33060f28bc683cdcad8aa452dbcf0ea77a4bb2"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8577096962.json": {
+      "bytes": 19499,
+      "sha256": "ede4db2cb2f1f47ff9e4035be69a5946799e87d968ae7822a827b0cd69ffb84d"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8577402995.json": {
+      "bytes": 13064,
+      "sha256": "bf7b22de332d09c94d0fddb4ae97c91b85fc7c677b5b13e68fcb4fc59fad31e1"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8577430497.json": {
+      "bytes": 14066,
+      "sha256": "2d2df5b9d1c2e16250ddaa181dbcfa282ae73575a60d8ffe308e27e37f2ce683"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8577530518.json": {
+      "bytes": 13593,
+      "sha256": "e7bd32a96ae03e8a6e979170ac242b87afc9cb34f82580e38408f9e6ef5862ee"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8577652604.json": {
+      "bytes": 16331,
+      "sha256": "9a5f6692eb7a9ab468ef9f4951ddfa5c3df1eab8afacac401c2712f00db32179"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8607083958.json": {
+      "bytes": 13056,
+      "sha256": "cce753ce76c1b1af5bb865538371b7aa44c10ed1c9f552e70c782f41383c165a"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8607750555.json": {
+      "bytes": 12514,
+      "sha256": "c5ee17ed2c26eab2e98cf8e6c4b2ae5f2e202e88a6ba5ac9468cf280fb7247d6"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/raw/8609617143.json": {
+      "bytes": 19303,
+      "sha256": "f354a47e5b8e872c482106ee89265606ad7de0dbeb10226fd074a55f6851a950"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/2675186661.json": {
+      "bytes": 771,
+      "sha256": "6df304a94ed732f4840594cbcc756ec2bdf25dd2b133c9c010cd3607584a40f5"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/3120042054.json": {
+      "bytes": 786,
+      "sha256": "9593f299642b4efb6a2fe5119fe0bc85e0a35b1a18df61da4430f31d7b57b549"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/3438162039.json": {
+      "bytes": 763,
+      "sha256": "ad4080b601cc010c615e8897cb5fd9b2a0407f180dbf9fd1b3f64ed82eb761da"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/3592572427.json": {
+      "bytes": 771,
+      "sha256": "5af772b6a4d8d08136ccd8b4b15b0941740d7c684e5ffc9a156b2b21fcee3171"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/3678673605.json": {
+      "bytes": 786,
+      "sha256": "49d29e94cc96f41176c738f6023020a6aa9c1ed95062c443d363a8b1476e89ea"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/4444743554.json": {
+      "bytes": 734,
+      "sha256": "edf9197fcc6f05e913d6927605d7910a5264862445189bba5fb1c7dc51e0c899"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/4576557365.json": {
+      "bytes": 863,
+      "sha256": "473ca31dcb2e190779e3091a07336387993a89c1495ec965f8045c35d1bb2261"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/4849688250.json": {
+      "bytes": 771,
+      "sha256": "05e4b80f50139c25365166cbeaff45a1411a1ecb57780681d702fbc61800ff2a"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/7203444169.json": {
+      "bytes": 734,
+      "sha256": "e309377d175a1e642c7d9d32a5bd240271c4450744780e486abd3b5d04d9af42"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/7310761169.json": {
+      "bytes": 770,
+      "sha256": "8f284607b1d17e9c2bb84b1a0801342fe5dd81f3c985047abb0b2828a4ea3a7b"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/7444081609.json": {
+      "bytes": 769,
+      "sha256": "66307230ddb39437277b903b6c0247187ad8f4ea56084ff4c70e33d7e348e0c1"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/7465392431.json": {
+      "bytes": 771,
+      "sha256": "756df2b4396a1a733328c5c969df18d1cb4f931eeff05b70d1b97e3cf1fc2ce6"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/7483396193.json": {
+      "bytes": 775,
+      "sha256": "36eb77144742dbab17e842ba69e64443cb8f005bbd8f8ea1225dd94894c0ce0f"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/7487245137.json": {
+      "bytes": 775,
+      "sha256": "a1832c2cb3fb5fdf019644540996a0ab247f3ea71f94f1332ef6b4fdc8ba6c10"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/7533658530.json": {
+      "bytes": 757,
+      "sha256": "8ba64165e1683000eadce708b751b4b91fac38bb755aba72cf730cb3b2f52d27"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/7562025859.json": {
+      "bytes": 773,
+      "sha256": "a420c79995a502dac79096fa9971070a3676c8330e9089ad34ed104eb933cebd"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/7596085273.json": {
+      "bytes": 764,
+      "sha256": "b7a8a2c69d9c9c07829ab27afeb20b9ca9f6a0c97dda47a683cc480ea43a1167"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/7624538407.json": {
+      "bytes": 775,
+      "sha256": "d01bd1a53c161da6f8eeda8e56f6736018eb5901e9b86bc07e8ae2f792226360"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/7648793440.json": {
+      "bytes": 734,
+      "sha256": "6d9051134897ea676f5ec8a21c5475a024c5667b3daf17504ff994e12573d244"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/7650360084.json": {
+      "bytes": 768,
+      "sha256": "d253afa9c4d8ec4f2a20c6d1ffa86f0e868dec05871142bf42c738061dd65d58"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/7652810374.json": {
+      "bytes": 872,
+      "sha256": "c535bbe1b5345667c48d0dc1e48b719e535e39685285c388287dd64d66deb7c5"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/7666001049.json": {
+      "bytes": 773,
+      "sha256": "21c56a5f30da9b1a3d82cc24931eb501272a966b311563c979939c6c29864834"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/7674414966.json": {
+      "bytes": 734,
+      "sha256": "d5d77caca9d2a03992e6dae67bab11f461725694822a1c2e564ec0f10c83a28f"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/7753191033.json": {
+      "bytes": 734,
+      "sha256": "67ab65683fb981d5d07b4a831cc0fc58191302b2d18a62a442768a392800024b"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/7762483158.json": {
+      "bytes": 780,
+      "sha256": "8a883f2ee77db38273fb62cb8f635430a356f36d6c96338ebc6ab5e611ef60cd"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/7767464962.json": {
+      "bytes": 775,
+      "sha256": "3c82dee48929e6a4aaffc57621649865eedf888d509c6713b9c9dfb812e66556"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/7788943446.json": {
+      "bytes": 759,
+      "sha256": "28c6119f4f2c2c3a8872714751f7c10d5342744f648654434956c560c47cd8d1"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/7796553406.json": {
+      "bytes": 734,
+      "sha256": "9e82cdb835c8339ec9b1a912edafd6632ec4cb20f97d7e2af08ce69c32cbaaa8"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/7818053307.json": {
+      "bytes": 775,
+      "sha256": "8b2d89c09db017e452e396875dd42c7d6aa809374fca7c445e7f6a63da2fb99d"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/7856574910.json": {
+      "bytes": 734,
+      "sha256": "4732989ed12a92f711867c1dc9e860c4b93e2a389f03810e9975ea741e9899f1"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/7857659927.json": {
+      "bytes": 734,
+      "sha256": "429ec210ff26d2ea142dfbd2381b72cb6e652a99ae5e203dd3e5aa61f99eb92f"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/7859063440.json": {
+      "bytes": 791,
+      "sha256": "dca63c88edb7fb2c58c4a3467643924ad54bcc4f27dc272aa8c9a40eed3ad162"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/7870259029.json": {
+      "bytes": 734,
+      "sha256": "5f107d38ff9f4ce4bfa6516790a1fba455c14438e4850c66af629dcc293fa866"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/7908131187.json": {
+      "bytes": 804,
+      "sha256": "b42945381e2e1b9e3c7bb5425fd9ddb89b97c6c498cbc4a1755e33b4d1aa1b26"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/7910063098.json": {
+      "bytes": 814,
+      "sha256": "265aa88647899e028032acc25ea14ee59b3cea9369ead4ee2db3b4db229665e4"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/7919267931.json": {
+      "bytes": 734,
+      "sha256": "394435f94f918c8c92ec20a85d16deaf4e48873bb6370439f399b2a4c6c37ab7"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/7920177209.json": {
+      "bytes": 792,
+      "sha256": "82cca62ae4db6ab775a542249193b0ca7c6202a2ef0efd1c7f8e3ddc10a807b6"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/7930703278.json": {
+      "bytes": 753,
+      "sha256": "2c2badb98907d75dfab9a50470c54e8478a37a3bcfdb4b31aff28aa9b034ae43"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/7930960375.json": {
+      "bytes": 734,
+      "sha256": "34e554d16666b596228c3f97fd9e32ffb45480aff044f64d377465d1c9afd283"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/7931870619.json": {
+      "bytes": 775,
+      "sha256": "f350b09cc114e9330694999177db9c00dff32f70761fab4f66b564eb5dc30b33"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/7941181793.json": {
+      "bytes": 734,
+      "sha256": "9d25f982628d4f90d72d30f555edc27c871ddf529c794b639763b65962106fba"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/7947598300.json": {
+      "bytes": 816,
+      "sha256": "ec591edbd66eae0c6ea7a46a5be1ba9b4eef3ca0bafa752966694ef7554cafee"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/7947914266.json": {
+      "bytes": 756,
+      "sha256": "380e9a9fd5e964be156a7fd9bc05b11d8d235c471d95e6aa708a4f750f84fe67"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/7969037639.json": {
+      "bytes": 791,
+      "sha256": "6dc76a6a8a90ec7dde69d362235a217fb41606f20029eb36328d156d395dcd9a"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/7984766569.json": {
+      "bytes": 753,
+      "sha256": "75e3c9b660ba83eb74367af7ce100d0214a1b66b6435d2ec5589086a112797fb"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/7987693471.json": {
+      "bytes": 734,
+      "sha256": "d71976eccc6177bef9ee4ae282d0eb966f347efeafbe75e01be7271c404c2587"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/7991028282.json": {
+      "bytes": 774,
+      "sha256": "9b513b18945d67eeee5bdf6567df53982d25b7418a479902e20542fe97176d22"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/7993550124.json": {
+      "bytes": 734,
+      "sha256": "847827035d8c303ed78e82020bccf10970efc29cf6cec1d3a1e16972d4dec4da"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/7996065503.json": {
+      "bytes": 793,
+      "sha256": "bf5ef927c43ebb6c4452dafd37d4584b1e30c5f35fac2bb74df1ca80fa898c94"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8005245085.json": {
+      "bytes": 913,
+      "sha256": "08daca8e0321773e8804d0f350f0212cc6eec3db832390ef5f5e9d14a28231dd"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8025019559.json": {
+      "bytes": 776,
+      "sha256": "facd3d6e25115d9d63e1383aadb7a008a624132b311f39fe679d9133dfe25df0"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8033942866.json": {
+      "bytes": 765,
+      "sha256": "0c2f0956387fa68c728142eccb74a944e4d646f2e033e7614c412fbdeffe522b"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8047574457.json": {
+      "bytes": 734,
+      "sha256": "d352007769c234a36fef87a1e41c580bc14af7e6428472eec6ba969dfbe1f790"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8048073527.json": {
+      "bytes": 775,
+      "sha256": "f8fbf1e93c985a4803fb6a6c7482b84488eddafa7e0faf5325349bc6f57db962"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8071574480.json": {
+      "bytes": 775,
+      "sha256": "155204e951175808372ff23c976f552f794a7a39e5fb2ea55f48b0d2eee47389"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8074072496.json": {
+      "bytes": 776,
+      "sha256": "81adb40665b965894f0c2eab4f4be5ac45a3d2c013781be6a6a2648f2e0f784d"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8081147634.json": {
+      "bytes": 757,
+      "sha256": "dc2f2ce4ce56cfeda5c11eb51ba502b79a8f0ee39e0ebcd446b1e97ce0c16a85"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8083953739.json": {
+      "bytes": 734,
+      "sha256": "6de0efd76d4b852b341a67f3bf976b893f3666c1fbba37b2314d38cd2e14f5c2"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8098698439.json": {
+      "bytes": 777,
+      "sha256": "87817818f5d89676424ad0b50ec9163f11f165367dc2efa08b7a5ad3cab71781"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8101442388.json": {
+      "bytes": 734,
+      "sha256": "246b7ccc497baaf7195b41dd87031a4f3601a3666d8fc3025611cb51c39b2597"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8111570289.json": {
+      "bytes": 794,
+      "sha256": "cea4efdb887099ae578d6045524a6904195f4ce58fdf11c8a9b450771e86da36"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8116746489.json": {
+      "bytes": 763,
+      "sha256": "9ec1bd281c339ed5726da7798a5ad3c562a8787ef211574f72ff6043560574d8"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8122796302.json": {
+      "bytes": 886,
+      "sha256": "f354a1fc4d45993fdc05ec066b489ae3d265466858944f2197869b70346de683"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8130243886.json": {
+      "bytes": 766,
+      "sha256": "cde0a60e091abab7b0f36b1ec8bc0d12b0902756d5b33b0660630d0117a20e6a"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8130810478.json": {
+      "bytes": 777,
+      "sha256": "82c90a63d0dd390018a1a9dc107bc7d01e899dbacdb274bc0c479deedef17b41"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8136402231.json": {
+      "bytes": 774,
+      "sha256": "1778c85cad6a7726e2c346e390b1be630168f547aeb03b0be2d6c8810b3bed18"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8138708330.json": {
+      "bytes": 773,
+      "sha256": "0893107841a5e07ecf6dec0757fa7c1539ef4c5cbedcaac594ccbd284e7afa7b"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8145868003.json": {
+      "bytes": 796,
+      "sha256": "9175da38684b98eac307798b1493821ac91faf112494a179d6c1f25cbf2e4e3d"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8153926324.json": {
+      "bytes": 760,
+      "sha256": "b693f4f64f0a24f3bb433791b6272823541ac0c4ce000b21be26d9a4f1be1818"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8159715638.json": {
+      "bytes": 788,
+      "sha256": "22320fc1fcf7f6727ff74bf86e4c095ddc1ff5a487699f8de29788f4e214432d"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8159748381.json": {
+      "bytes": 775,
+      "sha256": "0716adbac4a223ef90939148c16cbe7eee248fa494577f59040d4613327a135c"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8163991574.json": {
+      "bytes": 734,
+      "sha256": "1e9c93cd37975ef258e3eb30eaa45034030f7fab8b5f26b249fcccbfdd9232a6"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8170746633.json": {
+      "bytes": 871,
+      "sha256": "865deb6b97f207ee10a5128acf1f8efe0052b278ef3d1e3505930ba5bb8543f3"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8177456909.json": {
+      "bytes": 761,
+      "sha256": "b9ba7f35675d2dc5e6b071a965953d5ee807b8225c5cf1d87578dbfeb16c903b"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8179195927.json": {
+      "bytes": 764,
+      "sha256": "3deadf1ce8360751910f99f33000b7e54212a9602913e097c6efa30eacd269d4"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8181902343.json": {
+      "bytes": 734,
+      "sha256": "dce5cbb0fa26b8f6bfc0fb6e15a0be24651d8406efc98f2f5de861df76fa3769"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8192757260.json": {
+      "bytes": 765,
+      "sha256": "0c3d4dc9f724355dd430625966a3452c81e84db0d74dc2002794920ca66e605f"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8193244683.json": {
+      "bytes": 818,
+      "sha256": "aa1a49872dbfdfb42e623bce89214a3e8a376fcf63b74e34a840d7393417b56b"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8193912989.json": {
+      "bytes": 734,
+      "sha256": "35d20da74d7c8f2468ee9afcb7e41a6828147112f1803264687d36e7c183dd73"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8208239985.json": {
+      "bytes": 734,
+      "sha256": "970bae903c44b394105eada7d80d003cd0da8336a3e9a9e12f9a8080a4aa5432"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8212059501.json": {
+      "bytes": 786,
+      "sha256": "19a0c871374ce2cdfefbbf2e86fa5eda9369ccc2173166d499d99c2d47ecc2e4"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8212357423.json": {
+      "bytes": 734,
+      "sha256": "24fed878b0562650cbc20f2b8ceb0a9f1fd09daec8a97f8591118df058042cca"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8222390601.json": {
+      "bytes": 734,
+      "sha256": "cf1cda1ad29e3ae9456884ff9fa5ed7ddbb309695caadee9a194f4d52946cfec"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8227579190.json": {
+      "bytes": 734,
+      "sha256": "70bd67fec254db688a086a81f49ca9fac7daf6af8ab80b6af0b833d68803b755"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8227856468.json": {
+      "bytes": 760,
+      "sha256": "2cf767e37d39bb3b49df3da113ec2d01e36656560bb7f9e791b8a2615e4f3325"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8228663823.json": {
+      "bytes": 734,
+      "sha256": "25273aceab6e19674378f0c1cf8b3fb7d2d8928f4604eaae9f6506defe085920"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8232680172.json": {
+      "bytes": 780,
+      "sha256": "e1a3a475eec97a206537eae0cf11b7ce04e650d7a86368235f3387ab37d00d53"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8241953026.json": {
+      "bytes": 805,
+      "sha256": "f79a5620ec43114fcbcb54967729fdb7315202ce2c9de7c8e17fc2bf87589db6"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8244163781.json": {
+      "bytes": 821,
+      "sha256": "1b57f041eb919f93271e1e678f52912de758195041e5440f82e762c773eabc97"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8244626818.json": {
+      "bytes": 768,
+      "sha256": "bd2a0f0c5cff7b8485fdc496a3b550d17e98e25261798c3bdfe70f9d67e662e9"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8249685245.json": {
+      "bytes": 734,
+      "sha256": "56e487c438e0faa83110d19dab0f3bd9a1111ffe46cff64ad2229b6a9810829c"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8254050804.json": {
+      "bytes": 761,
+      "sha256": "7f1af53aee7c713735e13569c3069f80de9c9ca17d06b5a11372d9eec8fb1bd6"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8254379452.json": {
+      "bytes": 860,
+      "sha256": "e19d74fe3871c606acf1aeeccc3490fa9d7fdf5ef32375e883f90bc30a251393"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8256866562.json": {
+      "bytes": 799,
+      "sha256": "83491d99ec2f6bdf1557a01a090523268baadd52bce1c94f8bf940dbc40ba988"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8277389910.json": {
+      "bytes": 734,
+      "sha256": "cdca603fffd621f49c8f024ed1ced09219ddb3f7cc7ec08bfad060bd519a68f3"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8280848231.json": {
+      "bytes": 790,
+      "sha256": "fc2b50540af05ff3a0b941359cf627cbc7943f5df403c6c7b3b77cb75d3f54ac"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8285896494.json": {
+      "bytes": 770,
+      "sha256": "b778378fc95dc286214ab28ef0b71e16589093b8974bf7b63eaa923aecb9a0b7"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8288272210.json": {
+      "bytes": 770,
+      "sha256": "703cccbcac969a3a0a947c51d9a362919d67f0af693adab1eb537fcce5fd5a87"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8288290842.json": {
+      "bytes": 734,
+      "sha256": "748eb8124be546fe99360f94f206bb6e5cd2b5937b655a11a74304ddfc6fd4cd"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8291089065.json": {
+      "bytes": 832,
+      "sha256": "0bc9a650562418a56be8b6bf948f1032f118ced694f5e23e7365bdcdf6bdc1a1"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8298985022.json": {
+      "bytes": 787,
+      "sha256": "0641eb8c439a0197b049934996f146a51d51c246106a1e99c9c7f94ef525d34f"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8302086615.json": {
+      "bytes": 878,
+      "sha256": "33068fa1bce834444add3288846b310066dbfe0fdd89a6fdac5a980d89df4a8d"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8305858172.json": {
+      "bytes": 788,
+      "sha256": "d605010da27577bf37e995aaa62ea972f280074a86b5be901c28f40839b835b7"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8306174436.json": {
+      "bytes": 734,
+      "sha256": "985a10e19ad7a062e0d48bb2763ffc9639e813297aeafbb1c12f50c244befe5b"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8306868269.json": {
+      "bytes": 784,
+      "sha256": "0b93c317288df02454ca6345084b06351699588e7f467c97e3f6cca6dabdfc6b"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8308688260.json": {
+      "bytes": 759,
+      "sha256": "7c41f1210b1e92cd4932ed1f5442614c7a1695a10fea89fc2d850f0c9f512fd2"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8311265243.json": {
+      "bytes": 734,
+      "sha256": "e47db396384b96987a01c150a0f36b305b1109cdfc756069dffee91703a173ec"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8315528537.json": {
+      "bytes": 734,
+      "sha256": "0580059e30b2d68e44ed95bf3a0d9708be82603f940f5162de530a92e9884e10"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8315841763.json": {
+      "bytes": 769,
+      "sha256": "5deb9dd13da30c6217b1655d80a0a6cbd55489045533b6bf02d644477c81edc7"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8315841932.json": {
+      "bytes": 734,
+      "sha256": "0fcc2f2d72b4521187842af976e5f89eb2f99149b1a24c22ba5cf5954dffa1b9"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8318280024.json": {
+      "bytes": 763,
+      "sha256": "e85c4a56145a734c324df436ba09b73c49c70dc9bfefa113944917098d88086f"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8328641168.json": {
+      "bytes": 755,
+      "sha256": "e6a51ce64a84a62b59590fd8303d84ea65d24b5c90daed13a263b1b6a9c12bd9"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8332263792.json": {
+      "bytes": 782,
+      "sha256": "aaeab38a44930c86cea01fac4710480c1be8a157f2bd75c405688dfbc874aaed"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8332811961.json": {
+      "bytes": 734,
+      "sha256": "0f6c38347dd68fea6cb239e2e1cdff30e31af1c38b6150d6a8a9473fb174ee07"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8334112010.json": {
+      "bytes": 775,
+      "sha256": "412e574834280a680985587144cb8430e4080f260b6730c269046bf7cf9dfbe4"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8334997034.json": {
+      "bytes": 775,
+      "sha256": "866a607683c76012316722dd8daa448a676648b8e6ca78c35e17027a030a249f"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8335347563.json": {
+      "bytes": 772,
+      "sha256": "d0801ec78ad81d86031eb51fb6f6d8d679c04ff9f71301cf96e96f92778566b7"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8335389229.json": {
+      "bytes": 774,
+      "sha256": "2f5a4fb5ef22ed60b432e52301790970adb24e7d4b1e27c3b4500bc6e429ef31"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8336242037.json": {
+      "bytes": 791,
+      "sha256": "21ca1cb8bfd564dbcb9bd58bbf4b42c33793b348793ad32d2cefff8bf15a988c"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8337860849.json": {
+      "bytes": 783,
+      "sha256": "5904c51283486c84173e37378fd32fd53465ce648d40cebf1dcc36e2e742136d"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8338544020.json": {
+      "bytes": 778,
+      "sha256": "799a11350c1974beba2c7c1247256ea963d379bda17a295a2c3790ce2d552260"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8345057614.json": {
+      "bytes": 734,
+      "sha256": "bc30271c788b529fdeedea7efa9ad7365096a72b46452198117ca92abbf923a5"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8346855937.json": {
+      "bytes": 766,
+      "sha256": "b8eeb930594bd7d4ba834c6cef9b2390e993e40227d15b254a2d8435a1f0538d"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8347209267.json": {
+      "bytes": 764,
+      "sha256": "cb57b27da30aacf443f89315b84cc0c14c18f98983b88d3f8963d0393a90c249"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8347262437.json": {
+      "bytes": 775,
+      "sha256": "85ed432462281802b6453452ace1978afc04cc2a0a22eb5d88f8398cb508a179"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8347907745.json": {
+      "bytes": 734,
+      "sha256": "e8d9130480d0fb2cd747b29a9b4fb74d5e6d41b636343005f9a947557ed27492"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8348085354.json": {
+      "bytes": 734,
+      "sha256": "64d347d886e7b7470c97532d8dd2e2879c6cc1dc8b19f43240116febfb1a2706"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8348141305.json": {
+      "bytes": 848,
+      "sha256": "26e54c9f7d425a04fa875766e8c72a1b0e006986554db677e6e514ba466cca8c"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8348426166.json": {
+      "bytes": 734,
+      "sha256": "1067bf6561da75af4e0d60f4b9345858296e23766aa6403909bb88d8c97f5382"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8348600329.json": {
+      "bytes": 734,
+      "sha256": "12c873ffe45e4f05366d365d071ad8e40ca55027c67ce0ebee45e4ba5f16a007"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8348855975.json": {
+      "bytes": 780,
+      "sha256": "46b8e0bda46feedeb278255b28aff193e0e85be0ba3aaca6bf8df0b79f1a30df"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8349156680.json": {
+      "bytes": 734,
+      "sha256": "01bbf21c4859e800340afdd9c6e6b3d4d4795a90e0dc301bd563f84ceb044fdd"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8349332099.json": {
+      "bytes": 760,
+      "sha256": "cc383e31780497ecb0fd4578989eaffacf2ed82c36b309a8dd5f68c50d342b33"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8355648191.json": {
+      "bytes": 806,
+      "sha256": "54ced17c95adead85d90dc2e184339c3a3422b9ed58b2c16b5659d6acc93e8f6"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8357342961.json": {
+      "bytes": 775,
+      "sha256": "0b974be2afe780c6096e1ca80d122ed36718e25e0cfce48d71f2f84355d043ca"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8360422867.json": {
+      "bytes": 779,
+      "sha256": "316362f6180b5d14ba7ce98954e120304cc8a04c5c42cdbed1febe619344fe9e"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8360553619.json": {
+      "bytes": 754,
+      "sha256": "63fe92036d884f7e3064569c545c5f5f3727ecc9ae9e8b85676b17c8815d949a"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8360613815.json": {
+      "bytes": 734,
+      "sha256": "d37e2c86483ab5f1cd95391abf8378493d13b0b54e78ee23260e099fe29f2e75"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8360674721.json": {
+      "bytes": 734,
+      "sha256": "9b671072cd3022bb8b7869b506412e9cfe7fe8696a1ea5b4b981e38cb3ab26d3"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8362186134.json": {
+      "bytes": 734,
+      "sha256": "c44a3cd5992fde6715aaaf36e828d2f5b1dcf00d26e773f1f4ffcf6012969e77"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8362293280.json": {
+      "bytes": 764,
+      "sha256": "d9a027eb80a35b0ef9983975f776c710f164619a7d711fb2d9f313d18c22ac97"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8363592627.json": {
+      "bytes": 780,
+      "sha256": "a20069050eb1bf0fffad2b0ca4038356a668c8d4ab5ee3496dece8c6a809abc5"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8364068649.json": {
+      "bytes": 775,
+      "sha256": "b2ad08b89b20c7bb5633de3d3675d806d61bb0ca48a4f1e6b54a2ba7ca6937de"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8364820452.json": {
+      "bytes": 772,
+      "sha256": "71224ea01253977e02c8665fefe608ed449ef196a3517836ad77ccef5e8031f4"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8366456192.json": {
+      "bytes": 793,
+      "sha256": "1eb8725f26e7324f26f7831bfcb5dce4db22181c99d97bd5f3e6974f01c98265"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8368529212.json": {
+      "bytes": 734,
+      "sha256": "6bff6064202034d75c2347bb609ab60e45e0ed9e36d18612a8bec3dad7e1ee41"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8368833519.json": {
+      "bytes": 790,
+      "sha256": "3a777d5ac1d37a59ab2d3dabe0e7da9ac35238eeb2d10865c15dcb85fed871c5"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8369219696.json": {
+      "bytes": 780,
+      "sha256": "359daf61178e66ab5355faa22a8a7358925e005952b1b61454b29f204ecfadef"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8369359766.json": {
+      "bytes": 734,
+      "sha256": "be7dc5919e58d52a181b8cba16844906be964324c6b8e58cf33e323b3c190885"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8369775979.json": {
+      "bytes": 867,
+      "sha256": "c31970b52e9c276029b908ba9a7d64911f13802c677950f96ad2df9d09e9d4d7"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8369942665.json": {
+      "bytes": 771,
+      "sha256": "35ddeb0c8fa97cd80601dae7e9327b9a453328432cc7609ad4bf2449bd576be5"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8370484754.json": {
+      "bytes": 777,
+      "sha256": "a260e539b29f74705c298272d96688da08989d8fd68675e97b12aa51019b3d3a"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8370683398.json": {
+      "bytes": 763,
+      "sha256": "69f4b73532ce0a6dbd7610ead47e5b0daf61487905df96f26f8dfea282a14a9b"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8370753263.json": {
+      "bytes": 757,
+      "sha256": "71a7ed62cf2ebf33ed13d79d9ffa663d28b7fa0441fc7dc8fa6185e7d5385496"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8370837766.json": {
+      "bytes": 768,
+      "sha256": "741f3d8777c3d12ca2248a8107cc9f25faeefc8e5a046eb6f6c6187583783e28"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8372089413.json": {
+      "bytes": 734,
+      "sha256": "3b678fb998abf6df4610891441aecc719b0852534c326f5b98eabfd581f05e4e"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8372619637.json": {
+      "bytes": 805,
+      "sha256": "183f8c2d8216054e0a725eddd13bd07a6db1ff1e729922711ccfb939db84ccec"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8372667582.json": {
+      "bytes": 734,
+      "sha256": "46057120b6fc5607b8c72a8b89d35a9d2842e9a03fc8b44ffa4f6df7b6112240"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8372707776.json": {
+      "bytes": 734,
+      "sha256": "f7ce959e06c4c363bbf9e104113d5b9e95af059074862dd037656b6defd0fd6f"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8373389142.json": {
+      "bytes": 800,
+      "sha256": "ddf2c799fda9e4113175f84561e5bbd4bbfcbff20ba951e87eedda6809a0dfc4"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8374676357.json": {
+      "bytes": 766,
+      "sha256": "ddaf14d234dd0f8817532af2fc9e6cff05d494a15f4bb164f5c1344a662f3dd0"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8378862321.json": {
+      "bytes": 734,
+      "sha256": "0f89401bbc6bb2b0db18304fd96c98812f84aeda310555c18e53100e38c961a3"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8379107745.json": {
+      "bytes": 734,
+      "sha256": "f3aff396c6f85e87974346f1d40ac187ce9b95546b84f92c54449ab09c3d2f1c"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8379137829.json": {
+      "bytes": 771,
+      "sha256": "2cb5465b40bddbc177f4f7e31553dfb89db616d20da92ac13a3de60fcaa5be3b"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8379753615.json": {
+      "bytes": 734,
+      "sha256": "78920b282308435f94d170b037dfd84ef68866556d2867d76f3269c380353f07"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8379766826.json": {
+      "bytes": 770,
+      "sha256": "0f05abd378ae6936b570dc677631f738ea12c4dd5334a154f31dd7ed159bf4d3"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8380335448.json": {
+      "bytes": 734,
+      "sha256": "d841ba1575238db29960751f55a2592200c74c9f8020f73193ba11f46035fd38"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8380537677.json": {
+      "bytes": 734,
+      "sha256": "dc601bd960d5b152caa88790b2e1090bb8a6f3d5a36c48200e35e163c299cc9b"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8381520465.json": {
+      "bytes": 734,
+      "sha256": "e1732bfc7b4c295301e863752313e0781847e62b8aeb8ba05daefd8c44f5c822"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8384768443.json": {
+      "bytes": 734,
+      "sha256": "45e33d9026b4fd69ed72f8c638e96a34634758a542f0b26b2825ef420e43b0c9"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8387071129.json": {
+      "bytes": 775,
+      "sha256": "a9393e34a98757fcd71eb1f9d938591d206858eb43c1b68818eb1c07f25606bb"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8390441710.json": {
+      "bytes": 780,
+      "sha256": "6c2f8f8dd3871d4d30aebb1abd3dcecea39a7caae0eb0f15f71c05b018c734a9"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8394866049.json": {
+      "bytes": 784,
+      "sha256": "8fd4636daf4c57143e262292a1eb8ad667b07a2888a2c71f084866611e0b2531"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8395054551.json": {
+      "bytes": 761,
+      "sha256": "927d2ac6e44d1d1277d88a3670db81bc867e190ec5fb94266a193530d68ebfb8"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8397915940.json": {
+      "bytes": 734,
+      "sha256": "6d2402793d5358470eb94fdaf449eb03d930bec10fb5de804646427792e82f57"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8398505770.json": {
+      "bytes": 801,
+      "sha256": "914efdeeb15fbf35a46028bfe25270d2ba07acce9d5c9c988d458c493570d8a6"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8399552527.json": {
+      "bytes": 780,
+      "sha256": "a45bbf3b2c218de2736d65d6b50b8d6b6ff49362133aec25131714070cd006f9"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8399930374.json": {
+      "bytes": 734,
+      "sha256": "bcb39d513ba671c230420208be6f05a25811b2a8f5963ddcd4e2206953fffa69"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8400024027.json": {
+      "bytes": 780,
+      "sha256": "e9a2de18f75d06b0e033e05ddc00fa9373b66a5b387379e18643209543f34fc7"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8400121228.json": {
+      "bytes": 760,
+      "sha256": "a9275ecc5671ca0ef0aec50cd1789689da7bedeb15a7a5a8f08491cfd0e731a2"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8400409480.json": {
+      "bytes": 734,
+      "sha256": "be3ea8035092008bcf102e15ece74f9ed07aad570acb366d6acd6dd604b99a4e"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8400956414.json": {
+      "bytes": 734,
+      "sha256": "7c66d07e53321fbc020b2512c7773a4e7c5f90aefc2f9de8c5c0b305987207ad"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8401481706.json": {
+      "bytes": 811,
+      "sha256": "0bb4b001d69927671d4df072cf348fb23117497d1c13a4483fdc3bfb2cfa7f0a"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8401633970.json": {
+      "bytes": 734,
+      "sha256": "6cd091acd335d69eb3c43fb3f6475188eaacc2ae3c701c7b86b9f2cae0b4fc83"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8401678009.json": {
+      "bytes": 796,
+      "sha256": "eeae4c61f04bfac5acf51a082614911378cec6e2f9f8a38c2f7ce3164c8edbf9"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8401745347.json": {
+      "bytes": 851,
+      "sha256": "51848c6872fcbe0ba5a350b9fdf09f8b1a8fa9b0aad98a71dfaa7b52f8c95e52"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8401959022.json": {
+      "bytes": 773,
+      "sha256": "caf00bcab53416fcbeba52b8333856c4068698e36c501abc450f9091d6c94d8b"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8402073760.json": {
+      "bytes": 775,
+      "sha256": "c62be73529f628f4263a549b0e7da8a5288b01ed526207a6bf42912df01bd045"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8402236967.json": {
+      "bytes": 780,
+      "sha256": "7bde49159e965d6523617b083d6306cebeaea7025e9228b82742805fbc4bd27d"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8402239184.json": {
+      "bytes": 734,
+      "sha256": "5d93e79d344d2dd125c41bb03f602ea85af8af7d3ba50a73bcfe7d6db2a68e3d"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8402243275.json": {
+      "bytes": 764,
+      "sha256": "123a944f935cba1dc487ffed6c08aa1d3bd85cf82fe279ddaf8b077ba798bbd3"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8402707860.json": {
+      "bytes": 734,
+      "sha256": "cfa5cdb511feab75a33d887a703e7c6b7ae429ca625cd9b55cc62b518e5c55fe"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8406999647.json": {
+      "bytes": 807,
+      "sha256": "625f5f8f6be6b0519b908988707d58e57b3e7ebc2093566e734075547b0c9b67"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8407081682.json": {
+      "bytes": 814,
+      "sha256": "d80255493c1a057de7fae27c5f5fae278a516b98cc32776cd304f60621ee1b48"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8408120713.json": {
+      "bytes": 800,
+      "sha256": "d35dc87241869c296c49390824c3165ed6a284ad5f4f42142b57d0ab70bdb1e6"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8408544833.json": {
+      "bytes": 734,
+      "sha256": "cbd9377526192c62572eb7d4d4e785650b8aada8a4fe06c6160bad2981815891"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8410050639.json": {
+      "bytes": 756,
+      "sha256": "51844e8533a7d6ae1f83d3ee10f34bbef9db6a8add3c0df0c56c4c4f8c990080"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8410085027.json": {
+      "bytes": 772,
+      "sha256": "5a502757d5c370350d5b3705e92ffb134187a2fa58b2a6ec122cb1c7e5ea2985"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8410262757.json": {
+      "bytes": 734,
+      "sha256": "69ed9102767a336f1ec8583b5aa076372667a330bbb286149b45b4e083f12de7"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8410402596.json": {
+      "bytes": 734,
+      "sha256": "b4dcbb9394056148ac7adb9eca872e167e7f66be08df837e2a28e3d9539700a2"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8410834366.json": {
+      "bytes": 734,
+      "sha256": "09c7c9c95ff4f36d32218f34afbe7205c0b96a653019faa747f68fa660b48cb2"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8413400713.json": {
+      "bytes": 778,
+      "sha256": "e4f780bea4360c169ed86965669dcfe10719adea15046426d9c0094cabe76210"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8413461867.json": {
+      "bytes": 807,
+      "sha256": "04a07fe56539fe8ce286403744a8e9a127af3128ea44d616b6c283580c8d2739"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8414101597.json": {
+      "bytes": 752,
+      "sha256": "a5a0037b3ed323a484ded50dee778c9721ed76ad0ccca21e23f726935adb1b57"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8414141537.json": {
+      "bytes": 760,
+      "sha256": "8a6e1814422fcd82d780115916e3c0245a767d8cd6ef85132dd5444fe98330ee"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8414290996.json": {
+      "bytes": 775,
+      "sha256": "d737fe9209bf5e6ae3e4a25434eb4a3e59ff5ae0479a7f201a6e32a82bf5d28f"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8414661432.json": {
+      "bytes": 734,
+      "sha256": "872fe53a07c57262424f32ba55c7cdbd2ffc00aac033b3142bd23b6339f768d5"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8414797661.json": {
+      "bytes": 757,
+      "sha256": "bfeaa1d987bf4996c44af023488a95808ee67e13f00f6c3557c92f7dc7ad19c2"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8414846727.json": {
+      "bytes": 734,
+      "sha256": "95913fe46c874ef6f3e8cf945c65bed3e73f6788ae6b215c3489067cb028ad85"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8419239836.json": {
+      "bytes": 860,
+      "sha256": "35e6b2d6b232f3acd5dd205e4e581152f7b788e4969625021bc176215c17deef"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8420116096.json": {
+      "bytes": 780,
+      "sha256": "e32aeab2bc0c1a693967ddb26d9874288691b12aede75d69c4bed3e5a294afc2"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8420149711.json": {
+      "bytes": 761,
+      "sha256": "7fb102dce4be56cc630b85067e00fdd5802b0bcd6a83c0ba7f9598fe60e8d994"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8420344071.json": {
+      "bytes": 770,
+      "sha256": "c6ce1087ab4f4f9b4dcad47ac0f3122c01ac2dd980f2978c4a599ba5ac4e7ced"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8420348978.json": {
+      "bytes": 780,
+      "sha256": "eb9177f1cce5ee0665428abc7e935cf3ee86debbb48005c9f4773bb49d9b43f0"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8421913405.json": {
+      "bytes": 775,
+      "sha256": "3f020ceec98b5b70ad316c91bbee6c3b6c4ee820746df144819c46e77842e030"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8421943997.json": {
+      "bytes": 775,
+      "sha256": "5ae15d875ba71892f8cb5a5345ac66868d819c32cf8d67dd74d417e2bd51bae0"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8422243933.json": {
+      "bytes": 756,
+      "sha256": "db7bdc60a4a276a410e0f0f046cb9d3665ed3491cb92a2e5780ce7b492c87062"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8422485541.json": {
+      "bytes": 775,
+      "sha256": "d0ae6d4c2925802838794e8e70ddd42b1773c6eda98ee6b3f962d3cccef9e029"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8422559726.json": {
+      "bytes": 805,
+      "sha256": "6d392d7a54c57f774cbc751857cdcd770f793e1a5e49e67de02a2af55c621c1b"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8422940145.json": {
+      "bytes": 782,
+      "sha256": "416f583ea4b930b17fd035cac9078cc7468408284df3b68af7903bedd24fe5d2"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8423268122.json": {
+      "bytes": 734,
+      "sha256": "f9e5c6d6cdf3bcfedbf3068e64b3062059b60b3e00d0ac9a911bed9fe1a50f6e"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8423713536.json": {
+      "bytes": 788,
+      "sha256": "e13b42109c8257494adcac3bc9b30585f5454e6b6e9e85e4ec132e0c98de48b5"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8430585690.json": {
+      "bytes": 734,
+      "sha256": "a33e836e27b01daf99ec0357352e21f7970a9c00894d92d0ef1fd963852c1416"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8430669016.json": {
+      "bytes": 775,
+      "sha256": "ae30c9add73e034675c31014c92f4f4075805d7b29a85fb00118fc8aa608405a"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8430892285.json": {
+      "bytes": 734,
+      "sha256": "5f918bd7366bdbc7c5a6ebb8cc545ca083374824468184722eb647dfdd24bd56"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8431021563.json": {
+      "bytes": 734,
+      "sha256": "940a2f936bf10ee12b989919592326bfc1ad1ecc280489406c3e08b539f8d524"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8431156938.json": {
+      "bytes": 734,
+      "sha256": "ffa802b32be88d6357e79dfd8d010ab1fe6759883b5146c436cb17028787fe11"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8431758929.json": {
+      "bytes": 762,
+      "sha256": "7eea3a8cb7daad4eaebf61cd2cc33faa358f97b0e1f6d2c7796a546044dbf068"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8431987437.json": {
+      "bytes": 734,
+      "sha256": "1b14dcbab8423569bd79d74f6d53288a6068f54f9603b96dd846b2916018a7f5"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8435116466.json": {
+      "bytes": 761,
+      "sha256": "748f9c6836fcdcfe60c465455246b1b6ef143d4ca113f8aef10d097afe40f800"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8437661393.json": {
+      "bytes": 734,
+      "sha256": "f9b78c013f9a0d3188ce98a627202a522676b042718550011b0a683590a4d534"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8437968898.json": {
+      "bytes": 768,
+      "sha256": "89f1d8069a582ee9f7c4c6853833d7a60d9a25c6d927d294244e00a7dbd90b22"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8437999767.json": {
+      "bytes": 734,
+      "sha256": "6b81586fd855c29ba10230c2a8237c34885a7115bb0aff38e240bd490709bf1c"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8439105621.json": {
+      "bytes": 734,
+      "sha256": "73baa843ad39a30c133ab4b752668ce63b37fafe13b99e824d9518cfcabeba89"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8439202328.json": {
+      "bytes": 750,
+      "sha256": "de461ac605ce0273bb9c09d00c88e3c296364b7e8eb3fa4feacff9b225349e5e"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8439596356.json": {
+      "bytes": 734,
+      "sha256": "c1bec447a53952a4c457433edd4aa7ea11f4d782fabb97a59ce571cea90dd23c"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8440163218.json": {
+      "bytes": 734,
+      "sha256": "d965481ef3524b9bb3d671908e63be3875d49b06ef8affdc294ebc98725b6283"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8440221376.json": {
+      "bytes": 734,
+      "sha256": "fe0fd5b9c7c24c482dc999b4d1378eec94cfa2527245bc891cd6f65ced5ae616"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8440243692.json": {
+      "bytes": 761,
+      "sha256": "a021c2d7bd072b55adcc299882d1b6377d115100ccc735108ed3e054ebd49d52"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8440353166.json": {
+      "bytes": 796,
+      "sha256": "321d3cac286526e62149c651bb175549cb83f757a0d5001e8f313fd191816d3b"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8440579595.json": {
+      "bytes": 778,
+      "sha256": "bd1647a09670ef91ea1af71841b7beac4f305afc276958ba8940e425bf416230"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8440900972.json": {
+      "bytes": 770,
+      "sha256": "e198ae2918fe0a22cb82876820028af87b0e3ed53e987b92d2a133c5fca7e2a2"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8441182434.json": {
+      "bytes": 734,
+      "sha256": "c5e69d5016a636ca9178fc1657524182e7bd2ff4d58ad5bbcde7bcb1919426d9"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8441722078.json": {
+      "bytes": 788,
+      "sha256": "a0320af79ee19eb4bde8f2319bdc3b1928f346dd3d35e73a272d8e8408892ba9"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8442297567.json": {
+      "bytes": 790,
+      "sha256": "2e985d883b5abf82284665b10b58aba477c1b967800018caeb90e524d5aa317d"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8445275462.json": {
+      "bytes": 793,
+      "sha256": "8de766483b7294b156830eb43d50214891b7f0c51a81b38e05bfd5ae7f83fe0a"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8445573236.json": {
+      "bytes": 734,
+      "sha256": "13a4aeb36266b0d0d066ccb42e12177d052441d669d8284fe614914fc75ff857"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8449631048.json": {
+      "bytes": 734,
+      "sha256": "5de78792c9e863a4cd781256b5d0b55e7f8a44384a5d3f344bc950a7cbb8b555"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8449726737.json": {
+      "bytes": 734,
+      "sha256": "15d227f08e0d1eb5b09b3966a4c0cab78885b9e8b3203eb4d3ea1e1607bc2b0e"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8450541860.json": {
+      "bytes": 780,
+      "sha256": "0e8a99c800d735b45331ad9905cca0ffe7ba36cda463ca8cec4d4fe811b73bee"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8451010326.json": {
+      "bytes": 754,
+      "sha256": "d9231fd96171380e85f79af8fc676a820f8aa64736fab2d589decd593f726033"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8451283476.json": {
+      "bytes": 734,
+      "sha256": "16d5de293312d19409073955ede500b9507d06f0e4dfd2267d75c130b475fa41"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8451952977.json": {
+      "bytes": 800,
+      "sha256": "66132647922fdc29ea34096a35c3d0a4de11949b793bfa1e1d76b9fd2f84f565"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8452116131.json": {
+      "bytes": 734,
+      "sha256": "b139a2ff1f6354c70a1db7c224fdda8a3dc4eaa8ee26e4b60ea8c21d5e24fc99"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8453291763.json": {
+      "bytes": 786,
+      "sha256": "ec7b40ad0106c532da498ebb15e618a01644417cc837cf0b5d4398a8aeb824cf"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8453550137.json": {
+      "bytes": 771,
+      "sha256": "4176f527ff305fec63a7653629d3d854d3b6b093f0bed4865be52909e45c9bfc"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8454918657.json": {
+      "bytes": 756,
+      "sha256": "25c1e1b4e209f52ada0c771aee40e41cc91977aef5687cca83ba29ef8f3deb39"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8455612648.json": {
+      "bytes": 796,
+      "sha256": "20ac60824b323fdc101fe3d0b83cfb0fb626127fbc70dc0133e62e800b4ab910"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8455656187.json": {
+      "bytes": 759,
+      "sha256": "7f62e61a85d088994fd481a5a402d130329414b6bcc322b0da23064125d771af"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8457936411.json": {
+      "bytes": 834,
+      "sha256": "f233fbedbe1bef2ae02405d0fd86e69f47337ea5fd7864da382db02d1852c953"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8458378617.json": {
+      "bytes": 734,
+      "sha256": "c785b26e6c2f5e7a99895e9e9d15a1926d6b4b74cea7d102c5b1266adb1baa1f"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8459277415.json": {
+      "bytes": 814,
+      "sha256": "9e72fad149f70d990d4e5815890f22eb02038e03e4960905f4bb73aaf4ad975f"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8459616417.json": {
+      "bytes": 775,
+      "sha256": "c5355b04d9fd2b2d3d5557e0bbd8a03e4f77db562654783bc88bac09dff5f970"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8462998298.json": {
+      "bytes": 796,
+      "sha256": "188677f8cf4579b3d094217d256231bb97fa23c5e2d797fe295188996b01decb"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8463300621.json": {
+      "bytes": 775,
+      "sha256": "364f2c978e12b4fdc0105858d802db39db507e1176affd6ad90f5e53708c5c02"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8463388833.json": {
+      "bytes": 734,
+      "sha256": "ca6a821f4c4bdf4cda8a05a00da9b7001c977c8830ed46c619e2b2d65a1bff6b"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8467045373.json": {
+      "bytes": 734,
+      "sha256": "02339b39d5c8d6d8b728c68822ea6e122019a2a06a3c001602f98dad6cd21b7a"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8469024701.json": {
+      "bytes": 734,
+      "sha256": "4623da31c611878a09804fc2837377e69d25348f0275d63f654ae4d8e47e5fb8"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8469110605.json": {
+      "bytes": 841,
+      "sha256": "e4f0244393fe0ba53ba288555fd43bf2eeb77d24b87754e1858659933e41ef68"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8469287309.json": {
+      "bytes": 734,
+      "sha256": "af8c56381d328e1bbd99911b38998e64949d3c94aee393b4f07b2e2493880a9e"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8469910172.json": {
+      "bytes": 770,
+      "sha256": "2c4cbd23ec22ad4009e0ce62e945c9b1eaf07595943956e3fed0c21fc9dc9337"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8470156395.json": {
+      "bytes": 804,
+      "sha256": "1197eab3198aabf0732a8fe8fca692d8683b9aeee9f2777c1f9c53bf6f47970d"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8470828550.json": {
+      "bytes": 765,
+      "sha256": "fec66c2dbe1c3b9bebe49fe7535db5bebd6d3b74fabf9b53552f806a74cafe6c"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8471125251.json": {
+      "bytes": 734,
+      "sha256": "ec4776c04e1e41c8998e12fc8957260483fe86024ad7b0b1a76d31b0fb3624a4"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8471358578.json": {
+      "bytes": 812,
+      "sha256": "c7f1b6473afae7678d35813f85218aab9bec8a34a0d37e9b5dc773276f7645cb"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8471962823.json": {
+      "bytes": 814,
+      "sha256": "35200729064bc2af4b58a47913f3d4d3cd71a63c33769584037252db85ed98f0"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8472721202.json": {
+      "bytes": 756,
+      "sha256": "ac56ad096e4cc471c9fea463446f52185ef91abb27d71fca6d1d679c4062a174"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8473392174.json": {
+      "bytes": 784,
+      "sha256": "33e743d2d2ca60594aa5478a180420e2794adae58b15cbfd52e1884e04ff4605"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8476948657.json": {
+      "bytes": 775,
+      "sha256": "30f44113b6788f02a84b573a18c1e333b80897758d9481fc2f06c8bf90ac560a"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8477380115.json": {
+      "bytes": 827,
+      "sha256": "4c000843bbf3ecea3f1373c981d4210c243ee9dae841e08dca99ce9560789323"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8480025748.json": {
+      "bytes": 832,
+      "sha256": "4cf664d22b117aa4105132970d42f4ff19681d5b0dd79aea9466fef677e44afb"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8483787868.json": {
+      "bytes": 734,
+      "sha256": "84ab8ac62c15c36d288623044eabb0623837f666be2e93139b8e896de8e4eab1"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8484932134.json": {
+      "bytes": 765,
+      "sha256": "130bdc3fcc512f0f260e2ae616743dba7389f3059f629111ede181990f55e939"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8489070253.json": {
+      "bytes": 734,
+      "sha256": "7afa6b6c1eecc37099d295926c600a2b055d16508f9d89ef135fd124d98638c5"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8489296218.json": {
+      "bytes": 774,
+      "sha256": "ba597b19839407637b949339dc2723f21e8c319fbb16dfbb35d77d1d9be716be"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8489315901.json": {
+      "bytes": 734,
+      "sha256": "7b06c8798216b9b4adc342863d4e7e975c9c9b670f342a05c8a1c41eb03e3b76"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8489360197.json": {
+      "bytes": 812,
+      "sha256": "31b9e5b4f821cfbda542952de8d94409ef89311dd6d38d7f55550ca662d1919d"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8489958706.json": {
+      "bytes": 784,
+      "sha256": "9c9e9c261ddebf4f76bb9b62c3a348a20c32841feab7cb0f40640da4aa9892db"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8490067863.json": {
+      "bytes": 734,
+      "sha256": "22d1624ab0b5e172233c52cf33b530e21ba75240a42185463050e582f3f93abb"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8490307270.json": {
+      "bytes": 823,
+      "sha256": "283646cbfa658115516e20f4f1c6e3dfa2e4a249d0ba37818c7378c537d522c0"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8490849374.json": {
+      "bytes": 775,
+      "sha256": "2f05e2607ab5963409689969cbc77572097c0ca407efa7be39d9128e38b81a36"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8491503411.json": {
+      "bytes": 775,
+      "sha256": "58fbbfb4220192fe55dab65461d4fdf2f289f5f7c708208a8f92078694ed88d2"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8498908625.json": {
+      "bytes": 734,
+      "sha256": "131e989de1f5c7748ebb853216d780657f2d46bfa38ca859a656872ac4159155"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8499412287.json": {
+      "bytes": 734,
+      "sha256": "c8bbdcfeb92eef5f1df34c655b8f67795f4a13a8c5efc045de1db78ec1f074d2"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8502430645.json": {
+      "bytes": 776,
+      "sha256": "1e885a157a0d80c7b4b2565c8ff9eaa8ed6624bcf010f5941b5991aae9e06755"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8503524915.json": {
+      "bytes": 775,
+      "sha256": "9c66c765cae83d03a0189d9be4654c3f976091616f941e93ed0df19b0db4d185"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8503611390.json": {
+      "bytes": 734,
+      "sha256": "3a9be2f6c401eb2c551972239e9228ad4c19bcddf0dd8c693075ade7d621678c"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8503673872.json": {
+      "bytes": 866,
+      "sha256": "eccde1ecec169603ab0e982239bb7c9b7b8e4ea6c2044aa4ff49580b260c0b51"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8512118325.json": {
+      "bytes": 763,
+      "sha256": "d770fe74ad96f09af3b84ed6a169b2468609a8330b3c507dd3e7c1e122bc442c"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8512638135.json": {
+      "bytes": 734,
+      "sha256": "0098701c67bb4749301110bb3eba5e2adcf069e20ad081c09ea90bc93a2e0799"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8513833639.json": {
+      "bytes": 734,
+      "sha256": "ddcfe5a60b93706e850c8f1340f7896bdeca23239d82da1975867b5c919f76b8"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8514157538.json": {
+      "bytes": 796,
+      "sha256": "594be34b48024f02b59122a5b4e7f68850503515f2a45e6f5f3a514d1788d5df"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8514356174.json": {
+      "bytes": 772,
+      "sha256": "cd27e04117cb6a4c6dc94c4fbbf87d15da52711958c4fd54249fdbbea5c2e203"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8515116211.json": {
+      "bytes": 755,
+      "sha256": "713cd5bb52cc50d4cffbd86c16a52ca2838656cfc8d19d81abe7e3126d8af72b"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8515270257.json": {
+      "bytes": 775,
+      "sha256": "19311440c3e60c89ee66acb0264ae358d6b3e87530ed5a65fd8a59d047e55d7b"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8515290702.json": {
+      "bytes": 764,
+      "sha256": "e599b30338a30b607d15018a889afbefbfa58c504b0ab5e4b4acb1ec8a92e2db"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8515658527.json": {
+      "bytes": 775,
+      "sha256": "d156b36f03ddae73c196aa53e5a1ddcd798e15b3617336e6c8213d29869e4bd8"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8516926685.json": {
+      "bytes": 775,
+      "sha256": "c932ce0421da562968ca8aa6f0b5f318f940e015f8a2dbe3c59921cd2493c509"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8517203501.json": {
+      "bytes": 774,
+      "sha256": "fd693582d30b58fd3faf062af6503ff16598281c6b49ee0f53fe94674e441902"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8517601885.json": {
+      "bytes": 818,
+      "sha256": "7bf87c73f3e7d8aae798f053ecb677ee2f4dc0bab73af78cf92388db37ac4a60"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8520832595.json": {
+      "bytes": 734,
+      "sha256": "fab3cefa857fa513e5c22a7ffdd30618d9a07242f8fe5b1ddc0490b72699205e"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8520931219.json": {
+      "bytes": 800,
+      "sha256": "4b4772e5f39b70a1670a4202a171a3c31310bb371f729a99b93654863328af6f"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8521178576.json": {
+      "bytes": 775,
+      "sha256": "32bf58956503d170c2233bf1054151a20096d4edc46f7dfbbe7be53a12e0c400"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8522264307.json": {
+      "bytes": 734,
+      "sha256": "a8a5515dfc2ab71074dc6ec34397ab0ca152fdec1d18d49f213df8061673badb"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8523667643.json": {
+      "bytes": 841,
+      "sha256": "12c5c386074c2aeebbafd484a34c1f340bb8697a135ef83ceccd1f84123093c7"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8531353192.json": {
+      "bytes": 734,
+      "sha256": "71d9eab8b75b64b599adbfcbf738dfbbd474969049429ae12f67e37ee116b362"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8544134108.json": {
+      "bytes": 775,
+      "sha256": "99426646bd2275af8467b5cec264e055c8487ee817570a8e61cc83894bb8bb8d"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8544321705.json": {
+      "bytes": 734,
+      "sha256": "c19b39800cf1ee9ef08022e46d611c553db9ffa6b9d541ea30a93aa3e50f5497"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8544719552.json": {
+      "bytes": 734,
+      "sha256": "9a06881a2d8cc154068672b864ce758de01b614cd31de87a919ee7f4de1d44db"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8544944448.json": {
+      "bytes": 768,
+      "sha256": "98d68206e828cf5df86a7b4afd5d91f0d0e78cf2713a78a17807f66e600dd46b"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8545200791.json": {
+      "bytes": 734,
+      "sha256": "de32f0beb1207f68e81ef5e9a43fd5bf63dd5e5b669ed0cfc09faec06f9e6bec"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8553712626.json": {
+      "bytes": 734,
+      "sha256": "33a49889c417f7238572ecc7b3794fcc408d26622845c9f09215adf22b681844"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8556908683.json": {
+      "bytes": 734,
+      "sha256": "35cf81b79d49ddd33e7d1650fa5722108f9dae1cbcc4115680c6c9134c858e0b"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8556911243.json": {
+      "bytes": 787,
+      "sha256": "b05fe22de7c6bc3662eea23895f433730e93c10d3481889e5a0e1f3a2001aefc"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8556933700.json": {
+      "bytes": 790,
+      "sha256": "4a5a60a90e594687e8cc6f205af923844c3192c170af93abd9f0758702d9cc1d"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8557497848.json": {
+      "bytes": 734,
+      "sha256": "d5267356af257b1a550b9976f4585b19fd97282ca35f836f4407095c8eda70bb"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8574926050.json": {
+      "bytes": 734,
+      "sha256": "57af9d8c4e57123504e076e2721f45adbd6f25684186836174f36b277467cd58"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8576945359.json": {
+      "bytes": 775,
+      "sha256": "d4817f6189a27441b109bd38c1f5201b67f19a537e069d309b4a57ac09c499a1"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8577096962.json": {
+      "bytes": 761,
+      "sha256": "00c7bd888511f05d1e9096a7d8ea7b3e12268fec7c07dd668f5b4a35392cac6a"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8577402995.json": {
+      "bytes": 774,
+      "sha256": "c4b1a36bd831b47dabd72bb3c35da4f4ea52c89ab0412875a8cef814a5a73583"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8577430497.json": {
+      "bytes": 777,
+      "sha256": "d0321303b7e04692351a8e5d7aaf1a0c9d81c4ba3ed2c4f1eeac635724a83ad3"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8577530518.json": {
+      "bytes": 766,
+      "sha256": "85340c96b9fdf01c8018b3eb32e488d9482bb1427dc61ae00de3aa205b4731b5"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8577652604.json": {
+      "bytes": 734,
+      "sha256": "14da7bb5c9db34ec57416aa6b0e1bf73c5cd094b791d1b401dd78634f9590e27"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8607083958.json": {
+      "bytes": 823,
+      "sha256": "902c4225077a7e7b785bb07a9604082af0c4461027b958541d1396b93df077fa"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8607750555.json": {
+      "bytes": 779,
+      "sha256": "67f75b4bf82fe1f4bb76c362a609edb1bc34868b96735a651873d8cdc09b50e5"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/reviewed/8609617143.json": {
+      "bytes": 734,
+      "sha256": "7912635b3970729eb1e0e7cd0d16e15fcf15e2fd4807f79359da4f5899eb1a27"
+    },
+    "Data/avito_runs/20261109-krasnodar-kurer/standing_unavailable_policy.json": {
+      "bytes": 1011,
+      "sha256": "7a1c18520dc10340252a4933e92bb851f78d800b32c33c1017ede17529393381"
+    },
+    "Scraper/runs/20261109-krasnodar-kurer/plan.json": {
+      "bytes": 6190,
+      "sha256": "60b8cfe5a189ce2c6b9c6acd9f123a74d1fd128683851b6ccda9d80528b44cb8"
+    }
+  }
+}
