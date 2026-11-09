@@ -20,7 +20,7 @@
     "source": "title, profession, city, location_observed",
     "policy": "added_next_to_observed_columns_not_replacing"
   },
-  "rows": 24626,
+  "rows": 24779,
   "columns": [
     "source",
     "id",
@@ -150,7 +150,7 @@
     "enriched_fields",
     "enrichment_version"
   ],
-  "sha256": "a306cf4b9043dfef7d2fc15f399c4cd47833286ee6d6e7d2df51a42f01bf68ec",
+  "sha256": "741fb83e88250ccaac32e3ba3590db6af81211fd5b738610cc08ec91c14c275b",
   "inputs": [
     {
       "run_id": "20261028-spb-50-all",
@@ -4974,6 +4974,37 @@
         }
       },
       "rows": 1112
+    },
+    {
+      "run_id": "20261109-krasnodar-gruzchik",
+      "source": "avito",
+      "path": "Data/avito_runs/20261109-krasnodar-gruzchik/exports/vacancies_flat.csv",
+      "sha256": "3b937598f38a1fb3642aad34b2b2bfcb597ea71e3edd0e066d7497342da466d6",
+      "placement_regions": {
+        "Краснодар": "Краснодарский край",
+        "Берёзовый": "Краснодарский край",
+        "Ленина": "Краснодарский край",
+        "Знаменский": "Краснодарский край",
+        "Старокорсунская": "Краснодарский край",
+        "Дружелюбный": "Краснодарский край",
+        "Краснодарский": "Краснодарский край",
+        "Копанской": "Краснодарский край",
+        "Индустриальный": "Краснодарский край"
+      },
+      "enrichment_status": "not_run",
+      "unknown_city_placements": {
+        "8451957242": {
+          "region": "Краснодарский край",
+          "evidence": "Краснодарский край, муниципальное образование Краснодар, индустриальный парк Краснодар р-н Карасунский",
+          "region_unknown": false
+        },
+        "8260027549": {
+          "region": "Краснодарский край",
+          "evidence": "Краснодарский край, г.о. Краснодар, индустриальный парк Краснодар, 211 р-н Карасунский",
+          "region_unknown": false
+        }
+      },
+      "rows": 184
     },
     {
       "run_id": "all_professions_first5_2026-10-27",
