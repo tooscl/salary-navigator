@@ -1086,6 +1086,26 @@ const listBrowserTabs=async()=>[], openTab=async()=>pg, snapshot=async()=>({tree
             self.assertFalse(runner.closed_raw_matches({'state':'UNKNOWN_PAGE','heading':'Объявление не посмотреть','source_url':'https://wrong.example'},'123',item()['url'],runner.CLOSED_MARKERS[0]))
             self.assertFalse(runner.closed_raw_matches({'state':'UNKNOWN_PAGE','heading':'Объявление не посмотреть','source_url':item()['url']},'123',item()['url'],'CAPTCHA'))
 
+    def test_rejected_listing_requires_exact_evidence_and_preserves_previous_policy(self):
+        for scenario in ('ok','no_flag','wrong_title','restriction','sandbox_tamper','wrong_id'):
+            with self.subTest(scenario=scenario), tempfile.TemporaryDirectory() as directory, patch.object(runner,'ROOT',Path(directory)):
+                root=runner.ROOT;out,service,diag=runner.paths(root,'case'); sandbox=root/'sandbox'; candidate=item('123');url=candidate['url']
+                runner.write(out/'queue.json',[candidate]);runner.write(service/'plan.json',{})
+                cp={'state':'REVIEW_REQUIRED','stop_reason':'identity_or_template_review','next_id':'123','completed_ids':[]};runner.write(diag/'checkpoint.json',cp);runner.write(sandbox/'checkpoint.json',cp)
+                data={'state':'UNKNOWN_PAGE','source_url':url,'heading':'Объявление не посмотреть','unresolved_evidence':{'complete':True,'title_body_params_scanned':True,'restriction':scenario=='restriction'}}
+                runner.write(out/'raw/123.json',data);runner.write(sandbox/'raw/123.json',data);original=(out/'raw/123.json').read_bytes()
+                runner.write(diag/'sandbox.json',{'path':str(sandbox)});runner.write(sandbox/'browser-tab.json',{'url':url})
+                title='Другая страница' if scenario=='wrong_title' else 'Ошибка 404. Страница не найдена'
+                snap=f'- title: "{title}" [url={url}]\n- text: "{runner.REJECTED_MARKER}"\n';(diag/'problem.snapshot.txt').write_text(snap);(sandbox/'problem.snapshot.txt').write_text(snap+('x' if scenario=='sandbox_tamper' else ''))
+                policy={'authorization_id':runner.STANDING_UNAVAILABLE_ID,'human_instruction':runner.STANDING_UNAVAILABLE_INSTRUCTION,'markers':list(runner.PREVIOUS_UNAVAILABLE_MARKERS)};runner.write(out/'standing_unavailable_policy.json',policy)
+                ledger=runner.load_failures(diag);ledger['events'].append({'event':'project_unavailable_policy','authorization_id':runner.STANDING_UNAVAILABLE_ID,'instruction':runner.STANDING_UNAVAILABLE_INSTRUCTION});runner.save_failures(diag,ledger)
+                args=argparse.Namespace(run_id='case',id='999' if scenario=='wrong_id' else '123',authorization_id=runner.STANDING_UNAVAILABLE_ID,standing_rejected=scenario!='no_flag')
+                if scenario=='ok':
+                    runner.mark_unavailable(args);record=runner.read(out/'unavailable.json')[0];self.assertEqual(record['status'],'unavailable_rejected');self.assertEqual(record['evidence'],runner.REJECTED_MARKER);self.assertEqual(runner.read(out/'standing_unavailable_policy.json'),policy);self.assertEqual((out/'raw/123.json').read_bytes(),original)
+                else:
+                    with self.assertRaises((ValueError,runner.HumanRequired)):runner.mark_unavailable(args)
+                    self.assertFalse((out/'unavailable.json').exists());self.assertEqual((out/'raw/123.json').read_bytes(),original)
+
     def test_legacy_standing_policy_is_preserved_and_cannot_authorize_new_marker(self):
         with tempfile.TemporaryDirectory() as directory, patch.object(runner, 'ROOT', Path(directory)):
             out, service, diag = runner.paths(runner.ROOT, 'legacy')

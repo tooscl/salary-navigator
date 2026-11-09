@@ -968,9 +968,11 @@ DELETED_MARKER = 'Объявление удалено.'
 USER_DELETED_MARKER = 'Пользователь его удалил.'
 NO_LONGER_AVAILABLE_MARKER = 'Объявление больше недоступно.'
 UNAVAILABLE_TO_VIEW_MARKER = 'Объявление недоступно для просмотра.'
-OTHER_UNAVAILABLE_MARKERS = (DELETED_MARKER, USER_DELETED_MARKER, NO_LONGER_AVAILABLE_MARKER, UNAVAILABLE_TO_VIEW_MARKER)
+REJECTED_MARKER = 'Оно отклонено, но снова появится в поиске, если его исправят.'
+OTHER_UNAVAILABLE_MARKERS = (DELETED_MARKER, USER_DELETED_MARKER, NO_LONGER_AVAILABLE_MARKER, UNAVAILABLE_TO_VIEW_MARKER, REJECTED_MARKER)
 ALL_UNAVAILABLE_MARKERS = (*CLOSED_MARKERS, REVIEW_MARKER, BLOCKED_LISTING_MARKER, *OTHER_UNAVAILABLE_MARKERS)
-LEGACY_UNAVAILABLE_MARKERS = tuple(marker for marker in ALL_UNAVAILABLE_MARKERS if marker != USER_DELETED_MARKER)
+PREVIOUS_UNAVAILABLE_MARKERS = tuple(marker for marker in ALL_UNAVAILABLE_MARKERS if marker != REJECTED_MARKER)
+LEGACY_UNAVAILABLE_MARKERS = tuple(marker for marker in PREVIOUS_UNAVAILABLE_MARKERS if marker != USER_DELETED_MARKER)
 STANDING_UNAVAILABLE_ID = 'verified-unavailable-v1'
 STANDING_UNAVAILABLE_SOURCE = 'project_skill'
 STANDING_UNAVAILABLE_INSTRUCTION = ('Исключать отдельные карточки только по подтверждённому статусу недоступности, '
@@ -1005,8 +1007,7 @@ def standing_unavailable_policy(args):
                   markers=list(ALL_UNAVAILABLE_MARKERS))
     path = out/'standing_unavailable_policy.json'
     if path.exists() and read(path) != policy:
-        legacy = dict(policy, markers=list(LEGACY_UNAVAILABLE_MARKERS))
-        if read(path) != legacy:
+        if read(path) not in (dict(policy, markers=list(LEGACY_UNAVAILABLE_MARKERS)), dict(policy, markers=list(PREVIOUS_UNAVAILABLE_MARKERS))):
             raise ValueError('Existing standing policy differs; preserve history')
     if not path.exists(): write(path, policy)
     print('Standing unavailable policy recorded for this run')
@@ -1474,7 +1475,7 @@ def mark_unavailable(args):
         raise HumanRequired('Current human authorization required')
     instruction = events[auth[-1]]['instruction']
     policies = [read(path) for path in (out/'closed_policy.json', out/'review_policy.json', out/'blocked_listing_policy.json', out/'standing_unavailable_policy.json') if path.exists()]
-    policy = next((p for p in policies if p.get('authorization_id') == args.authorization_id and p.get('human_instruction') == instruction and p.get('markers') in (list(CLOSED_MARKERS), [REVIEW_MARKER], [BLOCKED_LISTING_MARKER], list(ALL_UNAVAILABLE_MARKERS), list(LEGACY_UNAVAILABLE_MARKERS))), None)
+    policy = next((p for p in policies if p.get('authorization_id') == args.authorization_id and p.get('human_instruction') == instruction and p.get('markers') in (list(CLOSED_MARKERS), [REVIEW_MARKER], [BLOCKED_LISTING_MARKER], list(ALL_UNAVAILABLE_MARKERS), list(PREVIOUS_UNAVAILABLE_MARKERS), list(LEGACY_UNAVAILABLE_MARKERS))), None)
     if offline_standing and (ledger['state'] != 'NEEDS_HUMAN' or not policy or events[auth[-1]].get('event') != 'project_unavailable_policy'):
         raise HumanRequired('Stopped run and recorded standing policy are required')
     if args.id not in instruction and not policy:
@@ -1519,7 +1520,29 @@ def mark_unavailable(args):
             raise ValueError('Stopped sandbox URL evidence differs')
         avito_url(url, args.id)
         tab_evidence = tab
-    if policy and markers[0] not in policy['markers']:
+    standing_rejected = (markers[0] == REJECTED_MARKER and getattr(args, 'standing_rejected', False)
+        and args.authorization_id == STANDING_UNAVAILABLE_ID and policy
+        and policy['markers'] == list(PREVIOUS_UNAVAILABLE_MARKERS))
+    if markers[0] == REJECTED_MARKER:
+        ev = data.get('unresolved_evidence', {})
+        pointer = diag/'sandbox.json'
+        if (data.get('state') != 'UNKNOWN_PAGE' or ev.get('complete') is not True or ev.get('title_body_params_scanned') is not True or ev.get('restriction') is not False
+                or f'- title: "Ошибка 404. Страница не найдена" [url={url}]' not in snapshot
+                or re.search(r'captcha|капч|доступ ограничен|проблема с ip|too many requests|http\s*429', snapshot, re.I)
+                or not pointer.exists()):
+            raise ValueError('Rejected listing requires exact unrestricted 404 and original sandbox')
+        sandbox = Path(read(pointer)['path']); sandbox_cp = read(sandbox/'checkpoint.json')
+        if ((sandbox/'raw'/raw.name).read_bytes() != raw.read_bytes() or (sandbox/'problem.snapshot.txt').read_bytes() != snap.read_bytes()
+                or read(sandbox/'browser-tab.json').get('url') != url
+                or any(sandbox_cp.get(k) != cp.get(k) for k in ('state','next_id','stop_reason','completed_ids'))):
+            raise ValueError('Rejected listing sandbox evidence differs')
+        evidence_archive = diag/'observations'/args.id; evidence_archive.mkdir(parents=True, exist_ok=True)
+        for source in (snap, sandbox/'browser-tab.json'):
+            dest = evidence_archive/(sha(source)+'.'+source.name)
+            if dest.exists() and dest.read_bytes() != source.read_bytes(): raise ValueError('Evidence archive collision')
+            if not dest.exists(): shutil.copy2(source,dest)
+        tab_evidence = sandbox/'browser-tab.json'
+    if policy and markers[0] not in policy['markers'] and not standing_rejected:
         raise ValueError('Observed marker is outside this authorization')
     records = unavailable_records(out, queue)
     if any(record['id'] == args.id for record in records):
@@ -1550,7 +1573,7 @@ def mark_unavailable(args):
         if destination.exists() and destination.read_bytes() != tab_evidence.read_bytes():
             raise ValueError('Browser tab archive collision')
         if not destination.exists(): shutil.copy2(tab_evidence, destination)
-    records.append(dict(browser_tab_sha256=tab_digest, id=args.id, url=url, status=('unavailable_under_review' if markers[0] == REVIEW_MARKER else 'unavailable_blocked_after_review' if markers[0] == BLOCKED_LISTING_MARKER else 'unavailable_deleted' if markers[0] in (DELETED_MARKER, USER_DELETED_MARKER) else 'unavailable_other' if markers[0] in OTHER_UNAVAILABLE_MARKERS else 'unavailable_closed'), evidence=markers[0],
+    records.append(dict(browser_tab_sha256=tab_digest, id=args.id, url=url, status=('unavailable_under_review' if markers[0] == REVIEW_MARKER else 'unavailable_blocked_after_review' if markers[0] == BLOCKED_LISTING_MARKER else 'unavailable_rejected' if markers[0] == REJECTED_MARKER else 'unavailable_deleted' if markers[0] in (DELETED_MARKER, USER_DELETED_MARKER) else 'unavailable_other' if markers[0] in OTHER_UNAVAILABLE_MARKERS else 'unavailable_closed'), evidence=markers[0],
         snapshot_sha256=sha(snap), raw_sha256=sha(raw), observed_at=data.get('observed_at'),
         authorization_id=args.authorization_id, human_instruction=instruction,
         recorded_at=datetime.now(timezone.utc).isoformat()))
@@ -4048,6 +4071,7 @@ def main():
             command.add_argument('--authorization-question', help='Exact preceding question when the saved answer confirms it')
         elif name == 'mark-unavailable':
             command.add_argument('--offline-standing', action='store_true')
+            command.add_argument('--standing-rejected', action='store_true', help='Apply the recorded project unavailable policy to an evidenced rejected 404 using the previous marker set')
             command.add_argument('--id', required=True)
             command.add_argument('--authorization-id', required=True)
         elif name == 'upgrade-unresolved-extractor':

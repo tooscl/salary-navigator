@@ -277,3 +277,5 @@ avito_runs/<название_сбора>/
 - [20261109-ekb-kassir-bez-opyta](avito_runs/20261109-ekb-kassir-bez-opyta/exports/vacancies_flat.csv): 352 вакансий.
 
 - [20261109-ekb-kassir-50000](avito_runs/20261109-ekb-kassir-50000/exports/vacancies_flat.csv): 318 вакансий.
+
+- [20261109-krasnodar-all](avito_runs/20261109-krasnodar-all/exports/vacancies_flat.csv): 1112 вакансий.
