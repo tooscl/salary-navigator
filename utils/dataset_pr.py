@@ -101,8 +101,16 @@ def main():
     forbidden = [path for path in staged if path and browser_evidence(path)]
     if forbidden:
         raise SystemExit("Keep browser evidence local; unstage: " + ", ".join(forbidden))
-    base = subprocess.check_output(["git", "show", f"{args.base}:Data/dataset/vacancies.csv"], cwd=ROOT)
-    current = (ROOT / "Data/dataset/vacancies.csv").read_bytes()
+    try:
+        from utils.build_dataset import assemble
+    except ModuleNotFoundError:
+        from build_dataset import assemble
+    def git_read(path):
+        return subprocess.check_output(["git", "show", f"{args.base}:Data/dataset/{path}"], cwd=ROOT)
+    base_manifest = json.loads(git_read("manifest.json"))
+    base = assemble(base_manifest, git_read) if "parts" in base_manifest else git_read("vacancies.csv")
+    manifest = json.loads((ROOT / "Data/dataset/manifest.json").read_text())
+    current = assemble(manifest, lambda path: (ROOT / "Data/dataset" / path).read_bytes())
     # Validate source hashes and repository-relative paths before opening batch CSVs.
     check_dataset(ROOT)
     registry = json.loads((ROOT / "Data/dataset/sources.json").read_text())

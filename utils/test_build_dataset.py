@@ -113,6 +113,24 @@ class DatasetTests(unittest.TestCase):
         self.registry["exports"].reverse()
         self.assertEqual(build(self.root, self.registry), original)
 
+    def test_nationwide_mode_keeps_context_and_search_scope_distinct(self):
+        import json
+        self.add("nationwide", [self.row()])
+        plan = self.root / "Scraper/runs/nationwide/plan.json"
+        plan.parent.mkdir(parents=True)
+        plan.write_text(json.dumps({"run_id": "nationwide", "geography": "Краснодар", "profession": "", "selected_controls": [{"marker": "params[127818]/toggle", "value": "3054249"}]}))
+        row = self.result()[0]
+        _, manifest_bytes = build(self.root, self.registry)
+        manifest = json.loads(manifest_bytes)
+        self.assertEqual((manifest["schema_version"], manifest["builder_version"]), ("1", "3"))
+        self.assertEqual(row["search_geography"], "По всей России")
+        self.assertEqual(json.loads(row["search_filter_observations"]), [["nationwide", "По всей России", ""]])
+        self.assertEqual(json.loads(row["search_geography_context_observations"]), [["nationwide", "Краснодар", "По всей России"]])
+        self.assertEqual((row["city"], row["region"]), ("Москва", "Москва"))
+        plan.write_text(json.dumps({"geography": "Краснодар", "selected_controls": [{"marker": "params[127818]/toggle", "value": "3054249"}, {"marker": "params[127818]/toggle", "value": "3054250"}]}))
+        with self.assertRaisesRegex(ValueError, "Conflicting geographic modes"):
+            self.result()
+
     def test_search_filters_preserve_observation_pairs_and_placement(self):
         import json
         self.add("old", [self.row()])

@@ -1224,6 +1224,131 @@ const snapshot=async()=>({tree:'stopped'});const closeTab=async()=>{closed++}; c
                 self.assertNotIn('secret', data['result']['url'])
                 self.assertEqual(data['result']['target_id'], 'external-id' if external else 'new-id')
 
+    @unittest.skipIf(os.name == 'nt', 'POSIX pipe test')
+    def test_owned_tab_close_is_acknowledged_by_its_repl(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory); sandbox = root/'sandbox'; sandbox.mkdir()
+            runner.write(sandbox/'browser-tab.json', {'ownership':'collector','target_id':'own-id','url':'https://example.test/a'})
+            script = """const readline=require('readline');
+const p={url:()=> 'https://example.test/a'};globalThis.tlCollectorPage=p;globalThis.tlCollectorExternal=false;
+globalThis.listBrowserTabs=async()=>[{targetId:'own-id',url:p.url()}];
+globalThis.getTabByTargetId=id=>id==='own-id'?p:null;
+globalThis.closeTab=async tab=>{if(tab!==p)throw Error('wrong tab')};
+readline.createInterface({input:process.stdin}).on('line',line=>{if(!line.startsWith('await eval('))throw Error('REPL must await');eval(line.replace(/^await /,''))});"""
+            proc = subprocess.Popen(['node','-e',script], stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+            try:
+                runner.retain_repl(proc, root, sandbox, {})
+                session = runner.read(root/'browser-session.local.json')
+                proc.stdin.close(); proc.stdout.close()
+                runner.release_browser(root)
+                self.assertTrue(Path(session['release_marker']+'.closed').exists())
+                self.assertTrue(Path(session['release_marker']).exists())
+                proc.wait(timeout=5)
+            finally:
+                if proc.poll() is None: proc.kill(); proc.wait()
+
+    @unittest.skipIf(os.name == 'nt', 'POSIX pipe test')
+    def test_owned_tab_identity_mismatch_preserves_session(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root=Path(directory); sandbox=root/'sandbox'; sandbox.mkdir()
+            runner.write(sandbox/'browser-tab.json', {'ownership':'collector','target_id':'own-id','url':'https://example.test/a'})
+            script = """const readline=require('readline');const p={url:()=> 'https://example.test/changed'};
+              globalThis.tlCollectorPage=p;globalThis.tlCollectorExternal=false;globalThis.listBrowserTabs=async()=>[{targetId:'own-id',url:p.url()}];
+              globalThis.getTabByTargetId=()=>p;globalThis.closeTab=async()=>{throw Error('must not close')};
+              readline.createInterface({input:process.stdin}).on('line',line=>{if(!line.startsWith('await eval('))throw Error('REPL must await');eval(line.replace(/^await /,''))});"""
+            proc=subprocess.Popen(['node','-e',script],stdin=subprocess.PIPE,stdout=subprocess.PIPE,stderr=subprocess.STDOUT)
+            try:
+                runner.retain_repl(proc,root,sandbox,{})
+                session=runner.read(root/'browser-session.local.json'); proc.stdin.close(); proc.stdout.close()
+                with patch.object(runner,'CLOSE_CONFIRM_TIMEOUT_SECONDS',.3):
+                    with self.assertRaisesRegex(RuntimeError,'unconfirmed'): runner.release_browser(root)
+                self.assertFalse(Path(session['release_marker']).exists())
+                self.assertTrue((root/'browser-session.local.json').exists())
+            finally:
+                Path(session['release_marker']).touch()
+                try: proc.wait(timeout=5)
+                except subprocess.TimeoutExpired: proc.kill(); proc.wait()
+
+    @unittest.skipIf(os.name == 'nt', 'POSIX pipe test')
+    def test_owned_tab_without_initial_target_closes_original_page(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root=Path(directory); sandbox=root/'sandbox'; sandbox.mkdir()
+            runner.write(sandbox/'browser-tab.json', {'ownership':'collector','target_id':None,'url':'https://example.test/a'})
+            script = """const readline=require('readline');const p={url:()=> 'https://example.test/a'};
+              globalThis.tlCollectorPage=p;globalThis.tlCollectorExternal=false;globalThis.listBrowserTabs=async()=>[{targetId:'foreign',url:p.url()},{targetId:'own',url:p.url()}];
+              globalThis.getTabByTargetId=id=>id==='own'?p:{};globalThis.closeTab=async tab=>{if(tab!==p)throw Error('foreign')};
+              readline.createInterface({input:process.stdin}).on('line',line=>{if(!line.startsWith('await eval('))throw Error('REPL must await');eval(line.replace(/^await /,''))});"""
+            proc=subprocess.Popen(['node','-e',script],stdin=subprocess.PIPE,stdout=subprocess.PIPE,stderr=subprocess.STDOUT)
+            try:
+                runner.retain_repl(proc,root,sandbox,{})
+                session=runner.read(root/'browser-session.local.json'); proc.stdin.close(); proc.stdout.close()
+                runner.release_browser(root)
+                self.assertTrue(Path(session['release_marker']+'.closed').exists())
+                proc.wait(timeout=5)
+            finally:
+                if proc.poll() is None: proc.kill(); proc.wait()
+
+    def test_external_tab_release_never_requests_close(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root=Path(directory); marker=root/'release'
+            runner.write(root/'browser-session.local.json', {'release_marker':str(marker), 'tab':{'ownership':'external','target_id':'other','url':'https://example.test/a'}})
+            runner.release_browser(root)
+            self.assertTrue(marker.exists())
+            self.assertFalse(Path(str(marker)+'.close').exists())
+
+    def test_unidentified_owned_tab_is_preserved(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root=Path(directory); marker=root/'release'
+            runner.write(root/'browser-session.local.json', {'release_marker':str(marker), 'tab':{'ownership':'collector','target_id':None,'url':None}})
+            with self.assertRaisesRegex(RuntimeError, 'identity'):
+                runner.release_browser(root)
+            self.assertFalse(marker.exists())
+            self.assertTrue((root/'browser-session.local.json').exists())
+
+    def test_confirmed_404_requires_saved_matching_evidence(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root=Path(directory); out=root/'out'; diag=root/'diag'; sandbox=root/'sandbox'
+            (out/'raw').mkdir(parents=True); (sandbox/'raw').mkdir(parents=True); diag.mkdir()
+            url='https://example.test/123'; raw=out/'raw'/'123.json'; runner.write(raw,{'source_url':url})
+            (sandbox/'raw'/'123.json').write_bytes(raw.read_bytes())
+            snap=diag/'problem.snapshot.txt'; snap.write_text(f'- title: "404" [url={url}]')
+            original=sandbox/'problem.snapshot.txt'; original.write_bytes(snap.read_bytes())
+            tab={'ownership':'collector','target_id':'own','url':url}; runner.write(sandbox/'browser-tab.json',tab)
+            runner.write(diag/'browser-session.local.json',{'tab':tab,'sandbox':str(sandbox)})
+            record={'id':'123','url':url,'raw_sha256':runner.sha(raw),'snapshot_sha256':runner.sha(snap)}
+            with patch.object(runner,'release_browser') as release, patch.object(runner.shutil,'copy2',side_effect=OSError('disk error')):
+                with self.assertRaisesRegex(OSError,'disk error'): runner.release_confirmed_404(out,diag,record)
+                release.assert_not_called()
+            with patch.object(runner,'release_browser') as release:
+                self.assertTrue(runner.release_confirmed_404(out,diag,record)); release.assert_called_once_with(diag)
+                archive=diag/'observations'/'123'
+                self.assertEqual((archive/(runner.sha(raw)+'.raw.json')).read_bytes(),raw.read_bytes())
+                self.assertEqual((archive/(runner.sha(snap)+'.problem.snapshot.txt')).read_bytes(),snap.read_bytes())
+                self.assertEqual((archive/(runner.sha(sandbox/'browser-tab.json')+'.browser-tab.json')).read_bytes(),(sandbox/'browser-tab.json').read_bytes())
+                snap.write_text(f'- title: "404" [url={url}]\n- text: "captcha"'); original.write_bytes(snap.read_bytes())
+                record['snapshot_sha256']=runner.sha(snap)
+                self.assertFalse(runner.release_confirmed_404(out,diag,record))
+                snap.write_text(f'- title: "Other" [url={url}]'); original.write_bytes(snap.read_bytes())
+                record['snapshot_sha256']=runner.sha(snap)
+                self.assertFalse(runner.release_confirmed_404(out,diag,record))
+                snap.write_text(f'- title: "404" [url={url}]'); original.write_bytes(snap.read_bytes())
+                record['snapshot_sha256']=runner.sha(snap)
+                tab['url']='https://example.test/other'; runner.write(diag/'browser-session.local.json',{'tab':tab,'sandbox':str(sandbox)})
+                self.assertFalse(runner.release_confirmed_404(out,diag,record))
+                self.assertEqual(release.call_count,1)
+
+    def test_preserve_unreleased_session_before_next_browser(self):
+        with tempfile.TemporaryDirectory() as directory:
+            diag=Path(directory); source=diag/'browser-session.local.json'
+            source.write_bytes(b'{"release_marker":"old"}')
+            original=source.read_bytes(); digest=hashlib.sha256(original).hexdigest()
+            runner.preserve_browser_session_pointer(diag)
+            archived=diag/f'browser-session-retained-{digest}.local.json'
+            self.assertEqual(archived.read_bytes(),original)
+            self.assertFalse(source.exists())
+            source.write_bytes(original); runner.preserve_browser_session_pointer(diag)
+            self.assertEqual(archived.read_bytes(),original)
+
     def test_release_keeps_previous_sessions_and_allows_replay(self):
         with tempfile.TemporaryDirectory() as directory:
             diag = Path(directory)
