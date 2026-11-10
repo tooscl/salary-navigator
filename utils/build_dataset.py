@@ -8,12 +8,13 @@ from datetime import datetime
 from pathlib import Path, PureWindowsPath
 
 try:
-    from . import title_flags, vacancy_labels, placement_transform, city_scope_subset
+    from . import title_flags, vacancy_labels, placement_transform, city_scope_subset, city_scope_multi
 except ImportError:  # Direct `python3 utils/build_dataset.py` entry point.
     import title_flags
     import vacancy_labels
     import placement_transform
     import city_scope_subset
+    import city_scope_multi
 
 ROOT = Path(__file__).resolve().parents[1]
 VERSION = "1"
@@ -92,6 +93,8 @@ def build(root, registry):
                         raise ValueError('Transformed placement registry mismatch')
             elif spec.get('version') == city_scope_subset.VERSION:
                 transformed = city_scope_subset.render(root, spec)
+            elif spec.get('version') == city_scope_multi.VERSION:
+                transformed = city_scope_multi.render(root, spec)
             else:
                 raise ValueError('Unknown transformation version')
             if transformed != data:
@@ -206,6 +209,7 @@ def build(root, registry):
                 "city_scope_audit_sha256": digest(Path(city_scope_subset.city_scope_audit.__file__).read_bytes()),
                 "city_scope_audit_v1_sha256": digest(Path(city_scope_subset.city_scope_audit_v1.__file__).read_bytes()),
                 "city_scope_subset_sha256": digest(Path(city_scope_subset.__file__).read_bytes()),
+                "city_scope_multi_sha256": digest(Path(city_scope_multi.__file__).read_bytes()),
                 "title_flags": {"version": title_flags.VERSION,
                                 "sha256": digest(Path(title_flags.__file__).read_bytes()),
                                 "source": "title", "policy": "keyword_signal_not_exclusion"},

@@ -333,3 +333,13 @@ avito_runs/<название_сбора>/
 - [20261110-ryazan-remote-bez-opyta](avito_runs/20261110-ryazan-remote-bez-opyta/exports/vacancies_flat.csv): региональный исходный архив, 575 вакансий; [предварительное подмножество Рязани](transformations/20261110-ryazan-remote-bez-opyta-city-v1/vacancies_flat.csv) — 27 вакансий, полнота города не подтверждена.
 
 - [20261110-ryazan-remote-50000](avito_runs/20261110-ryazan-remote-50000/exports/vacancies_flat.csv): региональный исходный архив, 644 вакансии; [предварительное подмножество Рязани](transformations/20261110-ryazan-remote-50000-city-v1/vacancies_flat.csv) — 25 вакансий, полнота города не подтверждена.
+
+- [20261110-remote-all-russia-batch_01](avito_runs/20261110-remote-all-russia-batch_01/exports/vacancies_flat.csv): исходный архив 199 прочитанных; предварительные адреса: [Краснодар](transformations/20261110-remote-all-russia-batch_01-cities-v1/city-01.csv), [Рязань](transformations/20261110-remote-all-russia-batch_01-cities-v1/city-02.csv). Полнота городов не подтверждена.
+
+- [20261110-remote-all-russia-batch_02](avito_runs/20261110-remote-all-russia-batch_02/exports/vacancies_flat.csv): исходный архив 200 прочитанных; предварительные адреса: [Краснодар](transformations/20261110-remote-all-russia-batch_02-cities-v1/city-01.csv), [Рязань](transformations/20261110-remote-all-russia-batch_02-cities-v1/city-02.csv). Полнота городов не подтверждена.
+
+- [20261110-remote-all-russia-batch_03](avito_runs/20261110-remote-all-russia-batch_03/exports/vacancies_flat.csv): исходный архив 199 прочитанных; предварительные адреса: [Краснодар](transformations/20261110-remote-all-russia-batch_03-cities-v1/city-01.csv), [Рязань](transformations/20261110-remote-all-russia-batch_03-cities-v1/city-02.csv). Полнота городов не подтверждена.
+
+- [20261110-remote-all-russia-batch_04](avito_runs/20261110-remote-all-russia-batch_04/exports/vacancies_flat.csv): исходный архив 200 прочитанных; предварительные адреса: [Краснодар](transformations/20261110-remote-all-russia-batch_04-cities-v1/city-01.csv), [Рязань](transformations/20261110-remote-all-russia-batch_04-cities-v1/city-02.csv). Полнота городов не подтверждена.
+
+- [20261110-remote-all-russia-batch_05](avito_runs/20261110-remote-all-russia-batch_05/exports/vacancies_flat.csv): исходный архив 155 прочитанных; предварительные адреса: [Краснодар](transformations/20261110-remote-all-russia-batch_05-cities-v1/city-01.csv), [Рязань](transformations/20261110-remote-all-russia-batch_05-cities-v1/city-02.csv). Полнота городов не подтверждена.

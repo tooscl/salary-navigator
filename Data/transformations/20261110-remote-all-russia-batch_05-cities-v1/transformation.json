@@ -1,0 +1,2845 @@
+{
+  "version": "city_remote_multi_v1",
+  "transformation_id": "20261110-remote-all-russia-batch_05-cities-v1",
+  "source_run_id": "20261110-remote-all-russia-batch_05",
+  "description": "Provisional observed city subsets; full city coverage is not established.",
+  "targets": [
+    {
+      "city": "Краснодар",
+      "region_quote": "Краснодарский край"
+    },
+    {
+      "city": "Рязань",
+      "region_quote": "Рязанская обл."
+    }
+  ],
+  "audits": [
+    {
+      "version": "city_scope_audit_v2",
+      "source_run_id": "20261110-remote-all-russia-batch_05",
+      "source_manifest": {
+        "path": "Scraper/runs/20261110-remote-all-russia-batch_05/manifest.json",
+        "sha256": "496e804169cf93d812684866ff7fbb37d03fe3acafd555b47f755347582ea9e5"
+      },
+      "audit_code_sha256": "72f5fb34740ac409dc32fa05084077c9b5b0629fe35dfdfb4be461f89fc096ee",
+      "target_city": "Краснодар",
+      "target_region_quote": "Краснодарский край",
+      "scope": "saved queue only; completeness of city coverage is not established by this audit",
+      "filter_validation": "not performed; verify remote format, profession scope and regional filter evidence separately",
+      "counts": {
+        "in_city": 3,
+        "outside_city": 138,
+        "unknown": 14,
+        "unavailable_or_unresolved": 0
+      },
+      "decisions": [
+        {
+          "id": "8531438145",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Москва, пр-т Мира, 102к1",
+          "reviewed_city": "Москва",
+          "reviewed_region": "Москва",
+          "visible_region": "Москва"
+        },
+        {
+          "id": "8491406046",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Самарская обл., г.о. Самара, Самарский район",
+          "reviewed_city": "",
+          "reviewed_region": "",
+          "visible_region": "Самарская обл."
+        },
+        {
+          "id": "8393935105",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Ростовская обл.",
+          "reviewed_city": "",
+          "reviewed_region": "",
+          "visible_region": "Ростовская обл."
+        },
+        {
+          "id": "8468981541",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Московская обл., Дмитровский муниципальный округ, Дмитров, Историческая пл.",
+          "reviewed_city": "",
+          "reviewed_region": "Московская область",
+          "visible_region": "Московская обл."
+        },
+        {
+          "id": "8531205274",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Оренбургская обл., Оренбург, Бухарский пер., 19",
+          "reviewed_city": "",
+          "reviewed_region": "",
+          "visible_region": "Оренбургская обл."
+        },
+        {
+          "id": "8347589883",
+          "decision": "in_city",
+          "reason": "visible_card_city_and_region",
+          "visible_address": "Краснодарский край, Краснодар, Главная городская пл.",
+          "reviewed_city": "Краснодар",
+          "reviewed_region": "Краснодарский край",
+          "remote_evidence": {
+            "basis": "card_format",
+            "observed_value": "Удалённо"
+          }
+        },
+        {
+          "id": "8400310559",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Новосибирская обл., Бердск",
+          "reviewed_city": "",
+          "reviewed_region": "Новосибирская область",
+          "visible_region": "Новосибирская обл."
+        },
+        {
+          "id": "3569320963",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Москва, Байкальская ул.",
+          "reviewed_city": "Москва",
+          "reviewed_region": "Москва",
+          "visible_region": "Москва"
+        },
+        {
+          "id": "8471621035",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Москва, ул. Петровка, 2",
+          "reviewed_city": "Москва",
+          "reviewed_region": "Москва",
+          "visible_region": "Москва"
+        },
+        {
+          "id": "8455528003",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Москва, Каспийская ул.",
+          "reviewed_city": "Москва",
+          "reviewed_region": "Москва",
+          "visible_region": "Москва"
+        },
+        {
+          "id": "8491124120",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Москва, пр. Воскресенские Ворота",
+          "reviewed_city": "",
+          "reviewed_region": "Москва",
+          "visible_region": "Москва"
+        },
+        {
+          "id": "8235986003",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Москва, пр. Воскресенские Ворота",
+          "reviewed_city": "",
+          "reviewed_region": "Москва",
+          "visible_region": "Москва"
+        },
+        {
+          "id": "7931845644",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Москва, Ленинский пр-т, 69А",
+          "reviewed_city": "Москва",
+          "reviewed_region": "Москва",
+          "visible_region": "Москва"
+        },
+        {
+          "id": "8502428049",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Москва",
+          "reviewed_city": "Москва",
+          "reviewed_region": "Москва",
+          "visible_region": "Москва"
+        },
+        {
+          "id": "8482833281",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Москва, Красная пл.",
+          "reviewed_city": "Москва",
+          "reviewed_region": "Москва",
+          "visible_region": "Москва"
+        },
+        {
+          "id": "8607138391",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Приморский край, Владивостокский г.о., Владивосток, ул. Овчинникова, 32",
+          "reviewed_city": "",
+          "reviewed_region": "",
+          "visible_region": "Приморский край"
+        },
+        {
+          "id": "2731827718",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Санкт-Петербург, пр-т Испытателей",
+          "reviewed_city": "Санкт-Петербург",
+          "reviewed_region": "Санкт-Петербург",
+          "visible_region": "Санкт-Петербург"
+        },
+        {
+          "id": "8372331806",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Санкт-Петербург, Невский пр-т, 13/9",
+          "reviewed_city": "Санкт-Петербург",
+          "reviewed_region": "Санкт-Петербург",
+          "visible_region": "Санкт-Петербург"
+        },
+        {
+          "id": "8470772206",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Ростовская обл., Ростов-на-Дону, Ворошиловский пр-т",
+          "reviewed_city": "",
+          "reviewed_region": "",
+          "visible_region": "Ростовская обл."
+        },
+        {
+          "id": "8491338136",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Москва, Цветной б-р",
+          "reviewed_city": "",
+          "reviewed_region": "Москва",
+          "visible_region": "Москва"
+        },
+        {
+          "id": "8514327131",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Санкт-Петербург, Дворцовая пл.",
+          "reviewed_city": "Санкт-Петербург",
+          "reviewed_region": "Санкт-Петербург",
+          "visible_region": "Санкт-Петербург"
+        },
+        {
+          "id": "8422442909",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Иркутская обл., Жигаловский р-н, пгт. Жигалово, Советская ул.",
+          "reviewed_city": "",
+          "reviewed_region": "",
+          "visible_region": "Иркутская обл."
+        },
+        {
+          "id": "8423622921",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Москва, Щёлковское ш., 75",
+          "reviewed_city": "",
+          "reviewed_region": "Москва",
+          "visible_region": "Москва"
+        },
+        {
+          "id": "8348578197",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Республика Башкортостан, Уфимский р-н, Михайловский сельсовет, д. Суровка, Степная ул.",
+          "reviewed_city": "",
+          "reviewed_region": "",
+          "visible_region": "Республика Башкортостан"
+        },
+        {
+          "id": "7983050091",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Республика Башкортостан, Уфа, пр-т Октября, 4",
+          "reviewed_city": "",
+          "reviewed_region": "",
+          "visible_region": "Республика Башкортостан"
+        },
+        {
+          "id": "8364307665",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Республика Карелия, Петрозаводский г.о., Петрозаводск, пр-т Ленина",
+          "reviewed_city": "",
+          "reviewed_region": "",
+          "visible_region": "Республика Карелия"
+        },
+        {
+          "id": "8382631521",
+          "decision": "unknown",
+          "reason": "visible_card_city_not_unambiguous",
+          "visible_address": "Донецк",
+          "reviewed_city": "",
+          "reviewed_region": ""
+        },
+        {
+          "id": "8589241764",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Ростовская обл., Ростов-на-Дону, 60К-9, 1-й километр, 4/4",
+          "reviewed_city": "",
+          "reviewed_region": "",
+          "visible_region": "Ростовская обл."
+        },
+        {
+          "id": "8439413819",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Владимирская обл., Владимир, ул. Мира",
+          "reviewed_city": "",
+          "reviewed_region": "",
+          "visible_region": "Владимирская обл."
+        },
+        {
+          "id": "8485198000",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Республика Карелия, Петрозаводский г.о., Петрозаводск, Северная ул., 5",
+          "reviewed_city": "",
+          "reviewed_region": "",
+          "visible_region": "Республика Карелия"
+        },
+        {
+          "id": "8544278554",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Севастополь",
+          "reviewed_city": "",
+          "reviewed_region": "",
+          "visible_region": "Севастополь"
+        },
+        {
+          "id": "8193695689",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Воронежская обл., г.о. Воронеж, Ленинский район",
+          "reviewed_city": "",
+          "reviewed_region": "",
+          "visible_region": "Воронежская обл."
+        },
+        {
+          "id": "8346430930",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Тюменская обл., Ханты-Мансийский АО, Нижневартовск, ул. Мира, 25",
+          "reviewed_city": "",
+          "reviewed_region": "",
+          "visible_region": "Тюменская обл."
+        },
+        {
+          "id": "8251107775",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Республика Карелия, Петрозаводский г.о., Петрозаводск, ул. Анохина, 47Б",
+          "reviewed_city": "",
+          "reviewed_region": "",
+          "visible_region": "Республика Карелия"
+        },
+        {
+          "id": "8400803914",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Москва, пр. Воскресенские Ворота",
+          "reviewed_city": "",
+          "reviewed_region": "Москва",
+          "visible_region": "Москва"
+        },
+        {
+          "id": "4898360041",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Республика Коми, Сыктывкар, ул. Ленина, 32",
+          "reviewed_city": "",
+          "reviewed_region": "",
+          "visible_region": "Республика Коми"
+        },
+        {
+          "id": "8485160038",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Москва, Южный административный округ, Даниловский район, бывшая территория АМО ЗИЛ",
+          "reviewed_city": "",
+          "reviewed_region": "Москва",
+          "visible_region": "Москва"
+        },
+        {
+          "id": "8458699096",
+          "decision": "unknown",
+          "reason": "visible_card_city_not_unambiguous",
+          "visible_address": "Краснодарский край",
+          "reviewed_city": "",
+          "reviewed_region": "Краснодарский край"
+        },
+        {
+          "id": "8431111541",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Москва, Варшавское ш., 141к13",
+          "reviewed_city": "",
+          "reviewed_region": "Москва",
+          "visible_region": "Москва"
+        },
+        {
+          "id": "7249657914",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Москва, Центральный административный округ, Пресненский район",
+          "reviewed_city": "Москва",
+          "reviewed_region": "Москва",
+          "visible_region": "Москва"
+        },
+        {
+          "id": "8438680562",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Московская обл., Одинцовский г.о., Звенигород",
+          "reviewed_city": "",
+          "reviewed_region": "Московская область",
+          "visible_region": "Московская обл."
+        },
+        {
+          "id": "8199158704",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Республика Башкортостан, г.о. Уфа, Советский район",
+          "reviewed_city": "",
+          "reviewed_region": "",
+          "visible_region": "Республика Башкортостан"
+        },
+        {
+          "id": "8575089114",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Самарская обл., Тольятти, 71-й квартал",
+          "reviewed_city": "",
+          "reviewed_region": "",
+          "visible_region": "Самарская обл."
+        },
+        {
+          "id": "8477609028",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Санкт-Петербург, пр-т Маршала Блюхера, 7к1",
+          "reviewed_city": "Санкт-Петербург",
+          "reviewed_region": "Санкт-Петербург",
+          "visible_region": "Санкт-Петербург"
+        },
+        {
+          "id": "7291257015",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Санкт-Петербург, Дворцовая пл.",
+          "reviewed_city": "Санкт-Петербург",
+          "reviewed_region": "Санкт-Петербург",
+          "visible_region": "Санкт-Петербург"
+        },
+        {
+          "id": "4456039625",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Санкт-Петербург, Верхняя ул., 4к3",
+          "reviewed_city": "Санкт-Петербург",
+          "reviewed_region": "Санкт-Петербург",
+          "visible_region": "Санкт-Петербург"
+        },
+        {
+          "id": "8395286454",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Москва, Ленинский пр-т, 54",
+          "reviewed_city": "Москва",
+          "reviewed_region": "Москва",
+          "visible_region": "Москва"
+        },
+        {
+          "id": "2104936346",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Тульская обл., Тула, Перекопская ул.",
+          "reviewed_city": "",
+          "reviewed_region": "",
+          "visible_region": "Тульская обл."
+        },
+        {
+          "id": "7673432848",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Иркутская обл., Иркутск, пл. Графа Сперанского",
+          "reviewed_city": "",
+          "reviewed_region": "",
+          "visible_region": "Иркутская обл."
+        },
+        {
+          "id": "7780445996",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Пензенская обл.",
+          "reviewed_city": "",
+          "reviewed_region": "",
+          "visible_region": "Пензенская обл."
+        },
+        {
+          "id": "8400080848",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Москва, Электродная ул., 2с32",
+          "reviewed_city": "Москва",
+          "reviewed_region": "Москва",
+          "visible_region": "Москва"
+        },
+        {
+          "id": "8388157878",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Красноярский край, Красноярск",
+          "reviewed_city": "",
+          "reviewed_region": "",
+          "visible_region": "Красноярский край"
+        },
+        {
+          "id": "8420171858",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Москва, Большая кольцевая линия",
+          "reviewed_city": "Москва",
+          "reviewed_region": "Москва",
+          "visible_region": "Москва"
+        },
+        {
+          "id": "8003717407",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Республика Калмыкия, Элиста, 5-й мкр-н, 8А",
+          "reviewed_city": "",
+          "reviewed_region": "",
+          "visible_region": "Республика Калмыкия"
+        },
+        {
+          "id": "8531075158",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Амурская обл., Благовещенск, ул. 50 лет Октября, 29",
+          "reviewed_city": "",
+          "reviewed_region": "",
+          "visible_region": "Амурская обл."
+        },
+        {
+          "id": "8523123990",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Красноярский край, Красноярск, мкр-н Взлётка",
+          "reviewed_city": "",
+          "reviewed_region": "",
+          "visible_region": "Красноярский край"
+        },
+        {
+          "id": "8473098797",
+          "decision": "unknown",
+          "reason": "visible_card_city_not_unambiguous",
+          "visible_address": "Россия",
+          "reviewed_city": "",
+          "reviewed_region": ""
+        },
+        {
+          "id": "8515632011",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Нижегородская обл., Нижний Новгород, ул. Воровского, 3",
+          "reviewed_city": "",
+          "reviewed_region": "",
+          "visible_region": "Нижегородская обл."
+        },
+        {
+          "id": "2466379568",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Москва, Лубянский пр., 27/1с1",
+          "reviewed_city": "",
+          "reviewed_region": "Москва",
+          "visible_region": "Москва"
+        },
+        {
+          "id": "8445455486",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Челябинская обл., Челябинск, ул. Академика Королёва, 14",
+          "reviewed_city": "Челябинск",
+          "reviewed_region": "Челябинская область",
+          "visible_region": "Челябинская обл."
+        },
+        {
+          "id": "8414711772",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Москва, ул. Бурденко, 11Ас1",
+          "reviewed_city": "Москва",
+          "reviewed_region": "Москва",
+          "visible_region": "Москва"
+        },
+        {
+          "id": "8379514339",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Воронежская обл., Воронеж, ул. Менделеева, 1Б",
+          "reviewed_city": "",
+          "reviewed_region": "",
+          "visible_region": "Воронежская обл."
+        },
+        {
+          "id": "8388480513",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Нижегородская обл., Нижний Новгород",
+          "reviewed_city": "",
+          "reviewed_region": "",
+          "visible_region": "Нижегородская обл."
+        },
+        {
+          "id": "8427198422",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Москва, 2-я ул. Машиностроения, 7с1",
+          "reviewed_city": "Москва",
+          "reviewed_region": "Москва",
+          "visible_region": "Москва"
+        },
+        {
+          "id": "8369352703",
+          "decision": "unknown",
+          "reason": "visible_card_city_not_unambiguous",
+          "visible_address": "Чеченская Республика, Грозный, ул. Дадин Айбики, 52",
+          "reviewed_city": "",
+          "reviewed_region": ""
+        },
+        {
+          "id": "8235303995",
+          "decision": "unknown",
+          "reason": "visible_card_city_not_unambiguous",
+          "visible_address": "Кемеровская обл. — Кузбасс, Топкинский муниципальный округ, Топки",
+          "reviewed_city": "",
+          "reviewed_region": ""
+        },
+        {
+          "id": "3219399134",
+          "decision": "unknown",
+          "reason": "visible_card_city_not_unambiguous",
+          "visible_address": "Чувашская Республика, Чебоксары, ул. Фёдора Гладкова, 11",
+          "reviewed_city": "",
+          "reviewed_region": ""
+        },
+        {
+          "id": "7780882028",
+          "decision": "unknown",
+          "reason": "visible_card_city_not_unambiguous",
+          "visible_address": "Чувашская Республика, Чебоксары, пр-т Тракторостроителей, 72",
+          "reviewed_city": "",
+          "reviewed_region": ""
+        },
+        {
+          "id": "8511347409",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Москва, Тверская ул.",
+          "reviewed_city": "Москва",
+          "reviewed_region": "Москва",
+          "visible_region": "Москва"
+        },
+        {
+          "id": "7860492270",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Московская обл., Мытищи, ул. Мира",
+          "reviewed_city": "",
+          "reviewed_region": "Московская область",
+          "visible_region": "Московская обл."
+        },
+        {
+          "id": "8511832822",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Москва, пр. Воскресенские Ворота",
+          "reviewed_city": "",
+          "reviewed_region": "Москва",
+          "visible_region": "Москва"
+        },
+        {
+          "id": "8439926286",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Москва, ул. Арбат",
+          "reviewed_city": "Москва",
+          "reviewed_region": "Москва",
+          "visible_region": "Москва"
+        },
+        {
+          "id": "3508745898",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Белгородская обл., Белгород, Соборная пл.",
+          "reviewed_city": "",
+          "reviewed_region": "",
+          "visible_region": "Белгородская обл."
+        },
+        {
+          "id": "8447501874",
+          "decision": "in_city",
+          "reason": "visible_card_city_and_region",
+          "visible_address": "Краснодарский край, Краснодар",
+          "reviewed_city": "Краснодар",
+          "reviewed_region": "Краснодарский край",
+          "remote_evidence": {
+            "basis": "card_format",
+            "observed_value": "Удалённо"
+          }
+        },
+        {
+          "id": "8463794725",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Ставропольский край, Шпаковский муниципальный округ, Михайловск, ул. Гоголя",
+          "reviewed_city": "",
+          "reviewed_region": "",
+          "visible_region": "Ставропольский край"
+        },
+        {
+          "id": "8220785374",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Волгоградская обл., Волгоград, Университетский пр-т, 64",
+          "reviewed_city": "",
+          "reviewed_region": "",
+          "visible_region": "Волгоградская обл."
+        },
+        {
+          "id": "7655334620",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Новосибирская обл., Новосибирск, пр-т Карла Маркса, 25",
+          "reviewed_city": "Новосибирск",
+          "reviewed_region": "Новосибирская область",
+          "visible_region": "Новосибирская обл."
+        },
+        {
+          "id": "8407649003",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Москва, пр. Воскресенские Ворота",
+          "reviewed_city": "",
+          "reviewed_region": "Москва",
+          "visible_region": "Москва"
+        },
+        {
+          "id": "8544449666",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Пермский край, Пермь, ул. Пушкина, 6",
+          "reviewed_city": "",
+          "reviewed_region": "",
+          "visible_region": "Пермский край"
+        },
+        {
+          "id": "4630507312",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Костромская обл., Кострома, пр-т Мира",
+          "reviewed_city": "",
+          "reviewed_region": "",
+          "visible_region": "Костромская обл."
+        },
+        {
+          "id": "8408415845",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Свердловская обл., Екатеринбург, ул. Луначарского, 81",
+          "reviewed_city": "Екатеринбург",
+          "reviewed_region": "Свердловская область",
+          "visible_region": "Свердловская обл."
+        },
+        {
+          "id": "8380330161",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Тверская обл., Тверь, пр-т Николая Корыткова",
+          "reviewed_city": "Тверь",
+          "reviewed_region": "Тверская область",
+          "visible_region": "Тверская обл."
+        },
+        {
+          "id": "8512506620",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Ярославская обл., Рыбинск, Крестовая ул.",
+          "reviewed_city": "",
+          "reviewed_region": "",
+          "visible_region": "Ярославская обл."
+        },
+        {
+          "id": "8440877675",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Красноярский край, г.о. Красноярск, Центральный район, пл. Революции",
+          "reviewed_city": "",
+          "reviewed_region": "",
+          "visible_region": "Красноярский край"
+        },
+        {
+          "id": "8452276830",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Санкт-Петербург, Дворцовая пл.",
+          "reviewed_city": "Санкт-Петербург",
+          "reviewed_region": "Санкт-Петербург",
+          "visible_region": "Санкт-Петербург"
+        },
+        {
+          "id": "8521250411",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Москва, пр. Воскресенские Ворота",
+          "reviewed_city": "",
+          "reviewed_region": "Москва",
+          "visible_region": "Москва"
+        },
+        {
+          "id": "8378337255",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Москва, Рязанский пр-т",
+          "reviewed_city": "Москва",
+          "reviewed_region": "Москва",
+          "visible_region": "Москва"
+        },
+        {
+          "id": "8372228796",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Московская обл., Долгопрудный, Лихачёвский пр-т, 64",
+          "reviewed_city": "",
+          "reviewed_region": "Московская область",
+          "visible_region": "Московская обл."
+        },
+        {
+          "id": "8380326019",
+          "decision": "unknown",
+          "reason": "visible_card_city_not_unambiguous",
+          "visible_address": "Россия",
+          "reviewed_city": "",
+          "reviewed_region": ""
+        },
+        {
+          "id": "8348317928",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Белгородская обл., Старооскольский г.о., Старый Оскол, мкр-н Олимпийский, 56",
+          "reviewed_city": "",
+          "reviewed_region": "",
+          "visible_region": "Белгородская обл."
+        },
+        {
+          "id": "8393307623",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Москва, Моховая ул.",
+          "reviewed_city": "Москва",
+          "reviewed_region": "Москва",
+          "visible_region": "Москва"
+        },
+        {
+          "id": "8276810071",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Москва, Красная пл.",
+          "reviewed_city": "Москва",
+          "reviewed_region": "Москва",
+          "visible_region": "Москва"
+        },
+        {
+          "id": "8491612479",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Москва, Тверская ул., 3",
+          "reviewed_city": "Москва",
+          "reviewed_region": "Москва",
+          "visible_region": "Москва"
+        },
+        {
+          "id": "8348600442",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Воронежская обл., Воронеж",
+          "reviewed_city": "",
+          "reviewed_region": "",
+          "visible_region": "Воронежская обл."
+        },
+        {
+          "id": "8348699031",
+          "decision": "in_city",
+          "reason": "visible_card_city_and_region",
+          "visible_address": "Краснодарский край, Краснодар, мкр-н Дубинка, пр. Полины Осипенко",
+          "reviewed_city": "Краснодар",
+          "reviewed_region": "Краснодарский край",
+          "remote_evidence": {
+            "basis": "card_format",
+            "observed_value": "Удалённо"
+          }
+        },
+        {
+          "id": "8232517681",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Свердловская обл., Екатеринбург, ул. Куйбышева, 159А",
+          "reviewed_city": "Екатеринбург",
+          "reviewed_region": "Свердловская область",
+          "visible_region": "Свердловская обл."
+        },
+        {
+          "id": "8366735106",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Москва",
+          "reviewed_city": "Москва",
+          "reviewed_region": "Москва",
+          "visible_region": "Москва"
+        },
+        {
+          "id": "8378500014",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Москва, ул. Большие Каменщики, 2",
+          "reviewed_city": "Москва",
+          "reviewed_region": "Москва",
+          "visible_region": "Москва"
+        },
+        {
+          "id": "8407805429",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Алтайский край, Барнаул, Павловский тракт, 283",
+          "reviewed_city": "",
+          "reviewed_region": "",
+          "visible_region": "Алтайский край"
+        },
+        {
+          "id": "8512460787",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Москва, пр. Воскресенские Ворота",
+          "reviewed_city": "",
+          "reviewed_region": "Москва",
+          "visible_region": "Москва"
+        },
+        {
+          "id": "7611435194",
+          "decision": "unknown",
+          "reason": "visible_card_city_not_unambiguous",
+          "visible_address": "Краснодарский край, Новороссийск, ул. Советов",
+          "reviewed_city": "",
+          "reviewed_region": "Краснодарский край"
+        },
+        {
+          "id": "8437712573",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Санкт-Петербург",
+          "reviewed_city": "Санкт-Петербург",
+          "reviewed_region": "Санкт-Петербург",
+          "visible_region": "Санкт-Петербург"
+        },
+        {
+          "id": "7628523278",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Санкт-Петербург, Выборгское ш.",
+          "reviewed_city": "",
+          "reviewed_region": "Санкт-Петербург",
+          "visible_region": "Санкт-Петербург"
+        },
+        {
+          "id": "8340758394",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Санкт-Петербург, Парфёновская ул., 6к1",
+          "reviewed_city": "Санкт-Петербург",
+          "reviewed_region": "Санкт-Петербург",
+          "visible_region": "Санкт-Петербург"
+        },
+        {
+          "id": "4091228151",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Московская обл., Подольск, ул. Ленина, 1",
+          "reviewed_city": "Подольск",
+          "reviewed_region": "Московская область",
+          "visible_region": "Московская обл."
+        },
+        {
+          "id": "8453272457",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Москва, Тверская ул.",
+          "reviewed_city": "Москва",
+          "reviewed_region": "Москва",
+          "visible_region": "Москва"
+        },
+        {
+          "id": "8378527862",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Москва, ул. Арбат",
+          "reviewed_city": "Москва",
+          "reviewed_region": "Москва",
+          "visible_region": "Москва"
+        },
+        {
+          "id": "8369251900",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Москва",
+          "reviewed_city": "Москва",
+          "reviewed_region": "Москва",
+          "visible_region": "Москва"
+        },
+        {
+          "id": "8407905086",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Псковская обл., Псков, ул. Труда",
+          "reviewed_city": "",
+          "reviewed_region": "",
+          "visible_region": "Псковская обл."
+        },
+        {
+          "id": "8431466833",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Санкт-Петербург, Петродворцовый р-н",
+          "reviewed_city": "Санкт-Петербург",
+          "reviewed_region": "Санкт-Петербург",
+          "visible_region": "Санкт-Петербург"
+        },
+        {
+          "id": "7958727165",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Москва, Зеленоград, к1614",
+          "reviewed_city": "",
+          "reviewed_region": "Москва",
+          "visible_region": "Москва"
+        },
+        {
+          "id": "8514056309",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Воронежская обл., Воронеж",
+          "reviewed_city": "",
+          "reviewed_region": "",
+          "visible_region": "Воронежская обл."
+        },
+        {
+          "id": "8459306053",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Республика Башкортостан, Уфа, пр-т Октября, 170",
+          "reviewed_city": "",
+          "reviewed_region": "",
+          "visible_region": "Республика Башкортостан"
+        },
+        {
+          "id": "8512549675",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Ростовская обл., Ростов-на-Дону, 2-я Форматная ул.",
+          "reviewed_city": "",
+          "reviewed_region": "",
+          "visible_region": "Ростовская обл."
+        },
+        {
+          "id": "8408801714",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Москва, Пресненская наб., 2",
+          "reviewed_city": "",
+          "reviewed_region": "Москва",
+          "visible_region": "Москва"
+        },
+        {
+          "id": "8401345435",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Республика Татарстан (Татарстан), Казань, ул. Баумана",
+          "reviewed_city": "",
+          "reviewed_region": "",
+          "visible_region": "Республика Татарстан (Татарстан)"
+        },
+        {
+          "id": "7247648678",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Республика Марий Эл, Йошкар-Ола, Фестивальная ул., 70В",
+          "reviewed_city": "",
+          "reviewed_region": "",
+          "visible_region": "Республика Марий Эл"
+        },
+        {
+          "id": "8457923664",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Санкт-Петербург, Лиговский пр-т, 61",
+          "reviewed_city": "Санкт-Петербург",
+          "reviewed_region": "Санкт-Петербург",
+          "visible_region": "Санкт-Петербург"
+        },
+        {
+          "id": "8378775989",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Москва, пр. Воскресенские Ворота",
+          "reviewed_city": "",
+          "reviewed_region": "Москва",
+          "visible_region": "Москва"
+        },
+        {
+          "id": "8347167776",
+          "decision": "unknown",
+          "reason": "visible_card_city_not_unambiguous",
+          "visible_address": "Россия",
+          "reviewed_city": "",
+          "reviewed_region": ""
+        },
+        {
+          "id": "8440828142",
+          "decision": "unknown",
+          "reason": "visible_card_city_not_unambiguous",
+          "visible_address": "Донецкий городской совет, Донецк, пр-т Ильича",
+          "reviewed_city": "",
+          "reviewed_region": ""
+        },
+        {
+          "id": "8482867276",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Москва, Ленинградский пр-т, 72к3",
+          "reviewed_city": "Москва",
+          "reviewed_region": "Москва",
+          "visible_region": "Москва"
+        },
+        {
+          "id": "8241016699",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Нижегородская обл., г.о. Нижний Новгород, Нижегородский район, пл. Минина и Пожарского",
+          "reviewed_city": "",
+          "reviewed_region": "",
+          "visible_region": "Нижегородская обл."
+        },
+        {
+          "id": "8503621275",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Смоленская обл., Ярцевский р-н, Ярцевское городское поселение, Ярцево, ул. Гагарина",
+          "reviewed_city": "",
+          "reviewed_region": "",
+          "visible_region": "Смоленская обл."
+        },
+        {
+          "id": "8382315481",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Кировская обл., Киров, ул. Дмитрия Козулева, 2",
+          "reviewed_city": "",
+          "reviewed_region": "",
+          "visible_region": "Кировская обл."
+        },
+        {
+          "id": "8515352176",
+          "decision": "unknown",
+          "reason": "visible_card_city_not_unambiguous",
+          "visible_address": "Россия",
+          "reviewed_city": "",
+          "reviewed_region": ""
+        },
+        {
+          "id": "8410719126",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Калининградская обл., Калининград, пр-т Мира, 31",
+          "reviewed_city": "",
+          "reviewed_region": "",
+          "visible_region": "Калининградская обл."
+        },
+        {
+          "id": "7470396074",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Волгоградская обл., Волгоград, пр-т имени В.И. Ленина",
+          "reviewed_city": "",
+          "reviewed_region": "",
+          "visible_region": "Волгоградская обл."
+        },
+        {
+          "id": "8379833741",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Москва",
+          "reviewed_city": "Москва",
+          "reviewed_region": "Москва",
+          "visible_region": "Москва"
+        },
+        {
+          "id": "8366266900",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Костромская обл., Кострома",
+          "reviewed_city": "",
+          "reviewed_region": "",
+          "visible_region": "Костромская обл."
+        },
+        {
+          "id": "8441112228",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Санкт-Петербург",
+          "reviewed_city": "Санкт-Петербург",
+          "reviewed_region": "Санкт-Петербург",
+          "visible_region": "Санкт-Петербург"
+        },
+        {
+          "id": "8470504287",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Москва, Щёлковское ш., 100к2",
+          "reviewed_city": "",
+          "reviewed_region": "Москва",
+          "visible_region": "Москва"
+        },
+        {
+          "id": "4486214179",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Москва, Шипиловская ул., 3",
+          "reviewed_city": "Москва",
+          "reviewed_region": "Москва",
+          "visible_region": "Москва"
+        },
+        {
+          "id": "8417738964",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Ростовская обл., Ростов-на-Дону, Ворошиловский пр-т",
+          "reviewed_city": "",
+          "reviewed_region": "",
+          "visible_region": "Ростовская обл."
+        },
+        {
+          "id": "4601404746",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Челябинская обл., Челябинский г.о., Челябинск, Ферросплавная ул., 70соор1",
+          "reviewed_city": "",
+          "reviewed_region": "Челябинская область",
+          "visible_region": "Челябинская обл."
+        },
+        {
+          "id": "8455542433",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Кировская обл., Киров, Владимирская ул., 99",
+          "reviewed_city": "",
+          "reviewed_region": "",
+          "visible_region": "Кировская обл."
+        },
+        {
+          "id": "7898103111",
+          "decision": "unknown",
+          "reason": "visible_card_city_not_unambiguous",
+          "visible_address": "Россия",
+          "reviewed_city": "",
+          "reviewed_region": ""
+        },
+        {
+          "id": "8012033270",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Санкт-Петербург, пр-т Луначарского, 15к1",
+          "reviewed_city": "Санкт-Петербург",
+          "reviewed_region": "Санкт-Петербург",
+          "visible_region": "Санкт-Петербург"
+        },
+        {
+          "id": "8390070402",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Москва, ул. Охотный Ряд",
+          "reviewed_city": "Москва",
+          "reviewed_region": "Москва",
+          "visible_region": "Москва"
+        },
+        {
+          "id": "4297937423",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Пензенская обл., Пенза, ул. Кирова, 18Б",
+          "reviewed_city": "",
+          "reviewed_region": "",
+          "visible_region": "Пензенская обл."
+        },
+        {
+          "id": "8490400449",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Москва, ул. Охотный Ряд",
+          "reviewed_city": "Москва",
+          "reviewed_region": "Москва",
+          "visible_region": "Москва"
+        },
+        {
+          "id": "8370353572",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Москва",
+          "reviewed_city": "Москва",
+          "reviewed_region": "Москва",
+          "visible_region": "Москва"
+        },
+        {
+          "id": "7446467198",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Республика Крым, Симферополь, ул. Набережная имени 60-летия СССР, 83А",
+          "reviewed_city": "",
+          "reviewed_region": "",
+          "visible_region": "Республика Крым"
+        },
+        {
+          "id": "8340203915",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Кемеровская обл., Кемеровский г.о., Кемерово, Ленинский район, мкр-н 16А, жилой комплекс Цветной Бульвар",
+          "reviewed_city": "",
+          "reviewed_region": "",
+          "visible_region": "Кемеровская обл."
+        },
+        {
+          "id": "2871315437",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Воронежская обл., Воронеж, Электросигнальная ул., 1А",
+          "reviewed_city": "",
+          "reviewed_region": "",
+          "visible_region": "Воронежская обл."
+        },
+        {
+          "id": "8589455015",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Москва, ул. Борисовские Пруды, 18к3",
+          "reviewed_city": "Москва",
+          "reviewed_region": "Москва",
+          "visible_region": "Москва"
+        },
+        {
+          "id": "8544068628",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Белгородская обл., Белгород, ул. Попова, 20",
+          "reviewed_city": "",
+          "reviewed_region": "",
+          "visible_region": "Белгородская обл."
+        },
+        {
+          "id": "8473712880",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Москва",
+          "reviewed_city": "Москва",
+          "reviewed_region": "Москва",
+          "visible_region": "Москва"
+        },
+        {
+          "id": "8441517963",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Москва, пр-т Вернадского, 29",
+          "reviewed_city": "Москва",
+          "reviewed_region": "Москва",
+          "visible_region": "Москва"
+        },
+        {
+          "id": "2385340134",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Воронежская обл., Воронеж, ул. Революции 1905 года, 31Ю",
+          "reviewed_city": "",
+          "reviewed_region": "",
+          "visible_region": "Воронежская обл."
+        },
+        {
+          "id": "8353851634",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Самарская обл., Тольятти, Юбилейная ул., 29",
+          "reviewed_city": "",
+          "reviewed_region": "",
+          "visible_region": "Самарская обл."
+        },
+        {
+          "id": "8498924622",
+          "decision": "unknown",
+          "reason": "visible_card_city_not_unambiguous",
+          "visible_address": "Россия",
+          "reviewed_city": "",
+          "reviewed_region": ""
+        },
+        {
+          "id": "8577796837",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Москва, Западный административный округ, район Филёвский Парк",
+          "reviewed_city": "Москва",
+          "reviewed_region": "Москва",
+          "visible_region": "Москва"
+        },
+        {
+          "id": "8405795148",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Москва, ул. Охотный Ряд",
+          "reviewed_city": "Москва",
+          "reviewed_region": "Москва",
+          "visible_region": "Москва"
+        },
+        {
+          "id": "8521602822",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Москва",
+          "reviewed_city": "Москва",
+          "reviewed_region": "Москва",
+          "visible_region": "Москва"
+        }
+      ]
+    },
+    {
+      "version": "city_scope_audit_v2",
+      "source_run_id": "20261110-remote-all-russia-batch_05",
+      "source_manifest": {
+        "path": "Scraper/runs/20261110-remote-all-russia-batch_05/manifest.json",
+        "sha256": "496e804169cf93d812684866ff7fbb37d03fe3acafd555b47f755347582ea9e5"
+      },
+      "audit_code_sha256": "72f5fb34740ac409dc32fa05084077c9b5b0629fe35dfdfb4be461f89fc096ee",
+      "target_city": "Рязань",
+      "target_region_quote": "Рязанская обл.",
+      "scope": "saved queue only; completeness of city coverage is not established by this audit",
+      "filter_validation": "not performed; verify remote format, profession scope and regional filter evidence separately",
+      "counts": {
+        "in_city": 0,
+        "outside_city": 143,
+        "unknown": 12,
+        "unavailable_or_unresolved": 0
+      },
+      "decisions": [
+        {
+          "id": "8531438145",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Москва, пр-т Мира, 102к1",
+          "reviewed_city": "Москва",
+          "reviewed_region": "Москва",
+          "visible_region": "Москва"
+        },
+        {
+          "id": "8491406046",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Самарская обл., г.о. Самара, Самарский район",
+          "reviewed_city": "",
+          "reviewed_region": "",
+          "visible_region": "Самарская обл."
+        },
+        {
+          "id": "8393935105",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Ростовская обл.",
+          "reviewed_city": "",
+          "reviewed_region": "",
+          "visible_region": "Ростовская обл."
+        },
+        {
+          "id": "8468981541",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Московская обл., Дмитровский муниципальный округ, Дмитров, Историческая пл.",
+          "reviewed_city": "",
+          "reviewed_region": "Московская область",
+          "visible_region": "Московская обл."
+        },
+        {
+          "id": "8531205274",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Оренбургская обл., Оренбург, Бухарский пер., 19",
+          "reviewed_city": "",
+          "reviewed_region": "",
+          "visible_region": "Оренбургская обл."
+        },
+        {
+          "id": "8347589883",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Краснодарский край, Краснодар, Главная городская пл.",
+          "reviewed_city": "Краснодар",
+          "reviewed_region": "Краснодарский край",
+          "visible_region": "Краснодарский край"
+        },
+        {
+          "id": "8400310559",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Новосибирская обл., Бердск",
+          "reviewed_city": "",
+          "reviewed_region": "Новосибирская область",
+          "visible_region": "Новосибирская обл."
+        },
+        {
+          "id": "3569320963",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Москва, Байкальская ул.",
+          "reviewed_city": "Москва",
+          "reviewed_region": "Москва",
+          "visible_region": "Москва"
+        },
+        {
+          "id": "8471621035",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Москва, ул. Петровка, 2",
+          "reviewed_city": "Москва",
+          "reviewed_region": "Москва",
+          "visible_region": "Москва"
+        },
+        {
+          "id": "8455528003",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Москва, Каспийская ул.",
+          "reviewed_city": "Москва",
+          "reviewed_region": "Москва",
+          "visible_region": "Москва"
+        },
+        {
+          "id": "8491124120",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Москва, пр. Воскресенские Ворота",
+          "reviewed_city": "",
+          "reviewed_region": "Москва",
+          "visible_region": "Москва"
+        },
+        {
+          "id": "8235986003",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Москва, пр. Воскресенские Ворота",
+          "reviewed_city": "",
+          "reviewed_region": "Москва",
+          "visible_region": "Москва"
+        },
+        {
+          "id": "7931845644",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Москва, Ленинский пр-т, 69А",
+          "reviewed_city": "Москва",
+          "reviewed_region": "Москва",
+          "visible_region": "Москва"
+        },
+        {
+          "id": "8502428049",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Москва",
+          "reviewed_city": "Москва",
+          "reviewed_region": "Москва",
+          "visible_region": "Москва"
+        },
+        {
+          "id": "8482833281",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Москва, Красная пл.",
+          "reviewed_city": "Москва",
+          "reviewed_region": "Москва",
+          "visible_region": "Москва"
+        },
+        {
+          "id": "8607138391",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Приморский край, Владивостокский г.о., Владивосток, ул. Овчинникова, 32",
+          "reviewed_city": "",
+          "reviewed_region": "",
+          "visible_region": "Приморский край"
+        },
+        {
+          "id": "2731827718",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Санкт-Петербург, пр-т Испытателей",
+          "reviewed_city": "Санкт-Петербург",
+          "reviewed_region": "Санкт-Петербург",
+          "visible_region": "Санкт-Петербург"
+        },
+        {
+          "id": "8372331806",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Санкт-Петербург, Невский пр-т, 13/9",
+          "reviewed_city": "Санкт-Петербург",
+          "reviewed_region": "Санкт-Петербург",
+          "visible_region": "Санкт-Петербург"
+        },
+        {
+          "id": "8470772206",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Ростовская обл., Ростов-на-Дону, Ворошиловский пр-т",
+          "reviewed_city": "",
+          "reviewed_region": "",
+          "visible_region": "Ростовская обл."
+        },
+        {
+          "id": "8491338136",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Москва, Цветной б-р",
+          "reviewed_city": "",
+          "reviewed_region": "Москва",
+          "visible_region": "Москва"
+        },
+        {
+          "id": "8514327131",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Санкт-Петербург, Дворцовая пл.",
+          "reviewed_city": "Санкт-Петербург",
+          "reviewed_region": "Санкт-Петербург",
+          "visible_region": "Санкт-Петербург"
+        },
+        {
+          "id": "8422442909",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Иркутская обл., Жигаловский р-н, пгт. Жигалово, Советская ул.",
+          "reviewed_city": "",
+          "reviewed_region": "",
+          "visible_region": "Иркутская обл."
+        },
+        {
+          "id": "8423622921",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Москва, Щёлковское ш., 75",
+          "reviewed_city": "",
+          "reviewed_region": "Москва",
+          "visible_region": "Москва"
+        },
+        {
+          "id": "8348578197",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Республика Башкортостан, Уфимский р-н, Михайловский сельсовет, д. Суровка, Степная ул.",
+          "reviewed_city": "",
+          "reviewed_region": "",
+          "visible_region": "Республика Башкортостан"
+        },
+        {
+          "id": "7983050091",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Республика Башкортостан, Уфа, пр-т Октября, 4",
+          "reviewed_city": "",
+          "reviewed_region": "",
+          "visible_region": "Республика Башкортостан"
+        },
+        {
+          "id": "8364307665",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Республика Карелия, Петрозаводский г.о., Петрозаводск, пр-т Ленина",
+          "reviewed_city": "",
+          "reviewed_region": "",
+          "visible_region": "Республика Карелия"
+        },
+        {
+          "id": "8382631521",
+          "decision": "unknown",
+          "reason": "visible_card_city_not_unambiguous",
+          "visible_address": "Донецк",
+          "reviewed_city": "",
+          "reviewed_region": ""
+        },
+        {
+          "id": "8589241764",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Ростовская обл., Ростов-на-Дону, 60К-9, 1-й километр, 4/4",
+          "reviewed_city": "",
+          "reviewed_region": "",
+          "visible_region": "Ростовская обл."
+        },
+        {
+          "id": "8439413819",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Владимирская обл., Владимир, ул. Мира",
+          "reviewed_city": "",
+          "reviewed_region": "",
+          "visible_region": "Владимирская обл."
+        },
+        {
+          "id": "8485198000",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Республика Карелия, Петрозаводский г.о., Петрозаводск, Северная ул., 5",
+          "reviewed_city": "",
+          "reviewed_region": "",
+          "visible_region": "Республика Карелия"
+        },
+        {
+          "id": "8544278554",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Севастополь",
+          "reviewed_city": "",
+          "reviewed_region": "",
+          "visible_region": "Севастополь"
+        },
+        {
+          "id": "8193695689",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Воронежская обл., г.о. Воронеж, Ленинский район",
+          "reviewed_city": "",
+          "reviewed_region": "",
+          "visible_region": "Воронежская обл."
+        },
+        {
+          "id": "8346430930",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Тюменская обл., Ханты-Мансийский АО, Нижневартовск, ул. Мира, 25",
+          "reviewed_city": "",
+          "reviewed_region": "",
+          "visible_region": "Тюменская обл."
+        },
+        {
+          "id": "8251107775",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Республика Карелия, Петрозаводский г.о., Петрозаводск, ул. Анохина, 47Б",
+          "reviewed_city": "",
+          "reviewed_region": "",
+          "visible_region": "Республика Карелия"
+        },
+        {
+          "id": "8400803914",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Москва, пр. Воскресенские Ворота",
+          "reviewed_city": "",
+          "reviewed_region": "Москва",
+          "visible_region": "Москва"
+        },
+        {
+          "id": "4898360041",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Республика Коми, Сыктывкар, ул. Ленина, 32",
+          "reviewed_city": "",
+          "reviewed_region": "",
+          "visible_region": "Республика Коми"
+        },
+        {
+          "id": "8485160038",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Москва, Южный административный округ, Даниловский район, бывшая территория АМО ЗИЛ",
+          "reviewed_city": "",
+          "reviewed_region": "Москва",
+          "visible_region": "Москва"
+        },
+        {
+          "id": "8458699096",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Краснодарский край",
+          "reviewed_city": "",
+          "reviewed_region": "Краснодарский край",
+          "visible_region": "Краснодарский край"
+        },
+        {
+          "id": "8431111541",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Москва, Варшавское ш., 141к13",
+          "reviewed_city": "",
+          "reviewed_region": "Москва",
+          "visible_region": "Москва"
+        },
+        {
+          "id": "7249657914",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Москва, Центральный административный округ, Пресненский район",
+          "reviewed_city": "Москва",
+          "reviewed_region": "Москва",
+          "visible_region": "Москва"
+        },
+        {
+          "id": "8438680562",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Московская обл., Одинцовский г.о., Звенигород",
+          "reviewed_city": "",
+          "reviewed_region": "Московская область",
+          "visible_region": "Московская обл."
+        },
+        {
+          "id": "8199158704",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Республика Башкортостан, г.о. Уфа, Советский район",
+          "reviewed_city": "",
+          "reviewed_region": "",
+          "visible_region": "Республика Башкортостан"
+        },
+        {
+          "id": "8575089114",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Самарская обл., Тольятти, 71-й квартал",
+          "reviewed_city": "",
+          "reviewed_region": "",
+          "visible_region": "Самарская обл."
+        },
+        {
+          "id": "8477609028",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Санкт-Петербург, пр-т Маршала Блюхера, 7к1",
+          "reviewed_city": "Санкт-Петербург",
+          "reviewed_region": "Санкт-Петербург",
+          "visible_region": "Санкт-Петербург"
+        },
+        {
+          "id": "7291257015",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Санкт-Петербург, Дворцовая пл.",
+          "reviewed_city": "Санкт-Петербург",
+          "reviewed_region": "Санкт-Петербург",
+          "visible_region": "Санкт-Петербург"
+        },
+        {
+          "id": "4456039625",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Санкт-Петербург, Верхняя ул., 4к3",
+          "reviewed_city": "Санкт-Петербург",
+          "reviewed_region": "Санкт-Петербург",
+          "visible_region": "Санкт-Петербург"
+        },
+        {
+          "id": "8395286454",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Москва, Ленинский пр-т, 54",
+          "reviewed_city": "Москва",
+          "reviewed_region": "Москва",
+          "visible_region": "Москва"
+        },
+        {
+          "id": "2104936346",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Тульская обл., Тула, Перекопская ул.",
+          "reviewed_city": "",
+          "reviewed_region": "",
+          "visible_region": "Тульская обл."
+        },
+        {
+          "id": "7673432848",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Иркутская обл., Иркутск, пл. Графа Сперанского",
+          "reviewed_city": "",
+          "reviewed_region": "",
+          "visible_region": "Иркутская обл."
+        },
+        {
+          "id": "7780445996",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Пензенская обл.",
+          "reviewed_city": "",
+          "reviewed_region": "",
+          "visible_region": "Пензенская обл."
+        },
+        {
+          "id": "8400080848",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Москва, Электродная ул., 2с32",
+          "reviewed_city": "Москва",
+          "reviewed_region": "Москва",
+          "visible_region": "Москва"
+        },
+        {
+          "id": "8388157878",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Красноярский край, Красноярск",
+          "reviewed_city": "",
+          "reviewed_region": "",
+          "visible_region": "Красноярский край"
+        },
+        {
+          "id": "8420171858",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Москва, Большая кольцевая линия",
+          "reviewed_city": "Москва",
+          "reviewed_region": "Москва",
+          "visible_region": "Москва"
+        },
+        {
+          "id": "8003717407",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Республика Калмыкия, Элиста, 5-й мкр-н, 8А",
+          "reviewed_city": "",
+          "reviewed_region": "",
+          "visible_region": "Республика Калмыкия"
+        },
+        {
+          "id": "8531075158",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Амурская обл., Благовещенск, ул. 50 лет Октября, 29",
+          "reviewed_city": "",
+          "reviewed_region": "",
+          "visible_region": "Амурская обл."
+        },
+        {
+          "id": "8523123990",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Красноярский край, Красноярск, мкр-н Взлётка",
+          "reviewed_city": "",
+          "reviewed_region": "",
+          "visible_region": "Красноярский край"
+        },
+        {
+          "id": "8473098797",
+          "decision": "unknown",
+          "reason": "visible_card_city_not_unambiguous",
+          "visible_address": "Россия",
+          "reviewed_city": "",
+          "reviewed_region": ""
+        },
+        {
+          "id": "8515632011",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Нижегородская обл., Нижний Новгород, ул. Воровского, 3",
+          "reviewed_city": "",
+          "reviewed_region": "",
+          "visible_region": "Нижегородская обл."
+        },
+        {
+          "id": "2466379568",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Москва, Лубянский пр., 27/1с1",
+          "reviewed_city": "",
+          "reviewed_region": "Москва",
+          "visible_region": "Москва"
+        },
+        {
+          "id": "8445455486",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Челябинская обл., Челябинск, ул. Академика Королёва, 14",
+          "reviewed_city": "Челябинск",
+          "reviewed_region": "Челябинская область",
+          "visible_region": "Челябинская обл."
+        },
+        {
+          "id": "8414711772",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Москва, ул. Бурденко, 11Ас1",
+          "reviewed_city": "Москва",
+          "reviewed_region": "Москва",
+          "visible_region": "Москва"
+        },
+        {
+          "id": "8379514339",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Воронежская обл., Воронеж, ул. Менделеева, 1Б",
+          "reviewed_city": "",
+          "reviewed_region": "",
+          "visible_region": "Воронежская обл."
+        },
+        {
+          "id": "8388480513",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Нижегородская обл., Нижний Новгород",
+          "reviewed_city": "",
+          "reviewed_region": "",
+          "visible_region": "Нижегородская обл."
+        },
+        {
+          "id": "8427198422",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Москва, 2-я ул. Машиностроения, 7с1",
+          "reviewed_city": "Москва",
+          "reviewed_region": "Москва",
+          "visible_region": "Москва"
+        },
+        {
+          "id": "8369352703",
+          "decision": "unknown",
+          "reason": "visible_card_city_not_unambiguous",
+          "visible_address": "Чеченская Республика, Грозный, ул. Дадин Айбики, 52",
+          "reviewed_city": "",
+          "reviewed_region": ""
+        },
+        {
+          "id": "8235303995",
+          "decision": "unknown",
+          "reason": "visible_card_city_not_unambiguous",
+          "visible_address": "Кемеровская обл. — Кузбасс, Топкинский муниципальный округ, Топки",
+          "reviewed_city": "",
+          "reviewed_region": ""
+        },
+        {
+          "id": "3219399134",
+          "decision": "unknown",
+          "reason": "visible_card_city_not_unambiguous",
+          "visible_address": "Чувашская Республика, Чебоксары, ул. Фёдора Гладкова, 11",
+          "reviewed_city": "",
+          "reviewed_region": ""
+        },
+        {
+          "id": "7780882028",
+          "decision": "unknown",
+          "reason": "visible_card_city_not_unambiguous",
+          "visible_address": "Чувашская Республика, Чебоксары, пр-т Тракторостроителей, 72",
+          "reviewed_city": "",
+          "reviewed_region": ""
+        },
+        {
+          "id": "8511347409",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Москва, Тверская ул.",
+          "reviewed_city": "Москва",
+          "reviewed_region": "Москва",
+          "visible_region": "Москва"
+        },
+        {
+          "id": "7860492270",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Московская обл., Мытищи, ул. Мира",
+          "reviewed_city": "",
+          "reviewed_region": "Московская область",
+          "visible_region": "Московская обл."
+        },
+        {
+          "id": "8511832822",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Москва, пр. Воскресенские Ворота",
+          "reviewed_city": "",
+          "reviewed_region": "Москва",
+          "visible_region": "Москва"
+        },
+        {
+          "id": "8439926286",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Москва, ул. Арбат",
+          "reviewed_city": "Москва",
+          "reviewed_region": "Москва",
+          "visible_region": "Москва"
+        },
+        {
+          "id": "3508745898",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Белгородская обл., Белгород, Соборная пл.",
+          "reviewed_city": "",
+          "reviewed_region": "",
+          "visible_region": "Белгородская обл."
+        },
+        {
+          "id": "8447501874",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Краснодарский край, Краснодар",
+          "reviewed_city": "Краснодар",
+          "reviewed_region": "Краснодарский край",
+          "visible_region": "Краснодарский край"
+        },
+        {
+          "id": "8463794725",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Ставропольский край, Шпаковский муниципальный округ, Михайловск, ул. Гоголя",
+          "reviewed_city": "",
+          "reviewed_region": "",
+          "visible_region": "Ставропольский край"
+        },
+        {
+          "id": "8220785374",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Волгоградская обл., Волгоград, Университетский пр-т, 64",
+          "reviewed_city": "",
+          "reviewed_region": "",
+          "visible_region": "Волгоградская обл."
+        },
+        {
+          "id": "7655334620",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Новосибирская обл., Новосибирск, пр-т Карла Маркса, 25",
+          "reviewed_city": "Новосибирск",
+          "reviewed_region": "Новосибирская область",
+          "visible_region": "Новосибирская обл."
+        },
+        {
+          "id": "8407649003",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Москва, пр. Воскресенские Ворота",
+          "reviewed_city": "",
+          "reviewed_region": "Москва",
+          "visible_region": "Москва"
+        },
+        {
+          "id": "8544449666",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Пермский край, Пермь, ул. Пушкина, 6",
+          "reviewed_city": "",
+          "reviewed_region": "",
+          "visible_region": "Пермский край"
+        },
+        {
+          "id": "4630507312",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Костромская обл., Кострома, пр-т Мира",
+          "reviewed_city": "",
+          "reviewed_region": "",
+          "visible_region": "Костромская обл."
+        },
+        {
+          "id": "8408415845",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Свердловская обл., Екатеринбург, ул. Луначарского, 81",
+          "reviewed_city": "Екатеринбург",
+          "reviewed_region": "Свердловская область",
+          "visible_region": "Свердловская обл."
+        },
+        {
+          "id": "8380330161",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Тверская обл., Тверь, пр-т Николая Корыткова",
+          "reviewed_city": "Тверь",
+          "reviewed_region": "Тверская область",
+          "visible_region": "Тверская обл."
+        },
+        {
+          "id": "8512506620",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Ярославская обл., Рыбинск, Крестовая ул.",
+          "reviewed_city": "",
+          "reviewed_region": "",
+          "visible_region": "Ярославская обл."
+        },
+        {
+          "id": "8440877675",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Красноярский край, г.о. Красноярск, Центральный район, пл. Революции",
+          "reviewed_city": "",
+          "reviewed_region": "",
+          "visible_region": "Красноярский край"
+        },
+        {
+          "id": "8452276830",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Санкт-Петербург, Дворцовая пл.",
+          "reviewed_city": "Санкт-Петербург",
+          "reviewed_region": "Санкт-Петербург",
+          "visible_region": "Санкт-Петербург"
+        },
+        {
+          "id": "8521250411",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Москва, пр. Воскресенские Ворота",
+          "reviewed_city": "",
+          "reviewed_region": "Москва",
+          "visible_region": "Москва"
+        },
+        {
+          "id": "8378337255",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Москва, Рязанский пр-т",
+          "reviewed_city": "Москва",
+          "reviewed_region": "Москва",
+          "visible_region": "Москва"
+        },
+        {
+          "id": "8372228796",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Московская обл., Долгопрудный, Лихачёвский пр-т, 64",
+          "reviewed_city": "",
+          "reviewed_region": "Московская область",
+          "visible_region": "Московская обл."
+        },
+        {
+          "id": "8380326019",
+          "decision": "unknown",
+          "reason": "visible_card_city_not_unambiguous",
+          "visible_address": "Россия",
+          "reviewed_city": "",
+          "reviewed_region": ""
+        },
+        {
+          "id": "8348317928",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Белгородская обл., Старооскольский г.о., Старый Оскол, мкр-н Олимпийский, 56",
+          "reviewed_city": "",
+          "reviewed_region": "",
+          "visible_region": "Белгородская обл."
+        },
+        {
+          "id": "8393307623",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Москва, Моховая ул.",
+          "reviewed_city": "Москва",
+          "reviewed_region": "Москва",
+          "visible_region": "Москва"
+        },
+        {
+          "id": "8276810071",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Москва, Красная пл.",
+          "reviewed_city": "Москва",
+          "reviewed_region": "Москва",
+          "visible_region": "Москва"
+        },
+        {
+          "id": "8491612479",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Москва, Тверская ул., 3",
+          "reviewed_city": "Москва",
+          "reviewed_region": "Москва",
+          "visible_region": "Москва"
+        },
+        {
+          "id": "8348600442",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Воронежская обл., Воронеж",
+          "reviewed_city": "",
+          "reviewed_region": "",
+          "visible_region": "Воронежская обл."
+        },
+        {
+          "id": "8348699031",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Краснодарский край, Краснодар, мкр-н Дубинка, пр. Полины Осипенко",
+          "reviewed_city": "Краснодар",
+          "reviewed_region": "Краснодарский край",
+          "visible_region": "Краснодарский край"
+        },
+        {
+          "id": "8232517681",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Свердловская обл., Екатеринбург, ул. Куйбышева, 159А",
+          "reviewed_city": "Екатеринбург",
+          "reviewed_region": "Свердловская область",
+          "visible_region": "Свердловская обл."
+        },
+        {
+          "id": "8366735106",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Москва",
+          "reviewed_city": "Москва",
+          "reviewed_region": "Москва",
+          "visible_region": "Москва"
+        },
+        {
+          "id": "8378500014",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Москва, ул. Большие Каменщики, 2",
+          "reviewed_city": "Москва",
+          "reviewed_region": "Москва",
+          "visible_region": "Москва"
+        },
+        {
+          "id": "8407805429",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Алтайский край, Барнаул, Павловский тракт, 283",
+          "reviewed_city": "",
+          "reviewed_region": "",
+          "visible_region": "Алтайский край"
+        },
+        {
+          "id": "8512460787",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Москва, пр. Воскресенские Ворота",
+          "reviewed_city": "",
+          "reviewed_region": "Москва",
+          "visible_region": "Москва"
+        },
+        {
+          "id": "7611435194",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Краснодарский край, Новороссийск, ул. Советов",
+          "reviewed_city": "",
+          "reviewed_region": "Краснодарский край",
+          "visible_region": "Краснодарский край"
+        },
+        {
+          "id": "8437712573",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Санкт-Петербург",
+          "reviewed_city": "Санкт-Петербург",
+          "reviewed_region": "Санкт-Петербург",
+          "visible_region": "Санкт-Петербург"
+        },
+        {
+          "id": "7628523278",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Санкт-Петербург, Выборгское ш.",
+          "reviewed_city": "",
+          "reviewed_region": "Санкт-Петербург",
+          "visible_region": "Санкт-Петербург"
+        },
+        {
+          "id": "8340758394",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Санкт-Петербург, Парфёновская ул., 6к1",
+          "reviewed_city": "Санкт-Петербург",
+          "reviewed_region": "Санкт-Петербург",
+          "visible_region": "Санкт-Петербург"
+        },
+        {
+          "id": "4091228151",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Московская обл., Подольск, ул. Ленина, 1",
+          "reviewed_city": "Подольск",
+          "reviewed_region": "Московская область",
+          "visible_region": "Московская обл."
+        },
+        {
+          "id": "8453272457",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Москва, Тверская ул.",
+          "reviewed_city": "Москва",
+          "reviewed_region": "Москва",
+          "visible_region": "Москва"
+        },
+        {
+          "id": "8378527862",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Москва, ул. Арбат",
+          "reviewed_city": "Москва",
+          "reviewed_region": "Москва",
+          "visible_region": "Москва"
+        },
+        {
+          "id": "8369251900",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Москва",
+          "reviewed_city": "Москва",
+          "reviewed_region": "Москва",
+          "visible_region": "Москва"
+        },
+        {
+          "id": "8407905086",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Псковская обл., Псков, ул. Труда",
+          "reviewed_city": "",
+          "reviewed_region": "",
+          "visible_region": "Псковская обл."
+        },
+        {
+          "id": "8431466833",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Санкт-Петербург, Петродворцовый р-н",
+          "reviewed_city": "Санкт-Петербург",
+          "reviewed_region": "Санкт-Петербург",
+          "visible_region": "Санкт-Петербург"
+        },
+        {
+          "id": "7958727165",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Москва, Зеленоград, к1614",
+          "reviewed_city": "",
+          "reviewed_region": "Москва",
+          "visible_region": "Москва"
+        },
+        {
+          "id": "8514056309",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Воронежская обл., Воронеж",
+          "reviewed_city": "",
+          "reviewed_region": "",
+          "visible_region": "Воронежская обл."
+        },
+        {
+          "id": "8459306053",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Республика Башкортостан, Уфа, пр-т Октября, 170",
+          "reviewed_city": "",
+          "reviewed_region": "",
+          "visible_region": "Республика Башкортостан"
+        },
+        {
+          "id": "8512549675",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Ростовская обл., Ростов-на-Дону, 2-я Форматная ул.",
+          "reviewed_city": "",
+          "reviewed_region": "",
+          "visible_region": "Ростовская обл."
+        },
+        {
+          "id": "8408801714",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Москва, Пресненская наб., 2",
+          "reviewed_city": "",
+          "reviewed_region": "Москва",
+          "visible_region": "Москва"
+        },
+        {
+          "id": "8401345435",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Республика Татарстан (Татарстан), Казань, ул. Баумана",
+          "reviewed_city": "",
+          "reviewed_region": "",
+          "visible_region": "Республика Татарстан (Татарстан)"
+        },
+        {
+          "id": "7247648678",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Республика Марий Эл, Йошкар-Ола, Фестивальная ул., 70В",
+          "reviewed_city": "",
+          "reviewed_region": "",
+          "visible_region": "Республика Марий Эл"
+        },
+        {
+          "id": "8457923664",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Санкт-Петербург, Лиговский пр-т, 61",
+          "reviewed_city": "Санкт-Петербург",
+          "reviewed_region": "Санкт-Петербург",
+          "visible_region": "Санкт-Петербург"
+        },
+        {
+          "id": "8378775989",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Москва, пр. Воскресенские Ворота",
+          "reviewed_city": "",
+          "reviewed_region": "Москва",
+          "visible_region": "Москва"
+        },
+        {
+          "id": "8347167776",
+          "decision": "unknown",
+          "reason": "visible_card_city_not_unambiguous",
+          "visible_address": "Россия",
+          "reviewed_city": "",
+          "reviewed_region": ""
+        },
+        {
+          "id": "8440828142",
+          "decision": "unknown",
+          "reason": "visible_card_city_not_unambiguous",
+          "visible_address": "Донецкий городской совет, Донецк, пр-т Ильича",
+          "reviewed_city": "",
+          "reviewed_region": ""
+        },
+        {
+          "id": "8482867276",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Москва, Ленинградский пр-т, 72к3",
+          "reviewed_city": "Москва",
+          "reviewed_region": "Москва",
+          "visible_region": "Москва"
+        },
+        {
+          "id": "8241016699",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Нижегородская обл., г.о. Нижний Новгород, Нижегородский район, пл. Минина и Пожарского",
+          "reviewed_city": "",
+          "reviewed_region": "",
+          "visible_region": "Нижегородская обл."
+        },
+        {
+          "id": "8503621275",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Смоленская обл., Ярцевский р-н, Ярцевское городское поселение, Ярцево, ул. Гагарина",
+          "reviewed_city": "",
+          "reviewed_region": "",
+          "visible_region": "Смоленская обл."
+        },
+        {
+          "id": "8382315481",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Кировская обл., Киров, ул. Дмитрия Козулева, 2",
+          "reviewed_city": "",
+          "reviewed_region": "",
+          "visible_region": "Кировская обл."
+        },
+        {
+          "id": "8515352176",
+          "decision": "unknown",
+          "reason": "visible_card_city_not_unambiguous",
+          "visible_address": "Россия",
+          "reviewed_city": "",
+          "reviewed_region": ""
+        },
+        {
+          "id": "8410719126",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Калининградская обл., Калининград, пр-т Мира, 31",
+          "reviewed_city": "",
+          "reviewed_region": "",
+          "visible_region": "Калининградская обл."
+        },
+        {
+          "id": "7470396074",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Волгоградская обл., Волгоград, пр-т имени В.И. Ленина",
+          "reviewed_city": "",
+          "reviewed_region": "",
+          "visible_region": "Волгоградская обл."
+        },
+        {
+          "id": "8379833741",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Москва",
+          "reviewed_city": "Москва",
+          "reviewed_region": "Москва",
+          "visible_region": "Москва"
+        },
+        {
+          "id": "8366266900",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Костромская обл., Кострома",
+          "reviewed_city": "",
+          "reviewed_region": "",
+          "visible_region": "Костромская обл."
+        },
+        {
+          "id": "8441112228",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Санкт-Петербург",
+          "reviewed_city": "Санкт-Петербург",
+          "reviewed_region": "Санкт-Петербург",
+          "visible_region": "Санкт-Петербург"
+        },
+        {
+          "id": "8470504287",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Москва, Щёлковское ш., 100к2",
+          "reviewed_city": "",
+          "reviewed_region": "Москва",
+          "visible_region": "Москва"
+        },
+        {
+          "id": "4486214179",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Москва, Шипиловская ул., 3",
+          "reviewed_city": "Москва",
+          "reviewed_region": "Москва",
+          "visible_region": "Москва"
+        },
+        {
+          "id": "8417738964",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Ростовская обл., Ростов-на-Дону, Ворошиловский пр-т",
+          "reviewed_city": "",
+          "reviewed_region": "",
+          "visible_region": "Ростовская обл."
+        },
+        {
+          "id": "4601404746",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Челябинская обл., Челябинский г.о., Челябинск, Ферросплавная ул., 70соор1",
+          "reviewed_city": "",
+          "reviewed_region": "Челябинская область",
+          "visible_region": "Челябинская обл."
+        },
+        {
+          "id": "8455542433",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Кировская обл., Киров, Владимирская ул., 99",
+          "reviewed_city": "",
+          "reviewed_region": "",
+          "visible_region": "Кировская обл."
+        },
+        {
+          "id": "7898103111",
+          "decision": "unknown",
+          "reason": "visible_card_city_not_unambiguous",
+          "visible_address": "Россия",
+          "reviewed_city": "",
+          "reviewed_region": ""
+        },
+        {
+          "id": "8012033270",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Санкт-Петербург, пр-т Луначарского, 15к1",
+          "reviewed_city": "Санкт-Петербург",
+          "reviewed_region": "Санкт-Петербург",
+          "visible_region": "Санкт-Петербург"
+        },
+        {
+          "id": "8390070402",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Москва, ул. Охотный Ряд",
+          "reviewed_city": "Москва",
+          "reviewed_region": "Москва",
+          "visible_region": "Москва"
+        },
+        {
+          "id": "4297937423",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Пензенская обл., Пенза, ул. Кирова, 18Б",
+          "reviewed_city": "",
+          "reviewed_region": "",
+          "visible_region": "Пензенская обл."
+        },
+        {
+          "id": "8490400449",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Москва, ул. Охотный Ряд",
+          "reviewed_city": "Москва",
+          "reviewed_region": "Москва",
+          "visible_region": "Москва"
+        },
+        {
+          "id": "8370353572",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Москва",
+          "reviewed_city": "Москва",
+          "reviewed_region": "Москва",
+          "visible_region": "Москва"
+        },
+        {
+          "id": "7446467198",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Республика Крым, Симферополь, ул. Набережная имени 60-летия СССР, 83А",
+          "reviewed_city": "",
+          "reviewed_region": "",
+          "visible_region": "Республика Крым"
+        },
+        {
+          "id": "8340203915",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Кемеровская обл., Кемеровский г.о., Кемерово, Ленинский район, мкр-н 16А, жилой комплекс Цветной Бульвар",
+          "reviewed_city": "",
+          "reviewed_region": "",
+          "visible_region": "Кемеровская обл."
+        },
+        {
+          "id": "2871315437",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Воронежская обл., Воронеж, Электросигнальная ул., 1А",
+          "reviewed_city": "",
+          "reviewed_region": "",
+          "visible_region": "Воронежская обл."
+        },
+        {
+          "id": "8589455015",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Москва, ул. Борисовские Пруды, 18к3",
+          "reviewed_city": "Москва",
+          "reviewed_region": "Москва",
+          "visible_region": "Москва"
+        },
+        {
+          "id": "8544068628",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Белгородская обл., Белгород, ул. Попова, 20",
+          "reviewed_city": "",
+          "reviewed_region": "",
+          "visible_region": "Белгородская обл."
+        },
+        {
+          "id": "8473712880",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Москва",
+          "reviewed_city": "Москва",
+          "reviewed_region": "Москва",
+          "visible_region": "Москва"
+        },
+        {
+          "id": "8441517963",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Москва, пр-т Вернадского, 29",
+          "reviewed_city": "Москва",
+          "reviewed_region": "Москва",
+          "visible_region": "Москва"
+        },
+        {
+          "id": "2385340134",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Воронежская обл., Воронеж, ул. Революции 1905 года, 31Ю",
+          "reviewed_city": "",
+          "reviewed_region": "",
+          "visible_region": "Воронежская обл."
+        },
+        {
+          "id": "8353851634",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Самарская обл., Тольятти, Юбилейная ул., 29",
+          "reviewed_city": "",
+          "reviewed_region": "",
+          "visible_region": "Самарская обл."
+        },
+        {
+          "id": "8498924622",
+          "decision": "unknown",
+          "reason": "visible_card_city_not_unambiguous",
+          "visible_address": "Россия",
+          "reviewed_city": "",
+          "reviewed_region": ""
+        },
+        {
+          "id": "8577796837",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Москва, Западный административный округ, район Филёвский Парк",
+          "reviewed_city": "Москва",
+          "reviewed_region": "Москва",
+          "visible_region": "Москва"
+        },
+        {
+          "id": "8405795148",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Москва, ул. Охотный Ряд",
+          "reviewed_city": "Москва",
+          "reviewed_region": "Москва",
+          "visible_region": "Москва"
+        },
+        {
+          "id": "8521602822",
+          "decision": "outside_city",
+          "reason": "different_visible_region",
+          "visible_address": "Москва",
+          "reviewed_city": "Москва",
+          "reviewed_region": "Москва",
+          "visible_region": "Москва"
+        }
+      ]
+    }
+  ],
+  "city_outputs": [
+    {
+      "file": "city-01.csv",
+      "sha256": "17b4fb53ed716363fe3d78494f96aa0b393694df6953431365963acb4265d5df",
+      "rows": 3
+    },
+    {
+      "file": "city-02.csv",
+      "sha256": "5ab9fe475099986c8d4742c0af25d23fe5790f6dee93296dda674ec2c41877ce",
+      "rows": 0
+    }
+  ]
+}

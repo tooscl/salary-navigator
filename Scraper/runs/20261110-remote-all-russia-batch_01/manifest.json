@@ -1,0 +1,2480 @@
+{
+  "run_id": "20261110-remote-all-russia-batch_01",
+  "dataset_id": "20261110-remote-all-russia-batch_01",
+  "status": "complete",
+  "schema": {
+    "columns": [
+      "id",
+      "city",
+      "profession",
+      "segments",
+      "title",
+      "salary_raw",
+      "source_url",
+      "observed_at",
+      "description",
+      "location_observed",
+      "employer_name_observed",
+      "date_raw",
+      "views_total",
+      "views_today",
+      "listing_rank",
+      "listing_promoted",
+      "full_parameters_read",
+      "analysis_status",
+      "export_eligibility",
+      "read_status_parameters",
+      "read_status_description",
+      "read_status_location",
+      "read_limitations",
+      "enrichment_status",
+      "enriched_fields",
+      "enrichment_version",
+      "military",
+      "military_keywords",
+      "military_rule_version",
+      "city__source",
+      "city__evidence",
+      "city_anomaly",
+      "Формат работы",
+      "График",
+      "Занятость",
+      "Стажировка",
+      "Способ оформления",
+      "Количество рабочих дней в неделю",
+      "Количество рабочих часов в день",
+      "Частота выплат",
+      "Сфера деятельности компании",
+      "Общение с клиентами",
+      "Опыт работы",
+      "В том числе для кандидатов",
+      "Что получают работники",
+      "Смены",
+      "Режим работы",
+      "Можно заканчивать в 17:00",
+      "Уровень образования",
+      "Модель продаж",
+      "Тип продаж",
+      "Тип организации",
+      "Объект",
+      "Компания предоставляет",
+      "Категория водительских прав",
+      "Стаж вождения",
+      "Способ доставки",
+      "Вид доставки",
+      "Статус самозанятости",
+      "Медкнижка",
+      "Грейд",
+      "Форма собственности организации",
+      "Выезд на дом",
+      "С кем предстоит работать",
+      "Образование",
+      "Направление образования",
+      "Навык мелкого ремонта автомобиля",
+      "Тип предприятия",
+      "Тип рекламы",
+      "Канал коммуникации",
+      "Портфолио",
+      "Специализация",
+      "Работа с материалами",
+      "Оборудование",
+      "Инструменты",
+      "Тип работ",
+      "Уровень",
+      "Бренд автомобиля",
+      "Где предстоит работать",
+      "Линия",
+      "Ассортимент",
+      "Техника",
+      "Возраст автомобиля",
+      "Площадки",
+      "Опыт военной службы",
+      "Навыки обращения с оружием"
+    ],
+    "unknown_policy": "empty_not_zero"
+  },
+  "collection": {
+    "run_id": "20261110-remote-all-russia-batch_01",
+    "geography": "Краснодар",
+    "profession": "",
+    "segments": "Формат работы: Удалённо; По всей России (контрол выдачи)",
+    "filter_evidence": "Краснодар в геоконтроле; профессии не выбраны; Удалённо и По всей России отмечены; заголовок и URL подтверждены; поиск пуст.",
+    "listing_url": "https://www.avito.ru/krasnodar/vakansii/format_raboty/udalenno-ASgBAgICAUSejBW~lZED?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6Ik9Ya2ZPQWRPU3hibVh6VFgiO31-SIHBJgAAAA&f=ASgBAgICAkSUzQ_S6vQCnowVvpWRAw",
+    "listing_request_url": "https://www.avito.ru/krasnodar/vakansii/format_raboty/udalenno-ASgBAgICAUSejBW~lZED?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6Ik9Ya2ZPQWRPU3hibVh6VFgiO31-SIHBJgAAAA&f=ASgBAgICAkSUzQ_S6vQCnowVvpWRAw&localPriority=0",
+    "selected_controls": [
+      {
+        "label": "По всей России",
+        "marker": "params[127818]/3054249",
+        "value": null
+      },
+      {
+        "label": "По всей России",
+        "marker": "params[127818]/toggle",
+        "value": "3054249"
+      },
+      {
+        "label": "Любой",
+        "marker": "params[196929]/all",
+        "value": null
+      },
+      {
+        "label": "Любой",
+        "marker": "params[196929]/toggle",
+        "value": "all"
+      },
+      {
+        "label": "Удалённо",
+        "marker": "params[172815]/3286367",
+        "value": null
+      },
+      {
+        "label": "Удалённо",
+        "marker": "params[172815]/toggle",
+        "value": "3286367"
+      },
+      {
+        "label": "Неважно",
+        "marker": null,
+        "value": "all"
+      },
+      {
+        "label": "Все",
+        "marker": null,
+        "value": "all"
+      }
+    ],
+    "listing_sha256": "1523e3fa8e338481b17c0ec8c9809ab837eacd724c74f7c346d7db2af1cc38fc",
+    "profession_scope": "all",
+    "profession_source": "selected_ui_context",
+    "listing_pages": [
+      {
+        "file": "listing_pages/0001.json",
+        "sha256": "1523e3fa8e338481b17c0ec8c9809ab837eacd724c74f7c346d7db2af1cc38fc",
+        "source_url": "https://www.avito.ru/krasnodar/vakansii/format_raboty/udalenno-ASgBAgICAUSejBW~lZED?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6Ik9Ya2ZPQWRPU3hibVh6VFgiO31-SIHBJgAAAA&f=ASgBAgICAkSUzQ_S6vQCnowVvpWRAw"
+      },
+      {
+        "file": "listing_pages/0002.json",
+        "sha256": "5db73a988826a0965d71db38150e04cecb120989f070540a9e76f0fc0ba2ebc4",
+        "source_url": "https://www.avito.ru/krasnodar/vakansii/format_raboty/udalenno-ASgBAgICAUSejBW~lZED?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6IjdYU0s2cE9CVHhXNEx2NkwiO335ULgiJgAAAA&f=ASgBAgICAkSUzQ_S6vQCnowVvpWRAw&p=2"
+      },
+      {
+        "file": "listing_pages/0003.json",
+        "sha256": "a5920b6127456591daca462c144b95a4271de2bde1bbab458fffd1dea354d019",
+        "source_url": "https://www.avito.ru/krasnodar/vakansii/format_raboty/udalenno-ASgBAgICAUSejBW~lZED?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6IjdYU0s2cE9CVHhXNEx2NkwiO335ULgiJgAAAA&f=ASgBAgICAkSUzQ_S6vQCnowVvpWRAw&p=3"
+      },
+      {
+        "file": "listing_pages/0004.json",
+        "sha256": "412cde8e33aab21effd6c83ce4b19fef5ff6d13242a423dcb0ee32fad1eddafc",
+        "source_url": "https://www.avito.ru/krasnodar/vakansii/format_raboty/udalenno-ASgBAgICAUSejBW~lZED?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6IjdYU0s2cE9CVHhXNEx2NkwiO335ULgiJgAAAA&f=ASgBAgICAkSUzQ_S6vQCnowVvpWRAw&p=4"
+      },
+      {
+        "file": "listing_pages/0005.json",
+        "sha256": "e5fcaabf287535048c3490fd6192a751adf0875eae76c1718181bbd905eb74ac",
+        "source_url": "https://www.avito.ru/krasnodar/vakansii/format_raboty/udalenno-ASgBAgICAUSejBW~lZED?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6IjdYU0s2cE9CVHhXNEx2NkwiO335ULgiJgAAAA&f=ASgBAgICAkSUzQ_S6vQCnowVvpWRAw&p=5"
+      },
+      {
+        "file": "listing_pages/0006.json",
+        "sha256": "3203f19254d7a2b3cbbaa1519c2d2a43db71d299f846751989516978ba12cae9",
+        "source_url": "https://www.avito.ru/krasnodar/vakansii/format_raboty/udalenno-ASgBAgICAUSejBW~lZED?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6IjdYU0s2cE9CVHhXNEx2NkwiO335ULgiJgAAAA&f=ASgBAgICAkSUzQ_S6vQCnowVvpWRAw&p=6"
+      },
+      {
+        "file": "listing_pages/0007.json",
+        "sha256": "a87551f84dd084b870cf6775fd92c8eb45920536227aa94e9ea54b7791b5ef09",
+        "source_url": "https://www.avito.ru/krasnodar/vakansii/format_raboty/udalenno-ASgBAgICAUSejBW~lZED?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6IjdYU0s2cE9CVHhXNEx2NkwiO335ULgiJgAAAA&f=ASgBAgICAkSUzQ_S6vQCnowVvpWRAw&p=7"
+      },
+      {
+        "file": "listing_pages/0008.json",
+        "sha256": "aa389c2ee94058f74be5f52c1a12c630d3f60bd3e718f954ea3ffcf03bae647c",
+        "source_url": "https://www.avito.ru/krasnodar/vakansii/format_raboty/udalenno-ASgBAgICAUSejBW~lZED?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6IjdYU0s2cE9CVHhXNEx2NkwiO335ULgiJgAAAA&f=ASgBAgICAkSUzQ_S6vQCnowVvpWRAw&p=8"
+      },
+      {
+        "file": "listing_pages/0009.json",
+        "sha256": "c5ccecc718ce65586d7ed0b562b8e6d655b64ad8bfe438dd23e20871bd2b83ee",
+        "source_url": "https://www.avito.ru/krasnodar/vakansii/format_raboty/udalenno-ASgBAgICAUSejBW~lZED?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6IjdYU0s2cE9CVHhXNEx2NkwiO335ULgiJgAAAA&f=ASgBAgICAkSUzQ_S6vQCnowVvpWRAw&p=9"
+      },
+      {
+        "file": "listing_pages/0010.json",
+        "sha256": "c967350300466cffc4ae52ca13e5f38ad823848f9ed9e581fc66c7a4f2f42784",
+        "source_url": "https://www.avito.ru/krasnodar/vakansii/format_raboty/udalenno-ASgBAgICAUSejBW~lZED?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6IjdYU0s2cE9CVHhXNEx2NkwiO335ULgiJgAAAA&f=ASgBAgICAkSUzQ_S6vQCnowVvpWRAw&p=10"
+      },
+      {
+        "file": "listing_pages/0011.json",
+        "sha256": "2153ecdd1f1034a22a4caa862a9867aa97b9dd6ce2db22bdd1c9f2dbfcab8f94",
+        "source_url": "https://www.avito.ru/krasnodar/vakansii/format_raboty/udalenno-ASgBAgICAUSejBW~lZED?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6IjdYU0s2cE9CVHhXNEx2NkwiO335ULgiJgAAAA&f=ASgBAgICAkSUzQ_S6vQCnowVvpWRAw&p=11"
+      },
+      {
+        "file": "listing_pages/0012.json",
+        "sha256": "ffb59b4806dffb2a5f0255906fd0ca98ffadd080a9d7a23b2284b62dd8c31582",
+        "source_url": "https://www.avito.ru/krasnodar/vakansii/format_raboty/udalenno-ASgBAgICAUSejBW~lZED?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6IjdYU0s2cE9CVHhXNEx2NkwiO335ULgiJgAAAA&f=ASgBAgICAkSUzQ_S6vQCnowVvpWRAw&p=12"
+      },
+      {
+        "file": "listing_pages/0013.json",
+        "sha256": "bc579b807f44249f92f6c92967050bd650ac32b2aa381fbb9d3370ceabccc3c5",
+        "source_url": "https://www.avito.ru/krasnodar/vakansii/format_raboty/udalenno-ASgBAgICAUSejBW~lZED?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6IjdYU0s2cE9CVHhXNEx2NkwiO335ULgiJgAAAA&f=ASgBAgICAkSUzQ_S6vQCnowVvpWRAw&p=13"
+      },
+      {
+        "file": "listing_pages/0014.json",
+        "sha256": "6cb7aa61447a0bc72d21b79676e9cc6012f559052236b769f7d1f5c37bdb19ba",
+        "source_url": "https://www.avito.ru/krasnodar/vakansii/format_raboty/udalenno-ASgBAgICAUSejBW~lZED?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6IjdYU0s2cE9CVHhXNEx2NkwiO335ULgiJgAAAA&f=ASgBAgICAkSUzQ_S6vQCnowVvpWRAw&p=14"
+      },
+      {
+        "file": "listing_pages/0015.json",
+        "sha256": "2e8f3f7bb6131114ddbc0df8ccee37bad36f389204054f71c395737034eb3933",
+        "source_url": "https://www.avito.ru/krasnodar/vakansii/format_raboty/udalenno-ASgBAgICAUSejBW~lZED?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6IjdYU0s2cE9CVHhXNEx2NkwiO335ULgiJgAAAA&f=ASgBAgICAkSUzQ_S6vQCnowVvpWRAw&p=15"
+      },
+      {
+        "file": "listing_pages/0016.json",
+        "sha256": "ea4b22be53fa6d6b2a32cae6119cc1306c9a33207e932485b01b105c4082e34c",
+        "source_url": "https://www.avito.ru/krasnodar/vakansii/format_raboty/udalenno-ASgBAgICAUSejBW~lZED?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6IjdYU0s2cE9CVHhXNEx2NkwiO335ULgiJgAAAA&f=ASgBAgICAkSUzQ_S6vQCnowVvpWRAw&p=16"
+      },
+      {
+        "file": "listing_pages/0017.json",
+        "sha256": "499e52bf75c575fccff1985f7e50b76d43ff437d1cf0e885217ad5b195fad21d",
+        "source_url": "https://www.avito.ru/krasnodar/vakansii/format_raboty/udalenno-ASgBAgICAUSejBW~lZED?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6IjdYU0s2cE9CVHhXNEx2NkwiO335ULgiJgAAAA&f=ASgBAgICAkSUzQ_S6vQCnowVvpWRAw&p=17"
+      },
+      {
+        "file": "listing_pages/0018.json",
+        "sha256": "0ed1685fd9512acadbde22c39cb376ca87d748d5a28cff0bb1c807a2f2699b29",
+        "source_url": "https://www.avito.ru/krasnodar/vakansii/format_raboty/udalenno-ASgBAgICAUSejBW~lZED?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6IjdYU0s2cE9CVHhXNEx2NkwiO335ULgiJgAAAA&f=ASgBAgICAkSUzQ_S6vQCnowVvpWRAw&p=18"
+      },
+      {
+        "file": "listing_pages/0019.json",
+        "sha256": "8dd9a8363ebf42c868e8094081f923fc77ad37f268d9c772fc17edbc7040101e",
+        "source_url": "https://www.avito.ru/krasnodar/vakansii/format_raboty/udalenno-ASgBAgICAUSejBW~lZED?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6IjdYU0s2cE9CVHhXNEx2NkwiO335ULgiJgAAAA&f=ASgBAgICAkSUzQ_S6vQCnowVvpWRAw&p=19"
+      },
+      {
+        "file": "listing_pages/0020.json",
+        "sha256": "923f135acb034bf424b5a039c0e11176cd7511af2bf95f967a79101bb5e00d69",
+        "source_url": "https://www.avito.ru/krasnodar/vakansii/format_raboty/udalenno-ASgBAgICAUSejBW~lZED?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6IjdYU0s2cE9CVHhXNEx2NkwiO335ULgiJgAAAA&f=ASgBAgICAkSUzQ_S6vQCnowVvpWRAw&p=20"
+      },
+      {
+        "file": "listing_pages/0021.json",
+        "sha256": "36ab503c695732d7080639abeb9d064d6d19f3177800573d1965fc82e4f5a034",
+        "source_url": "https://www.avito.ru/krasnodar/vakansii/format_raboty/udalenno-ASgBAgICAUSejBW~lZED?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6IjdYU0s2cE9CVHhXNEx2NkwiO335ULgiJgAAAA&f=ASgBAgICAkSUzQ_S6vQCnowVvpWRAw&p=21"
+      },
+      {
+        "file": "listing_pages/0022.json",
+        "sha256": "66228710a881e47e3484e9710e6e9daebcc9ee035534b52feb8694d9dfbdcca3",
+        "source_url": "https://www.avito.ru/krasnodar/vakansii/format_raboty/udalenno-ASgBAgICAUSejBW~lZED?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6IjdYU0s2cE9CVHhXNEx2NkwiO335ULgiJgAAAA&f=ASgBAgICAkSUzQ_S6vQCnowVvpWRAw&p=22"
+      },
+      {
+        "file": "listing_pages/0023.json",
+        "sha256": "7cc4afd428d6fa5ff928f0f334a3672fde9aec8cc311a67bc68e4548db6345af",
+        "source_url": "https://www.avito.ru/krasnodar/vakansii/format_raboty/udalenno-ASgBAgICAUSejBW~lZED?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6IjdYU0s2cE9CVHhXNEx2NkwiO335ULgiJgAAAA&f=ASgBAgICAkSUzQ_S6vQCnowVvpWRAw&p=23"
+      },
+      {
+        "file": "listing_pages/0024.json",
+        "sha256": "10234b2e2b4cdaac5d310ba7b0aabb47037291fac1eb294b1c9c8b64f85daacf",
+        "source_url": "https://www.avito.ru/krasnodar/vakansii/format_raboty/udalenno-ASgBAgICAUSejBW~lZED?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6IjdYU0s2cE9CVHhXNEx2NkwiO335ULgiJgAAAA&f=ASgBAgICAkSUzQ_S6vQCnowVvpWRAw&p=24"
+      },
+      {
+        "file": "listing_pages/0025.json",
+        "sha256": "d596b6edc500150d7096df0b2a8769ed3e25972b3cdf257580ae91d489f60806",
+        "source_url": "https://www.avito.ru/krasnodar/vakansii/format_raboty/udalenno-ASgBAgICAUSejBW~lZED?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6IjdYU0s2cE9CVHhXNEx2NkwiO335ULgiJgAAAA&f=ASgBAgICAkSUzQ_S6vQCnowVvpWRAw&p=25"
+      },
+      {
+        "file": "listing_pages/0026.json",
+        "sha256": "a08acf7a17398a2bf108fdceb1ddd2aed8ebc11b4080e30af13faef505030c95",
+        "source_url": "https://www.avito.ru/krasnodar/vakansii/format_raboty/udalenno-ASgBAgICAUSejBW~lZED?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6IjdYU0s2cE9CVHhXNEx2NkwiO335ULgiJgAAAA&f=ASgBAgICAkSUzQ_S6vQCnowVvpWRAw&p=26"
+      },
+      {
+        "file": "listing_pages/0027.json",
+        "sha256": "9bbef8c6309270c119b70c092d9161b6578650b4e7936e96614382286175f76b",
+        "source_url": "https://www.avito.ru/krasnodar/vakansii/format_raboty/udalenno-ASgBAgICAUSejBW~lZED?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6IjdYU0s2cE9CVHhXNEx2NkwiO335ULgiJgAAAA&f=ASgBAgICAkSUzQ_S6vQCnowVvpWRAw&p=27"
+      },
+      {
+        "file": "listing_pages/0028.json",
+        "sha256": "f6e4df326280c2b318383149d2424644ab5b4694bde597d4d3609b8354b11692",
+        "source_url": "https://www.avito.ru/krasnodar/vakansii/format_raboty/udalenno-ASgBAgICAUSejBW~lZED?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6IjdYU0s2cE9CVHhXNEx2NkwiO335ULgiJgAAAA&f=ASgBAgICAkSUzQ_S6vQCnowVvpWRAw&p=28"
+      },
+      {
+        "file": "listing_pages/0029.json",
+        "sha256": "be48822b013c6ab91ba81044bbd477ed76a2a388ea27174b2a1fe7b67e770c30",
+        "source_url": "https://www.avito.ru/krasnodar/vakansii/format_raboty/udalenno-ASgBAgICAUSejBW~lZED?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6IjdYU0s2cE9CVHhXNEx2NkwiO335ULgiJgAAAA&f=ASgBAgICAkSUzQ_S6vQCnowVvpWRAw&p=29"
+      },
+      {
+        "file": "listing_pages/0030.json",
+        "sha256": "ffcb142b54e52f8843536176033a0ff25abdf0cf89b4d0091618e026654f1bf3",
+        "source_url": "https://www.avito.ru/krasnodar/vakansii/format_raboty/udalenno-ASgBAgICAUSejBW~lZED?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6IjdYU0s2cE9CVHhXNEx2NkwiO335ULgiJgAAAA&f=ASgBAgICAkSUzQ_S6vQCnowVvpWRAw&p=30"
+      }
+    ],
+    "selection_mode": "first_N_unique_on_frozen_listing",
+    "limit": 200,
+    "requested_all_pages": true,
+    "saved_selection_authorization": null,
+    "requested_limit": 200,
+    "available_unique": 200,
+    "listing_end_reason": "confirmed_end",
+    "available_listing_exhausted": true,
+    "continuation": null,
+    "branch_only": false,
+    "max_pages": null,
+    "candidate_limit": null,
+    "created_at": "2026-11-10T00:22:52.257829+00:00",
+    "instruction_version": "1.8.1",
+    "extractor_sha256": "fa0a0e0c7df0877d15ea4f94e5fed14df514241cb51771cda18cacc04574e8b0",
+    "instruction_sha256": "4033fe896dc13c66a540d768bbc76800f3bcc41b806a5e8dbdc4881e7080b593",
+    "code_git_commit": "3a0d52a3fed65d07d20fd4ad9c44e46aa9a3b233",
+    "setup_seconds": 39.690780624747276,
+    "live_route_verified": false,
+    "execution_model": "gpt-6.1-terra",
+    "automation_sha256": {
+      "Scraper/skills/collect-avito/references/top-professions.json": "e3e72638b17b48f825ec6f2fefb963662494f679ae4b0cef1bebedba889610dd",
+      "utils/title_flags.py": "9c9456cb3fb0df5791630049c9c85987381091dbb9ba18bc3fb3314b8cccbeb6",
+      "Scraper/extract.js": "fa0a0e0c7df0877d15ea4f94e5fed14df514241cb51771cda18cacc04574e8b0",
+      "Scraper/skills/collect-avito/SKILL.md": "4033fe896dc13c66a540d768bbc76800f3bcc41b806a5e8dbdc4881e7080b593",
+      "Scraper/skills/collect-avito/scripts/run.py": "4bcbecab78fdf74298b784f17150688377853000566f88a803982a6e7f1de0d4",
+      "Scraper/skills/collect-avito/scripts/sweep_mode.py": "718a956a316df71c47ee3a4c5d3670fa011a5b16e9948393d68216702b140a56",
+      "Scraper/skills/collect-avito/scripts/browser_batch.js": "7572ff4aa773cd86ccd3d8ca3a2de6c9586b482ab6f1371dbfa152b165588eb4",
+      "Scraper/skills/collect-avito/scripts/check_capture.py": "aa746849317f9768af5aae08b394b9379539f6e268c1fc69e4ed13bd06a4657f",
+      "Scraper/skills/collect-avito/scripts/failure_log.py": "08dfd259fad4166a08acb1b056bf3cd14daede277385bd91c7e49680959475a4",
+      "Scraper/skills/collect-avito/scripts/preflight.py": "492a0d898990aee198f26bf6577d0876360dcc6ec69e274835cd77cdaa768974"
+    },
+    "uncommitted_automation_files": [
+      "Scraper/skills/collect-avito/SKILL.md",
+      "Scraper/skills/collect-avito/scripts/run.py"
+    ],
+    "partition": {
+      "parent_run_id": "20261110-krasnodar-remote-all-russia",
+      "parent_plan_sha256": "a64bb229516a8f3be29b2e519c65a735e962fe8812158c431d6e6427b392ac7f",
+      "parent_queue_sha256": "83c4080efe7dcb730ee051e8694867f7a3454d385206940abaa8b282338eb205",
+      "index": 1,
+      "batch_size": 200,
+      "start": 0,
+      "end": 200,
+      "total": 955,
+      "siblings": [
+        "20261110-remote-all-russia-batch_01",
+        "20261110-remote-all-russia-batch_02",
+        "20261110-remote-all-russia-batch_03",
+        "20261110-remote-all-russia-batch_04",
+        "20261110-remote-all-russia-batch_05"
+      ]
+    },
+    "city_anomaly_policy": "blank"
+  },
+  "coverage": {
+    "planned": 200,
+    "accepted": 199,
+    "unavailable": [
+      {
+        "browser_tab_sha256": null,
+        "id": "7570490667",
+        "url": "https://www.avito.ru/ulyanovsk/vakansii/voditel_na_gazel_biznes_gazon_nekst_7570490667",
+        "status": "unavailable_closed",
+        "evidence": "Объявление закрыто.",
+        "snapshot_sha256": "42d93981af69ce964bb8f9cf6b476274dc44f47767513d59d380be71032e2f8a",
+        "raw_sha256": "b0b8cd46d4ba54c27cd5b9655a6eeef826f705a617249476dad9d682a310429b",
+        "observed_at": "2026-11-10T00:27:51.057Z",
+        "authorization_id": "verified-unavailable-v1",
+        "human_instruction": "Исключать отдельные карточки только по подтверждённому статусу недоступности, сохраняя raw, локальное доказательство, ID и причину; CAPTCHA, 429 и общие ограничения сайта останавливают сбор.",
+        "recorded_at": "2026-11-10T00:27:51.252443+00:00"
+      }
+    ],
+    "unresolved_observations": [],
+    "user_skipped_observations": [],
+    "user_skipped_count": 0,
+    "user_skip_policy": null,
+    "user_detail_skip_policy": null,
+    "deduplication": null,
+    "sweep": null,
+    "unique_ids": [
+      "8401916533",
+      "8473402968",
+      "8360007417",
+      "8260536179",
+      "8305380117",
+      "4522842870",
+      "8325088889",
+      "8463692760",
+      "8186285862",
+      "8364044279",
+      "7405261035",
+      "8546281077",
+      "8325095704",
+      "8431991826",
+      "8441899308",
+      "7880811855",
+      "4251834325",
+      "7838482646",
+      "8430023179",
+      "8404450715",
+      "8502786170",
+      "8348910610",
+      "8448676165",
+      "8402209409",
+      "8553429196",
+      "8455506610",
+      "8503007923",
+      "8134053368",
+      "7929387927",
+      "7815989117",
+      "7431903323",
+      "7893991815",
+      "7697048797",
+      "3609816537",
+      "8525193172",
+      "8082014953",
+      "8346166093",
+      "7233515057",
+      "8390054165",
+      "8457957994",
+      "973042611",
+      "8521976392",
+      "8380739555",
+      "8394232499",
+      "8401149324",
+      "8430145645",
+      "8397884338",
+      "8400440841",
+      "8531310174",
+      "8481740953",
+      "8380220427",
+      "8589200508",
+      "8502387014",
+      "8378910573",
+      "8609771329",
+      "4157006372",
+      "8451902604",
+      "8576473203",
+      "8390524997",
+      "8289513874",
+      "8269954492",
+      "8576437536",
+      "8482405672",
+      "8315724408",
+      "8472267607",
+      "8346622383",
+      "4174167933",
+      "4737990443",
+      "8388757394",
+      "8577000788",
+      "8520954119",
+      "8262885537",
+      "8437352397",
+      "8381596456",
+      "8457728117",
+      "8432823776",
+      "8432984811",
+      "7897781260",
+      "8483825618",
+      "8577529561",
+      "8445794271",
+      "8459308028",
+      "8576445274",
+      "7887604417",
+      "8258673691",
+      "8421310047",
+      "8470710062",
+      "1953596839",
+      "8455649757",
+      "8427497590",
+      "7463662260",
+      "2083326549",
+      "8545518585",
+      "8516895965",
+      "8364202274",
+      "8400660159",
+      "8253486294",
+      "8152592487",
+      "1983705981",
+      "8441104154",
+      "8502700080",
+      "3478234708",
+      "8379007634",
+      "8359925045",
+      "7786931649",
+      "8455468168",
+      "8515517020",
+      "8483452734",
+      "7561978909",
+      "8430830206",
+      "7813581874",
+      "2515018350",
+      "8375877866",
+      "8372858621",
+      "8372862725",
+      "8451647736",
+      "8168332152",
+      "8437356971",
+      "8315299605",
+      "4686131126",
+      "8356703581",
+      "8348755101",
+      "8609411258",
+      "8337468876",
+      "8378859564",
+      "8354739130",
+      "8473270378",
+      "8515469783",
+      "8360159393",
+      "8609220030",
+      "4488900960",
+      "8545667708",
+      "3763595636",
+      "8589613447",
+      "8334775222",
+      "8369801142",
+      "8214237531",
+      "8423646808",
+      "8482883791",
+      "8432905374",
+      "7931469609",
+      "8365781600",
+      "8470634793",
+      "8340421649",
+      "8480878406",
+      "8437727051",
+      "8369295769",
+      "2727276939",
+      "8494924370",
+      "8517286966",
+      "8530976657",
+      "8372181775",
+      "8348005166",
+      "8491057376",
+      "8211865630",
+      "8363939067",
+      "8531052113",
+      "8523587089",
+      "8502571104",
+      "8520944434",
+      "8329866411",
+      "8469629532",
+      "8491803123",
+      "8431957866",
+      "8517672521",
+      "8266275403",
+      "7969218426",
+      "8047018788",
+      "8415155831",
+      "8607537987",
+      "8459713753",
+      "8379379813",
+      "8588813595",
+      "8516977091",
+      "7901290588",
+      "7817625147",
+      "8438418497",
+      "3730859523",
+      "8589007907",
+      "8522490423",
+      "8485266828",
+      "7968393125",
+      "8114553798",
+      "8575893149",
+      "8609783940",
+      "8410369888",
+      "8026855705",
+      "8607678537",
+      "2673975464",
+      "4161182396",
+      "8401767803",
+      "8546780780",
+      "7925902502",
+      "7982609018",
+      "8438503438",
+      "8589109589",
+      "8516886107",
+      "8431959774",
+      "8461780468"
+    ],
+    "errors": [],
+    "partial": null,
+    "limitations": [
+      "Visible rendered parameters only; enrichment not run; placement on site; live route unverified"
+    ]
+  },
+  "timing": {
+    "setup_seconds": 39.690780624747276,
+    "capture_seconds": 315.8329526260495,
+    "review_export_seconds": 4.355011959094554,
+    "publication_seconds": null
+  },
+  "review_model": "gpt-6.1-terra",
+  "automation_changes": [
+    {
+      "file": "Scraper/skills/collect-avito/SKILL.md",
+      "reason": "Опубликованы изменения PR #120, #138, #142 и #145 для транспорта и проверяемой географии.",
+      "validation": "PR #145: 62 теста city subset, audit, placement и dataset; post-finalize регрессии пройдены."
+    },
+    {
+      "file": "Scraper/skills/collect-avito/scripts/run.py",
+      "reason": "Опубликованы изменения PR #120, #138, #142 и #145 для транспорта и проверяемой географии.",
+      "validation": "PR #145: 62 теста city subset, audit, placement и dataset; post-finalize регрессии пройдены."
+    },
+    {
+      "file": "Scraper/test_aside_runner.py",
+      "reason": "Опубликованы изменения PR #120, #138, #142 и #145 для транспорта и проверяемой географии.",
+      "validation": "PR #145: 62 теста city subset, audit, placement и dataset; post-finalize регрессии пройдены."
+    },
+    {
+      "file": "utils/build_dataset.py",
+      "reason": "Опубликованы изменения PR #120, #138, #142 и #145 для транспорта и проверяемой географии.",
+      "validation": "PR #145: 62 теста city subset, audit, placement и dataset; post-finalize регрессии пройдены."
+    },
+    {
+      "file": "utils/placement_transform.py",
+      "reason": "Опубликованы изменения PR #120, #138, #142 и #145 для транспорта и проверяемой географии.",
+      "validation": "PR #145: 62 теста city subset, audit, placement и dataset; post-finalize регрессии пройдены."
+    },
+    {
+      "file": "utils/test_placement_transform.py",
+      "reason": "Опубликованы изменения PR #120, #138, #142 и #145 для транспорта и проверяемой географии.",
+      "validation": "PR #145: 62 теста city subset, audit, placement и dataset; post-finalize регрессии пройдены."
+    },
+    {
+      "file": "utils/city_scope_audit.py",
+      "reason": "Опубликованы изменения PR #120, #138, #142 и #145 для транспорта и проверяемой географии.",
+      "validation": "PR #145: 62 теста city subset, audit, placement и dataset; post-finalize регрессии пройдены."
+    },
+    {
+      "file": "utils/city_scope_audit_v1.py",
+      "reason": "Опубликованы изменения PR #120, #138, #142 и #145 для транспорта и проверяемой географии.",
+      "validation": "PR #145: 62 теста city subset, audit, placement и dataset; post-finalize регрессии пройдены."
+    },
+    {
+      "file": "utils/test_city_scope_audit.py",
+      "reason": "Опубликованы изменения PR #120, #138, #142 и #145 для транспорта и проверяемой географии.",
+      "validation": "PR #145: 62 теста city subset, audit, placement и dataset; post-finalize регрессии пройдены."
+    },
+    {
+      "file": "utils/city_scope_subset.py",
+      "reason": "Опубликованы изменения PR #120, #138, #142 и #145 для транспорта и проверяемой географии.",
+      "validation": "PR #145: 62 теста city subset, audit, placement и dataset; post-finalize регрессии пройдены."
+    },
+    {
+      "file": "utils/test_city_scope_subset.py",
+      "reason": "Опубликованы изменения PR #120, #138, #142 и #145 для транспорта и проверяемой географии.",
+      "validation": "PR #145: 62 теста city subset, audit, placement и dataset; post-finalize регрессии пройдены."
+    },
+    {
+      "file": "Scraper/skills/collect-avito/SKILL.md",
+      "reason": "Проверяемые городские аудиты и объединение результатов нескольких городов с исходным run_id.",
+      "validation": "93 теста city multi, subset, audit, placement и dataset прошли."
+    },
+    {
+      "file": "Scraper/skills/collect-avito/scripts/run.py",
+      "reason": "Проверяемые городские аудиты и объединение результатов нескольких городов с исходным run_id.",
+      "validation": "93 теста city multi, subset, audit, placement и dataset прошли."
+    },
+    {
+      "file": "Scraper/test_aside_runner.py",
+      "reason": "Проверяемые городские аудиты и объединение результатов нескольких городов с исходным run_id.",
+      "validation": "93 теста city multi, subset, audit, placement и dataset прошли."
+    },
+    {
+      "file": "utils/build_dataset.py",
+      "reason": "Проверяемые городские аудиты и объединение результатов нескольких городов с исходным run_id.",
+      "validation": "93 теста city multi, subset, audit, placement и dataset прошли."
+    },
+    {
+      "file": "utils/placement_transform.py",
+      "reason": "Проверяемые городские аудиты и объединение результатов нескольких городов с исходным run_id.",
+      "validation": "93 теста city multi, subset, audit, placement и dataset прошли."
+    },
+    {
+      "file": "utils/test_placement_transform.py",
+      "reason": "Проверяемые городские аудиты и объединение результатов нескольких городов с исходным run_id.",
+      "validation": "93 теста city multi, subset, audit, placement и dataset прошли."
+    },
+    {
+      "file": "utils/city_scope_audit.py",
+      "reason": "Проверяемые городские аудиты и объединение результатов нескольких городов с исходным run_id.",
+      "validation": "93 теста city multi, subset, audit, placement и dataset прошли."
+    },
+    {
+      "file": "utils/city_scope_audit_v1.py",
+      "reason": "Проверяемые городские аудиты и объединение результатов нескольких городов с исходным run_id.",
+      "validation": "93 теста city multi, subset, audit, placement и dataset прошли."
+    },
+    {
+      "file": "utils/test_city_scope_audit.py",
+      "reason": "Проверяемые городские аудиты и объединение результатов нескольких городов с исходным run_id.",
+      "validation": "93 теста city multi, subset, audit, placement и dataset прошли."
+    },
+    {
+      "file": "utils/city_scope_subset.py",
+      "reason": "Проверяемые городские аудиты и объединение результатов нескольких городов с исходным run_id.",
+      "validation": "93 теста city multi, subset, audit, placement и dataset прошли."
+    },
+    {
+      "file": "utils/test_city_scope_subset.py",
+      "reason": "Проверяемые городские аудиты и объединение результатов нескольких городов с исходным run_id.",
+      "validation": "93 теста city multi, subset, audit, placement и dataset прошли."
+    },
+    {
+      "file": "utils/city_scope_multi.py",
+      "reason": "Проверяемые городские аудиты и объединение результатов нескольких городов с исходным run_id.",
+      "validation": "93 теста city multi, subset, audit, placement и dataset прошли."
+    },
+    {
+      "file": "utils/test_city_scope_multi.py",
+      "reason": "Проверяемые городские аудиты и объединение результатов нескольких городов с исходным run_id.",
+      "validation": "93 теста city multi, subset, audit, placement и dataset прошли."
+    }
+  ],
+  "profession_correction": null,
+  "post_capture_automation_sha256": {
+    "Scraper/skills/collect-avito/SKILL.md": "4a624ed9bfad61360ff16f9e5f122a5095666ab32697d566eb0f3d786cd42c5c",
+    "Scraper/skills/collect-avito/scripts/run.py": "68af282644dc00fee94a861f8f195b970e9132eda97a1b7586703f4176448243"
+  },
+  "files": {
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/exports/vacancies.json": {
+      "bytes": 986823,
+      "sha256": "b716b0038a998fda8f497fe0b31ba233b9b14da55521162d8efa2f484f1b4955"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/exports/vacancies_flat.csv": {
+      "bytes": 742137,
+      "sha256": "2fab088a7ff5b56250c9f1344f42fb0ee5955fca7b3acb7eeab909be6daa48ba"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/exports/validation.json": {
+      "bytes": 1204,
+      "sha256": "32fc04b118d88425cfea440c346f6938ab37f4d96b0817d2a61ac3714a9e56f1"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/listing.json": {
+      "bytes": 50937,
+      "sha256": "1523e3fa8e338481b17c0ec8c9809ab837eacd724c74f7c346d7db2af1cc38fc"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/listing_pages/0001.json": {
+      "bytes": 50937,
+      "sha256": "1523e3fa8e338481b17c0ec8c9809ab837eacd724c74f7c346d7db2af1cc38fc"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/listing_pages/0002.json": {
+      "bytes": 50670,
+      "sha256": "5db73a988826a0965d71db38150e04cecb120989f070540a9e76f0fc0ba2ebc4"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/listing_pages/0003.json": {
+      "bytes": 50506,
+      "sha256": "a5920b6127456591daca462c144b95a4271de2bde1bbab458fffd1dea354d019"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/listing_pages/0004.json": {
+      "bytes": 50744,
+      "sha256": "412cde8e33aab21effd6c83ce4b19fef5ff6d13242a423dcb0ee32fad1eddafc"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/listing_pages/0005.json": {
+      "bytes": 50687,
+      "sha256": "e5fcaabf287535048c3490fd6192a751adf0875eae76c1718181bbd905eb74ac"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/listing_pages/0006.json": {
+      "bytes": 50009,
+      "sha256": "3203f19254d7a2b3cbbaa1519c2d2a43db71d299f846751989516978ba12cae9"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/listing_pages/0007.json": {
+      "bytes": 50608,
+      "sha256": "a87551f84dd084b870cf6775fd92c8eb45920536227aa94e9ea54b7791b5ef09"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/listing_pages/0008.json": {
+      "bytes": 50869,
+      "sha256": "aa389c2ee94058f74be5f52c1a12c630d3f60bd3e718f954ea3ffcf03bae647c"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/listing_pages/0009.json": {
+      "bytes": 49882,
+      "sha256": "c5ccecc718ce65586d7ed0b562b8e6d655b64ad8bfe438dd23e20871bd2b83ee"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/listing_pages/0010.json": {
+      "bytes": 50319,
+      "sha256": "c967350300466cffc4ae52ca13e5f38ad823848f9ed9e581fc66c7a4f2f42784"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/listing_pages/0011.json": {
+      "bytes": 49970,
+      "sha256": "2153ecdd1f1034a22a4caa862a9867aa97b9dd6ce2db22bdd1c9f2dbfcab8f94"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/listing_pages/0012.json": {
+      "bytes": 50179,
+      "sha256": "ffb59b4806dffb2a5f0255906fd0ca98ffadd080a9d7a23b2284b62dd8c31582"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/listing_pages/0013.json": {
+      "bytes": 50323,
+      "sha256": "bc579b807f44249f92f6c92967050bd650ac32b2aa381fbb9d3370ceabccc3c5"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/listing_pages/0014.json": {
+      "bytes": 50041,
+      "sha256": "6cb7aa61447a0bc72d21b79676e9cc6012f559052236b769f7d1f5c37bdb19ba"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/listing_pages/0015.json": {
+      "bytes": 50566,
+      "sha256": "2e8f3f7bb6131114ddbc0df8ccee37bad36f389204054f71c395737034eb3933"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/listing_pages/0016.json": {
+      "bytes": 50052,
+      "sha256": "ea4b22be53fa6d6b2a32cae6119cc1306c9a33207e932485b01b105c4082e34c"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/listing_pages/0017.json": {
+      "bytes": 49952,
+      "sha256": "499e52bf75c575fccff1985f7e50b76d43ff437d1cf0e885217ad5b195fad21d"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/listing_pages/0018.json": {
+      "bytes": 50385,
+      "sha256": "0ed1685fd9512acadbde22c39cb376ca87d748d5a28cff0bb1c807a2f2699b29"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/listing_pages/0019.json": {
+      "bytes": 50116,
+      "sha256": "8dd9a8363ebf42c868e8094081f923fc77ad37f268d9c772fc17edbc7040101e"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/listing_pages/0020.json": {
+      "bytes": 50200,
+      "sha256": "923f135acb034bf424b5a039c0e11176cd7511af2bf95f967a79101bb5e00d69"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/listing_pages/0021.json": {
+      "bytes": 50171,
+      "sha256": "36ab503c695732d7080639abeb9d064d6d19f3177800573d1965fc82e4f5a034"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/listing_pages/0022.json": {
+      "bytes": 50171,
+      "sha256": "66228710a881e47e3484e9710e6e9daebcc9ee035534b52feb8694d9dfbdcca3"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/listing_pages/0023.json": {
+      "bytes": 50233,
+      "sha256": "7cc4afd428d6fa5ff928f0f334a3672fde9aec8cc311a67bc68e4548db6345af"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/listing_pages/0024.json": {
+      "bytes": 49986,
+      "sha256": "10234b2e2b4cdaac5d310ba7b0aabb47037291fac1eb294b1c9c8b64f85daacf"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/listing_pages/0025.json": {
+      "bytes": 49984,
+      "sha256": "d596b6edc500150d7096df0b2a8769ed3e25972b3cdf257580ae91d489f60806"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/listing_pages/0026.json": {
+      "bytes": 50044,
+      "sha256": "a08acf7a17398a2bf108fdceb1ddd2aed8ebc11b4080e30af13faef505030c95"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/listing_pages/0027.json": {
+      "bytes": 50199,
+      "sha256": "9bbef8c6309270c119b70c092d9161b6578650b4e7936e96614382286175f76b"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/listing_pages/0028.json": {
+      "bytes": 50063,
+      "sha256": "f6e4df326280c2b318383149d2424644ab5b4694bde597d4d3609b8354b11692"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/listing_pages/0029.json": {
+      "bytes": 50030,
+      "sha256": "be48822b013c6ab91ba81044bbd477ed76a2a388ea27174b2a1fe7b67e770c30"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/listing_pages/0030.json": {
+      "bytes": 49543,
+      "sha256": "ffcb142b54e52f8843536176033a0ff25abdf0cf89b4d0091618e026654f1bf3"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/provenance/parent-plan.json": {
+      "bytes": 15370,
+      "sha256": "a64bb229516a8f3be29b2e519c65a735e962fe8812158c431d6e6427b392ac7f"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/provenance/parent-queue.json": {
+      "bytes": 444333,
+      "sha256": "83c4080efe7dcb730ee051e8694867f7a3454d385206940abaa8b282338eb205"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/queue.json": {
+      "bytes": 94521,
+      "sha256": "ea593ec8a2b09b4af3b6dd6e7d8345c470f46862259d14f11bf0478aaa654426"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/1953596839.json": {
+      "bytes": 11735,
+      "sha256": "edeb84cb7253fadb407266bef86ff65f4fce2acc1fef07b852dbc21afcf70ccc"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/1983705981.json": {
+      "bytes": 11158,
+      "sha256": "f9b9993a86cafb5137463aa48dd9df4480c50d1e086375cf43e0571076baef36"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/2083326549.json": {
+      "bytes": 9615,
+      "sha256": "2bcd1869a5623c08c9c864c86c9e027a88d4e22a697ee06fdf7ea0097c737b2c"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/2515018350.json": {
+      "bytes": 17298,
+      "sha256": "563b6c853e4ef1d03d7557d82bf4783125122e323df5432dd97d2939b5ac1e14"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/2673975464.json": {
+      "bytes": 12940,
+      "sha256": "0d022d549ddd30679063f9f5fd72688976f2edb6bdd1c537d5267019dfac6d20"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/2727276939.json": {
+      "bytes": 8798,
+      "sha256": "04c3ad05f2aac49950cb167f8bb5fe18551a5dabb7c544c48f586e020b14bc45"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/3478234708.json": {
+      "bytes": 18742,
+      "sha256": "a00fea6c54444d8b343cc1a5bb588c48074891298ac175c77190837511941431"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/3609816537.json": {
+      "bytes": 19799,
+      "sha256": "6f65b16b3e0cca8278226ab3c75152bd2b0377acc216d9c3f481ed272990199d"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/3730859523.json": {
+      "bytes": 5690,
+      "sha256": "fe3cb33093a62a79780ebca127679b6e6821b0db24ee4bbc224b88211e101169"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/3763595636.json": {
+      "bytes": 4998,
+      "sha256": "efb36bc703e8debe3f4225d7c9e47e5a5ab1fd0aef452542f43dfec0e1d5df1d"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/4157006372.json": {
+      "bytes": 17207,
+      "sha256": "2902465e09ed49f77a459ec6c5b5a11083e8eaa23c13b98222d3ff793d3d942c"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/4161182396.json": {
+      "bytes": 13836,
+      "sha256": "76955b7f7a048479a5589e28d736bffc9c45d2867ee1be4f6ce3ab700affcd71"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/4174167933.json": {
+      "bytes": 11311,
+      "sha256": "ce70a174b8f7a715b9038f2c85d6b144b447442ddb8227edf70f836fdde2152c"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/4251834325.json": {
+      "bytes": 14868,
+      "sha256": "e5cfec14b297c8cc87ce69c65250dcfa6f208073be479dd178b33ac84ec38295"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/4488900960.json": {
+      "bytes": 20137,
+      "sha256": "4c932a6fae326f68330b3ccbc3eaa51ff8bed01f8e2e39373c8178e9231eebff"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/4522842870.json": {
+      "bytes": 18862,
+      "sha256": "317c30118bfd68f97c7d591887923ec3a823fb8da36813c4a55a56d930d10b1a"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/4686131126.json": {
+      "bytes": 13014,
+      "sha256": "6d0dd8a110d657b1bf6d6b9a7c790be6ed98ededcb03475ccb635b219683f772"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/4737990443.json": {
+      "bytes": 10544,
+      "sha256": "07e8ac2da67d007667e882c12fea5d85e12cfa8a00e9b055ab73d7122b43d587"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/7233515057.json": {
+      "bytes": 14516,
+      "sha256": "7899759905b9b3fbbd3f4bb68db8371907fb0dc9e839080930be8a89666cd0df"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/7405261035.json": {
+      "bytes": 9814,
+      "sha256": "69aab76446fa321cfd1b74b2be2a03296bf4fc45e8b0a1574342594e2faff942"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/7431903323.json": {
+      "bytes": 19449,
+      "sha256": "1654a38ad49a362af6140ba4176619b5bbc515b30443507924e91fa8479b2f7b"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/7463662260.json": {
+      "bytes": 13047,
+      "sha256": "8ccb46b7962fc3d624d503bc67fa096516fd731b68ba251f3ea86aad49f0a412"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/7561978909.json": {
+      "bytes": 8536,
+      "sha256": "20e610e93e1169c55fa9e238fdf8adca9c50b174be8127b2e8195c5eafafbab8"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/7570490667.json": {
+      "bytes": 455,
+      "sha256": "b0b8cd46d4ba54c27cd5b9655a6eeef826f705a617249476dad9d682a310429b"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/7697048797.json": {
+      "bytes": 16810,
+      "sha256": "dcec86ef6baa93b5a51d8eb5e2615d4ef32c0d64c6452d6d16c80d7732e5a3a0"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/7786931649.json": {
+      "bytes": 13988,
+      "sha256": "1782cc4343260b123fb4f802953080898eca9498acbebc7b1d583a4d14dbb95d"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/7813581874.json": {
+      "bytes": 10837,
+      "sha256": "89e957bdc5182d24d5c863e08050a4d750ef9646f6d783bb144860ade0fd1266"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/7815989117.json": {
+      "bytes": 10733,
+      "sha256": "c69e3b133d73d02b7ae4526083446039aeccdf62caadb10a4c51e01190f31ce2"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/7817625147.json": {
+      "bytes": 17625,
+      "sha256": "d2e4cd1198d61a074640f78f51e8b619f104d9d47ae61769eb80713bfb8b05b7"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/7838482646.json": {
+      "bytes": 10765,
+      "sha256": "eb3512c7bcb1d645b92f9685b86890e46c5eeff6bbcdb86fdd2ccbb0eb952efa"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/7880811855.json": {
+      "bytes": 12084,
+      "sha256": "0334488c0248d0069de66b127d075045c734c4abc66bec885b7f1fd1fc610367"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/7887604417.json": {
+      "bytes": 7116,
+      "sha256": "bac5e283b72e829942cdb4cc428a69ddc3fce1fbc3acf7ffaecacba043b0fdb9"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/7893991815.json": {
+      "bytes": 13322,
+      "sha256": "6a780e64cad1febc85f28ea47bb1546faeba9a29d6aa046fba12f336f446791f"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/7897781260.json": {
+      "bytes": 20291,
+      "sha256": "102be098af1ac372ac7b1701bebf501dbe1b58303d21e1e890f740748886b7f4"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/7901290588.json": {
+      "bytes": 7274,
+      "sha256": "f4307805070b39c0ad9b32bae791658dc2eb3116556dc550b1f8c19890286905"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/7925902502.json": {
+      "bytes": 19628,
+      "sha256": "fa5fbdc5d2352bf98488950dd95edc2082f95bede19d0a32fc3c60150a255dbc"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/7929387927.json": {
+      "bytes": 17871,
+      "sha256": "bbcda162e828c3e37cc53a0c80337be5d98dec06f87eb350586f6e6cbce35a54"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/7931469609.json": {
+      "bytes": 20323,
+      "sha256": "9bf4890fd34edad9dc64a85e8fe7f9644817a18aeb393937419e7192401d9f42"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/7968393125.json": {
+      "bytes": 11361,
+      "sha256": "a472abe22f7f52bafaaa618671424efc40bf01869ac6c252731396ba617bf4a8"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/7969218426.json": {
+      "bytes": 21262,
+      "sha256": "b9fd3b4748d08a7628715e8df820e589c344985b49c5bf11ab8adebd70b6d6d1"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/7982609018.json": {
+      "bytes": 13848,
+      "sha256": "ab648375d6f095ed5a9e4390fa0109686c90013d8355b31849b9256252f55a62"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/8026855705.json": {
+      "bytes": 27455,
+      "sha256": "5eb027ba4de9d5e9180b68691914e22166d2cc149363e51b83555bca9d43ece8"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/8047018788.json": {
+      "bytes": 9194,
+      "sha256": "84fe543ee26ac9423e67499357226a770bed5fda250cc0712fb17b3946ef486e"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/8082014953.json": {
+      "bytes": 19906,
+      "sha256": "9a91b376dbbab2f95b96adeb5d966d283236f988c4c98dfef7eefd5bd2e94ab1"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/8114553798.json": {
+      "bytes": 15105,
+      "sha256": "d7125c79cfc5f24d1378136014e40a54180bc56dc0a4ee2c04fc0369e4db84c5"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/8134053368.json": {
+      "bytes": 13064,
+      "sha256": "df47e177a88579e79cfbfa688867deacc6d88fa7e6ba65168ace840ad965637b"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/8152592487.json": {
+      "bytes": 10052,
+      "sha256": "35c50005e51a1229c3a072faddb31a17a1c90a10e7ee0522a1806bddc4e15797"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/8168332152.json": {
+      "bytes": 9751,
+      "sha256": "dbebaee942d35c9d04adaa43e4dccbafcf53fff7f08fd49a2e3eb9ff8ebaa7ab"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/8186285862.json": {
+      "bytes": 25788,
+      "sha256": "50f85cabdde2c6db1f83f5c55f7520f3ed0bd8f282381b8c8abcab845880ee6b"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/8211865630.json": {
+      "bytes": 12700,
+      "sha256": "1efa2e17dcfdf6572b125c42af88b40cc67b0fb8474fc8b5ae44c7bdc893bd19"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/8214237531.json": {
+      "bytes": 5993,
+      "sha256": "4d8dfb11a3e23082aa9d84c8eb31807647e7bdadc7e8b8115eb69adf5a8e6478"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/8253486294.json": {
+      "bytes": 14040,
+      "sha256": "a704e22797d5e6e69eb5021c7d744ab20d197d795fafd9b50a566235b7e72f43"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/8258673691.json": {
+      "bytes": 16472,
+      "sha256": "d3cfdc1376baf395d7a29f65644dda9e9e2ee5acb5acc4feb71e7dc9ff76a918"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/8260536179.json": {
+      "bytes": 17392,
+      "sha256": "0f9b5f1677808947a99584347312411460951080ec9a0b2f4608dfeca0938368"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/8262885537.json": {
+      "bytes": 8538,
+      "sha256": "6c1b1a7730de87f07f5000f22a8602247c0ccc7c2e13cd6e86d41e27f0191525"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/8266275403.json": {
+      "bytes": 11236,
+      "sha256": "a44ce26132433a79e01a325aaa257d7348c3e87f27c15b09fe2a49c115c08872"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/8269954492.json": {
+      "bytes": 7387,
+      "sha256": "cb03bb32b0ba2fde9015e14a9ddf0e98ce5ec2463449fd26c6067563beed75bf"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/8289513874.json": {
+      "bytes": 14890,
+      "sha256": "bfb0ef86b2c1a215a3f4300e4c689e2a903edd4bb4fa83850e0bbcf4115ccaad"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/8305380117.json": {
+      "bytes": 13692,
+      "sha256": "0a9804d956a0a4c47d41e0c6372fc52b14b8bac748bd4d8d216ef57650204dad"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/8315299605.json": {
+      "bytes": 12986,
+      "sha256": "ee49384b87a42f56727f121dd5c6d48788f3e85df3825727147ea23aa4fc2c62"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/8315724408.json": {
+      "bytes": 10651,
+      "sha256": "0793dd7c77bcc67bf3ed554af4df3eaaae8ff9f4b174024e16dfd1f28b421aa0"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/8325088889.json": {
+      "bytes": 13016,
+      "sha256": "7dba5a90906f4b3285d17d17694f5a218866b501e4f8653ffc5985e02b4c61fd"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/8325095704.json": {
+      "bytes": 13050,
+      "sha256": "213cb405b01eac0f55adb3fc7a5d931acde153a886ec904ebae8ad1bae96f3aa"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/8329866411.json": {
+      "bytes": 13048,
+      "sha256": "39150af194b05dce6b60163357576700f92fd2163cc2aa88552dc542b096c2f0"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/8334775222.json": {
+      "bytes": 11062,
+      "sha256": "6a053849d5b73692da64526f770fa6b9b4c08559d42d64b565360c72d39e3521"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/8337468876.json": {
+      "bytes": 8024,
+      "sha256": "f4e665bceaa628fb480c076c64813fb4541acf69f71790ea562b74141b33208c"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/8340421649.json": {
+      "bytes": 12985,
+      "sha256": "07e3015a807e472569135e467040f1f8590e691c4ac9820b86ca5b5dc4435028"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/8346166093.json": {
+      "bytes": 14310,
+      "sha256": "1802f1cc0f6c0da4b30c221e99f5f808add3045519c0c0a360bc4cb5127266f1"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/8346622383.json": {
+      "bytes": 9091,
+      "sha256": "641bc7a9b44e2c716707dd901c9beb704424d830fe5ffad0eb731b0ffa05fc4e"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/8348005166.json": {
+      "bytes": 15254,
+      "sha256": "433c28e667e2fbbbebe1ec6b9e2bd6822b592c3be853e6ea0b4e0aa8e7e4cddf"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/8348755101.json": {
+      "bytes": 11337,
+      "sha256": "34883a116c0c7c21dad32daaa8a284677ff7eeb13da9e437f0fc73454296bd2b"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/8348910610.json": {
+      "bytes": 14022,
+      "sha256": "da3818a4b86b3833a6f2243244963ecb154f10968d5e820ec4a2bec06e7b5e4d"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/8354739130.json": {
+      "bytes": 14441,
+      "sha256": "655bd34766f4725f927aaa6303acf28309e2bc16fd7ca4e03cd2b6206879d052"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/8356703581.json": {
+      "bytes": 15036,
+      "sha256": "a164a278b4acbe22aa3a6e964403e921674206aabacd7196fb0e25dea9df8a0d"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/8359925045.json": {
+      "bytes": 10854,
+      "sha256": "f5f6f866f98b3c010e54977cf61d40fadf997559f44aaeb0f2cc39bc29e54142"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/8360007417.json": {
+      "bytes": 16018,
+      "sha256": "5193e8ca70c53fe7b6ce4ec3348a79552cd3e2f6bb7abc521d5ad461c7f4a222"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/8360159393.json": {
+      "bytes": 6796,
+      "sha256": "107eaba9dc51ddaec43f2acc017821377329cc2f4dc3dc4394283cbddda0d7fc"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/8363939067.json": {
+      "bytes": 10442,
+      "sha256": "fd35173b687954afc588142768dbb9e2c1a2e5afd96b86d3e7da86b222dcdbe0"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/8364044279.json": {
+      "bytes": 13652,
+      "sha256": "bfd68e22b02fe0281e547ada56c6c7459ea0e32e1a7e0e3c353391f2dcbfe447"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/8364202274.json": {
+      "bytes": 39001,
+      "sha256": "29938ac7168ab1dfdb6194e99e174543b0a6647802e20b6520eb5feb0c818095"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/8365781600.json": {
+      "bytes": 14495,
+      "sha256": "aa6c8b2a6931008236faa47b529e86ffa797839a42f6474668089e5b1d158604"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/8369295769.json": {
+      "bytes": 7510,
+      "sha256": "ce4c88796dde4f5d11a27610067085e5ebe5cd0cfb06887b1422f631c2ced550"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/8369801142.json": {
+      "bytes": 17716,
+      "sha256": "bb4c72898d4aec1a28c7afa5f9c43a324e9e079975db8e5e014e1fbc031b9dad"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/8372181775.json": {
+      "bytes": 9944,
+      "sha256": "b69815d0c1ccd0d154c6fca3200f987478b7c1b981dc89b90d7e11e0bf13b843"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/8372858621.json": {
+      "bytes": 8160,
+      "sha256": "d92c34eec485e5c82d4a5d6bfd8ecb561dc98302b4402e3e4f592d30f15505c0"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/8372862725.json": {
+      "bytes": 4107,
+      "sha256": "270f7f11b67a3b210ef839059885f59c41224d268f8d4d140dbbffbfa31a3efd"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/8375877866.json": {
+      "bytes": 19038,
+      "sha256": "c28a664144c556ff0724923e96f7c891a4a76dbd20444c49410bf0c28597ae9e"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/8378859564.json": {
+      "bytes": 15196,
+      "sha256": "cebc4c2d766fc2c65b5b09e03217ed18dd3da0224c7e2f259698a2c18e2e977c"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/8378910573.json": {
+      "bytes": 14948,
+      "sha256": "0819799100ce2fe062c419084d0283f09c231efd009675bf08dc9a6f4aa0e9bd"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/8379007634.json": {
+      "bytes": 6723,
+      "sha256": "66b1efee6318ec24f9d3a88b789dff6efdb6d0904939eb002835a7caba152a0b"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/8379379813.json": {
+      "bytes": 9198,
+      "sha256": "6513157bb9c75c2d120a11812e2f604e3884bc531709c995ad19e29501c1791a"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/8380220427.json": {
+      "bytes": 10336,
+      "sha256": "ce7ce0dedb136426015e1da087af1459b7cf82c74bff13f6ee55c1ab2ddb20a4"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/8380739555.json": {
+      "bytes": 20159,
+      "sha256": "db6eb0429b0737e668a04a6de04fc1a4a25df64cb82afedc38b51f43ec480f90"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/8381596456.json": {
+      "bytes": 9157,
+      "sha256": "ba3627eb280a8e541ef4ffdbaa64cbc7cd65be4296773ac84ef316a66c9ee5b9"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/8388757394.json": {
+      "bytes": 16445,
+      "sha256": "779434b989fcd6e222a98c8099f1d1fe1c47cf2272fd4dfabc1204fb146279d9"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/8390054165.json": {
+      "bytes": 8666,
+      "sha256": "6dbea0d9192ea44734e43f4d66685b5b7da78b41d4b1dffe5c50474cddcea2ff"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/8390524997.json": {
+      "bytes": 15315,
+      "sha256": "515c281a75c1aae9288e91783776079ee6635667f9074eb5d359a2d4588d015f"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/8394232499.json": {
+      "bytes": 9517,
+      "sha256": "0747e2490894f03aa866d515210de1684dfa7eec25e5ce561d6e2d09c04ce650"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/8397884338.json": {
+      "bytes": 19706,
+      "sha256": "67bfe5b66d5a598ca1cda30f5c5d582a235dcd6ef6ff159fc7a400dfe4af365a"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/8400440841.json": {
+      "bytes": 13407,
+      "sha256": "888bd25c0be872e51e89bd76a29f611cc7b9d1595c4df22086ebdbb4b30f840c"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/8400660159.json": {
+      "bytes": 12848,
+      "sha256": "c649c384a9e6bbec515c0848ee11cd497dbaf867e609a429cd0866f167c593a5"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/8401149324.json": {
+      "bytes": 13985,
+      "sha256": "fb8958c9202786b217eb3a0f7e7f155c74b60fb2cb73f0dd92db84d569c1f092"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/8401767803.json": {
+      "bytes": 13911,
+      "sha256": "38257c1e451505009b1a33b8dcb391e54620066039f4b4cad79e186044d3974a"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/8401916533.json": {
+      "bytes": 11437,
+      "sha256": "f86d5e59a2847647a5aa4a7c1b32899837fe93917f8217437e06afb6fabfa8e3"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/8402209409.json": {
+      "bytes": 14243,
+      "sha256": "4ed86adc6ba669b680867c3e2a41109efd4f477f88b818a9a35805342e69aff0"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/8404450715.json": {
+      "bytes": 10652,
+      "sha256": "e087a6e74f8ceca684132882dfd3f98e98297ed77fbcb8465ab8c730e47d6198"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/8410369888.json": {
+      "bytes": 11199,
+      "sha256": "324b6263344398eba69ddd129faf30f8b5a38fb262a76ce453afdf0562f4a937"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/8415155831.json": {
+      "bytes": 7466,
+      "sha256": "cce058bccb30ef9cd720d73e41b48546733acb157d494158b05c9c6d8cede481"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/8421310047.json": {
+      "bytes": 24288,
+      "sha256": "4143d46d3d6571a23944d1c6560df63dea7bdb0009631d49023a98018f34b7a8"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/8423646808.json": {
+      "bytes": 21544,
+      "sha256": "2a6674d04fbc9bb27e743883ea62bc0508e093fe5c098d804041e9e01253d3e2"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/8427497590.json": {
+      "bytes": 11375,
+      "sha256": "f9fdeaf18685505d58d95c7e98330c6cc99a7c7d4d5cf5924e8fe4ad811f9dbe"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/8430023179.json": {
+      "bytes": 8865,
+      "sha256": "8329f28f6490d3e04072fa96d3b3d1cdce05a2a78090f7d382f0ee08d1537e79"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/8430145645.json": {
+      "bytes": 15786,
+      "sha256": "eaf8d35210ba2dbd396a614b256edd0b90b1c556a8d5dbcea8d833b245a0c7d7"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/8430830206.json": {
+      "bytes": 14687,
+      "sha256": "b438183a9a8848e0bc0ca2cebacd88c3377a3d643b19a85ebcec8f943a91a2cd"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/8431957866.json": {
+      "bytes": 13512,
+      "sha256": "a77635a8a6f928f64d9a3a327982804400c72d2ad4e14badbe31f41b2d015210"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/8431959774.json": {
+      "bytes": 9872,
+      "sha256": "09562dca23b516d1733c4503672e881927dc9bcbb0760dbdc4349ab19878eb67"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/8431991826.json": {
+      "bytes": 14223,
+      "sha256": "d4c2f4c129967f018d0a5982423c2febc81f340a8c75ba94e480111106237138"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/8432823776.json": {
+      "bytes": 16928,
+      "sha256": "a6662e4bc169820c03bb469ffd1f07a52335576596e647373b718649949d2117"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/8432905374.json": {
+      "bytes": 9110,
+      "sha256": "2def2b4b07ae72dd5191c00a4d1ba764871edda80e91f76746de6608b1434610"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/8432984811.json": {
+      "bytes": 24515,
+      "sha256": "78dfadf7b05a038eae6c740dbef6a399261df96bcf7a029d3070cbe259b8d547"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/8437352397.json": {
+      "bytes": 17503,
+      "sha256": "fac94017f8cf331dcc2ebf2a8770eafaf60103c11b5717c6fcb5cfddd960c2b2"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/8437356971.json": {
+      "bytes": 22601,
+      "sha256": "756c6ffeebfa599777344a51d1c38df04643f95e15706a2f24d55b908012e08a"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/8437727051.json": {
+      "bytes": 7795,
+      "sha256": "f39e56b03a032f08bed343531d9f197eeb79ceceaaa937d5d2970e81999ba047"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/8438418497.json": {
+      "bytes": 9632,
+      "sha256": "60cf80a25db032415299b9c67b7a4c7fc74227e40d22dbce1f0e2933d51c3426"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/8438503438.json": {
+      "bytes": 15186,
+      "sha256": "169dea645ed855da2f0aee9e3e6df319432b7d272c1f7e57c68767ed362a3901"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/8441104154.json": {
+      "bytes": 11810,
+      "sha256": "bd115b339d3040447f2e7a7b84a922642743820b92910144fc1c2c11dbe83547"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/8441899308.json": {
+      "bytes": 13606,
+      "sha256": "360377244834999e2b22479726927ce5610178e4d2fed4e8ba62866acf705925"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/8445794271.json": {
+      "bytes": 13323,
+      "sha256": "7c609785088b3de1afb42492b8ce1d4f31cc4edf9654324e80f79e93fafdf5fd"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/8448676165.json": {
+      "bytes": 14413,
+      "sha256": "a30e15916c3843dacc1ac76064a18ffbe784e5cd1d3d6d9b9871a6afb56ea5c0"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/8451647736.json": {
+      "bytes": 13152,
+      "sha256": "ca70573bfa9a0f34a1cc2c2ee86602c64f6a80428e892f15fdec384674446b04"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/8451902604.json": {
+      "bytes": 17473,
+      "sha256": "23f71362aac9304d9d39c9f844362e5dc197b57de0f910ce3176d7c458459e36"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/8455468168.json": {
+      "bytes": 13873,
+      "sha256": "97989b964971db76c8adeccf2ed8e329333c881bd0209eee3c6783b2c5d8751b"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/8455506610.json": {
+      "bytes": 22642,
+      "sha256": "fece666eae5100bfed35d2d60748b4a27d836e65e3bb4fcbbfaabcc85fb1e2c0"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/8455649757.json": {
+      "bytes": 14244,
+      "sha256": "f8e6a9b8662846e9876363309b8de31e0d8b22b753e34e7893893e3247d06fa5"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/8457728117.json": {
+      "bytes": 9794,
+      "sha256": "ca5b2f9ad332862d9764d6d853fae22cb91cf4a0b3e9eec6f2e871b226a3ffd4"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/8457957994.json": {
+      "bytes": 8175,
+      "sha256": "a8746fc40bbfca063e859eb0e5a598dc317f54c8cdf33ba61aa795bc22f4d279"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/8459308028.json": {
+      "bytes": 14626,
+      "sha256": "3b671d9810608cf35fe00fae1f454e09fbd204b37625e92115aa8bf1d99a2809"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/8459713753.json": {
+      "bytes": 17390,
+      "sha256": "fd8dc71efaaad0e55e3ad22f9e8eed9949876bd9a22f6fa4c8a6e2477e985394"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/8461780468.json": {
+      "bytes": 14507,
+      "sha256": "f580249201e0ff2d41c967c7441a07d706aea57809340f11820fc76449c1ed18"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/8463692760.json": {
+      "bytes": 10852,
+      "sha256": "549f27a4d322cfb55bc87edcdca1ccc929416eb175fb9191d45f93b3d912c3f4"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/8469629532.json": {
+      "bytes": 15480,
+      "sha256": "f84da1705936dcdaa545e0d751ed9628e5e433f575d1f08d34137519461df7b7"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/8470634793.json": {
+      "bytes": 11909,
+      "sha256": "ae6009f7473633e751df364e2444be2224ff032285a9be9d201105c2d44b2838"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/8470710062.json": {
+      "bytes": 14972,
+      "sha256": "da4feda141f1168986017e113c94187259e9940e1ff12230c58a2f21bbcd56e9"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/8472267607.json": {
+      "bytes": 14094,
+      "sha256": "28b27ce4e1c70454fb8bc7b01d62f4f3fa9d1353a6e22561b812851dbab9390f"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/8473270378.json": {
+      "bytes": 13117,
+      "sha256": "f9de67cdeab9c8af741027a674c04cf5d73a908928f96d3c338797ab7c339fdb"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/8473402968.json": {
+      "bytes": 10423,
+      "sha256": "f6519a8f4fa36c2903b6ec659f6e4f6c6ed30fd587afb57d8db528322f6d1984"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/8480878406.json": {
+      "bytes": 8702,
+      "sha256": "a9b5f964f0ff3016a1bde1aaae34bd3f9e79a5bff9de26328806f937acf26d7d"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/8481740953.json": {
+      "bytes": 13088,
+      "sha256": "794fe38c036bb09884fca2b97b3458d1441c978fa2739c9ef662fb6c3b4c55c2"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/8482405672.json": {
+      "bytes": 13925,
+      "sha256": "3619de0ffd216396a73ba3c8cbeb7009b8eeace369469c40e85ea147fe775cda"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/8482883791.json": {
+      "bytes": 14785,
+      "sha256": "39a12abbad64221cdc348ccaff3e3b6dac0b36836a34f0ff7a2a781e73ab5041"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/8483452734.json": {
+      "bytes": 10607,
+      "sha256": "308f91d3d0c7686ff8117110b24f3e2566466698795ab746808700b8ecc1f980"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/8483825618.json": {
+      "bytes": 8861,
+      "sha256": "66077ea594b2160937f12dfc3a24395663c0caf8e2a891e0a8cfb72af4828e8d"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/8485266828.json": {
+      "bytes": 11662,
+      "sha256": "97b68ac5f28b5891c6e5f9901fba2d962faa1e9a8fca70286a8089dd2d43774c"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/8491057376.json": {
+      "bytes": 12293,
+      "sha256": "b311f029dc22d2f7929b476c02223a33f08951fdbbe697daf3dfae5841787f0e"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/8491803123.json": {
+      "bytes": 13174,
+      "sha256": "978b0b771bf3b3453cd2be9c82ba249f3a04ddf2e43283e7d4c12b49a9741ec7"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/8494924370.json": {
+      "bytes": 17064,
+      "sha256": "94507f9a65768418adc3a6710a21241dcabc4349608b436171aae5a78c9496e5"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/8502387014.json": {
+      "bytes": 15025,
+      "sha256": "544832ecde759996d8737f359c4cdfc0a04e7d42729f5eb615ca51dabd56bbc1"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/8502571104.json": {
+      "bytes": 13247,
+      "sha256": "e98772a06674535c1f18c9e50f9f0a79b0b31d50834b2517d85360713f1acf98"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/8502700080.json": {
+      "bytes": 9300,
+      "sha256": "b24315c4a3392118fccf6d57f64e15ea51dadaa16ac55a9e8d649366105fab39"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/8502786170.json": {
+      "bytes": 12321,
+      "sha256": "91c7315b14024ea30409dce3d27541cd3a3b457f911dd15b53470cf8d8bfc576"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/8503007923.json": {
+      "bytes": 15623,
+      "sha256": "b928129986f75f68704db510a2ef743bbb70c62c5dd4ce4e3e4c9aad44b5183a"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/8515469783.json": {
+      "bytes": 18858,
+      "sha256": "1be1b4091b84e3e224be221e447e47cbb1cb1e8ce0ff46cc9ab966e4789f6d84"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/8515517020.json": {
+      "bytes": 17589,
+      "sha256": "4564f31c9047752d6e0d3157bf7a6d580fd78226800efcccbd35c55835e08400"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/8516886107.json": {
+      "bytes": 17482,
+      "sha256": "3e3e1d0ab15369c6f2c30361bdc3f331696b661422e0f32787d21c030de0b345"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/8516895965.json": {
+      "bytes": 9609,
+      "sha256": "b2f3a5e2d9e9f7bc799481e204cb5dfece0b7f188e1e56123c669784dbcca95e"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/8516977091.json": {
+      "bytes": 21243,
+      "sha256": "bc649220e28ae6cb9c2c6e87ccc3638d431335640385eb8203d0b81af25eb6e7"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/8517286966.json": {
+      "bytes": 20197,
+      "sha256": "0add9ae7926d4840d3ce55e9ef1d03652a505c8fa553dfba38a9d05cfc8c2127"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/8517672521.json": {
+      "bytes": 22360,
+      "sha256": "11336c96f98ac3c5c4bdb6ed69bf2f5fb6a225b39c05934f073346e664b68600"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/8520944434.json": {
+      "bytes": 6547,
+      "sha256": "7fa1e587de8c229e8d56b13c67f6f62312c556504b3725e054e8cd3a89abd3cd"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/8520954119.json": {
+      "bytes": 22767,
+      "sha256": "73f3f4b677c4e73d30ffdd5a7ae937f34c65de4c55c7dfa4aaa778d5afa757d1"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/8521976392.json": {
+      "bytes": 9046,
+      "sha256": "39afd5a5aea18ea26d790399536c6a79bda9d725f37dd987de8b60681c3a882d"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/8522490423.json": {
+      "bytes": 20250,
+      "sha256": "37e63128392a8267306c6d9d6164db5faacc113bb6450b4142950e64156c81da"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/8523587089.json": {
+      "bytes": 11400,
+      "sha256": "dad355e5caff8b0b87f6c9fdefeb5263439fbef1313a94edd918a376687a3a8f"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/8525193172.json": {
+      "bytes": 13054,
+      "sha256": "90259142662d703a04266efc8b5589b2a2f0d10c199a8f9f583fba7fb619a788"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/8530976657.json": {
+      "bytes": 8916,
+      "sha256": "1dc432ae01af6b210c57a8de40cda25a38700f24b4e780d9229cce62c645ae77"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/8531052113.json": {
+      "bytes": 14247,
+      "sha256": "239efbe726ac09ffa015ca000150520cf0e3f27a9cadebc73aa9ee4e5e64a883"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/8531310174.json": {
+      "bytes": 22549,
+      "sha256": "f10ffc754ca5d7c6ca4539a1ac4a5d3171b36917371042c71fae6311770b8a3e"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/8545518585.json": {
+      "bytes": 12196,
+      "sha256": "dd2cbfbff0e40bb7a2bd1899b94f331e549e724de918623536e00822fcb4542b"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/8545667708.json": {
+      "bytes": 27423,
+      "sha256": "b8e27e1ca862b98a9d12fde158fe26ad39f394b29ca2d7db5dc08412529824f6"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/8546281077.json": {
+      "bytes": 11172,
+      "sha256": "766f02d5aaa44fe65bbb69acd661481e4ef65b4d6d35cc110174e536f83421ac"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/8546780780.json": {
+      "bytes": 12282,
+      "sha256": "d7d8427b13931abffbcbaf22a337613d22dcdeca15096251824fe822f2157e57"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/8553429196.json": {
+      "bytes": 10188,
+      "sha256": "517c192cad2e8206b96764773889e9aaf03eac910ce0ef48401e5b4c6b4595a6"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/8575893149.json": {
+      "bytes": 11752,
+      "sha256": "830b37b8662989c0f70da49d1464f7f737c9f22ab462a59044db6873a9387f0b"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/8576437536.json": {
+      "bytes": 12401,
+      "sha256": "1e73bba2370168f63935d8733ae5422bf01c5c985ec2db65e7b7974d4fbdd65c"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/8576445274.json": {
+      "bytes": 9557,
+      "sha256": "d00ab5575d4a197c304478a1fffd6e6acb0e21c264cf4aebacf20c5fb117845c"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/8576473203.json": {
+      "bytes": 8867,
+      "sha256": "c55217dc6aba0dca977229a43a2192ae732e7bbeab30605bf5018ad8d913a113"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/8577000788.json": {
+      "bytes": 36511,
+      "sha256": "363b1c235a89faf425095c1cc525b8d5603c89639cd1dbb040a60ccb84964581"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/8577529561.json": {
+      "bytes": 16654,
+      "sha256": "bf6eeba015f47db1d1911b73d38c919e5d7934ad012a286500a4828acc55a9f5"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/8588813595.json": {
+      "bytes": 8734,
+      "sha256": "8aa76809c449b72a6fcc04a47ff263fb24360143c0666257dfd80026cf40086d"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/8589007907.json": {
+      "bytes": 23614,
+      "sha256": "95575f2b3b22c37278f63ed02237415531141fbf5a579b797e4efd4e98157c28"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/8589109589.json": {
+      "bytes": 10819,
+      "sha256": "4b973d552f7111e5e74c099436b8f17bef844bd18063ff034772eb0261e0a7bd"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/8589200508.json": {
+      "bytes": 15004,
+      "sha256": "654e38e82d576c4ce706227517ecd7e8c21642a21d50e31a3adfd791e9288bc7"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/8589613447.json": {
+      "bytes": 19441,
+      "sha256": "b5c4a3ccfff296dbc69c40a589be538bcb107e7b222f82ff88a498615ff22987"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/8607537987.json": {
+      "bytes": 16607,
+      "sha256": "c7b9b2b096e35a2a9dc3abb4f709b98cc66eab90265a2c729acb0f5a4567a77f"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/8607678537.json": {
+      "bytes": 9776,
+      "sha256": "f46fac8cb40f38aa72fe2ce4c9369b8c53a58b6e00011542f2ef4a2e3a00d299"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/8609220030.json": {
+      "bytes": 15370,
+      "sha256": "e765ebde83c590dd1797797a540a7dc57f90ae27049160c19c4fa9a908a3746f"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/8609411258.json": {
+      "bytes": 11630,
+      "sha256": "8b0cd6eb7e5720cbc55e709999fc5a774909c54eb9be9bb4c80b5d92a66bfcd1"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/8609771329.json": {
+      "bytes": 6868,
+      "sha256": "dbed85b9ca30d2722c7b2ccc6af991aafde23a16e486efbfb5c9fd28496bbf78"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/8609783940.json": {
+      "bytes": 21297,
+      "sha256": "bf2b7a91e34c7a29d631be3146584fe3c7a3cf50883b79f27304c038cd6a48fe"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/raw/973042611.json": {
+      "bytes": 6717,
+      "sha256": "c516d9e0b4aa2e759837dcde672cfc429c5621085dd5cfe7dd663e21886427b2"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/1953596839.json": {
+      "bytes": 870,
+      "sha256": "c8f27deee78e2e841c3f6ce6f120d1eb7f9a5242bc13be29272b71bb8d843df0"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/1983705981.json": {
+      "bytes": 796,
+      "sha256": "85ef3ceb7ba340ec9ae913114c7f9de3c26534767fdad84329e0722e63355546"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/2083326549.json": {
+      "bytes": 810,
+      "sha256": "dd38149b695f820caa7171d10877064e88860594548b0627e65ade0dd56d76c7"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/2515018350.json": {
+      "bytes": 849,
+      "sha256": "d3cc765126f9cdc392a82cd09e18ea9da440378577777394f260f6e758c68e14"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/2673975464.json": {
+      "bytes": 866,
+      "sha256": "6518d5c938c205845c60ecd22e6fb04ea165fdbe408febd634b4f07751ab9bf0"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/2727276939.json": {
+      "bytes": 911,
+      "sha256": "23bb4c59c5458134feffb548ac38eb1bd626fdc8abd9a64dcdf453ca7b91f37a"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/3478234708.json": {
+      "bytes": 829,
+      "sha256": "e0ab39c8d2d688cd039fb9b2e2e30d0bd4ccb6e215bff9c23f4077646e6a357a"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/3609816537.json": {
+      "bytes": 757,
+      "sha256": "8d80c0ad8e1f53dfffb7d434054bce889bcd5eb809cf500be1107007621d32f6"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/3730859523.json": {
+      "bytes": 759,
+      "sha256": "1aaf827318212d9dad3fd34c071a2550395c2dbf9ee231cba1c9b9261c6f4334"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/3763595636.json": {
+      "bytes": 793,
+      "sha256": "0d4f01572a5dba0b7aa87762f96d1940a776de80760771364b46678e64762bd1"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/4157006372.json": {
+      "bytes": 758,
+      "sha256": "3c567c36b006c9161075bf1529afdea677aac54c8d23a652603e3c0cf0b7d714"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/4161182396.json": {
+      "bytes": 879,
+      "sha256": "7e33a34e2c1ce0764da8bc865f742966cf069ab9f447eeba76e91b81411608fc"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/4174167933.json": {
+      "bytes": 832,
+      "sha256": "13762658954139bd1be27ecd379d5305033b9175d78979b2471a132e8bd5bdf2"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/4251834325.json": {
+      "bytes": 809,
+      "sha256": "520220477f6eff40e941ca24a2d0421b54f3238046ea84e49b6f54b9044e390a"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/4488900960.json": {
+      "bytes": 779,
+      "sha256": "6bc16adc31797af8b8cb50933ec028e0f50480600fefcead31bc117727edf8f6"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/4522842870.json": {
+      "bytes": 811,
+      "sha256": "434f42a91065a304b7a3ab3b28214181735082fdfef201006516a4d9622e663f"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/4686131126.json": {
+      "bytes": 802,
+      "sha256": "d3162938d4f19b309cb5814479131acf2d73adf65da95d4fbbbe4297d3cbc07d"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/4737990443.json": {
+      "bytes": 769,
+      "sha256": "7d18ee136000756d252a8724d31010406de71fd54b00b27a1d1a05ae2d80c846"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/7233515057.json": {
+      "bytes": 773,
+      "sha256": "23b340ea33cde13bb1306829bd0965deb5c0a74aa344ae732ae661e39936b985"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/7405261035.json": {
+      "bytes": 729,
+      "sha256": "5129da73eb0ba10697d423097f3355a8f7e00746e3fb09e65216de4e99a5dfb2"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/7431903323.json": {
+      "bytes": 855,
+      "sha256": "44f0164952d285477da0b3a6d12d908ca0327c0ec2cde258616124f7ebb9ddb1"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/7463662260.json": {
+      "bytes": 804,
+      "sha256": "6066584f851b7eb60d04f850db0df6180a931351fb05d7b22329af603310b83d"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/7561978909.json": {
+      "bytes": 811,
+      "sha256": "132800c5e55ea86068e6d394016f06a2b920afb70814ff6659bee0b405d373af"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/7697048797.json": {
+      "bytes": 834,
+      "sha256": "48eeddb4c2e34eea7e3717c4ba655726f5bb0043b8676c82e9ff76c7da92abf9"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/7786931649.json": {
+      "bytes": 902,
+      "sha256": "0e3a2edbcc42fef4040df85aa52906f2184e598a860d2528b7f1ab5c703ec136"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/7813581874.json": {
+      "bytes": 814,
+      "sha256": "c9d42c8fdb9157252beed9292348475c4bfe30973405c8c68722ac082b891d6e"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/7815989117.json": {
+      "bytes": 824,
+      "sha256": "13921dd701a3e2c7fff56fdac2c9fe3ab1934162b80c7d94565dc5f5938b1c9d"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/7817625147.json": {
+      "bytes": 748,
+      "sha256": "e294e54e52ecc558cd31bf873bb9a7f8bdd5a4db965b50b4112f591cad00ab7e"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/7838482646.json": {
+      "bytes": 927,
+      "sha256": "9a998464b5549d1b6fb9452f9b2b227c7dc0d441c5c5e01a211fb1e847c8b951"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/7880811855.json": {
+      "bytes": 764,
+      "sha256": "f509f98c9b2faee17effdf0a292b8702043f36d22763218ee25298e64a8d60b9"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/7887604417.json": {
+      "bytes": 775,
+      "sha256": "cb5ab79cf45cce40642d823798ffb17f30349f3f5d03a645b5190156b0e46510"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/7893991815.json": {
+      "bytes": 817,
+      "sha256": "75eb439f2e3b403e9e9d8d3ad1ec131b1bb1f86cc065f7f6bff90ef64ac1a4e1"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/7897781260.json": {
+      "bytes": 844,
+      "sha256": "6141bdb24ed0a6d704c313777d7b02287f19cfd3f6844ee46716005b152d43a6"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/7901290588.json": {
+      "bytes": 769,
+      "sha256": "44e237f8d1a0e7cc2c2301d75eabef4521822354c400a0f4a385c82e0fe6bc38"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/7925902502.json": {
+      "bytes": 777,
+      "sha256": "0aee43ce8d896ac2929773adfb767d92a28451abbe1fe0e9baade26cc98f9378"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/7929387927.json": {
+      "bytes": 760,
+      "sha256": "35620f7fd8a251291b4a4c7051f3415af3bf04254f5e7bfedd2f1a7b6a2a8fc8"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/7931469609.json": {
+      "bytes": 858,
+      "sha256": "4ece12e024fcae545f08e5b237dabe1721bb83640435b2ad17f471c3f8b7d99b"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/7968393125.json": {
+      "bytes": 812,
+      "sha256": "056cd3c3ede5e181473e7b7add8fc2f00a96a89cd23fb505744020dd9bc18db4"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/7969218426.json": {
+      "bytes": 900,
+      "sha256": "e886ea115f363908d98731d0829f44bfa47817cc32f3abb5d699d6226c09d340"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/7982609018.json": {
+      "bytes": 773,
+      "sha256": "60b1c5cef64bc05e1e65a75e7c6618a50935a1ae802b5af75c9a4526d518d221"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/8026855705.json": {
+      "bytes": 808,
+      "sha256": "976ca74a8af2b4dd535325cc8684b61b60b4adeb3034e755477ebbaf03838228"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/8047018788.json": {
+      "bytes": 786,
+      "sha256": "512b79ebfdd6b81c1ae0a4d8114ce48ddedb40a1a7e6131bbefc88d3595618b9"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/8082014953.json": {
+      "bytes": 795,
+      "sha256": "d18b664b3cbb0fd383d5356d9bf85cf6cefb323feb3071490a4d7d578791e87d"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/8114553798.json": {
+      "bytes": 727,
+      "sha256": "c8bda1d02a62709b66c4b166ff250a694a8c2fc4ecc7334de0a5b17e4e780acb"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/8134053368.json": {
+      "bytes": 790,
+      "sha256": "a3db3ae3a7adc6bbefd0b59a36420f286fbfa65ef0739176a111cac7228c51f2"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/8152592487.json": {
+      "bytes": 921,
+      "sha256": "30768d60f93981c3b08abfade188c87d741c2b1b7f4f4ad43855cc6582260eba"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/8168332152.json": {
+      "bytes": 843,
+      "sha256": "8ed8b74a548e1856b1315141107742cbdb0d13fac78d277cd3f3c8bca600a3b6"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/8186285862.json": {
+      "bytes": 817,
+      "sha256": "dbdc4f30b34879a933c7dbb3547fbb8592fb96f6d2e3919bcf3dd159a3f218b7"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/8211865630.json": {
+      "bytes": 766,
+      "sha256": "03e8a7849cbbe979c46d49476658e243bf1e3fce8705019b5fa86612294f0087"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/8214237531.json": {
+      "bytes": 799,
+      "sha256": "d1b95ce50292be71bc7cfce4a30562e24418ecffd543c916ffba0067c679cc0e"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/8253486294.json": {
+      "bytes": 780,
+      "sha256": "ada97570ab7cb5fd25d1795639fb9b812c6109dfd8894c0d16c42d739105160c"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/8258673691.json": {
+      "bytes": 910,
+      "sha256": "9df05e9627dae646bcc569f3285c702b704370aa7d8bd4f79325145ddfd9194f"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/8260536179.json": {
+      "bytes": 779,
+      "sha256": "8f0f1cf0a8beab4ed38f0efa98c08a92994291aec9abad33268e52f2aff4c0b4"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/8262885537.json": {
+      "bytes": 795,
+      "sha256": "b0f0dfceb857225fca85a128e60755888915b1b13a33c5e6b01df26373914ea0"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/8266275403.json": {
+      "bytes": 769,
+      "sha256": "981dd39e37ffc2541a130bd2abbdafcd9599e139527e4089937c2589bb08d587"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/8269954492.json": {
+      "bytes": 782,
+      "sha256": "792a6357e85b5d86c5befdc5b55306aa3eb3559d4f16a14b6a5eb27be4babc07"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/8289513874.json": {
+      "bytes": 699,
+      "sha256": "d31b5bfc9ac863cd7f9e5b3ac86e4c43fdc30d149b4a900308c4cab8ed180dc6"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/8305380117.json": {
+      "bytes": 840,
+      "sha256": "3cfbc87447b6f31ffdee966cc3dcf75c1f56434d4e012a208059c36c12abc5c2"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/8315299605.json": {
+      "bytes": 867,
+      "sha256": "b791b42f528161124b5039b3483ddb615509161058e900633c5e3c8276d84265"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/8315724408.json": {
+      "bytes": 902,
+      "sha256": "efee0059ca00978c432705cc32cd3f4e5b9f232c13c3c0ff7ef49118502eb3b6"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/8325088889.json": {
+      "bytes": 780,
+      "sha256": "25ef10dbecd5fb8bfa90c1ee2983a7358dceb92a0fd4e61d98f9ef89170cb57d"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/8325095704.json": {
+      "bytes": 861,
+      "sha256": "2d473751abf188df390b6005474d6bbe4290df09170331302701ee142704207c"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/8329866411.json": {
+      "bytes": 848,
+      "sha256": "49df339f0141465a2fe1df7c2af89ecd05f6d476147e5466de0b58fe7ae112b2"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/8334775222.json": {
+      "bytes": 848,
+      "sha256": "99f946ee45b8d0b2a4e17d257cd1f38a7223eb47947144f2d2190a403de4345e"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/8337468876.json": {
+      "bytes": 734,
+      "sha256": "2356f73f8629474fe1057e43de2b6018f7cf8ce1335ba748763dfd40542dfb1c"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/8340421649.json": {
+      "bytes": 761,
+      "sha256": "5c771016daeb4fc9eb3ce3adfeb66f080b88625317887ec6887b6c270f63daea"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/8346166093.json": {
+      "bytes": 747,
+      "sha256": "f45aa239af9c800c12127e9ad517aa4d266fcee066fb8cfcf8147ab5568b1311"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/8346622383.json": {
+      "bytes": 797,
+      "sha256": "b2e55f9f984358adaea983e788aae987333e8f21fd7a9de3995db5afc36666ee"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/8348005166.json": {
+      "bytes": 709,
+      "sha256": "7d0a4c5008b740d6ab7c342c9ae6d7645572b2a7d272ffe75d213e42d3548cf7"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/8348755101.json": {
+      "bytes": 898,
+      "sha256": "abac660c24f06c402a3b4a46d22ad7a833782296604323928529466b1548a698"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/8348910610.json": {
+      "bytes": 751,
+      "sha256": "5924f23c83667068adb1e6d7723444cbd929f8f1f84f290278b5af983a084a20"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/8354739130.json": {
+      "bytes": 868,
+      "sha256": "6338d6f32a6b84b9e3387d4f5200d3f3d43864c1dc98bb0ae4f3545ee5ce1232"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/8356703581.json": {
+      "bytes": 885,
+      "sha256": "b5dc3f504334c7c5fec113938dfb73dd260dbc40919c9a85247a16a5fa33f6c7"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/8359925045.json": {
+      "bytes": 794,
+      "sha256": "eaf988cc19f6e48671e5c00203981f07ebee77220bc104f835c53faa75c2bc44"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/8360007417.json": {
+      "bytes": 757,
+      "sha256": "b0ef0bb3f79a96e283d7fbd3253ad409e1edcf66bfa44bee610bec4b82cee517"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/8360159393.json": {
+      "bytes": 773,
+      "sha256": "7c58839baede34f1d00df42132ae6a085a8da0bc5a0b1d58215d4e8dc402fd55"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/8363939067.json": {
+      "bytes": 764,
+      "sha256": "c87a6e3f4955797d964e6dc26613956708ed7f3faca041a74b2b37ffb9f52e23"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/8364044279.json": {
+      "bytes": 734,
+      "sha256": "3ce4041d70f4cc3598168782036a019555cc5efdce5ec256e7297d4585d6af28"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/8364202274.json": {
+      "bytes": 757,
+      "sha256": "3d1f915b4f0ef32739e6451dcf75043eef01cb6b5f5d4cb428a9d9362fa612dd"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/8365781600.json": {
+      "bytes": 850,
+      "sha256": "78d0e7db8c65d179f07a9e681e5d473eb894c055217ce50ea8d84d98ab5c1cb0"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/8369295769.json": {
+      "bytes": 721,
+      "sha256": "ed07c9281599f378043afa1e788db682227c47f514868e92d34066b37dce9050"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/8369801142.json": {
+      "bytes": 737,
+      "sha256": "35a8cdfaa879bd1bbb62a8ed70e5e1047db368ffc288caf538200cf6f41128c9"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/8372181775.json": {
+      "bytes": 757,
+      "sha256": "04b87097ec86d093da2359014268680fe7d4b40c8c02685c900a5bad5c1aed96"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/8372858621.json": {
+      "bytes": 779,
+      "sha256": "e4d3664f629de94c9bff9979675fff3208d94c596d69d07b18e78769c4d72e17"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/8372862725.json": {
+      "bytes": 751,
+      "sha256": "25e6e43d49cbfa27612b025cafc70966a516facb83943e37c331439ec89a16ae"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/8375877866.json": {
+      "bytes": 826,
+      "sha256": "14410a6be138b0474a4f3df2ec0f634f8b0e2c4c79d15eb7e1ba62d2defbea36"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/8378859564.json": {
+      "bytes": 827,
+      "sha256": "b063ef2251cbb8041ac52471e28d9fa5f8264cab7b7c9ec6cf695a6fe47faacf"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/8378910573.json": {
+      "bytes": 787,
+      "sha256": "36fe0c6afe47e5439322b0881f1dd956117889a382addecf2a5925686ab5cbd5"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/8379007634.json": {
+      "bytes": 781,
+      "sha256": "ea2d4a8cbc79571192e8259507bed20d54451016b717ec7b00d6fe4fb8b8dc4c"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/8379379813.json": {
+      "bytes": 902,
+      "sha256": "fe599c945615c45eda7ad7f60c91bc04d5f3b57a08499742a241ef2673a91289"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/8380220427.json": {
+      "bytes": 777,
+      "sha256": "612f8be8198266fc96877b905413dbea120cf75dca3212f874ef709067ad0b25"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/8380739555.json": {
+      "bytes": 861,
+      "sha256": "b4ffbb9b5f55106c76d03c9bf3ccd7f89c0a911513164ebce2d2b60c47bd8cf9"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/8381596456.json": {
+      "bytes": 870,
+      "sha256": "3e587ebceb9fe5251aa75d7aee45057e4840aa35db8001d69822c036e29223d6"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/8388757394.json": {
+      "bytes": 749,
+      "sha256": "65b2e936cf218709ba5033a3a85e7880b4dd6faa0a385367cb042aa54350c212"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/8390054165.json": {
+      "bytes": 878,
+      "sha256": "1c429e8360e4654ec931e510f1c5af1bf7f8f6c1e4880b45b6e204cf291ca492"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/8390524997.json": {
+      "bytes": 781,
+      "sha256": "5427c7cf4dc113928a196fb92df69f0c0755319dc5cd00201870bddd588b96d5"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/8394232499.json": {
+      "bytes": 902,
+      "sha256": "cac6e1ce63d5ac1fdbbb952966cfa6afce065e57ce2af2a012de358b2323d6fd"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/8397884338.json": {
+      "bytes": 795,
+      "sha256": "b456ac725b479d2a14d87d6f008197e25247ca2a268412e98130db7c21ae45f4"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/8400440841.json": {
+      "bytes": 763,
+      "sha256": "1b66cb509b867b54a19388547ddb90057cefc1ff9d0ad4a69fbafbbba990cc3f"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/8400660159.json": {
+      "bytes": 898,
+      "sha256": "b33ec6e8cc1ccc7e721fffa45f4ad033895d20e8ea910815a3670ae41512cc44"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/8401149324.json": {
+      "bytes": 733,
+      "sha256": "11e2ec2f71dab6f35a22f50a0b82c48423484387c454004400a68b7c813506ef"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/8401767803.json": {
+      "bytes": 755,
+      "sha256": "3d19023a8692ff9654695bbe09973d03199dcbc00399ce953f11eb523714c959"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/8401916533.json": {
+      "bytes": 693,
+      "sha256": "ecaedbade3bd557a3cd15e264dd8419c62ddc2d29c329c263ad490bed412742b"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/8402209409.json": {
+      "bytes": 757,
+      "sha256": "12b7a179ae7c45cf26bc1d32faf4b0469ae1541bce9c67210cc95d7100ac8ed5"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/8404450715.json": {
+      "bytes": 765,
+      "sha256": "28d0c08b5280f1bfb8104a52f45e19db3cbce955686938f05e0cde8bf48669d6"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/8410369888.json": {
+      "bytes": 777,
+      "sha256": "12f3419bae0054a51efb58eeb23955d29fe8cee8b0720052caac6b0343be9520"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/8415155831.json": {
+      "bytes": 790,
+      "sha256": "e6c38d2f26d01f2717f5d0943a7a1838a50e03bc21c9a423d7282b08b898d91c"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/8421310047.json": {
+      "bytes": 769,
+      "sha256": "deedc097842541d32e83a6cc3c745ceab6c57b2ecc7c187cbd736508a87b2885"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/8423646808.json": {
+      "bytes": 791,
+      "sha256": "c36b4c9a468a2da70390fe3ddf651f297fa5e62ca5d65ff9ceed8e6f72220337"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/8427497590.json": {
+      "bytes": 769,
+      "sha256": "d01b3fe240088720ae96123c98c866a844f46da78767ab72125195ea577be76a"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/8430023179.json": {
+      "bytes": 734,
+      "sha256": "8997c4cf3087dbbb2974a406a697e3169f70c1cb6ecf4efaede19e551d2d1a6c"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/8430145645.json": {
+      "bytes": 744,
+      "sha256": "56a9a83347d74c22ec01e6b5fc9c1df7b37f4c1289c06f9cc1c48ae45e95d638"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/8430830206.json": {
+      "bytes": 756,
+      "sha256": "0637cdf09996396128e0901adb1f32b1bbc4a814a44df3a26f62af3a40994a79"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/8431957866.json": {
+      "bytes": 843,
+      "sha256": "06483b7fb2d0663ac5c86d8144f7183a31d73aad4d3d2244f645d41c6e13325c"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/8431959774.json": {
+      "bytes": 757,
+      "sha256": "0f773d25da7c7ab8e32d243dfd4ef64af35d71b99cd14e8799228231b0d53473"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/8431991826.json": {
+      "bytes": 850,
+      "sha256": "1c85a5f51b3d15d2e1e08283017a9417b41d26b3e97d3df8a9773b71d192990f"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/8432823776.json": {
+      "bytes": 845,
+      "sha256": "31c70354f7d5a0e346986c671c46f125ae80fd13239b82360494fe6f893999d3"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/8432905374.json": {
+      "bytes": 866,
+      "sha256": "2801003b9fcc377106c1a60653ca337bca995aab19471a30785db2b5c37e8f78"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/8432984811.json": {
+      "bytes": 902,
+      "sha256": "d9f465efc9af37411885031e2de5b1bc4cc4180297dd5d9aec3a4c9386ed52ce"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/8437352397.json": {
+      "bytes": 769,
+      "sha256": "01403660bfb5b4698495a4e4c5cc0c81c6595936000238370094e47eb0cec287"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/8437356971.json": {
+      "bytes": 840,
+      "sha256": "8f135ea143e4f8aa3b147420fa61634444925aa240977defab785058fa493c97"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/8437727051.json": {
+      "bytes": 789,
+      "sha256": "10fdbfcdc065eee74b8f151d8ee760999156d3be96802d1731ecd0ec505a8028"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/8438418497.json": {
+      "bytes": 793,
+      "sha256": "d258cb296f31a78fbaff9f08a5215ad42bd22ac734a43e2db1dfda4415445bd3"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/8438503438.json": {
+      "bytes": 868,
+      "sha256": "13d070670959dd78b11eaa6260bf122ee4e4237efd533bec8e648cf59c067616"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/8441104154.json": {
+      "bytes": 859,
+      "sha256": "c25002a3aaf4c96c9da1f00e29b0d2397dc4414f2aaa41d3cc1c20efecc7fccc"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/8441899308.json": {
+      "bytes": 928,
+      "sha256": "edd276f0d0a23b60b0a1d075d05a9d4101cc790d9d1703f0632dd71add10259c"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/8445794271.json": {
+      "bytes": 751,
+      "sha256": "c9690ccc6a5e9c6fd8b67ce09099bcba41cb5657fa13b0af13f3f156bf279f0a"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/8448676165.json": {
+      "bytes": 795,
+      "sha256": "3891bd41b72481f9abdfa236840d327441e27183a518c26a515a85f30c2803a6"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/8451647736.json": {
+      "bytes": 902,
+      "sha256": "a54911cc6694608c8af1e8e44c1baa11b85018a31834385ae8838ba010f7bd0b"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/8451902604.json": {
+      "bytes": 767,
+      "sha256": "bfeee71743d9a825de707f72ee1bf6d1e8ac1cba4b8163a02554f6c38c8f31c9"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/8455468168.json": {
+      "bytes": 817,
+      "sha256": "0b6fb9d61796d1c6e8b2833f1c9ae13e412d961768d132e801288ea51772bf79"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/8455506610.json": {
+      "bytes": 795,
+      "sha256": "706da529a1a96fad3b31398453ddae201a086aa27cf027c20c90c7c87da2faf8"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/8455649757.json": {
+      "bytes": 769,
+      "sha256": "cc2ed6a416506e909038db2fda60eca7135038e7a426e645b880075e3c52a8ca"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/8457728117.json": {
+      "bytes": 788,
+      "sha256": "7450409b9d6881f9dcd9c7dfe688705c67aa2485da819c3c8fc0e4b076d0381c"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/8457957994.json": {
+      "bytes": 757,
+      "sha256": "93d010f13eb8b4423a05336167de1097427b5f35efb8112d855366eebd2453d2"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/8459308028.json": {
+      "bytes": 757,
+      "sha256": "3d57f98d3481a087a6977748985beb3015fc002e5a2446406307318bcadf46e8"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/8459713753.json": {
+      "bytes": 796,
+      "sha256": "29a596f2bc7846a821de5c4f0e6c5b03e818bf859cdb127752c8e5f94b29997b"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/8461780468.json": {
+      "bytes": 764,
+      "sha256": "ccc2b95e7736e86da4b0681fd52038237245891b5a3a25f3ff4d262798d93860"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/8463692760.json": {
+      "bytes": 734,
+      "sha256": "000b330137fb2b771684af4e2ede0f0a4093040885fd94463534f8683276a8f8"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/8469629532.json": {
+      "bytes": 803,
+      "sha256": "8f77bc8a33f2089f1e14616a2362313d2c91c573b0ce8a0b0b52aa2c3c71d2e5"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/8470634793.json": {
+      "bytes": 791,
+      "sha256": "69dfdafc6a9308496c028b90177d11e9aa1a91f09956bca8e01ea42af53bf0ea"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/8470710062.json": {
+      "bytes": 686,
+      "sha256": "158930541fae8da6124f50d2726b05ab06713f778a8d76fa3f661118717ae166"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/8472267607.json": {
+      "bytes": 795,
+      "sha256": "a726d5d34a97c5537c604b046ac65bbcee58f7134a2418770b0c9b8cce3b6e35"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/8473270378.json": {
+      "bytes": 758,
+      "sha256": "cc4cba652ae98774bed1e81fbe1b3f3b9a6d93ba7747428069977de05758c396"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/8473402968.json": {
+      "bytes": 742,
+      "sha256": "34fa70c32b0b44582040145d87145adf18e84effaf66544654e8527641fe8986"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/8480878406.json": {
+      "bytes": 763,
+      "sha256": "5696c4a259d1170c160ed4de2f3a23c08fafbd0ee5b140371be7ff08a106a6de"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/8481740953.json": {
+      "bytes": 751,
+      "sha256": "d5353d5c0a465a0dcd9ee04c5f90b471ed2fb70dd59406127fc6f570a8b9e758"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/8482405672.json": {
+      "bytes": 943,
+      "sha256": "ad38685a55312510c1c8fd8511b5abcf4ea18455c26a002a6e6a85e63a8732d5"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/8482883791.json": {
+      "bytes": 839,
+      "sha256": "4883dca3d9041dc18a7e26c46769570654a568d3824c10a026239c3c3bdf5ee9"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/8483452734.json": {
+      "bytes": 765,
+      "sha256": "773d81177249f6874894b64f955e3fafeea8a4776c654c21ba1b65721e3e0581"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/8483825618.json": {
+      "bytes": 777,
+      "sha256": "6b912dc62e6e540288c46539d82ae3924b4b27738bde52db4ff4b4fa5b7fbb40"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/8485266828.json": {
+      "bytes": 767,
+      "sha256": "9b7d4850f0cfed5827479d1458c1932634a5a9d9e38ba2189348481199235200"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/8491057376.json": {
+      "bytes": 686,
+      "sha256": "9551d722fae8f32ab15c2987aff5d936206eb886e070553512bc0f9709698b1a"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/8491803123.json": {
+      "bytes": 760,
+      "sha256": "f13b6e672e7d2edab46fff3e3b65fda18073a8353e9f1b980980a165e4e8778b"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/8494924370.json": {
+      "bytes": 802,
+      "sha256": "68c6bcf94de183d6abfec9136af2123a4e3ba83a0b8b1740081c7dc8a8ff9fa4"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/8502387014.json": {
+      "bytes": 835,
+      "sha256": "3fcb56b74d51ce4b3fa435dd4c31f66603b01d3940984a80808764c8bd846cef"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/8502571104.json": {
+      "bytes": 749,
+      "sha256": "28c208d9b224d56b9db9b53609d0ac8c39010183c1aa54923d389ce2401563a9"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/8502700080.json": {
+      "bytes": 780,
+      "sha256": "631e58e3cb30de6b2d079136764a4889278db4c2bc8fc9a6bb98c137ebca4fc1"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/8502786170.json": {
+      "bytes": 797,
+      "sha256": "d9e6f2cc6ec54bd559e5c4e064feaf42c7d95cdf297ebe0fab985635f00ae293"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/8503007923.json": {
+      "bytes": 866,
+      "sha256": "910fd4d68c999e7bdcf83d0e64ac386b82f1c8bb229598502b174bc616ac0e1f"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/8515469783.json": {
+      "bytes": 757,
+      "sha256": "ea3c218ddc391e63773af5b427af8ebc1fbf2ba1d2ce2a09fb88e1fe65687a38"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/8515517020.json": {
+      "bytes": 757,
+      "sha256": "da930a651a4955ae08c9c0b412c3fe34564bc55bfeb07535bfde3820a6a805c0"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/8516886107.json": {
+      "bytes": 734,
+      "sha256": "ee139fc737de9f148be2c9566ebf78555f68ce8fd21e48fd34475c52e81778eb"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/8516895965.json": {
+      "bytes": 778,
+      "sha256": "318cc97733a8caa676131562965d60bc40200f99511e54d4e42da4a6cfafcbc9"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/8516977091.json": {
+      "bytes": 817,
+      "sha256": "167e6067f8eef9beb4aae50f90af5eb90fee2e1e0b3cb7c6d16a56bdf0f54ec1"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/8517286966.json": {
+      "bytes": 737,
+      "sha256": "15eb88a2b85e712698ad0c7a016c426ae2af1a47e16269f2df4fc90cf69b2daa"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/8517672521.json": {
+      "bytes": 795,
+      "sha256": "732d2b8e7fde56db44da40bd2bedbad8a63eaaa7828acab4343da5f9a11b709e"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/8520944434.json": {
+      "bytes": 768,
+      "sha256": "09f80aadf7db569dd2779aa426196dccf8455e315acbc712de507032a5654099"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/8520954119.json": {
+      "bytes": 871,
+      "sha256": "3b99aed79474b6866423f96c2459184b625c1ff1a08a57a56a21fdfa9dd27df0"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/8521976392.json": {
+      "bytes": 810,
+      "sha256": "e3272f5510c0ba5baea89a5af572a05916e0db172169e031cb207ba89ef13e51"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/8522490423.json": {
+      "bytes": 795,
+      "sha256": "a4ca68605e8c0292df1c6d4c1e924102e390a12602c639073f47103d4cc1a27f"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/8523587089.json": {
+      "bytes": 730,
+      "sha256": "8e1fd3794849137c30dcbefb20bb42547d791c92b7d098be102f99d3e9cf7179"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/8525193172.json": {
+      "bytes": 731,
+      "sha256": "abedc989b973e2602ccce39c076542c7dc89490bb3d5b29e81510d0c3305f748"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/8530976657.json": {
+      "bytes": 892,
+      "sha256": "0ed970005e78895a912666a3f3cee904dad4ff2599000e5952a4e6c823eb015e"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/8531052113.json": {
+      "bytes": 817,
+      "sha256": "ac1cdb466b2ceb334ffeab3feb2fce0e7aff7d96372e0742cb97ca4afaaa7ba9"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/8531310174.json": {
+      "bytes": 822,
+      "sha256": "b32c3ae55c94531f2cf12b532f5312f903ed159e2eb0f1f1f00d5529e49889a1"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/8545518585.json": {
+      "bytes": 737,
+      "sha256": "82d28d788e95853bbc7126ac85c76e7a49806e307e9e54964b543f122ea87b8e"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/8545667708.json": {
+      "bytes": 863,
+      "sha256": "309191dbb6cff153a7f9655ba98e83dbdecc92ec330040cd79fc580792487f45"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/8546281077.json": {
+      "bytes": 785,
+      "sha256": "08096c9b3230ec21c6422221c236eb080ad4af0c77cbb11dc0a063c608c99d5b"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/8546780780.json": {
+      "bytes": 810,
+      "sha256": "bfb816b453950dadf7478e8e0bc835e179774d5c5bd71d34c610f37dad4b65ed"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/8553429196.json": {
+      "bytes": 834,
+      "sha256": "cdd44a0c0c954a3d88f68478e0d9153138bd8695b81c09d6961b9e36027dd1c4"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/8575893149.json": {
+      "bytes": 787,
+      "sha256": "0c2cf19653bb07f2f3c7d8b5679c9846112b1ec45228692a2606f24bafd7944c"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/8576437536.json": {
+      "bytes": 782,
+      "sha256": "fc0f4661c026ec9785d9d1c978155603f24bb4a544c40e5d43c858039db676b5"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/8576445274.json": {
+      "bytes": 851,
+      "sha256": "9fe45a1703adced58ea76f0f0db818e02876e4fa7a66d9c4fee100e6ccc58408"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/8576473203.json": {
+      "bytes": 826,
+      "sha256": "4a87fc221765cf34acc3dea92dda70f62d7b848df73749f14064753674b857ff"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/8577000788.json": {
+      "bytes": 757,
+      "sha256": "8ef341ee27b24a2c31adbadaa56c4a74f15778a493ee6048a6db9431f762f004"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/8577529561.json": {
+      "bytes": 902,
+      "sha256": "f3272194da638c77f7075cf68c59137c30d2b219a4c2a523f00f50846019c02b"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/8588813595.json": {
+      "bytes": 767,
+      "sha256": "7291d201e8b826c38495af5991185bca20b11196af983cae0c2b1dfa84c446a7"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/8589007907.json": {
+      "bytes": 730,
+      "sha256": "d6b844cd98bf2001549c3ab72325b9523c3f6d9dcf2603433d7ec92df834b731"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/8589109589.json": {
+      "bytes": 747,
+      "sha256": "18f4940c56898d45c3628aac3636f7f2ac5cea951e2ede8747d90f890fc2b393"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/8589200508.json": {
+      "bytes": 795,
+      "sha256": "6e6dcb610bc0c2b2e83519df3439874afe2365b49d09c3dc3de39475433c00e8"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/8589613447.json": {
+      "bytes": 757,
+      "sha256": "dc253efcdeb518bf808f5a96bbbc5f92a197203751bf8c2a0323db768c765f6a"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/8607537987.json": {
+      "bytes": 787,
+      "sha256": "6ebf0c0bd9a5d5beefc767cc6f5fbc3deed14a9580bdf4424ee81396cf36109d"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/8607678537.json": {
+      "bytes": 847,
+      "sha256": "39a7c45be85221b8068ee4a9a8f2cef8b14c36beea06e4d0797bf3a0c0eab327"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/8609220030.json": {
+      "bytes": 754,
+      "sha256": "5595140dce61d7ffec6bb0e610bc5a6d839ff68c4325cee3c6f68eb110a8fcf4"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/8609411258.json": {
+      "bytes": 834,
+      "sha256": "3aecb42f4fc4042c000907b45476507dcad0e039a4029ce95e40cf913d80cdd9"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/8609771329.json": {
+      "bytes": 844,
+      "sha256": "012f11ec707b8ab2cfd6b60fc7ed8f0e405b15c32cabbf07a2029af5eead3f39"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/8609783940.json": {
+      "bytes": 800,
+      "sha256": "cba04784a7338de43c95cd532945b17d548f38258cbc76de126f37d86d24d647"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/reviewed/973042611.json": {
+      "bytes": 876,
+      "sha256": "bbae50805cd7d251169c07e5aa50b0d264ec6102b7059c8605f807b0bedc2566"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/standing_unavailable_policy.json": {
+      "bytes": 1011,
+      "sha256": "7a1c18520dc10340252a4933e92bb851f78d800b32c33c1017ede17529393381"
+    },
+    "Data/avito_runs/20261110-remote-all-russia-batch_01/unavailable.json": {
+      "bytes": 956,
+      "sha256": "50f3a46529bd2f6e68301153956e9779f5e4bafe6cd0c819a63d287fd4489e86"
+    },
+    "Scraper/runs/20261110-remote-all-russia-batch_01/plan.json": {
+      "bytes": 15977,
+      "sha256": "7509da38195c4be3198ec33fb8a2336b24f858b4f545aa02a4a35a5c445b4b65"
+    }
+  }
+}
