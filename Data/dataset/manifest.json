@@ -1,11 +1,12 @@
 {
   "schema_version": "1",
   "builder_version": "1",
-  "builder_sha256": "7e581b8860e5609e72ba90ed3c5ae1c6a977d3e8e4d085217f6d787b91a2bf7c",
+  "builder_sha256": "3be8b60633ec2d8dc559b9b4f3742937f6b84bc62ff3d98d5d8c04b35d5ad74b",
   "placement_transform_sha256": "6f860342ad62f1a8ed10b62354297da7c2e7e27e1a9d170b34e484416ec399b6",
   "city_scope_audit_sha256": "72f5fb34740ac409dc32fa05084077c9b5b0629fe35dfdfb4be461f89fc096ee",
   "city_scope_audit_v1_sha256": "5a479702590a3e2a818a1ae247b59bc018beba386c506af16e01af56b55c96fc",
   "city_scope_subset_sha256": "93c718349a6cebd6d056dff630312accc5ec3b5f9590448468c1e61955039a17",
+  "city_scope_multi_sha256": "7e2c09b06e2fe3ba71949b4ee2a2cd77b1699ef84cab525d718e08fd1fef5934",
   "title_flags": {
     "version": "military_title_v1",
     "sha256": "9c9456cb3fb0df5791630049c9c85987381091dbb9ba18bc3fb3314b8cccbeb6",
@@ -130,14 +131,14 @@
     "Тип рекламы",
     "Знание графических программ",
     "Площадки",
+    "Грейд",
     "Категория прав тракториста-машиниста",
     "Выезд к клиенту",
+    "Языки программирования",
     "employer_profile_url",
     "read_status_employer",
     "Тип токарного станка",
     "Учёная степень",
-    "Языки программирования",
-    "Грейд",
     "military",
     "military_keywords",
     "military_rule_version",
@@ -154,7 +155,7 @@
     "enriched_fields",
     "enrichment_version"
   ],
-  "sha256": "e4ea587dc8ca6411524887dfc6a3b758a9759e53d1ac0aaf0a0380c2c5f54fc5",
+  "sha256": "3b335870602c10d7e250be1a7be969b2d3edc61c153e0da44f0a2332ea90392c",
   "inputs": [
     {
       "run_id": "20261028-spb-50-all",
@@ -5295,6 +5296,86 @@
         "sha256": "38d1f0aad7d6b901e324691a68709a4b7d87d637a4a65fcfe61178057982f01a"
       },
       "rows": 69
+    },
+    {
+      "run_id": "20261110-remote-all-russia-batch_01",
+      "source": "avito",
+      "path": "Data/transformations/20261110-remote-all-russia-batch_01-cities-v1/vacancies_flat.csv",
+      "sha256": "df744c4e257544abcd402484bb38fce1b358e341af8fd55bd5239dda4a3a40cd",
+      "placement_regions": {
+        "Краснодар": "Краснодарский край",
+        "Рязань": "Рязанская область"
+      },
+      "enrichment_status": "not_run",
+      "transformation": {
+        "path": "Data/transformations/20261110-remote-all-russia-batch_01-cities-v1/transformation.json",
+        "sha256": "52ae1586355fe087c49864832e05f2b0b888618f34de98f61bd59a7a9fa617ed"
+      },
+      "rows": 9
+    },
+    {
+      "run_id": "20261110-remote-all-russia-batch_02",
+      "source": "avito",
+      "path": "Data/transformations/20261110-remote-all-russia-batch_02-cities-v1/vacancies_flat.csv",
+      "sha256": "7450af3b34819bab55be15cf270c035efbd33357e22b01c41b1ae8b5f7499f28",
+      "placement_regions": {
+        "Краснодар": "Краснодарский край",
+        "Рязань": "Рязанская область"
+      },
+      "enrichment_status": "not_run",
+      "transformation": {
+        "path": "Data/transformations/20261110-remote-all-russia-batch_02-cities-v1/transformation.json",
+        "sha256": "d5eb12ec588fd3eae62da9be5b3a196b83e19d4dbb0442b3d157240ecc7af93f"
+      },
+      "rows": 13
+    },
+    {
+      "run_id": "20261110-remote-all-russia-batch_03",
+      "source": "avito",
+      "path": "Data/transformations/20261110-remote-all-russia-batch_03-cities-v1/vacancies_flat.csv",
+      "sha256": "2d3120817a7ee4a8a8d7e1fc05322eb616e3d6d159940520055e8b749ed46b87",
+      "placement_regions": {
+        "Краснодар": "Краснодарский край",
+        "Рязань": "Рязанская область"
+      },
+      "enrichment_status": "not_run",
+      "transformation": {
+        "path": "Data/transformations/20261110-remote-all-russia-batch_03-cities-v1/transformation.json",
+        "sha256": "3a0b7a0548169522abe22adf89ea75294dae4889db5426e6b9bcf6a065342472"
+      },
+      "rows": 9
+    },
+    {
+      "run_id": "20261110-remote-all-russia-batch_04",
+      "source": "avito",
+      "path": "Data/transformations/20261110-remote-all-russia-batch_04-cities-v1/vacancies_flat.csv",
+      "sha256": "a7c959c687c06173f99d4f05921a482d783ec14630c1cda53391cc72119f0ac3",
+      "placement_regions": {
+        "Краснодар": "Краснодарский край",
+        "Рязань": "Рязанская область"
+      },
+      "enrichment_status": "not_run",
+      "transformation": {
+        "path": "Data/transformations/20261110-remote-all-russia-batch_04-cities-v1/transformation.json",
+        "sha256": "5bcfe154156f3eca07fc86f05e6e089099b535bc6781a3eaafd89f5c9d6daa94"
+      },
+      "rows": 12
+    },
+    {
+      "run_id": "20261110-remote-all-russia-batch_05",
+      "source": "avito",
+      "path": "Data/transformations/20261110-remote-all-russia-batch_05-cities-v1/vacancies_flat.csv",
+      "sha256": "17b4fb53ed716363fe3d78494f96aa0b393694df6953431365963acb4265d5df",
+      "placement_regions": {
+        "Краснодар": "Краснодарский край",
+        "Рязань": "Рязанская область"
+      },
+      "enrichment_status": "not_run",
+      "transformation": {
+        "path": "Data/transformations/20261110-remote-all-russia-batch_05-cities-v1/transformation.json",
+        "sha256": "945a67477eb9345f644761bc2c1de0637bb6c7099261726858e020418a915088"
+      },
+      "rows": 3
     },
     {
       "run_id": "20261110-ryazan-all",
