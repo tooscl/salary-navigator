@@ -24,7 +24,7 @@
     "source": "title, profession, city, location_observed",
     "policy": "added_next_to_observed_columns_not_replacing"
   },
-  "rows": 29845,
+  "rows": 29849,
   "columns": [
     "source",
     "id",
@@ -131,10 +131,10 @@
     "Знание графических программ",
     "Площадки",
     "Категория прав тракториста-машиниста",
+    "Выезд к клиенту",
     "employer_profile_url",
     "read_status_employer",
     "Тип токарного станка",
-    "Выезд к клиенту",
     "Учёная степень",
     "Языки программирования",
     "Грейд",
@@ -154,7 +154,7 @@
     "enriched_fields",
     "enrichment_version"
   ],
-  "sha256": "976f4cbff5e9d08909a73b988cc61249fa87a1459bb4278b1538dedbb3e97afd",
+  "sha256": "e4ea587dc8ca6411524887dfc6a3b758a9759e53d1ac0aaf0a0380c2c5f54fc5",
   "inputs": [
     {
       "run_id": "20261028-spb-50-all",
@@ -5559,6 +5559,21 @@
         "sha256": "0775c8482be2d5a456d96f2a680258d070ee045fe2794f3f226e05a1e477e7a8"
       },
       "rows": 258
+    },
+    {
+      "run_id": "20261110-ryazan-remote-50000",
+      "source": "avito",
+      "path": "Data/transformations/20261110-ryazan-remote-50000-city-v1/vacancies_flat.csv",
+      "sha256": "51ef670d40c565105972620d546dab35d45395c533983e477a5a0892bb66417e",
+      "placement_regions": {
+        "Рязань": "Рязанская область"
+      },
+      "enrichment_status": "not_run",
+      "transformation": {
+        "path": "Data/transformations/20261110-ryazan-remote-50000-city-v1/transformation.json",
+        "sha256": "6add6b1beaf06650c69122000b08f518357440702be77e9ee0773c5a5ee12eec"
+      },
+      "rows": 25
     },
     {
       "run_id": "20261110-ryazan-remote-all",
