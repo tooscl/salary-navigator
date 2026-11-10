@@ -466,6 +466,52 @@ const first=make(url1,1);
 """
         subprocess.run(['node', '-e', script, str(runner.SCRIPTS/'browser_batch.js')], check=True, capture_output=True)
 
+    def test_ui_next_button_requires_exact_control_and_preserved_page(self):
+        script = r"""
+const src=require('fs').readFileSync(process.argv[1],'utf8');
+const u='https://www.avito.ru/ryazan/vakansii/format_raboty/udalenno';
+const controls=[{marker:'params[172242]/checkbox/22066761',label:'Полная',value:null},{marker:'params[172815]/3286367',label:'Удалённо',value:null}];
+const make=(n)=>({state:'LISTING',source_url:u+(n===1?'':'?p='+n),observed_at:String(Math.random()),heading:'Работа в Рязани',selected_controls:controls,listing_context:{geography:'Рязань, район',search:''},items:[{id:String(n)}],listing_item_audit:{malformed:0},pagination:{current_pages:[String(n)],next_url:null,next_button:true,evidence:{label:'Следующая страница',href:null,disabled:false}}});
+(async()=>{for(const scenario of ['ok','wrong_filters','wrong_page','disabled','ambiguous']) {
+ let current=make(1),clicks=0; const first=current,writes={};
+ global.pwd='sandbox';global.fs={mkdir:async()=>{},writeFile:async(n,v)=>writes[n]=v,rename:async(a,b)=>writes[b]=writes[a],readFile:async(n)=>writes[n]};
+ global.attachBrowserTab=async()=>({url:()=>current.source_url,evaluate:async()=>current,locator:()=>({click:async()=>{clicks++;current=make(scenario==='wrong_page'?3:2);if(scenario==='wrong_filters')current={...current,selected_controls:[]}}})});
+ global.snapshot=async(_p,o)=>({tree:o.selector==='[data-marker="pagination-button/nextPage"]' ? (scenario==='disabled'?'- button "Следующая страница" [ref=e7] [disabled]':scenario==='ambiguous'?'- button "Следующая страница" [ref=e7]\n- button "Следующая страница" [ref=e8]':'- button "Следующая страница" [ref=e7]'):'- listing'});
+ global.sleep=async()=>{};global.tlCollectorPage=null;
+ const job={mode:'freeze',url:u,completed_ids:[],tab_id:'tab',ui_next:true,previous:first,first,geography:'Рязань, район'};
+ await eval('(async()=>{'+src.replace('__JOB__',JSON.stringify(job)).replace('__EXTRACTOR__',JSON.stringify('extract'))+'})()');
+ const cp=JSON.parse(writes['checkpoint.json']);
+ if(scenario==='ok'){let page=JSON.parse(writes['listing.json']);if(cp.state!=='READY'||clicks!==1||page.ui_transition.next_button!==true||page.ui_transition.landed_page!==2)process.exit(1)}
+ else if(cp.state!=='BROWSER_ERROR'||writes['listing.json']||(['disabled','ambiguous'].includes(scenario)&&clicks))process.exit(2);
+}})().catch(()=>process.exit(3));
+"""
+        subprocess.run(['node', '-e', script, str(runner.SCRIPTS/'browser_batch.js')], check=True, capture_output=True)
+
+    def test_button_pagination_requires_ui_and_preserves_pending(self):
+        for ui in (False, True):
+            with tempfile.TemporaryDirectory() as directory, ExitStack() as stack:
+                root = Path(directory); url = 'https://www.avito.ru/ryazan/vakansii'
+                args = argparse.Namespace(run_id='run', resume=False, url=url, limit=2, geography='Рязань, район', profession='', segments='', filter_evidence='observed', ui_next=ui, tab_id='own')
+                page = dict(state='LISTING', source_url=url, heading='Работа', selected_controls=[], profession_filter=dict(observed=True, selected_count=0), items=[item('1')], pagination=dict(current_pages=['1'], next_url=None, next_button=True, end_confirmed=False))
+                def browser(job, out, diag):
+                    if job.get('previous'):
+                        self.assertEqual(job['previous']['source_url'], url)
+                        self.assertEqual(runner.read(diag/'pending_listing.json'), {'ui_next_from': url})
+                        raise RuntimeError('second page stopped')
+                    runner.write(diag/'listing.json', page); runner.write(diag/'checkpoint.json', dict(state='READY', completed_ids=[]))
+                    return dict(state='READY', completed_ids=[]), 0
+                stack.enter_context(patch.object(runner, 'ROOT', root)); stack.enter_context(patch.object(runner, 'preflight')); stack.enter_context(patch.object(runner, 'release_browser')); stack.enter_context(patch.object(runner, 'browser', side_effect=browser))
+                with self.assertRaisesRegex((RuntimeError, ValueError), 'second page stopped' if ui else 'requires UI Next'):
+                    runner.freeze(args)
+
+    def test_ui_transition_button_evidence_is_required(self):
+        url = 'https://www.avito.ru/ryazan/vakansii'
+        first = dict(source_url=url, heading='Работа', selected_controls=[], listing_context=dict(geography='Рязань, район', search=''), profession_filter=dict(observed=True, selected_count=0), pagination=dict(next_url=None, next_button=True, current_pages=['1']))
+        transition = dict(method='observed_ui_next', recovered=False, next_snapshot='button', from_page=1, landed_page=2, from_url=url, next_href=None, next_button=True, observed_href=None, landed_url=url+'?p=2')
+        page = dict(source_url=url+'?p=2', heading='Работа', selected_controls=[], listing_context=dict(geography='Рязань, район', search=''), profession_filter=dict(observed=True, selected_count=0), pagination=dict(current_pages=['2']), ui_transition=transition)
+        runner.validate_ui_transition(first, first, page)
+        with self.assertRaises(ValueError): runner.validate_ui_transition(first, first, dict(page, ui_transition=dict(transition, next_button=False)))
+
     def test_ui_next_rotated_context_click_and_wrong_landing(self):
         script = r"""
 const fs0=require('fs'), source=fs0.readFileSync(process.argv[1],'utf8');
@@ -541,6 +587,9 @@ showNext=false;result=eval(src);
 if(result.pagination.next_url||result.pagination.end_confirmed)process.exit(2);
 showNext=true;disabled=true;result=eval(src);
 if(result.pagination.next_url||!result.pagination.end_confirmed)process.exit(3);
+disabled=false; next.tagName='BUTTON'; next.getAttribute=(key)=>({'aria-label':'Следующая страница','data-marker':'pagination-button/nextPage'}[key]||null); result=eval(src);
+if(!result.pagination.next_button || result.pagination.next_url || result.pagination.end_confirmed)process.exit(5);
+next.getAttribute=(key)=>({'aria-label':'Следующая страница','data-marker':'other'}[key]||null); result=eval(src); if(result.pagination.next_button)process.exit(6);
 card.querySelector=()=>null;result=eval(src);
 if(result.items.length||result.listing_item_audit.malformed!==1)process.exit(4);
 '''
