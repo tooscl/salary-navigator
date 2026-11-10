@@ -113,6 +113,41 @@ class DatasetTests(unittest.TestCase):
         self.registry["exports"].reverse()
         self.assertEqual(build(self.root, self.registry), original)
 
+    def test_search_filters_preserve_observation_pairs_and_placement(self):
+        import json
+        self.add("old", [self.row()])
+        newer = self.row()
+        newer["observed_at"] = "2026-10-22T10:00:00Z"
+        self.add("new", [newer])
+        for run, geography, profession in [("old", "Екатеринбург", "Кассир"),
+                                            ("new", "Москва", "Курьер")]:
+            directory = self.root / "Scraper/runs" / run
+            directory.mkdir(parents=True)
+            (directory / "plan.json").write_text(json.dumps({"run_id": run,
+                "geography": geography, "profession": profession}, ensure_ascii=False))
+        row = self.result()[0]
+        self.assertEqual(row["city"], "Москва")
+        self.assertEqual((row["search_geography"], row["search_profession"]), ("Москва", "Курьер"))
+        self.assertEqual(json.loads(row["search_filter_observations"]), [
+            ["old", "Екатеринбург", "Кассир"],
+            ["new", "Москва", "Курьер"]])
+        self.registry["exports"].reverse()
+        self.assertEqual(self.result()[0], row)
+
+    def test_missing_and_unfiltered_search_are_distinct(self):
+        import json
+        self.add("unknown", [self.row()])
+        newer = self.row()
+        newer["observed_at"] = "2026-10-22T10:00:00Z"
+        self.add("all", [newer])
+        directory = self.root / "Scraper/runs/all"
+        directory.mkdir(parents=True)
+        (directory / "plan.json").write_text(json.dumps({"run_id": "all", "geography": "Все регионы", "profession": ""}, ensure_ascii=False))
+        observations = json.loads(self.result()[0]["search_filter_observations"])
+        self.assertEqual(observations[0][1], None)
+        self.assertEqual(observations[0][2], None)
+        self.assertEqual(observations[1][2], "")
+
     def test_identity_includes_source(self):
         self.add("one", [self.row()])
         self.add("two", [self.row()], source="other")
