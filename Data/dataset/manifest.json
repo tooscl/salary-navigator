@@ -1,7 +1,7 @@
 {
   "schema_version": "1",
   "builder_version": "1",
-  "builder_sha256": "3be8b60633ec2d8dc559b9b4f3742937f6b84bc62ff3d98d5d8c04b35d5ad74b",
+  "builder_sha256": "12a88e8893f0b21d95f067b4751e7a5a6c1e203b331ad07094c1a2085ed30cfb",
   "placement_transform_sha256": "6f860342ad62f1a8ed10b62354297da7c2e7e27e1a9d170b34e484416ec399b6",
   "city_scope_audit_sha256": "72f5fb34740ac409dc32fa05084077c9b5b0629fe35dfdfb4be461f89fc096ee",
   "city_scope_audit_v1_sha256": "5a479702590a3e2a818a1ae247b59bc018beba386c506af16e01af56b55c96fc",
@@ -151,11 +151,14 @@
     "last_seen_at",
     "run_id",
     "run_ids",
+    "search_geography",
+    "search_profession",
+    "search_filter_observations",
     "enrichment_status",
     "enriched_fields",
     "enrichment_version"
   ],
-  "sha256": "87cae0417655197508b518663bc0b58be535aa5f80be979fc29f611b2769d3c1",
+  "sha256": "b7afa7f453583e0e1ad85e7e973028fdba4fc288e552dbead5fae7d36121b8bb",
   "inputs": [
     {
       "run_id": "20261028-spb-50-all",
@@ -213,7 +216,11 @@
           "region_unknown": false
         }
       },
-      "rows": 50
+      "rows": 50,
+      "search_plan": {
+        "path": "Scraper/runs/20261028-spb-50-all/plan.json",
+        "sha256": "61cb0034cf09f16772f77b280a16c6156f18db63b3c724cea57a7603f762beb4"
+      }
     },
     {
       "run_id": "20261029_ekaterinburg_courier_part_01",
@@ -276,7 +283,11 @@
           "region_unknown": false
         }
       },
-      "rows": 299
+      "rows": 299,
+      "search_plan": {
+        "path": "Scraper/runs/20261029_ekaterinburg_courier_part_01/plan.json",
+        "sha256": "048279e41e028f6b53af184c2e51d76c7580547d30e5485ba81c7ea7967d2559"
+      }
     },
     {
       "run_id": "20261029_ekaterinburg_courier_part_02",
@@ -384,7 +395,11 @@
           "region_unknown": false
         }
       },
-      "rows": 258
+      "rows": 258,
+      "search_plan": {
+        "path": "Scraper/runs/20261029_ekaterinburg_courier_part_02/plan.json",
+        "sha256": "c5986ac215fcb8d45741f876131f83108e030562bd14392d33d2f421d3fddfc3"
+      }
     },
     {
       "run_id": "20261029_moscow_cashier_f13_01",
@@ -818,7 +833,11 @@
           "region_unknown": false
         }
       },
-      "rows": 299
+      "rows": 299,
+      "search_plan": {
+        "path": "Scraper/runs/20261029_moscow_cashier_f13_01/plan.json",
+        "sha256": "a4fa4166b8683cda22f40737370d7c8ff153f8764854cc82918264d4379cbcd6"
+      }
     },
     {
       "run_id": "20261029_moscow_cashier_f13_02",
@@ -836,7 +855,11 @@
           "region_unknown": false
         }
       },
-      "rows": 2
+      "rows": 2,
+      "search_plan": {
+        "path": "Scraper/runs/20261029_moscow_cashier_f13_02/plan.json",
+        "sha256": "5959dc7d17e2bcd0efb529260a1ca30b3536a82f9e44d7d8996d12ea319d6388"
+      }
     },
     {
       "run_id": "20261029_moscow_cashier_f13_02_resume",
@@ -1217,7 +1240,11 @@
           "region_unknown": false
         }
       },
-      "rows": 296
+      "rows": 296,
+      "search_plan": {
+        "path": "Scraper/runs/20261029_moscow_cashier_f13_02_resume/plan.json",
+        "sha256": "6875cef1f861c64883df1a2aa01bd0789e257170444b0359b527227f762f85be"
+      }
     },
     {
       "run_id": "20261029_moscow_cashier_f13_03",
@@ -1571,7 +1598,11 @@
           "region_unknown": false
         }
       },
-      "rows": 277
+      "rows": 277,
+      "search_plan": {
+        "path": "Scraper/runs/20261029_moscow_cashier_f13_03/plan.json",
+        "sha256": "c506fc25aa790adf105c11b9a36adfd91825f5184e6c322ea440cd286b6fa44e"
+      }
     },
     {
       "run_id": "20261029_sp_driver17_part_01",
@@ -2249,7 +2280,11 @@
           "region_unknown": false
         }
       },
-      "rows": 300
+      "rows": 300,
+      "search_plan": {
+        "path": "Scraper/runs/20261029_sp_driver17_part_01/plan.json",
+        "sha256": "07ff39b6b77fc16d4abb71cbd9d39ed37e2bc19fade6d43275ac4a805e3c2f15"
+      }
     },
     {
       "run_id": "20261029_sp_driver17_part_02",
@@ -2417,7 +2452,11 @@
           "region_unknown": false
         }
       },
-      "rows": 87
+      "rows": 87,
+      "search_plan": {
+        "path": "Scraper/runs/20261029_sp_driver17_part_02/plan.json",
+        "sha256": "1bb3c45574b6c8bce697ca1c2d1382b83df02fa7a9dbea8a02d64eb62996e475"
+      }
     },
     {
       "run_id": "20261029_sp_driver17_part_02_suffix",
@@ -2780,7 +2819,11 @@
           "region_unknown": false
         }
       },
-      "rows": 206
+      "rows": 206,
+      "search_plan": {
+        "path": "Scraper/runs/20261029_sp_driver17_part_02_suffix/plan.json",
+        "sha256": "53ec63191d73186e0fcf9ca47912d1a887fca8009c81849d0c6274b672163622"
+      }
     },
     {
       "run_id": "20261029_sp_driver17_part_03",
@@ -3134,7 +3177,11 @@
           "region_unknown": false
         }
       },
-      "rows": 294
+      "rows": 294,
+      "search_plan": {
+        "path": "Scraper/runs/20261029_sp_driver17_part_03/plan.json",
+        "sha256": "a07483a23aa8351d1dd4bacd277a46d41048da7078ad90972892f5fa0775257c"
+      }
     },
     {
       "run_id": "20261029_sp_driver17_part_04",
@@ -3162,7 +3209,11 @@
           "region_unknown": false
         }
       },
-      "rows": 24
+      "rows": 24,
+      "search_plan": {
+        "path": "Scraper/runs/20261029_sp_driver17_part_04/plan.json",
+        "sha256": "d39fca5993f5930214c9d0595376561eaf191c0f70883cf5926851d4533e8fd3"
+      }
     },
     {
       "run_id": "20261029_sp_driver17_supplement_p19",
@@ -3230,7 +3281,11 @@
           "region_unknown": false
         }
       },
-      "rows": 24
+      "rows": 24,
+      "search_plan": {
+        "path": "Scraper/runs/20261029_sp_driver17_supplement_p19/plan.json",
+        "sha256": "4fc4042cd1fa277695985e850b01d14a23a6858b3ed57d35ad891365ae6da437"
+      }
     },
     {
       "run_id": "20261029_spb_cashier_part_01",
@@ -3603,7 +3658,11 @@
           "region_unknown": false
         }
       },
-      "rows": 300
+      "rows": 300,
+      "search_plan": {
+        "path": "Scraper/runs/20261029_spb_cashier_part_01/plan.json",
+        "sha256": "80b5b485605416f5309de392b8fcb62e4bf20eb1811b9786a9a6b2d0d497945e"
+      }
     },
     {
       "run_id": "20261029_spb_cashier_part_02",
@@ -3921,7 +3980,11 @@
           "region_unknown": false
         }
       },
-      "rows": 299
+      "rows": 299,
+      "search_plan": {
+        "path": "Scraper/runs/20261029_spb_cashier_part_02/plan.json",
+        "sha256": "a7f4b089bfca55cb2dadcbcc396843f579c641929d4033a3b24253080c86de66"
+      }
     },
     {
       "run_id": "20261029_spb_cashier_part_03",
@@ -4391,7 +4454,11 @@
           "region_unknown": false
         }
       },
-      "rows": 300
+      "rows": 300,
+      "search_plan": {
+        "path": "Scraper/runs/20261029_spb_cashier_part_03/plan.json",
+        "sha256": "28de602cb17f99e5415e73c96b0ad32ffda88ee72973efc7fdd909e345ab8a57"
+      }
     },
     {
       "run_id": "20261029_spb_cashier_part_04",
@@ -4629,7 +4696,11 @@
           "region_unknown": false
         }
       },
-      "rows": 107
+      "rows": 107,
+      "search_plan": {
+        "path": "Scraper/runs/20261029_spb_cashier_part_04/plan.json",
+        "sha256": "bf03d949f574b1668530b821c38e67bd92d1bec9422eadfa5604d5bf31f738ee"
+      }
     },
     {
       "run_id": "20261109-ekb-kassir-50000",
@@ -4663,7 +4734,11 @@
           "region_unknown": true
         }
       },
-      "rows": 318
+      "rows": 318,
+      "search_plan": {
+        "path": "Scraper/runs/20261109-ekb-kassir-50000/plan.json",
+        "sha256": "c4b8053cfa2ee794ac3de10fc2bb25265841e446e95146312695ff355292235c"
+      }
     },
     {
       "run_id": "20261109-ekb-kassir-bez-opyta",
@@ -4741,7 +4816,11 @@
           "region_unknown": false
         }
       },
-      "rows": 352
+      "rows": 352,
+      "search_plan": {
+        "path": "Scraper/runs/20261109-ekb-kassir-bez-opyta/plan.json",
+        "sha256": "f84004955311cb8cd4e02536d86912f413b6464d7f4589e568594b5e776144d7"
+      }
     },
     {
       "run_id": "20261109-ekb-kassir-smenny",
@@ -4855,7 +4934,11 @@
           "location_missing": true
         }
       },
-      "rows": 335
+      "rows": 335,
+      "search_plan": {
+        "path": "Scraper/runs/20261109-ekb-kassir-smenny/plan.json",
+        "sha256": "4ca556cfa2eb9322fcee576c45814a377e50c957b178218ee8828281e140f7af"
+      }
     },
     {
       "run_id": "20261109-krasnodar-all",
@@ -4978,7 +5061,11 @@
           "region_unknown": true
         }
       },
-      "rows": 1112
+      "rows": 1112,
+      "search_plan": {
+        "path": "Scraper/runs/20261109-krasnodar-all/plan.json",
+        "sha256": "573095c5f56227fa0cec8172d5da381518089e7c480dcde544f826f378bb82d7"
+      }
     },
     {
       "run_id": "20261109-krasnodar-fasovshchik",
@@ -4993,7 +5080,11 @@
         "Елизаветинская": "Краснодарский край"
       },
       "enrichment_status": "not_run",
-      "rows": 79
+      "rows": 79,
+      "search_plan": {
+        "path": "Scraper/runs/20261109-krasnodar-fasovshchik/plan.json",
+        "sha256": "4818e8f181ac2586f8d8561e3bce37d2a67513da22d4a36c2bbfd5f20bcbd398"
+      }
     },
     {
       "run_id": "20261109-krasnodar-gruzchik",
@@ -5024,7 +5115,11 @@
           "region_unknown": false
         }
       },
-      "rows": 184
+      "rows": 184,
+      "search_plan": {
+        "path": "Scraper/runs/20261109-krasnodar-gruzchik/plan.json",
+        "sha256": "373789402387e61e5b07d79873ab4e4623a82470a414115af7d3e79eab7364e3"
+      }
     },
     {
       "run_id": "20261109-krasnodar-kladovshchik",
@@ -5053,7 +5148,11 @@
           "region_unknown": false
         }
       },
-      "rows": 107
+      "rows": 107,
+      "search_plan": {
+        "path": "Scraper/runs/20261109-krasnodar-kladovshchik/plan.json",
+        "sha256": "7559000e344975aeaeecc4c5baa28c3246e0cd49ea437a902e8ebeb9f87b55db"
+      }
     },
     {
       "run_id": "20261109-krasnodar-komplektovshchik",
@@ -5080,7 +5179,11 @@
           "region_unknown": false
         }
       },
-      "rows": 131
+      "rows": 131,
+      "search_plan": {
+        "path": "Scraper/runs/20261109-krasnodar-komplektovshchik/plan.json",
+        "sha256": "800d6093c64f206d3be8fda1010c2fc3dc29dcb342330225ae5befe704400e43"
+      }
     },
     {
       "run_id": "20261109-krasnodar-kurer",
@@ -5096,7 +5199,11 @@
         "Берёзовый": "Краснодарский край"
       },
       "enrichment_status": "not_run",
-      "rows": 336
+      "rows": 336,
+      "search_plan": {
+        "path": "Scraper/runs/20261109-krasnodar-kurer/plan.json",
+        "sha256": "60b8cfe5a189ce2c6b9c6acd9f123a74d1fd128683851b6ccda9d80528b44cb8"
+      }
     },
     {
       "run_id": "20261109-krasnodar-ohrannik",
@@ -5118,7 +5225,11 @@
         "Знаменский": "Краснодарский край"
       },
       "enrichment_status": "not_run",
-      "rows": 536
+      "rows": 536,
+      "search_plan": {
+        "path": "Scraper/runs/20261109-krasnodar-ohrannik/plan.json",
+        "sha256": "d58cc4d4212926695369bf1ab29644130bb7ba26bc7e3eee24f4e799bf12faac"
+      }
     },
     {
       "run_id": "20261109-krasnodar-prodavec",
@@ -5155,7 +5266,11 @@
           "region_unknown": true
         }
       },
-      "rows": 277
+      "rows": 277,
+      "search_plan": {
+        "path": "Scraper/runs/20261109-krasnodar-prodavec/plan.json",
+        "sha256": "c3980e92ef961477f75168b7431a5e0e580d2df9ec23da19cc50e45a869aa660"
+      }
     },
     {
       "run_id": "20261109-krasnodar-sklad",
@@ -5170,7 +5285,11 @@
         "Дружелюбный": "Краснодарский край"
       },
       "enrichment_status": "not_run",
-      "rows": 149
+      "rows": 149,
+      "search_plan": {
+        "path": "Scraper/runs/20261109-krasnodar-sklad/plan.json",
+        "sha256": "679b39092972f034a759f9ba50c81512f97b6e8e3f992cd97d578d24e8e227cd"
+      }
     },
     {
       "run_id": "20261109-krasnodar-upakovshchik",
@@ -5195,7 +5314,11 @@
           "region_unknown": false
         }
       },
-      "rows": 132
+      "rows": 132,
+      "search_plan": {
+        "path": "Scraper/runs/20261109-krasnodar-upakovshchik/plan.json",
+        "sha256": "7cad434864e0c981e5d1dd097837a069431d3034773eb34e1f2b58e03021c5be"
+      }
     },
     {
       "run_id": "20261109-krasnodar-voditel-gruzovogo",
@@ -5250,7 +5373,11 @@
           "region_unknown": false
         }
       },
-      "rows": 388
+      "rows": 388,
+      "search_plan": {
+        "path": "Scraper/runs/20261109-krasnodar-voditel-gruzovogo/plan.json",
+        "sha256": "67410e7d5515bbecd32f5fdd6b75be1a92ba41dbfa8c9426725a5284392a81a8"
+      }
     },
     {
       "run_id": "20261110-krasnodar-remote-50000",
@@ -5265,7 +5392,11 @@
         "path": "Data/transformations/20261110-krasnodar-remote-50000-city-v1/transformation.json",
         "sha256": "1e7f3d09474cff0019b3323c9fa28a9ebdb91423a5222ef3d894bf5bcfbc4ed1"
       },
-      "rows": 97
+      "rows": 97,
+      "search_plan": {
+        "path": "Scraper/runs/20261110-krasnodar-remote-50000/plan.json",
+        "sha256": "6864097416bdad2cb114b7810e32c626d721b9f9fd07b0c31c38e8559a3081c8"
+      }
     },
     {
       "run_id": "20261110-krasnodar-remote-all",
@@ -5280,7 +5411,11 @@
         "path": "Data/transformations/20261110-krasnodar-remote-all-city-v1/transformation.json",
         "sha256": "96be8f4f9489aa87e0b10eeabe5ef6a3d12262f14b899ebdd6b3ab608d5362ee"
       },
-      "rows": 137
+      "rows": 137,
+      "search_plan": {
+        "path": "Scraper/runs/20261110-krasnodar-remote-all/plan.json",
+        "sha256": "18f92d7590f76422be4936ffdd0548cf628afe966e27acea79ca3400fc7967c5"
+      }
     },
     {
       "run_id": "20261110-krasnodar-remote-bez-opyta",
@@ -5295,7 +5430,11 @@
         "path": "Data/transformations/20261110-krasnodar-remote-bez-opyta-city-v1/transformation.json",
         "sha256": "38d1f0aad7d6b901e324691a68709a4b7d87d637a4a65fcfe61178057982f01a"
       },
-      "rows": 69
+      "rows": 69,
+      "search_plan": {
+        "path": "Scraper/runs/20261110-krasnodar-remote-bez-opyta/plan.json",
+        "sha256": "fb10fd049a49c9c2f042371fee2ecaad1712214bec7174aa5698c27476437647"
+      }
     },
     {
       "run_id": "20261110-remote-all-russia-batch_01",
@@ -5311,7 +5450,11 @@
         "path": "Data/transformations/20261110-remote-all-russia-batch_01-cities-v1/transformation.json",
         "sha256": "52ae1586355fe087c49864832e05f2b0b888618f34de98f61bd59a7a9fa617ed"
       },
-      "rows": 9
+      "rows": 9,
+      "search_plan": {
+        "path": "Scraper/runs/20261110-remote-all-russia-batch_01/plan.json",
+        "sha256": "7509da38195c4be3198ec33fb8a2336b24f858b4f545aa02a4a35a5c445b4b65"
+      }
     },
     {
       "run_id": "20261110-remote-all-russia-batch_02",
@@ -5327,7 +5470,11 @@
         "path": "Data/transformations/20261110-remote-all-russia-batch_02-cities-v1/transformation.json",
         "sha256": "d5eb12ec588fd3eae62da9be5b3a196b83e19d4dbb0442b3d157240ecc7af93f"
       },
-      "rows": 13
+      "rows": 13,
+      "search_plan": {
+        "path": "Scraper/runs/20261110-remote-all-russia-batch_02/plan.json",
+        "sha256": "fb298e44a045ca7d7058899e0b7a95d4f9440a9ce2e5fb8a3c7e6150b07e0077"
+      }
     },
     {
       "run_id": "20261110-remote-all-russia-batch_03",
@@ -5343,7 +5490,11 @@
         "path": "Data/transformations/20261110-remote-all-russia-batch_03-cities-v1/transformation.json",
         "sha256": "3a0b7a0548169522abe22adf89ea75294dae4889db5426e6b9bcf6a065342472"
       },
-      "rows": 9
+      "rows": 9,
+      "search_plan": {
+        "path": "Scraper/runs/20261110-remote-all-russia-batch_03/plan.json",
+        "sha256": "0ad8e1d7330241bfe82bfd8f45de478b536b05adbc6b1226a72fe3b2720aeeae"
+      }
     },
     {
       "run_id": "20261110-remote-all-russia-batch_04",
@@ -5359,7 +5510,11 @@
         "path": "Data/transformations/20261110-remote-all-russia-batch_04-cities-v1/transformation.json",
         "sha256": "5bcfe154156f3eca07fc86f05e6e089099b535bc6781a3eaafd89f5c9d6daa94"
       },
-      "rows": 12
+      "rows": 12,
+      "search_plan": {
+        "path": "Scraper/runs/20261110-remote-all-russia-batch_04/plan.json",
+        "sha256": "f5a0f0a4a1c4867effdf98ad673af8fc587a3e01d488ab03d4e95c657518ad44"
+      }
     },
     {
       "run_id": "20261110-remote-all-russia-batch_05",
@@ -5375,7 +5530,11 @@
         "path": "Data/transformations/20261110-remote-all-russia-batch_05-cities-v1/transformation.json",
         "sha256": "945a67477eb9345f644761bc2c1de0637bb6c7099261726858e020418a915088"
       },
-      "rows": 3
+      "rows": 3,
+      "search_plan": {
+        "path": "Scraper/runs/20261110-remote-all-russia-batch_05/plan.json",
+        "sha256": "5e9614c82c39c5f639437a4585582eee92820f7826be4462c127d042ed375d79"
+      }
     },
     {
       "run_id": "20261110-remote-bez-opyta-batch_01",
@@ -5391,7 +5550,11 @@
         "path": "Data/transformations/20261110-remote-bez-opyta-batch_01-cities-v1/transformation.json",
         "sha256": "cc492f50b683ce660008842c8235826bcc2c9035aee6c16387ee684876398b46"
       },
-      "rows": 11
+      "rows": 11,
+      "search_plan": {
+        "path": "Scraper/runs/20261110-remote-bez-opyta-batch_01/plan.json",
+        "sha256": "167c8f187fb743b9bd766a7aefceb4220863f6539c80e712686afc2e95845ced"
+      }
     },
     {
       "run_id": "20261110-remote-bez-opyta-batch_02",
@@ -5407,7 +5570,11 @@
         "path": "Data/transformations/20261110-remote-bez-opyta-batch_02-cities-v1/transformation.json",
         "sha256": "7bdae4bdec779078bd0b69e57158475fb6a9342cce48b3d71a6d4eeb799f993c"
       },
-      "rows": 7
+      "rows": 7,
+      "search_plan": {
+        "path": "Scraper/runs/20261110-remote-bez-opyta-batch_02/plan.json",
+        "sha256": "aec6ecc566a26ac9e0c80c06d7adf53759abf4d0f6d5f319c3bfe2f6cf1454da"
+      }
     },
     {
       "run_id": "20261110-remote-bez-opyta-batch_03",
@@ -5423,7 +5590,11 @@
         "path": "Data/transformations/20261110-remote-bez-opyta-batch_03-cities-v1/transformation.json",
         "sha256": "dd323529ceefc79bb03118cdda7addf2100107ea35efee9a1868c84314719720"
       },
-      "rows": 6
+      "rows": 6,
+      "search_plan": {
+        "path": "Scraper/runs/20261110-remote-bez-opyta-batch_03/plan.json",
+        "sha256": "a5527aa58f0a19c317e33b6611b9ae6adfd08b29ac3c79b043b4853cd463b0fe"
+      }
     },
     {
       "run_id": "20261110-ryazan-all",
@@ -5517,7 +5688,11 @@
           "region_unknown": true
         }
       },
-      "rows": 1199
+      "rows": 1199,
+      "search_plan": {
+        "path": "Scraper/runs/20261110-ryazan-all/plan.json",
+        "sha256": "4767b879bb6dd16db1f274fc084d9232048c9c63f1b5a3500d4c81d47a16d1d6"
+      }
     },
     {
       "run_id": "20261110-ryazan-fasovshchik",
@@ -5529,7 +5704,11 @@
         "Дядьково": "Рязанская область"
       },
       "enrichment_status": "not_run",
-      "rows": 111
+      "rows": 111,
+      "search_plan": {
+        "path": "Scraper/runs/20261110-ryazan-fasovshchik/plan.json",
+        "sha256": "2a0178d16d4a4bf1b777d3cbaf74a9561f08e03371268151457fd5880ca7bd25"
+      }
     },
     {
       "run_id": "20261110-ryazan-gruzchik",
@@ -5552,7 +5731,11 @@
           "region_unknown": false
         }
       },
-      "rows": 228
+      "rows": 228,
+      "search_plan": {
+        "path": "Scraper/runs/20261110-ryazan-gruzchik/plan.json",
+        "sha256": "b2940b1aab2933a7921e66b681437aac683ac70f8d706d17e7806b119d4eedb0"
+      }
     },
     {
       "run_id": "20261110-ryazan-kladovshchik",
@@ -5575,7 +5758,11 @@
           "region_unknown": false
         }
       },
-      "rows": 110
+      "rows": 110,
+      "search_plan": {
+        "path": "Scraper/runs/20261110-ryazan-kladovshchik/plan.json",
+        "sha256": "af452145fc53bd1d739301598297704fc20fa524681f92ea1114c7f6f5e44242"
+      }
     },
     {
       "run_id": "20261110-ryazan-komplektovshchik",
@@ -5593,7 +5780,11 @@
           "region_unknown": false
         }
       },
-      "rows": 211
+      "rows": 211,
+      "search_plan": {
+        "path": "Scraper/runs/20261110-ryazan-komplektovshchik/plan.json",
+        "sha256": "0b06e1c54b8d4dc2e04d4a0983a3b0b27a34da0eee956abe6f3396a31443fc39"
+      }
     },
     {
       "run_id": "20261110-ryazan-kurer",
@@ -5611,7 +5802,11 @@
           "region_unknown": false
         }
       },
-      "rows": 251
+      "rows": 251,
+      "search_plan": {
+        "path": "Scraper/runs/20261110-ryazan-kurer/plan.json",
+        "sha256": "88d1e0523d920a2c0df3fa892eeeab2d4cafbfbec9cb70fdb51d71d796b1f7a0"
+      }
     },
     {
       "run_id": "20261110-ryazan-ohrannik",
@@ -5642,7 +5837,11 @@
           "region_unknown": false
         }
       },
-      "rows": 407
+      "rows": 407,
+      "search_plan": {
+        "path": "Scraper/runs/20261110-ryazan-ohrannik/plan.json",
+        "sha256": "1d83a127236f76404976dc34c6a62b6895d5df36192b119dba217a02fff67912"
+      }
     },
     {
       "run_id": "20261110-ryazan-prodavec",
@@ -5687,7 +5886,11 @@
         "path": "Data/transformations/20261110-ryazan-prodavec-placement-v1/transformation.json",
         "sha256": "0775c8482be2d5a456d96f2a680258d070ee045fe2794f3f226e05a1e477e7a8"
       },
-      "rows": 258
+      "rows": 258,
+      "search_plan": {
+        "path": "Scraper/runs/20261110-ryazan-prodavec/plan.json",
+        "sha256": "7341b6e5f712615312f415e2a32f8a585600ec0bdf57bd3a694273ac96203837"
+      }
     },
     {
       "run_id": "20261110-ryazan-remote-50000",
@@ -5702,7 +5905,11 @@
         "path": "Data/transformations/20261110-ryazan-remote-50000-city-v1/transformation.json",
         "sha256": "6add6b1beaf06650c69122000b08f518357440702be77e9ee0773c5a5ee12eec"
       },
-      "rows": 25
+      "rows": 25,
+      "search_plan": {
+        "path": "Scraper/runs/20261110-ryazan-remote-50000/plan.json",
+        "sha256": "6d186e7cf668ba025dbbb0ffced7754fdbc4209f277ca7573b37dabfe6736008"
+      }
     },
     {
       "run_id": "20261110-ryazan-remote-all",
@@ -5717,7 +5924,11 @@
         "path": "Data/transformations/20261110-ryazan-remote-all-city-v1/transformation.json",
         "sha256": "178bd05206218e70cc1f7e8529e798c7d40f917afece8d89540fb9e2e1152a2c"
       },
-      "rows": 41
+      "rows": 41,
+      "search_plan": {
+        "path": "Scraper/runs/20261110-ryazan-remote-all/plan.json",
+        "sha256": "ad1ac1c1606d321f93e59e3000424d7120f9078fce5d2c8e1c3c6b83e794f262"
+      }
     },
     {
       "run_id": "20261110-ryazan-remote-bez-opyta",
@@ -5732,7 +5943,11 @@
         "path": "Data/transformations/20261110-ryazan-remote-bez-opyta-city-v1/transformation.json",
         "sha256": "b0017ecc16b73d9160dd2ecfdafcbd9bc374495e71d3d15e7aa024558d05898a"
       },
-      "rows": 27
+      "rows": 27,
+      "search_plan": {
+        "path": "Scraper/runs/20261110-ryazan-remote-bez-opyta/plan.json",
+        "sha256": "74ff4cb5e962b73f23cc8cd2c0e22ba294698210d4f09cc5c05fe58424ed74e5"
+      }
     },
     {
       "run_id": "20261110-ryazan-sklad",
@@ -5755,7 +5970,11 @@
           "region_unknown": false
         }
       },
-      "rows": 148
+      "rows": 148,
+      "search_plan": {
+        "path": "Scraper/runs/20261110-ryazan-sklad/plan.json",
+        "sha256": "502f80081675bcccddb060d45ffd75c6453c5de87e49d2fea169ec71cf7e3720"
+      }
     },
     {
       "run_id": "20261110-ryazan-upakovshchik",
@@ -5774,7 +5993,11 @@
           "region_unknown": false
         }
       },
-      "rows": 200
+      "rows": 200,
+      "search_plan": {
+        "path": "Scraper/runs/20261110-ryazan-upakovshchik/plan.json",
+        "sha256": "1c6f647433ae6de3ec5ebf69de9633d096818296217d4d6b3f78aa943cb0262d"
+      }
     },
     {
       "run_id": "20261110-ryazan-voditel-gruzovogo",
@@ -5811,7 +6034,11 @@
           "region_unknown": false
         }
       },
-      "rows": 233
+      "rows": 233,
+      "search_plan": {
+        "path": "Scraper/runs/20261110-ryazan-voditel-gruzovogo/plan.json",
+        "sha256": "7aaf0e7839422e9cf771e974983b346f450437c8aeb3fc6d624695726480cc08"
+      }
     },
     {
       "run_id": "all_professions_first5_2026-10-27",
@@ -5822,7 +6049,11 @@
       "placement_regions": {
         "Москва": "Москва"
       },
-      "rows": 5
+      "rows": 5,
+      "search_plan": {
+        "path": "Scraper/runs/all_professions_first5_2026-10-27/plan.json",
+        "sha256": "272dd90914c809af73b7f211022ea183f263f5bbca4794717a33a880bc91762c"
+      }
     },
     {
       "run_id": "all_regions_first30_2026-10-27",
@@ -5846,7 +6077,11 @@
         "Люберцы": "Московская область",
         "Новосибирск": "Новосибирская область"
       },
-      "rows": 30
+      "rows": 30,
+      "search_plan": {
+        "path": "Scraper/runs/all_regions_first30_2026-10-27/plan.json",
+        "sha256": "4bf6c742832da6b86f366170e359654b795a1f03054074dd4501d3e83c8f87f9"
+      }
     },
     {
       "run_id": "avito-amga-20261106",
@@ -12077,7 +12312,11 @@
           "region_unknown": true
         }
       },
-      "rows": 1244
+      "rows": 1244,
+      "search_plan": {
+        "path": "Scraper/runs/avito-amga-20261106/plan.json",
+        "sha256": "11b65a3f599ffa7856a5282d83d72bbb1d76d5193f0849712b170a0366edbf53"
+      }
     },
     {
       "run_id": "avito-kamchatskiy-kray-20261106",
@@ -12237,7 +12476,11 @@
           "region_unknown": false
         }
       },
-      "rows": 1071
+      "rows": 1071,
+      "search_plan": {
+        "path": "Scraper/runs/avito-kamchatskiy-kray-20261106/plan.json",
+        "sha256": "a7afb17a0660f44bffadd00b46fdb2f191f5a3e007f1cc6cf3b43b79e77115f1"
+      }
     },
     {
       "run_id": "avito-yakutsk-20261106",
@@ -18448,7 +18691,11 @@
           "region_unknown": true
         }
       },
-      "rows": 1240
+      "rows": 1240,
+      "search_plan": {
+        "path": "Scraper/runs/avito-yakutsk-20261106/plan.json",
+        "sha256": "d5b2ce079f5ece21ad869fe7f0d3694f641642b3ab22a1be13a31bd236f170ba"
+      }
     },
     {
       "run_id": "avito_10_moscow_courier_20261029_01",
@@ -18777,7 +19024,11 @@
           "region_unknown": false
         }
       },
-      "rows": 300
+      "rows": 300,
+      "search_plan": {
+        "path": "Scraper/runs/avito_10_moscow_courier_20261029_01/plan.json",
+        "sha256": "2e31b14a5fc9ab96c4a18b2ccdf61d64fb270841082b4db09d17c868db57a198"
+      }
     },
     {
       "run_id": "avito_10_moscow_courier_20261029_02",
@@ -19116,7 +19367,11 @@
           "region_unknown": false
         }
       },
-      "rows": 299
+      "rows": 299,
+      "search_plan": {
+        "path": "Scraper/runs/avito_10_moscow_courier_20261029_02/plan.json",
+        "sha256": "53689d9e251b5d68f005f6e6318d1dbc528432318e6aefe1598732c9bb8c9b27"
+      }
     },
     {
       "run_id": "avito_10_moscow_courier_20261029_03",
@@ -19320,7 +19575,11 @@
           "region_unknown": false
         }
       },
-      "rows": 178
+      "rows": 178,
+      "search_plan": {
+        "path": "Scraper/runs/avito_10_moscow_courier_20261029_03/plan.json",
+        "sha256": "8a3df0d55058e1aa7c85e5055bafc3b085b7194063fa3e3ea509f786e716f5f2"
+      }
     },
     {
       "run_id": "avito_20261102_gruzchik_all_1500",
@@ -25132,7 +25391,11 @@
           "region_unknown": true
         }
       },
-      "rows": 1389
+      "rows": 1389,
+      "search_plan": {
+        "path": "Scraper/runs/avito_20261102_gruzchik_all_1500/plan.json",
+        "sha256": "f84d17fa0c4f4c5b6cdd1d81b7ddf0c5047597721c9418ab405844d3553754e3"
+      }
     },
     {
       "run_id": "avito_f06_ekb_picker_20261029_b_01",
@@ -25254,7 +25517,11 @@
           "region_unknown": false
         }
       },
-      "rows": 298
+      "rows": 298,
+      "search_plan": {
+        "path": "Scraper/runs/avito_f06_ekb_picker_20261029_b_01/plan.json",
+        "sha256": "3689da5693d65802e22192cc9236bb0ea442939ebcb568e6ecb00643e356406d"
+      }
     },
     {
       "run_id": "avito_f07_moscow_prodavets_20261029_b_01",
@@ -25628,7 +25895,11 @@
           "region_unknown": false
         }
       },
-      "rows": 300
+      "rows": 300,
+      "search_plan": {
+        "path": "Scraper/runs/avito_f07_moscow_prodavets_20261029_b_01/plan.json",
+        "sha256": "806ae8d3d2d65c088127409ca1b055972869dca277b7fc7ae507859bc1bfe406"
+      }
     },
     {
       "run_id": "avito_f07_moscow_prodavets_20261029_b_02",
@@ -25982,7 +26253,11 @@
           "region_unknown": false
         }
       },
-      "rows": 300
+      "rows": 300,
+      "search_plan": {
+        "path": "Scraper/runs/avito_f07_moscow_prodavets_20261029_b_02/plan.json",
+        "sha256": "c89f7b7e2b644eabd9b13b686ab84a42d70b783cd3428a992057e10401c9d70f"
+      }
     },
     {
       "run_id": "avito_f07_moscow_prodavets_20261029_b_03",
@@ -26322,7 +26597,11 @@
           "region_unknown": false
         }
       },
-      "rows": 300
+      "rows": 300,
+      "search_plan": {
+        "path": "Scraper/runs/avito_f07_moscow_prodavets_20261029_b_03/plan.json",
+        "sha256": "27fbff2898ca4604f65f139a23d02b26c1071989108c70b821e708ec565ae509"
+      }
     },
     {
       "run_id": "avito_f07_moscow_prodavets_20261029_b_04",
@@ -26375,7 +26654,11 @@
           "region_unknown": false
         }
       },
-      "rows": 45
+      "rows": 45,
+      "search_plan": {
+        "path": "Scraper/runs/avito_f07_moscow_prodavets_20261029_b_04/plan.json",
+        "sha256": "129535a87b9f7f2c4bb92e705d6d9b353cff04392acf769f01fbed1d0f375e08"
+      }
     },
     {
       "run_id": "avito_f11_spb_courier_20261029_part_01",
@@ -26653,7 +26936,11 @@
           "region_unknown": false
         }
       },
-      "rows": 300
+      "rows": 300,
+      "search_plan": {
+        "path": "Scraper/runs/avito_f11_spb_courier_20261029_part_01/plan.json",
+        "sha256": "a4471b3d1fe1b9021fa54e0b6de9c63b09aa7b62f2ba4afdb5bc67814d62537c"
+      }
     },
     {
       "run_id": "avito_f11_spb_courier_20261029_part_02",
@@ -27201,7 +27488,11 @@
           "region_unknown": false
         }
       },
-      "rows": 295
+      "rows": 295,
+      "search_plan": {
+        "path": "Scraper/runs/avito_f11_spb_courier_20261029_part_02/plan.json",
+        "sha256": "26d59a261fe081adbd800a859ad413b44c5e28d0f04d425f41a1d33ca555672f"
+      }
     },
     {
       "run_id": "courier_ekaterinburg_first40_benchmark_2026-10-27",
@@ -27212,7 +27503,11 @@
         "Екатеринбург": "Свердловская область"
       },
       "enrichment_status": "not_run",
-      "rows": 40
+      "rows": 40,
+      "search_plan": {
+        "path": "Scraper/runs/courier_ekaterinburg_first40_benchmark_2026-10-27/plan.json",
+        "sha256": "7debf64282addb31614d752a3cea39ab617a3ad8bfd103f5b4222d3138992a2e"
+      }
     },
     {
       "run_id": "courier_first5_2026-10-26",
@@ -27223,7 +27518,11 @@
       "placement_regions": {
         "Москва": "Москва"
       },
-      "rows": 5
+      "rows": 5,
+      "search_plan": {
+        "path": "Scraper/runs/courier_first5_2026-10-26/plan.json",
+        "sha256": "c5833ad1dbdf05b90ac48ced2c2cd976a6c16dd9333a2fbc77f0e9080e714d55"
+      }
     },
     {
       "run_id": "courier_first5_2026-10-27",
@@ -27234,7 +27533,11 @@
       "placement_regions": {
         "Москва": "Москва"
       },
-      "rows": 5
+      "rows": 5,
+      "search_plan": {
+        "path": "Scraper/runs/courier_first5_2026-10-27/plan.json",
+        "sha256": "6eac47ad36bf127c4f389a2951dd3ee34136308423b1162dc19baa51b495d6ee"
+      }
     },
     {
       "run_id": "courier_next5_2026-10-26",
@@ -27245,7 +27548,11 @@
       "placement_regions": {
         "Москва": "Москва"
       },
-      "rows": 5
+      "rows": 5,
+      "search_plan": {
+        "path": "Scraper/runs/courier_next5_2026-10-26/plan.json",
+        "sha256": "9aff91cbd47bd8f73d3b9c613e7b35b2304f0e343a053916de55a0a535bd2286"
+      }
     },
     {
       "run_id": "ekaterinburg_all_100_2026-10-28",
@@ -27293,7 +27600,11 @@
           "region_unknown": false
         }
       },
-      "rows": 100
+      "rows": 100,
+      "search_plan": {
+        "path": "Scraper/runs/ekaterinburg_all_100_2026-10-28/plan.json",
+        "sha256": "4a6fbe6f42bd3ba6a4a60b13c5cb10c5b1afd9b64ae049e4dd132f735dd6f1f5"
+      }
     },
     {
       "run_id": "ekb_loader_20261029_batch_01",
@@ -27466,7 +27777,11 @@
           "region_unknown": false
         }
       },
-      "rows": 300
+      "rows": 300,
+      "search_plan": {
+        "path": "Scraper/runs/ekb_loader_20261029_batch_01/plan.json",
+        "sha256": "1ce0bb0101d91e856ae4664c044672b67b1ff70617aa5267b0c9a9572370a81d"
+      }
     },
     {
       "run_id": "ekb_loader_20261029_batch_02",
@@ -27494,7 +27809,11 @@
           "region_unknown": false
         }
       },
-      "rows": 52
+      "rows": 52,
+      "search_plan": {
+        "path": "Scraper/runs/ekb_loader_20261029_batch_02/plan.json",
+        "sha256": "d0129c80b8ad3a54fc498fad2c3e30fc237abe592e412a275bbed583f19bc8ec"
+      }
     },
     {
       "run_id": "f08_spb_seller_20261029_b_01",
@@ -27827,7 +28146,11 @@
           "region_unknown": false
         }
       },
-      "rows": 299
+      "rows": 299,
+      "search_plan": {
+        "path": "Scraper/runs/f08_spb_seller_20261029_b_01/plan.json",
+        "sha256": "7a2c315530c446d2303c7e72cc372bee4803c7adbe793db00c00f2d893233f6b"
+      }
     },
     {
       "run_id": "f08_spb_seller_20261029_b_02",
@@ -28145,7 +28468,11 @@
           "region_unknown": false
         }
       },
-      "rows": 298
+      "rows": 298,
+      "search_plan": {
+        "path": "Scraper/runs/f08_spb_seller_20261029_b_02/plan.json",
+        "sha256": "394d4d98f3acd4dce117e2e7e2f53a08e2499023f315bb28c1e20df6d8ec6d11"
+      }
     },
     {
       "run_id": "f08_spb_seller_20261029_b_03",
@@ -28498,7 +28825,11 @@
           "region_unknown": false
         }
       },
-      "rows": 300
+      "rows": 300,
+      "search_plan": {
+        "path": "Scraper/runs/f08_spb_seller_20261029_b_03/plan.json",
+        "sha256": "76d839bec5902fcf1bd732a2d3506db086c5296fe5304f9a678ea14100bbd0a7"
+      }
     },
     {
       "run_id": "f08_spb_seller_20261029_b_04",
@@ -28646,7 +28977,11 @@
           "region_unknown": false
         }
       },
-      "rows": 65
+      "rows": 65,
+      "search_plan": {
+        "path": "Scraper/runs/f08_spb_seller_20261029_b_04/plan.json",
+        "sha256": "99039b53b57552c5c748184f68b2d73f62f8cbe2fdf261578c2c56329e36445d"
+      }
     },
     {
       "run_id": "filter09_ekaterinburg_prodavets_20261029_b_01",
@@ -28779,7 +29114,11 @@
           "region_unknown": false
         }
       },
-      "rows": 300
+      "rows": 300,
+      "search_plan": {
+        "path": "Scraper/runs/filter09_ekaterinburg_prodavets_20261029_b_01/plan.json",
+        "sha256": "5fdd7562de0ca7304f06d34b31f825bb2a64daec0a0fd618af0f429e296f0917"
+      }
     },
     {
       "run_id": "filter09_ekaterinburg_prodavets_20261029_b_02",
@@ -28817,7 +29156,11 @@
           "region_unknown": false
         }
       },
-      "rows": 218
+      "rows": 218,
+      "search_plan": {
+        "path": "Scraper/runs/filter09_ekaterinburg_prodavets_20261029_b_02/plan.json",
+        "sha256": "71188aee1788357c8e8d0def717b8fb76f88fdad7f5a017d72778339ec810c45"
+      }
     },
     {
       "run_id": "filter15_01",
@@ -28950,7 +29293,11 @@
           "region_unknown": false
         }
       },
-      "rows": 299
+      "rows": 299,
+      "search_plan": {
+        "path": "Scraper/runs/filter15_01/plan.json",
+        "sha256": "0e745c363de79daaa91e3713d2d7719597256a0ba23d22edeea408cf70962fbc"
+      }
     },
     {
       "run_id": "filter15_02",
@@ -28973,7 +29320,11 @@
           "region_unknown": false
         }
       },
-      "rows": 116
+      "rows": 116,
+      "search_plan": {
+        "path": "Scraper/runs/filter15_02/plan.json",
+        "sha256": "cf64ce9d8660c5ac339b2d49cb4c30a230083ce55d31d190f2356e0c4ba1018d"
+      }
     },
     {
       "run_id": "filter16_moscow_truck_driver_20261029_b_01",
@@ -29317,7 +29668,11 @@
           "region_unknown": false
         }
       },
-      "rows": 299
+      "rows": 299,
+      "search_plan": {
+        "path": "Scraper/runs/filter16_moscow_truck_driver_20261029_b_01/plan.json",
+        "sha256": "98745e0ac169b93a6927b0a41d2a7622f850a44d469100b3cc70e1cd8ea17cb2"
+      }
     },
     {
       "run_id": "filter16_moscow_truck_driver_20261029_b_02",
@@ -29831,7 +30186,11 @@
           "region_unknown": false
         }
       },
-      "rows": 299
+      "rows": 299,
+      "search_plan": {
+        "path": "Scraper/runs/filter16_moscow_truck_driver_20261029_b_02/plan.json",
+        "sha256": "ac06129665c00cfcc1d7a08308c3fad7a47e64f1fc2f687afb7939bca54e957e"
+      }
     },
     {
       "run_id": "filter16_moscow_truck_driver_20261029_b_03",
@@ -30216,7 +30575,11 @@
           "region_unknown": false
         }
       },
-      "rows": 300
+      "rows": 300,
+      "search_plan": {
+        "path": "Scraper/runs/filter16_moscow_truck_driver_20261029_b_03/plan.json",
+        "sha256": "fbec606ebbc911a83b8f160a8236dc0fad6f5ebea5f37f1e7f4c15161422c10c"
+      }
     },
     {
       "run_id": "filter16_moscow_truck_driver_20261029_b_04",
@@ -30483,7 +30846,11 @@
           "region_unknown": false
         }
       },
-      "rows": 297
+      "rows": 297,
+      "search_plan": {
+        "path": "Scraper/runs/filter16_moscow_truck_driver_20261029_b_04/plan.json",
+        "sha256": "d2365128d57faeee56e19b779ef7f48fa09ee525b165ccea40ee954872b56d28"
+      }
     },
     {
       "run_id": "filter16_moscow_truck_driver_20261029_b_05",
@@ -30582,7 +30949,11 @@
           "region_unknown": false
         }
       },
-      "rows": 66
+      "rows": 66,
+      "search_plan": {
+        "path": "Scraper/runs/filter16_moscow_truck_driver_20261029_b_05/plan.json",
+        "sha256": "8c9eeef5fe67176356e1f4a0a19c9380c858ca4b0b4df1ca4d091f376e1dc0e4"
+      }
     },
     {
       "run_id": "filter18_ekaterinburg_truck_driver_20261029_part_01",
@@ -30665,7 +31036,11 @@
           "region_unknown": false
         }
       },
-      "rows": 203
+      "rows": 203,
+      "search_plan": {
+        "path": "Scraper/runs/filter18_ekaterinburg_truck_driver_20261029_part_01/plan.json",
+        "sha256": "b9aef12c55e617c99355d04b1b5aa256e6af1d1732eb622badaca278e5b43c2b"
+      }
     },
     {
       "run_id": "first5_2026-10-28_01",
@@ -30683,7 +31058,11 @@
           "region_unknown": false
         }
       },
-      "rows": 5
+      "rows": 5,
+      "search_plan": {
+        "path": "Scraper/runs/first5_2026-10-28_01/plan.json",
+        "sha256": "f35c41f2c25a2edb2dbfde86ea8d27ff4f791edb01512d3b8d918d03558d413b"
+      }
     },
     {
       "run_id": "first_export_2026-10-21",
@@ -30696,7 +31075,11 @@
         "Санкт-Петербург": "Санкт-Петербург",
         "Екатеринбург": "Свердловская область"
       },
-      "rows": 238
+      "rows": 238,
+      "search_plan": {
+        "path": "Scraper/runs/first_export_2026-10-21/plan.json",
+        "sha256": "b4ada92c3b3473567d54993393f55583a5f076c4968609399c3b39699ee15653"
+      }
     },
     {
       "run_id": "flexible_all_regions_first5_2026-10-27",
@@ -30709,7 +31092,11 @@
         "Троицк": "Москва",
         "Тверь": "Тверская область"
       },
-      "rows": 5
+      "rows": 5,
+      "search_plan": {
+        "path": "Scraper/runs/flexible_all_regions_first5_2026-10-27/plan.json",
+        "sha256": "5a752fb871ea34b2c23fffd9dcd8d15a67cdb984f7fa8533a159e2660bfc9893"
+      }
     },
     {
       "run_id": "flexible_first5_2026-10-28",
@@ -30720,7 +31107,11 @@
         "Москва": "Москва"
       },
       "enrichment_status": "not_run",
-      "rows": 5
+      "rows": 5,
+      "search_plan": {
+        "path": "Scraper/runs/flexible_first5_2026-10-28/plan.json",
+        "sha256": "f0045234dc93d35e453d6ce9fc74bfdd126bdf4187d48213fe36a0764c25a38a"
+      }
     },
     {
       "run_id": "general_first5_2026-10-28",
@@ -30731,7 +31122,11 @@
         "Москва": "Москва"
       },
       "enrichment_status": "not_run",
-      "rows": 5
+      "rows": 5,
+      "search_plan": {
+        "path": "Scraper/runs/general_first5_2026-10-28/plan.json",
+        "sha256": "ae7980eb6b54b7c9cf80b21366a1e222a559215a98c38a7dd3366573011eba99"
+      }
     },
     {
       "run_id": "moscow-all-10000-20261028",
@@ -32252,7 +32647,11 @@
           "region_unknown": false
         }
       },
-      "rows": 1397
+      "rows": 1397,
+      "search_plan": {
+        "path": "Scraper/runs/moscow-all-10000-20261028/plan.json",
+        "sha256": "dfa65e4ea5cc2e2f30f5ffebc1241771e756199b2d84bc64aae7ddc63bbead86"
+      }
     },
     {
       "run_id": "moscow_all_200_2026-10-28",
@@ -32461,7 +32860,11 @@
           "region_unknown": false
         }
       },
-      "rows": 200
+      "rows": 200,
+      "search_plan": {
+        "path": "Scraper/runs/moscow_all_200_2026-10-28/plan.json",
+        "sha256": "292472793be7a2a444d9ba477b3f70852f3bc52ee5871a415543dd9cc6b3768c"
+      }
     },
     {
       "run_id": "moscow_loader_20261028_batch_01",
@@ -32840,7 +33243,11 @@
           "region_unknown": false
         }
       },
-      "rows": 295
+      "rows": 295,
+      "search_plan": {
+        "path": "Scraper/runs/moscow_loader_20261028_batch_01/plan.json",
+        "sha256": "52aecace3ce7e6e287a2459c886aee2975dfff9b28455cb0828320c209488d6e"
+      }
     },
     {
       "run_id": "moscow_loader_20261028_batch_02",
@@ -33259,7 +33666,11 @@
           "region_unknown": false
         }
       },
-      "rows": 278
+      "rows": 278,
+      "search_plan": {
+        "path": "Scraper/runs/moscow_loader_20261028_batch_02/plan.json",
+        "sha256": "dbb0e800cbf2ed6d4bf931d30c79494f2da65ae702d5ecebd420f8d98680c098"
+      }
     },
     {
       "run_id": "moscow_picker_20261029_b_01",
@@ -33639,7 +34050,11 @@
           "region_unknown": false
         }
       },
-      "rows": 299
+      "rows": 299,
+      "search_plan": {
+        "path": "Scraper/runs/moscow_picker_20261029_b_01/plan.json",
+        "sha256": "63facc47f507967b3e37ffa52679ec324b75adfd31e48b2adf6eafc9e2ea9885"
+      }
     },
     {
       "run_id": "moscow_picker_20261029_b_02",
@@ -34053,7 +34468,11 @@
           "region_unknown": false
         }
       },
-      "rows": 293
+      "rows": 293,
+      "search_plan": {
+        "path": "Scraper/runs/moscow_picker_20261029_b_02/plan.json",
+        "sha256": "e6e195adbfa977aed4f7f2f45534ef2058d69ad0eedd17ac4955def9a752beab"
+      }
     },
     {
       "run_id": "moscow_picker_20261029_b_03",
@@ -34141,7 +34560,11 @@
           "region_unknown": false
         }
       },
-      "rows": 63
+      "rows": 63,
+      "search_plan": {
+        "path": "Scraper/runs/moscow_picker_20261029_b_03/plan.json",
+        "sha256": "f9cd6b5001eb3a85c4812c010d62bc21d01c641534fde449cb093c492b1dede3"
+      }
     },
     {
       "run_id": "remote10-verified-20261028-demo4",
@@ -34194,7 +34617,11 @@
           "region_unknown": true
         }
       },
-      "rows": 10
+      "rows": 10,
+      "search_plan": {
+        "path": "Scraper/runs/remote10-verified-20261028-demo4/plan.json",
+        "sha256": "fc70659f45b559895e9cfe69fcffc15bc2f7acd4080e4794332343c61552e957"
+      }
     },
     {
       "run_id": "remote_1500_2026-10-29_shamil",
@@ -39167,7 +39594,11 @@
           "region_unknown": true
         }
       },
-      "rows": 1485
+      "rows": 1485,
+      "search_plan": {
+        "path": "Scraper/runs/remote_1500_2026-10-29_shamil/plan.json",
+        "sha256": "5155c2bb8e14f7dacdd3ca7991c9ec787713c842e8505f22b381aa2f9e98fe56"
+      }
     },
     {
       "run_id": "remote_continuous_r000001_s000_new",
@@ -40662,7 +41093,11 @@
           "region_unknown": false
         }
       },
-      "rows": 358
+      "rows": 358,
+      "search_plan": {
+        "path": "Scraper/runs/remote_continuous_r000001_s000_new/plan.json",
+        "sha256": "2ee34ff0beb13e6716ece3ed4e878ada93f7884676a54345d97f3e63eb0c0996"
+      }
     },
     {
       "run_id": "remote_continuous_r000001_s001_new",
@@ -40746,7 +41181,11 @@
           "region_unknown": false
         }
       },
-      "rows": 78
+      "rows": 78,
+      "search_plan": {
+        "path": "Scraper/runs/remote_continuous_r000001_s001_new/plan.json",
+        "sha256": "ec0d65e04f45f6c907e1606acc8bd9e19c77e6044f3d1851e77818a6ba9c1c17"
+      }
     },
     {
       "run_id": "remote_continuous_r000002_s000_new",
@@ -41656,7 +42095,11 @@
           "region_unknown": true
         }
       },
-      "rows": 215
+      "rows": 215,
+      "search_plan": {
+        "path": "Scraper/runs/remote_continuous_r000002_s000_new/plan.json",
+        "sha256": "12cf80f207bf10e7be96bebb11e45955695a371d2862ff8be67282e95c7eee41"
+      }
     },
     {
       "run_id": "remote_continuous_r000002_s001_new",
@@ -41680,7 +42123,11 @@
           "region_unknown": false
         }
       },
-      "rows": 24
+      "rows": 24,
+      "search_plan": {
+        "path": "Scraper/runs/remote_continuous_r000002_s001_new/plan.json",
+        "sha256": "69291403272d584e47659e04f7089f30ec21e35ac370c65266b7a385ae75ac2e"
+      }
     },
     {
       "run_id": "remote_continuous_r000003_s000_new",
@@ -42218,7 +42665,11 @@
           "region_unknown": true
         }
       },
-      "rows": 120
+      "rows": 120,
+      "search_plan": {
+        "path": "Scraper/runs/remote_continuous_r000003_s000_new/plan.json",
+        "sha256": "33279e5b79647393ec9cfd2bf05e6c478ef9bea0a6c3b4dd3e49223a9fe16f46"
+      }
     },
     {
       "run_id": "remote_continuous_r000003_s001_new",
@@ -42252,7 +42703,11 @@
           "region_unknown": false
         }
       },
-      "rows": 14
+      "rows": 14,
+      "search_plan": {
+        "path": "Scraper/runs/remote_continuous_r000003_s001_new/plan.json",
+        "sha256": "befaea1740287d8feabbcdb058c58e90e33d7946103e0eb51e75b8cc86a215a7"
+      }
     },
     {
       "run_id": "remote_continuous_r000004_s000_new",
@@ -42452,7 +42907,11 @@
           "region_unknown": true
         }
       },
-      "rows": 43
+      "rows": 43,
+      "search_plan": {
+        "path": "Scraper/runs/remote_continuous_r000004_s000_new/plan.json",
+        "sha256": "70a40f6c2d113d681d34266e90363235fe45c5f1f7ca4117d1e07a1b02add77d"
+      }
     },
     {
       "run_id": "remote_continuous_r000004_s001_new",
@@ -42470,7 +42929,11 @@
           "region_unknown": false
         }
       },
-      "rows": 14
+      "rows": 14,
+      "search_plan": {
+        "path": "Scraper/runs/remote_continuous_r000004_s001_new/plan.json",
+        "sha256": "7235486fa2545e7391a1cbfa25f4e390fb678b540bf8d38637edeb6a1809198d"
+      }
     },
     {
       "run_id": "remote_continuous_r000005_s000_new",
@@ -42933,7 +43396,11 @@
           "region_unknown": false
         }
       },
-      "rows": 106
+      "rows": 106,
+      "search_plan": {
+        "path": "Scraper/runs/remote_continuous_r000005_s000_new/plan.json",
+        "sha256": "cd47ec351c06206a47763a4b3c038cfd7cb2587c61c49e526d28a5f825ec78cf"
+      }
     },
     {
       "run_id": "remote_continuous_r000005_s001_new",
@@ -42971,7 +43438,11 @@
           "region_unknown": false
         }
       },
-      "rows": 27
+      "rows": 27,
+      "search_plan": {
+        "path": "Scraper/runs/remote_continuous_r000005_s001_new/plan.json",
+        "sha256": "28fe8ef47d31147f6e2352870bb4e528caafa5c61d97e4b159ff50d97574e727"
+      }
     },
     {
       "run_id": "remote_continuous_r000006_s000_new",
@@ -43243,7 +43714,11 @@
           "region_unknown": false
         }
       },
-      "rows": 61
+      "rows": 61,
+      "search_plan": {
+        "path": "Scraper/runs/remote_continuous_r000006_s000_new/plan.json",
+        "sha256": "6cb5e58b7c1246365dd33a1af2ab6ce204a03f36d87ba6aa46b4d2df396ec6a2"
+      }
     },
     {
       "run_id": "remote_moscow_2026-10-30_shamil_novel",
@@ -43914,7 +44389,11 @@
           "region_unknown": false
         }
       },
-      "rows": 490
+      "rows": 490,
+      "search_plan": {
+        "path": "Scraper/runs/remote_moscow_2026-10-30_shamil_novel/plan.json",
+        "sha256": "614023b5766f0f8338916538bbbe2c144c05e8517471cb56fb5501bed1e16d63"
+      }
     },
     {
       "run_id": "samara_prodavets_first1200_20261106",
@@ -45735,7 +46214,11 @@
           "region_unknown": true
         }
       },
-      "rows": 362
+      "rows": 362,
+      "search_plan": {
+        "path": "Scraper/runs/samara_prodavets_first1200_20261106/plan.json",
+        "sha256": "6ab99c6c2e644de91d4efe3bd0013fecac950ba91784f904aafc4700debb55ef"
+      }
     },
     {
       "run_id": "spb_all_first1500_2026-10-28",
@@ -47138,7 +47621,11 @@
           "region_unknown": false
         }
       },
-      "rows": 1459
+      "rows": 1459,
+      "search_plan": {
+        "path": "Scraper/runs/spb_all_first1500_2026-10-28/plan.json",
+        "sha256": "9408353ee4ab6d1ded966284684f2b259863ec0926832b07f58620bb66ca8ae6"
+      }
     },
     {
       "run_id": "spb_all_first50_2026-10-28",
@@ -47211,7 +47698,11 @@
           "region_unknown": false
         }
       },
-      "rows": 50
+      "rows": 50,
+      "search_plan": {
+        "path": "Scraper/runs/spb_all_first50_2026-10-28/plan.json",
+        "sha256": "e02e8c54fa32c8da5cd64ffeed2ef7ea255e988696fbc97e93bf851d7068c864"
+      }
     },
     {
       "run_id": "spb_gruzchik_20261028_b_01",
@@ -47695,7 +48186,11 @@
           "region_unknown": false
         }
       },
-      "rows": 299
+      "rows": 299,
+      "search_plan": {
+        "path": "Scraper/runs/spb_gruzchik_20261028_b_01/plan.json",
+        "sha256": "2b174714e9b45fdd6db307c44218d0f418a40d08a21e70f62f7b1f312cc5f644"
+      }
     },
     {
       "run_id": "spb_gruzchik_20261028_b_02",
@@ -48373,7 +48868,11 @@
           "region_unknown": false
         }
       },
-      "rows": 258
+      "rows": 258,
+      "search_plan": {
+        "path": "Scraper/runs/spb_gruzchik_20261028_b_02/plan.json",
+        "sha256": "09c5a879c53e616a715e296550141821814c54f2229d8cbfbaffefc5ebd64acb"
+      }
     },
     {
       "run_id": "spb_gruzchik_20261028_tail_01",
@@ -48491,7 +48990,11 @@
           "region_unknown": false
         }
       },
-      "rows": 30
+      "rows": 30,
+      "search_plan": {
+        "path": "Scraper/runs/spb_gruzchik_20261028_tail_01/plan.json",
+        "sha256": "004b08ae6cf037db9bc4459b8f2f7b7273b23665f8d142818bf1c9a8ef631681"
+      }
     },
     {
       "run_id": "spb_picker_20261029_b_01",
@@ -48984,7 +49487,11 @@
           "region_unknown": false
         }
       },
-      "rows": 300
+      "rows": 300,
+      "search_plan": {
+        "path": "Scraper/runs/spb_picker_20261029_b_01/plan.json",
+        "sha256": "5e4610b103bf37e8f6fcca0787e1c15eccb40b66d6e1106b454418de61796499"
+      }
     },
     {
       "run_id": "spb_picker_20261029_b_02",
@@ -49372,7 +49879,11 @@
           "region_unknown": false
         }
       },
-      "rows": 196
+      "rows": 196,
+      "search_plan": {
+        "path": "Scraper/runs/spb_picker_20261029_b_02/plan.json",
+        "sha256": "e4d8344b235c5c87f9902c1ca8c81c0465922ca0587e98d329d58bffed6897b0"
+      }
     },
     {
       "run_id": "truck_driver_ekaterinburg_first40_2026-10-27",
@@ -49385,7 +49896,11 @@
       "enrichment_status": "not_run",
       "search_city": "Екатеринбург",
       "search_city_evidence": "https://www.avito.ru/ekaterinburg/vakansii/voditel_gruzovogo_transporta-ASgBAgICAUTUzBHOjqAV",
-      "rows": 40
+      "rows": 40,
+      "search_plan": {
+        "path": "Scraper/runs/truck_driver_ekaterinburg_first40_2026-10-27/plan.json",
+        "sha256": "7e9d4f4898990a7b7856e8266445512c8d451b2707f7082843b3f16739cac1d5"
+      }
     },
     {
       "run_id": "vahta_1500_2026-11-02_sasha",
@@ -53777,7 +54292,11 @@
           "region_unknown": true
         }
       },
-      "rows": 1257
+      "rows": 1257,
+      "search_plan": {
+        "path": "Scraper/runs/vahta_1500_2026-11-02_sasha/plan.json",
+        "sha256": "c16d77aeb7cfd9e79df82603511e2cdaedadabfb7232bed891ffb41a89600617"
+      }
     },
     {
       "run_id": "vahta_50_2026-11-02_sasha",
@@ -53921,7 +54440,11 @@
           "region_unknown": true
         }
       },
-      "rows": 50
+      "rows": 50,
+      "search_plan": {
+        "path": "Scraper/runs/vahta_50_2026-11-02_sasha/plan.json",
+        "sha256": "8b832c84fbc27717a364ddedf3115b0e02e2b360721757b6d25b896f555b4511"
+      }
     },
     {
       "run_id": "vahta_first5_2026-10-27",
@@ -53935,7 +54458,11 @@
         "Коммунарка": "Москва",
         "Подольск": "Московская область"
       },
-      "rows": 5
+      "rows": 5,
+      "search_plan": {
+        "path": "Scraper/runs/vahta_first5_2026-10-27/plan.json",
+        "sha256": "624360054bffbc3ce5c86996ecd15b4e899a96359679fcaa19cef3fbbe8781ff"
+      }
     }
   ],
   "update_policy": "latest_complete_observation",

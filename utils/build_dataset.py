@@ -19,8 +19,9 @@ except ImportError:  # Direct `python3 utils/build_dataset.py` entry point.
 ROOT = Path(__file__).resolve().parents[1]
 VERSION = "1"
 METADATA = ["source", "region", "first_seen_at", "last_seen_at", "run_id",
-            "run_ids", "enrichment_status", "enriched_fields", "enrichment_version"]
-GENERATED = {"source", "region", "first_seen_at", "last_seen_at", "run_id", "run_ids"}
+            "run_ids", "search_geography", "search_profession", "search_filter_observations",
+            "enrichment_status", "enriched_fields", "enrichment_version"]
+GENERATED = {"source", "region", "first_seen_at", "last_seen_at", "run_id", "run_ids", "search_geography", "search_profession", "search_filter_observations"}
 REQUIRED = {"id", "source_url", "observed_at", "city", "profession", "title",
             "description", "salary_raw", "analysis_status", "export_eligibility"}
 # Recomputed from the latest observation on every build; never taken from exports.
@@ -106,6 +107,20 @@ def build(root, registry):
                 raise ValueError('Profession correction must be inside repository')
             if digest((root / correction_path).read_bytes()) != correction['sha256']:
                 raise ValueError('Profession correction SHA-256 mismatch')
+        # A run plan is evidence of search scope, independent of placement fields.
+        # Never infer filter values from a vacancy, a filename, or placement mappings.
+        plan_path = Path("Scraper/runs") / run_id / "plan.json"
+        if not (root / plan_path).resolve().is_relative_to(root.resolve()):
+            raise ValueError("Plan must be inside repository")
+        plan_bytes = (root / plan_path).read_bytes() if (root / plan_path).exists() else None
+        plan = json.loads(plan_bytes) if plan_bytes is not None else {}
+        if plan.get("run_id", run_id) != run_id:
+            raise ValueError(f"Mismatched plan run_id: {run_id}")
+        geography = plan.get("geography", plan.get("city"))
+        profession = plan.get("profession", plan.get("profession_filter"))
+        if geography is not None and not isinstance(geography, str) or profession is not None and not isinstance(profession, str):
+            raise ValueError(f"Invalid search filter in plan: {run_id}")
+        search = {"run_id": run_id, "geography": geography, "profession": profession}
         reader = csv.DictReader(io.StringIO(data.decode("utf-8-sig")))
         names = reader.fieldnames or []
         if len(names) != len(set(names)) or not REQUIRED.issubset(names) or GENERATED.intersection(names):
@@ -177,10 +192,10 @@ def build(root, registry):
             row.update(source=source, region=region,
                        run_id=run_id, enrichment_status=status,
                        enriched_fields="; ".join(fields), enrichment_version=version)
-            records.setdefault((source, identity), []).append((observed, run_id, row))
+            records.setdefault((source, identity), []).append((observed, run_id, row, search))
         if not seen:
             raise ValueError(f"Empty export: {path}")
-        inputs.append(dict(entry, rows=len(seen)))
+        inputs.append(dict(entry, rows=len(seen), search_plan={"path": plan_path.as_posix(), "sha256": digest(plan_bytes)} if plan_bytes is not None else None))
     columns = ["source", "id", "city", "region", "profession"] + [
         name for name in columns if name not in {"id", "city", "profession"} and name not in METADATA and name not in DERIVED
     ] + list(DERIVED) + [name for name in METADATA if name not in {"source", "region"}]
@@ -198,7 +213,10 @@ def build(root, registry):
         latest = dict(observations[-1][2])
         latest.update(first_seen_at=observations[0][2]["observed_at"],
                       last_seen_at=latest["observed_at"],
-                      run_ids="; ".join(sorted({item[1] for item in observations})))
+                      run_ids="; ".join(sorted({item[1] for item in observations})),
+                      search_geography=observations[-1][3]["geography"] or "",
+                      search_profession=observations[-1][3]["profession"] or "",
+                      search_filter_observations=json.dumps([[item[3]["run_id"], item[3]["geography"], item[3]["profession"]] for item in observations], ensure_ascii=False, separators=(",", ":")))
         latest.update(title_flags.military_flags(latest["title"]))
         latest.update(vacancy_labels.vacancy_labels(latest))
         writer.writerow(latest)
