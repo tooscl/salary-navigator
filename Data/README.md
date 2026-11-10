@@ -343,3 +343,9 @@ avito_runs/<название_сбора>/
 - [20261110-remote-all-russia-batch_04](avito_runs/20261110-remote-all-russia-batch_04/exports/vacancies_flat.csv): исходный архив 200 прочитанных; предварительные адреса: [Краснодар](transformations/20261110-remote-all-russia-batch_04-cities-v1/city-01.csv), [Рязань](transformations/20261110-remote-all-russia-batch_04-cities-v1/city-02.csv). Полнота городов не подтверждена.
 
 - [20261110-remote-all-russia-batch_05](avito_runs/20261110-remote-all-russia-batch_05/exports/vacancies_flat.csv): исходный архив 155 прочитанных; предварительные адреса: [Краснодар](transformations/20261110-remote-all-russia-batch_05-cities-v1/city-01.csv), [Рязань](transformations/20261110-remote-all-russia-batch_05-cities-v1/city-02.csv). Полнота городов не подтверждена.
+
+- [20261110-remote-bez-opyta-batch_01](avito_runs/20261110-remote-bez-opyta-batch_01/exports/vacancies_flat.csv): исходный архив 200 прочитанных; предварительные адреса: [Краснодар](transformations/20261110-remote-bez-opyta-batch_01-cities-v1/city-01.csv), [Рязань](transformations/20261110-remote-bez-opyta-batch_01-cities-v1/city-02.csv). Полнота городов не подтверждена.
+
+- [20261110-remote-bez-opyta-batch_02](avito_runs/20261110-remote-bez-opyta-batch_02/exports/vacancies_flat.csv): исходный архив 200 прочитанных; предварительные адреса: [Краснодар](transformations/20261110-remote-bez-opyta-batch_02-cities-v1/city-01.csv), [Рязань](transformations/20261110-remote-bez-opyta-batch_02-cities-v1/city-02.csv). Полнота городов не подтверждена.
+
+- [20261110-remote-bez-opyta-batch_03](avito_runs/20261110-remote-bez-opyta-batch_03/exports/vacancies_flat.csv): исходный архив 160 прочитанных; предварительные адреса: [Краснодар](transformations/20261110-remote-bez-opyta-batch_03-cities-v1/city-01.csv), [Рязань](transformations/20261110-remote-bez-opyta-batch_03-cities-v1/city-02.csv). Полнота городов не подтверждена.
