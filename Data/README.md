@@ -362,3 +362,7 @@ avito_runs/<название_сбора>/
 - [20261110-remote-50000-batch_05](avito_runs/20261110-remote-50000-batch_05/exports/vacancies_flat.csv): 197 вакансий.
 
 - [20261110-remote-50000-batch_06](avito_runs/20261110-remote-50000-batch_06/exports/vacancies_flat.csv): 185 вакансий.
+
+- [remote-full-ryazan-20261110](avito_runs/remote-full-ryazan-20261110/exports/vacancies_flat.csv): 353 вакансий.
+
+- [remote-full-krasnodar-20261110](avito_runs/remote-full-krasnodar-20261110/exports/vacancies_flat.csv): 96 вакансий.

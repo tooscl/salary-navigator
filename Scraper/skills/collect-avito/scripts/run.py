@@ -253,11 +253,19 @@ def validate_ui_transition(first, previous, page):
     if page.get('heading') != first.get('heading') or selection_profession(page, None) != selection_profession(first, None):
         raise ValueError('Profession controls changed between pages')
     transition = page.get('ui_transition') or {}
+    if previous.get('pagination', {}).get('next_button') is True:
+        key = lambda c: (c.get('marker') or '', c.get('value') or '', c.get('label') or '')
+        if (sorted(map(key, first.get('selected_controls', []))) != sorted(map(key, page.get('selected_controls', [])))
+                or not first.get('listing_context', {}).get('geography')
+                or first.get('listing_context') != page.get('listing_context')
+                or first['listing_context'].get('search') != ''):
+            raise ValueError('Button transition changed filters or listing context')
     if (transition.get('method') != 'observed_ui_next' or not isinstance(transition.get('recovered'), bool)
             or (not transition['recovered'] and not transition.get('next_snapshot'))
             or transition.get('from_page') != page_number(previous['source_url'])
             or transition.get('landed_page') != page_number(page['source_url'])
-            or transition.get('from_url') != previous['source_url'] or transition.get('next_href') != previous['pagination']['next_url'] or transition.get('landed_url') != page['source_url']):
+            or transition.get('from_url') != previous['source_url'] or transition.get('next_href') != previous['pagination']['next_url'] or transition.get('landed_url') != page['source_url']
+            or (previous['pagination'].get('next_button') is True and (transition.get('next_button') is not True or transition.get('observed_href') is not None))):
         raise ValueError('UI transition evidence differs from previous page')
 
 
@@ -894,7 +902,10 @@ def freeze(args):
             raise ValueError('Saved pages must contain a nonempty incomplete selection')
     empty_saved = bool(pages and pages[0].get('state') == 'EMPTY_RESULT')
     while not empty_saved and (not pages or target is None or len(queue_from_pages(pages, target, False)) < target):
-        url = args.url if not pages else pages[-1].get('pagination', {}).get('next_url')
+        if pages and not ui_next and pages[-1].get('pagination', {}).get('next_button') is True:
+            raise ValueError('Observed Next button requires UI Next mode')
+        button_next = bool(pages and ui_next and pages[-1].get('pagination', {}).get('next_button') is True)
+        url = args.url if not pages else (pages[-1]['source_url'] if button_next else pages[-1].get('pagination', {}).get('next_url'))
         if not url:
             listing_end_reason = 'confirmed_end' if pages[-1].get('pagination', {}).get('end_confirmed') else 'no_next_link'
             break
@@ -904,10 +915,11 @@ def freeze(args):
         avito_url(url)
         if pages and not ui_next:
             validate_page_filters(pages[0], {'source_url': url})
-        if any(same_observed_url(url, p['source_url']) for p in pages):
+        if not button_next and any(same_observed_url(url, p['source_url']) for p in pages):
             listing_end_reason = 'repeated_next_link'
             break
-        recovering = pending.exists() and read(pending) == {'url': url}
+        pending_value = {'ui_next_from': url} if button_next else {'url': url}
+        recovering = pending.exists() and read(pending) == pending_value
         if pending.exists() and not recovering:
             raise ValueError('Pending listing does not match the observed Next link')
         if recovering and (diag / 'sandbox.json').exists():
@@ -917,7 +929,7 @@ def freeze(args):
         else:
             for name in ('sandbox.json', 'listing.json', 'checkpoint.json'):
                 (diag/name).unlink(missing_ok=True)
-            write(pending, {'url': url})
+            write(pending, pending_value)
             cp, _ = browser(dict(mode='freeze', url=url, completed_ids=[], tab_id=getattr(args, 'tab_id', None), allow_navigation=bool(pages), ui_next=ui_next, allow_empty=branch_only, previous=pages[-1] if pages and ui_next else None, first=pages[0] if pages and ui_next else None, geography=args.geography), out, diag)
         if cp['state'] != 'READY':
             raise CollectionStopped(f'Stopped: {cp["state"]}; inspect local diagnostics', cp['state'])
@@ -1623,6 +1635,12 @@ def mark_unavailable(args):
         if destination.exists() and destination.read_bytes() != tab_evidence.read_bytes():
             raise ValueError('Browser tab archive collision')
         if not destination.exists(): shutil.copy2(tab_evidence, destination)
+    # Preserve every verified snapshot before the next capture replaces it.
+    archive = diag/'observations'/args.id; archive.mkdir(parents=True, exist_ok=True)
+    archived_snapshot = archive/(sha(snap) + '.problem.snapshot.txt')
+    if archived_snapshot.exists() and archived_snapshot.read_bytes() != snap.read_bytes():
+        raise ValueError('Snapshot archive collision')
+    if not archived_snapshot.exists(): shutil.copy2(snap, archived_snapshot)
     records.append(dict(browser_tab_sha256=tab_digest, id=args.id, url=url, status=('unavailable_under_review' if markers[0] == REVIEW_MARKER else 'unavailable_blocked_after_review' if markers[0] == BLOCKED_LISTING_MARKER else 'unavailable_rejected' if markers[0] == REJECTED_MARKER else 'unavailable_deleted' if markers[0] in (DELETED_MARKER, USER_DELETED_MARKER) else 'unavailable_other' if markers[0] in OTHER_UNAVAILABLE_MARKERS else 'unavailable_closed'), evidence=markers[0],
         snapshot_sha256=sha(snap), raw_sha256=sha(raw), observed_at=data.get('observed_at'),
         authorization_id=args.authorization_id, human_instruction=instruction,

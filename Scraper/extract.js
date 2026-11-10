@@ -146,11 +146,12 @@
   const effectiveNext = next || disabledNext;
   const disabled = effectiveNext && (effectiveNext.hasAttribute('disabled') || effectiveNext.getAttribute('aria-disabled') === 'true');
   const nextHref = effectiveNext?.getAttribute('href');
+  const nextButton = !!effectiveNext && !disabled && !nextHref && effectiveNext.getAttribute('data-marker') === 'pagination-button/nextPage' && effectiveNext.getAttribute('aria-label') === 'Следующая страница' && effectiveNext.tagName === 'BUTTON';
   const nextURL = nextHref ? new URL(nextHref, location.href).href : null;
   // Missing Next alone may be a render delay. A truncated numeric pager
   // (even current == max visible) is not positive evidence of the end.
   const current_pages = [...document.querySelectorAll('[aria-current="page"]')].filter(visible).map(e => text(e)).filter(t => /^[1-9]\d*$/.test(t));
-  const pagination = {current_pages, next_url: !disabled ? nextURL : null, end_confirmed: !!disabled,
+  const pagination = {current_pages, next_url: !disabled ? nextURL : null, next_button: nextButton, end_confirmed: !!disabled,
     evidence: effectiveNext ? {text: text(effectiveNext), label: effectiveNext.getAttribute('aria-label'), href: nextHref, disabled: !!disabled, direction: effectiveNext === disabledNext ? 'next_arrowright' : null} : null,
     limitation: 'End requires an explicitly disabled Next; missing Next alone is not proof; infinite loading and server-side result caps are not covered'};
   const geoControl = document.querySelector('[data-marker="search-form/change-location"]');

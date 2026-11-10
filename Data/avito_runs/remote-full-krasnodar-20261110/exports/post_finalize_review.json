@@ -1,0 +1,82 @@
+{
+  "method": "post_finalize_validation_v1",
+  "reason": "Проверка неизменной краснодарской выгрузки после отдельного исправления кнопочной пагинации для Рязани",
+  "original_manifest_sha256": "c58e946b3191c4f910bcf6a69e18b9040579f8629d293de48b3e566099341224",
+  "previous_automation_sha256": {
+    "Scraper/skills/collect-avito/references/top-professions.json": "e3e72638b17b48f825ec6f2fefb963662494f679ae4b0cef1bebedba889610dd",
+    "utils/title_flags.py": "9c9456cb3fb0df5791630049c9c85987381091dbb9ba18bc3fb3314b8cccbeb6",
+    "Scraper/extract.js": "fa0a0e0c7df0877d15ea4f94e5fed14df514241cb51771cda18cacc04574e8b0",
+    "Scraper/skills/collect-avito/SKILL.md": "7896b721bb99ba21586239169127f7a30c66602325f5cce7401df773a9565334",
+    "Scraper/skills/collect-avito/scripts/run.py": "71b4b7447ba86c4f98d66b79790c944671337cdc8bba2bd667314de89ca4a7f9",
+    "Scraper/skills/collect-avito/scripts/sweep_mode.py": "718a956a316df71c47ee3a4c5d3670fa011a5b16e9948393d68216702b140a56",
+    "Scraper/skills/collect-avito/scripts/browser_batch.js": "7572ff4aa773cd86ccd3d8ca3a2de6c9586b482ab6f1371dbfa152b165588eb4",
+    "Scraper/skills/collect-avito/scripts/check_capture.py": "aa746849317f9768af5aae08b394b9379539f6e268c1fc69e4ed13bd06a4657f",
+    "Scraper/skills/collect-avito/scripts/failure_log.py": "08dfd259fad4166a08acb1b056bf3cd14daede277385bd91c7e49680959475a4",
+    "Scraper/skills/collect-avito/scripts/preflight.py": "492a0d898990aee198f26bf6577d0876360dcc6ec69e274835cd77cdaa768974"
+  },
+  "automation_changes": [
+    {
+      "file": "Scraper/skills/collect-avito/scripts/run.py",
+      "reason": "Сохранять проверенный snapshot каждой недоступной карточки до следующего чтения",
+      "validation": "python3 -m unittest Scraper.test_aside_runner.RunnerTests.test_blocked_listing_policy_requires_exact_listing_evidence: OK"
+    },
+    {
+      "file": "Scraper/skills/collect-avito/SKILL.md",
+      "reason": "Сохранять проверенный snapshot каждой недоступной карточки до следующего чтения",
+      "validation": "python3 -m unittest Scraper.test_aside_runner.RunnerTests.test_blocked_listing_policy_requires_exact_listing_evidence: OK"
+    },
+    {
+      "file": "Scraper/test_aside_runner.py",
+      "reason": "Сохранять проверенный snapshot каждой недоступной карточки до следующего чтения",
+      "validation": "python3 -m unittest Scraper.test_aside_runner.RunnerTests.test_blocked_listing_policy_requires_exact_listing_evidence: OK"
+    },
+    {
+      "file": "Scraper/skills/collect-avito/scripts/run.py",
+      "reason": "Сохранять проверенный snapshot каждой недоступной карточки до следующего чтения",
+      "validation": "python3 -m unittest Scraper.test_aside_runner.RunnerTests.test_blocked_listing_policy_requires_exact_listing_evidence: OK"
+    },
+    {
+      "file": "Scraper/skills/collect-avito/SKILL.md",
+      "reason": "Сохранять проверенный snapshot каждой недоступной карточки до следующего чтения",
+      "validation": "python3 -m unittest Scraper.test_aside_runner.RunnerTests.test_blocked_listing_policy_requires_exact_listing_evidence: OK"
+    },
+    {
+      "file": "Scraper/test_aside_runner.py",
+      "reason": "Сохранять проверенный snapshot каждой недоступной карточки до следующего чтения",
+      "validation": "python3 -m unittest Scraper.test_aside_runner.RunnerTests.test_blocked_listing_policy_requires_exact_listing_evidence: OK"
+    },
+    {
+      "file": "Scraper/extract.js",
+      "reason": "Поддержка наблюдаемой кнопки Next без href для отдельного сбора Рязани",
+      "validation": "python3 -m unittest Scraper.test_pagination: 26 tests passed"
+    },
+    {
+      "file": "Scraper/skills/collect-avito/scripts/browser_batch.js",
+      "reason": "Поддержка наблюдаемой кнопки Next без href для отдельного сбора Рязани",
+      "validation": "python3 -m unittest Scraper.test_pagination: 26 tests passed"
+    },
+    {
+      "file": "Scraper/test_pagination.py",
+      "reason": "Поддержка наблюдаемой кнопки Next без href для отдельного сбора Рязани",
+      "validation": "python3 -m unittest Scraper.test_pagination: 26 tests passed"
+    }
+  ],
+  "previous_review_sha256": null,
+  "current_automation_sha256": {
+    "Scraper/extract.js": "0c52ba2f821d861083c99ec6bc328456df96b3d179b7fffd47f87aadfda84bdb",
+    "Scraper/skills/collect-avito/SKILL.md": "7896b721bb99ba21586239169127f7a30c66602325f5cce7401df773a9565334",
+    "Scraper/skills/collect-avito/references/top-professions.json": "e3e72638b17b48f825ec6f2fefb963662494f679ae4b0cef1bebedba889610dd",
+    "Scraper/skills/collect-avito/scripts/browser_batch.js": "8090a7905357a3ee3387009d4b9778f3150556506d319b7f62783bb3594d5733",
+    "Scraper/skills/collect-avito/scripts/check_capture.py": "aa746849317f9768af5aae08b394b9379539f6e268c1fc69e4ed13bd06a4657f",
+    "Scraper/skills/collect-avito/scripts/failure_log.py": "08dfd259fad4166a08acb1b056bf3cd14daede277385bd91c7e49680959475a4",
+    "Scraper/skills/collect-avito/scripts/preflight.py": "492a0d898990aee198f26bf6577d0876360dcc6ec69e274835cd77cdaa768974",
+    "Scraper/skills/collect-avito/scripts/run.py": "71b4b7447ba86c4f98d66b79790c944671337cdc8bba2bd667314de89ca4a7f9",
+    "Scraper/skills/collect-avito/scripts/sweep_mode.py": "718a956a316df71c47ee3a4c5d3670fa011a5b16e9948393d68216702b140a56",
+    "Scraper/test_aside_runner.py": "b13b4b33967482377fff24f5f156d11cf48288af1425a884680f2b73d2e3d128",
+    "Scraper/test_pagination.py": "3f07c38a5c439fdec631107a7939e5ee5f42bdffa6850d2b6c06ecf580a2a032",
+    "utils/build_dataset.py": "6309315bcfe07c4388172c01ce2e015051ac0dded1f2baaf7a7da8ad4d65c00c",
+    "utils/test_build_dataset.py": "3daedd725f9ab1464bf6931d0fc82177d566426eee29bddd40cdbb2d55de2584",
+    "utils/title_flags.py": "9c9456cb3fb0df5791630049c9c85987381091dbb9ba18bc3fb3314b8cccbeb6"
+  },
+  "validation": "Partition, plan, page hashes, URL chain, raw, correction, CSV IDs and profession, dataset check and offline regression suites passed"
+}

@@ -36,7 +36,7 @@ try {
         const {observed_at, ...stableFields} = value;
         const key = JSON.stringify(stableFields);
         repeats = key === last ? repeats + 1 : 0; last = key;
-        const paginationObserved = value.pagination?.next_url || value.pagination?.end_confirmed;
+        const paginationObserved = value.pagination?.next_url || value.pagination?.next_button === true || value.pagination?.end_confirmed;
         if (repeats >= 2 && value.state === 'LISTING' && value.items.length && value.listing_item_audit?.malformed === 0 && paginationObserved && accept(value)) return value;
         if (repeats >= 2 && value.state === 'EMPTY_RESULT' && value.empty_evidence && !(value.items || []).length && accept(value)) return value;
         await sleep(500);
@@ -59,8 +59,12 @@ try {
       let recovered = true, observedHref = previous.pagination?.evidence?.href || null, nextSnapshot = null;
       if (valid(current, n)) {
         recovered = false;
-        const snapBefore = await snapshot(p, {selector: '[aria-label="Следующая страница"]', interactive: true});
-        const line = snapBefore.tree.split('\n').find(x => /link "Следующая страница"/.test(x));
+        const button = current.pagination?.next_button === true;
+        if (button !== (previous.pagination?.next_button === true)) throw new Error('Observed Next type differs from saved page');
+        const selector = button ? '[data-marker="pagination-button/nextPage"]' : '[aria-label="Следующая страница"]';
+        const snapBefore = await snapshot(p, {selector, interactive: true});
+        const lines = snapBefore.tree.split('\n').filter(x => (button ? /button "Следующая страница"/ : /link "Следующая страница"/).test(x) && !/\[disabled\]/.test(x));
+        const line = lines.length === 1 ? lines[0] : null;
         nextSnapshot = line || null;
         const ref = line && line.match(/\[ref=(e\d+)\]/);
         observedHref = current.pagination?.evidence?.href || null;
@@ -69,13 +73,13 @@ try {
           current_next: current.pagination?.next_url || null, observed_href: observedHref,
           resolved_href: resolvedHref, ref_found: Boolean(ref), scoped_snapshot: snapBefore.tree};
         await save('next-comparison.json', comparison);
-        if (!ref || !observedHref || resolvedHref !== current.pagination?.next_url || (!rotated && current.pagination?.next_url !== previous.pagination?.next_url))
+        if (!ref || (button ? (observedHref || current.pagination?.next_url) : (!observedHref || resolvedHref !== current.pagination?.next_url || (!rotated && current.pagination?.next_url !== previous.pagination?.next_url))))
           throw new Error('Observed Next differs from saved page; see next-comparison.json');
         await p.locator(ref[1]).click();
         current = await stable(l => valid(l, n + 1) && (!job.geography || contextValid(l)));
       }
       if (!valid(current, n + 1) || (job.geography && !contextValid(current))) throw new Error('Tab is not the expected completed next page');
-      listing = {...current, ui_transition: {method: 'observed_ui_next', recovered, next_snapshot: nextSnapshot, from_url: previous.source_url, live_from_url: liveFromUrl, live_context: liveContext, from_page: n, next_href: previous.pagination.next_url, observed_href: observedHref, live_next_url: observedHref ? new URL(observedHref, liveFromUrl).href : null, landed_url: current.source_url, landed_page: n + 1, stability: 'three_matching_snapshots_500ms'}};
+      listing = {...current, ui_transition: {method: 'observed_ui_next', recovered, next_snapshot: nextSnapshot, from_url: previous.source_url, live_from_url: liveFromUrl, live_context: liveContext, from_page: n, next_href: previous.pagination.next_url, next_button: previous.pagination.next_button === true, observed_href: observedHref, live_next_url: observedHref ? new URL(observedHref, liveFromUrl).href : null, landed_url: current.source_url, landed_page: n + 1, stability: 'three_matching_snapshots_500ms'}};
     } else listing = job.ui_next ? await stable(l => l.state === 'EMPTY_RESULT' || (l.pagination?.current_pages || []).includes('1')) : await stable(l =>
       (job.allow_empty && l.state === 'EMPTY_RESULT') || (Array.isArray(l.selected_controls) && l.selected_controls.length > 0 && l.profession_filter?.observed === true &&
       ((l.pagination?.current_pages || []).length > 0 || l.pagination?.end_confirmed === true)));
