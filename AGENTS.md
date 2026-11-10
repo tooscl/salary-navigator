@@ -57,7 +57,9 @@
   версия инструкции/кода фиксируются отдельно.
 - Общий датасет — `Data/dataset/vacancies.csv`, производный от явно
   зарегистрированных выгрузок в `Data/dataset/sources.json`. Его и manifest
-  пересобираем `python3 utils/build_dataset.py`; завершённые исходники неизменны.
+  пересобираем `python3 utils/build_dataset.py`; Git хранит части и manifest,
+  локальный CSV восстанавливается командой `python3 utils/build_dataset.py --materialize`.
+  Завершённые исходники неизменны.
   Город/регион означают размещение на сайте. Новый сбор включает обновление
   общего CSV и PR, если публикация не исключена заданием. Контракт —
   [Data/dataset/README.md](Data/dataset/README.md).

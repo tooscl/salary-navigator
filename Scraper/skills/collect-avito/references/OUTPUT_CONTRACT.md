@@ -14,7 +14,8 @@
 | `Scraper/runs/<run_id>/plan.json` | Фильтры, режим отбора, время, версия/commit и хеши реально использованного кода; фиксирует freeze |
 | `Scraper/runs/<run_id>/manifest.json` | Паспорт конкретного сбора: покрытие, схема, тайминги, модель проверки, хеши файлов и зарегистрированные изменения; создаёт finalize |
 | `Data/dataset/sources.json` | Реестр неизменяемых исходных CSV, по одной записи на run_id; finalize добавляет свой источник, прежние записи сохраняются |
-| `Data/dataset/vacancies.csv`, `Data/dataset/manifest.json` | Общая таблица и её паспорт; целиком генерирует `utils/build_dataset.py` по реестру |
+| `Data/dataset/parts/*.csv`, `Data/dataset/manifest.json` | Части общей таблицы и её паспорт в Git; генерирует `utils/build_dataset.py` по реестру |
+| `Data/dataset/vacancies.csv` | Локальный общий CSV, исключённый из Git; восстанавливается из частей командой `python3 utils/build_dataset.py --materialize`, которая перезаписывает этот файл |
 | `Data/README.md`, `Data/dataset/README.md` | Ссылка на новый набор и актуальная размерность; обновляет finalize |
 | `Data/avito_sweeps/<sweep_id>/coverage.{json,csv,md}` | Для режима добора: статус, страницы, новые ID, пересечения и причина конца каждой ветки |
 | `Data/avito_sweeps/<sweep_id>/unique_queue.json`, `memberships.json` | Глобальная очередь без повторов и все срезы, в которых найден каждый ID |

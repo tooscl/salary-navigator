@@ -23,10 +23,19 @@ def checked_path(root, value):
     return root / path
 
 
-def render(root, spec):
+def normalize_explicit_region(value):
+    """Normalize only spellings explicitly present in the address."""
+    value = re.sub(r'\bобл\.', 'область', value.strip(), flags=re.I)
+    aliases = {'Республика Татарстан (Татарстан)': 'Республика Татарстан',
+               'Чувашская Республика — Чувашия': 'Чувашская Республика'}
+    return aliases.get(value, value)
+
+
+def render(root, spec, *, explicit_region=False):
     """Verify source passport and reproduce only explicitly reviewed blank-city corrections."""
     root = Path(root)
-    if spec.get('version') != VERSION or not re.fullmatch(r'[a-zA-Z0-9][a-zA-Z0-9_-]*', spec.get('transformation_id', '')):
+    accepted_version = 'placement_from_explicit_region_v2' if explicit_region else VERSION
+    if spec.get('version') != accepted_version or not re.fullmatch(r'[a-zA-Z0-9][a-zA-Z0-9_-]*', spec.get('transformation_id', '')):
         raise ValueError('Invalid transformation identity or version')
     run = spec['source_run_id']
     if not re.fullmatch(r'[a-zA-Z0-9][a-zA-Z0-9_-]*', run):
@@ -56,6 +65,13 @@ def render(root, spec):
     rows = list(reader)
     if len({r['id'] for r in rows}) != len(rows):
         raise ValueError('Duplicate source ID')
+    listing = {}
+    if explicit_region:
+        queue_name = f'Data/avito_runs/{run}/queue.json'
+        if queue_name not in files: raise ValueError('Source queue absent from manifest')
+        queue = json.loads(checked_path(root, queue_name).read_bytes())
+        listing = {item['id']: item for item in queue}
+        if len(listing) != len(queue): raise ValueError('Duplicate listing ID')
     corrections = spec['placements']
     if not corrections or not isinstance(corrections, dict):
         raise ValueError('Expected nonempty placements')
@@ -73,16 +89,27 @@ def render(root, spec):
         review = json.loads(checked_path(root, review_path).read_bytes())
         city, region, evidence = change['city'], change['region'], change['evidence']
         address = '\n'.join(raw.get('location_raw', [])).split('\n', 1)[0].strip()
-        pattern = r'(?:^|[,;])\s*(?:г\.\s*|город\s+|с\.\s*|село\s+|пос\.\s*(?:учхоза\s+)?|посёлок\s+|д\.\s*)?' + re.escape(city) + r'\s*(?:[,;]|$)'
+        pattern = r'(?:^|[,;])\s*(?:г\.\s*|город\s+|с\.\s*|село\s+|пос\.\s*(?:учхоза\s+)?|посёлок\s+|станица\s+|ст\.\s*|д\.\s*)?' + re.escape(city) + r'\s*(?:[,;]|$)'
         match = re.search(pattern, address, re.I) if city else None
         remainder = address[match.end():] if match else ''
         # A more specific locality after the selected one makes the choice ambiguous.
         tail = re.split(r',\s*(?:ул\.|улица|пр\.|проспект|ш\.|шоссе|пер\.|переулок)', remainder, maxsplit=1, flags=re.I)[0]
-        nested_locality = re.search(r'(?:^|[,;])\s*(?:с\.|село\s|д\.|деревня\s|пос\.|пос[её]лок\s|пгт\.?\s)', tail, re.I)
+        nested_locality = re.search(r'(?:^|[,;])\s*(?:с\.|село\s|д\.|деревня\s|пос\.|пос[её]лок\s|станица\s|ст\.\s*|хутор\s|х\.\s*|пгт\.?\s)', tail, re.I)
+        region_valid = review.get('region') == region
+        if explicit_region and not review.get('region'):
+            first = address.split(',', 1)[0].strip()
+            explicit = normalize_explicit_region(first)
+            listing_location = listing.get(ident, {}).get('location_raw', '')
+            components = [part.strip() for part in address.split(',')]
+            region_valid = (bool(re.search(r'область|край|республика', explicit, re.I))
+                and explicit == region and len(components) > 1 and components[1] == city
+                and bool(re.fullmatch(r'[А-Яа-яЁёA-Za-z\- ]+', city))
+                and not re.search(r'край|район|р-н|округ|область|республика|городской|шоссе|площадь|улица|территория', city, re.I)
+                and bool(re.search(r'(?<!\w)' + re.escape(city) + r'(?!\w)', listing_location, re.I)))
         if (not city or not region or not evidence or evidence != address or
                 not match or nested_locality or raw.get('id') != ident or
                 row['city'] or row['city__source'] != 'missing' or
-                review.get('city') or review.get('region') != region or
+                review.get('city') or not region_valid or
                 evidence not in row['location_observed']):
             raise ValueError(f'Unsupported placement correction: {ident}')
         row.update(city=city, city__source='card', city__evidence=row['location_observed'], city_anomaly='')

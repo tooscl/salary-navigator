@@ -415,41 +415,69 @@ def pipe_chunks(stream, stoppable=False):
     return chunks, reader
 
 
+def preserve_browser_session_pointer(diag):
+    """Archive an unreleased session before a later REPL replaces its pointer."""
+    path = diag/'browser-session.local.json'
+    if not path.exists(): return
+    original = path.read_bytes()
+    digest = hashlib.sha256(original).hexdigest()
+    destination = diag/f'browser-session-retained-{digest}.local.json'
+    if destination.exists():
+        if destination.read_bytes() != original:
+            raise RuntimeError('Retained browser session hash collision; inspect diagnostics')
+        path.unlink()
+    else:
+        path.rename(destination)
+
+
 def retain_repl(process, diag, sandbox, job):
     """Keep our REPL pipes alive until an explicit local release marker is created."""
     # PIDs may be reused during one run; each keeper needs its own marker.
     release = diag / f'release-browser-session-{process.pid}-{uuid.uuid4().hex}'
     if release.exists():
         raise RuntimeError('Release marker collision; inspect diagnostics')
-    code = """import os,select,sys,time
-inp,out,release=int(sys.argv[1]),int(sys.argv[2]),sys.argv[3]
-print("keeper_started", flush=True)
-try:
-    while not os.path.exists(release):
-        ready,_,_=select.select([out],[],[],1)
-        if ready and not os.read(out,65536):
-            print("repl_stdout_eof", flush=True); break
-    else:
-        print("release_marker_observed", flush=True)
-finally:
-    os.close(inp); os.close(out)
-"""
-    if os.name == 'nt':
-        # Windows pipes cannot be selected and pass_fds is POSIX-only. Give the
-        # keeper explicit inherited OS handles and drain stdout on a thread.
-        import msvcrt
-        code = """import msvcrt,os,sys,threading,time
-inp=msvcrt.open_osfhandle(int(sys.argv[1]),os.O_WRONLY)
-out=msvcrt.open_osfhandle(int(sys.argv[2]),os.O_RDONLY)
+    # The keeper owns the REPL pipes. A close request is sent only after the
+    # caller has validated and persisted its outcome; the acknowledgement must
+    # arrive before the ordinary release marker can close those pipes.
+    code = """import os,sys,time,threading
+if os.name == 'nt':
+    import msvcrt
+    inp=msvcrt.open_osfhandle(int(sys.argv[1]),os.O_WRONLY)
+    out=msvcrt.open_osfhandle(int(sys.argv[2]),os.O_RDONLY)
+else:
+    inp,out=int(sys.argv[1]),int(sys.argv[2])
 release=sys.argv[3]
+request=release+'.close'
+ack=release+'.closed'
 print('keeper_started',flush=True)
+observed=bytearray()
 def drain():
-    while os.read(out,65536): pass
+    while True:
+        chunk=os.read(out,65536)
+        if not chunk: break
+        observed.extend(chunk)
+        sys.stdout.buffer.write(chunk); sys.stdout.buffer.flush()
     print('repl_stdout_eof',flush=True)
-t=threading.Thread(target=drain,daemon=True); t.start()
-while not os.path.exists(release) and t.is_alive(): time.sleep(.1)
+if os.name == 'nt':
+    t=threading.Thread(target=drain,daemon=True); t.start()
+else:
+    import select
+    t=None
+sent=False
+while not os.path.exists(release) and (t is None or t.is_alive()):
+    if t is None and select.select([out],[],[],.05)[0]:
+        chunk=os.read(out,65536)
+        if not chunk: break
+        observed.extend(chunk)
+        sys.stdout.buffer.write(chunk); sys.stdout.buffer.flush()
+    if not sent and os.path.exists(request):
+        with open(request,'rb') as f: command=f.read()
+        os.write(inp,command+b'\\n'); sent=True
+    if sent and not os.path.exists(ack) and b'TL_OWNED_TAB_CLOSED' in observed.replace(b'\\r\\n',b'\\n').splitlines():
+        with open(ack,'wb') as f: f.write(b'closed\\n')
+    time.sleep(.05)
 if os.path.exists(release): print('release_marker_observed',flush=True)
-os.close(inp)
+os.close(inp); os.close(out)
 """
     log_path = diag / f'keeper-{process.pid}.local.log'
     with log_path.open('ab', buffering=0) as log:
@@ -473,17 +501,39 @@ os.close(inp)
                 stdin=subprocess.DEVNULL, stdout=log, stderr=log, start_new_session=True)
         log.write(f'handoff_after repl_pid={process.pid} poll={process.poll()} keeper_pid={keeper.pid} keeper_poll={keeper.poll()}\n'.encode())
     tab = read(sandbox/'browser-tab.json') if sandbox and (sandbox/'browser-tab.json').exists() else {}
+    preserve_browser_session_pointer(diag)
     write(diag/'browser-session.local.json', dict(repl_pid=process.pid, keeper_pid=keeper.pid,
         sandbox=str(sandbox) if sandbox else None, tab=tab, release_marker=str(release)))
 
 
-def release_browser(diag):
+CLOSE_CONFIRM_TIMEOUT_SECONDS = 15
+
+
+def release_browser(diag, close_owned=True):
     path = diag/'browser-session.local.json'
     if path.exists():
         session = read(path)
+        tab = session.get('tab') or {}
+        if close_owned and tab.get('ownership') == 'collector':
+            target, url = tab.get('target_id'), tab.get('url')
+            if (target is not None and (not isinstance(target, str) or not target)) or not isinstance(url, str) or not url:
+                raise RuntimeError('Cannot prove owned browser tab identity; session preserved')
+            marker = Path(session['release_marker'])
+            request, ack = Path(str(marker)+'.close'), Path(str(marker)+'.closed')
+            # The original REPL holds the Page returned by openTab and records
+            # whether it was supplied externally. Check that ownership and URL
+            # there; never attach or close an arbitrary target.
+            expression = "(async()=>{const p=globalThis.tlCollectorPage;const id=" + json.dumps(target) + ";const url=" + json.dumps(url) + ";const clean=v=>{try{let u=new URL(v);return u.origin+u.pathname}catch(_){return null}};if(!p||globalThis.tlCollectorExternal!==false||clean(p.url())!==url)throw Error('Owned tab identity changed');if(id!==null){const found=(await listBrowserTabs()).filter(t=>t.targetId===id);if(found.length!==1||clean(found[0].url)!==url)throw Error('Owned tab target changed')}await closeTab(p);globalThis.tlCollectorPage=null;console.log('TL_OWNED_TAB_CLOSED')})().catch(e=>console.log('TL_CLOSE_ERROR='+String(e)))"
+            expression = 'await eval(' + json.dumps(expression) + ')'
+            temporary = request.with_name(request.name+'.tmp')
+            temporary.write_text(expression, encoding='utf8')
+            temporary.replace(request)
+            deadline = time.monotonic()+CLOSE_CONFIRM_TIMEOUT_SECONDS
+            while not ack.exists() and time.monotonic()<deadline:
+                time.sleep(.05)
+            if not ack.exists():
+                raise RuntimeError('Owned tab close unconfirmed; session preserved')
         Path(session['release_marker']).touch()
-        # Each released session keeps its exact bytes; a retry may encounter
-        # the same destination after a crash, but must never replace history.
         original = path.read_bytes()
         digest = hashlib.sha256(original).hexdigest()
         destination = diag/f'browser-session-released-{digest}.local.json'
@@ -2186,6 +2236,50 @@ def verify_partition_url_guard(plan, changed):
         raise ValueError('Partition browser change is not the audited URL guard')
 
 
+def release_confirmed_404(out, diag, record):
+    """Release only a persisted, unrestricted exact 404 observation."""
+    raw = out/'raw'/f"{record['id']}.json"
+    snap = diag/'problem.snapshot.txt'
+    if not raw.is_file() or not snap.is_file() or sha(raw) != record.get('raw_sha256') or sha(snap) != record.get('snapshot_sha256'):
+        return False
+    session_path = diag/'browser-session.local.json'
+    if not session_path.is_file(): return False
+    session = read(session_path)
+    tab = session.get('tab') or {}
+    sandbox_path = session.get('sandbox')
+    if tab.get('ownership') != 'collector' or tab.get('url') != record.get('url') or not sandbox_path:
+        return False
+    sandbox = Path(sandbox_path)
+    original_raw = sandbox/'raw'/f"{record['id']}.json"
+    original_snap, original_tab = sandbox/'problem.snapshot.txt', sandbox/'browser-tab.json'
+    if (not original_raw.is_file() or not original_snap.is_file() or not original_tab.is_file()
+            or sha(original_raw) != record['raw_sha256'] or sha(original_snap) != record['snapshot_sha256']
+            or read(original_tab) != tab or read(raw).get('source_url') != record['url']):
+        return False
+    text = snap.read_text(encoding='utf8')
+    titles = ('Ошибка 404. Страница не найдена', 'Ошибка 404', '404')
+    if not any(f'- title: "{title}" [url={record["url"]}]' in text.splitlines() for title in titles):
+        return False
+    if re.search(r'captcha|капч|доступ ограничен|проблема с ip|too many requests|http\s*429', text, re.I):
+        return False
+    # A closed REPL may be garbage-collected by Aside. Preserve exact local
+    # evidence before closing, including the original tab identity.
+    archive = diag/'observations'/record['id']
+    archive.mkdir(parents=True, exist_ok=True)
+    for source, suffix in ((original_raw, 'raw.json'), (original_snap, 'problem.snapshot.txt'), (original_tab, 'browser-tab.json')):
+        digest = sha(source)
+        destination = archive/(digest+'.'+suffix)
+        if destination.exists():
+            if destination.read_bytes() != source.read_bytes():
+                raise RuntimeError('404 evidence archive collision; session preserved')
+        else:
+            shutil.copy2(source, destination)
+            if sha(destination) != digest:
+                raise RuntimeError('404 evidence archive verification failed; session preserved')
+    release_browser(diag)
+    return True
+
+
 def capture(args):
     while _capture_batch(args) == 'USER_SKIPPED':
         pass
@@ -2299,6 +2393,9 @@ def _capture_batch(args):
                     pass
                 else:
                     succeeded(diag, 'capture', 'Standing policy accounted for the stopped observation')
+                    records = user_skipped_records(out, queue)
+                    if records and records[-1].get('id') == cp2['next_id']:
+                        release_confirmed_404(out, diag, records[-1])
                     print(json.dumps({'state':'IN_PROGRESS', 'user_skipped':cp2['next_id']})); return 'USER_SKIPPED'
             for policy_path in (out/'closed_policy.json', out/'review_policy.json', out/'blocked_listing_policy.json', out/'standing_unavailable_policy.json'):
                 if not policy_path.exists(): continue
@@ -2307,6 +2404,9 @@ def _capture_batch(args):
                     mark_unavailable(argparse.Namespace(run_id=args.run_id, id=cp2['next_id'], authorization_id=policy['authorization_id'], automatic=True))
                 except (ValueError, HumanRequired, OSError, KeyError):
                     continue
+                records = unavailable_records(out, queue)
+                if records and records[-1].get('id') == cp2['next_id']:
+                    release_confirmed_404(out, diag, records[-1])
                 print(json.dumps({'state': 'IN_PROGRESS', 'unavailable': cp2['next_id']}))
                 return
             unresolved_policy_path = out/'unresolved_policy.json'
@@ -2344,6 +2444,13 @@ def _capture_batch(args):
                     print(json.dumps({'state': 'IN_PROGRESS', 'reviewed': cp2['next_id']}))
                     return
         raise CollectionStopped('Stopped; inspect diagnostics and repair the shared collector before resuming', cp2['state'])
+    expected = done + [item['id'] for item in pending[:args.batch_size]]
+    if cp2.get('completed_ids') != expected:
+        raise ValueError('Checkpoint does not match completed batch')
+    for item in pending[:args.batch_size]:
+        data = reviewed_capture(out, item)
+        if not check(data, item['id'])['structural_check_passed'] or not data.get('parameter_audit', {}).get('rendered_complete'):
+            raise ValueError('Completed batch failed Python validation; session preserved')
     release_browser(diag)
 
 
@@ -2715,8 +2822,8 @@ def finalize(args):
     registry['exports'] = [e for e in registry['exports'] if e['run_id'] != args.run_id] + [entry]
     csv_bytes, manifest_bytes = build(ROOT, registry)  # validates before changing shared registry
     write(registry_path, registry)
-    (ROOT / 'Data/dataset/vacancies.csv').write_bytes(csv_bytes)
-    (ROOT / 'Data/dataset/manifest.json').write_bytes(manifest_bytes)
+    from utils.build_dataset import write_outputs
+    write_outputs(ROOT / 'Data/dataset', csv_bytes, manifest_bytes)
     manifest = dict(run_id=args.run_id, dataset_id=args.run_id, status='complete',
         schema=dict(columns=columns, unknown_policy='empty_not_zero'), collection=plan,
         coverage=dict(planned=len(queue), accepted=len(rows), unavailable=unavailable, unresolved_observations=unresolved, user_skipped_observations=user_skipped, user_skipped_count=len(user_skipped), user_skip_policy=read(out/'user_skip_policy.json') if (out/'user_skip_policy.json').exists() else None, user_detail_skip_policy=read(out/'user_detail_skip_policy.json') if (out/'user_detail_skip_policy.json').exists() else None, deduplication=plan.get('deduplication'), sweep=plan.get('sweep'), unique_ids=[r['id'] for r in rows], errors=[], partial=partial,
@@ -3835,7 +3942,7 @@ def publish(args):
     subprocess.run([sys.executable, '-X', 'utf8', 'utils/build_dataset.py', '--check'], check=True, cwd=ROOT)
     files = [str(out.relative_to(ROOT)), str((service/'plan.json').relative_to(ROOT)),
         str((service/'manifest.json').relative_to(ROOT)), 'Data/dataset/sources.json',
-        'Data/dataset/vacancies.csv', 'Data/dataset/manifest.json', 'Data/README.md', 'Data/dataset/README.md']
+        'Data/dataset/parts', 'Data/dataset/manifest.json', 'Data/README.md', 'Data/dataset/README.md']
     source_entries = [e for e in read(ROOT/'Data/dataset/sources.json')['exports'] if e['run_id'] == args.run_id]
     if len(source_entries) != 1:
         raise ValueError('Expected exactly one registered source for this run')

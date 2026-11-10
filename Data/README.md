@@ -1,7 +1,8 @@
 # Данные
 
-Основной файл для всей команды — [общий датасет](dataset/vacancies.csv).
-Сейчас он собран из семи проверенных выгрузок: 267 вакансий, 73 колонки.
+Основной файл для всей команды — общий датасет `dataset/vacancies.csv`.
+Восстановите его из сохранённых частей командой `python3 utils/build_dataset.py --materialize`
+из корня проекта. Сейчас он содержит 31 543 вакансии и 131 колонку из 137 выгрузок.
 Новые принятые сборы добавляются через [реестр источников](dataset/sources.json)
 и `python3 utils/build_dataset.py`. Дубли по площадке и ID дают одну строку
 с последним наблюдением. Город и регион означают размещение на сайте.
@@ -349,3 +350,15 @@ avito_runs/<название_сбора>/
 - [20261110-remote-bez-opyta-batch_02](avito_runs/20261110-remote-bez-opyta-batch_02/exports/vacancies_flat.csv): исходный архив 200 прочитанных; предварительные адреса: [Краснодар](transformations/20261110-remote-bez-opyta-batch_02-cities-v1/city-01.csv), [Рязань](transformations/20261110-remote-bez-opyta-batch_02-cities-v1/city-02.csv). Полнота городов не подтверждена.
 
 - [20261110-remote-bez-opyta-batch_03](avito_runs/20261110-remote-bez-opyta-batch_03/exports/vacancies_flat.csv): исходный архив 160 прочитанных; предварительные адреса: [Краснодар](transformations/20261110-remote-bez-opyta-batch_03-cities-v1/city-01.csv), [Рязань](transformations/20261110-remote-bez-opyta-batch_03-cities-v1/city-02.csv). Полнота городов не подтверждена.
+
+- [20261110-remote-50000-batch_01](avito_runs/20261110-remote-50000-batch_01/exports/vacancies_flat.csv): 192 вакансий.
+
+- [20261110-remote-50000-batch_02](avito_runs/20261110-remote-50000-batch_02/exports/vacancies_flat.csv): 196 вакансий.
+
+- [20261110-remote-50000-batch_03](avito_runs/20261110-remote-50000-batch_03/exports/vacancies_flat.csv): 198 вакансий.
+
+- [20261110-remote-50000-batch_04](avito_runs/20261110-remote-50000-batch_04/exports/vacancies_flat.csv): 193 вакансий.
+
+- [20261110-remote-50000-batch_05](avito_runs/20261110-remote-50000-batch_05/exports/vacancies_flat.csv): 197 вакансий.
+
+- [20261110-remote-50000-batch_06](avito_runs/20261110-remote-50000-batch_06/exports/vacancies_flat.csv): 185 вакансий.

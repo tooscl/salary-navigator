@@ -1,0 +1,129 @@
+{
+  "method": "post_finalize_validation_v1",
+  "reason": "Validate reproducible placement correction after finalize",
+  "original_manifest_sha256": "7488aa0d720d16b0572e1f1f36ce99048b9a1e9881baf35d73be54bcd8587574",
+  "previous_automation_sha256": {
+    "Scraper/skills/collect-avito/references/top-professions.json": "e3e72638b17b48f825ec6f2fefb963662494f679ae4b0cef1bebedba889610dd",
+    "utils/title_flags.py": "9c9456cb3fb0df5791630049c9c85987381091dbb9ba18bc3fb3314b8cccbeb6",
+    "Scraper/extract.js": "fa0a0e0c7df0877d15ea4f94e5fed14df514241cb51771cda18cacc04574e8b0",
+    "Scraper/skills/collect-avito/SKILL.md": "871bafb795ceae974c9e7e22dabeb6179048f727112540421987015d6831516d",
+    "Scraper/skills/collect-avito/scripts/run.py": "ab7cd9c3fd01c88119164e4ef5d11aca5c4b91b9c309c59edea511f102e88e3f",
+    "Scraper/skills/collect-avito/scripts/sweep_mode.py": "718a956a316df71c47ee3a4c5d3670fa011a5b16e9948393d68216702b140a56",
+    "Scraper/skills/collect-avito/scripts/browser_batch.js": "7572ff4aa773cd86ccd3d8ca3a2de6c9586b482ab6f1371dbfa152b165588eb4",
+    "Scraper/skills/collect-avito/scripts/check_capture.py": "aa746849317f9768af5aae08b394b9379539f6e268c1fc69e4ed13bd06a4657f",
+    "Scraper/skills/collect-avito/scripts/failure_log.py": "08dfd259fad4166a08acb1b056bf3cd14daede277385bd91c7e49680959475a4",
+    "Scraper/skills/collect-avito/scripts/preflight.py": "492a0d898990aee198f26bf6577d0876360dcc6ec69e274835cd77cdaa768974"
+  },
+  "automation_changes": [
+    {
+      "file": "Scraper/skills/collect-avito/scripts/run.py",
+      "reason": "Bind 404 page evidence to owned session and preserve stopped session pointers",
+      "validation": "139 runner/pagination tests plus 2 targeted tests"
+    },
+    {
+      "file": "Scraper/skills/collect-avito/SKILL.md",
+      "reason": "Bind 404 page evidence to owned session and preserve stopped session pointers",
+      "validation": "139 runner/pagination tests plus 2 targeted tests"
+    },
+    {
+      "file": "Scraper/test_aside_runner.py",
+      "reason": "Bind 404 page evidence to owned session and preserve stopped session pointers",
+      "validation": "139 runner/pagination tests plus 2 targeted tests"
+    },
+    {
+      "file": "Scraper/skills/collect-avito/scripts/run.py",
+      "reason": "Preserve exact 404 evidence before closing collector-owned tab",
+      "validation": "139 runner and pagination tests, including evidence-copy failure; live Aside keeper close"
+    },
+    {
+      "file": "Scraper/skills/collect-avito/SKILL.md",
+      "reason": "Preserve exact 404 evidence before closing collector-owned tab",
+      "validation": "139 runner and pagination tests, including evidence-copy failure; live Aside keeper close"
+    },
+    {
+      "file": "Scraper/test_aside_runner.py",
+      "reason": "Preserve exact 404 evidence before closing collector-owned tab",
+      "validation": "139 runner and pagination tests, including evidence-copy failure; live Aside keeper close"
+    },
+    {
+      "file": "Scraper/skills/collect-avito/scripts/run.py",
+      "reason": "Bind 404 page evidence to owned session and preserve stopped session pointers",
+      "validation": "139 runner/pagination tests plus 2 targeted tests"
+    },
+    {
+      "file": "Scraper/skills/collect-avito/SKILL.md",
+      "reason": "Bind 404 page evidence to owned session and preserve stopped session pointers",
+      "validation": "139 runner/pagination tests plus 2 targeted tests"
+    },
+    {
+      "file": "Scraper/test_aside_runner.py",
+      "reason": "Bind 404 page evidence to owned session and preserve stopped session pointers",
+      "validation": "139 runner/pagination tests plus 2 targeted tests"
+    },
+    {
+      "file": "Scraper/skills/collect-avito/scripts/run.py",
+      "reason": "Preserve exact 404 evidence before closing collector-owned tab",
+      "validation": "139 runner and pagination tests, including evidence-copy failure; live Aside keeper close"
+    },
+    {
+      "file": "Scraper/skills/collect-avito/SKILL.md",
+      "reason": "Preserve exact 404 evidence before closing collector-owned tab",
+      "validation": "139 runner and pagination tests, including evidence-copy failure; live Aside keeper close"
+    },
+    {
+      "file": "Scraper/test_aside_runner.py",
+      "reason": "Preserve exact 404 evidence before closing collector-owned tab",
+      "validation": "139 runner and pagination tests, including evidence-copy failure; live Aside keeper close"
+    },
+    {
+      "file": "Scraper/skills/collect-avito/SKILL.md",
+      "reason": "Restore explicit city and region from immutable raw and listing evidence",
+      "validation": "32 placement and builder tests; all 1161 placement evidence checked"
+    },
+    {
+      "file": "utils/placement_transform.py",
+      "reason": "Restore explicit city and region from immutable raw and listing evidence",
+      "validation": "32 placement and builder tests; all 1161 placement evidence checked"
+    },
+    {
+      "file": "utils/placement_transform_v2.py",
+      "reason": "Restore explicit city and region from immutable raw and listing evidence",
+      "validation": "32 placement and builder tests; all 1161 placement evidence checked"
+    },
+    {
+      "file": "utils/test_placement_transform.py",
+      "reason": "Restore explicit city and region from immutable raw and listing evidence",
+      "validation": "32 placement and builder tests; all 1161 placement evidence checked"
+    },
+    {
+      "file": "utils/build_dataset.py",
+      "reason": "Restore explicit city and region from immutable raw and listing evidence",
+      "validation": "32 placement and builder tests; all 1161 placement evidence checked"
+    },
+    {
+      "file": "utils/test_build_dataset.py",
+      "reason": "Restore explicit city and region from immutable raw and listing evidence",
+      "validation": "32 placement and builder tests; all 1161 placement evidence checked"
+    }
+  ],
+  "previous_review_sha256": null,
+  "current_automation_sha256": {
+    "Scraper/extract.js": "fa0a0e0c7df0877d15ea4f94e5fed14df514241cb51771cda18cacc04574e8b0",
+    "Scraper/skills/collect-avito/SKILL.md": "c317c9919088dad416ca2a3816ce43be27308e7d98719743725225238d714184",
+    "Scraper/skills/collect-avito/references/top-professions.json": "e3e72638b17b48f825ec6f2fefb963662494f679ae4b0cef1bebedba889610dd",
+    "Scraper/skills/collect-avito/scripts/browser_batch.js": "7572ff4aa773cd86ccd3d8ca3a2de6c9586b482ab6f1371dbfa152b165588eb4",
+    "Scraper/skills/collect-avito/scripts/check_capture.py": "aa746849317f9768af5aae08b394b9379539f6e268c1fc69e4ed13bd06a4657f",
+    "Scraper/skills/collect-avito/scripts/failure_log.py": "08dfd259fad4166a08acb1b056bf3cd14daede277385bd91c7e49680959475a4",
+    "Scraper/skills/collect-avito/scripts/preflight.py": "492a0d898990aee198f26bf6577d0876360dcc6ec69e274835cd77cdaa768974",
+    "Scraper/skills/collect-avito/scripts/run.py": "ab7cd9c3fd01c88119164e4ef5d11aca5c4b91b9c309c59edea511f102e88e3f",
+    "Scraper/skills/collect-avito/scripts/sweep_mode.py": "718a956a316df71c47ee3a4c5d3670fa011a5b16e9948393d68216702b140a56",
+    "Scraper/test_aside_runner.py": "0f414edc5a74a5430e38d3d0d7b14a9af23c08c8cf88896a10bc5a4ee3ea3316",
+    "utils/build_dataset.py": "92d429e1f0d758dc2b1a00f6501b6e72a14ead1680af698b0f6c399771b823dc",
+    "utils/placement_transform.py": "2d7aeeb6a57f361a86f287fc5bb24d15b0ccbc5094fa6d252cf10d94fe7198d5",
+    "utils/placement_transform_v2.py": "da0ecccdcf2b445f5212bddc71af7b1a23ab1344432d819cab0cfccd0a5d7716",
+    "utils/test_build_dataset.py": "3daedd725f9ab1464bf6931d0fc82177d566426eee29bddd40cdbb2d55de2584",
+    "utils/test_placement_transform.py": "ec0a96579cd84b337de2028dbc11613b580876ebbde752003b1ffbbd8c671e54",
+    "utils/title_flags.py": "9c9456cb3fb0df5791630049c9c85987381091dbb9ba18bc3fb3314b8cccbeb6"
+  },
+  "validation": "Partition, plan, page hashes, URL chain, raw, correction, CSV IDs and profession, dataset check and offline regression suites passed"
+}

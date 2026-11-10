@@ -8,20 +8,22 @@ from datetime import datetime
 from pathlib import Path, PureWindowsPath
 
 try:
-    from . import title_flags, vacancy_labels, placement_transform, city_scope_subset, city_scope_multi
+    from . import title_flags, vacancy_labels, placement_transform, placement_transform_v2, city_scope_subset, city_scope_multi
 except ImportError:  # Direct `python3 utils/build_dataset.py` entry point.
     import title_flags
     import vacancy_labels
     import placement_transform
+    import placement_transform_v2
     import city_scope_subset
     import city_scope_multi
 
 ROOT = Path(__file__).resolve().parents[1]
 VERSION = "1"
+BUILDER_VERSION = "3"
 METADATA = ["source", "region", "first_seen_at", "last_seen_at", "run_id",
-            "run_ids", "search_geography", "search_profession", "search_filter_observations",
+            "run_ids", "search_geography", "search_profession", "search_filter_observations", "search_geography_context_observations",
             "enrichment_status", "enriched_fields", "enrichment_version"]
-GENERATED = {"source", "region", "first_seen_at", "last_seen_at", "run_id", "run_ids", "search_geography", "search_profession", "search_filter_observations"}
+GENERATED = {"source", "region", "first_seen_at", "last_seen_at", "run_id", "run_ids", "search_geography", "search_profession", "search_filter_observations", "search_geography_context_observations"}
 REQUIRED = {"id", "source_url", "observed_at", "city", "profession", "title",
             "description", "salary_raw", "analysis_status", "export_eligibility"}
 # Recomputed from the latest observation on every build; never taken from exports.
@@ -92,6 +94,12 @@ def build(root, registry):
                     if (entry['placement_regions'].get(decision['city']) != decision['region'] or
                             identity in entry.get('unknown_city_placements', {})):
                         raise ValueError('Transformed placement registry mismatch')
+            elif spec.get('version') == placement_transform_v2.VERSION:
+                transformed = placement_transform_v2.render(root, spec)
+                for identity, decision in spec['placements'].items():
+                    if (entry['placement_regions'].get(decision['city']) != decision['region'] or
+                            identity in entry.get('unknown_city_placements', {})):
+                        raise ValueError('Transformed placement registry mismatch')
             elif spec.get('version') == city_scope_subset.VERSION:
                 transformed = city_scope_subset.render(root, spec)
             elif spec.get('version') == city_scope_multi.VERSION:
@@ -120,7 +128,15 @@ def build(root, registry):
         profession = plan.get("profession", plan.get("profession_filter"))
         if geography is not None and not isinstance(geography, str) or profession is not None and not isinstance(profession, str):
             raise ValueError(f"Invalid search filter in plan: {run_id}")
-        search = {"run_id": run_id, "geography": geography, "profession": profession}
+        context = geography
+        controls = plan.get("selected_controls", [])
+        modes = {x.get("value") for x in controls if isinstance(x, dict) and x.get("marker") == "params[127818]/toggle" and x.get("value") in {"3054249", "3054250"}}
+        if len(modes) > 1:
+            raise ValueError(f"Conflicting geographic modes in plan: {run_id}")
+        mode = {"3054249": "По всей России", "3054250": "Только в моём регионе"}.get(next(iter(modes), None))
+        if mode == "По всей России":
+            geography = "По всей России"
+        search = {"run_id": run_id, "geography": geography, "profession": profession, "context": context, "mode": mode}
         reader = csv.DictReader(io.StringIO(data.decode("utf-8-sig")))
         names = reader.fieldnames or []
         if len(names) != len(set(names)) or not REQUIRED.issubset(names) or GENERATED.intersection(names):
@@ -216,14 +232,16 @@ def build(root, registry):
                       run_ids="; ".join(sorted({item[1] for item in observations})),
                       search_geography=observations[-1][3]["geography"] or "",
                       search_profession=observations[-1][3]["profession"] or "",
-                      search_filter_observations=json.dumps([[item[3]["run_id"], item[3]["geography"], item[3]["profession"]] for item in observations], ensure_ascii=False, separators=(",", ":")))
+                      search_filter_observations=json.dumps([[item[3]["run_id"], item[3]["geography"], item[3]["profession"]] for item in observations], ensure_ascii=False, separators=(",", ":")),
+                      search_geography_context_observations=json.dumps([[item[3]["run_id"], item[3]["context"], item[3]["mode"]] for item in observations], ensure_ascii=False, separators=(",", ":")))
         latest.update(title_flags.military_flags(latest["title"]))
         latest.update(vacancy_labels.vacancy_labels(latest))
         writer.writerow(latest)
     csv_bytes = output.getvalue().encode("utf-8-sig")
-    manifest = {"schema_version": VERSION, "builder_version": VERSION,
+    manifest = {"schema_version": VERSION, "builder_version": BUILDER_VERSION,
                 "builder_sha256": digest(Path(__file__).read_bytes()),
                 "placement_transform_sha256": digest(Path(placement_transform.__file__).read_bytes()),
+                "placement_transform_v2_sha256": digest(Path(placement_transform_v2.__file__).read_bytes()),
                 "city_scope_audit_sha256": digest(Path(city_scope_subset.city_scope_audit.__file__).read_bytes()),
                 "city_scope_audit_v1_sha256": digest(Path(city_scope_subset.city_scope_audit_v1.__file__).read_bytes()),
                 "city_scope_subset_sha256": digest(Path(city_scope_subset.__file__).read_bytes()),
@@ -241,21 +259,100 @@ def build(root, registry):
     return csv_bytes, (json.dumps(manifest, ensure_ascii=False, indent=2) + "\n").encode()
 
 
+
+SHARD_COUNT = 64
+
+def split_csv(data):
+    reader = csv.DictReader(io.StringIO(data.decode("utf-8-sig"), newline=""))
+    columns = reader.fieldnames
+    outputs = [io.StringIO(newline="") for _ in range(SHARD_COUNT)]
+    writers = [csv.DictWriter(out, fieldnames=columns, lineterminator="\n") for out in outputs]
+    for writer in writers:
+        writer.writeheader()
+    counts = [0] * SHARD_COUNT
+    for row in reader:
+        key = json.dumps([row["source"], row["id"]], ensure_ascii=False, separators=(",", ":")).encode("utf-8")
+        index = int.from_bytes(hashlib.sha256(key).digest()[:8], "big") % SHARD_COUNT
+        writers[index].writerow(row)
+        counts[index] += 1
+    files = {f"parts/part-{i:02d}.csv": out.getvalue().encode("utf-8-sig") for i, out in enumerate(outputs)}
+    metadata = [{"path": name, "rows": counts[i], "bytes": len(content), "sha256": digest(content)}
+                for i, (name, content) in enumerate(files.items())]
+    return files, metadata
+
+
+def assemble(manifest, read_part):
+    rows = []
+    columns = manifest["columns"]
+    seen = set()
+    for part in manifest["parts"]:
+        data = read_part(part["path"])
+        if len(data) != part["bytes"] or digest(data) != part["sha256"]:
+            raise ValueError(f"Invalid part: {part['path']}")
+        reader = csv.DictReader(io.StringIO(data.decode("utf-8-sig"), newline=""))
+        if reader.fieldnames != columns:
+            raise ValueError(f"Invalid header: {part['path']}")
+        count = 0
+        for row in reader:
+            key = (row["source"], row["id"])
+            if key in seen:
+                raise ValueError(f"Duplicate key: {key}")
+            seen.add(key)
+            rows.append(row)
+            count += 1
+        if count != part["rows"]:
+            raise ValueError(f"Invalid row count: {part['path']}")
+    output = io.StringIO(newline="")
+    writer = csv.DictWriter(output, fieldnames=columns, lineterminator="\n")
+    writer.writeheader()
+    writer.writerows(sorted(rows, key=lambda row: (row["source"], row["id"])))
+    data = output.getvalue().encode("utf-8-sig")
+    if len(rows) != manifest["rows"] or digest(data) != manifest["sha256"]:
+        raise ValueError("Assembled CSV does not match manifest")
+    return data
+
+
+def write_outputs(directory, csv_bytes, manifest_bytes, check=False):
+    manifest = json.loads(manifest_bytes)
+    files, metadata = split_csv(csv_bytes)
+    manifest["parts"] = metadata
+    manifest["partition"] = "sha256-json-source-id-first64-mod-64-v1"
+    manifest_bytes = (json.dumps(manifest, ensure_ascii=False, indent=2) + "\n").encode()
+    files["manifest.json"] = manifest_bytes
+    existing = {p.relative_to(directory).as_posix() for p in (directory / "parts").glob("*.csv")}
+    expected = set(files) - {"manifest.json"}
+    if check and existing != expected:
+        raise SystemExit("Dataset parts differ; run python3 utils/build_dataset.py")
+    for name, data in files.items():
+        path = directory / name
+        if check:
+            if not path.exists() or path.read_bytes() != data:
+                raise SystemExit(f"Outdated {path}; run python3 utils/build_dataset.py")
+        else:
+            path.parent.mkdir(parents=True, exist_ok=True)
+            path.write_bytes(data)
+    if not check:
+        for name in existing - expected:
+            (directory / name).unlink()
+        (directory / "vacancies.csv").write_bytes(csv_bytes)
+    return manifest
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--check", action="store_true", help="Fail if committed outputs differ")
+    parser.add_argument("--materialize", action="store_true", help="Reconstruct CSV from committed parts")
     args = parser.parse_args()
     directory = ROOT / "Data/dataset"
+    if args.materialize:
+        if args.check:
+            parser.error("--materialize and --check are mutually exclusive")
+        manifest = json.loads((directory / "manifest.json").read_text())
+        (directory / "vacancies.csv").write_bytes(assemble(manifest, lambda path: (directory / path).read_bytes()))
+        print(f"Materialized {manifest['rows']} vacancies; SHA-256 {manifest['sha256']}")
+        return
     registry = json.loads((directory / "sources.json").read_text())
     csv_bytes, manifest_bytes = build(ROOT, registry)
-    for name, data in [("vacancies.csv", csv_bytes), ("manifest.json", manifest_bytes)]:
-        path = directory / name
-        if args.check:
-            if not path.exists() or path.read_bytes() != data:
-                raise SystemExit(f"Outdated {path.relative_to(ROOT)}; run python3 utils/build_dataset.py")
-        else:
-            path.write_bytes(data)
-    manifest = json.loads(manifest_bytes)
+    manifest = write_outputs(directory, csv_bytes, manifest_bytes, check=args.check)
     print(f"{manifest['rows']} vacancies, {len(manifest['columns'])} columns; {len(registry['exports'])} exports")
 
 
