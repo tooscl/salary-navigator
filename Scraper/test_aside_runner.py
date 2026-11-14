@@ -39,6 +39,21 @@ def raw(identity='123'):
 
 
 class RunnerTests(unittest.TestCase):
+    def test_protocol_scan_handles_split_marker_and_large_unterminated_line(self):
+        chunks = bytearray(b'x' * 200000)
+        found, line_start, search_start = runner.scan_protocol_lines(
+            chunks, r'(?m)^TL_FINISHED\r?\n', 0, 0)
+        self.assertIsNone(found)
+        self.assertEqual(search_start, len(chunks))
+        chunks.extend(b'\nTL_FIN')
+        found, line_start, search_start = runner.scan_protocol_lines(
+            chunks, r'(?m)^TL_FINISHED\r?\n', line_start, search_start)
+        self.assertIsNone(found)
+        chunks.extend(b'ISHED\r\n')
+        found, _, _ = runner.scan_protocol_lines(
+            chunks, r'(?m)^TL_FINISHED\r?\n', line_start, search_start)
+        self.assertIsNotNone(found)
+
     def test_hours_selection_and_dataset_snapshot(self):
         with tempfile.TemporaryDirectory() as directory:
             out = Path(directory)
