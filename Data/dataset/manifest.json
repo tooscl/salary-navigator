@@ -26,7 +26,7 @@
     "source": "title, profession, city, location_observed",
     "policy": "added_next_to_observed_columns_not_replacing"
   },
-  "rows": 32057,
+  "rows": 32087,
   "columns": [
     "source",
     "id",
@@ -160,7 +160,7 @@
     "enriched_fields",
     "enrichment_version"
   ],
-  "sha256": "208e4e2176f9273919c1ae0fafb02f89190dc71513198aca054e68a6a41b3e4d",
+  "sha256": "b607c7f0df325bb24537a92cef7c995716878ab314023e0c7548c30367f7f5dc",
   "inputs": [
     {
       "run_id": "20261028-spb-50-all",
@@ -46756,6 +46756,58 @@
       }
     },
     {
+      "run_id": "msk_gruzchik_perm_shift_20261114_new18",
+      "source": "avito",
+      "path": "Data/avito_runs/msk_gruzchik_perm_shift_20261114_new18/exports/vacancies_flat.csv",
+      "sha256": "f4bfd16579c7221f373339ad83c591a66463e435236832fb799d03436a56bdc3",
+      "placement_regions": {
+        "Москва": "Москва"
+      },
+      "enrichment_status": "not_run",
+      "unknown_city_placements": {
+        "8015162417": {
+          "region": "Москва",
+          "evidence": "Москва, Боровское ш. Солнцево 6–10 мин. Солнечная 11–15 мин. Говорово 16–20 мин.",
+          "region_unknown": false
+        },
+        "8433243370": {
+          "region": "Москва",
+          "evidence": "Москва, Кавказский б-р, 22 Кантемировская 6–10 мин. Царицыно 11–15 мин. Москворечье 21–30 мин.",
+          "region_unknown": false
+        },
+        "8380393620": {
+          "region": "Москва",
+          "evidence": "Москва, Природно-исторический парк Косинский Новокосино 21–30 мин. Улица Дмитриевского 21–30 мин. Реутов от 31 мин.",
+          "region_unknown": false
+        },
+        "8469796242": {
+          "region": "Москва",
+          "evidence": "Москва, Каширское ш., 21 Каширская 11–15 мин. Варшавская 21–30 мин. Нахимовский проспект 21–30 мин.",
+          "region_unknown": false
+        },
+        "8283652889": {
+          "region": "Московская область",
+          "evidence": "Московская обл., Ленинский г.о., пгт. Дрожжино, Новое ш., 13 Бутово 21–30 мин. Щербинка от 31 мин. Улица Скобелевская от 31 мин.",
+          "region_unknown": false
+        },
+        "8546138508": {
+          "region": "Москва",
+          "evidence": "Москва, Карамышевская наб., 44 Мнёвники 16–20 мин. Народное Ополчение 16–20 мин. Бульвар Генерала Карбышева 16–20 мин.",
+          "region_unknown": false
+        },
+        "8230305473": {
+          "region": "Москва",
+          "evidence": "Москва, платформа Северянин, 6 Ростокино 6–10 мин. Свиблово 21–30 мин. Ботанический сад от 31 мин.",
+          "region_unknown": false
+        }
+      },
+      "rows": 30,
+      "search_plan": {
+        "path": "Scraper/runs/msk_gruzchik_perm_shift_20261114_new18/plan.json",
+        "sha256": "e6fbf57dcff42578f2136e8ee072e7b8845129c4bda27ff0b1eab4a1b422b865"
+      }
+    },
+    {
       "run_id": "remote-full-krasnodar-20261110",
       "source": "avito",
       "path": "Data/avito_runs/remote-full-krasnodar-20261110/exports/vacancies_flat.csv",
@@ -67578,9 +67630,9 @@
     },
     {
       "path": "parts/part-01.csv",
-      "rows": 517,
-      "bytes": 1835600,
-      "sha256": "98d1daad98771eceb8621bb1315c358eccc892bb60c07ef96062f034e9c0b729"
+      "rows": 519,
+      "bytes": 1842610,
+      "sha256": "3bf5894244eaff429b87bf40da7d6eb3dfe07f71995be148e2a125a267ada124"
     },
     {
       "path": "parts/part-02.csv",
@@ -67590,15 +67642,15 @@
     },
     {
       "path": "parts/part-03.csv",
-      "rows": 505,
-      "bytes": 1793590,
-      "sha256": "3daefca52fa2309d0df89f3a1c0f00e68ab60ac4dff355043161f873b2dd3d19"
+      "rows": 506,
+      "bytes": 1797155,
+      "sha256": "757a6d04ec7041f0198f3565af86710c30e65c5bf3fed529d129f973eaf71b18"
     },
     {
       "path": "parts/part-04.csv",
-      "rows": 484,
-      "bytes": 1745191,
-      "sha256": "2fc28ab8d4df4e5970d6cbb684625ebd57da2a061f784a9e335de7a576ba86d2"
+      "rows": 487,
+      "bytes": 1753316,
+      "sha256": "07abd005a610f893abe6aeb48d8d7692c8770294a65f71c6806bd96937cea6cf"
     },
     {
       "path": "parts/part-05.csv",
@@ -67614,9 +67666,9 @@
     },
     {
       "path": "parts/part-07.csv",
-      "rows": 511,
-      "bytes": 1924819,
-      "sha256": "b9ae0e50a408a90c33bf625f7524a068d7eaaa90348cec2932c37b58b394da57"
+      "rows": 512,
+      "bytes": 1927503,
+      "sha256": "7f789c6a5082f795ed4104162b7d86cdf50b54fae31544c8879d947072e5d393"
     },
     {
       "path": "parts/part-08.csv",
@@ -67626,9 +67678,9 @@
     },
     {
       "path": "parts/part-09.csv",
-      "rows": 545,
-      "bytes": 2023119,
-      "sha256": "08afc0a69932aa716741f04262a198443376aa85d397a2153782587eef40fede"
+      "rows": 547,
+      "bytes": 2028926,
+      "sha256": "a89e3d8c1e5ae474fdeacf3f99ed1216a795c8e0b07b039a11fa526d751d57a6"
     },
     {
       "path": "parts/part-10.csv",
@@ -67638,9 +67690,9 @@
     },
     {
       "path": "parts/part-11.csv",
-      "rows": 490,
-      "bytes": 1752256,
-      "sha256": "3ce84b3299406b18a3f6eaf623e515fd3c31cf4398b5c37db1cb109ecf9c5adc"
+      "rows": 491,
+      "bytes": 1756011,
+      "sha256": "cca6a2cc19260db3d33b072cf3c5e0e589f3ae01111c139ca5296644eab56cbe"
     },
     {
       "path": "parts/part-12.csv",
@@ -67668,9 +67720,9 @@
     },
     {
       "path": "parts/part-16.csv",
-      "rows": 516,
-      "bytes": 1903693,
-      "sha256": "b62415f925e24add8c38626c5eb147e6e38873e7024138cefced6d38d940145d"
+      "rows": 517,
+      "bytes": 1905399,
+      "sha256": "261bcad3788ffb85123a767744a521ec012d482be5490c994e354938b0628a09"
     },
     {
       "path": "parts/part-17.csv",
@@ -67680,15 +67732,15 @@
     },
     {
       "path": "parts/part-18.csv",
-      "rows": 502,
-      "bytes": 1845132,
-      "sha256": "65e4f1800eae84a90939ac8e2dbcb4ab96e7e8670a3e4b6a615f2abcd4fbc99f"
+      "rows": 503,
+      "bytes": 1847484,
+      "sha256": "d769fd80729856a9ba418990594a7d1abf08cd7d4481728ba92bc99a513a8837"
     },
     {
       "path": "parts/part-19.csv",
-      "rows": 585,
-      "bytes": 2139342,
-      "sha256": "b5093da10f015f214b390c117624075655c1b72029cb2cb4c678a59fa5f8c38b"
+      "rows": 586,
+      "bytes": 2142351,
+      "sha256": "13a331abed2d41e30443357788a955e54d23a6ad0e72d882b9cf2593b332159a"
     },
     {
       "path": "parts/part-20.csv",
@@ -67710,27 +67762,27 @@
     },
     {
       "path": "parts/part-23.csv",
-      "rows": 527,
-      "bytes": 1960684,
-      "sha256": "f7724de34cf89d043915e7ba6a8f719c523f8500a333581e8f6f4298008b46c2"
+      "rows": 528,
+      "bytes": 1963280,
+      "sha256": "ef0fe4ff30cb40bebee2d48a56ac81c7fbae3b7d993b18f9850aee59b1452496"
     },
     {
       "path": "parts/part-24.csv",
-      "rows": 494,
-      "bytes": 1827410,
-      "sha256": "54e0f189da34d5b58852a88933231c440cab17db9332c7bb81e11151b1fc5d50"
+      "rows": 495,
+      "bytes": 1830950,
+      "sha256": "01eba715b2937a978d40562ef7839c9479d6b7313b6a618e969166f2cec4d99f"
     },
     {
       "path": "parts/part-25.csv",
-      "rows": 522,
-      "bytes": 1958822,
-      "sha256": "6fc1808d812fad3f7be1671a5b2df56a63163bf69b63eacbc474a3b3a421f9b7"
+      "rows": 523,
+      "bytes": 1962709,
+      "sha256": "453b85c4572a2d086e96142a4eb240fa3ae0601f62e95d9cfa9ebb8745b067e1"
     },
     {
       "path": "parts/part-26.csv",
-      "rows": 519,
-      "bytes": 1904482,
-      "sha256": "5c7ef895073fea36277d785754489669c926d4911fee699925a494dfb7e7a6dc"
+      "rows": 520,
+      "bytes": 1907803,
+      "sha256": "615a2d7dddd96ded4b6212fed4a04bc51b1d273d6f6d137131bdb8ce008895a2"
     },
     {
       "path": "parts/part-27.csv",
@@ -67764,9 +67816,9 @@
     },
     {
       "path": "parts/part-32.csv",
-      "rows": 495,
-      "bytes": 1832451,
-      "sha256": "6480d2411bdd9cfe0d854c23f873e62abd2d9abefae9bf7f574a047a0f50dc78"
+      "rows": 496,
+      "bytes": 1835928,
+      "sha256": "55abaf35fa617cb9b5e99a40164297d11e01d39721eed55e5006fb22239ab1ea"
     },
     {
       "path": "parts/part-33.csv",
@@ -67788,9 +67840,9 @@
     },
     {
       "path": "parts/part-36.csv",
-      "rows": 439,
-      "bytes": 1579540,
-      "sha256": "78dc9c9b4ab993e7730282ea1948979d14be94217c98aeefe3007e4473f36adc"
+      "rows": 440,
+      "bytes": 1583280,
+      "sha256": "2450c4184912c19632aaa4888c72a35c4eb23dfc9bb453090c2e4573c74fedc9"
     },
     {
       "path": "parts/part-37.csv",
@@ -67806,15 +67858,15 @@
     },
     {
       "path": "parts/part-39.csv",
-      "rows": 479,
-      "bytes": 1756204,
-      "sha256": "9634aad1fd428c5b399313242ef7de91aae864a17797d24aaf74e4be03eba501"
+      "rows": 480,
+      "bytes": 1759456,
+      "sha256": "a21d973ad8b0c35051f6937fe5e398da29b07d6f755d50be09b8dd69e853fb09"
     },
     {
       "path": "parts/part-40.csv",
-      "rows": 515,
-      "bytes": 1839720,
-      "sha256": "80193a3b86042f3eba9c954e79a28592c1a5483bf491e9dc3c3d77b73e8e16da"
+      "rows": 516,
+      "bytes": 1843763,
+      "sha256": "7aea9b9c74de40c6f5cd0c98af2a84d1640bed20716f22b5d1228a7f3309cb82"
     },
     {
       "path": "parts/part-41.csv",
@@ -67824,9 +67876,9 @@
     },
     {
       "path": "parts/part-42.csv",
-      "rows": 502,
-      "bytes": 1797069,
-      "sha256": "1c594b9452c2fa6ed83e00ef9242f080f0a6f737919183601a2611a80f715b29"
+      "rows": 503,
+      "bytes": 1800747,
+      "sha256": "91e139be86e82ea8cf6b36d5f8fff571c9e4ecfe2fcf4e0387bcaddf3d18fbff"
     },
     {
       "path": "parts/part-43.csv",
@@ -67842,9 +67894,9 @@
     },
     {
       "path": "parts/part-45.csv",
-      "rows": 540,
-      "bytes": 1973306,
-      "sha256": "a0e4257dd811c8faed867aa25a475acfd6c726b2e4bba6b21ec93f798c833201"
+      "rows": 541,
+      "bytes": 1976641,
+      "sha256": "0fd0b6167f759a196987c8a06b659fb7a4eea015ae7b1141cfc386b5aa20a1b6"
     },
     {
       "path": "parts/part-46.csv",
@@ -67854,15 +67906,15 @@
     },
     {
       "path": "parts/part-47.csv",
-      "rows": 490,
-      "bytes": 1777170,
-      "sha256": "f83f6547ba46f3102b4be1198a8b1682f0152f94e4b363ed324ea85179646e62"
+      "rows": 491,
+      "bytes": 1780856,
+      "sha256": "f2ac58dbf7c9396d1a1f90772fa92520a4dd516679ee1b3d5c00078c45cc8b66"
     },
     {
       "path": "parts/part-48.csv",
-      "rows": 514,
-      "bytes": 1931428,
-      "sha256": "41deb85cc900edb7bb496b850c0196e9b81bbb92a25739e31af5646cb6a5881d"
+      "rows": 515,
+      "bytes": 1934578,
+      "sha256": "9cf2ec385e833ed460842ee9d3b28b49132c24e1fcc12ecf3e77cddb7ae67beb"
     },
     {
       "path": "parts/part-49.csv",
@@ -67902,9 +67954,9 @@
     },
     {
       "path": "parts/part-55.csv",
-      "rows": 469,
-      "bytes": 1724745,
-      "sha256": "8b3fae6c880f0480a90b163c3f51acc58f974fbd17367ef9bdb55e09457c6d17"
+      "rows": 470,
+      "bytes": 1727752,
+      "sha256": "55e46339fa0a7a66343b9526f9c04c2e778a54bafaad1c35b4d90533f2662804"
     },
     {
       "path": "parts/part-56.csv",
@@ -67914,9 +67966,9 @@
     },
     {
       "path": "parts/part-57.csv",
-      "rows": 489,
-      "bytes": 1805792,
-      "sha256": "50b087d6aa7670bae9c682a78c884cd166e9742789a5c49de714dab3a5ec7f44"
+      "rows": 490,
+      "bytes": 1809263,
+      "sha256": "d3c4c6d9d8040ce97a361b8bbdfb4b55470fc6c5b59e26087700abf8ca3c74be"
     },
     {
       "path": "parts/part-58.csv",
@@ -67926,9 +67978,9 @@
     },
     {
       "path": "parts/part-59.csv",
-      "rows": 476,
-      "bytes": 1759560,
-      "sha256": "3d1c669fc9c11dc6906902c442dc9e62aa3962f53f7f0f4192242ef04ae3260c"
+      "rows": 478,
+      "bytes": 1765099,
+      "sha256": "31899840675f503a5e8d58fc2fbf8d60e469a8cf5169b905d6c096e059becce0"
     },
     {
       "path": "parts/part-60.csv",
@@ -67944,9 +67996,9 @@
     },
     {
       "path": "parts/part-62.csv",
-      "rows": 485,
-      "bytes": 1778358,
-      "sha256": "976fa87373124a8a432058a8e5df732876b802c65cbebc2b56a131e30a38ad32"
+      "rows": 486,
+      "bytes": 1781799,
+      "sha256": "68c3edc63a664bb7179f4f5922689b6ffc64c98b6ad474514dbafb1ff060899c"
     },
     {
       "path": "parts/part-63.csv",
