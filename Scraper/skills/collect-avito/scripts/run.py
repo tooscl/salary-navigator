@@ -591,6 +591,19 @@ def browser_sources():
             (ROOT / 'Scraper/extract.js').read_text(encoding='utf-8'))
 
 
+def scan_protocol_lines(chunks, pattern, line_start, search_start):
+    """Search complete new output lines once, retaining a partial trailing line."""
+    while True:
+        end = chunks.find(b'\n', search_start)
+        if end < 0:
+            return None, line_start, len(chunks)
+        line = chunks[line_start:end + 1].decode('utf-8', errors='replace')
+        line_start = search_start = end + 1
+        found = re.search(pattern, line)
+        if found:
+            return found, line_start, search_start
+
+
 def browser(job, out, diag):
     # One-shot Aside buffers stdout until completion. An interactive handshake
     # records its sandbox BEFORE collection, so interruption cannot orphan raw.
@@ -602,9 +615,10 @@ def browser(job, out, diag):
     chunks = bytearray()
     def until(pattern, timeout, offset=0):
         deadline = time.monotonic() + timeout
+        line_start = search_start = offset
         while True:
-            output = chunks[offset:].decode('utf-8', errors='replace')
-            found = re.search(pattern, output)
+            found, line_start, search_start = scan_protocol_lines(
+                chunks, pattern, line_start, search_start)
             if found:
                 return found
             remaining = deadline - time.monotonic()
