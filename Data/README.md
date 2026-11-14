@@ -386,3 +386,5 @@ avito_runs/<название_сбора>/
 - [ekb_prodavec_11_12h_20261114](avito_runs/ekb_prodavec_11_12h_20261114/exports/vacancies_flat.csv): 35 вакансий.
 
 - [ekb_prodavec_others_20261114](avito_runs/ekb_prodavec_others_20261114/exports/vacancies_flat.csv): 32 ранее прочитанных кандидата с другими или неуказанными часами.
+
+- [msk_gruzchik_perm_shift_20261114_new18](avito_runs/msk_gruzchik_perm_shift_20261114_new18/exports/vacancies_flat.csv): 30 вакансий.
