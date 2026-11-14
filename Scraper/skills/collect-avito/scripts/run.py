@@ -306,7 +306,18 @@ def queue_from(listing, limit):
 
 
 
-def remote_decisions(queue, out, target):
+def verify_comparison(out, plan, queue):
+    if plan.get('selection_criterion') != 'hours_11_12':
+        return
+    path = out/'comparison_ids.json'
+    if sha(path) != plan.get('comparison_sha256'):
+        raise ValueError('Dataset comparison snapshot changed')
+    existing = set(read(path)['ids'])
+    if any(item['id'] in existing for item in queue):
+        raise ValueError('Candidate already exists in comparison dataset')
+
+
+def remote_decisions(queue, out, target, criterion="remote"):
     """Validate a contiguous saved prefix; stop exactly at the target."""
     decisions = []
     accepted = 0
@@ -325,12 +336,13 @@ def remote_decisions(queue, out, target):
         fields = [(norm(f['name']), norm(f['value'])) for f in data['fields']]
         if any(not name or not value for name, value in fields) or len({name for name, _ in fields}) != len(fields):
             raise ValueError('Empty or duplicate parameter requires review')
-        values = [value for name, value in fields if name == 'Формат работы']
+        field = 'Количество рабочих часов в день' if criterion == 'hours_11_12' else 'Формат работы'
+        values = [value for name, value in fields if name == field]
         if len(values) > 1:
             raise ValueError('Duplicate format parameter requires review')
-        match = values == ['Удалённо']
+        match = bool(values and ('11–12' in [norm(v) for v in values[0].split(',')] if criterion == 'hours_11_12' else values == ['Удалённо']))
         decisions.append(dict(id=item['id'], listing_rank=item['listing_rank'],
-            accepted=match, parameter='Формат работы', observed_value=values[0] if values else None,
+            accepted=match, parameter=field, observed_value=values[0] if values else None,
             reason='exact_parameter_match' if match else 'parameter_missing_or_different'))
         accepted += int(match)
     return decisions
@@ -639,7 +651,7 @@ def browser(job, out, diag):
             if cp['state'] not in ('READY', 'CAPTURED'):
                 break
             if job.get('selection_queue') is not None:
-                decisions = remote_decisions(job['selection_queue'], out, job['selection_target'])
+                decisions = remote_decisions(job['selection_queue'], out, job['selection_target'], job.get('selection_criterion', 'remote'))
                 if sum(d['accepted'] for d in decisions) >= job['selection_target']:
                     break
     finally:
@@ -833,6 +845,8 @@ def freeze(args):
     if (out/'listing_pages').exists() and not (diag/'freeze_request.json').exists():
         raise ValueError('Frozen pages lack their original request; cannot safely resume')
     route_override = None
+    if getattr(args, 'selection_criterion', 'remote') != 'remote':
+        request['selection_criterion'] = args.selection_criterion
     if existing and (diag/'freeze_request.json').exists() and read(diag / 'freeze_request.json') != request:
         original = read(diag/'freeze_request.json')
         authorization_id = getattr(args, 'resume_route_authorization_id', None)
@@ -887,6 +901,20 @@ def freeze(args):
         pending.unlink()
     cp = read(diag/'checkpoint.json') if (diag/'checkpoint.json').exists() else dict(state='READY', completed_ids=[])
     target = candidate_limit or args.limit
+    comparison = None
+    if getattr(args, 'selection_criterion', 'remote') == 'hours_11_12':
+        if candidate_limit is None:
+            raise ValueError('Hours selection requires --candidate-limit')
+        comparison_path = out/'comparison_ids.json'
+        if comparison_path.exists():
+            comparison = read(comparison_path)
+        else:
+            dataset = ROOT/'Data/dataset/vacancies.csv'
+            with dataset.open(encoding='utf-8-sig', newline='') as stream:
+                ids = sorted({row['id'] for row in csv.DictReader(stream)})
+            comparison = dict(dataset_sha256=sha(dataset), ids=ids)
+            write(comparison_path, comparison)
+    existing_ids = set(comparison['ids']) if comparison else set()
     listing_end_reason = None
     saved_pending = None
     if accept_saved:
@@ -901,7 +929,7 @@ def freeze(args):
         if not target or (not all_pages and target >= args.limit):
             raise ValueError('Saved pages must contain a nonempty incomplete selection')
     empty_saved = bool(pages and pages[0].get('state') == 'EMPTY_RESULT')
-    while not empty_saved and (not pages or target is None or len(queue_from_pages(pages, target, False)) < target):
+    while not empty_saved and (not pages or target is None or len([x for x in queue_from_pages(pages, None, False) if x['id'] not in existing_ids]) < target):
         if pages and not ui_next and pages[-1].get('pagination', {}).get('next_button') is True:
             raise ValueError('Observed Next button requires UI Next mode')
         button_next = bool(pages and ui_next and pages[-1].get('pagination', {}).get('next_button') is True)
@@ -956,7 +984,7 @@ def freeze(args):
             if getattr(args, 'profession_scope', None) == 'all' and has_checked_profession(page):
                 raise ValueError('All-scope conflicts with observed checked profession controls')
             selection_profession(page, getattr(args, 'profession_scope', None), args.profession)
-            if candidate_limit is not None and not any(c.get('label') == 'Удалённо' and 'params[172815]' in (c.get('marker') or '') for c in page.get('selected_controls', [])):
+            if candidate_limit is not None and getattr(args, 'selection_criterion', 'remote') == 'remote' and not any(c.get('label') == 'Удалённо' and 'params[172815]' in (c.get('marker') or '') for c in page.get('selected_controls', [])):
                 raise ValueError('Remote selection requires the observed Удалённо filter')
         queue_from_pages([page], target, False)  # validate every observed card before persisting
         path = page_dir / f'{len(pages)+1:04d}.json'
@@ -966,11 +994,11 @@ def freeze(args):
         release_browser(diag)
     listing = pages[0]
     profession = selection_profession(listing, getattr(args, 'profession_scope', None), args.profession)
-    if candidate_limit is not None and not any(c.get('label') == 'Удалённо' and 'params[172815]' in (c.get('marker') or '') for c in listing.get('selected_controls', [])):
+    if candidate_limit is not None and getattr(args, 'selection_criterion', 'remote') == 'remote' and not any(c.get('label') == 'Удалённо' and 'params[172815]' in (c.get('marker') or '') for c in listing.get('selected_controls', [])):
         raise ValueError('Remote selection requires the observed Удалённо filter')
     if candidate_limit is not None and candidate_limit < args.limit:
         raise ValueError('Candidate limit must be at least the target limit')
-    queue = [] if listing.get('state') == 'EMPTY_RESULT' else queue_from_pages(pages, target, require_full=False)
+    queue = [] if listing.get('state') == 'EMPTY_RESULT' else [x for x in queue_from_pages(pages, None, require_full=False) if x['id'] not in existing_ids][:target]
     continuation_info = read(diag/'continuation.json') if (diag/'continuation.json').exists() else None
     if continuation_info:
         provenance = out/'continuation-provenance'
@@ -1004,7 +1032,8 @@ def freeze(args):
         requested_limit=args.limit, available_unique=len(queue),
         listing_end_reason=listing_end_reason, available_listing_exhausted=listing_end_reason == 'confirmed_end', continuation=continuation_info,
         branch_only=branch_only, max_pages=max_pages,
-        candidate_limit=candidate_limit,
+        candidate_limit=candidate_limit, selection_criterion=getattr(args, 'selection_criterion', 'remote'),
+        comparison_sha256=sha(out/'comparison_ids.json') if comparison else None,
         created_at=datetime.now(timezone.utc).isoformat(), instruction_version=instruction_version(ROOT/'Scraper/skills/collect-avito/SKILL.md'),
         extractor_sha256=sha(ROOT / 'Scraper/extract.js'), instruction_sha256=sha(SCRIPTS.parent / 'SKILL.md'),
         code_git_commit=subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=ROOT, text=True).strip(),
@@ -2377,6 +2406,7 @@ def _capture_batch(args):
     standing_unavailable_policy(argparse.Namespace(run_id=args.run_id, authorization_id=STANDING_UNAVAILABLE_ID,
         human_instruction=STANDING_UNAVAILABLE_INSTRUCTION))
     queue = read(out / 'queue.json')
+    verify_comparison(out, plan, queue)
     # Recover an interrupted transfer before considering another navigation.
     if (diag / 'sandbox.json').exists():
         import_sandbox(Path(read(diag / 'sandbox.json')['path']), out, diag)
@@ -2384,7 +2414,7 @@ def _capture_batch(args):
     # Read it only after the transfer so the prefix check uses one snapshot.
     cp = read(diag / 'checkpoint.json')
     if plan.get('selection_mode') == 'first_N_remote_parameter_matches':
-        decisions = remote_decisions(queue, out, plan['limit'])
+        decisions = remote_decisions(queue, out, plan['limit'], plan.get('selection_criterion', 'remote'))
         accepted = sum(d['accepted'] for d in decisions)
         if accepted == plan['limit']:
             print(json.dumps(dict(state='CAPTURED', captured=len(decisions), accepted=accepted, remaining=0)))
@@ -2393,13 +2423,13 @@ def _capture_batch(args):
             raise CollectionStopped('Candidate limit exhausted before target; preserve run without export', 'REVIEW_REQUIRED')
         pending = queue[len(decisions):len(decisions)+args.batch_size]
         cp2, elapsed = browser(dict(mode='capture', queue=pending, completed_ids=[d['id'] for d in decisions],
-            selection_queue=queue, selection_target=plan['limit'], tab_id=getattr(args, 'tab_id', None),
+            selection_queue=queue, selection_target=plan['limit'], selection_criterion=plan.get('selection_criterion', 'remote'), tab_id=getattr(args, 'tab_id', None),
             previous_capture_seconds=cp.get('capture_seconds', 0)), out, diag)
         cp2['capture_seconds'] = cp.get('capture_seconds', 0) + elapsed
         write(diag / 'checkpoint.json', cp2)
         if cp2['state'] != 'CAPTURED':
             raise CollectionStopped('Stopped; inspect diagnostics', cp2['state'])
-        decisions = remote_decisions(queue, out, plan['limit'])
+        decisions = remote_decisions(queue, out, plan['limit'], plan.get('selection_criterion', 'remote'))
         if cp2['completed_ids'] != [d['id'] for d in decisions]:
             raise ValueError('Checkpoint does not match the saved candidate prefix')
         accepted = sum(d['accepted'] for d in decisions)
@@ -2816,8 +2846,9 @@ def finalize(args):
     overrides = read(args.placements) if args.placements else {}
     decisions = None
     selected_queue = queue
+    verify_comparison(out, plan, queue)
     if plan.get('selection_mode') == 'first_N_remote_parameter_matches':
-        decisions = remote_decisions(queue, out, plan['limit'])
+        decisions = remote_decisions(queue, out, plan['limit'], plan.get('selection_criterion', 'remote'))
         if sum(d['accepted'] for d in decisions) != plan['limit']:
             raise ValueError('Target not reached; incomplete candidate selection cannot be exported')
         selected_ids = {d['id'] for d in decisions if d['accepted']}
@@ -2861,7 +2892,7 @@ def finalize(args):
         writer.writeheader(); writer.writerows(rows)
     write(exports / 'vacancies.json', rows)
     if decisions is not None:
-        write(exports / 'selection.json', dict(criterion={'field': 'Формат работы', 'value': 'Удалённо'},
+        write(exports / 'selection.json', dict(criterion=({'field': 'Количество рабочих часов в день', 'value': '11–12'} if plan.get('selection_criterion') == 'hours_11_12' else {'field': 'Формат работы', 'value': 'Удалённо'}),
             candidate_limit=len(queue), target=plan['limit'], decisions=decisions))
     for review in reviews:
         write(out / 'reviewed' / (review['id'] + '.json'), review)
@@ -4220,6 +4251,7 @@ def main():
             size = command.add_mutually_exclusive_group(required=True)
             size.add_argument('--limit', type=int, help='Total unique vacancies; no fixed page/card ceiling')
             size.add_argument('--all-pages', action='store_true', help='Follow observed Next links until the listing ends')
+            command.add_argument('--selection-criterion', choices=['remote', 'hours_11_12'], default='remote')
             command.add_argument('--candidate-limit', type=int, help='Select first N exact remote parameter matches from this many observed candidates')
             command.add_argument('--geography', required=True)
             command.add_argument('--profession', default='', help='Optional assertion; profession is read from selected listing filters')

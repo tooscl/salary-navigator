@@ -39,6 +39,23 @@ def raw(identity='123'):
 
 
 class RunnerTests(unittest.TestCase):
+    def test_hours_selection_and_dataset_snapshot(self):
+        with tempfile.TemporaryDirectory() as directory:
+            out = Path(directory)
+            runner.write(out/'raw/123.json', dict(raw(), fields=[dict(name='Количество рабочих часов в день', value='8, 11–12')]))
+            with patch.object(runner, 'check', return_value={'structural_check_passed': True}):
+                decisions = runner.remote_decisions([item()], out, 1, 'hours_11_12')
+            self.assertTrue(decisions[0]['accepted'])
+            self.assertEqual(decisions[0]['observed_value'], '8, 11–12')
+            runner.write(out/'comparison_ids.json', {'ids': ['456'], 'dataset_sha256': 'abc'})
+            plan = {'selection_criterion': 'hours_11_12', 'comparison_sha256': runner.sha(out/'comparison_ids.json')}
+            runner.verify_comparison(out, plan, [item()])
+            with self.assertRaises(ValueError):
+                runner.verify_comparison(out, plan, [item('456')])
+            runner.write(out/'comparison_ids.json', {'ids': [], 'dataset_sha256': 'abc'})
+            with self.assertRaises(ValueError):
+                runner.verify_comparison(out, plan, [item()])
+
     def test_finalized_provenance_redaction_preserves_raw_and_audits(self):
         with tempfile.TemporaryDirectory() as directory,patch.object(runner,'ROOT',Path(directory)):
             root=runner.ROOT;out,service,diag=runner.paths(root,'run');data=b'{"state":"NEEDS_HUMAN"}\n';digest=hashlib.sha256(data).hexdigest()
