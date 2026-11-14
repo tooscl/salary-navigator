@@ -374,3 +374,5 @@ avito_runs/<название_сбора>/
 - [spb-kassir-permanent-20261114-batch02](avito_runs/spb-kassir-permanent-20261114-batch02/exports/vacancies_flat.csv): 15 вакансий.
 
 - [20261114_moscow_cashier_11_12h](avito_runs/20261114_moscow_cashier_11_12h/exports/vacancies_flat.csv): 37 вакансий.
+
+- [20261114-ekb-kassir-outside-top](avito_runs/20261114-ekb-kassir-outside-top/exports/vacancies_flat.csv): 33 вакансий.

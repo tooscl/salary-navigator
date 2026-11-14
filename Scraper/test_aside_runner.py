@@ -685,6 +685,73 @@ const listBrowserTabs=async()=>[],openTab=async()=>pg,snapshot=async()=>({tree:'
             keys = child/'dedup-provenance/dataset-keys.json'; keys.write_bytes(keys.read_bytes() + b' ')
             with self.assertRaisesRegex(ValueError, 'Dataset dedup provenance'): runner.validate_partition(child, child_service)
 
+    def test_dataset_dedup_child_employer_selection_finalize_and_tampering(self):
+        original_root = runner.ROOT
+        real_baseline = runner.employer_selection.baseline
+        evidence = real_baseline(original_root, '7dc8e62cb', 'Екатеринбург', 'Кассир')
+        with tempfile.TemporaryDirectory() as directory, patch.object(runner, 'ROOT', Path(directory)):
+            root = runner.ROOT
+            for file in runner.AUTOMATION_FILES:
+                dest = root/file; dest.parent.mkdir(parents=True, exist_ok=True)
+                dest.write_bytes((original_root/file).read_bytes())
+            source, service, diag = runner.paths(root, 'source')
+            page = dict(state='LISTING', source_url='https://www.avito.ru/moskva/vakansii', selected_controls=[], items=[item(str(i)) for i in range(1, 6)])
+            runner.write(source/'listing.json', page); runner.write(source/'listing_pages/0001.json', page)
+            queue = runner.queue_from_pages([page], None); runner.write(source/'queue.json', queue)
+            runner.write(service/'plan.json', dict(run_id='source', profession='', profession_scope='all', setup_seconds=1, segments='', selection_mode='first_N_unique_on_frozen_listing', listing_sha256=runner.sha(source/'listing.json'), listing_pages=[dict(file='listing_pages/0001.json', sha256=runner.sha(source/'listing_pages/0001.json'))]))
+            runner.write(diag/'checkpoint.json', dict(state='READY', completed_ids=[], next_id='1'))
+            runner.save_failures(diag, runner.load_failures(diag))
+            materialized = root/'Data/dataset/vacancies.csv'; materialized.parent.mkdir(parents=True)
+            materialized.write_text('source,id\navito,1\n', encoding='utf8')
+            runner.write(materialized.parent/'manifest.json', {'sha256': runner.sha(materialized), 'rows': 1})
+            dedup = argparse.Namespace(source_run_id='source', run_id='child', against_run_id=None, against_dataset=True, limit=4)
+            with patch.object(runner.subprocess, 'check_output', return_value='head'), patch.object(runner, 'dirty_automation', return_value=[]):
+                runner.deduplicate_queue(dedup)
+            out, child_service, child_diag = runner.paths(root, 'child')
+            child = runner.read(out/'queue.json')
+            self.assertEqual([x['id'] for x in child], ['2', '3', '4', '5'])
+            for candidate, employer in zip(child, ['', 'Работа есть', 'Другой работодатель', 'Ещё один']):
+                data = raw(candidate['id']); data.update(title='Кассир', employer_raw=[employer] if employer else [], location_raw=['Екатеринбург'])
+                runner.write(out/'raw'/f"{candidate['id']}.json", data)
+            runner.write(child_diag/'checkpoint.json', dict(state='CAPTURED', completed_ids=[x['id'] for x in child], next_id=None, capture_seconds=1))
+            runner.write(root/'Data/dataset/sources.json', {'schema_version':'1','exports':[]})
+            (root/'Data/README.md').write_text('# Data\n',encoding='utf8'); (root/'Data/dataset/README.md').write_text('Текущий состав: old\n',encoding='utf8')
+            before = {x['id']: (out/'raw'/f"{x['id']}.json").read_bytes() for x in child}
+            args = argparse.Namespace(run_id='child', placements=None, review_model='test', exclude_largest_employer_baseline='7dc8e62cb', selection_city='Екатеринбург', selection_profession='Кассир', selection_target=1)
+            def committed_baseline(_root, revision, city, profession):
+                return real_baseline(original_root, revision, city, profession)
+            with patch.object(runner.employer_selection, 'baseline', side_effect=committed_baseline):
+                runner.finalize(args)
+                manifest = runner.validate_completed_export(out, child_service)
+                selection = manifest['coverage']['employer_selection']
+                self.assertEqual(selection['accepted_ids'], ['4'])
+                self.assertEqual([x['decision'] for x in selection['decisions']], ['employer_unknown', 'excluded_leader_exact_match', 'accepted', 'after_target'])
+                self.assertEqual((selection['baseline']['cohort_count'], selection['baseline']['leader_count']), (385, 37))
+                self.assertNotEqual(manifest['collection']['deduplication']['dataset']['manifest_sha256'], selection['baseline']['manifest_sha256'])
+                with (out/'exports/vacancies_flat.csv').open(encoding='utf-8-sig', newline='') as stream:
+                    self.assertEqual([row['id'] for row in csv.DictReader(stream)], ['4'])
+                for identity, data in before.items():
+                    self.assertEqual((out/'raw'/f'{identity}.json').read_bytes(), data)
+                path = out/'raw/3.json'; path.write_bytes(before['3'] + b' ')
+                with self.assertRaisesRegex(ValueError, 'Published artifact changed'):
+                    runner.validate_completed_export(out, child_service)
+                path.write_bytes(before['3'])
+                original_manifest = (child_service/'manifest.json').read_bytes()
+                changed = runner.read(path); changed['employer_raw'] = ['Подменённый работодатель']; runner.write(path, changed)
+                altered_manifest = runner.read(child_service/'manifest.json')
+                raw_key = path.relative_to(root).as_posix()
+                altered_manifest['files'][raw_key] = dict(bytes=path.stat().st_size, sha256=runner.sha(path))
+                runner.write(child_service/'manifest.json', altered_manifest)
+                with self.assertRaisesRegex(ValueError, 'Employer selection decisions differ'):
+                    runner.validate_completed_export(out, child_service)
+                path.write_bytes(before['3']); (child_service/'manifest.json').write_bytes(original_manifest)
+                saved = runner.read(out/'exports/employer_selection.json')
+                modified = dict(saved, accepted_ids=['5']); runner.write(out/'exports/employer_selection.json', modified)
+                with self.assertRaisesRegex(ValueError, 'Published artifact changed'):
+                    runner.validate_completed_export(out, child_service)
+                runner.write(out/'exports/employer_selection.json', saved)
+                runner.validate_completed_export(out, child_service)
+
     def test_deduplicate_queue_rejects_source_after_capture(self):
         with tempfile.TemporaryDirectory() as directory, patch.object(runner,'ROOT',Path(directory)):
             out,service,diag=runner.paths(runner.ROOT,'source'); runner.write(out/'raw/123.json',raw()); runner.write(diag/'checkpoint.json',dict(state='READY',completed_ids=['123']))
