@@ -22,6 +22,7 @@ ROOT = SCRIPTS.parents[3]
 sys.path.insert(0, str(ROOT))
 sys.path.insert(0, str(SCRIPTS))
 from utils.build_dataset import build
+import employer_selection
 from utils.title_flags import military_flags
 from check_capture import check
 from failure_log import ensure_allowed, record as record_failure, succeeded, HumanRequired, authorize_offline, authorize_browser, operation_locked, locked, load as load_failures, save as save_failures
@@ -33,7 +34,7 @@ from sweep_mode import (init_sweep as sweep_init_impl, register_branch as sweep_
     demo_export as sweep_demo_impl)
 
 AUTOMATION_FILES = ['Scraper/skills/collect-avito/references/top-professions.json', 'utils/title_flags.py', 'Scraper/extract.js', 'Scraper/skills/collect-avito/SKILL.md'] + [
-    'Scraper/skills/collect-avito/scripts/' + name for name in ('run.py', 'sweep_mode.py', 'browser_batch.js', 'check_capture.py', 'failure_log.py', 'preflight.py')]
+    'Scraper/skills/collect-avito/scripts/' + name for name in ('run.py', 'employer_selection.py', 'sweep_mode.py', 'browser_batch.js', 'check_capture.py', 'failure_log.py', 'preflight.py')]
 
 
 class CollectionStopped(RuntimeError, ValueError):
@@ -2827,7 +2828,7 @@ def finalize(args):
     changes = [dict(c, file=c.get('file', '').replace('\\', '/')) for c in changes]
     changed = {file for file,value in plan.get('automation_sha256', {}).items() if sha(ROOT/file) != value}
     reviewed_changes = {change['file'] for change in changes}
-    allowed_changes = {'Scraper/skills/collect-avito/scripts/run.py', 'Scraper/skills/collect-avito/scripts/failure_log.py', 'Scraper/skills/collect-avito/SKILL.md'}
+    allowed_changes = {'Scraper/skills/collect-avito/scripts/employer_selection.py', 'Scraper/skills/collect-avito/scripts/run.py', 'Scraper/skills/collect-avito/scripts/failure_log.py', 'Scraper/skills/collect-avito/SKILL.md'}
     allowed_changes |= allowed_capture_changes(plan, changes)
     if changed - (reviewed_changes & allowed_changes):
         raise ValueError('Unregistered collector source changed after capture; use a new run')
@@ -2880,9 +2881,34 @@ def finalize(args):
             unknown_cities[item['id']] = {'region': region, 'evidence': row['location_observed'],
                                         'region_unknown': not bool(region),
                                         **({'location_missing': True} if not row['location_observed'] else {})}
+    employer_selection_record = None
+    selection_commit = getattr(args, 'exclude_largest_employer_baseline', None)
+    if selection_commit:
+        if decisions is not None or partial or correction or overrides:
+            raise ValueError('Employer selection cannot combine with remote, partial, correction or placement overrides')
+        city = getattr(args, 'selection_city', None)
+        profession = getattr(args, 'selection_profession', None)
+        target = getattr(args, 'selection_target', None)
+        if not city or not profession or target is None:
+            raise ValueError('Employer selection requires city, profession and target')
+        evidence = employer_selection.baseline(ROOT, selection_commit, city, profession)
+        employer_selection_record = employer_selection.select(rows, target, evidence,
+            {r['id']: sha(out/'raw'/f"{r['id']}.json") for r in rows})
+        employer_selection_record['regions'] = regions
+        employer_selection_record['city_anomaly_policy'] = plan['city_anomaly_policy']
+        employer_selection_record['excluded_observation_ids'] = [item['id'] for item in queue if item['id'] in excluded]
+        accepted_ids = set(employer_selection_record['accepted_ids'])
+        rows = [r for r in rows if r['id'] in accepted_ids]
+        reviews = [r for r in reviews if r['id'] in accepted_ids]
+        unknown_cities = {i: value for i, value in unknown_cities.items() if i in accepted_ids}
+        mapping = {city: region for city, region in mapping.items() if city in {r['city'] for r in rows}}
+    elif any(getattr(args, key, None) is not None for key in ('selection_city', 'selection_profession', 'selection_target')):
+        raise ValueError('Selection arguments require a baseline commit')
     columns = list(dict.fromkeys(k for row in rows for k in row))
     exports = out / 'exports'
     exports.mkdir(exist_ok=True)  # unfinished drafts may be retried; completed runs cannot
+    if employer_selection_record:
+        write(exports/'employer_selection.json', employer_selection_record)
     if partial:
         write(exports/'partial_selection.json', partial)
     if correction:
@@ -2918,7 +2944,7 @@ def finalize(args):
     write_outputs(ROOT / 'Data/dataset', csv_bytes, manifest_bytes)
     manifest = dict(run_id=args.run_id, dataset_id=args.run_id, status='complete',
         schema=dict(columns=columns, unknown_policy='empty_not_zero'), collection=plan,
-        coverage=dict(planned=len(queue), accepted=len(rows), unavailable=unavailable, unresolved_observations=unresolved, user_skipped_observations=user_skipped, user_skipped_count=len(user_skipped), user_skip_policy=read(out/'user_skip_policy.json') if (out/'user_skip_policy.json').exists() else None, user_detail_skip_policy=read(out/'user_detail_skip_policy.json') if (out/'user_detail_skip_policy.json').exists() else None, deduplication=plan.get('deduplication'), sweep=plan.get('sweep'), unique_ids=[r['id'] for r in rows], errors=[], partial=partial,
+        coverage=dict(employer_selection=employer_selection_record, planned=len(queue), accepted=len(rows), unavailable=unavailable, unresolved_observations=unresolved, user_skipped_observations=user_skipped, user_skipped_count=len(user_skipped), user_skip_policy=read(out/'user_skip_policy.json') if (out/'user_skip_policy.json').exists() else None, user_detail_skip_policy=read(out/'user_detail_skip_policy.json') if (out/'user_detail_skip_policy.json').exists() else None, deduplication=plan.get('deduplication'), sweep=plan.get('sweep'), unique_ids=[r['id'] for r in rows], errors=[], partial=partial,
             limitations=['Visible rendered parameters only; enrichment not run; placement on site; live route unverified']),
         timing=dict(setup_seconds=plan['setup_seconds'], capture_seconds=read(diag/'checkpoint.json').get('capture_seconds'),
             review_export_seconds=time.perf_counter()-started, publication_seconds=None),
@@ -3896,6 +3922,23 @@ def validate_completed_export(out, service):
         if (not check(data, item['id'])['structural_check_passed'] or data.get('source_url') != item['url']
                 or not data.get('parameter_audit', {}).get('rendered_complete')):
             raise ValueError('Raw capture fails structural or identity validation')
+    employer_record = manifest['coverage'].get('employer_selection')
+    if employer_record:
+        if partial or correction or read(out/'exports/employer_selection.json') != employer_record:
+            raise ValueError('Employer selection evidence differs')
+        evidence = employer_record['baseline']
+        if employer_selection.baseline(ROOT, evidence['commit'], evidence['city'], evidence['profession']) != evidence:
+            raise ValueError('Baseline evidence differs')
+        if employer_record['excluded_observation_ids'] != [item['id'] for item in queue if item['id'] in excluded]:
+            raise ValueError('Employer selection excluded observations differ')
+        selection_plan = dict(plan, city_anomaly_policy=employer_record['city_anomaly_policy'])
+        candidate_rows = [reviewed_row(reviewed_capture(out, item), item, employer_record['regions'], selection_plan, None)[0] for item in expected]
+        actual = employer_selection.select(candidate_rows, employer_record['target'], evidence,
+            {item['id']: sha(out/'raw'/f"{item['id']}.json") for item in expected})
+        actual.update(regions=employer_record['regions'], city_anomaly_policy=employer_record['city_anomaly_policy'], excluded_observation_ids=employer_record['excluded_observation_ids'])
+        if actual != employer_record: raise ValueError('Employer selection decisions differ')
+        accepted = set(actual['accepted_ids'])
+        expected = [item for item in expected if item['id'] in accepted]
     with (out/'exports/vacancies_flat.csv').open(encoding='utf-8-sig', newline='') as stream:
         rows = list(csv.DictReader(stream))
     if [r['id'] for r in rows] != [item['id'] for item in expected] or any(r['profession'] != (correction['corrected_profession'] if correction else plan['profession']) for r in rows):
@@ -3905,7 +3948,7 @@ def validate_completed_export(out, service):
     return manifest
 
 
-POST_FINALIZE_TESTED = ['Scraper/skills/collect-avito/scripts/run.py', 'Scraper/skills/collect-avito/SKILL.md',
+POST_FINALIZE_TESTED = ['Scraper/skills/collect-avito/scripts/run.py', 'Scraper/skills/collect-avito/scripts/employer_selection.py', 'Scraper/test_employer_selection.py', 'Scraper/skills/collect-avito/SKILL.md',
                         'Scraper/test_aside_runner.py', 'utils/build_dataset.py', 'utils/test_build_dataset.py']
 
 
@@ -3924,7 +3967,7 @@ def post_finalize_review(args):
     if changed - noted or not changed:
         raise ValueError('Post-finalize source changes must be recorded and nonempty')
     validate_automation_changes(changes, changed)
-    subprocess.run([sys.executable, '-X', 'utf8', '-m', 'unittest', 'Scraper.test_aside_runner', 'utils.test_build_dataset'], check=True, cwd=ROOT)
+    subprocess.run([sys.executable, '-X', 'utf8', '-m', 'unittest', 'Scraper.test_aside_runner', 'Scraper.test_employer_selection', 'utils.test_build_dataset'], check=True, cwd=ROOT)
     subprocess.run([sys.executable, '-X', 'utf8', 'utils/build_dataset.py', '--check'], check=True, cwd=ROOT)
     write(dest, dict(method='post_finalize_validation_v1', reason=args.reason,
         original_manifest_sha256=sha(service/'manifest.json'), previous_automation_sha256=baseline, automation_changes=changes,
@@ -4267,6 +4310,10 @@ def main():
             command.add_argument('--retry-reason')
             command.add_argument('--batch-size', type=int, default=30)
         elif name == 'finalize':
+            command.add_argument('--exclude-largest-employer-baseline', help='Git commit with the baseline dataset')
+            command.add_argument('--selection-city')
+            command.add_argument('--selection-profession')
+            command.add_argument('--selection-target', type=int)
             command.add_argument('--partial-prefix', action='store_true', help='Export a verified stopped ordinary or partition queue prefix, preserving remaining IDs')
             command.add_argument('--partial-instruction', help='Exact authorization to publish the verified prefix offline')
             command.add_argument('--city-anomaly-policy', choices=['blank','search_filter'], default='blank')
