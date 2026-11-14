@@ -26,7 +26,7 @@
     "source": "title, profession, city, location_observed",
     "policy": "added_next_to_observed_columns_not_replacing"
   },
-  "rows": 31635,
+  "rows": 31655,
   "columns": [
     "source",
     "id",
@@ -160,7 +160,7 @@
     "enriched_fields",
     "enrichment_version"
   ],
-  "sha256": "236238c8d4094ca355a67b9183ef7af6f77c6800c1cc19a17d9e2f484007d70b",
+  "sha256": "5d2ffc710c88ed215e03a82b99e624b9e180a4fc12db76d7a49e2e7db0e5eaf7",
   "inputs": [
     {
       "run_id": "20261028-spb-50-all",
@@ -58801,6 +58801,37 @@
       }
     },
     {
+      "run_id": "spb-kassir-permanent-20261114-batch01",
+      "source": "avito",
+      "path": "Data/transformations/spb-kassir-permanent-20261114-batch01-placement-v1/vacancies_flat.csv",
+      "sha256": "17d511fef3c549671877525dcb4bfeb54ad6235bdae0b10f632fd0a1faa812a9",
+      "placement_regions": {
+        "Санкт-Петербург": "Санкт-Петербург"
+      },
+      "enrichment_status": "not_run",
+      "unknown_city_placements": {
+        "8377330405": {
+          "region": "Санкт-Петербург",
+          "evidence": "Санкт-Петербург, Кронштадтский р-н, Кронштадт, пр-т Ленина, 16",
+          "region_unknown": false
+        },
+        "8126581646": {
+          "region": "Санкт-Петербург",
+          "evidence": "Санкт-Петербург, Пушкинский р-н, пос. Шушары, территория Славянка, Ростовская ул., 9к1 р-н Пушкинский",
+          "region_unknown": false
+        }
+      },
+      "transformation": {
+        "path": "Data/transformations/spb-kassir-permanent-20261114-batch01-placement-v1/transformation.json",
+        "sha256": "e406ec42037970b88e254addea9129d84d8b708a93cb9db5a9ea430ad3db8df8"
+      },
+      "rows": 20,
+      "search_plan": {
+        "path": "Scraper/runs/spb-kassir-permanent-20261114-batch01/plan.json",
+        "sha256": "6014697dff44a8d9b48923aef82847bab29d10b90791dc6db636ac0cca2e42f8"
+      }
+    },
+    {
       "run_id": "spb_all_first1500_2026-10-28",
       "source": "avito",
       "path": "Data/avito_runs/spb_all_first1500_2026-10-28/exports/vacancies_flat.csv",
@@ -67069,9 +67100,9 @@
     },
     {
       "path": "parts/part-03.csv",
-      "rows": 498,
-      "bytes": 1770124,
-      "sha256": "d6c587466047ff76ef03a344f1f2ceaa96609baab8f4494459f08a6d0f23cb37"
+      "rows": 499,
+      "bytes": 1774238,
+      "sha256": "44ff7766a625c9a2478d4279cc0de846bfc1fbfd99d4006c3152ecd8a1fa95b4"
     },
     {
       "path": "parts/part-04.csv",
@@ -67093,9 +67124,9 @@
     },
     {
       "path": "parts/part-07.csv",
-      "rows": 504,
-      "bytes": 1902542,
-      "sha256": "1e55081ef33924ff2742f413a0c0d5e8c23f17f29b2778d0167dbbcf4c9bace6"
+      "rows": 505,
+      "bytes": 1905725,
+      "sha256": "1458181a513591e7d193dc4da0887e22613e0e4d76533257bce6589805c26662"
     },
     {
       "path": "parts/part-08.csv",
@@ -67105,9 +67136,9 @@
     },
     {
       "path": "parts/part-09.csv",
-      "rows": 538,
-      "bytes": 1997202,
-      "sha256": "17ae4e24b2eab6a8c134a59af65671b83050bd289165239c31c49bde5ce9fd2c"
+      "rows": 539,
+      "bytes": 2002360,
+      "sha256": "be04898821509ce1e65f5da1537f484a4a00eceba6725f280b85a30a1d04e08f"
     },
     {
       "path": "parts/part-10.csv",
@@ -67123,9 +67154,9 @@
     },
     {
       "path": "parts/part-12.csv",
-      "rows": 495,
-      "bytes": 1831310,
-      "sha256": "1dfcb968c8dd446d146bbd4421c2bdc78e712f21b561aa7620892900904145af"
+      "rows": 496,
+      "bytes": 1833897,
+      "sha256": "f91a6a6c8e17632d05434d6fb0bdacb316d63ec1e3d9a08b8766976cea8ae525"
     },
     {
       "path": "parts/part-13.csv",
@@ -67141,9 +67172,9 @@
     },
     {
       "path": "parts/part-15.csv",
-      "rows": 516,
-      "bytes": 1885915,
-      "sha256": "498babce7976f51dac953d7b2fbdcb68dd3cfdd0b2d4017953b7a9cb5a8bbffe"
+      "rows": 517,
+      "bytes": 1888745,
+      "sha256": "6edfa8e72c32428413177be0c82032a5b832ed195faedf1f0d02848d87ee8879"
     },
     {
       "path": "parts/part-16.csv",
@@ -67183,9 +67214,9 @@
     },
     {
       "path": "parts/part-22.csv",
-      "rows": 500,
-      "bytes": 1788189,
-      "sha256": "f3fa0c1fcaeeb03e803ff1391a1f75bf0f7dbf94d6bf53342c313a86084584c3"
+      "rows": 501,
+      "bytes": 1791080,
+      "sha256": "3c6f1ccafb3a980290b6df723f4ffca1b3d0b8907bd5f059b218a29eaac4e260"
     },
     {
       "path": "parts/part-23.csv",
@@ -67213,9 +67244,9 @@
     },
     {
       "path": "parts/part-27.csv",
-      "rows": 457,
-      "bytes": 1693884,
-      "sha256": "ec92e5761bd2701ecd9dc6c80263f443dfd1efb7a02070a102fb2d90eaaeefe1"
+      "rows": 458,
+      "bytes": 1696471,
+      "sha256": "c5d686f59f63f999b795642901490d9098632fecd894620cba0afbf869c01d0c"
     },
     {
       "path": "parts/part-28.csv",
@@ -67231,21 +67262,21 @@
     },
     {
       "path": "parts/part-30.csv",
-      "rows": 483,
-      "bytes": 1747988,
-      "sha256": "5c325dcd09fc794ac1c2157d8f14e21bb619e1499891f3ebb075e3c87f1b9f59"
+      "rows": 484,
+      "bytes": 1751401,
+      "sha256": "3eb60e014bb47ac74f4b2f2f8981486bcb40ec3a75fca9bfb3b4cf638781f064"
     },
     {
       "path": "parts/part-31.csv",
-      "rows": 508,
-      "bytes": 1861259,
-      "sha256": "738417818ed753409c4f08cb4380963a96b32c9603a13a939e705f164d004190"
+      "rows": 510,
+      "bytes": 1868620,
+      "sha256": "1fa0e68bb6638ac98d8dddb62043acbf0838d0a07c2d3c40727bcedd3982d726"
     },
     {
       "path": "parts/part-32.csv",
-      "rows": 489,
-      "bytes": 1812590,
-      "sha256": "9d9bfc37f15a329df597fdae2a8060b10bf21c4f0eb80c57d993669d90ae5b64"
+      "rows": 490,
+      "bytes": 1815747,
+      "sha256": "f05b19718b6fbf76d9848571a4e471d6c8ac983b200bae30901fb58ea34a335f"
     },
     {
       "path": "parts/part-33.csv",
@@ -67273,15 +67304,15 @@
     },
     {
       "path": "parts/part-37.csv",
-      "rows": 502,
-      "bytes": 1821208,
-      "sha256": "d777422500faa3836615d1e166ee7340870bf2a8f83ddcf32b601627ffe9cd1a"
+      "rows": 503,
+      "bytes": 1825304,
+      "sha256": "31c0461ea907fa10299927284b12ab2e1abc53a76c0e9dcec93e68a9acc87591"
     },
     {
       "path": "parts/part-38.csv",
-      "rows": 467,
-      "bytes": 1725846,
-      "sha256": "a42fe86d00330c3a211c04e4c110cdc2ca2b43d9b12864fc630e35f33fb90875"
+      "rows": 469,
+      "bytes": 1733106,
+      "sha256": "d8643aeae1cf0f1ae35e1362b86f7aa6ccf6813e8e3cc233e90525283e9f7a07"
     },
     {
       "path": "parts/part-39.csv",
@@ -67315,15 +67346,15 @@
     },
     {
       "path": "parts/part-44.csv",
-      "rows": 504,
-      "bytes": 1814529,
-      "sha256": "89522cf6ceb50e8eabbbdc0c60da15e2bfd534199b4df08940222ab49e2d809d"
+      "rows": 505,
+      "bytes": 1818694,
+      "sha256": "a630d35de52dbb43ceceb8cc6f3eecd9798e5b68adfb946345b4455394118d82"
     },
     {
       "path": "parts/part-45.csv",
-      "rows": 529,
-      "bytes": 1933696,
-      "sha256": "94796cc6c3f7d531d0272aede590d8012e3e551d5bd703edf5d87e227357d9b8"
+      "rows": 530,
+      "bytes": 1936597,
+      "sha256": "e5a3da7afc1c5e7a9330d0ec32a4bc2cb23ef644c45cf603a90b0533cde317e3"
     },
     {
       "path": "parts/part-46.csv",
@@ -67339,9 +67370,9 @@
     },
     {
       "path": "parts/part-48.csv",
-      "rows": 507,
-      "bytes": 1904409,
-      "sha256": "51aef24132f762e3f2c7b3efe2b58353b167ffa6dfd2c258646b881098606dc6"
+      "rows": 509,
+      "bytes": 1911529,
+      "sha256": "4014809feae724a634f4bd1f5cde2efaeaa1d0e8bc5958d5d53c070210d7f807"
     },
     {
       "path": "parts/part-49.csv",
@@ -67387,9 +67418,9 @@
     },
     {
       "path": "parts/part-56.csv",
-      "rows": 475,
-      "bytes": 1745501,
-      "sha256": "b1dc851d722b74f6ae6b2c8f431b8c091ab41988d37766230fd4a4b1f2f1e1b3"
+      "rows": 476,
+      "bytes": 1748783,
+      "sha256": "b632e892c4f7298a5879b225d73072058878f7d10cab17f776d582f9c732ed0d"
     },
     {
       "path": "parts/part-57.csv",
@@ -67417,9 +67448,9 @@
     },
     {
       "path": "parts/part-61.csv",
-      "rows": 480,
-      "bytes": 1771252,
-      "sha256": "df4e627bdab86dda8d28b5bc547323770cc6e666d5da995e653c9cd3558428db"
+      "rows": 481,
+      "bytes": 1773457,
+      "sha256": "2a79c672312033b82e1390a612d0edad1a7e3dff212dd7c5cd374f57b2a21bed"
     },
     {
       "path": "parts/part-62.csv",
