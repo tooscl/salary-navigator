@@ -1,0 +1,531 @@
+{
+  "run_id": "spb-kassir-permanent-20261114-batch01",
+  "dataset_id": "spb-kassir-permanent-20261114-batch01",
+  "status": "complete",
+  "schema": {
+    "columns": [
+      "id",
+      "city",
+      "profession",
+      "segments",
+      "title",
+      "salary_raw",
+      "source_url",
+      "observed_at",
+      "description",
+      "location_observed",
+      "employer_name_observed",
+      "date_raw",
+      "views_total",
+      "views_today",
+      "listing_rank",
+      "listing_promoted",
+      "full_parameters_read",
+      "analysis_status",
+      "export_eligibility",
+      "read_status_parameters",
+      "read_status_description",
+      "read_status_location",
+      "read_limitations",
+      "enrichment_status",
+      "enriched_fields",
+      "enrichment_version",
+      "military",
+      "military_keywords",
+      "military_rule_version",
+      "city__source",
+      "city__evidence",
+      "city_anomaly",
+      "График",
+      "Занятость",
+      "Способ оформления",
+      "Частота выплат",
+      "Сфера деятельности компании",
+      "Что получают работники",
+      "Смены",
+      "Ассортимент",
+      "С чем надо работать",
+      "Опыт работы",
+      "Медкнижка",
+      "Стажировка",
+      "Количество рабочих часов в день",
+      "В том числе для кандидатов",
+      "Количество рабочих дней в неделю",
+      "Режим работы",
+      "Длительность вахты"
+    ],
+    "unknown_policy": "empty_not_zero"
+  },
+  "collection": {
+    "run_id": "spb-kassir-permanent-20261114-batch01",
+    "geography": "Санкт-Петербург",
+    "profession": "Кассир",
+    "segments": "",
+    "filter_evidence": "Observed listing heading Вакансии по профессии Кассир в Санкт-Петербурге; profession checkbox Кассир params[144170]/checkbox/3201751 checked true; employment checkbox Полная checked true as authorized narrower subset; no exact Постоянная UI control claimed; exact observed URL retained.",
+    "listing_url": "https://www.avito.ru/sankt-peterburg/vakansii/polnaya_zanyatost-ASgBAgICAUSkgxWS2YUV?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6ImdLR1VCRVA4cE9Sekg2bHciO317iQCAJgAAAA&f=ASgBAgICAkTUzBGu64YDpIMVktmFFQ",
+    "listing_request_url": "https://www.avito.ru/sankt-peterburg/vakansii/polnaya_zanyatost-ASgBAgICAUSkgxWS2YUV?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6ImdLR1VCRVA4cE9Sekg2bHciO317iQCAJgAAAA&f=ASgBAgICAkTUzBGu64YDpIMVktmFFQ&localPriority=0",
+    "selected_controls": [
+      {
+        "label": "Кассир",
+        "marker": "params[144170]/checkbox/3201751",
+        "value": null
+      },
+      {
+        "label": "Кассир",
+        "marker": "params[144170]/checkbox/toggle",
+        "value": "3201751"
+      },
+      {
+        "label": "Любой",
+        "marker": "params[196929]/all",
+        "value": null
+      },
+      {
+        "label": "Любой",
+        "marker": "params[196929]/toggle",
+        "value": "all"
+      },
+      {
+        "label": "Полная",
+        "marker": "params[172242]/checkbox/22066761",
+        "value": null
+      },
+      {
+        "label": "Полная",
+        "marker": "params[172242]/checkbox/toggle",
+        "value": "22066761"
+      },
+      {
+        "label": "Неважно",
+        "marker": "params[172815]/all",
+        "value": null
+      },
+      {
+        "label": "Неважно",
+        "marker": "params[172815]/toggle",
+        "value": "all"
+      },
+      {
+        "label": "Неважно",
+        "marker": null,
+        "value": "all"
+      },
+      {
+        "label": "Все",
+        "marker": null,
+        "value": "all"
+      }
+    ],
+    "listing_sha256": "1a4f02dd07d3f97552fa4a9862f98ffb193ac11185d73d1c7c57a3f39e3b17cf",
+    "profession_scope": null,
+    "profession_source": "observed_controls",
+    "listing_pages": [
+      {
+        "file": "listing_pages/0001.json",
+        "sha256": "1a4f02dd07d3f97552fa4a9862f98ffb193ac11185d73d1c7c57a3f39e3b17cf",
+        "source_url": "https://www.avito.ru/sankt-peterburg/vakansii/polnaya_zanyatost-ASgBAgICAUSkgxWS2YUV?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6ImdLR1VCRVA4cE9Sekg2bHciO317iQCAJgAAAA&f=ASgBAgICAkTUzBGu64YDpIMVktmFFQ"
+      }
+    ],
+    "selection_mode": "first_N_unique_on_frozen_listing",
+    "limit": 20,
+    "requested_all_pages": false,
+    "saved_selection_authorization": null,
+    "requested_limit": 28,
+    "available_unique": 20,
+    "listing_end_reason": null,
+    "available_listing_exhausted": false,
+    "continuation": null,
+    "branch_only": false,
+    "max_pages": null,
+    "candidate_limit": null,
+    "created_at": "2026-11-14T12:24:20.894865+00:00",
+    "instruction_version": "1.8.2",
+    "extractor_sha256": "0c52ba2f821d861083c99ec6bc328456df96b3d179b7fffd47f87aadfda84bdb",
+    "instruction_sha256": "9ab9972bf6e8e398d2cd4271325e0367752572f5fb07b57f6c37834e37bda43b",
+    "code_git_commit": "e2d0cef47fc392d2e012b816226e89a13e151f79",
+    "setup_seconds": 6.328378584235907,
+    "live_route_verified": false,
+    "execution_model": "gpt-6-luna",
+    "automation_sha256": {
+      "Scraper/skills/collect-avito/references/top-professions.json": "e3e72638b17b48f825ec6f2fefb963662494f679ae4b0cef1bebedba889610dd",
+      "utils/title_flags.py": "9c9456cb3fb0df5791630049c9c85987381091dbb9ba18bc3fb3314b8cccbeb6",
+      "Scraper/extract.js": "0c52ba2f821d861083c99ec6bc328456df96b3d179b7fffd47f87aadfda84bdb",
+      "Scraper/skills/collect-avito/SKILL.md": "9ab9972bf6e8e398d2cd4271325e0367752572f5fb07b57f6c37834e37bda43b",
+      "Scraper/skills/collect-avito/scripts/run.py": "4ba60f090b4847f151600173ef38d290aec950f765d7e5e25079fda84ab3b178",
+      "Scraper/skills/collect-avito/scripts/sweep_mode.py": "718a956a316df71c47ee3a4c5d3670fa011a5b16e9948393d68216702b140a56",
+      "Scraper/skills/collect-avito/scripts/browser_batch.js": "8090a7905357a3ee3387009d4b9778f3150556506d319b7f62783bb3594d5733",
+      "Scraper/skills/collect-avito/scripts/check_capture.py": "aa746849317f9768af5aae08b394b9379539f6e268c1fc69e4ed13bd06a4657f",
+      "Scraper/skills/collect-avito/scripts/failure_log.py": "7a2fa9f997ae528969f9a864514f30d76427ae06aafe108344df42ead3fe2291",
+      "Scraper/skills/collect-avito/scripts/preflight.py": "492a0d898990aee198f26bf6577d0876360dcc6ec69e274835cd77cdaa768974"
+    },
+    "uncommitted_automation_files": [
+      "Scraper/skills/collect-avito/SKILL.md",
+      "Scraper/skills/collect-avito/scripts/run.py",
+      "Scraper/skills/collect-avito/scripts/failure_log.py"
+    ],
+    "deduplication": {
+      "source_run_id": "spb-kassir-permanent-20261114",
+      "source_plan_sha256": "99d28a2a91c6471c46a054415a12c69ec7edb7b0ffe4fc991b6bc9ce2913ba7a",
+      "source_queue_sha256": "078071de256ace1478994760e9bab9f1275b90e89e7ba4e5f161a943fc9e0ba7",
+      "against": [],
+      "source_count": 28,
+      "duplicate_excluded": 8,
+      "novel_count": 20,
+      "duplicate_ids": [
+        "8397153637",
+        "8053084581",
+        "4466216312",
+        "8470630300",
+        "8394384607",
+        "8393129085",
+        "8376546868",
+        "8470109019"
+      ],
+      "dataset": {
+        "csv_sha256": "236238c8d4094ca355a67b9183ef7af6f77c6800c1cc19a17d9e2f484007d70b",
+        "manifest_sha256": "5ae5cfbd8aa1f8e45994eba8a51cc46693fbb0b5619694e48471b92038fb16bf",
+        "keys_sha256": "f2a778cbe689520b560508013b96adbc7917b6ba9144b8d5807b7a79b2e589d6",
+        "rows": 31635
+      },
+      "selection_limit": 28,
+      "eligible_count": 20,
+      "deferred_ids": []
+    },
+    "city_anomaly_policy": "blank"
+  },
+  "coverage": {
+    "planned": 20,
+    "accepted": 20,
+    "unavailable": [],
+    "unresolved_observations": [],
+    "user_skipped_observations": [],
+    "user_skipped_count": 0,
+    "user_skip_policy": null,
+    "user_detail_skip_policy": null,
+    "deduplication": {
+      "source_run_id": "spb-kassir-permanent-20261114",
+      "source_plan_sha256": "99d28a2a91c6471c46a054415a12c69ec7edb7b0ffe4fc991b6bc9ce2913ba7a",
+      "source_queue_sha256": "078071de256ace1478994760e9bab9f1275b90e89e7ba4e5f161a943fc9e0ba7",
+      "against": [],
+      "source_count": 28,
+      "duplicate_excluded": 8,
+      "novel_count": 20,
+      "duplicate_ids": [
+        "8397153637",
+        "8053084581",
+        "4466216312",
+        "8470630300",
+        "8394384607",
+        "8393129085",
+        "8376546868",
+        "8470109019"
+      ],
+      "dataset": {
+        "csv_sha256": "236238c8d4094ca355a67b9183ef7af6f77c6800c1cc19a17d9e2f484007d70b",
+        "manifest_sha256": "5ae5cfbd8aa1f8e45994eba8a51cc46693fbb0b5619694e48471b92038fb16bf",
+        "keys_sha256": "f2a778cbe689520b560508013b96adbc7917b6ba9144b8d5807b7a79b2e589d6",
+        "rows": 31635
+      },
+      "selection_limit": 28,
+      "eligible_count": 20,
+      "deferred_ids": []
+    },
+    "sweep": null,
+    "unique_ids": [
+      "8377330405",
+      "7737750138",
+      "3819085572",
+      "8470431448",
+      "8335259872",
+      "8446190819",
+      "7962481593",
+      "8363035412",
+      "8283544333",
+      "8414392685",
+      "3984445161",
+      "7488547955",
+      "8544341865",
+      "8491168496",
+      "8126581646",
+      "4418775258",
+      "8335063929",
+      "8470805544",
+      "8423039428",
+      "8575573494"
+    ],
+    "errors": [],
+    "partial": null,
+    "limitations": [
+      "Visible rendered parameters only; enrichment not run; placement on site; live route unverified"
+    ]
+  },
+  "timing": {
+    "setup_seconds": 6.328378584235907,
+    "capture_seconds": 71.51215041708201,
+    "review_export_seconds": 6.109844207763672,
+    "publication_seconds": null
+  },
+  "review_model": "gpt-6.1-terra",
+  "automation_changes": [
+    {
+      "file": "Scraper/skills/collect-avito/scripts/failure_log.py",
+      "reason": "Audit exact administrative immediate misclassification without relaxing site stops",
+      "validation": "python3 -m unittest Scraper.test_failure_log: 15 tests OK, 1 skipped"
+    },
+    {
+      "file": "Scraper/skills/collect-avito/scripts/run.py",
+      "reason": "Guard correction to pre-freeze runs and expose explicit option",
+      "validation": "python3 -m unittest Scraper.test_failure_log: 15 tests OK, 1 skipped"
+    },
+    {
+      "file": "Scraper/test_failure_log.py",
+      "reason": "Regression checks preserve history and reject actual site restrictions",
+      "validation": "python3 -m unittest Scraper.test_failure_log: 15 tests OK, 1 skipped"
+    },
+    {
+      "file": "Scraper/skills/collect-avito/SKILL.md",
+      "reason": "Document narrow administrative correction and preserved restriction stops",
+      "validation": "python3 -m unittest Scraper.test_failure_log: 15 tests OK, 1 skipped"
+    },
+    {
+      "file": "Scraper/skills/collect-avito/scripts/failure_log.py",
+      "reason": "Preserve existing unlimited technical authorization on fresh human resume after external IP stop",
+      "validation": "python3 -m unittest Scraper.test_failure_log: 16 tests OK, 1 skipped"
+    },
+    {
+      "file": "Scraper/skills/collect-avito/scripts/run.py",
+      "reason": "Preserve existing unlimited technical authorization on fresh human resume after external IP stop",
+      "validation": "python3 -m unittest Scraper.test_failure_log: 16 tests OK, 1 skipped"
+    },
+    {
+      "file": "Scraper/test_failure_log.py",
+      "reason": "Preserve existing unlimited technical authorization on fresh human resume after external IP stop",
+      "validation": "python3 -m unittest Scraper.test_failure_log: 16 tests OK, 1 skipped"
+    },
+    {
+      "file": "Scraper/skills/collect-avito/SKILL.md",
+      "reason": "Preserve existing unlimited technical authorization on fresh human resume after external IP stop",
+      "validation": "python3 -m unittest Scraper.test_failure_log: 16 tests OK, 1 skipped"
+    }
+  ],
+  "profession_correction": null,
+  "post_capture_automation_sha256": {},
+  "files": {
+    "Data/avito_runs/spb-kassir-permanent-20261114-batch01/dedup-provenance/dataset-keys.json": {
+      "bytes": 1233671,
+      "sha256": "f2a778cbe689520b560508013b96adbc7917b6ba9144b8d5807b7a79b2e589d6"
+    },
+    "Data/avito_runs/spb-kassir-permanent-20261114-batch01/dedup-provenance/dataset-manifest.json": {
+      "bytes": 3323393,
+      "sha256": "5ae5cfbd8aa1f8e45994eba8a51cc46693fbb0b5619694e48471b92038fb16bf"
+    },
+    "Data/avito_runs/spb-kassir-permanent-20261114-batch01/dedup-provenance/source-plan.json": {
+      "bytes": 4858,
+      "sha256": "99d28a2a91c6471c46a054415a12c69ec7edb7b0ffe4fc991b6bc9ce2913ba7a"
+    },
+    "Data/avito_runs/spb-kassir-permanent-20261114-batch01/dedup-provenance/source-queue.json": {
+      "bytes": 13281,
+      "sha256": "078071de256ace1478994760e9bab9f1275b90e89e7ba4e5f161a943fc9e0ba7"
+    },
+    "Data/avito_runs/spb-kassir-permanent-20261114-batch01/dedup_selection.json": {
+      "bytes": 869,
+      "sha256": "a9aaa93bfc43e7cfc6439b325245dd1144056118a965d33113df495738d46d69"
+    },
+    "Data/avito_runs/spb-kassir-permanent-20261114-batch01/exports/vacancies.json": {
+      "bytes": 82621,
+      "sha256": "8d731320667d6900d2c358db94b1a15a2c1a33a824ae63d45f4dea3a8fe91737"
+    },
+    "Data/avito_runs/spb-kassir-permanent-20261114-batch01/exports/vacancies_flat.csv": {
+      "bytes": 58823,
+      "sha256": "fcbcf1586a8f539ea56401c56ded07bf528cd0c5a0f7b6945f4099517047b84a"
+    },
+    "Data/avito_runs/spb-kassir-permanent-20261114-batch01/exports/validation.json": {
+      "bytes": 220,
+      "sha256": "b785732bded1178ab20de5c1de2bf2d8abc225c7e8b87048a9c353a5434c95c6"
+    },
+    "Data/avito_runs/spb-kassir-permanent-20261114-batch01/listing.json": {
+      "bytes": 53552,
+      "sha256": "1a4f02dd07d3f97552fa4a9862f98ffb193ac11185d73d1c7c57a3f39e3b17cf"
+    },
+    "Data/avito_runs/spb-kassir-permanent-20261114-batch01/listing_pages/0001.json": {
+      "bytes": 53552,
+      "sha256": "1a4f02dd07d3f97552fa4a9862f98ffb193ac11185d73d1c7c57a3f39e3b17cf"
+    },
+    "Data/avito_runs/spb-kassir-permanent-20261114-batch01/queue.json": {
+      "bytes": 9246,
+      "sha256": "d0eb6232315f0189d1c9742e78e739955b6292a6525368a9fb1040a666e8a339"
+    },
+    "Data/avito_runs/spb-kassir-permanent-20261114-batch01/raw/3819085572.json": {
+      "bytes": 9678,
+      "sha256": "b47e3ffc60e78d51daf2ebd4f6cab4d65b2cbe91127ac7a981fb47d9efbc2fe8"
+    },
+    "Data/avito_runs/spb-kassir-permanent-20261114-batch01/raw/3984445161.json": {
+      "bytes": 12077,
+      "sha256": "ac823dd62704d9f99abee7ff086f15b71b902ad0b6c35dacf39d1f264dfe3d5f"
+    },
+    "Data/avito_runs/spb-kassir-permanent-20261114-batch01/raw/4418775258.json": {
+      "bytes": 10806,
+      "sha256": "03aa08214f150da624b1a0c4d227b942d0aa19ec4947eb97272c0705af3ef023"
+    },
+    "Data/avito_runs/spb-kassir-permanent-20261114-batch01/raw/7488547955.json": {
+      "bytes": 12181,
+      "sha256": "9818727976d0713e111b4437c5f9acdd03a78c93f198ee3d6a40bed98c9a3f09"
+    },
+    "Data/avito_runs/spb-kassir-permanent-20261114-batch01/raw/7737750138.json": {
+      "bytes": 11498,
+      "sha256": "c88b904a63f37be300c3e9df6cbac42cc5b9f1656c7f152309bc205b0b470214"
+    },
+    "Data/avito_runs/spb-kassir-permanent-20261114-batch01/raw/7962481593.json": {
+      "bytes": 8994,
+      "sha256": "5d0e71e021cc8de43e47e7c31e045f7fd09457d124184cce295898e2cb8ea63c"
+    },
+    "Data/avito_runs/spb-kassir-permanent-20261114-batch01/raw/8126581646.json": {
+      "bytes": 9942,
+      "sha256": "7fbba1ea0811a5a5e001dd76364658c9404ab85611fa7f3679fa039cf86338b0"
+    },
+    "Data/avito_runs/spb-kassir-permanent-20261114-batch01/raw/8283544333.json": {
+      "bytes": 11669,
+      "sha256": "a17010f04b73e29cd78f929b5235d2513e547a2da5302e441d703fc486140ca1"
+    },
+    "Data/avito_runs/spb-kassir-permanent-20261114-batch01/raw/8335063929.json": {
+      "bytes": 15525,
+      "sha256": "165c6e97ad4e05c80ec8a1975220168ac3637db3e54adf294ff5aa7b68a0c786"
+    },
+    "Data/avito_runs/spb-kassir-permanent-20261114-batch01/raw/8335259872.json": {
+      "bytes": 10194,
+      "sha256": "23780a02ab81e531790cbc7ba5613d8961d3df7f086778fbfa5192519e12b87b"
+    },
+    "Data/avito_runs/spb-kassir-permanent-20261114-batch01/raw/8363035412.json": {
+      "bytes": 17220,
+      "sha256": "a73bfdd01f019ed8a80fa4aa3af5c9416236c09ca1c5a3779dc8212a5c1795d8"
+    },
+    "Data/avito_runs/spb-kassir-permanent-20261114-batch01/raw/8377330405.json": {
+      "bytes": 14006,
+      "sha256": "ce3b1d9db182831f42abd69f4b700e67a7e4175f9ba85960d307a52efda8e649"
+    },
+    "Data/avito_runs/spb-kassir-permanent-20261114-batch01/raw/8414392685.json": {
+      "bytes": 7981,
+      "sha256": "16d8c3d1498d83f1a43492b0287ffac54d6c18aedc830f4c502733dae22f6d82"
+    },
+    "Data/avito_runs/spb-kassir-permanent-20261114-batch01/raw/8423039428.json": {
+      "bytes": 13234,
+      "sha256": "2b3a392dbb29cc45006c3bf83293a520030a8a2d015a566fbc8e1cc7f434164f"
+    },
+    "Data/avito_runs/spb-kassir-permanent-20261114-batch01/raw/8446190819.json": {
+      "bytes": 10142,
+      "sha256": "282d731f9d93f227a5a0f77edf71b00b2a2ecaa5623b5b79e34da470d6f39bc0"
+    },
+    "Data/avito_runs/spb-kassir-permanent-20261114-batch01/raw/8470431448.json": {
+      "bytes": 9560,
+      "sha256": "44f077dcb5f3b55fb8ff49d2aabacbcbb1658534e88a5d3bde0ca22e302e2d53"
+    },
+    "Data/avito_runs/spb-kassir-permanent-20261114-batch01/raw/8470805544.json": {
+      "bytes": 8124,
+      "sha256": "80208587c9766c994a93a3bfc29cd08a437009523e715c8370fd1fe1c4d1a26e"
+    },
+    "Data/avito_runs/spb-kassir-permanent-20261114-batch01/raw/8491168496.json": {
+      "bytes": 13748,
+      "sha256": "0a02e05a503b0cb15ee905f8ac1956e261843d27e115ab4e4537800cf6bcabea"
+    },
+    "Data/avito_runs/spb-kassir-permanent-20261114-batch01/raw/8544341865.json": {
+      "bytes": 11775,
+      "sha256": "73bc1317f56e051202ae067559b05d016a427db0a43d7c98f2252753923e1e9b"
+    },
+    "Data/avito_runs/spb-kassir-permanent-20261114-batch01/raw/8575573494.json": {
+      "bytes": 11765,
+      "sha256": "2fdcfce8cb4fe18e1f1373216319a18a512c14c03ef180cecc1b75e86e5d3eeb"
+    },
+    "Data/avito_runs/spb-kassir-permanent-20261114-batch01/reviewed/3819085572.json": {
+      "bytes": 817,
+      "sha256": "1da09e02df944c7c00bce8a420b5bae7a5a38af45fe71fc38bea4b6e97191ae6"
+    },
+    "Data/avito_runs/spb-kassir-permanent-20261114-batch01/reviewed/3984445161.json": {
+      "bytes": 817,
+      "sha256": "9d87a50749b92666e1974deabfcbebb21d8d133b0aa6f9743079665d9e66bd16"
+    },
+    "Data/avito_runs/spb-kassir-permanent-20261114-batch01/reviewed/4418775258.json": {
+      "bytes": 816,
+      "sha256": "97ea228190a8ff3e3d2572a9a6b7d13b6b6678c75c4cea86c537922c7ae0bcb7"
+    },
+    "Data/avito_runs/spb-kassir-permanent-20261114-batch01/reviewed/7488547955.json": {
+      "bytes": 746,
+      "sha256": "614e7b31c7de47116f0ad0815b1fe3f499df1c0dfae5943a4cc2e89f01dd3b34"
+    },
+    "Data/avito_runs/spb-kassir-permanent-20261114-batch01/reviewed/7737750138.json": {
+      "bytes": 816,
+      "sha256": "d38ae1a0e1c2813c5f6c8a5efd08b2cf99b2586c8d921cceac6a654d2c6fad59"
+    },
+    "Data/avito_runs/spb-kassir-permanent-20261114-batch01/reviewed/7962481593.json": {
+      "bytes": 838,
+      "sha256": "dca615d3c29b888fd76c78c9b3791c696aeea649beaa7f0d75488d15889b24a0"
+    },
+    "Data/avito_runs/spb-kassir-permanent-20261114-batch01/reviewed/8126581646.json": {
+      "bytes": 873,
+      "sha256": "9b5dedc207517f42ea3b4f169ce31f24c7c19dca0b464a58930d9071f4b2adc7"
+    },
+    "Data/avito_runs/spb-kassir-permanent-20261114-batch01/reviewed/8283544333.json": {
+      "bytes": 832,
+      "sha256": "6d18482c91161710ed673bd0ac06d3273f6bf17fb432da61e90598298cc1a6c7"
+    },
+    "Data/avito_runs/spb-kassir-permanent-20261114-batch01/reviewed/8335063929.json": {
+      "bytes": 831,
+      "sha256": "308aabacefebf39101025804f2feb49463a15751c810df63c2071157ac867741"
+    },
+    "Data/avito_runs/spb-kassir-permanent-20261114-batch01/reviewed/8335259872.json": {
+      "bytes": 817,
+      "sha256": "9781d31d945f5ae0c071f9ac8d9b9a8bfee1e73b5ebd02cc5cc4e8854836472f"
+    },
+    "Data/avito_runs/spb-kassir-permanent-20261114-batch01/reviewed/8363035412.json": {
+      "bytes": 817,
+      "sha256": "22f66d64400a1b92c7e3505e4f3a4a2f0f0a077f034553faa1a6d1e69390a2eb"
+    },
+    "Data/avito_runs/spb-kassir-permanent-20261114-batch01/reviewed/8377330405.json": {
+      "bytes": 818,
+      "sha256": "e6ec7ca220b7d88d8fb4360e27f26e05be9d57bccda6c0ec0f702007fdcb6c2d"
+    },
+    "Data/avito_runs/spb-kassir-permanent-20261114-batch01/reviewed/8414392685.json": {
+      "bytes": 830,
+      "sha256": "e0a81dcc3bd6687a86e54a6b36693eb2986b619e5d9cc34d8c089fac39292b26"
+    },
+    "Data/avito_runs/spb-kassir-permanent-20261114-batch01/reviewed/8423039428.json": {
+      "bytes": 875,
+      "sha256": "aa3142c0dbbf9b9515086496afafa9e3726719a088cbf3a11a14b32c37c57743"
+    },
+    "Data/avito_runs/spb-kassir-permanent-20261114-batch01/reviewed/8446190819.json": {
+      "bytes": 823,
+      "sha256": "d8b6fffd35ad28ca9431db4dd4583991c027f4f8c4bf3b528ccb4681a63ccdb1"
+    },
+    "Data/avito_runs/spb-kassir-permanent-20261114-batch01/reviewed/8470431448.json": {
+      "bytes": 840,
+      "sha256": "e74a707c6ab96cb72f9225a3598c7525ea366ab826bf4c6151110415d5036dab"
+    },
+    "Data/avito_runs/spb-kassir-permanent-20261114-batch01/reviewed/8470805544.json": {
+      "bytes": 848,
+      "sha256": "1378c331691e82453e4949bb98dd979323ab286aa0c78df201807420159a8e91"
+    },
+    "Data/avito_runs/spb-kassir-permanent-20261114-batch01/reviewed/8491168496.json": {
+      "bytes": 938,
+      "sha256": "d69ccfb6f7fb41db40fab7e07bb9d367a6cc7ee9f6e17b02342fbaffea435010"
+    },
+    "Data/avito_runs/spb-kassir-permanent-20261114-batch01/reviewed/8544341865.json": {
+      "bytes": 826,
+      "sha256": "98f26fd0ebf6ceb7fb63ae65ee87b422f8970206f5b5cf160fe454f0babfb109"
+    },
+    "Data/avito_runs/spb-kassir-permanent-20261114-batch01/reviewed/8575573494.json": {
+      "bytes": 821,
+      "sha256": "cab3614750d02430ab19834b679c0d98051fef6b176e0da28799b4cbf4733ba9"
+    },
+    "Data/avito_runs/spb-kassir-permanent-20261114-batch01/standing_unavailable_policy.json": {
+      "bytes": 1011,
+      "sha256": "7a1c18520dc10340252a4933e92bb851f78d800b32c33c1017ede17529393381"
+    },
+    "Scraper/runs/spb-kassir-permanent-20261114-batch01/plan.json": {
+      "bytes": 5809,
+      "sha256": "6014697dff44a8d9b48923aef82847bab29d10b90791dc6db636ac0cca2e42f8"
+    },
+    "Scraper/runs/spb-kassir-permanent-20261114-batch01/shared-ledger.json": {
+      "bytes": 55,
+      "sha256": "fa4afc1461552d469eaccfa909c2c5870a41df089002556e59a84b6ad3ef0740"
+    }
+  }
+}

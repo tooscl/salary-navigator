@@ -3367,9 +3367,16 @@ def retry_incomplete_observation(args):
 
 
 def resume_browser(args):
-    out, _, diag = paths(ROOT, args.run_id)
+    out, service, diag = paths(ROOT, args.run_id)
+    correction = getattr(args, 'correct_record_error', False)
+    if correction and ((service/'plan.json').exists() or (out/'queue.json').exists() or any((out/'raw').glob('*')) or (diag/'checkpoint.json').exists()):
+        raise HumanRequired('Administrative correction is limited to a pre-freeze run without checkpoint or raw')
     pending_id = getattr(args, 'pending_id_no_budget', None)
     detail_hydration = getattr(args, 'detail_hydration', False)
+    if correction and pending_id:
+        raise ValueError('Administrative correction cannot authorize a pending capture')
+    if pending_id and getattr(args, 'retain_unbounded', False):
+        raise ValueError('Pending-only and retained unbounded authorization are mutually exclusive')
     if detail_hydration and not pending_id:
         raise ValueError('DETAIL hydration authorization requires a pending ID')
     if pending_id and getattr(args, 'unbounded_retries', False):
@@ -3398,7 +3405,7 @@ def resume_browser(args):
             save_failures(diag, ledger)
         print('One pending capture authorized without replenishing the retry budget')
         return
-    authorize_browser(diag, args.human_instruction, args.authorization_id, unbounded_retries=getattr(args, 'unbounded_retries', False))
+    authorize_browser(diag, args.human_instruction, args.authorization_id, unbounded_retries=getattr(args, 'unbounded_retries', False), correct_record_error=correction, retain_unbounded=getattr(args, 'retain_unbounded', False))
     print('Human browser authorization recorded; history retained')
 
 
@@ -4304,6 +4311,8 @@ def main():
             if name == 'resume-browser': command.add_argument('--pending-id-no-budget', help='Authorize one pending ID without replenishing an exhausted retry budget')
             if name == 'resume-browser': command.add_argument('--detail-hydration', action='store_true', help='Limit pending authorization to an evidenced incomplete DETAIL hydration race')
             if name == 'resume-browser': command.add_argument('--unbounded-retries', action='store_true', help='Record explicit authorization for unbounded ordinary technical retries in this run')
+            if name == 'resume-browser': command.add_argument('--correct-record-error', action='store_true', help='Audit the narrowly identified pre-freeze administrative record-error misclassification')
+            if name == 'resume-browser': command.add_argument('--retain-unbounded', action='store_true', help='Retain an existing unbounded technical retry authorization after a fresh human resume')
         else:
             for flag in ['file', 'reason', 'validation']:
                 command.add_argument('--' + flag, required=True)

@@ -368,3 +368,5 @@ avito_runs/<название_сбора>/
 - [remote-full-krasnodar-20261110](avito_runs/remote-full-krasnodar-20261110/exports/vacancies_flat.csv): 96 вакансий.
 
 - [avito-spb-truck-driver-20261114](avito_runs/avito-spb-truck-driver-20261114/exports/vacancies_flat.csv): 25 вакансий.
+
+- [spb-kassir-permanent-20261114-batch01](avito_runs/spb-kassir-permanent-20261114-batch01/exports/vacancies_flat.csv): 20 вакансий.
