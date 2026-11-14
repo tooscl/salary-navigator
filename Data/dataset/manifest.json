@@ -26,7 +26,7 @@
     "source": "title, profession, city, location_observed",
     "policy": "added_next_to_observed_columns_not_replacing"
   },
-  "rows": 31610,
+  "rows": 31635,
   "columns": [
     "source",
     "id",
@@ -160,7 +160,7 @@
     "enriched_fields",
     "enrichment_version"
   ],
-  "sha256": "7831e53ccd38c3c85e33c7e0bb3b8a521db58292e90349ebaae9cc4b025f873f",
+  "sha256": "236238c8d4094ca355a67b9183ef7af6f77c6800c1cc19a17d9e2f484007d70b",
   "inputs": [
     {
       "run_id": "20261028-spb-50-all",
@@ -24106,6 +24106,98 @@
       "search_plan": {
         "path": "Scraper/runs/avito-kamchatskiy-kray-20261106/plan.json",
         "sha256": "a7afb17a0660f44bffadd00b46fdb2f191f5a3e007f1cc6cf3b43b79e77115f1"
+      }
+    },
+    {
+      "run_id": "avito-spb-truck-driver-20261114",
+      "source": "avito",
+      "path": "Data/avito_runs/avito-spb-truck-driver-20261114/exports/vacancies_flat.csv",
+      "sha256": "e9b2746efe3a08018c5a39ed1cdeaebf43a13008e2d4e6a10c10e24d60f41608",
+      "placement_regions": {
+        "Санкт-Петербург": "Санкт-Петербург"
+      },
+      "enrichment_status": "not_run",
+      "unknown_city_placements": {
+        "8482040511": {
+          "region": "Санкт-Петербург",
+          "evidence": "Санкт-Петербург, Пушкинский р-н, пос. Шушары Шушары от 31 мин.",
+          "region_unknown": false
+        },
+        "8472980136": {
+          "region": "Санкт-Петербург",
+          "evidence": "Санкт-Петербург, Пушкинский р-н, пос. Шушары, 3-й Бадаевский пр., 7к1с2 Шушары от 31 мин. Купчино от 31 мин.",
+          "region_unknown": false
+        },
+        "8227550272": {
+          "region": "Санкт-Петербург",
+          "evidence": "Санкт-Петербург, наб. реки Мойки, 27 Адмиралтейская 6–10 мин. Невский проспект 11–15 мин. Гостиный двор 11–15 мин.",
+          "region_unknown": false
+        },
+        "8346286567": {
+          "region": "Санкт-Петербург",
+          "evidence": "Санкт-Петербург, пос. Парголово, ул. Михаила Дудина, 8к1 Парнас 6–10 мин. Проспект Просвещения от 31 мин. Озерки от 31 мин.",
+          "region_unknown": false
+        },
+        "7393593937": {
+          "region": "Санкт-Петербург",
+          "evidence": "Санкт-Петербург, Пушкинский р-н, пос. Шушары, Московское ш., 153к2 Шушары от 31 мин.",
+          "region_unknown": false
+        },
+        "1933874487": {
+          "region": "Санкт-Петербург",
+          "evidence": "Санкт-Петербург, Московское ш., 36 Звёздная 6–10 мин. Купчино 21–30 мин. Московская 21–30 мин.",
+          "region_unknown": false
+        },
+        "7593663718": {
+          "region": "Санкт-Петербург",
+          "evidence": "Санкт-Петербург, Колпинский р-н, пос. Петро-Славянка, Софийская ул., 149с3 Шушары от 31 мин. Рыбацкое от 31 мин.",
+          "region_unknown": false
+        },
+        "7766198190": {
+          "region": "Санкт-Петербург",
+          "evidence": "Санкт-Петербург, Пушкинский р-н, пос. Шушары, территория предприятия Ленсоветовское р-н Пушкинский",
+          "region_unknown": false
+        },
+        "8432696064": {
+          "region": "Санкт-Петербург",
+          "evidence": "Санкт-Петербург, Пушкинский р-н, пос. Шушары, ул. Ленина, 1БА Шушары от 31 мин. Купчино от 31 мин. Дунайская от 31 мин.",
+          "region_unknown": false
+        },
+        "8158252337": {
+          "region": "Санкт-Петербург",
+          "evidence": "Санкт-Петербург, Пушкинский р-н, пос. Шушары, Московское ш., 185 р-н Пушкинский",
+          "region_unknown": false
+        },
+        "8589255151": {
+          "region": "Санкт-Петербург",
+          "evidence": "Санкт-Петербург, Петродворцовый р-н, Петергоф, Ропшинское ш., 8Б р-н Петродворцовый",
+          "region_unknown": false
+        },
+        "8521880737": {
+          "region": "Санкт-Петербург",
+          "evidence": "Санкт-Петербург, Пушкинский р-н, пос. Шушары, Московское ш. р-н Пушкинский",
+          "region_unknown": false
+        },
+        "8494979390": {
+          "region": "Санкт-Петербург",
+          "evidence": "Санкт-Петербург, Пушкинский р-н, пос. Шушары, Московское ш., 145с1 Шушары от 31 мин. Рыбацкое от 31 мин.",
+          "region_unknown": false
+        },
+        "1249958262": {
+          "region": "Санкт-Петербург",
+          "evidence": "Санкт-Петербург, Пушкинский р-н, пос. Шушары, территория Бадаевское Отделение Шушары от 31 мин. Купчино от 31 мин. Дунайская от 31 мин.",
+          "region_unknown": false
+        },
+        "8400943400": {
+          "region": "Санкт-Петербург",
+          "evidence": "Санкт-Петербург, Василеостровский район, муниципальный округ Морской, ЖК Я – Романтик Приморская 21–30 мин. Зенит от 31 мин.",
+          "region_unknown": false
+        }
+      },
+      "rows": 25,
+      "search_plan": {
+        "path": "Scraper/runs/avito-spb-truck-driver-20261114/plan.json",
+        "sha256": "b01a17a8d99835df922086665f6367dc552a7a5360a1c0493a29ee913af781d4"
       }
     },
     {
@@ -66959,9 +67051,9 @@
   "parts": [
     {
       "path": "parts/part-00.csv",
-      "rows": 475,
-      "bytes": 1726612,
-      "sha256": "8b6e73deb7560a06979c432765d7908b6f8d7098468d892311f2ac4ea4bf5b4c"
+      "rows": 476,
+      "bytes": 1729882,
+      "sha256": "9238aa41b264e58f6a7a3eeb8b61eb65daa7d28297224db49c5896ef02144f18"
     },
     {
       "path": "parts/part-01.csv",
@@ -66995,9 +67087,9 @@
     },
     {
       "path": "parts/part-06.csv",
-      "rows": 489,
-      "bytes": 1811652,
-      "sha256": "c483e9521f8463755d39caeac54190c2fc108726451a1770723d06f1ca549350"
+      "rows": 491,
+      "bytes": 1817783,
+      "sha256": "b82db4151df643814ce81312b0d9f019dd23a4dd29d2c77f3dcec3393ee358f4"
     },
     {
       "path": "parts/part-07.csv",
@@ -67013,9 +67105,9 @@
     },
     {
       "path": "parts/part-09.csv",
-      "rows": 537,
-      "bytes": 1994337,
-      "sha256": "ce27d854ca2bbff64ec24e270000a4dac8cccd9836a487adef343c6b50e98011"
+      "rows": 538,
+      "bytes": 1997202,
+      "sha256": "17ae4e24b2eab6a8c134a59af65671b83050bd289165239c31c49bde5ce9fd2c"
     },
     {
       "path": "parts/part-10.csv",
@@ -67025,9 +67117,9 @@
     },
     {
       "path": "parts/part-11.csv",
-      "rows": 481,
-      "bytes": 1723593,
-      "sha256": "2b69b9456dde4e590ef443f321f37f2096d3e4c6c848b2980ee29b31e70e18cd"
+      "rows": 482,
+      "bytes": 1726793,
+      "sha256": "f15b7d0e3c8968923012226f16ed98d91006ed03985741638500a2d3f582d7db"
     },
     {
       "path": "parts/part-12.csv",
@@ -67067,9 +67159,9 @@
     },
     {
       "path": "parts/part-18.csv",
-      "rows": 495,
-      "bytes": 1822637,
-      "sha256": "fa44765a370c5ff9f85d968084652f37b955f15b366f7a0461d801863dbe0742"
+      "rows": 496,
+      "bytes": 1825064,
+      "sha256": "b9b51bddea78636f01287a970de703e19cbd1da83810b8be710f26e38e03a0a7"
     },
     {
       "path": "parts/part-19.csv",
@@ -67103,9 +67195,9 @@
     },
     {
       "path": "parts/part-24.csv",
-      "rows": 485,
-      "bytes": 1794783,
-      "sha256": "821948d24c2b1dc938116e9db81e2da639764caa77a757b4cfff34ac42852068"
+      "rows": 487,
+      "bytes": 1803501,
+      "sha256": "58ec416504c671820802fa437773b4cef6697402574362bdd3cb548ce494deb3"
     },
     {
       "path": "parts/part-25.csv",
@@ -67127,15 +67219,15 @@
     },
     {
       "path": "parts/part-28.csv",
-      "rows": 486,
-      "bytes": 1743025,
-      "sha256": "f95e8c9a65d207c6a57f28073f5dc1232095e4c713e608faa5fdb06abae35c4d"
+      "rows": 488,
+      "bytes": 1754540,
+      "sha256": "172ca9c81a27bd33c1d7f15aa4adcf82983b4afcffb4d139a727bfbf7ca2bffd"
     },
     {
       "path": "parts/part-29.csv",
-      "rows": 497,
-      "bytes": 1837889,
-      "sha256": "4c7b6651e437b1f668f1a916c479fa9ae0c56b3c49f3c0629e50976e831f66e5"
+      "rows": 498,
+      "bytes": 1843098,
+      "sha256": "cbe5671326f814c1305128729b132ba9eb57570bcb8e4b7fad756afd0406a8f5"
     },
     {
       "path": "parts/part-30.csv",
@@ -67151,9 +67243,9 @@
     },
     {
       "path": "parts/part-32.csv",
-      "rows": 488,
-      "bytes": 1807740,
-      "sha256": "891be4a70cd4ffd128d00eaac3a9bc84f42efaf8d4eb86e8d260fa75bcf15810"
+      "rows": 489,
+      "bytes": 1812590,
+      "sha256": "9d9bfc37f15a329df597fdae2a8060b10bf21c4f0eb80c57d993669d90ae5b64"
     },
     {
       "path": "parts/part-33.csv",
@@ -67169,9 +67261,9 @@
     },
     {
       "path": "parts/part-35.csv",
-      "rows": 462,
-      "bytes": 1728085,
-      "sha256": "f68f00c707c94c017d1bdecea80b96f4bdd9793e349884deb222e62f70a92cb6"
+      "rows": 464,
+      "bytes": 1734495,
+      "sha256": "bc9eadce65e9f2487c626efafc2d6059c0d51f6f9babecf7cf9bfd4b7fce1ef9"
     },
     {
       "path": "parts/part-36.csv",
@@ -67193,9 +67285,9 @@
     },
     {
       "path": "parts/part-39.csv",
-      "rows": 469,
-      "bytes": 1713960,
-      "sha256": "1c17a43fff60d0bcd5aa1efacda5a77cb3ec70047ec1d39343c7c0742e1cb6b3"
+      "rows": 471,
+      "bytes": 1721154,
+      "sha256": "1556a1e6f08f999742e75492229c0cbfb4fba1f46bec5d7a4e2c42fbc94cd25f"
     },
     {
       "path": "parts/part-40.csv",
@@ -67217,15 +67309,15 @@
     },
     {
       "path": "parts/part-43.csv",
-      "rows": 482,
-      "bytes": 1775341,
-      "sha256": "4ab91428cf262f9376e858ad57bb306443204c7a86ee410bd688e40467a8c729"
+      "rows": 484,
+      "bytes": 1783141,
+      "sha256": "d9ccd7bbc57107698cf38b17d6921e11088b24f71a853b281939de62be1a90c5"
     },
     {
       "path": "parts/part-44.csv",
-      "rows": 503,
-      "bytes": 1809674,
-      "sha256": "55e39409401542727674a8d84086b2a171515d241bce76027a9e0034ad83d8b1"
+      "rows": 504,
+      "bytes": 1814529,
+      "sha256": "89522cf6ceb50e8eabbbdc0c60da15e2bfd534199b4df08940222ab49e2d809d"
     },
     {
       "path": "parts/part-45.csv",
@@ -67253,9 +67345,9 @@
     },
     {
       "path": "parts/part-49.csv",
-      "rows": 534,
-      "bytes": 1975190,
-      "sha256": "c9612c9b8ba10e8d7d462d9cfc2845d55de9dae9829113378fe49bd07e912724"
+      "rows": 535,
+      "bytes": 1981107,
+      "sha256": "5cbfba765672b115beb55b65d84ca3abbdd0be7f231bd56ff6646622992a559a"
     },
     {
       "path": "parts/part-50.csv",
@@ -67271,9 +67363,9 @@
     },
     {
       "path": "parts/part-52.csv",
-      "rows": 498,
-      "bytes": 1793919,
-      "sha256": "b67c9317ce4ac3471d43c29c5673e218c351131a04978e09b7c14300e9a1e8f7"
+      "rows": 499,
+      "bytes": 1797117,
+      "sha256": "9df94c5d7ca54b70af9969aa2deb7c7e12b5a4151e04e7409b45d46c9d1b68eb"
     },
     {
       "path": "parts/part-53.csv",
@@ -67289,9 +67381,9 @@
     },
     {
       "path": "parts/part-55.csv",
-      "rows": 464,
-      "bytes": 1704317,
-      "sha256": "c4137cfe5a76fac538ab661cd014bebea8066199acf6972cd0d7634069feeb95"
+      "rows": 465,
+      "bytes": 1707636,
+      "sha256": "210fc33428c7d52e2637548bb903bb774240ed6adc226fbf4f38a890140605ed"
     },
     {
       "path": "parts/part-56.csv",
@@ -67325,21 +67417,21 @@
     },
     {
       "path": "parts/part-61.csv",
-      "rows": 479,
-      "bytes": 1767793,
-      "sha256": "b581a48a7c86d7a0860740f9b2662e9b487e0c87cc5b86dac681aa9d604c3861"
+      "rows": 480,
+      "bytes": 1771252,
+      "sha256": "df4e627bdab86dda8d28b5bc547323770cc6e666d5da995e653c9cd3558428db"
     },
     {
       "path": "parts/part-62.csv",
-      "rows": 478,
-      "bytes": 1755587,
-      "sha256": "6247de10c5d1def05b6c03d098124655cf1e15d16a1040c842f1a6231f4daba6"
+      "rows": 479,
+      "bytes": 1759176,
+      "sha256": "a86e84b4e2607eb8a01ceee3097e9d1b986b98ab9fe5a356c66613cdc1e286b2"
     },
     {
       "path": "parts/part-63.csv",
-      "rows": 520,
-      "bytes": 1901681,
-      "sha256": "4b5b7fec0cbb0f38153bbc74bb0370d3b51efa0c55b6e79d2e3f0f7f915bd442"
+      "rows": 521,
+      "bytes": 1905428,
+      "sha256": "4f988bef46d24d9cd0ab223adae7d54024996a390e71635c8c76e383e22e1ab8"
     }
   ],
   "partition": "sha256-json-source-id-first64-mod-64-v1"
