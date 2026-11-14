@@ -380,3 +380,5 @@ avito_runs/<название_сбора>/
 - [moscow-prodavec-medbook-no-20261114-b01-novel](avito_runs/moscow-prodavec-medbook-no-20261114-b01-novel/exports/vacancies_flat.csv): 56 вакансий.
 
 - [moscow-prodavec-medbook-no-20261114-b02-novel](avito_runs/moscow-prodavec-medbook-no-20261114-b02-novel/exports/vacancies_flat.csv): 150 вакансий.
+
+- [20261114_moscow_cashier_candidates_other_hours](avito_runs/20261114_moscow_cashier_candidates_other_hours/exports/vacancies_flat.csv): 18 вакансий из ранее прочитанных кандидатов.
