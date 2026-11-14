@@ -2680,8 +2680,16 @@ def partial_prefix_selection(out, service, queue, instruction):
     excluded = unavailable_ids | unresolved_ids | user_skipped_ids
     ids = [x['id'] for x in queue]
     next_id = cp.get('next_id')
+    # A completed bounded capture batch can report CAPTURED even though the
+    # frozen queue has a suffix. Derive its boundary only from accounted IDs.
+    batch_complete = cp.get('state') == 'CAPTURED' and next_id is None
+    if batch_complete:
+        cut = len(cp.get('completed_ids', [])) + len(excluded)
+        if 0 < cut < len(ids):
+            next_id = ids[cut]
     if next_id not in ids or cp.get('state') not in ('REVIEW_REQUIRED', 'BROWSER_ERROR', 'NEEDS_HUMAN'):
-        raise ValueError('Expected a stopped pending partition ID')
+        if not batch_complete or next_id not in ids:
+            raise ValueError('Expected a stopped pending partition ID')
     cut = ids.index(next_id)
     if cut == 0 or cp.get('completed_ids') != [i for i in ids[:cut] if i not in excluded] or excluded - set(ids[:cut]):
         raise ValueError('Completed IDs must be the accounted queue prefix')

@@ -376,3 +376,7 @@ avito_runs/<название_сбора>/
 - [20261114_moscow_cashier_11_12h](avito_runs/20261114_moscow_cashier_11_12h/exports/vacancies_flat.csv): 37 вакансий.
 
 - [20261114-ekb-kassir-outside-top](avito_runs/20261114-ekb-kassir-outside-top/exports/vacancies_flat.csv): 33 вакансий.
+
+- [moscow-prodavec-medbook-no-20261114-b01-novel](avito_runs/moscow-prodavec-medbook-no-20261114-b01-novel/exports/vacancies_flat.csv): 56 вакансий.
+
+- [moscow-prodavec-medbook-no-20261114-b02-novel](avito_runs/moscow-prodavec-medbook-no-20261114-b02-novel/exports/vacancies_flat.csv): 150 вакансий.
