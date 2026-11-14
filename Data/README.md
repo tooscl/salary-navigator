@@ -384,3 +384,5 @@ avito_runs/<название_сбора>/
 - [20261114_moscow_cashier_candidates_other_hours](avito_runs/20261114_moscow_cashier_candidates_other_hours/exports/vacancies_flat.csv): 18 вакансий из ранее прочитанных кандидатов.
 
 - [ekb_prodavec_11_12h_20261114](avito_runs/ekb_prodavec_11_12h_20261114/exports/vacancies_flat.csv): 35 вакансий.
+
+- [ekb_prodavec_others_20261114](avito_runs/ekb_prodavec_others_20261114/exports/vacancies_flat.csv): 32 ранее прочитанных кандидата с другими или неуказанными часами.
