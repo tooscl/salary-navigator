@@ -370,3 +370,5 @@ avito_runs/<название_сбора>/
 - [avito-spb-truck-driver-20261114](avito_runs/avito-spb-truck-driver-20261114/exports/vacancies_flat.csv): 25 вакансий.
 
 - [spb-kassir-permanent-20261114-batch01](avito_runs/spb-kassir-permanent-20261114-batch01/exports/vacancies_flat.csv): 20 вакансий.
+
+- [spb-kassir-permanent-20261114-batch02](avito_runs/spb-kassir-permanent-20261114-batch02/exports/vacancies_flat.csv): 15 вакансий.
