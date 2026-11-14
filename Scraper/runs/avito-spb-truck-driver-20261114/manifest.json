@@ -1,0 +1,722 @@
+{
+  "run_id": "avito-spb-truck-driver-20261114",
+  "dataset_id": "avito-spb-truck-driver-20261114",
+  "status": "complete",
+  "schema": {
+    "columns": [
+      "id",
+      "city",
+      "profession",
+      "segments",
+      "title",
+      "salary_raw",
+      "source_url",
+      "observed_at",
+      "description",
+      "location_observed",
+      "employer_name_observed",
+      "date_raw",
+      "views_total",
+      "views_today",
+      "listing_rank",
+      "listing_promoted",
+      "full_parameters_read",
+      "analysis_status",
+      "export_eligibility",
+      "read_status_parameters",
+      "read_status_description",
+      "read_status_location",
+      "read_limitations",
+      "enrichment_status",
+      "enriched_fields",
+      "enrichment_version",
+      "military",
+      "military_keywords",
+      "military_rule_version",
+      "city__source",
+      "city__evidence",
+      "city_anomaly",
+      "График",
+      "Занятость",
+      "Способ оформления",
+      "Частота выплат",
+      "Сфера деятельности компании",
+      "Что получают работники",
+      "Опыт работы",
+      "В том числе для кандидатов",
+      "Категория водительских прав",
+      "Статус самозанятости",
+      "Медкнижка",
+      "Количество рабочих часов в день",
+      "Техника",
+      "Смены",
+      "Количество рабочих дней в неделю",
+      "Стаж вождения",
+      "Компания предоставляет",
+      "Навык мелкого ремонта автомобиля",
+      "Режим работы",
+      "Возраст автомобиля",
+      "Бренд автомобиля",
+      "Стажировка",
+      "Где предстоит работать"
+    ],
+    "unknown_policy": "empty_not_zero"
+  },
+  "collection": {
+    "run_id": "avito-spb-truck-driver-20261114",
+    "geography": "Санкт-Петербург",
+    "profession": "Водитель грузового транспорта",
+    "segments": "",
+    "filter_evidence": "Observed listing URL and h1 identify Санкт-Петербург; profession checkbox Водитель грузового транспорта checked (value 22283175); search query empty; no additional controls selected.",
+    "listing_url": "https://www.avito.ru/sankt-peterburg/vakansii/voditel_gruzovogo_transporta-ASgBAgICAUTUzBHOjqAV?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6IkluWDlRNEFiTFhhRUlRa08iO316aD3BJgAAAA",
+    "listing_request_url": "https://www.avito.ru/sankt-peterburg/vakansii/voditel_gruzovogo_transporta-ASgBAgICAUTUzBHOjqAV?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6IkluWDlRNEFiTFhhRUlRa08iO316aD3BJgAAAA&localPriority=0",
+    "selected_controls": [
+      {
+        "label": "Водитель грузового транспорта",
+        "marker": "params[144170]/checkbox/22283175",
+        "value": null
+      },
+      {
+        "label": "Водитель грузового транспорта",
+        "marker": "params[144170]/checkbox/toggle",
+        "value": "22283175"
+      },
+      {
+        "label": "Любой",
+        "marker": "params[196929]/all",
+        "value": null
+      },
+      {
+        "label": "Любой",
+        "marker": "params[196929]/toggle",
+        "value": "all"
+      },
+      {
+        "label": "Неважно",
+        "marker": "params[172815]/all",
+        "value": null
+      },
+      {
+        "label": "Неважно",
+        "marker": "params[172815]/toggle",
+        "value": "all"
+      },
+      {
+        "label": "Неважно",
+        "marker": null,
+        "value": "all"
+      },
+      {
+        "label": "Все",
+        "marker": null,
+        "value": "all"
+      }
+    ],
+    "listing_sha256": "bb8b52525dd470f798557d649c7705b0b5a46db23c2d10ba443de087ad062b87",
+    "profession_scope": null,
+    "profession_source": "observed_controls",
+    "listing_pages": [
+      {
+        "file": "listing_pages/0001.json",
+        "sha256": "bb8b52525dd470f798557d649c7705b0b5a46db23c2d10ba443de087ad062b87",
+        "source_url": "https://www.avito.ru/sankt-peterburg/vakansii/voditel_gruzovogo_transporta-ASgBAgICAUTUzBHOjqAV?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6IkluWDlRNEFiTFhhRUlRa08iO316aD3BJgAAAA"
+      },
+      {
+        "file": "listing_pages/0002.json",
+        "sha256": "78233e07e4174f6e65c7e500c56d8d66c371d012ade78295bc8e7673de9fb74b",
+        "source_url": "https://www.avito.ru/sankt-peterburg/vakansii/voditel_gruzovogo_transporta-ASgBAgICAUTUzBHOjqAV?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6InNlZmZSZUhIYjZ6bWltMHEiO32NckZoJgAAAA&p=2"
+      },
+      {
+        "file": "listing_pages/0003.json",
+        "sha256": "f5ec9947408429730cfd181ab8c1aef5ea5ef6311a62bb122cc13341d018dfe6",
+        "source_url": "https://www.avito.ru/sankt-peterburg/vakansii/voditel_gruzovogo_transporta-ASgBAgICAUTUzBHOjqAV?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6InNlZmZSZUhIYjZ6bWltMHEiO32NckZoJgAAAA&p=3"
+      }
+    ],
+    "selection_mode": "first_N_unique_on_frozen_listing",
+    "limit": 25,
+    "requested_all_pages": false,
+    "saved_selection_authorization": null,
+    "requested_limit": 100,
+    "available_unique": 25,
+    "listing_end_reason": null,
+    "available_listing_exhausted": false,
+    "continuation": null,
+    "branch_only": false,
+    "max_pages": null,
+    "candidate_limit": null,
+    "created_at": "2026-11-14T11:07:58.216489+00:00",
+    "instruction_version": "1.8.2",
+    "extractor_sha256": "0c52ba2f821d861083c99ec6bc328456df96b3d179b7fffd47f87aadfda84bdb",
+    "instruction_sha256": "56c5550b557f236f217f567b2da0ae470ff324c811f596d28b0bd35bd81121cb",
+    "code_git_commit": "7dc8e62cbc141972333c99fcc1ccb9f466139211",
+    "setup_seconds": 11.484836125280708,
+    "live_route_verified": false,
+    "execution_model": "Codex GPT-6.1",
+    "automation_sha256": {
+      "Scraper/skills/collect-avito/references/top-professions.json": "e3e72638b17b48f825ec6f2fefb963662494f679ae4b0cef1bebedba889610dd",
+      "utils/title_flags.py": "9c9456cb3fb0df5791630049c9c85987381091dbb9ba18bc3fb3314b8cccbeb6",
+      "Scraper/extract.js": "0c52ba2f821d861083c99ec6bc328456df96b3d179b7fffd47f87aadfda84bdb",
+      "Scraper/skills/collect-avito/SKILL.md": "56c5550b557f236f217f567b2da0ae470ff324c811f596d28b0bd35bd81121cb",
+      "Scraper/skills/collect-avito/scripts/run.py": "7d17ff2d588b1b4b114b4c7a35ba03b496a75cf5940d3b258605ae09e638d3c7",
+      "Scraper/skills/collect-avito/scripts/sweep_mode.py": "718a956a316df71c47ee3a4c5d3670fa011a5b16e9948393d68216702b140a56",
+      "Scraper/skills/collect-avito/scripts/browser_batch.js": "8090a7905357a3ee3387009d4b9778f3150556506d319b7f62783bb3594d5733",
+      "Scraper/skills/collect-avito/scripts/check_capture.py": "aa746849317f9768af5aae08b394b9379539f6e268c1fc69e4ed13bd06a4657f",
+      "Scraper/skills/collect-avito/scripts/failure_log.py": "08dfd259fad4166a08acb1b056bf3cd14daede277385bd91c7e49680959475a4",
+      "Scraper/skills/collect-avito/scripts/preflight.py": "492a0d898990aee198f26bf6577d0876360dcc6ec69e274835cd77cdaa768974"
+    },
+    "uncommitted_automation_files": [
+      "Scraper/skills/collect-avito/SKILL.md",
+      "Scraper/skills/collect-avito/scripts/run.py"
+    ],
+    "deduplication": {
+      "source_run_id": "avito-spb-truck-driver-20261114_candidates",
+      "source_plan_sha256": "40dc9f51903c48f0f6deececc21582f02efc4d036433178c4a4499a6b0ed4163",
+      "source_queue_sha256": "b641bb7a3232932a93f830242c06efb45f9507265049b3003c6f64e7475fd351",
+      "against": [],
+      "source_count": 100,
+      "duplicate_excluded": 44,
+      "novel_count": 25,
+      "duplicate_ids": [
+        "8177178562",
+        "8321374620",
+        "8212574721",
+        "7231222956",
+        "8212603961",
+        "7793561336",
+        "8212738499",
+        "7814658623",
+        "7307641845",
+        "3778097148",
+        "3405047847",
+        "8407290491",
+        "8250936622",
+        "8393418372",
+        "8374447380",
+        "4205065982",
+        "8445815431",
+        "7614030942",
+        "2568904929",
+        "3205997894",
+        "8241247564",
+        "8334580866",
+        "2309383081",
+        "7913083088",
+        "8389267103",
+        "4157905850",
+        "8145287075",
+        "8252412604",
+        "1004619500",
+        "8166810676",
+        "7950554254",
+        "8203160779",
+        "8383913098",
+        "8279963981",
+        "8165813526",
+        "8301963782",
+        "8521318252",
+        "7642913305",
+        "3579614943",
+        "8398486756",
+        "7899949201",
+        "8409669396",
+        "8094016390",
+        "7572319724"
+      ],
+      "dataset": {
+        "csv_sha256": "7831e53ccd38c3c85e33c7e0bb3b8a521db58292e90349ebaae9cc4b025f873f",
+        "manifest_sha256": "8e3120145313b4187b21c87ebf5d9b933c775e4802ed8d3ad292d64e62d857f7",
+        "keys_sha256": "c9a1593d5d9722d121918d44161e2cf5a4cb7ed34c9293212b2f1dc2c4d22495",
+        "rows": 31610
+      },
+      "selection_limit": 25,
+      "eligible_count": 56,
+      "deferred_ids": [
+        "8364760405",
+        "8186102042",
+        "8408358110",
+        "3418585196",
+        "8257150402",
+        "8351289774",
+        "8022314464",
+        "8289295042",
+        "7471248938",
+        "8425804487",
+        "7527151806",
+        "8401540507",
+        "1108664666",
+        "8385312365",
+        "3470868535",
+        "8377204974",
+        "8344818191",
+        "8345677264",
+        "8434966683",
+        "1084324315",
+        "3649895296",
+        "8048172220",
+        "8389989006",
+        "8146970367",
+        "3200085173",
+        "8523527758",
+        "8237114783",
+        "8546428658",
+        "4311221925",
+        "7916233132",
+        "4471512777"
+      ]
+    },
+    "city_anomaly_policy": "blank"
+  },
+  "coverage": {
+    "planned": 25,
+    "accepted": 25,
+    "unavailable": [],
+    "unresolved_observations": [],
+    "user_skipped_observations": [],
+    "user_skipped_count": 0,
+    "user_skip_policy": null,
+    "user_detail_skip_policy": null,
+    "deduplication": {
+      "source_run_id": "avito-spb-truck-driver-20261114_candidates",
+      "source_plan_sha256": "40dc9f51903c48f0f6deececc21582f02efc4d036433178c4a4499a6b0ed4163",
+      "source_queue_sha256": "b641bb7a3232932a93f830242c06efb45f9507265049b3003c6f64e7475fd351",
+      "against": [],
+      "source_count": 100,
+      "duplicate_excluded": 44,
+      "novel_count": 25,
+      "duplicate_ids": [
+        "8177178562",
+        "8321374620",
+        "8212574721",
+        "7231222956",
+        "8212603961",
+        "7793561336",
+        "8212738499",
+        "7814658623",
+        "7307641845",
+        "3778097148",
+        "3405047847",
+        "8407290491",
+        "8250936622",
+        "8393418372",
+        "8374447380",
+        "4205065982",
+        "8445815431",
+        "7614030942",
+        "2568904929",
+        "3205997894",
+        "8241247564",
+        "8334580866",
+        "2309383081",
+        "7913083088",
+        "8389267103",
+        "4157905850",
+        "8145287075",
+        "8252412604",
+        "1004619500",
+        "8166810676",
+        "7950554254",
+        "8203160779",
+        "8383913098",
+        "8279963981",
+        "8165813526",
+        "8301963782",
+        "8521318252",
+        "7642913305",
+        "3579614943",
+        "8398486756",
+        "7899949201",
+        "8409669396",
+        "8094016390",
+        "7572319724"
+      ],
+      "dataset": {
+        "csv_sha256": "7831e53ccd38c3c85e33c7e0bb3b8a521db58292e90349ebaae9cc4b025f873f",
+        "manifest_sha256": "8e3120145313b4187b21c87ebf5d9b933c775e4802ed8d3ad292d64e62d857f7",
+        "keys_sha256": "c9a1593d5d9722d121918d44161e2cf5a4cb7ed34c9293212b2f1dc2c4d22495",
+        "rows": 31610
+      },
+      "selection_limit": 25,
+      "eligible_count": 56,
+      "deferred_ids": [
+        "8364760405",
+        "8186102042",
+        "8408358110",
+        "3418585196",
+        "8257150402",
+        "8351289774",
+        "8022314464",
+        "8289295042",
+        "7471248938",
+        "8425804487",
+        "7527151806",
+        "8401540507",
+        "1108664666",
+        "8385312365",
+        "3470868535",
+        "8377204974",
+        "8344818191",
+        "8345677264",
+        "8434966683",
+        "1084324315",
+        "3649895296",
+        "8048172220",
+        "8389989006",
+        "8146970367",
+        "3200085173",
+        "8523527758",
+        "8237114783",
+        "8546428658",
+        "4311221925",
+        "7916233132",
+        "4471512777"
+      ]
+    },
+    "sweep": null,
+    "unique_ids": [
+      "8482040511",
+      "8472980136",
+      "8227550272",
+      "8346286567",
+      "7393593937",
+      "8515075599",
+      "1933874487",
+      "8513544786",
+      "8435393555",
+      "7593663718",
+      "7766198190",
+      "8039078599",
+      "8531368249",
+      "3745154014",
+      "8432696064",
+      "4595374495",
+      "8158252337",
+      "8589255151",
+      "8342040083",
+      "8521880737",
+      "8494979390",
+      "8255247290",
+      "2822236311",
+      "1249958262",
+      "8400943400"
+    ],
+    "errors": [],
+    "partial": null,
+    "limitations": [
+      "Visible rendered parameters only; enrichment not run; placement on site; live route unverified"
+    ]
+  },
+  "timing": {
+    "setup_seconds": 11.484836125280708,
+    "capture_seconds": 87.7122569582425,
+    "review_export_seconds": 9.435441832989454,
+    "publication_seconds": null
+  },
+  "review_model": "gpt-6.1-terra-high",
+  "automation_changes": [
+    {
+      "file": "Scraper/skills/collect-avito/scripts/run.py",
+      "reason": "Сверка замороженной очереди с полным датасетом и выбор первых новых ID с закреплением базы",
+      "validation": "python3 -m unittest Scraper.test_aside_runner: все тесты прошли, включая выбор, наследование и контроль изменения основания"
+    },
+    {
+      "file": "Scraper/test_aside_runner.py",
+      "reason": "Сверка замороженной очереди с полным датасетом и выбор первых новых ID с закреплением базы",
+      "validation": "python3 -m unittest Scraper.test_aside_runner: все тесты прошли, включая выбор, наследование и контроль изменения основания"
+    },
+    {
+      "file": "Scraper/skills/collect-avito/SKILL.md",
+      "reason": "Сверка замороженной очереди с полным датасетом и выбор первых новых ID с закреплением базы",
+      "validation": "python3 -m unittest Scraper.test_aside_runner: все тесты прошли, включая выбор, наследование и контроль изменения основания"
+    },
+    {
+      "file": "Scraper/skills/collect-avito/scripts/run.py",
+      "reason": "Воспроизводимая офлайн-проверка dedup child в чистом checkout и публикация указателя общего журнала",
+      "validation": "python3 -m unittest Scraper.test_aside_runner utils.test_build_dataset: 140 тестов OK, включая проверку без исходного run и diagnostics"
+    },
+    {
+      "file": "Scraper/test_aside_runner.py",
+      "reason": "Воспроизводимая офлайн-проверка dedup child в чистом checkout и публикация указателя общего журнала",
+      "validation": "python3 -m unittest Scraper.test_aside_runner utils.test_build_dataset: 140 тестов OK, включая проверку без исходного run и diagnostics"
+    },
+    {
+      "file": "Scraper/skills/collect-avito/SKILL.md",
+      "reason": "Воспроизводимая офлайн-проверка dedup child в чистом checkout и публикация указателя общего журнала",
+      "validation": "python3 -m unittest Scraper.test_aside_runner utils.test_build_dataset: 140 тестов OK, включая проверку без исходного run и diagnostics"
+    }
+  ],
+  "profession_correction": null,
+  "post_capture_automation_sha256": {
+    "Scraper/skills/collect-avito/SKILL.md": "5b103732296978d4ce704aac382efbd38b46ad58dde694a114826753ec7c6ee4",
+    "Scraper/skills/collect-avito/scripts/run.py": "d94ad84d2700c8d7e61980c43edd402a27521f5204ff35f1fa00da5c72b661a8"
+  },
+  "files": {
+    "Data/avito_runs/avito-spb-truck-driver-20261114/dedup-provenance/dataset-keys.json": {
+      "bytes": 1232696,
+      "sha256": "c9a1593d5d9722d121918d44161e2cf5a4cb7ed34c9293212b2f1dc2c4d22495"
+    },
+    "Data/avito_runs/avito-spb-truck-driver-20261114/dedup-provenance/dataset-manifest.json": {
+      "bytes": 3317889,
+      "sha256": "8e3120145313b4187b21c87ebf5d9b933c775e4802ed8d3ad292d64e62d857f7"
+    },
+    "Data/avito_runs/avito-spb-truck-driver-20261114/dedup-provenance/source-plan.json": {
+      "bytes": 5129,
+      "sha256": "40dc9f51903c48f0f6deececc21582f02efc4d036433178c4a4499a6b0ed4163"
+    },
+    "Data/avito_runs/avito-spb-truck-driver-20261114/dedup-provenance/source-queue.json": {
+      "bytes": 49671,
+      "sha256": "b641bb7a3232932a93f830242c06efb45f9507265049b3003c6f64e7475fd351"
+    },
+    "Data/avito_runs/avito-spb-truck-driver-20261114/dedup_selection.json": {
+      "bytes": 2092,
+      "sha256": "7591fc1b24ff50a97824afa151c47e7bab9256b540fe99042bcda0dff6032faf"
+    },
+    "Data/avito_runs/avito-spb-truck-driver-20261114/employer_name_audit.json": {
+      "bytes": 13246,
+      "sha256": "8e78d0c595fea53c80791df0477437575e75a7b4122d6645cfce0037afcf2edc"
+    },
+    "Data/avito_runs/avito-spb-truck-driver-20261114/exports/vacancies.json": {
+      "bytes": 115059,
+      "sha256": "9875ea34007383ff3b42e6337d638a33e8b414c338fe2b418e78461f2e81685c"
+    },
+    "Data/avito_runs/avito-spb-truck-driver-20261114/exports/vacancies_flat.csv": {
+      "bytes": 82998,
+      "sha256": "e9b2746efe3a08018c5a39ed1cdeaebf43a13008e2d4e6a10c10e24d60f41608"
+    },
+    "Data/avito_runs/avito-spb-truck-driver-20261114/exports/validation.json": {
+      "bytes": 220,
+      "sha256": "ac89101fde11650bdf886e05b4591a3d30b74007695c51721636cfb0e3d2828c"
+    },
+    "Data/avito_runs/avito-spb-truck-driver-20261114/listing.json": {
+      "bytes": 52299,
+      "sha256": "bb8b52525dd470f798557d649c7705b0b5a46db23c2d10ba443de087ad062b87"
+    },
+    "Data/avito_runs/avito-spb-truck-driver-20261114/listing_pages/0001.json": {
+      "bytes": 52299,
+      "sha256": "bb8b52525dd470f798557d649c7705b0b5a46db23c2d10ba443de087ad062b87"
+    },
+    "Data/avito_runs/avito-spb-truck-driver-20261114/listing_pages/0002.json": {
+      "bytes": 51870,
+      "sha256": "78233e07e4174f6e65c7e500c56d8d66c371d012ade78295bc8e7673de9fb74b"
+    },
+    "Data/avito_runs/avito-spb-truck-driver-20261114/listing_pages/0003.json": {
+      "bytes": 51765,
+      "sha256": "f5ec9947408429730cfd181ab8c1aef5ea5ef6311a62bb122cc13341d018dfe6"
+    },
+    "Data/avito_runs/avito-spb-truck-driver-20261114/queue.json": {
+      "bytes": 12516,
+      "sha256": "e5d415285888818d05127dbaa6db97799e8b15f5ad8b035b05e318a284f52d83"
+    },
+    "Data/avito_runs/avito-spb-truck-driver-20261114/raw/1249958262.json": {
+      "bytes": 14781,
+      "sha256": "adf871c31f85e0a26ca655ca00292aa2e7332a30f9973cf76f66f0fe0e5986c5"
+    },
+    "Data/avito_runs/avito-spb-truck-driver-20261114/raw/1933874487.json": {
+      "bytes": 19444,
+      "sha256": "11d623e09dd920010af7024185961a03deda7b1710e75e54995a65f3e7daa145"
+    },
+    "Data/avito_runs/avito-spb-truck-driver-20261114/raw/2822236311.json": {
+      "bytes": 12160,
+      "sha256": "0743365d62127297a4a1d542e6c4e000da946e7bfce69e287a0264d18f550dcc"
+    },
+    "Data/avito_runs/avito-spb-truck-driver-20261114/raw/3745154014.json": {
+      "bytes": 11427,
+      "sha256": "f41f7ed8c89a63a354c175a1965a40d946f2a99e8ba9e18a4649282419bd8205"
+    },
+    "Data/avito_runs/avito-spb-truck-driver-20261114/raw/4595374495.json": {
+      "bytes": 13518,
+      "sha256": "3d6a0995861891973726322cb2785f4dfb0dab1552994ae8f2f209741e7d8dc5"
+    },
+    "Data/avito_runs/avito-spb-truck-driver-20261114/raw/7393593937.json": {
+      "bytes": 11582,
+      "sha256": "611538bdab5ec6a8defa832b9b1712db288c535935d5f39ca585971ae0726d55"
+    },
+    "Data/avito_runs/avito-spb-truck-driver-20261114/raw/7593663718.json": {
+      "bytes": 7148,
+      "sha256": "286d905a175db338e99d169899ad0a7b69d6c337c66d1e4fc273e22e2217385c"
+    },
+    "Data/avito_runs/avito-spb-truck-driver-20261114/raw/7766198190.json": {
+      "bytes": 10344,
+      "sha256": "a1c86e6ce3e4d6ed031c0331f275d9a7be24f4755680113905828c9739d55a67"
+    },
+    "Data/avito_runs/avito-spb-truck-driver-20261114/raw/8039078599.json": {
+      "bytes": 8134,
+      "sha256": "acb3e16eea1f05234458b1ca278f7ecfd5f798ba303c7ddba65ed8e189527326"
+    },
+    "Data/avito_runs/avito-spb-truck-driver-20261114/raw/8158252337.json": {
+      "bytes": 11193,
+      "sha256": "5d7b483589517035c49911bc21a2265563a2285f376db6732b818c7a61ca9263"
+    },
+    "Data/avito_runs/avito-spb-truck-driver-20261114/raw/8227550272.json": {
+      "bytes": 11239,
+      "sha256": "6ed7f0a42a76f0314e84c9421447a60e4e2cd10acc9c28b9d39eabb71059e029"
+    },
+    "Data/avito_runs/avito-spb-truck-driver-20261114/raw/8255247290.json": {
+      "bytes": 8535,
+      "sha256": "0f54aee9171ae6d235d292739c5cb4e00491c4ded780bd3dc342cc5b90dcf997"
+    },
+    "Data/avito_runs/avito-spb-truck-driver-20261114/raw/8342040083.json": {
+      "bytes": 16457,
+      "sha256": "65c91306b555a126e22d1612c9d73099400a8e2323cc87707efed26c184e85cb"
+    },
+    "Data/avito_runs/avito-spb-truck-driver-20261114/raw/8346286567.json": {
+      "bytes": 19556,
+      "sha256": "785c399df629a5cfccf642bc770e9f1d73eac65fe2054bdd429fca828e154341"
+    },
+    "Data/avito_runs/avito-spb-truck-driver-20261114/raw/8400943400.json": {
+      "bytes": 10861,
+      "sha256": "7e8e45b1cb82c58774117964aab49b7d5ac8be60eedcadb886811c19948da5ba"
+    },
+    "Data/avito_runs/avito-spb-truck-driver-20261114/raw/8432696064.json": {
+      "bytes": 9919,
+      "sha256": "4e6627ef5428a93dd4e6e230fc479506b69286db260cc6b902cb51ff245beca0"
+    },
+    "Data/avito_runs/avito-spb-truck-driver-20261114/raw/8435393555.json": {
+      "bytes": 19476,
+      "sha256": "02bb6c56ac426df3ee47427ba7ea8a8ec385537cb60cf27368a43916812d110f"
+    },
+    "Data/avito_runs/avito-spb-truck-driver-20261114/raw/8472980136.json": {
+      "bytes": 8047,
+      "sha256": "44fbb5a8933fc58814f93f7f7dbd3b576d9a77c131cc5e72de0b2743e90e7f5c"
+    },
+    "Data/avito_runs/avito-spb-truck-driver-20261114/raw/8482040511.json": {
+      "bytes": 12105,
+      "sha256": "e07d259210cc8beb928836054da02379e2324ded07c675946aa9becc7b0bb693"
+    },
+    "Data/avito_runs/avito-spb-truck-driver-20261114/raw/8494979390.json": {
+      "bytes": 16871,
+      "sha256": "60b77ead1f3edd7d40a55d07a19bfa41da908541c5d54d1ecba2331535cb4137"
+    },
+    "Data/avito_runs/avito-spb-truck-driver-20261114/raw/8513544786.json": {
+      "bytes": 9786,
+      "sha256": "f5866f4069e77caf49dafc999d9cbae57ec10981f8f1f86c127db6df2d6d7394"
+    },
+    "Data/avito_runs/avito-spb-truck-driver-20261114/raw/8515075599.json": {
+      "bytes": 14782,
+      "sha256": "6bb4762c8944eed8948f8df6771e00c826be5f8967bb7fb50a877f9c50d2f5cf"
+    },
+    "Data/avito_runs/avito-spb-truck-driver-20261114/raw/8521880737.json": {
+      "bytes": 11124,
+      "sha256": "7cf3ec5393c80f7f786f06e3a5d583bebd4c97cc3de939a48ca0505308048a78"
+    },
+    "Data/avito_runs/avito-spb-truck-driver-20261114/raw/8531368249.json": {
+      "bytes": 15877,
+      "sha256": "5ba9d8afc4161cbcdc22fb6f06bc2d568c262c56b1e16944c2ed737b7d4ee19b"
+    },
+    "Data/avito_runs/avito-spb-truck-driver-20261114/raw/8589255151.json": {
+      "bytes": 17927,
+      "sha256": "dc468dd7fe2dcc3d212974ac0942afbe7a364dbaa99eb473fa1013ebfaa3f570"
+    },
+    "Data/avito_runs/avito-spb-truck-driver-20261114/reviewed/1249958262.json": {
+      "bytes": 930,
+      "sha256": "033a4a9ac33b18540b4a9f7ca1f983f554945c1402f301b49b60f9120a147cf5"
+    },
+    "Data/avito_runs/avito-spb-truck-driver-20261114/reviewed/1933874487.json": {
+      "bytes": 874,
+      "sha256": "54c0a1fe1da7a2709b904d3a4da27be4ac600d6b5bd2ae03933dd86ccdca378a"
+    },
+    "Data/avito_runs/avito-spb-truck-driver-20261114/reviewed/2822236311.json": {
+      "bytes": 749,
+      "sha256": "3e1777b9d834057d5897da5833ca168426745ce14c9ac553fee7d0ab540df0fc"
+    },
+    "Data/avito_runs/avito-spb-truck-driver-20261114/reviewed/3745154014.json": {
+      "bytes": 817,
+      "sha256": "801eb00019b1c587106235228150ad3317fe849c6df8d6f0611e2af0a55bbaec"
+    },
+    "Data/avito_runs/avito-spb-truck-driver-20261114/reviewed/4595374495.json": {
+      "bytes": 878,
+      "sha256": "09b4b40b8cd60dd978733e50cce69d44ff01ed8e85876c8cc633b53b557b8317"
+    },
+    "Data/avito_runs/avito-spb-truck-driver-20261114/reviewed/7393593937.json": {
+      "bytes": 836,
+      "sha256": "e6380c8ec9aebf4bafaea2f3e6690a7061d3a1d03736b0595aa511e02d79f242"
+    },
+    "Data/avito_runs/avito-spb-truck-driver-20261114/reviewed/7593663718.json": {
+      "bytes": 899,
+      "sha256": "549f4ae2f91280fcbb913fe95a24dae36de30baf2d01b8d9738f573f14b79e73"
+    },
+    "Data/avito_runs/avito-spb-truck-driver-20261114/reviewed/7766198190.json": {
+      "bytes": 874,
+      "sha256": "fd9658969b5ee1ad8eec15eac7d0561340d3f5774f5fbc16081a6a1d2395b25e"
+    },
+    "Data/avito_runs/avito-spb-truck-driver-20261114/reviewed/8039078599.json": {
+      "bytes": 817,
+      "sha256": "930249bc307d36a627d918b0d7f3b5acec8b69e7de1f87dda4911d34e5e34ccc"
+    },
+    "Data/avito_runs/avito-spb-truck-driver-20261114/reviewed/8158252337.json": {
+      "bytes": 831,
+      "sha256": "f75dd819576ad4d74857e07d4686531ed5278e0822356e08c11d0b14be734f15"
+    },
+    "Data/avito_runs/avito-spb-truck-driver-20261114/reviewed/8227550272.json": {
+      "bytes": 914,
+      "sha256": "9d3d7be47f74e5791f76084892df105924b85b587e90e46b31683abe47da8e35"
+    },
+    "Data/avito_runs/avito-spb-truck-driver-20261114/reviewed/8255247290.json": {
+      "bytes": 833,
+      "sha256": "33bc06fdc1f108aa09c80b8197514214857f12c2b3d6c8e5f0a1b56ed11e0e25"
+    },
+    "Data/avito_runs/avito-spb-truck-driver-20261114/reviewed/8342040083.json": {
+      "bytes": 817,
+      "sha256": "f0f474b07a1c072729455977324aca07deca2a1163ebdb7473f6a8049185f1e5"
+    },
+    "Data/avito_runs/avito-spb-truck-driver-20261114/reviewed/8346286567.json": {
+      "bytes": 911,
+      "sha256": "ebfd8acee30fc4b9e4642da75508e6b03e6184b06ab490c9d1bbccdbcf8b6456"
+    },
+    "Data/avito_runs/avito-spb-truck-driver-20261114/reviewed/8400943400.json": {
+      "bytes": 941,
+      "sha256": "29806335c38f7f4698b2154a28755dc5a42a11ee9ed6865f806de667c6d84753"
+    },
+    "Data/avito_runs/avito-spb-truck-driver-20261114/reviewed/8432696064.json": {
+      "bytes": 895,
+      "sha256": "f6cb4c7dd58a72a950fece01674c86b39f27160973e01c40bba1551b46b263cc"
+    },
+    "Data/avito_runs/avito-spb-truck-driver-20261114/reviewed/8435393555.json": {
+      "bytes": 830,
+      "sha256": "59c265b4aa2992122b546eba52f92ea85f4e52acc111d7cb66cedb311afb25a3"
+    },
+    "Data/avito_runs/avito-spb-truck-driver-20261114/reviewed/8472980136.json": {
+      "bytes": 875,
+      "sha256": "3c78bada5dd2e1fdca4ba28ccaf3a69873e3f1df10097db8e69b348b5b94f4eb"
+    },
+    "Data/avito_runs/avito-spb-truck-driver-20261114/reviewed/8482040511.json": {
+      "bytes": 802,
+      "sha256": "27784275a6e8c680773c64dd291d6a7fcc6506168b44e57841de2e59dc4f7ee6"
+    },
+    "Data/avito_runs/avito-spb-truck-driver-20261114/reviewed/8494979390.json": {
+      "bytes": 869,
+      "sha256": "b3b08d552844c35bad095b5a39d317d4b819013c7d7dc65df346cd733f03827d"
+    },
+    "Data/avito_runs/avito-spb-truck-driver-20261114/reviewed/8513544786.json": {
+      "bytes": 817,
+      "sha256": "ba8f708b1454ac9cbab47e6166c0ae4d3f94937ce10dcb3fcbcc0f7f2469fead"
+    },
+    "Data/avito_runs/avito-spb-truck-driver-20261114/reviewed/8515075599.json": {
+      "bytes": 817,
+      "sha256": "b7b3a546b99863f9be0c0a931be1fe1accd2b824a7d8e5d8232e077d71c97a46"
+    },
+    "Data/avito_runs/avito-spb-truck-driver-20261114/reviewed/8521880737.json": {
+      "bytes": 826,
+      "sha256": "f73b24f0f9198aa04e076aac0ff3d1b80bc46f85c4c4b66a4817ee14b3843b70"
+    },
+    "Data/avito_runs/avito-spb-truck-driver-20261114/reviewed/8531368249.json": {
+      "bytes": 843,
+      "sha256": "46d77ff92dbf794dd1f2891b8caea9f7235224cd7cc3f1a49058fe94cadd6f3a"
+    },
+    "Data/avito_runs/avito-spb-truck-driver-20261114/reviewed/8589255151.json": {
+      "bytes": 856,
+      "sha256": "00a8ecb85348b7cad8ced4dfe0c2bcf513dba6464e3310c5e9b264ac66b66b4b"
+    },
+    "Data/avito_runs/avito-spb-truck-driver-20261114/standing_unavailable_policy.json": {
+      "bytes": 1011,
+      "sha256": "7a1c18520dc10340252a4933e92bb851f78d800b32c33c1017ede17529393381"
+    },
+    "Scraper/runs/avito-spb-truck-driver-20261114/plan.json": {
+      "bytes": 7516,
+      "sha256": "b01a17a8d99835df922086665f6367dc552a7a5360a1c0493a29ee913af781d4"
+    },
+    "Scraper/runs/avito-spb-truck-driver-20261114/shared-ledger.json": {
+      "bytes": 68,
+      "sha256": "27bbccf953692f7346056f119799189e4744140d3b4a30e5d81b83086442adc8"
+    }
+  }
+}

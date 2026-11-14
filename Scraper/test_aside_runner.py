@@ -626,12 +626,47 @@ const listBrowserTabs=async()=>[],openTab=async()=>pg,snapshot=async()=>({tree:'
                     manifest=runner.read(service/'manifest.json')
                     self.assertEqual(manifest['coverage']['accepted'],2)
                     self.assertEqual(manifest['coverage']['deduplication']['duplicate_excluded'],904)
+                    public_pointer = service/'shared-ledger.json'
+                    self.assertEqual(runner.read(public_pointer), {'parent_run_id': 'source'})
+                    self.assertEqual(manifest['files'][public_pointer.relative_to(root).as_posix()]['sha256'], runner.sha(public_pointer))
                 known_bytes=(known_out/'queue.json').read_bytes(); (known_out/'queue.json').write_bytes(known_bytes+b' ')
                 with self.assertRaisesRegex(ValueError,'known provenance'): runner.validate_partition(out,service)
                 (known_out/'queue.json').write_bytes(known_bytes)
                 source_bytes=(source/'queue.json').read_bytes(); (source/'queue.json').write_bytes(source_bytes+b' ')
                 with self.assertRaisesRegex(ValueError,'source provenance'): runner.validate_partition(out,service)
                 (source/'queue.json').write_bytes(source_bytes)
+
+    def test_deduplicate_against_dataset_with_limit_and_pinned_basis(self):
+        original_root = runner.ROOT
+        with tempfile.TemporaryDirectory() as directory, patch.object(runner, 'ROOT', Path(directory)):
+            root = runner.ROOT
+            for file in runner.AUTOMATION_FILES:
+                dest = root/file; dest.parent.mkdir(parents=True, exist_ok=True); dest.write_bytes((original_root/file).read_bytes())
+            out, service, diag = runner.paths(root, 'source')
+            page = dict(state='LISTING', source_url='https://www.avito.ru/moskva/vakansii', selected_controls=[], items=[item(str(i)) for i in range(1, 7)])
+            runner.write(out/'listing.json', page); runner.write(out/'listing_pages/0001.json', page)
+            queue = runner.queue_from_pages([page], None); runner.write(out/'queue.json', queue)
+            runner.write(service/'plan.json', dict(run_id='source', profession='', profession_scope='all', setup_seconds=1, segments='', selection_mode='first_N_unique_on_frozen_listing', listing_sha256=runner.sha(out/'listing.json'), listing_pages=[dict(file='listing_pages/0001.json', sha256=runner.sha(out/'listing_pages/0001.json'))]))
+            runner.write(diag/'checkpoint.json', dict(state='READY', completed_ids=[], next_id='1'))
+            dataset = root/'Data/dataset/vacancies.csv'; dataset.parent.mkdir(parents=True)
+            dataset.write_text('source,id\navito,2\navito,4\nother,1\n', encoding='utf8')
+            runner.write(dataset.parent/'manifest.json', {'sha256': runner.sha(dataset), 'rows': 3})
+            args = argparse.Namespace(source_run_id='source', run_id='child', against_run_id=None, against_dataset=True, limit=2)
+            with patch.object(runner.subprocess, 'check_output', return_value='head'), patch.object(runner, 'dirty_automation', return_value=[]): runner.deduplicate_queue(args)
+            child, child_service, _ = runner.paths(root, 'child'); info = runner.read(child/'dedup_selection.json')
+            self.assertEqual([x['id'] for x in runner.read(child/'queue.json')], ['1', '3'])
+            self.assertEqual(info['duplicate_ids'], ['2', '4']); self.assertEqual(info['deferred_ids'], ['5', '6'])
+            self.assertEqual(info['eligible_count'], 4); runner.validate_partition(child, child_service)
+            dataset.write_text('changed', encoding='utf8'); runner.validate_partition(child, child_service)
+            # Recreate the published layout: no original run and no local diagnostics.
+            runner.write(child_service/'shared-ledger.json', {'parent_run_id': 'source'})
+            shutil.rmtree(out); shutil.rmtree(service); shutil.rmtree(child_service/'diagnostics')
+            runner.validate_partition(child, child_service)
+            runner.write(child_service/'shared-ledger.json', {'parent_run_id': 'wrong'})
+            with self.assertRaisesRegex(ValueError, 'source ledger'): runner.validate_partition(child, child_service)
+            runner.write(child_service/'shared-ledger.json', {'parent_run_id': 'source'})
+            keys = child/'dedup-provenance/dataset-keys.json'; keys.write_bytes(keys.read_bytes() + b' ')
+            with self.assertRaisesRegex(ValueError, 'Dataset dedup provenance'): runner.validate_partition(child, child_service)
 
     def test_deduplicate_queue_rejects_source_after_capture(self):
         with tempfile.TemporaryDirectory() as directory, patch.object(runner,'ROOT',Path(directory)):

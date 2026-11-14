@@ -1959,18 +1959,31 @@ def verified_frozen_queue(out, service):
     return plan, queue
 
 
+def dataset_keys(path):
+    with path.open(encoding='utf-8-sig', newline='') as stream:
+        reader = csv.DictReader(stream)
+        if not {'source', 'id'}.issubset(reader.fieldnames or []):
+            raise ValueError('Dataset lacks source and id columns')
+        keys = [(row['source'], row['id']) for row in reader]
+    if any(not source or not identity for source, identity in keys) or len(keys) != len(set(keys)):
+        raise ValueError('Dataset has empty or duplicate keys')
+    return sorted(keys)
+
+
 def validate_deduplication(out, service):
     plan = read(service/'plan.json'); info = plan['deduplication']; prov = out/'dedup-provenance'
     source_out, source_service, _ = paths(ROOT, info['source_run_id'])
-    ledger_pointer = service/'diagnostics/shared-ledger.json'
-    if not ledger_pointer.exists(): ledger_pointer = service/'shared-ledger.json'
-    if read(ledger_pointer) != {'parent_run_id': info['source_run_id']}:
+    ledger_pointers = [p for p in (service/'diagnostics/shared-ledger.json', service/'shared-ledger.json') if p.exists()]
+    if not ledger_pointers or any(read(p) != {'parent_run_id': info['source_run_id']} for p in ledger_pointers):
         raise ValueError('Deduplicated child must use source ledger')
-    if read(source_service/'dedup-child.json') != {'child_run_id': plan['run_id']}:
-        raise ValueError('Source child assignment differs')
     source_plan_path = prov/'source-plan.json'; source_queue_path = prov/'source-queue.json'
-    for local, original, expected in ((source_plan_path,source_service/'plan.json',info['source_plan_sha256']), (source_queue_path,source_out/'queue.json',info['source_queue_sha256'])):
-        if sha(local) != expected or sha(original) != expected: raise ValueError('Dedup source provenance changed')
+    originals = (source_service/'plan.json', source_out/'queue.json', source_service/'dedup-child.json')
+    present = [p.exists() for p in originals]
+    if any(present) and not all(present): raise ValueError('Incomplete dedup source provenance')
+    if all(present) and read(originals[2]) != {'child_run_id': plan['run_id']}:
+        raise ValueError('Source child assignment differs')
+    for local, original, expected in ((source_plan_path, originals[0], info['source_plan_sha256']), (source_queue_path, originals[1], info['source_queue_sha256'])):
+        if sha(local) != expected or (all(present) and sha(original) != expected): raise ValueError('Dedup source provenance changed')
     parent = read(source_plan_path); source_queue = read(source_queue_path)
     validate_plan_profession(parent, out/'listing.json')
     if queue_from_pages([read(out/x['file'].replace('\\', '/')) for x in parent['listing_pages']], len(source_queue)) != source_queue:
@@ -1982,8 +1995,20 @@ def validate_deduplication(out, service):
             if sha(prov/name) != digest or sha(original) != digest: raise ValueError('Dedup known provenance changed')
         known_plan, known_queue = verified_frozen_queue(known_out, known_service)
         known.update(x['id'] for x in known_queue)
-    novel = [item for item in source_queue if item['id'] not in known]
+    dataset = info.get('dataset')
+    if dataset:
+        manifest_path = prov/'dataset-manifest.json'; keys_path = prov/'dataset-keys.json'
+        if sha(manifest_path) != dataset['manifest_sha256'] or sha(keys_path) != dataset['keys_sha256']:
+            raise ValueError('Dataset dedup provenance changed')
+        manifest = read(manifest_path); keys = read(keys_path)
+        if manifest['sha256'] != dataset['csv_sha256'] or manifest['rows'] != len(keys) or keys != sorted(keys) or len(keys) != len({tuple(k) for k in keys}):
+            raise ValueError('Dataset dedup basis differs')
+        known.update(identity for source, identity in keys if source == 'avito')
+    eligible = [item for item in source_queue if item['id'] not in known]
+    novel = eligible[:info['selection_limit']] if info.get('selection_limit') is not None else eligible
     excluded = [item['id'] for item in source_queue if item['id'] in known]
+    if 'eligible_count' in info and (info['eligible_count'] != len(eligible) or info['deferred_ids'] != [x['id'] for x in eligible[len(novel):]]):
+        raise ValueError('Dedup deferred selection differs')
     if plan.get('run_id') != service.name or plan.get('limit') != len(novel) or len({e['run_id'] for e in info['against']}) != len(info['against']): raise ValueError('Deduplicated child metadata differs')
     if (len(source_queue) != info['source_count'] or len(novel) != info['novel_count'] or excluded != info['duplicate_ids'] or len(excluded) != info['duplicate_excluded'] or read(out/'queue.json') != novel):
         raise ValueError('Deduplicated queue or counts differ')
@@ -2002,8 +2027,11 @@ def deduplicate_queue(args):
     out, service, diag = paths(ROOT, args.run_id)
     ensure_allowed(source_diag, 'deduplicate-queue')
     if out.exists() or service.exists() or (source_service/'dedup-child.json').exists(): raise ValueError('Derivative or source assignment already exists')
-    against = args.against_run_id
-    if not against or len(set(against)) != len(against) or args.source_run_id in against or args.run_id in against or args.run_id == args.source_run_id:
+    against = args.against_run_id or []
+    use_dataset = getattr(args, 'against_dataset', False)
+    limit = getattr(args, 'limit', None)
+    if limit is not None and limit <= 0: raise ValueError('Selection limit must be positive')
+    if (not against and not use_dataset) or len(set(against)) != len(against) or args.source_run_id in against or args.run_id in against or args.run_id == args.source_run_id:
         raise ValueError('Distinct source, child and known run IDs required')
     parent, source_queue = verified_frozen_queue(source_out, source_service)
     with locked(source_diag):
@@ -2017,9 +2045,24 @@ def deduplicate_queue(args):
         _, queue = verified_frozen_queue(known_out, known_service)
         known.update(item['id'] for item in queue)
         known_runs.append(dict(run_id=run_id,plan_file=f'known-{index:03d}-plan.json',queue_file=f'known-{index:03d}-queue.json',plan_sha256=sha(known_service/'plan.json'),queue_sha256=sha(known_out/'queue.json')))
-    novel = [item for item in source_queue if item['id'] not in known]; excluded = [item['id'] for item in source_queue if item['id'] in known]
+    dataset_manifest = ROOT/'Data/dataset/manifest.json'; dataset_csv = ROOT/'Data/dataset/vacancies.csv'
+    dataset_info = None; keys = None
+    if use_dataset:
+        manifest = read(dataset_manifest)
+        if sha(dataset_csv) != manifest['sha256']: raise ValueError('Materialized dataset does not match manifest')
+        keys = dataset_keys(dataset_csv)
+        if len(keys) != manifest['rows']: raise ValueError('Dataset row count differs from manifest')
+        known.update(identity for source, identity in keys if source == 'avito')
+    eligible = [item for item in source_queue if item['id'] not in known]
+    novel = eligible[:limit] if limit is not None else eligible
+    excluded = [item['id'] for item in source_queue if item['id'] in known]
     info = dict(source_run_id=args.source_run_id,source_plan_sha256=sha(source_service/'plan.json'),source_queue_sha256=sha(source_out/'queue.json'),against=known_runs,source_count=len(source_queue),duplicate_excluded=len(excluded),novel_count=len(novel),duplicate_ids=excluded)
     out.mkdir(parents=True); diag.mkdir(parents=True); prov=out/'dedup-provenance'; prov.mkdir()
+    if use_dataset:
+        shutil.copy2(dataset_manifest, prov/'dataset-manifest.json'); write(prov/'dataset-keys.json', keys)
+        info['dataset'] = dict(csv_sha256=manifest['sha256'], manifest_sha256=sha(prov/'dataset-manifest.json'), keys_sha256=sha(prov/'dataset-keys.json'), rows=len(keys))
+    if limit is not None:
+        info.update(selection_limit=limit, eligible_count=len(eligible), deferred_ids=[x['id'] for x in eligible[len(novel):]])
     shutil.copy2(source_service/'plan.json',prov/'source-plan.json'); shutil.copy2(source_out/'queue.json',prov/'source-queue.json')
     for archive in sorted(source_service.glob('superseded-freeze*')):
         if not archive.is_dir(): continue
@@ -2851,7 +2894,15 @@ def finalize(args):
         review_model=args.review_model, automation_changes=changes,
         profession_correction=correction,
         post_capture_automation_sha256={file: sha(ROOT/file) for file in sorted(changed)}, files={})
-    for path in sorted(list(out.rglob('*')) + [service / 'plan.json']):
+    service_files = [service / 'plan.json']
+    if plan.get('deduplication'):
+        # Publish only the ledger pointer; the shared error ledger remains local.
+        pointer = read(diag/'shared-ledger.json')
+        if pointer != {'parent_run_id': plan['deduplication']['source_run_id']}:
+            raise ValueError('Deduplicated child must use source ledger')
+        write(service/'shared-ledger.json', pointer)
+        service_files.append(service/'shared-ledger.json')
+    for path in sorted(list(out.rglob('*')) + service_files):
         if path.is_file():
             manifest['files'][str(path.relative_to(ROOT))] = dict(bytes=path.stat().st_size, sha256=sha(path))
     catalog = ROOT / 'Data/README.md'
@@ -3961,6 +4012,11 @@ def publish(args):
     files = [str(out.relative_to(ROOT)), str((service/'plan.json').relative_to(ROOT)),
         str((service/'manifest.json').relative_to(ROOT)), 'Data/dataset/sources.json',
         'Data/dataset/parts', 'Data/dataset/manifest.json', 'Data/README.md', 'Data/dataset/README.md']
+    if manifest['collection'].get('deduplication'):
+        pointer = service/'shared-ledger.json'
+        if str(pointer.relative_to(ROOT)) not in manifest['files']:
+            raise ValueError('Dedup public ledger pointer missing from manifest')
+        files.append(str(pointer.relative_to(ROOT)))
     source_entries = [e for e in read(ROOT/'Data/dataset/sources.json')['exports'] if e['run_id'] == args.run_id]
     if len(source_entries) != 1:
         raise ValueError('Expected exactly one registered source for this run')
@@ -3983,7 +4039,7 @@ def publish(args):
     info = manifest.get('collection', {}).get('deduplication')
     summary = args.summary
     if info:
-        summary += f" Дедупликация: исходная очередь {info['source_count']}, повторов исключено {info['duplicate_excluded']}, новых ID {info['novel_count']}; сравнено с: {', '.join(x['run_id'] for x in info['against'])}."
+        summary += f" Дедупликация: исходная очередь {info['source_count']}, повторов исключено {info['duplicate_excluded']}, выбрано новых ID {info['novel_count']}; основа: {', '.join(x['run_id'] for x in info['against'])}{' общий датасет' if info.get('dataset') else ''}."
     subprocess.run([sys.executable, 'utils/dataset_pr.py', '--run-id', args.run_id,
         '--summary', summary, '--output', str(body)], check=True, cwd=ROOT)
     verify_staged_manifest(ROOT, service, manifest)
@@ -4132,7 +4188,9 @@ def main():
             command.add_argument('--prefix', required=True)
         elif name == 'deduplicate-queue':
             command.add_argument('--source-run-id', required=True)
-            command.add_argument('--against-run-id', required=True, action='append')
+            command.add_argument('--against-run-id', action='append')
+            command.add_argument('--against-dataset', action='store_true')
+            command.add_argument('--limit', type=int, help='Select at most this many novel IDs in listing order')
         elif name == 'supplemental':
             command.add_argument('--parent-run-id', required=True)
             command.add_argument('--observation', required=True, help='Listing JSON filename in parent diagnostics')
