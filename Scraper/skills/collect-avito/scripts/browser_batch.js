@@ -37,7 +37,11 @@ try {
         const key = JSON.stringify(stableFields);
         repeats = key === last ? repeats + 1 : 0; last = key;
         const paginationObserved = value.pagination?.next_url || value.pagination?.next_button === true || value.pagination?.end_confirmed;
-        if (repeats >= 2 && value.state === 'LISTING' && value.items.length && value.listing_item_audit?.malformed === 0 && paginationObserved && accept(value)) return value;
+        const visibleOnly = job.visible_page_only && !paginationObserved &&
+          (value.pagination?.current_pages || []).length === 0 &&
+          value.source_url === job.url && p.url() === job.url;
+        if (repeats >= 2 && value.state === 'LISTING' && value.items.length && value.listing_item_audit?.malformed === 0 &&
+            (job.visible_page_only ? visibleOnly : paginationObserved) && accept(value)) return value;
         if (repeats >= 2 && value.state === 'EMPTY_RESULT' && value.empty_evidence && !(value.items || []).length && accept(value)) return value;
         await sleep(500);
       }
@@ -82,7 +86,7 @@ try {
       listing = {...current, ui_transition: {method: 'observed_ui_next', recovered, next_snapshot: nextSnapshot, from_url: previous.source_url, live_from_url: liveFromUrl, live_context: liveContext, from_page: n, next_href: previous.pagination.next_url, next_button: previous.pagination.next_button === true, observed_href: observedHref, live_next_url: observedHref ? new URL(observedHref, liveFromUrl).href : null, landed_url: current.source_url, landed_page: n + 1, stability: 'three_matching_snapshots_500ms'}};
     } else listing = job.ui_next ? await stable(l => l.state === 'EMPTY_RESULT' || (l.pagination?.current_pages || []).includes('1')) : await stable(l =>
       (job.allow_empty && l.state === 'EMPTY_RESULT') || (Array.isArray(l.selected_controls) && l.selected_controls.length > 0 && l.profession_filter?.observed === true &&
-      ((l.pagination?.current_pages || []).length > 0 || l.pagination?.end_confirmed === true)));
+      (job.visible_page_only || (l.pagination?.current_pages || []).length > 0 || l.pagination?.end_confirmed === true)));
     const snap = await snapshot(p, {interactive: true});
     await save('listing.json', listing);
     if (listing.state === 'EMPTY_RESULT') {

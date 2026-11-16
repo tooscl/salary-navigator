@@ -230,6 +230,49 @@ class RunnerTests(unittest.TestCase):
             ledger=runner.load_failures(diag);[e.update(at='2020-01-01T00:00:00+00:00') for e in ledger['events'] if e.get('event')=='failure'];runner.save_failures(diag,ledger)
             result=subprocess.run(recover,cwd=root,text=True,capture_output=True);self.assertEqual(result.returncode,0,result.stderr);self.assertEqual(runner.load_failures(diag)['bounded_pending']['id'],'456')
 
+    def test_standing_goal_recovers_confirmed_closed_shell_without_resetting_ledger(self):
+        with tempfile.TemporaryDirectory() as directory, patch.object(runner, 'ROOT', Path(directory)):
+            root = runner.ROOT
+            out, service, diag = runner.paths(root, 'case')
+            runner.register_standing_run(argparse.Namespace(run_id='case', goal_source='goal',
+                authorization_id='standing-goal', technical_instruction='Повторять технические сбои',
+                ip_instruction='Применять тайм-аут IP'))
+            runner.standing_unavailable_policy(argparse.Namespace(run_id='case',
+                authorization_id=runner.STANDING_UNAVAILABLE_ID, human_instruction=runner.STANDING_UNAVAILABLE_INSTRUCTION))
+            queue = [item('123'), item('456')]
+            url = queue[0]['url']
+            runner.write(out/'listing.json', {})
+            runner.write(out/'queue.json', queue)
+            runner.write(service/'plan.json', dict(run_id='case', listing_pages=[{}], deduplication={'verified': True}))
+            cp = dict(state='REVIEW_REQUIRED', stop_reason='identity_or_template_review', next_id='123', completed_ids=[])
+            snapshot = f'- title: "Ошибка 404. Страница не найдена" [url={url}]\n- text: "Объявление закрыто."\n'
+            raw_data = dict(state='UNKNOWN_PAGE', heading='Объявление не посмотреть', source_url=url,
+                            unresolved_evidence=dict(known_unavailable=True, restriction=False, complete=False))
+            sandbox = root/'sandbox'
+            runner.write(diag/'sandbox.json', {'path': str(sandbox)})
+            runner.write(sandbox/'browser-tab.json', {'url': url})
+            for evidence_dir in (diag, sandbox):
+                runner.write(evidence_dir/'checkpoint.json', cp)
+                (evidence_dir/'problem.snapshot.txt').write_text(snapshot, encoding='utf-8')
+            for evidence_dir in (out, sandbox):
+                runner.write(evidence_dir/'raw/123.json', raw_data)
+            runner.record_failure(diag, 'capture', 'stopped', 'capture', immediate=True)
+            args = argparse.Namespace(run_id='case', id='123', authorization_id=runner.STANDING_UNAVAILABLE_ID,
+                                      offline_standing=True, standing_source='standing-goal')
+            with patch.object(runner, 'validate_partition'), patch.object(runner, 'validate_plan_profession'):
+                for evidence_dir in (diag, sandbox):
+                    (evidence_dir/'problem.snapshot.txt').write_text(snapshot + 'HTTP 429', encoding='utf-8')
+                with self.assertRaises(ValueError):
+                    runner.mark_unavailable(args)
+                self.assertEqual(runner.load_failures(diag)['state'], 'NEEDS_HUMAN')
+                for evidence_dir in (diag, sandbox):
+                    (evidence_dir/'problem.snapshot.txt').write_text(snapshot, encoding='utf-8')
+                runner.mark_unavailable(args)
+            ledger = runner.load_failures(diag)
+            self.assertEqual((ledger['state'], ledger['failures'], ledger['retries_started']), ('READY', 1, 0))
+            self.assertEqual(runner.read(out/'raw/123.json'), raw_data)
+            self.assertEqual(runner.read(diag/'checkpoint.json')['next_id'], '456')
+
     def test_recurring_incomplete_actual_cli_and_guards(self):
         with tempfile.TemporaryDirectory() as directory:
             root=Path(directory).resolve(); scripts=root/'Scraper/skills/collect-avito/scripts'; shutil.copytree(SCRIPTS,scripts); shutil.copytree(runner.ROOT/'utils',root/'utils',ignore=shutil.ignore_patterns('__pycache__'))
@@ -418,37 +461,51 @@ const listBrowserTabs=async()=>[],openTab=async()=>pg,snapshot=async()=>({tree:'
                 with self.assertRaises(runner.HumanRequired): runner.resume_browser(args)
 
     def test_retry_incomplete_requires_authorized_matching_forensic_evidence(self):
-        for scenario in ('ok', 'standing', 'missing_id', 'old_auth', 'wrong_id', 'restriction', 'snapshot', 'prefix'):
+        for scenario in ('ok', 'standing', 'missing_id', 'old_auth', 'wrong_id', 'restriction', 'snapshot', 'prefix',
+                         'goal', 'goal_restriction'):
             with self.subTest(scenario=scenario), tempfile.TemporaryDirectory() as directory, patch.object(runner, 'ROOT', Path(directory)):
                 root = runner.ROOT; run_id = 'case'; out, service, diag = runner.paths(root, run_id); sandbox = root/'sandbox'
+                standing_goal = scenario.startswith('goal')
+                if standing_goal:
+                    runner.register_standing_run(argparse.Namespace(run_id=run_id, goal_source='goal',
+                        authorization_id='standing-goal', technical_instruction='Самостоятельно повторять технические ошибки',
+                        ip_instruction='Повторять после ожидания'))
                 queue = [item('123'), item('456')]; queue[1]['listing_rank'] = 2
                 runner.write(out/'queue.json', queue); runner.write(out/'listing.json', {})
                 runner.write(out/'listing_pages/0001.json', {})
-                runner.write(service/'plan.json', dict(run_id=run_id, listing_pages=[dict(file='listing_pages/0001.json')], listing_sha256='pinned'))
+                runner.write(service/'plan.json', dict(run_id=run_id, listing_pages=[dict(file='listing_pages/0001.json')],
+                    listing_sha256='pinned', deduplication={'checked': True} if standing_goal else None))
                 cp = dict(state='REVIEW_REQUIRED', stop_reason='identity_or_template_review', next_id='456', completed_ids=['123'])
                 if scenario == 'prefix': cp['completed_ids'] = []
                 runner.write(diag/'checkpoint.json', cp); runner.write(sandbox/'checkpoint.json', cp)
                 runner.write(diag/'sandbox.json', {'path':str(sandbox)}); runner.write(sandbox/'browser-tab.json', {'url':queue[1]['url']})
-                data = dict(state='UNKNOWN_PAGE', source_url=queue[1]['url'], heading=None, items=[], unresolved_evidence=dict(complete=False, restriction=scenario == 'restriction', known_unavailable=False))
+                data = dict(state='UNKNOWN_PAGE', source_url=queue[1]['url'], heading=None, items=[], unresolved_evidence=dict(complete=False, restriction=scenario.endswith('restriction'), known_unavailable=False))
                 runner.write(out/'raw/456.json', data); runner.write(sandbox/'raw/456.json', data)
                 snap = '# note: interactive (clickable / focusable) elements only.\n- title: "Авито" [url='+queue[1]['url']+']\n- link "Помощь" [ref=e1]\n'
                 (diag/'problem.snapshot.txt').write_text(snap, encoding='utf8'); (sandbox/'problem.snapshot.txt').write_text(snap + ('tamper' if scenario == 'snapshot' else ''), encoding='utf8')
                 runner.record_failure(diag, 'capture', 'stopped', 'capture', immediate=True)
-                runner.authorize_browser(diag, 'Самостоятельно повторять технические ошибки' if scenario in ('standing', 'missing_id') else 'Повторить карточку 456', 'auth')
+                if not standing_goal:
+                    runner.authorize_browser(diag, 'Самостоятельно повторять технические ошибки' if scenario in ('standing', 'missing_id') else 'Повторить карточку 456', 'auth')
                 if scenario == 'old_auth': runner.record_failure(diag, 'capture', 'new stop', 'capture', immediate=True)
-                args = argparse.Namespace(run_id=run_id, id='999' if scenario == 'wrong_id' else '456', authorization_id='auth', standing_incomplete=scenario == 'standing')
+                args = argparse.Namespace(run_id=run_id, id='999' if scenario == 'wrong_id' else '456', authorization_id='auth',
+                    standing_incomplete=scenario == 'standing', standing_source='standing-goal' if standing_goal else None)
                 original = (out/'raw/456.json').read_bytes(); plan_bytes = (service/'plan.json').read_bytes(); queue_bytes = (out/'queue.json').read_bytes()
-                with patch.object(runner, 'validate_partition'), patch.object(runner, 'validate_plan_profession'), patch.object(runner, 'queue_from_pages', return_value=queue), patch.object(runner, 'unavailable_records', return_value=[]), patch.object(runner, 'unresolved_records', return_value=[]):
-                    if scenario in ('ok', 'standing'): runner.retry_incomplete_observation(args)
+                with patch.object(runner, 'validate_partition'), patch.object(runner, 'validate_plan_profession'), patch.object(runner, 'queue_from_pages', return_value=[] if standing_goal else queue), patch.object(runner, 'unavailable_records', return_value=[]), patch.object(runner, 'unresolved_records', return_value=[]):
+                    if scenario in ('ok', 'standing', 'goal'): runner.retry_incomplete_observation(args)
                     else:
                         with self.assertRaises((ValueError, runner.HumanRequired)): runner.retry_incomplete_observation(args)
                 self.assertEqual((service/'plan.json').read_bytes(), plan_bytes); self.assertEqual((out/'queue.json').read_bytes(), queue_bytes)
-                if scenario in ('ok', 'standing'):
+                if scenario in ('ok', 'standing', 'goal'):
                     digest = hashlib.sha256(original).hexdigest(); self.assertEqual((out/'observations/456'/f'{digest}.json').read_bytes(), original)
                     self.assertFalse((out/'raw/456.json').exists()); self.assertEqual((sandbox/'raw/456.json').read_bytes(), original)
                     self.assertEqual(runner.read(diag/'checkpoint.json')['completed_ids'], ['123'])
                     self.assertEqual(runner.read(out/'observations/456'/f'{digest}.provenance.json')['snapshot_sha256'], runner.sha(diag/'problem.snapshot.txt'))
                 else: self.assertEqual((out/'raw/456.json').read_bytes(), original)
+                if standing_goal:
+                    ledger = runner.load_failures(diag)
+                    self.assertEqual(ledger['failures'], 1)
+                    self.assertEqual(ledger['retries_started'], 0)
+                    self.assertEqual(ledger.get('bounded_pending'), {'id': '456', 'state': 'reserved', 'authorization_id': 'auth'} if scenario == 'goal' else None)
 
     def test_detail_hydration_one_authorized_retry_preserves_evidence(self):
         for scenario in ('ok', 'restriction', 'wrong_id', 'snapshot'):
@@ -700,6 +757,57 @@ const listBrowserTabs=async()=>[],openTab=async()=>pg,snapshot=async()=>({tree:'
             keys = child/'dedup-provenance/dataset-keys.json'; keys.write_bytes(keys.read_bytes() + b' ')
             with self.assertRaisesRegex(ValueError, 'Dataset dedup provenance'): runner.validate_partition(child, child_service)
 
+    def test_deduplicate_unqueued_observed_tail_preserves_prefix_and_provenance(self):
+        original_root = runner.ROOT
+        with tempfile.TemporaryDirectory() as directory, patch.object(runner, 'ROOT', Path(directory)):
+            root = runner.ROOT
+            for source_file in runner.AUTOMATION_FILES:
+                target = root/source_file
+                target.parent.mkdir(parents=True, exist_ok=True)
+                shutil.copy2(original_root/source_file, target)
+
+            def frozen(run_id, identities, limit):
+                out, service, diag = runner.paths(root, run_id)
+                page = dict(state='LISTING', source_url='https://www.avito.ru/moskva/vakansii',
+                            selected_controls=[], items=[item(i) for i in identities])
+                runner.write(out/'listing.json', page)
+                runner.write(out/'listing_pages/0001.json', page)
+                runner.write(out/'queue.json', runner.queue_from_pages([page], limit))
+                runner.write(service/'plan.json', dict(run_id=run_id, profession='', profession_scope='all',
+                    setup_seconds=1, segments='', selection_mode='first_N_unique_on_frozen_listing',
+                    listing_sha256=runner.sha(out/'listing.json'),
+                    listing_pages=[dict(file='listing_pages/0001.json', sha256=runner.sha(out/'listing_pages/0001.json'))]))
+                runner.write(diag/'checkpoint.json', dict(state='READY', completed_ids=[], next_id=identities[0]))
+                return out, service
+
+            source, source_service = frozen('source', ['1', '2', '3', '4'], 2)
+            known, known_service = frozen('known', ['3'], 1)
+            original_prefix = (source/'queue.json').read_bytes()
+            args = argparse.Namespace(source_run_id='source', against_run_id=['known'], against_dataset=False, limit=None)
+            with patch.object(runner.subprocess, 'check_output', return_value='head'), patch.object(runner, 'dirty_automation', return_value=[]):
+                runner.deduplicate_queue(argparse.Namespace(**vars(args), run_id='prefix'))
+                runner.deduplicate_queue(argparse.Namespace(**vars(args), run_id='tail', observed_tail=True))
+            tail, tail_service, _ = runner.paths(root, 'tail')
+            self.assertEqual(runner.read(tail/'queue.json'), runner.queue_from_pages([runner.read(source/'listing.json')], None)[3:])
+            self.assertEqual((source/'queue.json').read_bytes(), original_prefix)
+            self.assertEqual(runner.read(source_service/'dedup-child.json'), {'child_run_id': 'prefix'})
+            self.assertEqual(runner.read(source_service/'dedup-tail-child.json'), {'child_run_id': 'tail'})
+            runner.validate_partition(tail, tail_service)
+            frozen('later', ['4', '5'], 2)
+            with patch.object(runner.subprocess, 'check_output', return_value='head'), patch.object(runner, 'dirty_automation', return_value=[]):
+                runner.deduplicate_queue(argparse.Namespace(source_run_id='later', run_id='after_tail',
+                    against_run_id=['tail'], against_dataset=False, limit=None))
+            after_tail, after_tail_service, _ = runner.paths(root, 'after_tail')
+            self.assertEqual([row['id'] for row in runner.read(after_tail/'queue.json')], ['5'])
+            for original in (source, source_service, known, known_service):
+                shutil.rmtree(original)
+            runner.validate_partition(tail, tail_service)
+            runner.validate_partition(after_tail, after_tail_service)
+            evidence = tail/'listing_pages/0001.json'
+            evidence.write_bytes(evidence.read_bytes() + b' ')
+            with self.assertRaisesRegex(ValueError, 'Frozen listing page changed after freeze'):
+                runner.validate_partition(tail, tail_service)
+
     def test_dataset_dedup_child_employer_selection_finalize_and_tampering(self):
         original_root = runner.ROOT
         real_baseline = runner.employer_selection.baseline
@@ -881,26 +989,46 @@ const attachBrowserTab=async()=>pg, snapshot=async()=>({tree:''}), sleep=async()
             page = json.loads((Path(directory)/'listing.json').read_text(encoding='utf-8'))
             self.assertTrue(page['pagination']['next_url'])
 
+    def test_ui_next_country_radio_maps_to_observed_geographic_control(self):
+        requested = 'По всей России'
+        country = dict(
+            listing_context={'geography': 'Во всех регионах', 'search': ''},
+            selected_controls=[{'label': requested, 'marker': 'params[127818]/3054249'}],
+        )
+        self.assertEqual(runner.visible_pagination_geography(requested, country), 'Во всех регионах')
+        self.assertEqual(runner.visible_pagination_geography('Москва', country), 'Москва')
+        self.assertEqual(runner.visible_pagination_geography(requested, dict(country, selected_controls=[])), requested)
+        local = dict(country, listing_context={'geography': 'Москва', 'search': ''})
+        self.assertEqual(runner.visible_pagination_geography(requested, local), requested)
+
     def test_direct_freeze_waits_for_complete_controls_and_stops_on_protection(self):
         script = (SCRIPTS/'browser_batch.js').read_text()
         job = {'mode':'freeze','url':'https://www.avito.ru/all/vakansii', 'completed_ids':[], 'tab_id':'own', 'ui_next':False}
-        body = script.replace('__JOB__', json.dumps(job), 1).replace('__EXTRACTOR__', '"extract"', 1)
-        for scenario in ('delayed', 'short', 'missing', 'protection'):
+        for scenario in ('delayed', 'short', 'missing', 'protection', 'visible', 'visible_with_next', 'visible_protection'):
             with self.subTest(scenario=scenario), tempfile.TemporaryDirectory() as directory:
+                body = script.replace('__JOB__', json.dumps(dict(job, visible_page_only=scenario.startswith('visible'))), 1).replace('__EXTRACTOR__', '"extract"', 1)
                 harness = """const fs=require('fs').promises, pwd=process.cwd(); let calls=0; const scenario=SCENARIO;
-const pg={url:()=> 'https://www.avito.ru/all/vakansii',evaluate:async()=>{calls++; if(scenario==='protection' && calls===2) return {state:'NEEDS_HUMAN'}; const ready=scenario==='short' || (scenario==='delayed' && calls>=5); return {state:'LISTING',items:[{id:'1'}],listing_item_audit:{malformed:0},selected_controls:ready?[{label:'Удалённо'}]:[],profession_filter:{observed:ready},pagination:{current_pages:ready&&scenario!=='short'?['1']:[],next_url:ready&&scenario!=='short'?'https://www.avito.ru/all/vakansii?p=2':null,end_confirmed:scenario==='short'}}}};
+const url='https://www.avito.ru/all/vakansii';
+const pg={url:()=>url,evaluate:async()=>{calls++;
+  if(scenario.endsWith('protection') && calls===2) return {state:'NEEDS_HUMAN'};
+  const paginated=scenario==='visible_with_next' || (scenario==='delayed' && calls>=5);
+  const ready=paginated || scenario==='short' || scenario.startsWith('visible');
+  return {state:'LISTING',source_url:url,items:[{id:'1'}],listing_item_audit:{malformed:0},
+    selected_controls:ready?[{label:'Удалённо'}]:[],profession_filter:{observed:ready},
+    pagination:{current_pages:paginated?['1']:[],next_url:paginated?url+'?p=2':null,end_confirmed:scenario==='short'}};
+}};
 const attachBrowserTab=async()=>pg, snapshot=async()=>({tree:''}), sleep=async()=>{};
 (async()=>{BODY; console.log('CALLS='+calls)})().catch(e=>{console.error(e);process.exit(1)});
 """.replace('SCENARIO',json.dumps(scenario)).replace('BODY',body)
                 result = subprocess.run(['node','-e',harness],cwd=directory,capture_output=True,text=True,check=True)
                 calls = int(result.stdout.split('CALLS=')[-1])
                 checkpoint = json.loads((Path(directory)/'checkpoint.json').read_text(encoding='utf-8'))
-                if scenario in ('delayed', 'short'):
+                if scenario in ('delayed', 'short', 'visible'):
                     self.assertGreaterEqual(calls, 7 if scenario == 'delayed' else 3)
                     self.assertEqual(checkpoint['state'], 'READY')
                 else:
-                    self.assertEqual(checkpoint['state'], 'NEEDS_HUMAN' if scenario == 'protection' else 'BROWSER_ERROR')
-                    self.assertEqual(calls, 2 if scenario == 'protection' else 30)
+                    self.assertEqual(checkpoint['state'], 'NEEDS_HUMAN' if scenario.endswith('protection') else 'BROWSER_ERROR')
+                    self.assertEqual(calls, 2 if scenario.endswith('protection') else 30)
 
     def test_capture_rejects_blank_or_mismatched_actual_url(self):
         script = (SCRIPTS/'browser_batch.js').read_text()
@@ -2660,6 +2788,49 @@ console.log(JSON.stringify(extract()));""".replace('EXTRACTOR', extractor.rstrip
                 self.assertEqual(next(csv.DictReader(stream))['profession'], 'Курьер')
             self.assertEqual(manifest['collection']['profession'], 'Курьер')
             self.assertTrue(all('diagnostics' not in name for name in manifest['files']))
+
+    def test_finalize_reviewed_selection_validates_full_queue_and_exact_evidence(self):
+        with tempfile.TemporaryDirectory() as directory, patch.object(runner, 'ROOT', Path(directory)):
+            root = runner.ROOT
+            out, service, diag = runner.paths(root, 'reviewed')
+            runner.write(root/'Data/dataset/sources.json', {'schema_version': '1', 'exports': []})
+            (root/'Data/README.md').write_text('# Data\n', encoding='utf-8')
+            (root/'Data/dataset/README.md').write_text('Текущий состав: старый\n', encoding='utf-8')
+            runner.write(out/'queue.json', [item('123'), item('456')])
+            runner.write(out/'listing.json', {'selected_controls': courier_controls()})
+            runner.write(service/'plan.json', {'setup_seconds': 1, 'profession': 'Курьер', 'segments': 'all'})
+            runner.write(diag/'checkpoint.json', dict(state='CAPTURED', next_id=None, capture_seconds=1))
+            for identity, value in [('123', 'Удалённо'), ('456', 'Удалённо, Гибрид')]:
+                data = dict(raw(identity), fields=[{'name': 'Формат работы', 'value': value}])
+                runner.write(out/'raw'/f'{identity}.json', data)
+            decisions = [
+                dict(id='123', raw_sha256=runner.sha(out/'raw/123.json'), accepted=True,
+                     reason='Подтверждено описанием', description_evidence=['Вторая строка']),
+                dict(id='456', raw_sha256=runner.sha(out/'raw/456.json'), accepted=False, reason='Гибрид'),
+            ]
+            selection = dict(criteria='Проверяем формат и описание',
+                             required_fields={'Формат работы': 'Удалённо'}, decisions=decisions)
+            path = diag/'reviewed-input.json'
+            runner.write(path, dict(selection, decisions=decisions[:1]))
+            args = argparse.Namespace(run_id='reviewed', placements=None, review_model='tester', reviewed_selection=path)
+            with self.assertRaisesRegex(ValueError, 'every valid candidate'):
+                runner.finalize(args)
+            runner.write(path, dict(selection, decisions=[dict(decisions[0], description_evidence=['Чужая строка']), decisions[1]]))
+            with self.assertRaisesRegex(ValueError, 'lacks exact description evidence'):
+                runner.finalize(args)
+            runner.write(path, dict(selection, decisions=[decisions[0], dict(decisions[1], accepted=True)]))
+            with self.assertRaisesRegex(ValueError, 'fails a required field'):
+                runner.finalize(args)
+            runner.write(path, selection)
+            runner.finalize(args)
+            manifest = runner.validate_completed_export(out, service)
+            self.assertEqual(manifest['coverage']['reviewed_selection']['accepted_ids'], ['123'])
+            self.assertEqual(manifest['coverage']['accepted'], 1)
+            self.assertTrue((out/'raw/456.json').exists())
+            saved = out/'exports/reviewed_selection.json'
+            runner.write(saved, dict(runner.read(saved), accepted_ids=['456']))
+            with self.assertRaisesRegex(ValueError, 'Published artifact changed'):
+                runner.validate_completed_export(out, service)
 
     def test_finalize_applies_audited_profession_without_rewriting_plan_or_raw(self):
         with tempfile.TemporaryDirectory() as directory:
