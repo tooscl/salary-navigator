@@ -24,7 +24,7 @@ try {
       p = await openTab(job.url);
       const added = (await listBrowserTabs()).filter(t => !before.has(t.targetId) && t.url === p.url());
       if (added.length === 1) targetId = added[0].targetId;
-    } else if (job.ui_next && !job.previous) {
+    } else if (job.ui_next && !job.previous && !job.visible_page_only) {
       await p.goto(job.url);
     } else if (!job.ui_next && job.allow_navigation && p.url() !== job.url) await p.goto(job.url);
     await saveTab();
@@ -56,8 +56,10 @@ try {
       let current = await stable();
       const n = pageNo(previous.source_url);
       const rotated = valid(current, n) && current.source_url !== previous.source_url;
-      const contextValid = l => Boolean(job.geography && l.listing_context?.geography === job.geography && l.listing_context?.search === '');
-      if (job.geography && !contextValid(current)) throw new Error('Listing lacks matching visible geography or empty search');
+      const search = first.listing_context?.search;
+      const contextValid = l => Boolean(job.geography && l.listing_context?.geography === job.geography &&
+        typeof search === 'string' && l.listing_context?.search === search);
+      if (job.geography && !contextValid(current)) throw new Error('Listing lacks matching visible geography or search');
       const liveFromUrl = current.source_url;
       const liveContext = current.listing_context || null;
       let recovered = true, observedHref = previous.pagination?.evidence?.href || null, nextSnapshot = null;
@@ -84,7 +86,7 @@ try {
       }
       if (!valid(current, n + 1) || (job.geography && !contextValid(current))) throw new Error('Tab is not the expected completed next page');
       listing = {...current, ui_transition: {method: 'observed_ui_next', recovered, next_snapshot: nextSnapshot, from_url: previous.source_url, live_from_url: liveFromUrl, live_context: liveContext, from_page: n, next_href: previous.pagination.next_url, next_button: previous.pagination.next_button === true, observed_href: observedHref, live_next_url: observedHref ? new URL(observedHref, liveFromUrl).href : null, landed_url: current.source_url, landed_page: n + 1, stability: 'three_matching_snapshots_500ms'}};
-    } else listing = job.ui_next ? await stable(l => l.state === 'EMPTY_RESULT' || (l.pagination?.current_pages || []).includes('1')) : await stable(l =>
+    } else listing = job.ui_next && !job.visible_page_only ? await stable(l => l.state === 'EMPTY_RESULT' || (l.pagination?.current_pages || []).includes('1')) : await stable(l =>
       (job.allow_empty && l.state === 'EMPTY_RESULT') || (Array.isArray(l.selected_controls) && l.selected_controls.length > 0 && l.profession_filter?.observed === true &&
       (job.visible_page_only || (l.pagination?.current_pages || []).length > 0 || l.pagination?.end_confirmed === true)));
     const snap = await snapshot(p, {interactive: true});

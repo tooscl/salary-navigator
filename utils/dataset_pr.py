@@ -1,6 +1,7 @@
 """Render a short, factual dataset PR from actual CSVs; reject staged browser dumps."""
 import argparse
 import csv
+import hashlib
 import io
 import json
 from pathlib import Path
@@ -48,7 +49,7 @@ def validate_automation_changes(changes, code_paths):
         raise ValueError('Collector fix requires an updated and recorded SKILL.md')
 
 
-def render(summary, before, after, batches):
+def render(summary, before, after, batches, observation_archives=()):
     old_columns, old_rows = before
     new_columns, new_rows = after
     key = lambda row: (row["source"], row["id"])
@@ -58,20 +59,23 @@ def render(summary, before, after, batches):
     if not old_keys <= new_keys:
         raise ValueError("Publication removes existing vacancy keys")
     observations = [(source, r["id"]) for source, rows in batches for r in rows]
-    if not observations or any(not identity for _, identity in observations):
+    if (not observations and not observation_archives) or any(not identity for _, identity in observations):
         raise ValueError("No accepted observations")
     if not set(observations) <= new_keys:
         raise ValueError("Batch vacancies are absent from shared CSV")
     added = [c for c in new_columns if c not in old_columns]
-    accepted = "; ".join(f"{source}: {identity}" for source, identity in observations)
+    accepted = "; ".join(f"{source}: {identity}" for source, identity in observations) or "нет"
     new = len(set(observations) - old_keys)
     repeated = len(observations) - new
+    archives = "".join(f"- Архив `{run_id}`: {count} наблюдений, 0 принятых.\n"
+                       for run_id, count in observation_archives)
     return (summary.strip() + "\n\n"
             f"- Приняты ID: {accepted}.\n"
             f"- Новые ключи: {new}; повторные наблюдения: {repeated}.\n"
             f"- Общая таблица: {len(old_rows)} → {len(new_rows)} строк; "
             f"{len(old_columns)} → {len(new_columns)} колонок.\n"
-            f"- Новые характеристики: {', '.join(added) if added else 'нет'}.\n\n"
+            f"- Новые характеристики: {', '.join(added) if added else 'нет'}.\n"
+            + archives + "\n"
             "Файлы: плоский CSV с полными описаниями, raw JSON, план и паспорт. "
             "Проверка общей таблицы: --check пройден.\n")
 
@@ -116,16 +120,31 @@ def main():
     registry = json.loads((ROOT / "Data/dataset/sources.json").read_text())
     entries = {entry["run_id"]: entry for entry in registry["exports"]}
     batches = []
+    observation_archives = []
     automation_changes = []
     for run_id in args.run_id:
-        entry = entries[run_id]
-        _, rows = read_csv((ROOT / entry["path"]).read_bytes())
-        batches.append((entry["source"], rows))
+        entry = entries.get(run_id)
+        if entry:
+            _, rows = read_csv((ROOT / entry["path"]).read_bytes())
+            batches.append((entry["source"], rows))
+        else:
+            run_manifest = json.loads((ROOT / "Scraper/runs" / run_id / "manifest.json").read_text())
+            coverage = run_manifest["coverage"]
+            archive = ROOT / "Data/avito_runs" / run_id / "exports/vacancy_observations.csv"
+            content = archive.read_bytes()
+            _, rows = read_csv(content)
+            if (run_manifest.get("status") != "complete" or coverage["accepted"] != 0
+                    or not coverage.get("full_observations")):
+                raise ValueError(f"Run {run_id} has neither a dataset source nor a complete observation archive")
+            proof = coverage["full_observations"]
+            if proof != {"rows": len(rows), "sha256": hashlib.sha256(content).hexdigest()} or not rows:
+                raise ValueError(f"Observation archive differs from the manifest for {run_id}")
+            observation_archives.append((run_id, len(rows)))
         automation_changes.extend(review_changes(ROOT, run_id))
     code = [p for p in staged if p.startswith(('Scraper/', 'utils/')) and
             (p.endswith(('.py', '.js', 'SKILL.md')) and '/runs/' not in p)]
     validate_automation_changes(automation_changes, code)
-    body = render(args.summary, read_csv(base), read_csv(current), batches)
+    body = render(args.summary, read_csv(base), read_csv(current), batches, observation_archives)
     if automation_changes:
         body += '\nИзменения сборщика:\n' + ''.join(
             f'- `{c["file"]}`: {c["reason"]}. Проверка: {c["validation"]}.\n' for c in automation_changes)
