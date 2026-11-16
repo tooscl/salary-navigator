@@ -26,7 +26,7 @@
     "source": "title, profession, city, location_observed",
     "policy": "added_next_to_observed_columns_not_replacing"
   },
-  "rows": 31610,
+  "rows": 32087,
   "columns": [
     "source",
     "id",
@@ -160,7 +160,7 @@
     "enriched_fields",
     "enrichment_version"
   ],
-  "sha256": "7831e53ccd38c3c85e33c7e0bb3b8a521db58292e90349ebaae9cc4b025f873f",
+  "sha256": "b607c7f0df325bb24537a92cef7c995716878ab314023e0c7548c30367f7f5dc",
   "inputs": [
     {
       "run_id": "20261028-spb-50-all",
@@ -17667,6 +17667,140 @@
       }
     },
     {
+      "run_id": "20261114-ekb-kassir-outside-top",
+      "source": "avito",
+      "path": "Data/avito_runs/20261114-ekb-kassir-outside-top/exports/vacancies_flat.csv",
+      "sha256": "49d88f79c529e2656a087c68b7f8d6baee5080b760c385e14e19b807fcd4611b",
+      "placement_regions": {
+        "Екатеринбург": "Свердловская область"
+      },
+      "enrichment_status": "not_run",
+      "rows": 33,
+      "search_plan": {
+        "path": "Scraper/runs/20261114-ekb-kassir-outside-top/plan.json",
+        "sha256": "39e856fca6ea115aaa355231f5f3f5c58ec26060e55cc07df323cda09c7a16a4"
+      }
+    },
+    {
+      "run_id": "20261114-ekb-kassir-saved-candidates",
+      "source": "avito",
+      "path": "Data/avito_runs/20261114-ekb-kassir-saved-candidates/exports/vacancies_flat.csv",
+      "sha256": "16e7fa4cb7d8a948dba36b17252b6746dd9040070892d7ecaaf6067039480b4e",
+      "placement_regions": {
+        "Екатеринбург": "Свердловская область"
+      },
+      "enrichment_status": "not_run",
+      "rows": 26,
+      "search_plan": {
+        "path": "Scraper/runs/20261114-ekb-kassir-saved-candidates/plan.json",
+        "sha256": "5de030f2203afeb3ef2a3f9504344c1fddd3b9a0280c636b0ba8cc87f75feb79"
+      }
+    },
+    {
+      "run_id": "20261114_moscow_cashier_11_12h",
+      "source": "avito",
+      "path": "Data/avito_runs/20261114_moscow_cashier_11_12h/exports/vacancies_flat.csv",
+      "sha256": "ce1e02456d604f03a51fbc95da6a06cc8024b39af9d9e0909d5b753b0ef4b858",
+      "placement_regions": {
+        "Москва": "Москва"
+      },
+      "enrichment_status": "not_run",
+      "unknown_city_placements": {
+        "8445393985": {
+          "region": "Москва",
+          "evidence": "Москва, Цветной б-р, 9 Трубная до 5 мин. Цветной бульвар до 5 мин. Сухаревская 6–10 мин.",
+          "region_unknown": false
+        },
+        "8609468086": {
+          "region": "Москва",
+          "evidence": "Москва, Варшавское ш., 134 Пражская 6–10 мин. Южная 6–10 мин. Покровское 21–30 мин.",
+          "region_unknown": false
+        },
+        "4225279832": {
+          "region": "Москва",
+          "evidence": "Москва, Дмитровское ш., 73с2 Верхние Лихоборы до 5 мин. Селигерская 11–15 мин. Лихоборы 16–20 мин.",
+          "region_unknown": false
+        },
+        "8502866828": {
+          "region": "Москва",
+          "evidence": "Москва, Дмитровское ш., 45к2 Петровско-Разумовская до 5 мин. Окружная 21–30 мин. Лихоборы 21–30 мин.",
+          "region_unknown": false
+        },
+        "8501847318": {
+          "region": "Москва",
+          "evidence": "Москва, Дмитровское ш., 163Ак1 Марк 6–10 мин. Физтех 16–20 мин. Лианозово 16–20 мин.",
+          "region_unknown": false
+        },
+        "7397055221": {
+          "region": "Москва",
+          "evidence": "Москва, Ярославское ш., 131А Бабушкинская от 31 мин. Медведково от 31 мин.",
+          "region_unknown": false
+        },
+        "8470232588": {
+          "region": "Москва",
+          "evidence": "Москва, Каширское ш., 14 Варшавская 16–20 мин. Каширская 16–20 мин. Нагорная 21–30 мин.",
+          "region_unknown": false
+        },
+        "8517091581": {
+          "region": "Москва",
+          "evidence": "Москва, 1-й пр. Марьиной Рощи Марьина Роща до 5 мин. Рижская 11–15 мин. Достоевская 16–20 мин.",
+          "region_unknown": false
+        },
+        "8320349582": {
+          "region": "Москва",
+          "evidence": "Москва, Окружной пр., 4с2 Черкизовская до 5 мин. Локомотив 6–10 мин. Измайлово 11–15 мин.",
+          "region_unknown": false
+        }
+      },
+      "rows": 37,
+      "search_plan": {
+        "path": "Scraper/runs/20261114_moscow_cashier_11_12h/plan.json",
+        "sha256": "3c1a990678344fc71f4f9658d93b5a0e89cbb172d9bcc07a92ac4913b07bc5cc"
+      }
+    },
+    {
+      "run_id": "20261114_moscow_cashier_candidates_other_hours",
+      "source": "avito",
+      "path": "Data/avito_runs/20261114_moscow_cashier_candidates_other_hours/exports/vacancies_flat.csv",
+      "sha256": "fa91222a0f69f711c7f734c1ffcaa2d169ac5fb09c2e7a5ebd27d602d8de8906",
+      "placement_regions": {
+        "Москва": "Москва"
+      },
+      "enrichment_status": "not_run",
+      "unknown_city_placements": {
+        "8437723604": {
+          "region": "Москва",
+          "evidence": "Москва, Варшавское ш., 95к1 Чертановская 11–15 мин. Варшавская 16–20 мин. Севастопольская 21–30 мин.",
+          "region_unknown": false
+        },
+        "8422695528": {
+          "region": "Москва",
+          "evidence": "Москва, 6-й Загородный пр., 1с1 Крымская 11–15 мин. Верхние котлы 11–15 мин. Нагатинская 16–20 мин.",
+          "region_unknown": false
+        },
+        "8547733483": {
+          "region": "Москва",
+          "evidence": "Москва, Мячковский б-р, 3А Братиславская до 5 мин. Марьино 11–15 мин. Люблино 21–30 мин.",
+          "region_unknown": false
+        },
+        "8454155181": {
+          "region": "Москва",
+          "evidence": "Москва, Ходынский б-р, 4 ЦСКА 6–10 мин. Аэропорт 21–30 мин. Полежаевская 21–30 мин.",
+          "region_unknown": false
+        },
+        "8239800898": {
+          "region": "",
+          "evidence": "МЦД-1 Белорусско-Савёловский диаметр Славянский бульвар до 5 мин. Пионерская 6–10 мин. Филёвский парк 16–20 мин.",
+          "region_unknown": true
+        }
+      },
+      "rows": 18,
+      "search_plan": {
+        "path": "Scraper/runs/20261114_moscow_cashier_candidates_other_hours/plan.json",
+        "sha256": "4371ef2b1863ebbc3a23c0cda5c9a5c53a3530376880a97c64d257ea2749be78"
+      }
+    },
+    {
       "run_id": "all_professions_first5_2026-10-27",
       "source": "avito",
       "path": "Data/avito_runs/all_professions_first5_2026-10-27/exports/vacancies_flat.csv",
@@ -24106,6 +24240,98 @@
       "search_plan": {
         "path": "Scraper/runs/avito-kamchatskiy-kray-20261106/plan.json",
         "sha256": "a7afb17a0660f44bffadd00b46fdb2f191f5a3e007f1cc6cf3b43b79e77115f1"
+      }
+    },
+    {
+      "run_id": "avito-spb-truck-driver-20261114",
+      "source": "avito",
+      "path": "Data/avito_runs/avito-spb-truck-driver-20261114/exports/vacancies_flat.csv",
+      "sha256": "e9b2746efe3a08018c5a39ed1cdeaebf43a13008e2d4e6a10c10e24d60f41608",
+      "placement_regions": {
+        "Санкт-Петербург": "Санкт-Петербург"
+      },
+      "enrichment_status": "not_run",
+      "unknown_city_placements": {
+        "8482040511": {
+          "region": "Санкт-Петербург",
+          "evidence": "Санкт-Петербург, Пушкинский р-н, пос. Шушары Шушары от 31 мин.",
+          "region_unknown": false
+        },
+        "8472980136": {
+          "region": "Санкт-Петербург",
+          "evidence": "Санкт-Петербург, Пушкинский р-н, пос. Шушары, 3-й Бадаевский пр., 7к1с2 Шушары от 31 мин. Купчино от 31 мин.",
+          "region_unknown": false
+        },
+        "8227550272": {
+          "region": "Санкт-Петербург",
+          "evidence": "Санкт-Петербург, наб. реки Мойки, 27 Адмиралтейская 6–10 мин. Невский проспект 11–15 мин. Гостиный двор 11–15 мин.",
+          "region_unknown": false
+        },
+        "8346286567": {
+          "region": "Санкт-Петербург",
+          "evidence": "Санкт-Петербург, пос. Парголово, ул. Михаила Дудина, 8к1 Парнас 6–10 мин. Проспект Просвещения от 31 мин. Озерки от 31 мин.",
+          "region_unknown": false
+        },
+        "7393593937": {
+          "region": "Санкт-Петербург",
+          "evidence": "Санкт-Петербург, Пушкинский р-н, пос. Шушары, Московское ш., 153к2 Шушары от 31 мин.",
+          "region_unknown": false
+        },
+        "1933874487": {
+          "region": "Санкт-Петербург",
+          "evidence": "Санкт-Петербург, Московское ш., 36 Звёздная 6–10 мин. Купчино 21–30 мин. Московская 21–30 мин.",
+          "region_unknown": false
+        },
+        "7593663718": {
+          "region": "Санкт-Петербург",
+          "evidence": "Санкт-Петербург, Колпинский р-н, пос. Петро-Славянка, Софийская ул., 149с3 Шушары от 31 мин. Рыбацкое от 31 мин.",
+          "region_unknown": false
+        },
+        "7766198190": {
+          "region": "Санкт-Петербург",
+          "evidence": "Санкт-Петербург, Пушкинский р-н, пос. Шушары, территория предприятия Ленсоветовское р-н Пушкинский",
+          "region_unknown": false
+        },
+        "8432696064": {
+          "region": "Санкт-Петербург",
+          "evidence": "Санкт-Петербург, Пушкинский р-н, пос. Шушары, ул. Ленина, 1БА Шушары от 31 мин. Купчино от 31 мин. Дунайская от 31 мин.",
+          "region_unknown": false
+        },
+        "8158252337": {
+          "region": "Санкт-Петербург",
+          "evidence": "Санкт-Петербург, Пушкинский р-н, пос. Шушары, Московское ш., 185 р-н Пушкинский",
+          "region_unknown": false
+        },
+        "8589255151": {
+          "region": "Санкт-Петербург",
+          "evidence": "Санкт-Петербург, Петродворцовый р-н, Петергоф, Ропшинское ш., 8Б р-н Петродворцовый",
+          "region_unknown": false
+        },
+        "8521880737": {
+          "region": "Санкт-Петербург",
+          "evidence": "Санкт-Петербург, Пушкинский р-н, пос. Шушары, Московское ш. р-н Пушкинский",
+          "region_unknown": false
+        },
+        "8494979390": {
+          "region": "Санкт-Петербург",
+          "evidence": "Санкт-Петербург, Пушкинский р-н, пос. Шушары, Московское ш., 145с1 Шушары от 31 мин. Рыбацкое от 31 мин.",
+          "region_unknown": false
+        },
+        "1249958262": {
+          "region": "Санкт-Петербург",
+          "evidence": "Санкт-Петербург, Пушкинский р-н, пос. Шушары, территория Бадаевское Отделение Шушары от 31 мин. Купчино от 31 мин. Дунайская от 31 мин.",
+          "region_unknown": false
+        },
+        "8400943400": {
+          "region": "Санкт-Петербург",
+          "evidence": "Санкт-Петербург, Василеостровский район, муниципальный округ Морской, ЖК Я – Романтик Приморская 21–30 мин. Зенит от 31 мин.",
+          "region_unknown": false
+        }
+      },
+      "rows": 25,
+      "search_plan": {
+        "path": "Scraper/runs/avito-spb-truck-driver-20261114/plan.json",
+        "sha256": "b01a17a8d99835df922086665f6367dc552a7a5360a1c0493a29ee913af781d4"
       }
     },
     {
@@ -39442,6 +39668,48 @@
       }
     },
     {
+      "run_id": "ekb_prodavec_11_12h_20261114",
+      "source": "avito",
+      "path": "Data/avito_runs/ekb_prodavec_11_12h_20261114/exports/vacancies_flat.csv",
+      "sha256": "fead981abdf12a5667dbbf1a13e0eaadb9499ae006485da76b8c829dda8afaed",
+      "placement_regions": {
+        "Екатеринбург": "Свердловская область"
+      },
+      "enrichment_status": "not_run",
+      "rows": 35,
+      "search_plan": {
+        "path": "Scraper/runs/ekb_prodavec_11_12h_20261114/plan.json",
+        "sha256": "55e00696ff12c8def24969f4133726c21d0a7ab3f9980433d0e01a757ab20158"
+      }
+    },
+    {
+      "run_id": "ekb_prodavec_others_20261114",
+      "source": "avito",
+      "path": "Data/avito_runs/ekb_prodavec_others_20261114/exports/vacancies_flat.csv",
+      "sha256": "e43757b7f5ccef5328478685ab25d809fb4c911a3b3edcfbeb10b2c360d1f3d6",
+      "placement_regions": {
+        "Екатеринбург": "Свердловская область"
+      },
+      "enrichment_status": "not_run",
+      "unknown_city_placements": {
+        "4133356488": {
+          "region": "Свердловская область",
+          "evidence": "Свердловская обл., Белоярский муниципальный округ, пос. Прохладный, ул. Свердлова, 7А",
+          "region_unknown": false
+        },
+        "1875735095": {
+          "region": "Свердловская область",
+          "evidence": "Свердловская обл., аэропорт Екатеринбург (Кольцово) имени А.Н. Демидова р-н Октябрьский",
+          "region_unknown": false
+        }
+      },
+      "rows": 32,
+      "search_plan": {
+        "path": "Scraper/runs/ekb_prodavec_others_20261114/plan.json",
+        "sha256": "5be09b9b8df99a4dcb273afbfed7574ec07a1348e111e57bf8ed557c91765c50"
+      }
+    },
+    {
       "run_id": "f08_spb_seller_20261029_b_01",
       "source": "avito",
       "path": "Data/avito_runs/f08_spb_seller_20261029_b_01/exports/vacancies_flat.csv",
@@ -44280,6 +44548,301 @@
       }
     },
     {
+      "run_id": "moscow-prodavec-medbook-no-20261114-b01-novel",
+      "source": "avito",
+      "path": "Data/avito_runs/moscow-prodavec-medbook-no-20261114-b01-novel/exports/vacancies_flat.csv",
+      "sha256": "99215a0c0a39d45ea8bb390628760fb386ea02148bfe85c376b2673b6ce9c186",
+      "placement_regions": {
+        "Москва": "Москва"
+      },
+      "enrichment_status": "not_run",
+      "unknown_city_placements": {
+        "8441059145": {
+          "region": "Москва",
+          "evidence": "Москва, Ленинградское ш., 72 Речной вокзал 11–15 мин. Водный стадион 11–15 мин. Беломорская 21–30 мин.",
+          "region_unknown": false
+        },
+        "8072891711": {
+          "region": "Москва",
+          "evidence": "Москва, Измайловское ш., 24к1 Семёновская 6–10 мин. Электрозаводская 11–15 мин. Измайлово 21–30 мин.",
+          "region_unknown": false
+        },
+        "8402558074": {
+          "region": "Москва",
+          "evidence": "Москва, Каширское ш., 78к5 Москворечье 6–10 мин. Кантемировская 21–30 мин. Царицыно 21–30 мин.",
+          "region_unknown": false
+        },
+        "8396789979": {
+          "region": "Москва",
+          "evidence": "Москва, Центральный парк культуры и отдыха имени М. Горького Октябрьская 6–10 мин. Парк культуры 11–15 мин. Полянка 16–20 мин.",
+          "region_unknown": false
+        },
+        "8490010737": {
+          "region": "Москва",
+          "evidence": "Москва, территория Кремль Библиотека им. Ленина 6–10 мин. Александровский сад 6–10 мин. Боровицкая 6–10 мин.",
+          "region_unknown": false
+        },
+        "8470201051": {
+          "region": "Москва",
+          "evidence": "Москва, Ярославское ш., 54 Бабушкинская от 31 мин. Свиблово от 31 мин. Медведково от 31 мин.",
+          "region_unknown": false
+        },
+        "4425804786": {
+          "region": "Москва",
+          "evidence": "Москва, Рождественский б-р, 1 Трубная до 5 мин. Кузнецкий мост 6–10 мин. Цветной бульвар 6–10 мин.",
+          "region_unknown": false
+        },
+        "8066087692": {
+          "region": "Москва",
+          "evidence": "Москва, Страстной б-р, 4 Чеховская до 5 мин. Пушкинская до 5 мин. Тверская до 5 мин.",
+          "region_unknown": false
+        },
+        "8396028061": {
+          "region": "Москва",
+          "evidence": "Москва, Ореховый б-р, 14с3А Домодедовская до 5 мин. Зябликово 16–20 мин. Красногвардейская 16–20 мин.",
+          "region_unknown": false
+        },
+        "7215799033": {
+          "region": "Москва",
+          "evidence": "Москва, Лазоревый пр., 1Ак2 Ботанический сад до 5 мин. Свиблово 11–15 мин. Ростокино 21–30 мин.",
+          "region_unknown": false
+        },
+        "2174746497": {
+          "region": "Москва",
+          "evidence": "Москва, 1-й Хорошёвский пр. Беговая до 5 мин. Хорошёвская 16–20 мин. Полежаевская 16–20 мин.",
+          "region_unknown": false
+        },
+        "8070182359": {
+          "region": "Москва",
+          "evidence": "Москва, Шелепихинская наб., 34к3зд6 Звенигородская 6–10 мин. Шелепиха 11–15 мин.",
+          "region_unknown": false
+        },
+        "8153687085": {
+          "region": "Москва",
+          "evidence": "Москва, Варшавское ш., 25Ас1 Верхние котлы 6–10 мин. Нагатинская 11–15 мин. Крымская 16–20 мин.",
+          "region_unknown": false
+        },
+        "8589121105": {
+          "region": "Москва",
+          "evidence": "Москва, Ленинградское ш., 16Ас8 Балтийская до 5 мин. Войковская 6–10 мин. Стрешнево 16–20 мин.",
+          "region_unknown": false
+        }
+      },
+      "rows": 56,
+      "search_plan": {
+        "path": "Scraper/runs/moscow-prodavec-medbook-no-20261114-b01-novel/plan.json",
+        "sha256": "2acc911f52a0f26bdf88bbb9ac0c6d49196217384da4fdd01063ea7826d3735c"
+      }
+    },
+    {
+      "run_id": "moscow-prodavec-medbook-no-20261114-b02-novel",
+      "source": "avito",
+      "path": "Data/avito_runs/moscow-prodavec-medbook-no-20261114-b02-novel/exports/vacancies_flat.csv",
+      "sha256": "862af70b0dd0ea01e97d541245f8c143ed14f6c4a4101f7f0781cc87faed95e1",
+      "placement_regions": {
+        "Москва": "Москва",
+        "Зеленоград": "Москва"
+      },
+      "enrichment_status": "not_run",
+      "unknown_city_placements": {
+        "8470203299": {
+          "region": "Москва",
+          "evidence": "Москва, Карамышевская наб., 36 Мнёвники 11–15 мин. Народное Ополчение 16–20 мин. Народное Ополчение 16–20 мин.",
+          "region_unknown": false
+        },
+        "8417550645": {
+          "region": "Москва",
+          "evidence": "Москва, пр. Воскресенские Ворота Охотный ряд до 5 мин. Театральная до 5 мин. Площадь революции до 5 мин.",
+          "region_unknown": false
+        },
+        "7525076282": {
+          "region": "Москва",
+          "evidence": "Москва, Химкинское кладбище Молжаниново 16–20 мин. Новоподрезково от 31 мин.",
+          "region_unknown": false
+        },
+        "8396904633": {
+          "region": "Москва",
+          "evidence": "Москва, 2-й Грайвороновский пр., 44к2 Стахановская до 5 мин. Нижегородская 16–20 мин. Чухлинка 16–20 мин.",
+          "region_unknown": false
+        },
+        "8337029088": {
+          "region": "Москва",
+          "evidence": "Москва, Юго-Восточный административный округ, район Кузьминки, Волжский Бульвар квартал 114А Кузьминки 11–15 мин. Текстильщики 11–15 мин. Волжская 16–20 мин.",
+          "region_unknown": false
+        },
+        "8099977086": {
+          "region": "Москва",
+          "evidence": "Москва, Береговой пр., 5Ак6 Фили 11–15 мин. Шелепиха 11–15 мин. Звенигородская 21–30 мин.",
+          "region_unknown": false
+        },
+        "8414071746": {
+          "region": "Москва",
+          "evidence": "Москва, Андреевская наб., 1к10 Ленинский проспект 11–15 мин. Площадь Гагарина 11–15 мин. Воробьёвы горы 16–20 мин.",
+          "region_unknown": false
+        },
+        "8260515704": {
+          "region": "Москва",
+          "evidence": "Москва, Щёлковское ш., 75 Щёлковская до 5 мин. Первомайская 21–30 мин. Измайловская от 31 мин.",
+          "region_unknown": false
+        },
+        "7871723009": {
+          "region": "Москва",
+          "evidence": "Москва, Курский вокзал Чкаловская до 5 мин. Курская до 5 мин. Красные ворота 16–20 мин.",
+          "region_unknown": false
+        },
+        "8182299969": {
+          "region": "Москва",
+          "evidence": "Москва, Дмитровское ш., 107Ак5 Яхромская 6–10 мин. Селигерская 16–20 мин. Моссельмаш 21–30 мин.",
+          "region_unknown": false
+        },
+        "7847930550": {
+          "region": "Москва",
+          "evidence": "Москва, Западный административный округ, район Солнцево, жилой комплекс В Солнцево Солнцево 11–15 мин. Новопеределкино 11–15 мин. Боровское шоссе 21–30 мин.",
+          "region_unknown": false
+        },
+        "8523679035": {
+          "region": "Москва",
+          "evidence": "Москва, Загородное ш., 6к1 Крымская 6–10 мин. Верхние котлы 11–15 мин. Нагатинская 21–30 мин.",
+          "region_unknown": false
+        },
+        "1712904523": {
+          "region": "Москва",
+          "evidence": "Москва, Хорошёвское ш., 38с5 Беговая 6–10 мин. ЦСКА 11–15 мин. Хорошёвская 11–15 мин.",
+          "region_unknown": false
+        },
+        "8362226981": {
+          "region": "Москва",
+          "evidence": "Москва, Шмитовский пр., 7 Улица 1905 года 11–15 мин. Деловой центр 16–20 мин.",
+          "region_unknown": false
+        },
+        "4287723178": {
+          "region": "Москва",
+          "evidence": "Москва, Ленинградское ш., 228к3 Молжаниново 11–15 мин. Новоподрезково 21–30 мин.",
+          "region_unknown": false
+        },
+        "7694744632": {
+          "region": "Москва",
+          "evidence": "Москва, Пятницкое ш., 18 Волоколамская 11–15 мин. Трикотажная 16–20 мин. Митино 16–20 мин.",
+          "region_unknown": false
+        },
+        "7539531111": {
+          "region": "Москва",
+          "evidence": "Москва, б-р Маршала Рокоссовского, 31 Бульвар Рокоссовского 16–20 мин. Белокаменная 21–30 мин. Преображенская площадь 21–30 мин.",
+          "region_unknown": false
+        },
+        "8589780993": {
+          "region": "Москва",
+          "evidence": "Москва, Варшавское ш., 125с37 Южная 16–20 мин. Чертановская 16–20 мин. Пражская 21–30 мин.",
+          "region_unknown": false
+        },
+        "8514633006": {
+          "region": "Москва",
+          "evidence": "Москва, Дмитровское ш., 169к8 Новодачная 11–15 мин. Физтех 16–20 мин. Долгопрудная 21–30 мин.",
+          "region_unknown": false
+        },
+        "8402415306": {
+          "region": "Московская область",
+          "evidence": "Московская обл., Ленинский г.о., пгт. Боброво, территория ДНТ Бутово Бутово 21–30 мин. Улица Скобелевская от 31 мин. Бульвар адмирала Ушакова от 31 мин.",
+          "region_unknown": false
+        },
+        "8546759564": {
+          "region": "Москва",
+          "evidence": "Москва, б-р Дмитрия Донского, 2А Улица Старокачаловская до 5 мин. Бульвар Дмитрия Донского до 5 мин. Лесопарковая 16–20 мин.",
+          "region_unknown": false
+        },
+        "8217953922": {
+          "region": "Москва",
+          "evidence": "Москва, Каширское ш., 61Г Домодедовская 16–20 мин. Орехово 16–20 мин. Шипиловская 21–30 мин.",
+          "region_unknown": false
+        },
+        "8553059063": {
+          "region": "Москва",
+          "evidence": "Москва, Ленинградское ш., 16Ас4 Балтийская до 5 мин. Войковская 6–10 мин. Стрешнево 16–20 мин.",
+          "region_unknown": false
+        },
+        "8502868869": {
+          "region": "Москва",
+          "evidence": "Москва, Щёлковское ш., 75 Щёлковская до 5 мин. Первомайская 21–30 мин. Измайловская от 31 мин.",
+          "region_unknown": false
+        },
+        "8435065568": {
+          "region": "Москва",
+          "evidence": "Москва, Пятницкое ш., 18 Волоколамская 11–15 мин. Трикотажная 16–20 мин. Митино 16–20 мин.",
+          "region_unknown": false
+        },
+        "8437275369": {
+          "region": "Москва",
+          "evidence": "Москва, Кавказский б-р, 17 Царицыно 11–15 мин. Кантемировская 11–15 мин. Москворечье 21–30 мин.",
+          "region_unknown": false
+        },
+        "3123525772": {
+          "region": "Московская область",
+          "evidence": "Московская обл., Одинцовский г.о., с. Немчиновка, Московская ул., вл63 Сетунь 16–20 мин. Немчиновка 16–20 мин. Рабочий Посёлок от 31 мин.",
+          "region_unknown": false
+        },
+        "2221886725": {
+          "region": "Москва",
+          "evidence": "Москва, Дмитровское ш., 89 Селигерская до 5 мин. Моссельмаш 16–20 мин. Верхние Лихоборы 16–20 мин.",
+          "region_unknown": false
+        },
+        "8589724860": {
+          "region": "Москва",
+          "evidence": "Москва, Осенний б-р, 15 Крылатское до 5 мин. Молодёжная 21–30 мин. Строгино от 31 мин.",
+          "region_unknown": false
+        },
+        "7348725499": {
+          "region": "Москва",
+          "evidence": "Москва, Алтуфьевское ш., 70к1 Алтуфьево 11–15 мин. Бибирево 11–15 мин. Бескудниково 21–30 мин.",
+          "region_unknown": false
+        },
+        "7866460015": {
+          "region": "Москва",
+          "evidence": "Москва, Проектируемый пр. № 4296, с6 Панки 16–20 мин. Люберцы от 31 мин. Томилино от 31 мин.",
+          "region_unknown": false
+        },
+        "8239329659": {
+          "region": "Москва",
+          "evidence": "Москва, Перовское ш., 1 Нижегородская до 5 мин. Андроновка 16–20 мин. Новохохловская 21–30 мин.",
+          "region_unknown": false
+        },
+        "8447854192": {
+          "region": "Москва",
+          "evidence": "Москва, МКАД, 47-й километр, 31с1 Говорово 11–15 мин. Мещерская 11–15 мин. Озёрная 21–30 мин.",
+          "region_unknown": false
+        },
+        "8608978888": {
+          "region": "Москва",
+          "evidence": "Москва, Дмитровское ш. Селигерская до 5 мин. Моссельмаш 16–20 мин. Яхромская 16–20 мин.",
+          "region_unknown": false
+        },
+        "8239020062": {
+          "region": "Москва",
+          "evidence": "Москва, Окружной пр., 7с1 Локомотив до 5 мин. Черкизовская до 5 мин. Измайлово 16–20 мин.",
+          "region_unknown": false
+        },
+        "8156935023": {
+          "region": "",
+          "evidence": "МЦД-2 Курско-Рижский диаметр Пенягино до 5 мин. Павшино 21–30 мин. Мякинино 21–30 мин.",
+          "region_unknown": true
+        },
+        "8400163977": {
+          "region": "Москва",
+          "evidence": "Москва, пр. Русанова, 17 Свиблово 6–10 мин. Ботанический сад 11–15 мин. Бабушкинская 21–30 мин.",
+          "region_unknown": false
+        },
+        "8440521032": {
+          "region": "Москва",
+          "evidence": "Москва, МКАД, съезд 1В Реутов 21–30 мин. Новогиреево от 31 мин. Новокосино от 31 мин.",
+          "region_unknown": false
+        }
+      },
+      "rows": 150,
+      "search_plan": {
+        "path": "Scraper/runs/moscow-prodavec-medbook-no-20261114-b02-novel/plan.json",
+        "sha256": "39a1818669b22479d61b18b9013d8760e0ab8abfea8f72b21308fff492e05d8d"
+      }
+    },
+    {
       "run_id": "moscow_all_200_2026-10-28",
       "source": "avito",
       "path": "Data/avito_runs/moscow_all_200_2026-10-28/exports/vacancies_flat.csv",
@@ -46190,6 +46753,58 @@
       "search_plan": {
         "path": "Scraper/runs/moscow_picker_20261029_b_03/plan.json",
         "sha256": "f9cd6b5001eb3a85c4812c010d62bc21d01c641534fde449cb093c492b1dede3"
+      }
+    },
+    {
+      "run_id": "msk_gruzchik_perm_shift_20261114_new18",
+      "source": "avito",
+      "path": "Data/avito_runs/msk_gruzchik_perm_shift_20261114_new18/exports/vacancies_flat.csv",
+      "sha256": "f4bfd16579c7221f373339ad83c591a66463e435236832fb799d03436a56bdc3",
+      "placement_regions": {
+        "Москва": "Москва"
+      },
+      "enrichment_status": "not_run",
+      "unknown_city_placements": {
+        "8015162417": {
+          "region": "Москва",
+          "evidence": "Москва, Боровское ш. Солнцево 6–10 мин. Солнечная 11–15 мин. Говорово 16–20 мин.",
+          "region_unknown": false
+        },
+        "8433243370": {
+          "region": "Москва",
+          "evidence": "Москва, Кавказский б-р, 22 Кантемировская 6–10 мин. Царицыно 11–15 мин. Москворечье 21–30 мин.",
+          "region_unknown": false
+        },
+        "8380393620": {
+          "region": "Москва",
+          "evidence": "Москва, Природно-исторический парк Косинский Новокосино 21–30 мин. Улица Дмитриевского 21–30 мин. Реутов от 31 мин.",
+          "region_unknown": false
+        },
+        "8469796242": {
+          "region": "Москва",
+          "evidence": "Москва, Каширское ш., 21 Каширская 11–15 мин. Варшавская 21–30 мин. Нахимовский проспект 21–30 мин.",
+          "region_unknown": false
+        },
+        "8283652889": {
+          "region": "Московская область",
+          "evidence": "Московская обл., Ленинский г.о., пгт. Дрожжино, Новое ш., 13 Бутово 21–30 мин. Щербинка от 31 мин. Улица Скобелевская от 31 мин.",
+          "region_unknown": false
+        },
+        "8546138508": {
+          "region": "Москва",
+          "evidence": "Москва, Карамышевская наб., 44 Мнёвники 16–20 мин. Народное Ополчение 16–20 мин. Бульвар Генерала Карбышева 16–20 мин.",
+          "region_unknown": false
+        },
+        "8230305473": {
+          "region": "Москва",
+          "evidence": "Москва, платформа Северянин, 6 Ростокино 6–10 мин. Свиблово 21–30 мин. Ботанический сад от 31 мин.",
+          "region_unknown": false
+        }
+      },
+      "rows": 30,
+      "search_plan": {
+        "path": "Scraper/runs/msk_gruzchik_perm_shift_20261114_new18/plan.json",
+        "sha256": "e6fbf57dcff42578f2136e8ee072e7b8845129c4bda27ff0b1eab4a1b422b865"
       }
     },
     {
@@ -58709,6 +59324,56 @@
       }
     },
     {
+      "run_id": "spb-kassir-permanent-20261114-batch01",
+      "source": "avito",
+      "path": "Data/transformations/spb-kassir-permanent-20261114-batch01-placement-v1/vacancies_flat.csv",
+      "sha256": "17d511fef3c549671877525dcb4bfeb54ad6235bdae0b10f632fd0a1faa812a9",
+      "placement_regions": {
+        "Санкт-Петербург": "Санкт-Петербург"
+      },
+      "enrichment_status": "not_run",
+      "unknown_city_placements": {
+        "8377330405": {
+          "region": "Санкт-Петербург",
+          "evidence": "Санкт-Петербург, Кронштадтский р-н, Кронштадт, пр-т Ленина, 16",
+          "region_unknown": false
+        },
+        "8126581646": {
+          "region": "Санкт-Петербург",
+          "evidence": "Санкт-Петербург, Пушкинский р-н, пос. Шушары, территория Славянка, Ростовская ул., 9к1 р-н Пушкинский",
+          "region_unknown": false
+        }
+      },
+      "transformation": {
+        "path": "Data/transformations/spb-kassir-permanent-20261114-batch01-placement-v1/transformation.json",
+        "sha256": "e406ec42037970b88e254addea9129d84d8b708a93cb9db5a9ea430ad3db8df8"
+      },
+      "rows": 20,
+      "search_plan": {
+        "path": "Scraper/runs/spb-kassir-permanent-20261114-batch01/plan.json",
+        "sha256": "6014697dff44a8d9b48923aef82847bab29d10b90791dc6db636ac0cca2e42f8"
+      }
+    },
+    {
+      "run_id": "spb-kassir-permanent-20261114-batch02",
+      "source": "avito",
+      "path": "Data/transformations/spb-kassir-permanent-20261114-batch02-placement-v1/vacancies_flat.csv",
+      "sha256": "c380fded8dadb637edb110f20c1b9135244a1e10d18beb2952a6f9f6e60c5ad3",
+      "placement_regions": {
+        "Санкт-Петербург": "Санкт-Петербург"
+      },
+      "enrichment_status": "not_run",
+      "transformation": {
+        "path": "Data/transformations/spb-kassir-permanent-20261114-batch02-placement-v1/transformation.json",
+        "sha256": "1391d6042312dc25706278063e8e865faefb971a68b66cbcc2172a219af3cdb7"
+      },
+      "rows": 15,
+      "search_plan": {
+        "path": "Scraper/runs/spb-kassir-permanent-20261114-batch02/plan.json",
+        "sha256": "5f83f49256a348031b2ff7bd503e2b9f9829e38529c5d69a8ad45dedec64bc06"
+      }
+    },
+    {
       "run_id": "spb_all_first1500_2026-10-28",
       "source": "avito",
       "path": "Data/avito_runs/spb_all_first1500_2026-10-28/exports/vacancies_flat.csv",
@@ -66959,387 +67624,387 @@
   "parts": [
     {
       "path": "parts/part-00.csv",
-      "rows": 475,
-      "bytes": 1726612,
-      "sha256": "8b6e73deb7560a06979c432765d7908b6f8d7098468d892311f2ac4ea4bf5b4c"
+      "rows": 481,
+      "bytes": 1749116,
+      "sha256": "9588113d7bec476dabdb5e68fc6203b928f4ce603baae8c56c10942fb9baac4b"
     },
     {
       "path": "parts/part-01.csv",
-      "rows": 511,
-      "bytes": 1813972,
-      "sha256": "eab2c7bc64860b7395a2d605d00ada085ad3b1a6e65ee34b9debea8643d0ecfb"
+      "rows": 519,
+      "bytes": 1842610,
+      "sha256": "3bf5894244eaff429b87bf40da7d6eb3dfe07f71995be148e2a125a267ada124"
     },
     {
       "path": "parts/part-02.csv",
-      "rows": 497,
-      "bytes": 1843352,
-      "sha256": "b8c23a65217efd1390ddbb6ec4fab897414354ef46f7428ab1dca0141b23820f"
+      "rows": 502,
+      "bytes": 1863104,
+      "sha256": "33397002918ef8c744bc467ebdb8f4b6a983e13fffe8e56ea70b7c2109685434"
     },
     {
       "path": "parts/part-03.csv",
-      "rows": 498,
-      "bytes": 1770124,
-      "sha256": "d6c587466047ff76ef03a344f1f2ceaa96609baab8f4494459f08a6d0f23cb37"
+      "rows": 506,
+      "bytes": 1797155,
+      "sha256": "757a6d04ec7041f0198f3565af86710c30e65c5bf3fed529d129f973eaf71b18"
     },
     {
       "path": "parts/part-04.csv",
-      "rows": 476,
-      "bytes": 1715975,
-      "sha256": "038f6ac725d289dd3898f1dca094e481213232ecaaad61230b4b344d923b3145"
+      "rows": 487,
+      "bytes": 1753316,
+      "sha256": "07abd005a610f893abe6aeb48d8d7692c8770294a65f71c6806bd96937cea6cf"
     },
     {
       "path": "parts/part-05.csv",
-      "rows": 505,
-      "bytes": 1844671,
-      "sha256": "94227f14cdc08639328276875e5d45b68118e31de6fb6f3eb6e4db50132aac54"
+      "rows": 511,
+      "bytes": 1865729,
+      "sha256": "0e7c7acd2112b1211b71b32ae0f9a46a4cf2388f2844f77624bb082910e28ce8"
     },
     {
       "path": "parts/part-06.csv",
-      "rows": 489,
-      "bytes": 1811652,
-      "sha256": "c483e9521f8463755d39caeac54190c2fc108726451a1770723d06f1ca549350"
+      "rows": 501,
+      "bytes": 1849191,
+      "sha256": "adec814b808c7d72c98329093ff7f411d87b4be57d8728ed24af7f2b82d3a8e1"
     },
     {
       "path": "parts/part-07.csv",
-      "rows": 504,
-      "bytes": 1902542,
-      "sha256": "1e55081ef33924ff2742f413a0c0d5e8c23f17f29b2778d0167dbbcf4c9bace6"
+      "rows": 512,
+      "bytes": 1927503,
+      "sha256": "7f789c6a5082f795ed4104162b7d86cdf50b54fae31544c8879d947072e5d393"
     },
     {
       "path": "parts/part-08.csv",
-      "rows": 496,
-      "bytes": 1845861,
-      "sha256": "71b0089d766d9e22b31b51be868075ef427d1fe07c02783590ac51c0808de48d"
+      "rows": 500,
+      "bytes": 1861578,
+      "sha256": "8d261bba8d5ce893d40cb4faec441ee8065ee2c6a81069addacf2ab17dcc7906"
     },
     {
       "path": "parts/part-09.csv",
-      "rows": 537,
-      "bytes": 1994337,
-      "sha256": "ce27d854ca2bbff64ec24e270000a4dac8cccd9836a487adef343c6b50e98011"
+      "rows": 547,
+      "bytes": 2028926,
+      "sha256": "a89e3d8c1e5ae474fdeacf3f99ed1216a795c8e0b07b039a11fa526d751d57a6"
     },
     {
       "path": "parts/part-10.csv",
-      "rows": 500,
-      "bytes": 1786107,
-      "sha256": "ad0f80a61534e1faf6c64608a32d74c3c907508d5f44e6ef9859eae2b7bfcf73"
+      "rows": 511,
+      "bytes": 1822959,
+      "sha256": "f3cb88ecab20418c3d0eb5ffe90ae10aafac771a67d4ea1ceaacb0f78857de67"
     },
     {
       "path": "parts/part-11.csv",
-      "rows": 481,
-      "bytes": 1723593,
-      "sha256": "2b69b9456dde4e590ef443f321f37f2096d3e4c6c848b2980ee29b31e70e18cd"
+      "rows": 491,
+      "bytes": 1756011,
+      "sha256": "cca6a2cc19260db3d33b072cf3c5e0e589f3ae01111c139ca5296644eab56cbe"
     },
     {
       "path": "parts/part-12.csv",
-      "rows": 495,
-      "bytes": 1831310,
-      "sha256": "1dfcb968c8dd446d146bbd4421c2bdc78e712f21b561aa7620892900904145af"
+      "rows": 501,
+      "bytes": 1848888,
+      "sha256": "f741900ce0f911c86fff1b2c14dc0add20c0b987d8b6f22f299cd79ade4f354f"
     },
     {
       "path": "parts/part-13.csv",
-      "rows": 483,
-      "bytes": 1788337,
-      "sha256": "dd478d7c7591ba4a7c096bf5d02b6997a7100ed0104979278391c94f31ad2153"
+      "rows": 484,
+      "bytes": 1792668,
+      "sha256": "84fae744832a9d628c03d043e7c2d6c0375a9d7925af004af3e2fb850c5847a9"
     },
     {
       "path": "parts/part-14.csv",
-      "rows": 468,
-      "bytes": 1693804,
-      "sha256": "1b3acc030cbcab91e14ea9f5701adb24550ab3334aebd28fdcd5c11490fdf8e6"
+      "rows": 476,
+      "bytes": 1724922,
+      "sha256": "e59abff54623ea917f3a2f6dd692a2696de0d17ae2300c66f3686d54c597218c"
     },
     {
       "path": "parts/part-15.csv",
-      "rows": 516,
-      "bytes": 1885915,
-      "sha256": "498babce7976f51dac953d7b2fbdcb68dd3cfdd0b2d4017953b7a9cb5a8bbffe"
+      "rows": 525,
+      "bytes": 1918639,
+      "sha256": "f81465a1b3bf8fc1cf2fb54bf4e153ddaa64d1c08f8f7b79309a34331bab81cc"
     },
     {
       "path": "parts/part-16.csv",
-      "rows": 509,
-      "bytes": 1878588,
-      "sha256": "db895d75b4b2ed16eb922c5cfe0b8ac8927ce5d2fdae1c4d3806ec8edf49849b"
+      "rows": 517,
+      "bytes": 1905399,
+      "sha256": "261bcad3788ffb85123a767744a521ec012d482be5490c994e354938b0628a09"
     },
     {
       "path": "parts/part-17.csv",
-      "rows": 510,
-      "bytes": 1892394,
-      "sha256": "54e37ca08fedc5f638f30a088afe5d5ce8b9889edf35302b004b14274799cd96"
+      "rows": 522,
+      "bytes": 1935115,
+      "sha256": "fa4d64a28daf516dd62ac2d5c9fc72b3115323b163b91940bfabe334722d8d36"
     },
     {
       "path": "parts/part-18.csv",
-      "rows": 495,
-      "bytes": 1822637,
-      "sha256": "fa44765a370c5ff9f85d968084652f37b955f15b366f7a0461d801863dbe0742"
+      "rows": 503,
+      "bytes": 1847484,
+      "sha256": "d769fd80729856a9ba418990594a7d1abf08cd7d4481728ba92bc99a513a8837"
     },
     {
       "path": "parts/part-19.csv",
-      "rows": 580,
-      "bytes": 2120089,
-      "sha256": "d86637780572fa67228a7b59c00ecd02c8d191f03f1a07213d758c03cb332e90"
+      "rows": 586,
+      "bytes": 2142351,
+      "sha256": "13a331abed2d41e30443357788a955e54d23a6ad0e72d882b9cf2593b332159a"
     },
     {
       "path": "parts/part-20.csv",
-      "rows": 494,
-      "bytes": 1766129,
-      "sha256": "46f3f27e9e83f9f9760b03b23e29c41d84268423ab1c2ce2a1e0f948d885016b"
+      "rows": 505,
+      "bytes": 1804291,
+      "sha256": "ff964e7c4305b3ba102eb0eee60c3d8dc34c5f835e54b514e4ea0d6db2710228"
     },
     {
       "path": "parts/part-21.csv",
-      "rows": 475,
-      "bytes": 1736222,
-      "sha256": "609d66389f9068c2b63df91610067927c7bf8eb3e3d8c26c4f7cd339b9567fb8"
+      "rows": 483,
+      "bytes": 1765503,
+      "sha256": "91d3e8f96eff371c1ad7481daa4eeec8ff68a6c45e7202c7858669e8e82e0b4d"
     },
     {
       "path": "parts/part-22.csv",
-      "rows": 500,
-      "bytes": 1788189,
-      "sha256": "f3fa0c1fcaeeb03e803ff1391a1f75bf0f7dbf94d6bf53342c313a86084584c3"
+      "rows": 508,
+      "bytes": 1818488,
+      "sha256": "192cc81196b1703c6d670527e40f947815629061889f297e6b06747a3dcc7a85"
     },
     {
       "path": "parts/part-23.csv",
-      "rows": 520,
-      "bytes": 1936883,
-      "sha256": "f06a5e5ad2669e2a494b31b8878777226edfb1008499caed9a0b7a1c9851f52a"
+      "rows": 528,
+      "bytes": 1963280,
+      "sha256": "ef0fe4ff30cb40bebee2d48a56ac81c7fbae3b7d993b18f9850aee59b1452496"
     },
     {
       "path": "parts/part-24.csv",
-      "rows": 485,
-      "bytes": 1794783,
-      "sha256": "821948d24c2b1dc938116e9db81e2da639764caa77a757b4cfff34ac42852068"
+      "rows": 495,
+      "bytes": 1830950,
+      "sha256": "01eba715b2937a978d40562ef7839c9479d6b7313b6a618e969166f2cec4d99f"
     },
     {
       "path": "parts/part-25.csv",
-      "rows": 518,
-      "bytes": 1940778,
-      "sha256": "9768ebdbf41854722b4a6448db99a48774d8127f20c00572cf9b6e7254552515"
+      "rows": 523,
+      "bytes": 1962709,
+      "sha256": "453b85c4572a2d086e96142a4eb240fa3ae0601f62e95d9cfa9ebb8745b067e1"
     },
     {
       "path": "parts/part-26.csv",
-      "rows": 510,
-      "bytes": 1866085,
-      "sha256": "681cfb104545f1a73510cdab7d8eda3b3cd57dd83a43a3a5e76e594889f42e0a"
+      "rows": 520,
+      "bytes": 1907803,
+      "sha256": "615a2d7dddd96ded4b6212fed4a04bc51b1d273d6f6d137131bdb8ce008895a2"
     },
     {
       "path": "parts/part-27.csv",
-      "rows": 457,
-      "bytes": 1693884,
-      "sha256": "ec92e5761bd2701ecd9dc6c80263f443dfd1efb7a02070a102fb2d90eaaeefe1"
+      "rows": 463,
+      "bytes": 1712422,
+      "sha256": "d5d89aba0efeee1408f1dd2cd71e01e109dc8448cdc3ffb17a2ad9e8eb7c1064"
     },
     {
       "path": "parts/part-28.csv",
-      "rows": 486,
-      "bytes": 1743025,
-      "sha256": "f95e8c9a65d207c6a57f28073f5dc1232095e4c713e608faa5fdb06abae35c4d"
+      "rows": 494,
+      "bytes": 1776480,
+      "sha256": "9e70d4e5b3cb325e3a4d7dc03809da0c20ec544d894e7c768f646d315ee4559a"
     },
     {
       "path": "parts/part-29.csv",
-      "rows": 497,
-      "bytes": 1837889,
-      "sha256": "4c7b6651e437b1f668f1a916c479fa9ae0c56b3c49f3c0629e50976e831f66e5"
+      "rows": 506,
+      "bytes": 1870273,
+      "sha256": "a29a33d331a80d81f183d3aff81e62010971d3881cb62c60bfacf7911d8a3b96"
     },
     {
       "path": "parts/part-30.csv",
-      "rows": 483,
-      "bytes": 1747988,
-      "sha256": "5c325dcd09fc794ac1c2157d8f14e21bb619e1499891f3ebb075e3c87f1b9f59"
+      "rows": 486,
+      "bytes": 1759863,
+      "sha256": "6aeb397dbeb9fcb4e0f9055add71e906f690dc3a190bebb7bf2747eb1266fa38"
     },
     {
       "path": "parts/part-31.csv",
-      "rows": 508,
-      "bytes": 1861259,
-      "sha256": "738417818ed753409c4f08cb4380963a96b32c9603a13a939e705f164d004190"
+      "rows": 520,
+      "bytes": 1902455,
+      "sha256": "f78f65f87b75fdc2cb55cc3f9f6c33f237c59f1e40df2dca0f91fbd066542b51"
     },
     {
       "path": "parts/part-32.csv",
-      "rows": 488,
-      "bytes": 1807740,
-      "sha256": "891be4a70cd4ffd128d00eaac3a9bc84f42efaf8d4eb86e8d260fa75bcf15810"
+      "rows": 496,
+      "bytes": 1835928,
+      "sha256": "55abaf35fa617cb9b5e99a40164297d11e01d39721eed55e5006fb22239ab1ea"
     },
     {
       "path": "parts/part-33.csv",
-      "rows": 488,
-      "bytes": 1814898,
-      "sha256": "14177812b02072f074a57fcb2d3e35a1c15f862715d2cdf353ad880ae24843c3"
+      "rows": 491,
+      "bytes": 1823683,
+      "sha256": "52b282a4f4e6c9b53af339ca711f1efd9cb3a14799aa74a6e1cf97ed1b2a0d00"
     },
     {
       "path": "parts/part-34.csv",
-      "rows": 490,
-      "bytes": 1777715,
-      "sha256": "a59a48e786c8cf15cceba2217719d2d7c5201be085530fe8f92cbae1853d4f40"
+      "rows": 492,
+      "bytes": 1784085,
+      "sha256": "a91fe820d3ff82b82385e9feaabcaa9eddb7497bb3561d7b2f3fba36721c61a1"
     },
     {
       "path": "parts/part-35.csv",
-      "rows": 462,
-      "bytes": 1728085,
-      "sha256": "f68f00c707c94c017d1bdecea80b96f4bdd9793e349884deb222e62f70a92cb6"
+      "rows": 468,
+      "bytes": 1751037,
+      "sha256": "8a5fde3110d83169ac98123eeb83e9059ef359d12f2df8ba412f74bd166f0a32"
     },
     {
       "path": "parts/part-36.csv",
-      "rows": 432,
-      "bytes": 1555594,
-      "sha256": "6eab1f93e66b027f25423745db4a0bc782ee3c6db8f06f43c23679a01d92b07c"
+      "rows": 440,
+      "bytes": 1583280,
+      "sha256": "2450c4184912c19632aaa4888c72a35c4eb23dfc9bb453090c2e4573c74fedc9"
     },
     {
       "path": "parts/part-37.csv",
-      "rows": 502,
-      "bytes": 1821208,
-      "sha256": "d777422500faa3836615d1e166ee7340870bf2a8f83ddcf32b601627ffe9cd1a"
+      "rows": 508,
+      "bytes": 1841729,
+      "sha256": "5a5ae7f6c037276efbd1db4d5b115d25c0a438d946aba3f3e57c0d831e8f7725"
     },
     {
       "path": "parts/part-38.csv",
-      "rows": 467,
-      "bytes": 1725846,
-      "sha256": "a42fe86d00330c3a211c04e4c110cdc2ca2b43d9b12864fc630e35f33fb90875"
+      "rows": 478,
+      "bytes": 1769289,
+      "sha256": "f8a2d71e4f50e1f09fdb80b4fa792b3a24267653c44f167a45aefed1d8b70bb6"
     },
     {
       "path": "parts/part-39.csv",
-      "rows": 469,
-      "bytes": 1713960,
-      "sha256": "1c17a43fff60d0bcd5aa1efacda5a77cb3ec70047ec1d39343c7c0742e1cb6b3"
+      "rows": 480,
+      "bytes": 1759456,
+      "sha256": "a21d973ad8b0c35051f6937fe5e398da29b07d6f755d50be09b8dd69e853fb09"
     },
     {
       "path": "parts/part-40.csv",
-      "rows": 510,
-      "bytes": 1820498,
-      "sha256": "9260f304f79963d6570827e76555f25b6d60102322364d2a0e8de5d988e1043b"
+      "rows": 516,
+      "bytes": 1843763,
+      "sha256": "7aea9b9c74de40c6f5cd0c98af2a84d1640bed20716f22b5d1228a7f3309cb82"
     },
     {
       "path": "parts/part-41.csv",
-      "rows": 506,
-      "bytes": 1881834,
-      "sha256": "60420bbf67a4049f7ccae9a790fce9655556b43dbc95208091b5b9d76670443b"
+      "rows": 513,
+      "bytes": 1905219,
+      "sha256": "0913c8847bb8c65b0e56dfc4b5e3a71bbdcf459de595f6109f54b233e1c56621"
     },
     {
       "path": "parts/part-42.csv",
-      "rows": 495,
-      "bytes": 1771499,
-      "sha256": "7d49cd53dd818fe10d21bcf836fe8c307c05a95df15a2bb59c3f22a44a968eb2"
+      "rows": 503,
+      "bytes": 1800747,
+      "sha256": "91e139be86e82ea8cf6b36d5f8fff571c9e4ecfe2fcf4e0387bcaddf3d18fbff"
     },
     {
       "path": "parts/part-43.csv",
-      "rows": 482,
-      "bytes": 1775341,
-      "sha256": "4ab91428cf262f9376e858ad57bb306443204c7a86ee410bd688e40467a8c729"
+      "rows": 484,
+      "bytes": 1783141,
+      "sha256": "d9ccd7bbc57107698cf38b17d6921e11088b24f71a853b281939de62be1a90c5"
     },
     {
       "path": "parts/part-44.csv",
-      "rows": 503,
-      "bytes": 1809674,
-      "sha256": "55e39409401542727674a8d84086b2a171515d241bce76027a9e0034ad83d8b1"
+      "rows": 511,
+      "bytes": 1841464,
+      "sha256": "7c518c3ff44f169bc4fa43bacc4386a64aa43545b2771c34c3c4f03951be2263"
     },
     {
       "path": "parts/part-45.csv",
-      "rows": 529,
-      "bytes": 1933696,
-      "sha256": "94796cc6c3f7d531d0272aede590d8012e3e551d5bd703edf5d87e227357d9b8"
+      "rows": 541,
+      "bytes": 1976641,
+      "sha256": "0fd0b6167f759a196987c8a06b659fb7a4eea015ae7b1141cfc386b5aa20a1b6"
     },
     {
       "path": "parts/part-46.csv",
-      "rows": 455,
-      "bytes": 1657772,
-      "sha256": "347a05c3e9b0d5bc628fbbb1c7e7ba1c11e597ffdc4cf58d02d166fb09996937"
+      "rows": 462,
+      "bytes": 1679486,
+      "sha256": "47c5603ba6397260ffff04a9dbd155402a32f45c04917baf6b84cbc87ed87a28"
     },
     {
       "path": "parts/part-47.csv",
-      "rows": 487,
-      "bytes": 1766036,
-      "sha256": "1ef166b8594ab85cb6fba865994ab305d7d0231180a708c733b30966fed7176b"
+      "rows": 491,
+      "bytes": 1780856,
+      "sha256": "f2ac58dbf7c9396d1a1f90772fa92520a4dd516679ee1b3d5c00078c45cc8b66"
     },
     {
       "path": "parts/part-48.csv",
-      "rows": 507,
-      "bytes": 1904409,
-      "sha256": "51aef24132f762e3f2c7b3efe2b58353b167ffa6dfd2c258646b881098606dc6"
+      "rows": 515,
+      "bytes": 1934578,
+      "sha256": "9cf2ec385e833ed460842ee9d3b28b49132c24e1fcc12ecf3e77cddb7ae67beb"
     },
     {
       "path": "parts/part-49.csv",
-      "rows": 534,
-      "bytes": 1975190,
-      "sha256": "c9612c9b8ba10e8d7d462d9cfc2845d55de9dae9829113378fe49bd07e912724"
+      "rows": 540,
+      "bytes": 1999158,
+      "sha256": "f00173771472f19d46fbf590aafd92b6d3657171afe53ea250b0cbc73cd6435d"
     },
     {
       "path": "parts/part-50.csv",
-      "rows": 520,
-      "bytes": 1931271,
-      "sha256": "2c918044c050e2343fb52409779d9b191222e1edf5d880d1be3ff7ae55e1ef38"
+      "rows": 528,
+      "bytes": 1965830,
+      "sha256": "183686d6568eeaad0e86f7ce177acd3bc69192d2c8d3f7305d35d8fa168ceee7"
     },
     {
       "path": "parts/part-51.csv",
-      "rows": 503,
-      "bytes": 1804195,
-      "sha256": "a16c916f39c9fc285cebe30546ac42c48cd38bc973ab0ce219eb38b4ee7864d9"
+      "rows": 509,
+      "bytes": 1827772,
+      "sha256": "d23ca928c122a7408665f87bd6e2467310b217edde5ebbf2658be3ac1026a6bc"
     },
     {
       "path": "parts/part-52.csv",
-      "rows": 498,
-      "bytes": 1793919,
-      "sha256": "b67c9317ce4ac3471d43c29c5673e218c351131a04978e09b7c14300e9a1e8f7"
+      "rows": 506,
+      "bytes": 1823310,
+      "sha256": "a3df1efeac27521dde3921e13264331cd87659e7de94a3b05a6c3e8e1db91bb6"
     },
     {
       "path": "parts/part-53.csv",
-      "rows": 530,
-      "bytes": 1998320,
-      "sha256": "3a218d7a713ede2a820798942c4b1e71faaa4fdd196f37767b6cfbfc4c76dd8c"
+      "rows": 537,
+      "bytes": 2017958,
+      "sha256": "eec24c97b71b7b9e2ac1634c38fc3efb3cd242c76f822bdc2e871bc82e964caa"
     },
     {
       "path": "parts/part-54.csv",
-      "rows": 461,
-      "bytes": 1707741,
-      "sha256": "2aa41aea4f5ab0b7babc54dc985c8c5339335bd52f7e2df6628eed970a7c4d2b"
+      "rows": 469,
+      "bytes": 1733682,
+      "sha256": "086ccb1963749ab212d9ee5952ef27b75f64bf2b8dad9e93267fbaf8e98a0c99"
     },
     {
       "path": "parts/part-55.csv",
-      "rows": 464,
-      "bytes": 1704317,
-      "sha256": "c4137cfe5a76fac538ab661cd014bebea8066199acf6972cd0d7634069feeb95"
+      "rows": 470,
+      "bytes": 1727752,
+      "sha256": "55e46339fa0a7a66343b9526f9c04c2e778a54bafaad1c35b4d90533f2662804"
     },
     {
       "path": "parts/part-56.csv",
-      "rows": 475,
-      "bytes": 1745501,
-      "sha256": "b1dc851d722b74f6ae6b2c8f431b8c091ab41988d37766230fd4a4b1f2f1e1b3"
+      "rows": 486,
+      "bytes": 1787983,
+      "sha256": "388b061a18aa173926c50b72ba00a60395f4049aa82e55fa95fc9ac3ad33a205"
     },
     {
       "path": "parts/part-57.csv",
-      "rows": 483,
-      "bytes": 1785084,
-      "sha256": "0c277f0de367e4468cba4ff350be2411136f7f350f2d5e8c755f87d7fd1bf961"
+      "rows": 490,
+      "bytes": 1809263,
+      "sha256": "d3c4c6d9d8040ce97a361b8bbdfb4b55470fc6c5b59e26087700abf8ca3c74be"
     },
     {
       "path": "parts/part-58.csv",
-      "rows": 484,
-      "bytes": 1766592,
-      "sha256": "bcf6482e0c125471cf145b7fa421eb1d65419c07b4a5e18e753a4ea62357893d"
+      "rows": 488,
+      "bytes": 1780796,
+      "sha256": "57d46e98c7129c03d43daf7518e91009940bf9ac83cf97559eed52ddc484e624"
     },
     {
       "path": "parts/part-59.csv",
-      "rows": 473,
-      "bytes": 1749077,
-      "sha256": "ef3a94f249fbfd6448fceebccace1a12721ef324fb9b11da6b5e1743e89088c5"
+      "rows": 478,
+      "bytes": 1765099,
+      "sha256": "31899840675f503a5e8d58fc2fbf8d60e469a8cf5169b905d6c096e059becce0"
     },
     {
       "path": "parts/part-60.csv",
-      "rows": 478,
-      "bytes": 1779032,
-      "sha256": "ecfce8887a4b773fe623ad8ac8016e374c8e1c6c730eed8107c6e71be7dd83a2"
+      "rows": 487,
+      "bytes": 1808546,
+      "sha256": "9aa3a944d5b619f56742c0c6936a8b7855553b4f75e3f73657c2323a006cab68"
     },
     {
       "path": "parts/part-61.csv",
-      "rows": 479,
-      "bytes": 1767793,
-      "sha256": "b581a48a7c86d7a0860740f9b2662e9b487e0c87cc5b86dac681aa9d604c3861"
+      "rows": 485,
+      "bytes": 1788133,
+      "sha256": "e346695abe47b0f9096ff3b3260e343b3b0869d8fc4bfc24d32bbaa891bf8ffa"
     },
     {
       "path": "parts/part-62.csv",
-      "rows": 478,
-      "bytes": 1755587,
-      "sha256": "6247de10c5d1def05b6c03d098124655cf1e15d16a1040c842f1a6231f4daba6"
+      "rows": 486,
+      "bytes": 1781799,
+      "sha256": "68c3edc63a664bb7179f4f5922689b6ffc64c98b6ad474514dbafb1ff060899c"
     },
     {
       "path": "parts/part-63.csv",
-      "rows": 520,
-      "bytes": 1901681,
-      "sha256": "4b5b7fec0cbb0f38153bbc74bb0370d3b51efa0c55b6e79d2e3f0f7f915bd442"
+      "rows": 526,
+      "bytes": 1925721,
+      "sha256": "1bd97cffbb649a0672cbcaca9824eb64e8a08898b779601b769b60922a3051c6"
     }
   ],
   "partition": "sha256-json-source-id-first64-mod-64-v1"

@@ -1,0 +1,692 @@
+{
+  "run_id": "msk_gruzchik_perm_shift_20261114_new18",
+  "dataset_id": "msk_gruzchik_perm_shift_20261114_new18",
+  "status": "complete",
+  "schema": {
+    "columns": [
+      "id",
+      "city",
+      "profession",
+      "segments",
+      "title",
+      "salary_raw",
+      "source_url",
+      "observed_at",
+      "description",
+      "location_observed",
+      "employer_name_observed",
+      "date_raw",
+      "views_total",
+      "views_today",
+      "listing_rank",
+      "listing_promoted",
+      "full_parameters_read",
+      "analysis_status",
+      "export_eligibility",
+      "read_status_parameters",
+      "read_status_description",
+      "read_status_location",
+      "read_limitations",
+      "enrichment_status",
+      "enriched_fields",
+      "enrichment_version",
+      "military",
+      "military_keywords",
+      "military_rule_version",
+      "city__source",
+      "city__evidence",
+      "city_anomaly",
+      "График",
+      "Занятость",
+      "Способ оформления",
+      "Количество рабочих часов в день",
+      "Частота выплат",
+      "Сфера деятельности компании",
+      "Смены",
+      "Тип предприятия",
+      "Опыт работы",
+      "В том числе для кандидатов",
+      "Медкнижка",
+      "Что получают работники",
+      "Разряд",
+      "Тип работ"
+    ],
+    "unknown_policy": "empty_not_zero"
+  },
+  "collection": {
+    "run_id": "msk_gruzchik_perm_shift_20261114_new18",
+    "geography": "Москва",
+    "profession": "Грузчик",
+    "segments": "",
+    "filter_evidence": "Fresh snapshot on the exact loaded URL confirmed Moscow title Грузчик: сменный график в Москве, profession Грузчик checked, schedule Сменный checked. Employment Постоянная is a card field and will be checked on each detail card.",
+    "listing_url": "https://www.avito.ru/moskva/vakansii/smennyy/gruzcik-ASgBAgICAkSQC4yeAdTMEfrqhgM?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6IjkiO3M6MTY6IjRYZDAxQ2VmTGp6RzFYa3AiO30LJPtvJgAAAA",
+    "listing_request_url": "https://www.avito.ru/moskva/vakansii/smennyy/gruzcik-ASgBAgICAkSQC4yeAdTMEfrqhgM?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6IjkiO3M6MTY6IjRYZDAxQ2VmTGp6RzFYa3AiO30LJPtvJgAAAA",
+    "selected_controls": [
+      {
+        "label": "Грузчик",
+        "marker": "params[144170]/checkbox/3201725",
+        "value": null
+      },
+      {
+        "label": "Грузчик",
+        "marker": "params[144170]/checkbox/toggle",
+        "value": "3201725"
+      },
+      {
+        "label": "Любой",
+        "marker": "params[196929]/all",
+        "value": null
+      },
+      {
+        "label": "Любой",
+        "marker": "params[196929]/toggle",
+        "value": "all"
+      },
+      {
+        "label": "Сменный",
+        "marker": "params[712]/checkbox/10118",
+        "value": null
+      },
+      {
+        "label": "Сменный",
+        "marker": "params[712]/checkbox/toggle",
+        "value": "10118"
+      },
+      {
+        "label": "Неважно",
+        "marker": "params[172815]/all",
+        "value": null
+      },
+      {
+        "label": "Неважно",
+        "marker": "params[172815]/toggle",
+        "value": "all"
+      },
+      {
+        "label": "Неважно",
+        "marker": null,
+        "value": "all"
+      },
+      {
+        "label": "Все",
+        "marker": null,
+        "value": "all"
+      }
+    ],
+    "listing_sha256": "a1330ff8d40679be5a3188afc4a088a4519eff8cc99fc7216c2c9ce44d1a4663",
+    "profession_scope": null,
+    "profession_source": "observed_controls",
+    "listing_pages": [
+      {
+        "file": "listing_pages/0001.json",
+        "sha256": "a1330ff8d40679be5a3188afc4a088a4519eff8cc99fc7216c2c9ce44d1a4663",
+        "source_url": "https://www.avito.ru/moskva/vakansii/smennyy/gruzcik-ASgBAgICAkSQC4yeAdTMEfrqhgM?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6IjkiO3M6MTY6IjRYZDAxQ2VmTGp6RzFYa3AiO30LJPtvJgAAAA"
+      }
+    ],
+    "selection_mode": "first_N_unique_on_frozen_listing",
+    "limit": 44,
+    "requested_all_pages": false,
+    "saved_selection_authorization": null,
+    "requested_limit": 50,
+    "available_unique": 44,
+    "listing_end_reason": null,
+    "available_listing_exhausted": false,
+    "continuation": null,
+    "branch_only": false,
+    "max_pages": null,
+    "candidate_limit": null,
+    "selection_criterion": "remote",
+    "comparison_sha256": null,
+    "created_at": "2026-11-14T16:20:41.717149+00:00",
+    "instruction_version": "1.8.3",
+    "extractor_sha256": "0c52ba2f821d861083c99ec6bc328456df96b3d179b7fffd47f87aadfda84bdb",
+    "instruction_sha256": "66338fbbcc563ec92cb915263b76db4a686f73dd1707889d76e864bd660d5f66",
+    "code_git_commit": "3d9b785381d7e2a8cdc35b10b8936b2ee2b9c6b0",
+    "setup_seconds": 1.8921730829997614,
+    "live_route_verified": false,
+    "execution_model": "gpt-6.1-terra",
+    "automation_sha256": {
+      "Scraper/skills/collect-avito/references/top-professions.json": "e3e72638b17b48f825ec6f2fefb963662494f679ae4b0cef1bebedba889610dd",
+      "utils/title_flags.py": "9c9456cb3fb0df5791630049c9c85987381091dbb9ba18bc3fb3314b8cccbeb6",
+      "Scraper/extract.js": "0c52ba2f821d861083c99ec6bc328456df96b3d179b7fffd47f87aadfda84bdb",
+      "Scraper/skills/collect-avito/SKILL.md": "66338fbbcc563ec92cb915263b76db4a686f73dd1707889d76e864bd660d5f66",
+      "Scraper/skills/collect-avito/scripts/run.py": "c3535b11f18b6d72c2f8e7ffca0aa814f054048806bfaf18b2a8401980131f94",
+      "Scraper/skills/collect-avito/scripts/employer_selection.py": "52cbd4ceb6ed260b861dde8bb15b9d426d5f18237c0c4146007c65a79725f1f9",
+      "Scraper/skills/collect-avito/scripts/sweep_mode.py": "718a956a316df71c47ee3a4c5d3670fa011a5b16e9948393d68216702b140a56",
+      "Scraper/skills/collect-avito/scripts/browser_batch.js": "8090a7905357a3ee3387009d4b9778f3150556506d319b7f62783bb3594d5733",
+      "Scraper/skills/collect-avito/scripts/check_capture.py": "aa746849317f9768af5aae08b394b9379539f6e268c1fc69e4ed13bd06a4657f",
+      "Scraper/skills/collect-avito/scripts/failure_log.py": "7a2fa9f997ae528969f9a864514f30d76427ae06aafe108344df42ead3fe2291",
+      "Scraper/skills/collect-avito/scripts/preflight.py": "492a0d898990aee198f26bf6577d0876360dcc6ec69e274835cd77cdaa768974"
+    },
+    "uncommitted_automation_files": [],
+    "deduplication": {
+      "source_run_id": "msk_gruzchik_perm_shift_20261114",
+      "source_plan_sha256": "05d1e6567049882643fabe755503510c857abed7e642bfa705c2097966524567",
+      "source_queue_sha256": "6a2a5ef90b81eed49c7a39cff3ced2dc68599b59d74bbb002c4870fd749f6b0e",
+      "against": [],
+      "source_count": 50,
+      "duplicate_excluded": 6,
+      "novel_count": 44,
+      "duplicate_ids": [
+        "8409908898",
+        "8375988851",
+        "8378733722",
+        "8268926785",
+        "2537094336",
+        "4505671768"
+      ],
+      "dataset": {
+        "csv_sha256": "208e4e2176f9273919c1ae0fafb02f89190dc71513198aca054e68a6a41b3e4d",
+        "manifest_sha256": "53c79dc46a04afcb882b22c0ce0302543d0de39b5fdd9c5c731c180de18f2862",
+        "keys_sha256": "ad50063e28d9b23527f96d2adedfdbb6c67fda3bc7833da4d0b7a63c65a85966",
+        "rows": 32057
+      },
+      "selection_limit": 50,
+      "eligible_count": 44,
+      "deferred_ids": []
+    },
+    "city_anomaly_policy": "blank"
+  },
+  "coverage": {
+    "employer_selection": null,
+    "planned": 44,
+    "accepted": 30,
+    "unavailable": [],
+    "unresolved_observations": [],
+    "user_skipped_observations": [],
+    "user_skipped_count": 0,
+    "user_skip_policy": null,
+    "user_detail_skip_policy": null,
+    "deduplication": {
+      "source_run_id": "msk_gruzchik_perm_shift_20261114",
+      "source_plan_sha256": "05d1e6567049882643fabe755503510c857abed7e642bfa705c2097966524567",
+      "source_queue_sha256": "6a2a5ef90b81eed49c7a39cff3ced2dc68599b59d74bbb002c4870fd749f6b0e",
+      "against": [],
+      "source_count": 50,
+      "duplicate_excluded": 6,
+      "novel_count": 44,
+      "duplicate_ids": [
+        "8409908898",
+        "8375988851",
+        "8378733722",
+        "8268926785",
+        "2537094336",
+        "4505671768"
+      ],
+      "dataset": {
+        "csv_sha256": "208e4e2176f9273919c1ae0fafb02f89190dc71513198aca054e68a6a41b3e4d",
+        "manifest_sha256": "53c79dc46a04afcb882b22c0ce0302543d0de39b5fdd9c5c731c180de18f2862",
+        "keys_sha256": "ad50063e28d9b23527f96d2adedfdbb6c67fda3bc7833da4d0b7a63c65a85966",
+        "rows": 32057
+      },
+      "selection_limit": 50,
+      "eligible_count": 44,
+      "deferred_ids": []
+    },
+    "sweep": null,
+    "unique_ids": [
+      "8327968308",
+      "7848239978",
+      "8015162417",
+      "8360971488",
+      "4160748488",
+      "8433243370",
+      "8380393620",
+      "8036339080",
+      "8469796242",
+      "8503382684",
+      "8326941830",
+      "7700148094",
+      "8390079830",
+      "8522982675",
+      "8607133013",
+      "8430757603",
+      "8247216629",
+      "8416242237",
+      "8430779859",
+      "8283652889",
+      "8546138508",
+      "8322698487",
+      "8396756382",
+      "8505077637",
+      "8502295794",
+      "3103320818",
+      "8522834583",
+      "8467025330",
+      "8525519211",
+      "8230305473"
+    ],
+    "errors": [],
+    "partial": {
+      "method": "ordinary_prefix_v1",
+      "plan_sha256": "e6fbf57dcff42578f2136e8ee072e7b8845129c4bda27ff0b1eab4a1b422b865",
+      "queue_sha256": "1d4caf7ffdc5106c8388d7427d293a1f696221622518308e78c11acd150cf475",
+      "accepted_ids": [
+        "8327968308",
+        "7848239978",
+        "8015162417",
+        "8360971488",
+        "4160748488",
+        "8433243370",
+        "8380393620",
+        "8036339080",
+        "8469796242",
+        "8503382684",
+        "8326941830",
+        "7700148094",
+        "8390079830",
+        "8522982675",
+        "8607133013",
+        "8430757603",
+        "8247216629",
+        "8416242237",
+        "8430779859",
+        "8283652889",
+        "8546138508",
+        "8322698487",
+        "8396756382",
+        "8505077637",
+        "8502295794",
+        "3103320818",
+        "8522834583",
+        "8467025330",
+        "8525519211",
+        "8230305473"
+      ],
+      "skipped_ids": [],
+      "unresolved_observation_ids": [],
+      "user_skipped_ids": [],
+      "unresolved_ids": [
+        "8502680117",
+        "8130161187",
+        "8414227791",
+        "8525769004",
+        "8398203220",
+        "3963862276",
+        "8498911290",
+        "8514148950",
+        "7998992452",
+        "8469809124",
+        "8455198075",
+        "8515549758",
+        "8446642538",
+        "8522062448"
+      ],
+      "stop_state": "CAPTURED",
+      "stop_reason": null,
+      "next_id": "8502680117",
+      "raw_sha256": {
+        "8327968308": "9b1ee8fc7dc723d24eb71dcb445216c4a1a8f9a3093f7afe62158aa9f0c8f413",
+        "7848239978": "33ad51818421b564e8808b110d6b8aa07bcee9aa2e8bc75f3d2c74ecbc6b5300",
+        "8015162417": "f8b5cac277c9cb2a72805c4395933567c6da90c110dd3649047389f1a0c81c88",
+        "8360971488": "d1039a3da24d51e86abdd52113d435e03edca0c5f597fda6d8c3cb7f13beb533",
+        "4160748488": "514a0f45566ff08aaf62101baa894f75e49f726bb7cca4a8381b8688a71285de",
+        "8433243370": "e10809003382b549826d1deb453d1effead9b37834814ba7dad5f76a8f540507",
+        "8380393620": "ec4e4e0edd3aeebd940dec5b8df7ed936149b06aaa90d5a0a853a48916217669",
+        "8036339080": "4c44591bae8f9f37ba931c04216c26dd6052b79e518105e55a9ee68f3d79698c",
+        "8469796242": "b59caa8afaa50652467802f67691276d7265a0ce425808f136db2085ed5c25d5",
+        "8503382684": "a7482d6f9170f4fe0a81a38a1fffe2076fa9de084c20ed34d377494f1c2e9d33",
+        "8326941830": "5c119d81bc34dac3462eb705e37d9b20fcf4ff55defe02aae4e3093f7ee93952",
+        "7700148094": "16774bf4baceb1b039c2f0c06b83ddd7a02bbfbd2928825f7188e8e329c90e06",
+        "8390079830": "4d9621feb14ba188dcb64961587b17ba87ef4e60d7a903b51d3584119dc457a3",
+        "8522982675": "2c49385a6948d5ede2916e28add889c2dbce2f691b20b2b73fe09e04cf9c2588",
+        "8607133013": "873f88b588ddba49df82b3aec0f10bdd9576db71d88821696502968418f26ae2",
+        "8430757603": "0a18514c019998fc99819600e7799f9fcba8ad68d262347bfe8cbde22642df63",
+        "8247216629": "6725806f8aae96b5c8cd88d3a78b105f35374bbdd251232e27b025bed9ef6a55",
+        "8416242237": "52732b437645a4c0ff5a932b1a179d4568cc0f5f5d643180e9ad1c9b7fcdac2d",
+        "8430779859": "4eb1b9189aa2aa9254cdc87345b3515918d67fb12f36e13eb6fa14feb252bc6f",
+        "8283652889": "f2fa2562fb4c96aba624dca6d6696525036a91d47a5cefe6702aa496008b9151",
+        "8546138508": "46595385d9c7318f2547ccbd334efbb12a3e06472e5603514dbb7e00518689e9",
+        "8322698487": "54aa67f6801d8e0e8df4d8d788f1f9d1626a3beeb339c53cc0d02f4f7da885d5",
+        "8396756382": "ca6a49b0fdad393a58d57cecbd2fa3153b21e747b70ac2b1a5f78096f119b9b4",
+        "8505077637": "6dd1aa27e647f28f5424b39834b65fa3582f38c06df62377d6c5b176171476d8",
+        "8502295794": "06fb91154f04ff807deaf58d002854dc7dbd848cb050f1aabec160410e066c46",
+        "3103320818": "83f6cb2657948a573086459de05e51f3bb0a0ca201ac24dee9ea7da0bcb5eade",
+        "8522834583": "f0f4eb9b46e746eb8d6ddac30db14042def57685f41fe52a2d5a70b02587008d",
+        "8467025330": "6d5498d86f207de92c874d17119f9e8e1b2c7b10577b5647dc72e78a2a026425",
+        "8525519211": "888c6db9b71430d005d9073a9139f2ffa2b52a9ee277a7b99687bf90f7eba1bc",
+        "8230305473": "2be883b132962e3f19751d4187e3cbff0a33f6f613a082c37bafcf17fdc4b151"
+      },
+      "authorization": "Сохраняй и публикуй все корректно прочитанные новые карточки, даже если они не подходят целевым условиям; соответствующие условиям считай отдельно."
+    },
+    "limitations": [
+      "Visible rendered parameters only; enrichment not run; placement on site; live route unverified"
+    ]
+  },
+  "timing": {
+    "setup_seconds": 1.8921730829997614,
+    "capture_seconds": 50.40995187499993,
+    "review_export_seconds": 5.69460616699962,
+    "publication_seconds": null
+  },
+  "review_model": "gpt-6.1-terra",
+  "automation_changes": [],
+  "profession_correction": null,
+  "post_capture_automation_sha256": {},
+  "files": {
+    "Data/avito_runs/msk_gruzchik_perm_shift_20261114_new18/dedup-provenance/dataset-keys.json": {
+      "bytes": 1250129,
+      "sha256": "ad50063e28d9b23527f96d2adedfdbb6c67fda3bc7833da4d0b7a63c65a85966"
+    },
+    "Data/avito_runs/msk_gruzchik_perm_shift_20261114_new18/dedup-provenance/dataset-manifest.json": {
+      "bytes": 3351298,
+      "sha256": "53c79dc46a04afcb882b22c0ce0302543d0de39b5fdd9c5c731c180de18f2862"
+    },
+    "Data/avito_runs/msk_gruzchik_perm_shift_20261114_new18/dedup-provenance/rejected-freezes/superseded-freeze/data/listing.json": {
+      "bytes": 55548,
+      "sha256": "da51a52fe1fed74938b02db060525ffb92774b7d6d08b3796b75dac8da92efa2"
+    },
+    "Data/avito_runs/msk_gruzchik_perm_shift_20261114_new18/dedup-provenance/rejected-freezes/superseded-freeze/data/listing_pages/0001.json": {
+      "bytes": 55548,
+      "sha256": "da51a52fe1fed74938b02db060525ffb92774b7d6d08b3796b75dac8da92efa2"
+    },
+    "Data/avito_runs/msk_gruzchik_perm_shift_20261114_new18/dedup-provenance/rejected-freezes/superseded-freeze/data/queue.json": {
+      "bytes": 24099,
+      "sha256": "76c4875794f9b4dc1113b4615fe63a3466cff9125be62869df42a8787a3f1144"
+    },
+    "Data/avito_runs/msk_gruzchik_perm_shift_20261114_new18/dedup-provenance/rejected-freezes/superseded-freeze/hashes.json": {
+      "bytes": 453,
+      "sha256": "b63f4924725bff3b1a510717aa1350c59fdcde51a29f42e57600cbe4659eb5f5"
+    },
+    "Data/avito_runs/msk_gruzchik_perm_shift_20261114_new18/dedup-provenance/rejected-freezes/superseded-freeze/plan.json": {
+      "bytes": 6082,
+      "sha256": "af7cd666d4c80e9115923575f370c12e996f20f11b87e96513922f1299f8423c"
+    },
+    "Data/avito_runs/msk_gruzchik_perm_shift_20261114_new18/dedup-provenance/rejected-freezes/superseded-freeze/reason.json": {
+      "bytes": 378,
+      "sha256": "c5e4012ef22c16bf94031ca4dbf9eb5a52788a310c3d3fe615ac7d63218df125"
+    },
+    "Data/avito_runs/msk_gruzchik_perm_shift_20261114_new18/dedup-provenance/source-plan.json": {
+      "bytes": 4690,
+      "sha256": "05d1e6567049882643fabe755503510c857abed7e642bfa705c2097966524567"
+    },
+    "Data/avito_runs/msk_gruzchik_perm_shift_20261114_new18/dedup-provenance/source-queue.json": {
+      "bytes": 24004,
+      "sha256": "6a2a5ef90b81eed49c7a39cff3ced2dc68599b59d74bbb002c4870fd749f6b0e"
+    },
+    "Data/avito_runs/msk_gruzchik_perm_shift_20261114_new18/dedup_selection.json": {
+      "bytes": 836,
+      "sha256": "3787ad99d30ed0c71973ccea9515a3d789cc3925f81429fea608807b0e4e6c22"
+    },
+    "Data/avito_runs/msk_gruzchik_perm_shift_20261114_new18/exports/partial_selection.json": {
+      "bytes": 4109,
+      "sha256": "4e4d0dc3bc059d01da94d0e8aa7d932339c19f0f93ce0da8c6b6677dd3e67d7f"
+    },
+    "Data/avito_runs/msk_gruzchik_perm_shift_20261114_new18/exports/vacancies.json": {
+      "bytes": 118396,
+      "sha256": "72e781d99dd837bdf13dbf167f7954f604cf70c7debe881f57e5b06f4c76809c"
+    },
+    "Data/avito_runs/msk_gruzchik_perm_shift_20261114_new18/exports/vacancies_flat.csv": {
+      "bytes": 82190,
+      "sha256": "f4bfd16579c7221f373339ad83c591a66463e435236832fb799d03436a56bdc3"
+    },
+    "Data/avito_runs/msk_gruzchik_perm_shift_20261114_new18/exports/validation.json": {
+      "bytes": 220,
+      "sha256": "a544177f0aea458d0d92139f51fcc032ef41178e3138f59c5dbc6d1eab2c6466"
+    },
+    "Data/avito_runs/msk_gruzchik_perm_shift_20261114_new18/listing.json": {
+      "bytes": 55525,
+      "sha256": "a1330ff8d40679be5a3188afc4a088a4519eff8cc99fc7216c2c9ce44d1a4663"
+    },
+    "Data/avito_runs/msk_gruzchik_perm_shift_20261114_new18/listing_pages/0001.json": {
+      "bytes": 55525,
+      "sha256": "a1330ff8d40679be5a3188afc4a088a4519eff8cc99fc7216c2c9ce44d1a4663"
+    },
+    "Data/avito_runs/msk_gruzchik_perm_shift_20261114_new18/queue.json": {
+      "bytes": 21117,
+      "sha256": "1d4caf7ffdc5106c8388d7427d293a1f696221622518308e78c11acd150cf475"
+    },
+    "Data/avito_runs/msk_gruzchik_perm_shift_20261114_new18/raw/3103320818.json": {
+      "bytes": 6344,
+      "sha256": "83f6cb2657948a573086459de05e51f3bb0a0ca201ac24dee9ea7da0bcb5eade"
+    },
+    "Data/avito_runs/msk_gruzchik_perm_shift_20261114_new18/raw/4160748488.json": {
+      "bytes": 13513,
+      "sha256": "514a0f45566ff08aaf62101baa894f75e49f726bb7cca4a8381b8688a71285de"
+    },
+    "Data/avito_runs/msk_gruzchik_perm_shift_20261114_new18/raw/7700148094.json": {
+      "bytes": 7491,
+      "sha256": "16774bf4baceb1b039c2f0c06b83ddd7a02bbfbd2928825f7188e8e329c90e06"
+    },
+    "Data/avito_runs/msk_gruzchik_perm_shift_20261114_new18/raw/7848239978.json": {
+      "bytes": 13707,
+      "sha256": "33ad51818421b564e8808b110d6b8aa07bcee9aa2e8bc75f3d2c74ecbc6b5300"
+    },
+    "Data/avito_runs/msk_gruzchik_perm_shift_20261114_new18/raw/8015162417.json": {
+      "bytes": 13839,
+      "sha256": "f8b5cac277c9cb2a72805c4395933567c6da90c110dd3649047389f1a0c81c88"
+    },
+    "Data/avito_runs/msk_gruzchik_perm_shift_20261114_new18/raw/8036339080.json": {
+      "bytes": 10435,
+      "sha256": "4c44591bae8f9f37ba931c04216c26dd6052b79e518105e55a9ee68f3d79698c"
+    },
+    "Data/avito_runs/msk_gruzchik_perm_shift_20261114_new18/raw/8230305473.json": {
+      "bytes": 11298,
+      "sha256": "2be883b132962e3f19751d4187e3cbff0a33f6f613a082c37bafcf17fdc4b151"
+    },
+    "Data/avito_runs/msk_gruzchik_perm_shift_20261114_new18/raw/8247216629.json": {
+      "bytes": 13824,
+      "sha256": "6725806f8aae96b5c8cd88d3a78b105f35374bbdd251232e27b025bed9ef6a55"
+    },
+    "Data/avito_runs/msk_gruzchik_perm_shift_20261114_new18/raw/8283652889.json": {
+      "bytes": 13950,
+      "sha256": "f2fa2562fb4c96aba624dca6d6696525036a91d47a5cefe6702aa496008b9151"
+    },
+    "Data/avito_runs/msk_gruzchik_perm_shift_20261114_new18/raw/8322698487.json": {
+      "bytes": 8507,
+      "sha256": "54aa67f6801d8e0e8df4d8d788f1f9d1626a3beeb339c53cc0d02f4f7da885d5"
+    },
+    "Data/avito_runs/msk_gruzchik_perm_shift_20261114_new18/raw/8326941830.json": {
+      "bytes": 10242,
+      "sha256": "5c119d81bc34dac3462eb705e37d9b20fcf4ff55defe02aae4e3093f7ee93952"
+    },
+    "Data/avito_runs/msk_gruzchik_perm_shift_20261114_new18/raw/8327968308.json": {
+      "bytes": 10420,
+      "sha256": "9b1ee8fc7dc723d24eb71dcb445216c4a1a8f9a3093f7afe62158aa9f0c8f413"
+    },
+    "Data/avito_runs/msk_gruzchik_perm_shift_20261114_new18/raw/8360971488.json": {
+      "bytes": 10356,
+      "sha256": "d1039a3da24d51e86abdd52113d435e03edca0c5f597fda6d8c3cb7f13beb533"
+    },
+    "Data/avito_runs/msk_gruzchik_perm_shift_20261114_new18/raw/8380393620.json": {
+      "bytes": 10528,
+      "sha256": "ec4e4e0edd3aeebd940dec5b8df7ed936149b06aaa90d5a0a853a48916217669"
+    },
+    "Data/avito_runs/msk_gruzchik_perm_shift_20261114_new18/raw/8390079830.json": {
+      "bytes": 12027,
+      "sha256": "4d9621feb14ba188dcb64961587b17ba87ef4e60d7a903b51d3584119dc457a3"
+    },
+    "Data/avito_runs/msk_gruzchik_perm_shift_20261114_new18/raw/8396756382.json": {
+      "bytes": 12286,
+      "sha256": "ca6a49b0fdad393a58d57cecbd2fa3153b21e747b70ac2b1a5f78096f119b9b4"
+    },
+    "Data/avito_runs/msk_gruzchik_perm_shift_20261114_new18/raw/8416242237.json": {
+      "bytes": 11682,
+      "sha256": "52732b437645a4c0ff5a932b1a179d4568cc0f5f5d643180e9ad1c9b7fcdac2d"
+    },
+    "Data/avito_runs/msk_gruzchik_perm_shift_20261114_new18/raw/8430757603.json": {
+      "bytes": 11534,
+      "sha256": "0a18514c019998fc99819600e7799f9fcba8ad68d262347bfe8cbde22642df63"
+    },
+    "Data/avito_runs/msk_gruzchik_perm_shift_20261114_new18/raw/8430779859.json": {
+      "bytes": 8730,
+      "sha256": "4eb1b9189aa2aa9254cdc87345b3515918d67fb12f36e13eb6fa14feb252bc6f"
+    },
+    "Data/avito_runs/msk_gruzchik_perm_shift_20261114_new18/raw/8433243370.json": {
+      "bytes": 11843,
+      "sha256": "e10809003382b549826d1deb453d1effead9b37834814ba7dad5f76a8f540507"
+    },
+    "Data/avito_runs/msk_gruzchik_perm_shift_20261114_new18/raw/8467025330.json": {
+      "bytes": 7410,
+      "sha256": "6d5498d86f207de92c874d17119f9e8e1b2c7b10577b5647dc72e78a2a026425"
+    },
+    "Data/avito_runs/msk_gruzchik_perm_shift_20261114_new18/raw/8469796242.json": {
+      "bytes": 10075,
+      "sha256": "b59caa8afaa50652467802f67691276d7265a0ce425808f136db2085ed5c25d5"
+    },
+    "Data/avito_runs/msk_gruzchik_perm_shift_20261114_new18/raw/8502295794.json": {
+      "bytes": 11682,
+      "sha256": "06fb91154f04ff807deaf58d002854dc7dbd848cb050f1aabec160410e066c46"
+    },
+    "Data/avito_runs/msk_gruzchik_perm_shift_20261114_new18/raw/8503382684.json": {
+      "bytes": 11096,
+      "sha256": "a7482d6f9170f4fe0a81a38a1fffe2076fa9de084c20ed34d377494f1c2e9d33"
+    },
+    "Data/avito_runs/msk_gruzchik_perm_shift_20261114_new18/raw/8505077637.json": {
+      "bytes": 8541,
+      "sha256": "6dd1aa27e647f28f5424b39834b65fa3582f38c06df62377d6c5b176171476d8"
+    },
+    "Data/avito_runs/msk_gruzchik_perm_shift_20261114_new18/raw/8522834583.json": {
+      "bytes": 12485,
+      "sha256": "f0f4eb9b46e746eb8d6ddac30db14042def57685f41fe52a2d5a70b02587008d"
+    },
+    "Data/avito_runs/msk_gruzchik_perm_shift_20261114_new18/raw/8522982675.json": {
+      "bytes": 12237,
+      "sha256": "2c49385a6948d5ede2916e28add889c2dbce2f691b20b2b73fe09e04cf9c2588"
+    },
+    "Data/avito_runs/msk_gruzchik_perm_shift_20261114_new18/raw/8525519211.json": {
+      "bytes": 10596,
+      "sha256": "888c6db9b71430d005d9073a9139f2ffa2b52a9ee277a7b99687bf90f7eba1bc"
+    },
+    "Data/avito_runs/msk_gruzchik_perm_shift_20261114_new18/raw/8546138508.json": {
+      "bytes": 10906,
+      "sha256": "46595385d9c7318f2547ccbd334efbb12a3e06472e5603514dbb7e00518689e9"
+    },
+    "Data/avito_runs/msk_gruzchik_perm_shift_20261114_new18/raw/8607133013.json": {
+      "bytes": 10438,
+      "sha256": "873f88b588ddba49df82b3aec0f10bdd9576db71d88821696502968418f26ae2"
+    },
+    "Data/avito_runs/msk_gruzchik_perm_shift_20261114_new18/reviewed/3103320818.json": {
+      "bytes": 765,
+      "sha256": "e8dd32a65f96922de4f8f433df760e7ba5a34ceaa1eb988b3e553954c7634dd2"
+    },
+    "Data/avito_runs/msk_gruzchik_perm_shift_20261114_new18/reviewed/4160748488.json": {
+      "bytes": 770,
+      "sha256": "b243336a8044921cc6c169c5592aab1dea6f5b0415ea8bf89ca9395c07b45e21"
+    },
+    "Data/avito_runs/msk_gruzchik_perm_shift_20261114_new18/reviewed/7700148094.json": {
+      "bytes": 778,
+      "sha256": "be1b2cfd023b6dbb53bed1feaa4fc9a795059ad8cbd770392b7e5264cd4bbf2b"
+    },
+    "Data/avito_runs/msk_gruzchik_perm_shift_20261114_new18/reviewed/7848239978.json": {
+      "bytes": 784,
+      "sha256": "6e47ff0f0087b029034c70275a0e6b30c9ceb2b17e1dd04e1fd653eb5aa6de21"
+    },
+    "Data/avito_runs/msk_gruzchik_perm_shift_20261114_new18/reviewed/8015162417.json": {
+      "bytes": 832,
+      "sha256": "c323b7d5c9176795e5007e2385783f87329e8e1aac48289cf3003670d49eca1c"
+    },
+    "Data/avito_runs/msk_gruzchik_perm_shift_20261114_new18/reviewed/8036339080.json": {
+      "bytes": 816,
+      "sha256": "aed1d4df73efc4a28457d98a88ba6916086ea47b36b545f7fb741e5743e65862"
+    },
+    "Data/avito_runs/msk_gruzchik_perm_shift_20261114_new18/reviewed/8230305473.json": {
+      "bytes": 880,
+      "sha256": "e13f988ada0070cb3f1f8200360f30219e2e469ab86a80a9f83f6a600702f67d"
+    },
+    "Data/avito_runs/msk_gruzchik_perm_shift_20261114_new18/reviewed/8247216629.json": {
+      "bytes": 797,
+      "sha256": "34e7e3a8018ae83230db1568b4a6fdd65a70ce7171072d72e98f3bf62e3c387b"
+    },
+    "Data/avito_runs/msk_gruzchik_perm_shift_20261114_new18/reviewed/8283652889.json": {
+      "bytes": 937,
+      "sha256": "1bac049b335d8fbbb24fce62f6da5c5913f91e4f0f92dfccc374ef130d5628da"
+    },
+    "Data/avito_runs/msk_gruzchik_perm_shift_20261114_new18/reviewed/8322698487.json": {
+      "bytes": 818,
+      "sha256": "12e54f3500a65e84cf3480cfc958f3b70c9bd585a6c3b680140f10013a25177e"
+    },
+    "Data/avito_runs/msk_gruzchik_perm_shift_20261114_new18/reviewed/8326941830.json": {
+      "bytes": 796,
+      "sha256": "cc012af300f3c85e7be6cff2e2b8736cfa4d2f9c7c63da64ab853bc2d448df07"
+    },
+    "Data/avito_runs/msk_gruzchik_perm_shift_20261114_new18/reviewed/8327968308.json": {
+      "bytes": 882,
+      "sha256": "a569cb52aa3bc1b28348953ba1e2150d1cc25cfcb750b7e0b6c3c0732dfdf1b6"
+    },
+    "Data/avito_runs/msk_gruzchik_perm_shift_20261114_new18/reviewed/8360971488.json": {
+      "bytes": 790,
+      "sha256": "0fbbcf82d932086b75643b24d906f60a3c90cc6397249115666e6fa4cf1c5aca"
+    },
+    "Data/avito_runs/msk_gruzchik_perm_shift_20261114_new18/reviewed/8380393620.json": {
+      "bytes": 946,
+      "sha256": "1bd5986d7ef972e31d58f51fd5a129563ae6098e4a6d346439cd22ea9bde7f73"
+    },
+    "Data/avito_runs/msk_gruzchik_perm_shift_20261114_new18/reviewed/8390079830.json": {
+      "bytes": 781,
+      "sha256": "b3c30d5e1dffb4ee266eb68396434ccd40561c9446033af2e13b234fff68b57f"
+    },
+    "Data/avito_runs/msk_gruzchik_perm_shift_20261114_new18/reviewed/8396756382.json": {
+      "bytes": 782,
+      "sha256": "f29fef005aaad86b5bb0a20c3736a51780fb32cc999d61f2f28dacbcf646011f"
+    },
+    "Data/avito_runs/msk_gruzchik_perm_shift_20261114_new18/reviewed/8416242237.json": {
+      "bytes": 766,
+      "sha256": "077458882ca71694dce3fb85a22ada81159b2b5c95296110f657919803272d59"
+    },
+    "Data/avito_runs/msk_gruzchik_perm_shift_20261114_new18/reviewed/8430757603.json": {
+      "bytes": 796,
+      "sha256": "6cc3b01e5949b0305b3ff1919d1a2e2c69cfa49c15e24757034bedfa80d41ff5"
+    },
+    "Data/avito_runs/msk_gruzchik_perm_shift_20261114_new18/reviewed/8430779859.json": {
+      "bytes": 772,
+      "sha256": "2844e7a4563928abc848498f80d723cf6f7df038c064a59d195862a69557a74c"
+    },
+    "Data/avito_runs/msk_gruzchik_perm_shift_20261114_new18/reviewed/8433243370.json": {
+      "bytes": 860,
+      "sha256": "8fffed4476096833f6e3923541a092dd4653c9553920eaba23f553868ca28f19"
+    },
+    "Data/avito_runs/msk_gruzchik_perm_shift_20261114_new18/reviewed/8467025330.json": {
+      "bytes": 795,
+      "sha256": "c53c822713a712a3239dbfd132dc5a0748e04418da2ad08e9e9187555452ec49"
+    },
+    "Data/avito_runs/msk_gruzchik_perm_shift_20261114_new18/reviewed/8469796242.json": {
+      "bytes": 864,
+      "sha256": "d81b971dd0693fb0a5bdb889dd157306750aa1283fa761a30bf3f3715d03bcc5"
+    },
+    "Data/avito_runs/msk_gruzchik_perm_shift_20261114_new18/reviewed/8502295794.json": {
+      "bytes": 782,
+      "sha256": "3818dc4291c5b04edeb43c9c641d8b6b8e596ed660b2dce818938249fdfe5e25"
+    },
+    "Data/avito_runs/msk_gruzchik_perm_shift_20261114_new18/reviewed/8503382684.json": {
+      "bytes": 763,
+      "sha256": "93d6aeb5257f05213901def4605f7862b99e81ede138efff909ecb8a16804085"
+    },
+    "Data/avito_runs/msk_gruzchik_perm_shift_20261114_new18/reviewed/8505077637.json": {
+      "bytes": 793,
+      "sha256": "17f7aa8c4fd3c7dced3617c7d64a92678c67b0bbfc575f46da5ca89a1183c277"
+    },
+    "Data/avito_runs/msk_gruzchik_perm_shift_20261114_new18/reviewed/8522834583.json": {
+      "bytes": 781,
+      "sha256": "2ba28ab6542614a9fd4ffe1fdee24c6cbde49928b0c82c2610bb5656fd4f9628"
+    },
+    "Data/avito_runs/msk_gruzchik_perm_shift_20261114_new18/reviewed/8522982675.json": {
+      "bytes": 798,
+      "sha256": "f503ec9b4bfb143e86973f454835bc7c976dbd371d120fb1b652c23982daf2b6"
+    },
+    "Data/avito_runs/msk_gruzchik_perm_shift_20261114_new18/reviewed/8525519211.json": {
+      "bytes": 799,
+      "sha256": "114f1116a38a41d9f05819235ab111987365da2c8b41d16bac06745993fc4a5b"
+    },
+    "Data/avito_runs/msk_gruzchik_perm_shift_20261114_new18/reviewed/8546138508.json": {
+      "bytes": 912,
+      "sha256": "0431281c11501acb8da1714020595e6c8486d36caf10553ea49753f86611028d"
+    },
+    "Data/avito_runs/msk_gruzchik_perm_shift_20261114_new18/reviewed/8607133013.json": {
+      "bytes": 775,
+      "sha256": "28f7714d9d138ba7f9f26b7f6b59afabd9e4fd2ce15291634c873292ddeb66f7"
+    },
+    "Data/avito_runs/msk_gruzchik_perm_shift_20261114_new18/standing_unavailable_policy.json": {
+      "bytes": 1011,
+      "sha256": "7a1c18520dc10340252a4933e92bb851f78d800b32c33c1017ede17529393381"
+    },
+    "Scraper/runs/msk_gruzchik_perm_shift_20261114_new18/plan.json": {
+      "bytes": 5602,
+      "sha256": "e6fbf57dcff42578f2136e8ee072e7b8845129c4bda27ff0b1eab4a1b422b865"
+    },
+    "Scraper/runs/msk_gruzchik_perm_shift_20261114_new18/shared-ledger.json": {
+      "bytes": 58,
+      "sha256": "224d71adf6a79269636de369aeca9e6f63438ab1e5692ad6e850eaee6afc8160"
+    }
+  }
+}

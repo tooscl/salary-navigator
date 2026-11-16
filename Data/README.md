@@ -366,3 +366,25 @@ avito_runs/<название_сбора>/
 - [remote-full-ryazan-20261110](avito_runs/remote-full-ryazan-20261110/exports/vacancies_flat.csv): 353 вакансий.
 
 - [remote-full-krasnodar-20261110](avito_runs/remote-full-krasnodar-20261110/exports/vacancies_flat.csv): 96 вакансий.
+
+- [avito-spb-truck-driver-20261114](avito_runs/avito-spb-truck-driver-20261114/exports/vacancies_flat.csv): 25 вакансий.
+
+- [spb-kassir-permanent-20261114-batch01](avito_runs/spb-kassir-permanent-20261114-batch01/exports/vacancies_flat.csv): 20 вакансий.
+
+- [spb-kassir-permanent-20261114-batch02](avito_runs/spb-kassir-permanent-20261114-batch02/exports/vacancies_flat.csv): 15 вакансий.
+
+- [20261114_moscow_cashier_11_12h](avito_runs/20261114_moscow_cashier_11_12h/exports/vacancies_flat.csv): 37 вакансий.
+
+- [20261114-ekb-kassir-outside-top](avito_runs/20261114-ekb-kassir-outside-top/exports/vacancies_flat.csv): 33 вакансий.
+
+- [moscow-prodavec-medbook-no-20261114-b01-novel](avito_runs/moscow-prodavec-medbook-no-20261114-b01-novel/exports/vacancies_flat.csv): 56 вакансий.
+
+- [moscow-prodavec-medbook-no-20261114-b02-novel](avito_runs/moscow-prodavec-medbook-no-20261114-b02-novel/exports/vacancies_flat.csv): 150 вакансий.
+
+- [20261114_moscow_cashier_candidates_other_hours](avito_runs/20261114_moscow_cashier_candidates_other_hours/exports/vacancies_flat.csv): 18 вакансий из ранее прочитанных кандидатов.
+
+- [ekb_prodavec_11_12h_20261114](avito_runs/ekb_prodavec_11_12h_20261114/exports/vacancies_flat.csv): 35 вакансий.
+
+- [ekb_prodavec_others_20261114](avito_runs/ekb_prodavec_others_20261114/exports/vacancies_flat.csv): 32 ранее прочитанных кандидата с другими или неуказанными часами.
+
+- [msk_gruzchik_perm_shift_20261114_new18](avito_runs/msk_gruzchik_perm_shift_20261114_new18/exports/vacancies_flat.csv): 30 вакансий.

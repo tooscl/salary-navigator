@@ -22,6 +22,7 @@ ROOT = SCRIPTS.parents[3]
 sys.path.insert(0, str(ROOT))
 sys.path.insert(0, str(SCRIPTS))
 from utils.build_dataset import build
+import employer_selection
 from utils.title_flags import military_flags
 from check_capture import check
 from failure_log import ensure_allowed, record as record_failure, succeeded, HumanRequired, authorize_offline, authorize_browser, operation_locked, locked, load as load_failures, save as save_failures
@@ -33,7 +34,7 @@ from sweep_mode import (init_sweep as sweep_init_impl, register_branch as sweep_
     demo_export as sweep_demo_impl)
 
 AUTOMATION_FILES = ['Scraper/skills/collect-avito/references/top-professions.json', 'utils/title_flags.py', 'Scraper/extract.js', 'Scraper/skills/collect-avito/SKILL.md'] + [
-    'Scraper/skills/collect-avito/scripts/' + name for name in ('run.py', 'sweep_mode.py', 'browser_batch.js', 'check_capture.py', 'failure_log.py', 'preflight.py')]
+    'Scraper/skills/collect-avito/scripts/' + name for name in ('run.py', 'employer_selection.py', 'sweep_mode.py', 'browser_batch.js', 'check_capture.py', 'failure_log.py', 'preflight.py')]
 
 
 class CollectionStopped(RuntimeError, ValueError):
@@ -306,7 +307,18 @@ def queue_from(listing, limit):
 
 
 
-def remote_decisions(queue, out, target):
+def verify_comparison(out, plan, queue):
+    if plan.get('selection_criterion') != 'hours_11_12':
+        return
+    path = out/'comparison_ids.json'
+    if sha(path) != plan.get('comparison_sha256'):
+        raise ValueError('Dataset comparison snapshot changed')
+    existing = set(read(path)['ids'])
+    if any(item['id'] in existing for item in queue):
+        raise ValueError('Candidate already exists in comparison dataset')
+
+
+def remote_decisions(queue, out, target, criterion="remote"):
     """Validate a contiguous saved prefix; stop exactly at the target."""
     decisions = []
     accepted = 0
@@ -325,12 +337,13 @@ def remote_decisions(queue, out, target):
         fields = [(norm(f['name']), norm(f['value'])) for f in data['fields']]
         if any(not name or not value for name, value in fields) or len({name for name, _ in fields}) != len(fields):
             raise ValueError('Empty or duplicate parameter requires review')
-        values = [value for name, value in fields if name == 'Формат работы']
+        field = 'Количество рабочих часов в день' if criterion == 'hours_11_12' else 'Формат работы'
+        values = [value for name, value in fields if name == field]
         if len(values) > 1:
             raise ValueError('Duplicate format parameter requires review')
-        match = values == ['Удалённо']
+        match = bool(values and ('11–12' in [norm(v) for v in values[0].split(',')] if criterion == 'hours_11_12' else values == ['Удалённо']))
         decisions.append(dict(id=item['id'], listing_rank=item['listing_rank'],
-            accepted=match, parameter='Формат работы', observed_value=values[0] if values else None,
+            accepted=match, parameter=field, observed_value=values[0] if values else None,
             reason='exact_parameter_match' if match else 'parameter_missing_or_different'))
         accepted += int(match)
     return decisions
@@ -578,6 +591,19 @@ def browser_sources():
             (ROOT / 'Scraper/extract.js').read_text(encoding='utf-8'))
 
 
+def scan_protocol_lines(chunks, pattern, line_start, search_start):
+    """Search complete new output lines once, retaining a partial trailing line."""
+    while True:
+        end = chunks.find(b'\n', search_start)
+        if end < 0:
+            return None, line_start, len(chunks)
+        line = chunks[line_start:end + 1].decode('utf-8', errors='replace')
+        line_start = search_start = end + 1
+        found = re.search(pattern, line)
+        if found:
+            return found, line_start, search_start
+
+
 def browser(job, out, diag):
     # One-shot Aside buffers stdout until completion. An interactive handshake
     # records its sandbox BEFORE collection, so interruption cannot orphan raw.
@@ -589,9 +615,10 @@ def browser(job, out, diag):
     chunks = bytearray()
     def until(pattern, timeout, offset=0):
         deadline = time.monotonic() + timeout
+        line_start = search_start = offset
         while True:
-            output = chunks[offset:].decode('utf-8', errors='replace')
-            found = re.search(pattern, output)
+            found, line_start, search_start = scan_protocol_lines(
+                chunks, pattern, line_start, search_start)
             if found:
                 return found
             remaining = deadline - time.monotonic()
@@ -639,7 +666,7 @@ def browser(job, out, diag):
             if cp['state'] not in ('READY', 'CAPTURED'):
                 break
             if job.get('selection_queue') is not None:
-                decisions = remote_decisions(job['selection_queue'], out, job['selection_target'])
+                decisions = remote_decisions(job['selection_queue'], out, job['selection_target'], job.get('selection_criterion', 'remote'))
                 if sum(d['accepted'] for d in decisions) >= job['selection_target']:
                     break
     finally:
@@ -833,6 +860,8 @@ def freeze(args):
     if (out/'listing_pages').exists() and not (diag/'freeze_request.json').exists():
         raise ValueError('Frozen pages lack their original request; cannot safely resume')
     route_override = None
+    if getattr(args, 'selection_criterion', 'remote') != 'remote':
+        request['selection_criterion'] = args.selection_criterion
     if existing and (diag/'freeze_request.json').exists() and read(diag / 'freeze_request.json') != request:
         original = read(diag/'freeze_request.json')
         authorization_id = getattr(args, 'resume_route_authorization_id', None)
@@ -887,6 +916,20 @@ def freeze(args):
         pending.unlink()
     cp = read(diag/'checkpoint.json') if (diag/'checkpoint.json').exists() else dict(state='READY', completed_ids=[])
     target = candidate_limit or args.limit
+    comparison = None
+    if getattr(args, 'selection_criterion', 'remote') == 'hours_11_12':
+        if candidate_limit is None:
+            raise ValueError('Hours selection requires --candidate-limit')
+        comparison_path = out/'comparison_ids.json'
+        if comparison_path.exists():
+            comparison = read(comparison_path)
+        else:
+            dataset = ROOT/'Data/dataset/vacancies.csv'
+            with dataset.open(encoding='utf-8-sig', newline='') as stream:
+                ids = sorted({row['id'] for row in csv.DictReader(stream)})
+            comparison = dict(dataset_sha256=sha(dataset), ids=ids)
+            write(comparison_path, comparison)
+    existing_ids = set(comparison['ids']) if comparison else set()
     listing_end_reason = None
     saved_pending = None
     if accept_saved:
@@ -901,7 +944,7 @@ def freeze(args):
         if not target or (not all_pages and target >= args.limit):
             raise ValueError('Saved pages must contain a nonempty incomplete selection')
     empty_saved = bool(pages and pages[0].get('state') == 'EMPTY_RESULT')
-    while not empty_saved and (not pages or target is None or len(queue_from_pages(pages, target, False)) < target):
+    while not empty_saved and (not pages or target is None or len([x for x in queue_from_pages(pages, None, False) if x['id'] not in existing_ids]) < target):
         if pages and not ui_next and pages[-1].get('pagination', {}).get('next_button') is True:
             raise ValueError('Observed Next button requires UI Next mode')
         button_next = bool(pages and ui_next and pages[-1].get('pagination', {}).get('next_button') is True)
@@ -956,7 +999,7 @@ def freeze(args):
             if getattr(args, 'profession_scope', None) == 'all' and has_checked_profession(page):
                 raise ValueError('All-scope conflicts with observed checked profession controls')
             selection_profession(page, getattr(args, 'profession_scope', None), args.profession)
-            if candidate_limit is not None and not any(c.get('label') == 'Удалённо' and 'params[172815]' in (c.get('marker') or '') for c in page.get('selected_controls', [])):
+            if candidate_limit is not None and getattr(args, 'selection_criterion', 'remote') == 'remote' and not any(c.get('label') == 'Удалённо' and 'params[172815]' in (c.get('marker') or '') for c in page.get('selected_controls', [])):
                 raise ValueError('Remote selection requires the observed Удалённо filter')
         queue_from_pages([page], target, False)  # validate every observed card before persisting
         path = page_dir / f'{len(pages)+1:04d}.json'
@@ -966,11 +1009,11 @@ def freeze(args):
         release_browser(diag)
     listing = pages[0]
     profession = selection_profession(listing, getattr(args, 'profession_scope', None), args.profession)
-    if candidate_limit is not None and not any(c.get('label') == 'Удалённо' and 'params[172815]' in (c.get('marker') or '') for c in listing.get('selected_controls', [])):
+    if candidate_limit is not None and getattr(args, 'selection_criterion', 'remote') == 'remote' and not any(c.get('label') == 'Удалённо' and 'params[172815]' in (c.get('marker') or '') for c in listing.get('selected_controls', [])):
         raise ValueError('Remote selection requires the observed Удалённо filter')
     if candidate_limit is not None and candidate_limit < args.limit:
         raise ValueError('Candidate limit must be at least the target limit')
-    queue = [] if listing.get('state') == 'EMPTY_RESULT' else queue_from_pages(pages, target, require_full=False)
+    queue = [] if listing.get('state') == 'EMPTY_RESULT' else [x for x in queue_from_pages(pages, None, require_full=False) if x['id'] not in existing_ids][:target]
     continuation_info = read(diag/'continuation.json') if (diag/'continuation.json').exists() else None
     if continuation_info:
         provenance = out/'continuation-provenance'
@@ -1004,7 +1047,8 @@ def freeze(args):
         requested_limit=args.limit, available_unique=len(queue),
         listing_end_reason=listing_end_reason, available_listing_exhausted=listing_end_reason == 'confirmed_end', continuation=continuation_info,
         branch_only=branch_only, max_pages=max_pages,
-        candidate_limit=candidate_limit,
+        candidate_limit=candidate_limit, selection_criterion=getattr(args, 'selection_criterion', 'remote'),
+        comparison_sha256=sha(out/'comparison_ids.json') if comparison else None,
         created_at=datetime.now(timezone.utc).isoformat(), instruction_version=instruction_version(ROOT/'Scraper/skills/collect-avito/SKILL.md'),
         extractor_sha256=sha(ROOT / 'Scraper/extract.js'), instruction_sha256=sha(SCRIPTS.parent / 'SKILL.md'),
         code_git_commit=subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=ROOT, text=True).strip(),
@@ -1959,18 +2003,31 @@ def verified_frozen_queue(out, service):
     return plan, queue
 
 
+def dataset_keys(path):
+    with path.open(encoding='utf-8-sig', newline='') as stream:
+        reader = csv.DictReader(stream)
+        if not {'source', 'id'}.issubset(reader.fieldnames or []):
+            raise ValueError('Dataset lacks source and id columns')
+        keys = [(row['source'], row['id']) for row in reader]
+    if any(not source or not identity for source, identity in keys) or len(keys) != len(set(keys)):
+        raise ValueError('Dataset has empty or duplicate keys')
+    return sorted(keys)
+
+
 def validate_deduplication(out, service):
     plan = read(service/'plan.json'); info = plan['deduplication']; prov = out/'dedup-provenance'
     source_out, source_service, _ = paths(ROOT, info['source_run_id'])
-    ledger_pointer = service/'diagnostics/shared-ledger.json'
-    if not ledger_pointer.exists(): ledger_pointer = service/'shared-ledger.json'
-    if read(ledger_pointer) != {'parent_run_id': info['source_run_id']}:
+    ledger_pointers = [p for p in (service/'diagnostics/shared-ledger.json', service/'shared-ledger.json') if p.exists()]
+    if not ledger_pointers or any(read(p) != {'parent_run_id': info['source_run_id']} for p in ledger_pointers):
         raise ValueError('Deduplicated child must use source ledger')
-    if read(source_service/'dedup-child.json') != {'child_run_id': plan['run_id']}:
-        raise ValueError('Source child assignment differs')
     source_plan_path = prov/'source-plan.json'; source_queue_path = prov/'source-queue.json'
-    for local, original, expected in ((source_plan_path,source_service/'plan.json',info['source_plan_sha256']), (source_queue_path,source_out/'queue.json',info['source_queue_sha256'])):
-        if sha(local) != expected or sha(original) != expected: raise ValueError('Dedup source provenance changed')
+    originals = (source_service/'plan.json', source_out/'queue.json', source_service/'dedup-child.json')
+    present = [p.exists() for p in originals]
+    if any(present) and not all(present): raise ValueError('Incomplete dedup source provenance')
+    if all(present) and read(originals[2]) != {'child_run_id': plan['run_id']}:
+        raise ValueError('Source child assignment differs')
+    for local, original, expected in ((source_plan_path, originals[0], info['source_plan_sha256']), (source_queue_path, originals[1], info['source_queue_sha256'])):
+        if sha(local) != expected or (all(present) and sha(original) != expected): raise ValueError('Dedup source provenance changed')
     parent = read(source_plan_path); source_queue = read(source_queue_path)
     validate_plan_profession(parent, out/'listing.json')
     if queue_from_pages([read(out/x['file'].replace('\\', '/')) for x in parent['listing_pages']], len(source_queue)) != source_queue:
@@ -1982,8 +2039,20 @@ def validate_deduplication(out, service):
             if sha(prov/name) != digest or sha(original) != digest: raise ValueError('Dedup known provenance changed')
         known_plan, known_queue = verified_frozen_queue(known_out, known_service)
         known.update(x['id'] for x in known_queue)
-    novel = [item for item in source_queue if item['id'] not in known]
+    dataset = info.get('dataset')
+    if dataset:
+        manifest_path = prov/'dataset-manifest.json'; keys_path = prov/'dataset-keys.json'
+        if sha(manifest_path) != dataset['manifest_sha256'] or sha(keys_path) != dataset['keys_sha256']:
+            raise ValueError('Dataset dedup provenance changed')
+        manifest = read(manifest_path); keys = read(keys_path)
+        if manifest['sha256'] != dataset['csv_sha256'] or manifest['rows'] != len(keys) or keys != sorted(keys) or len(keys) != len({tuple(k) for k in keys}):
+            raise ValueError('Dataset dedup basis differs')
+        known.update(identity for source, identity in keys if source == 'avito')
+    eligible = [item for item in source_queue if item['id'] not in known]
+    novel = eligible[:info['selection_limit']] if info.get('selection_limit') is not None else eligible
     excluded = [item['id'] for item in source_queue if item['id'] in known]
+    if 'eligible_count' in info and (info['eligible_count'] != len(eligible) or info['deferred_ids'] != [x['id'] for x in eligible[len(novel):]]):
+        raise ValueError('Dedup deferred selection differs')
     if plan.get('run_id') != service.name or plan.get('limit') != len(novel) or len({e['run_id'] for e in info['against']}) != len(info['against']): raise ValueError('Deduplicated child metadata differs')
     if (len(source_queue) != info['source_count'] or len(novel) != info['novel_count'] or excluded != info['duplicate_ids'] or len(excluded) != info['duplicate_excluded'] or read(out/'queue.json') != novel):
         raise ValueError('Deduplicated queue or counts differ')
@@ -2002,8 +2071,11 @@ def deduplicate_queue(args):
     out, service, diag = paths(ROOT, args.run_id)
     ensure_allowed(source_diag, 'deduplicate-queue')
     if out.exists() or service.exists() or (source_service/'dedup-child.json').exists(): raise ValueError('Derivative or source assignment already exists')
-    against = args.against_run_id
-    if not against or len(set(against)) != len(against) or args.source_run_id in against or args.run_id in against or args.run_id == args.source_run_id:
+    against = args.against_run_id or []
+    use_dataset = getattr(args, 'against_dataset', False)
+    limit = getattr(args, 'limit', None)
+    if limit is not None and limit <= 0: raise ValueError('Selection limit must be positive')
+    if (not against and not use_dataset) or len(set(against)) != len(against) or args.source_run_id in against or args.run_id in against or args.run_id == args.source_run_id:
         raise ValueError('Distinct source, child and known run IDs required')
     parent, source_queue = verified_frozen_queue(source_out, source_service)
     with locked(source_diag):
@@ -2017,9 +2089,24 @@ def deduplicate_queue(args):
         _, queue = verified_frozen_queue(known_out, known_service)
         known.update(item['id'] for item in queue)
         known_runs.append(dict(run_id=run_id,plan_file=f'known-{index:03d}-plan.json',queue_file=f'known-{index:03d}-queue.json',plan_sha256=sha(known_service/'plan.json'),queue_sha256=sha(known_out/'queue.json')))
-    novel = [item for item in source_queue if item['id'] not in known]; excluded = [item['id'] for item in source_queue if item['id'] in known]
+    dataset_manifest = ROOT/'Data/dataset/manifest.json'; dataset_csv = ROOT/'Data/dataset/vacancies.csv'
+    dataset_info = None; keys = None
+    if use_dataset:
+        manifest = read(dataset_manifest)
+        if sha(dataset_csv) != manifest['sha256']: raise ValueError('Materialized dataset does not match manifest')
+        keys = dataset_keys(dataset_csv)
+        if len(keys) != manifest['rows']: raise ValueError('Dataset row count differs from manifest')
+        known.update(identity for source, identity in keys if source == 'avito')
+    eligible = [item for item in source_queue if item['id'] not in known]
+    novel = eligible[:limit] if limit is not None else eligible
+    excluded = [item['id'] for item in source_queue if item['id'] in known]
     info = dict(source_run_id=args.source_run_id,source_plan_sha256=sha(source_service/'plan.json'),source_queue_sha256=sha(source_out/'queue.json'),against=known_runs,source_count=len(source_queue),duplicate_excluded=len(excluded),novel_count=len(novel),duplicate_ids=excluded)
     out.mkdir(parents=True); diag.mkdir(parents=True); prov=out/'dedup-provenance'; prov.mkdir()
+    if use_dataset:
+        shutil.copy2(dataset_manifest, prov/'dataset-manifest.json'); write(prov/'dataset-keys.json', keys)
+        info['dataset'] = dict(csv_sha256=manifest['sha256'], manifest_sha256=sha(prov/'dataset-manifest.json'), keys_sha256=sha(prov/'dataset-keys.json'), rows=len(keys))
+    if limit is not None:
+        info.update(selection_limit=limit, eligible_count=len(eligible), deferred_ids=[x['id'] for x in eligible[len(novel):]])
     shutil.copy2(source_service/'plan.json',prov/'source-plan.json'); shutil.copy2(source_out/'queue.json',prov/'source-queue.json')
     for archive in sorted(source_service.glob('superseded-freeze*')):
         if not archive.is_dir(): continue
@@ -2334,6 +2421,7 @@ def _capture_batch(args):
     standing_unavailable_policy(argparse.Namespace(run_id=args.run_id, authorization_id=STANDING_UNAVAILABLE_ID,
         human_instruction=STANDING_UNAVAILABLE_INSTRUCTION))
     queue = read(out / 'queue.json')
+    verify_comparison(out, plan, queue)
     # Recover an interrupted transfer before considering another navigation.
     if (diag / 'sandbox.json').exists():
         import_sandbox(Path(read(diag / 'sandbox.json')['path']), out, diag)
@@ -2341,7 +2429,7 @@ def _capture_batch(args):
     # Read it only after the transfer so the prefix check uses one snapshot.
     cp = read(diag / 'checkpoint.json')
     if plan.get('selection_mode') == 'first_N_remote_parameter_matches':
-        decisions = remote_decisions(queue, out, plan['limit'])
+        decisions = remote_decisions(queue, out, plan['limit'], plan.get('selection_criterion', 'remote'))
         accepted = sum(d['accepted'] for d in decisions)
         if accepted == plan['limit']:
             print(json.dumps(dict(state='CAPTURED', captured=len(decisions), accepted=accepted, remaining=0)))
@@ -2350,13 +2438,13 @@ def _capture_batch(args):
             raise CollectionStopped('Candidate limit exhausted before target; preserve run without export', 'REVIEW_REQUIRED')
         pending = queue[len(decisions):len(decisions)+args.batch_size]
         cp2, elapsed = browser(dict(mode='capture', queue=pending, completed_ids=[d['id'] for d in decisions],
-            selection_queue=queue, selection_target=plan['limit'], tab_id=getattr(args, 'tab_id', None),
+            selection_queue=queue, selection_target=plan['limit'], selection_criterion=plan.get('selection_criterion', 'remote'), tab_id=getattr(args, 'tab_id', None),
             previous_capture_seconds=cp.get('capture_seconds', 0)), out, diag)
         cp2['capture_seconds'] = cp.get('capture_seconds', 0) + elapsed
         write(diag / 'checkpoint.json', cp2)
         if cp2['state'] != 'CAPTURED':
             raise CollectionStopped('Stopped; inspect diagnostics', cp2['state'])
-        decisions = remote_decisions(queue, out, plan['limit'])
+        decisions = remote_decisions(queue, out, plan['limit'], plan.get('selection_criterion', 'remote'))
         if cp2['completed_ids'] != [d['id'] for d in decisions]:
             raise ValueError('Checkpoint does not match the saved candidate prefix')
         accepted = sum(d['accepted'] for d in decisions)
@@ -2606,8 +2694,16 @@ def partial_prefix_selection(out, service, queue, instruction):
     excluded = unavailable_ids | unresolved_ids | user_skipped_ids
     ids = [x['id'] for x in queue]
     next_id = cp.get('next_id')
+    # A completed bounded capture batch can report CAPTURED even though the
+    # frozen queue has a suffix. Derive its boundary only from accounted IDs.
+    batch_complete = cp.get('state') == 'CAPTURED' and next_id is None
+    if batch_complete:
+        cut = len(cp.get('completed_ids', [])) + len(excluded)
+        if 0 < cut < len(ids):
+            next_id = ids[cut]
     if next_id not in ids or cp.get('state') not in ('REVIEW_REQUIRED', 'BROWSER_ERROR', 'NEEDS_HUMAN'):
-        raise ValueError('Expected a stopped pending partition ID')
+        if not batch_complete or next_id not in ids:
+            raise ValueError('Expected a stopped pending partition ID')
     cut = ids.index(next_id)
     if cut == 0 or cp.get('completed_ids') != [i for i in ids[:cut] if i not in excluded] or excluded - set(ids[:cut]):
         raise ValueError('Completed IDs must be the accounted queue prefix')
@@ -2754,7 +2850,7 @@ def finalize(args):
     changes = [dict(c, file=c.get('file', '').replace('\\', '/')) for c in changes]
     changed = {file for file,value in plan.get('automation_sha256', {}).items() if sha(ROOT/file) != value}
     reviewed_changes = {change['file'] for change in changes}
-    allowed_changes = {'Scraper/skills/collect-avito/scripts/run.py', 'Scraper/skills/collect-avito/scripts/failure_log.py', 'Scraper/skills/collect-avito/SKILL.md'}
+    allowed_changes = {'Scraper/skills/collect-avito/scripts/employer_selection.py', 'Scraper/skills/collect-avito/scripts/run.py', 'Scraper/skills/collect-avito/scripts/failure_log.py', 'Scraper/skills/collect-avito/SKILL.md'}
     allowed_changes |= allowed_capture_changes(plan, changes)
     if changed - (reviewed_changes & allowed_changes):
         raise ValueError('Unregistered collector source changed after capture; use a new run')
@@ -2773,8 +2869,9 @@ def finalize(args):
     overrides = read(args.placements) if args.placements else {}
     decisions = None
     selected_queue = queue
+    verify_comparison(out, plan, queue)
     if plan.get('selection_mode') == 'first_N_remote_parameter_matches':
-        decisions = remote_decisions(queue, out, plan['limit'])
+        decisions = remote_decisions(queue, out, plan['limit'], plan.get('selection_criterion', 'remote'))
         if sum(d['accepted'] for d in decisions) != plan['limit']:
             raise ValueError('Target not reached; incomplete candidate selection cannot be exported')
         selected_ids = {d['id'] for d in decisions if d['accepted']}
@@ -2806,9 +2903,34 @@ def finalize(args):
             unknown_cities[item['id']] = {'region': region, 'evidence': row['location_observed'],
                                         'region_unknown': not bool(region),
                                         **({'location_missing': True} if not row['location_observed'] else {})}
+    employer_selection_record = None
+    selection_commit = getattr(args, 'exclude_largest_employer_baseline', None)
+    if selection_commit:
+        if decisions is not None or partial or correction or overrides:
+            raise ValueError('Employer selection cannot combine with remote, partial, correction or placement overrides')
+        city = getattr(args, 'selection_city', None)
+        profession = getattr(args, 'selection_profession', None)
+        target = getattr(args, 'selection_target', None)
+        if not city or not profession or target is None:
+            raise ValueError('Employer selection requires city, profession and target')
+        evidence = employer_selection.baseline(ROOT, selection_commit, city, profession)
+        employer_selection_record = employer_selection.select(rows, target, evidence,
+            {r['id']: sha(out/'raw'/f"{r['id']}.json") for r in rows})
+        employer_selection_record['regions'] = regions
+        employer_selection_record['city_anomaly_policy'] = plan['city_anomaly_policy']
+        employer_selection_record['excluded_observation_ids'] = [item['id'] for item in queue if item['id'] in excluded]
+        accepted_ids = set(employer_selection_record['accepted_ids'])
+        rows = [r for r in rows if r['id'] in accepted_ids]
+        reviews = [r for r in reviews if r['id'] in accepted_ids]
+        unknown_cities = {i: value for i, value in unknown_cities.items() if i in accepted_ids}
+        mapping = {city: region for city, region in mapping.items() if city in {r['city'] for r in rows}}
+    elif any(getattr(args, key, None) is not None for key in ('selection_city', 'selection_profession', 'selection_target')):
+        raise ValueError('Selection arguments require a baseline commit')
     columns = list(dict.fromkeys(k for row in rows for k in row))
     exports = out / 'exports'
     exports.mkdir(exist_ok=True)  # unfinished drafts may be retried; completed runs cannot
+    if employer_selection_record:
+        write(exports/'employer_selection.json', employer_selection_record)
     if partial:
         write(exports/'partial_selection.json', partial)
     if correction:
@@ -2818,7 +2940,7 @@ def finalize(args):
         writer.writeheader(); writer.writerows(rows)
     write(exports / 'vacancies.json', rows)
     if decisions is not None:
-        write(exports / 'selection.json', dict(criterion={'field': 'Формат работы', 'value': 'Удалённо'},
+        write(exports / 'selection.json', dict(criterion=({'field': 'Количество рабочих часов в день', 'value': '11–12'} if plan.get('selection_criterion') == 'hours_11_12' else {'field': 'Формат работы', 'value': 'Удалённо'}),
             candidate_limit=len(queue), target=plan['limit'], decisions=decisions))
     for review in reviews:
         write(out / 'reviewed' / (review['id'] + '.json'), review)
@@ -2844,14 +2966,22 @@ def finalize(args):
     write_outputs(ROOT / 'Data/dataset', csv_bytes, manifest_bytes)
     manifest = dict(run_id=args.run_id, dataset_id=args.run_id, status='complete',
         schema=dict(columns=columns, unknown_policy='empty_not_zero'), collection=plan,
-        coverage=dict(planned=len(queue), accepted=len(rows), unavailable=unavailable, unresolved_observations=unresolved, user_skipped_observations=user_skipped, user_skipped_count=len(user_skipped), user_skip_policy=read(out/'user_skip_policy.json') if (out/'user_skip_policy.json').exists() else None, user_detail_skip_policy=read(out/'user_detail_skip_policy.json') if (out/'user_detail_skip_policy.json').exists() else None, deduplication=plan.get('deduplication'), sweep=plan.get('sweep'), unique_ids=[r['id'] for r in rows], errors=[], partial=partial,
+        coverage=dict(employer_selection=employer_selection_record, planned=len(queue), accepted=len(rows), unavailable=unavailable, unresolved_observations=unresolved, user_skipped_observations=user_skipped, user_skipped_count=len(user_skipped), user_skip_policy=read(out/'user_skip_policy.json') if (out/'user_skip_policy.json').exists() else None, user_detail_skip_policy=read(out/'user_detail_skip_policy.json') if (out/'user_detail_skip_policy.json').exists() else None, deduplication=plan.get('deduplication'), sweep=plan.get('sweep'), unique_ids=[r['id'] for r in rows], errors=[], partial=partial,
             limitations=['Visible rendered parameters only; enrichment not run; placement on site; live route unverified']),
         timing=dict(setup_seconds=plan['setup_seconds'], capture_seconds=read(diag/'checkpoint.json').get('capture_seconds'),
             review_export_seconds=time.perf_counter()-started, publication_seconds=None),
         review_model=args.review_model, automation_changes=changes,
         profession_correction=correction,
         post_capture_automation_sha256={file: sha(ROOT/file) for file in sorted(changed)}, files={})
-    for path in sorted(list(out.rglob('*')) + [service / 'plan.json']):
+    service_files = [service / 'plan.json']
+    if plan.get('deduplication'):
+        # Publish only the ledger pointer; the shared error ledger remains local.
+        pointer = read(diag/'shared-ledger.json')
+        if pointer != {'parent_run_id': plan['deduplication']['source_run_id']}:
+            raise ValueError('Deduplicated child must use source ledger')
+        write(service/'shared-ledger.json', pointer)
+        service_files.append(service/'shared-ledger.json')
+    for path in sorted(list(out.rglob('*')) + service_files):
         if path.is_file():
             manifest['files'][str(path.relative_to(ROOT))] = dict(bytes=path.stat().st_size, sha256=sha(path))
     catalog = ROOT / 'Data/README.md'
@@ -3316,9 +3446,16 @@ def retry_incomplete_observation(args):
 
 
 def resume_browser(args):
-    out, _, diag = paths(ROOT, args.run_id)
+    out, service, diag = paths(ROOT, args.run_id)
+    correction = getattr(args, 'correct_record_error', False)
+    if correction and ((service/'plan.json').exists() or (out/'queue.json').exists() or any((out/'raw').glob('*')) or (diag/'checkpoint.json').exists()):
+        raise HumanRequired('Administrative correction is limited to a pre-freeze run without checkpoint or raw')
     pending_id = getattr(args, 'pending_id_no_budget', None)
     detail_hydration = getattr(args, 'detail_hydration', False)
+    if correction and pending_id:
+        raise ValueError('Administrative correction cannot authorize a pending capture')
+    if pending_id and getattr(args, 'retain_unbounded', False):
+        raise ValueError('Pending-only and retained unbounded authorization are mutually exclusive')
     if detail_hydration and not pending_id:
         raise ValueError('DETAIL hydration authorization requires a pending ID')
     if pending_id and getattr(args, 'unbounded_retries', False):
@@ -3347,7 +3484,7 @@ def resume_browser(args):
             save_failures(diag, ledger)
         print('One pending capture authorized without replenishing the retry budget')
         return
-    authorize_browser(diag, args.human_instruction, args.authorization_id, unbounded_retries=getattr(args, 'unbounded_retries', False))
+    authorize_browser(diag, args.human_instruction, args.authorization_id, unbounded_retries=getattr(args, 'unbounded_retries', False), correct_record_error=correction, retain_unbounded=getattr(args, 'retain_unbounded', False))
     print('Human browser authorization recorded; history retained')
 
 
@@ -3807,6 +3944,23 @@ def validate_completed_export(out, service):
         if (not check(data, item['id'])['structural_check_passed'] or data.get('source_url') != item['url']
                 or not data.get('parameter_audit', {}).get('rendered_complete')):
             raise ValueError('Raw capture fails structural or identity validation')
+    employer_record = manifest['coverage'].get('employer_selection')
+    if employer_record:
+        if partial or correction or read(out/'exports/employer_selection.json') != employer_record:
+            raise ValueError('Employer selection evidence differs')
+        evidence = employer_record['baseline']
+        if employer_selection.baseline(ROOT, evidence['commit'], evidence['city'], evidence['profession']) != evidence:
+            raise ValueError('Baseline evidence differs')
+        if employer_record['excluded_observation_ids'] != [item['id'] for item in queue if item['id'] in excluded]:
+            raise ValueError('Employer selection excluded observations differ')
+        selection_plan = dict(plan, city_anomaly_policy=employer_record['city_anomaly_policy'])
+        candidate_rows = [reviewed_row(reviewed_capture(out, item), item, employer_record['regions'], selection_plan, None)[0] for item in expected]
+        actual = employer_selection.select(candidate_rows, employer_record['target'], evidence,
+            {item['id']: sha(out/'raw'/f"{item['id']}.json") for item in expected})
+        actual.update(regions=employer_record['regions'], city_anomaly_policy=employer_record['city_anomaly_policy'], excluded_observation_ids=employer_record['excluded_observation_ids'])
+        if actual != employer_record: raise ValueError('Employer selection decisions differ')
+        accepted = set(actual['accepted_ids'])
+        expected = [item for item in expected if item['id'] in accepted]
     with (out/'exports/vacancies_flat.csv').open(encoding='utf-8-sig', newline='') as stream:
         rows = list(csv.DictReader(stream))
     if [r['id'] for r in rows] != [item['id'] for item in expected] or any(r['profession'] != (correction['corrected_profession'] if correction else plan['profession']) for r in rows):
@@ -3816,7 +3970,7 @@ def validate_completed_export(out, service):
     return manifest
 
 
-POST_FINALIZE_TESTED = ['Scraper/skills/collect-avito/scripts/run.py', 'Scraper/skills/collect-avito/SKILL.md',
+POST_FINALIZE_TESTED = ['Scraper/skills/collect-avito/scripts/run.py', 'Scraper/skills/collect-avito/scripts/employer_selection.py', 'Scraper/test_employer_selection.py', 'Scraper/skills/collect-avito/SKILL.md',
                         'Scraper/test_aside_runner.py', 'utils/build_dataset.py', 'utils/test_build_dataset.py']
 
 
@@ -3835,7 +3989,7 @@ def post_finalize_review(args):
     if changed - noted or not changed:
         raise ValueError('Post-finalize source changes must be recorded and nonempty')
     validate_automation_changes(changes, changed)
-    subprocess.run([sys.executable, '-X', 'utf8', '-m', 'unittest', 'Scraper.test_aside_runner', 'utils.test_build_dataset'], check=True, cwd=ROOT)
+    subprocess.run([sys.executable, '-X', 'utf8', '-m', 'unittest', 'Scraper.test_aside_runner', 'Scraper.test_employer_selection', 'utils.test_build_dataset'], check=True, cwd=ROOT)
     subprocess.run([sys.executable, '-X', 'utf8', 'utils/build_dataset.py', '--check'], check=True, cwd=ROOT)
     write(dest, dict(method='post_finalize_validation_v1', reason=args.reason,
         original_manifest_sha256=sha(service/'manifest.json'), previous_automation_sha256=baseline, automation_changes=changes,
@@ -3961,6 +4115,11 @@ def publish(args):
     files = [str(out.relative_to(ROOT)), str((service/'plan.json').relative_to(ROOT)),
         str((service/'manifest.json').relative_to(ROOT)), 'Data/dataset/sources.json',
         'Data/dataset/parts', 'Data/dataset/manifest.json', 'Data/README.md', 'Data/dataset/README.md']
+    if manifest['collection'].get('deduplication'):
+        pointer = service/'shared-ledger.json'
+        if str(pointer.relative_to(ROOT)) not in manifest['files']:
+            raise ValueError('Dedup public ledger pointer missing from manifest')
+        files.append(str(pointer.relative_to(ROOT)))
     source_entries = [e for e in read(ROOT/'Data/dataset/sources.json')['exports'] if e['run_id'] == args.run_id]
     if len(source_entries) != 1:
         raise ValueError('Expected exactly one registered source for this run')
@@ -3983,7 +4142,7 @@ def publish(args):
     info = manifest.get('collection', {}).get('deduplication')
     summary = args.summary
     if info:
-        summary += f" Дедупликация: исходная очередь {info['source_count']}, повторов исключено {info['duplicate_excluded']}, новых ID {info['novel_count']}; сравнено с: {', '.join(x['run_id'] for x in info['against'])}."
+        summary += f" Дедупликация: исходная очередь {info['source_count']}, повторов исключено {info['duplicate_excluded']}, выбрано новых ID {info['novel_count']}; основа: {', '.join(x['run_id'] for x in info['against'])}{' общий датасет' if info.get('dataset') else ''}."
     subprocess.run([sys.executable, 'utils/dataset_pr.py', '--run-id', args.run_id,
         '--summary', summary, '--output', str(body)], check=True, cwd=ROOT)
     verify_staged_manifest(ROOT, service, manifest)
@@ -4132,7 +4291,9 @@ def main():
             command.add_argument('--prefix', required=True)
         elif name == 'deduplicate-queue':
             command.add_argument('--source-run-id', required=True)
-            command.add_argument('--against-run-id', required=True, action='append')
+            command.add_argument('--against-run-id', action='append')
+            command.add_argument('--against-dataset', action='store_true')
+            command.add_argument('--limit', type=int, help='Select at most this many novel IDs in listing order')
         elif name == 'supplemental':
             command.add_argument('--parent-run-id', required=True)
             command.add_argument('--observation', required=True, help='Listing JSON filename in parent diagnostics')
@@ -4155,6 +4316,7 @@ def main():
             size = command.add_mutually_exclusive_group(required=True)
             size.add_argument('--limit', type=int, help='Total unique vacancies; no fixed page/card ceiling')
             size.add_argument('--all-pages', action='store_true', help='Follow observed Next links until the listing ends')
+            command.add_argument('--selection-criterion', choices=['remote', 'hours_11_12'], default='remote')
             command.add_argument('--candidate-limit', type=int, help='Select first N exact remote parameter matches from this many observed candidates')
             command.add_argument('--geography', required=True)
             command.add_argument('--profession', default='', help='Optional assertion; profession is read from selected listing filters')
@@ -4170,6 +4332,10 @@ def main():
             command.add_argument('--retry-reason')
             command.add_argument('--batch-size', type=int, default=30)
         elif name == 'finalize':
+            command.add_argument('--exclude-largest-employer-baseline', help='Git commit with the baseline dataset')
+            command.add_argument('--selection-city')
+            command.add_argument('--selection-profession')
+            command.add_argument('--selection-target', type=int)
             command.add_argument('--partial-prefix', action='store_true', help='Export a verified stopped ordinary or partition queue prefix, preserving remaining IDs')
             command.add_argument('--partial-instruction', help='Exact authorization to publish the verified prefix offline')
             command.add_argument('--city-anomaly-policy', choices=['blank','search_filter'], default='blank')
@@ -4246,6 +4412,8 @@ def main():
             if name == 'resume-browser': command.add_argument('--pending-id-no-budget', help='Authorize one pending ID without replenishing an exhausted retry budget')
             if name == 'resume-browser': command.add_argument('--detail-hydration', action='store_true', help='Limit pending authorization to an evidenced incomplete DETAIL hydration race')
             if name == 'resume-browser': command.add_argument('--unbounded-retries', action='store_true', help='Record explicit authorization for unbounded ordinary technical retries in this run')
+            if name == 'resume-browser': command.add_argument('--correct-record-error', action='store_true', help='Audit the narrowly identified pre-freeze administrative record-error misclassification')
+            if name == 'resume-browser': command.add_argument('--retain-unbounded', action='store_true', help='Retain an existing unbounded technical retry authorization after a fresh human resume')
         else:
             for flag in ['file', 'reason', 'validation']:
                 command.add_argument('--' + flag, required=True)

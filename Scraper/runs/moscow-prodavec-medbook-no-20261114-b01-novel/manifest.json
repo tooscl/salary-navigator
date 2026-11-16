@@ -1,0 +1,799 @@
+{
+  "run_id": "moscow-prodavec-medbook-no-20261114-b01-novel",
+  "dataset_id": "moscow-prodavec-medbook-no-20261114-b01-novel",
+  "status": "complete",
+  "schema": {
+    "columns": [
+      "id",
+      "city",
+      "profession",
+      "segments",
+      "title",
+      "salary_raw",
+      "source_url",
+      "observed_at",
+      "description",
+      "location_observed",
+      "employer_name_observed",
+      "date_raw",
+      "views_total",
+      "views_today",
+      "listing_rank",
+      "listing_promoted",
+      "full_parameters_read",
+      "analysis_status",
+      "export_eligibility",
+      "read_status_parameters",
+      "read_status_description",
+      "read_status_location",
+      "read_limitations",
+      "enrichment_status",
+      "enriched_fields",
+      "enrichment_version",
+      "military",
+      "military_keywords",
+      "military_rule_version",
+      "city__source",
+      "city__evidence",
+      "city_anomaly",
+      "График",
+      "Занятость",
+      "Способ оформления",
+      "Количество рабочих часов в день",
+      "Частота выплат",
+      "Сфера деятельности компании",
+      "Что получают работники",
+      "Смены",
+      "Ассортимент",
+      "Опыт работы",
+      "В том числе для кандидатов",
+      "Режим работы",
+      "Медкнижка",
+      "С чем надо работать",
+      "Количество рабочих дней в неделю",
+      "Можно заканчивать в 17:00",
+      "Стажировка"
+    ],
+    "unknown_policy": "empty_not_zero"
+  },
+  "collection": {
+    "run_id": "moscow-prodavec-medbook-no-20261114-b01-novel",
+    "geography": "Москва",
+    "profession": "Продавец",
+    "segments": "",
+    "filter_evidence": "Видимо выбран checked-фильтр профессии Продавец (input name=Продавец, value=3235382) по URL в /moskva/vakansii/prodavec-ASgBAgICAUTUzBHs~IoD. Отдельного фильтра «Медкнижка: Не нужна» или «медицинская книжка» в полной форме нет; это условие в фильтры не кодируется и должно подтверждаться по сохранённым карточкам.",
+    "listing_url": "https://www.avito.ru/moskva/vakansii/prodavec-ASgBAgICAUTUzBHs~IoD?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6IlBmR0h2YTUzQkdlUVVDTzMiO33wIEkMJgAAAA",
+    "listing_request_url": "https://www.avito.ru/moskva/vakansii/prodavec-ASgBAgICAUTUzBHs~IoD?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6IlBmR0h2YTUzQkdlUVVDTzMiO33wIEkMJgAAAA&localPriority=0",
+    "selected_controls": [
+      {
+        "label": "Продавец",
+        "marker": "params[144170]/checkbox/3235382",
+        "value": null
+      },
+      {
+        "label": "Продавец",
+        "marker": "params[144170]/checkbox/toggle",
+        "value": "3235382"
+      },
+      {
+        "label": "Любой",
+        "marker": "params[196929]/all",
+        "value": null
+      },
+      {
+        "label": "Любой",
+        "marker": "params[196929]/toggle",
+        "value": "all"
+      },
+      {
+        "label": "Неважно",
+        "marker": "params[172815]/all",
+        "value": null
+      },
+      {
+        "label": "Неважно",
+        "marker": "params[172815]/toggle",
+        "value": "all"
+      },
+      {
+        "label": "Неважно",
+        "marker": null,
+        "value": "all"
+      },
+      {
+        "label": "Все",
+        "marker": null,
+        "value": "all"
+      }
+    ],
+    "listing_sha256": "7dc0411e12a705bae5d53e00948e92c73f72dec6d50e9db7b9902229aa208193",
+    "profession_scope": null,
+    "profession_source": "observed_controls",
+    "listing_pages": [
+      {
+        "file": "listing_pages/0001.json",
+        "sha256": "7dc0411e12a705bae5d53e00948e92c73f72dec6d50e9db7b9902229aa208193",
+        "source_url": "https://www.avito.ru/moskva/vakansii/prodavec-ASgBAgICAUTUzBHs~IoD?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6IlBmR0h2YTUzQkdlUVVDTzMiO33wIEkMJgAAAA"
+      },
+      {
+        "file": "listing_pages/0002.json",
+        "sha256": "1fffd3e7bce2571160f97f46af7db8d4b7a3ab9baf7a70d64c59cef583d62103",
+        "source_url": "https://www.avito.ru/moskva/vakansii/prodavec-ASgBAgICAUTUzBHs~IoD?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6IklUcTNFZ3NXeUl4MXNZY3MiO32tWsW2JgAAAA&p=2"
+      }
+    ],
+    "selection_mode": "first_N_unique_on_frozen_listing",
+    "limit": 56,
+    "requested_all_pages": false,
+    "saved_selection_authorization": null,
+    "requested_limit": 60,
+    "available_unique": 56,
+    "listing_end_reason": null,
+    "available_listing_exhausted": false,
+    "continuation": null,
+    "branch_only": false,
+    "max_pages": null,
+    "candidate_limit": null,
+    "selection_criterion": "remote",
+    "comparison_sha256": null,
+    "created_at": "2026-11-14T13:38:47.463060+00:00",
+    "instruction_version": "1.8.3",
+    "extractor_sha256": "0c52ba2f821d861083c99ec6bc328456df96b3d179b7fffd47f87aadfda84bdb",
+    "instruction_sha256": "6de3d127c1a604549a8151d9dfd1a60e85aa9a4b0eb72d8182b0aa8d489577c3",
+    "code_git_commit": "08a01bcea55068af8df172f971cb83c6423c280e",
+    "setup_seconds": 10.851629707962275,
+    "live_route_verified": false,
+    "execution_model": "gpt-6-luna",
+    "automation_sha256": {
+      "Scraper/skills/collect-avito/references/top-professions.json": "e3e72638b17b48f825ec6f2fefb963662494f679ae4b0cef1bebedba889610dd",
+      "utils/title_flags.py": "9c9456cb3fb0df5791630049c9c85987381091dbb9ba18bc3fb3314b8cccbeb6",
+      "Scraper/extract.js": "0c52ba2f821d861083c99ec6bc328456df96b3d179b7fffd47f87aadfda84bdb",
+      "Scraper/skills/collect-avito/SKILL.md": "6de3d127c1a604549a8151d9dfd1a60e85aa9a4b0eb72d8182b0aa8d489577c3",
+      "Scraper/skills/collect-avito/scripts/run.py": "ace98fb04fbf2fcd194ba935a257c2eb45dfd8257e85b371ecd7e6729f00f51b",
+      "Scraper/skills/collect-avito/scripts/employer_selection.py": "52cbd4ceb6ed260b861dde8bb15b9d426d5f18237c0c4146007c65a79725f1f9",
+      "Scraper/skills/collect-avito/scripts/sweep_mode.py": "718a956a316df71c47ee3a4c5d3670fa011a5b16e9948393d68216702b140a56",
+      "Scraper/skills/collect-avito/scripts/browser_batch.js": "8090a7905357a3ee3387009d4b9778f3150556506d319b7f62783bb3594d5733",
+      "Scraper/skills/collect-avito/scripts/check_capture.py": "aa746849317f9768af5aae08b394b9379539f6e268c1fc69e4ed13bd06a4657f",
+      "Scraper/skills/collect-avito/scripts/failure_log.py": "7a2fa9f997ae528969f9a864514f30d76427ae06aafe108344df42ead3fe2291",
+      "Scraper/skills/collect-avito/scripts/preflight.py": "492a0d898990aee198f26bf6577d0876360dcc6ec69e274835cd77cdaa768974"
+    },
+    "uncommitted_automation_files": [],
+    "deduplication": {
+      "source_run_id": "moscow-prodavec-medbook-no-20261114-b01",
+      "source_plan_sha256": "0ff15cae6d8ed5147283fb6fc2d34bb7c5d6eafde1602e95591830a0ac570339",
+      "source_queue_sha256": "17a947a55f4668b43b4b5b3a56b55d4f75eeb1f016fc1e2d80565c898cab2b87",
+      "against": [],
+      "source_count": 60,
+      "duplicate_excluded": 4,
+      "novel_count": 56,
+      "duplicate_ids": [
+        "8250926709",
+        "7983484364",
+        "8336614482",
+        "4698761829"
+      ],
+      "dataset": {
+        "csv_sha256": "019a2fd6d6c8be4400dda3fb419c1111b420b5c8b1002662d65cfede03e3a23a",
+        "manifest_sha256": "ff13387d1bddec71ca84049d15313ccf6a199dc57327ee7f7985dd9343759769",
+        "keys_sha256": "8074a100f2ba3a522333b08a6f17595cf695c221e031564948facb458f0a0b61",
+        "rows": 31740
+      }
+    },
+    "city_anomaly_policy": "blank"
+  },
+  "coverage": {
+    "employer_selection": null,
+    "planned": 56,
+    "accepted": 56,
+    "unavailable": [],
+    "unresolved_observations": [],
+    "user_skipped_observations": [],
+    "user_skipped_count": 0,
+    "user_skip_policy": null,
+    "user_detail_skip_policy": null,
+    "deduplication": {
+      "source_run_id": "moscow-prodavec-medbook-no-20261114-b01",
+      "source_plan_sha256": "0ff15cae6d8ed5147283fb6fc2d34bb7c5d6eafde1602e95591830a0ac570339",
+      "source_queue_sha256": "17a947a55f4668b43b4b5b3a56b55d4f75eeb1f016fc1e2d80565c898cab2b87",
+      "against": [],
+      "source_count": 60,
+      "duplicate_excluded": 4,
+      "novel_count": 56,
+      "duplicate_ids": [
+        "8250926709",
+        "7983484364",
+        "8336614482",
+        "4698761829"
+      ],
+      "dataset": {
+        "csv_sha256": "019a2fd6d6c8be4400dda3fb419c1111b420b5c8b1002662d65cfede03e3a23a",
+        "manifest_sha256": "ff13387d1bddec71ca84049d15313ccf6a199dc57327ee7f7985dd9343759769",
+        "keys_sha256": "8074a100f2ba3a522333b08a6f17595cf695c221e031564948facb458f0a0b61",
+        "rows": 31740
+      }
+    },
+    "sweep": null,
+    "unique_ids": [
+      "8347522810",
+      "8549474887",
+      "8382172863",
+      "8441059145",
+      "8072891711",
+      "8402558074",
+      "8396789979",
+      "8490010737",
+      "7876164467",
+      "3440504923",
+      "8180031642",
+      "8535452773",
+      "8343312678",
+      "8523561383",
+      "7637921380",
+      "8470201051",
+      "8016792745",
+      "8450855934",
+      "4425804786",
+      "7613370768",
+      "8477433931",
+      "8340942262",
+      "4561445725",
+      "8332447766",
+      "8433097309",
+      "8066087692",
+      "8396028061",
+      "4057445923",
+      "7215799033",
+      "8449210631",
+      "2174746497",
+      "8393393304",
+      "8503170692",
+      "8136826586",
+      "8070182359",
+      "8379839298",
+      "8393765989",
+      "7628034966",
+      "8153687085",
+      "8589121105",
+      "2748834109",
+      "8337617100",
+      "8439868880",
+      "8160336679",
+      "4631293640",
+      "7481501696",
+      "4865715498",
+      "8376735633",
+      "8322294942",
+      "8270513604",
+      "8286533600",
+      "8203967566",
+      "4570203197",
+      "8383548831",
+      "8439924600",
+      "8544861546"
+    ],
+    "errors": [],
+    "partial": null,
+    "limitations": [
+      "Visible rendered parameters only; enrichment not run; placement on site; live route unverified"
+    ]
+  },
+  "timing": {
+    "setup_seconds": 10.851629707962275,
+    "capture_seconds": 99.75703391665593,
+    "review_export_seconds": 5.891334666870534,
+    "publication_seconds": null
+  },
+  "review_model": "gpt-6.1-terra",
+  "automation_changes": [],
+  "profession_correction": null,
+  "post_capture_automation_sha256": {},
+  "files": {
+    "Data/avito_runs/moscow-prodavec-medbook-no-20261114-b01-novel/dedup-provenance/dataset-keys.json": {
+      "bytes": 1237766,
+      "sha256": "8074a100f2ba3a522333b08a6f17595cf695c221e031564948facb458f0a0b61"
+    },
+    "Data/avito_runs/moscow-prodavec-medbook-no-20261114-b01-novel/dedup-provenance/dataset-manifest.json": {
+      "bytes": 3329558,
+      "sha256": "ff13387d1bddec71ca84049d15313ccf6a199dc57327ee7f7985dd9343759769"
+    },
+    "Data/avito_runs/moscow-prodavec-medbook-no-20261114-b01-novel/dedup-provenance/source-plan.json": {
+      "bytes": 4993,
+      "sha256": "0ff15cae6d8ed5147283fb6fc2d34bb7c5d6eafde1602e95591830a0ac570339"
+    },
+    "Data/avito_runs/moscow-prodavec-medbook-no-20261114-b01-novel/dedup-provenance/source-queue.json": {
+      "bytes": 28929,
+      "sha256": "17a947a55f4668b43b4b5b3a56b55d4f75eeb1f016fc1e2d80565c898cab2b87"
+    },
+    "Data/avito_runs/moscow-prodavec-medbook-no-20261114-b01-novel/dedup_selection.json": {
+      "bytes": 736,
+      "sha256": "b72238508f863107229fd5329220b6626b0d2cc0ad974f07032e50f12c40f61f"
+    },
+    "Data/avito_runs/moscow-prodavec-medbook-no-20261114-b01-novel/exports/vacancies.json": {
+      "bytes": 237589,
+      "sha256": "6a03d2fbfec4b34448313eba727996eaea988325a5b5b89dd47b615251720b27"
+    },
+    "Data/avito_runs/moscow-prodavec-medbook-no-20261114-b01-novel/exports/vacancies_flat.csv": {
+      "bytes": 168093,
+      "sha256": "99215a0c0a39d45ea8bb390628760fb386ea02148bfe85c376b2673b6ce9c186"
+    },
+    "Data/avito_runs/moscow-prodavec-medbook-no-20261114-b01-novel/exports/validation.json": {
+      "bytes": 220,
+      "sha256": "d530b4ea94c7719794b6d47b5f047fd1428db352032b832383d23695b97ce801"
+    },
+    "Data/avito_runs/moscow-prodavec-medbook-no-20261114-b01-novel/listing.json": {
+      "bytes": 53305,
+      "sha256": "7dc0411e12a705bae5d53e00948e92c73f72dec6d50e9db7b9902229aa208193"
+    },
+    "Data/avito_runs/moscow-prodavec-medbook-no-20261114-b01-novel/listing_pages/0001.json": {
+      "bytes": 53305,
+      "sha256": "7dc0411e12a705bae5d53e00948e92c73f72dec6d50e9db7b9902229aa208193"
+    },
+    "Data/avito_runs/moscow-prodavec-medbook-no-20261114-b01-novel/listing_pages/0002.json": {
+      "bytes": 53681,
+      "sha256": "1fffd3e7bce2571160f97f46af7db8d4b7a3ab9baf7a70d64c59cef583d62103"
+    },
+    "Data/avito_runs/moscow-prodavec-medbook-no-20261114-b01-novel/queue.json": {
+      "bytes": 26920,
+      "sha256": "70218df6c24adb937e7b6e9214f1a50f079a266d6de3d080f65e7ec9bce9e670"
+    },
+    "Data/avito_runs/moscow-prodavec-medbook-no-20261114-b01-novel/raw/2174746497.json": {
+      "bytes": 13624,
+      "sha256": "6830ce2123b5411eef0311f05652e4781a9bfa93dde7f7f474f681c641a5d966"
+    },
+    "Data/avito_runs/moscow-prodavec-medbook-no-20261114-b01-novel/raw/2748834109.json": {
+      "bytes": 6678,
+      "sha256": "d577e72f7bc22292d057782f8969cf8d2e9b6f19689f302b9181eb5ad501b0ba"
+    },
+    "Data/avito_runs/moscow-prodavec-medbook-no-20261114-b01-novel/raw/3440504923.json": {
+      "bytes": 7717,
+      "sha256": "02927608914feee804507b5715bd7ae04e54fe064ee303e171ba25d523f6d68c"
+    },
+    "Data/avito_runs/moscow-prodavec-medbook-no-20261114-b01-novel/raw/4057445923.json": {
+      "bytes": 7165,
+      "sha256": "8da0a138d70b6f1b86f09f79c183cc55a13a056b209fd0e16e912d1329164370"
+    },
+    "Data/avito_runs/moscow-prodavec-medbook-no-20261114-b01-novel/raw/4425804786.json": {
+      "bytes": 12847,
+      "sha256": "475f6a67bbfd3606d76fdc22a149519f9d7d83d63840737640347be2fb0ad879"
+    },
+    "Data/avito_runs/moscow-prodavec-medbook-no-20261114-b01-novel/raw/4561445725.json": {
+      "bytes": 11235,
+      "sha256": "a963d3130abd3ff606d13b82934749922c412ab236777f302ce66a3f3c71893c"
+    },
+    "Data/avito_runs/moscow-prodavec-medbook-no-20261114-b01-novel/raw/4570203197.json": {
+      "bytes": 9784,
+      "sha256": "5353917e88d336a90827f03af165b313a38fbf78e0510e9a24e8221da3816990"
+    },
+    "Data/avito_runs/moscow-prodavec-medbook-no-20261114-b01-novel/raw/4631293640.json": {
+      "bytes": 10253,
+      "sha256": "5c795a58c7010b848825527ab966f05c0e30f01b71c80a068a518e0f33b67448"
+    },
+    "Data/avito_runs/moscow-prodavec-medbook-no-20261114-b01-novel/raw/4865715498.json": {
+      "bytes": 13713,
+      "sha256": "c14b51cd74fe20e493f965916fe433e02a20c12e8682ab65224dd708e768027c"
+    },
+    "Data/avito_runs/moscow-prodavec-medbook-no-20261114-b01-novel/raw/7215799033.json": {
+      "bytes": 5667,
+      "sha256": "a85f2119e360735cebd7ebfb2d5ee2af5d6a0defd9476fb3278ffb529fa1fbdc"
+    },
+    "Data/avito_runs/moscow-prodavec-medbook-no-20261114-b01-novel/raw/7481501696.json": {
+      "bytes": 9804,
+      "sha256": "24b0831b061e3c9243bde796d06348612c8a30de71f301a0a48dfa6899f2d648"
+    },
+    "Data/avito_runs/moscow-prodavec-medbook-no-20261114-b01-novel/raw/7613370768.json": {
+      "bytes": 14616,
+      "sha256": "1d1b6633b58dbb8799e9cea244d69113916d7afffb428d226473e3ddce0d584e"
+    },
+    "Data/avito_runs/moscow-prodavec-medbook-no-20261114-b01-novel/raw/7628034966.json": {
+      "bytes": 9659,
+      "sha256": "ec8c84055fc627f043ccbd9c8c67f054fa30f79f21e1fdf656161bac41d28259"
+    },
+    "Data/avito_runs/moscow-prodavec-medbook-no-20261114-b01-novel/raw/7637921380.json": {
+      "bytes": 17741,
+      "sha256": "b6dd83fd3371f2f63155fa2276d6f0f3f8f4e6b9b817fff6c26faee2bd4a681c"
+    },
+    "Data/avito_runs/moscow-prodavec-medbook-no-20261114-b01-novel/raw/7876164467.json": {
+      "bytes": 10441,
+      "sha256": "abb4d3096126244d88cfe267690bda05a27883c1b29fbe8c112ecb979fa40473"
+    },
+    "Data/avito_runs/moscow-prodavec-medbook-no-20261114-b01-novel/raw/8016792745.json": {
+      "bytes": 10635,
+      "sha256": "9ba038b824ea42788fef6acd0387a198a56314d55382927c6733cdd7e28d845d"
+    },
+    "Data/avito_runs/moscow-prodavec-medbook-no-20261114-b01-novel/raw/8066087692.json": {
+      "bytes": 13288,
+      "sha256": "78101c06d2a030928b3bc71ddcc0cb43b66d8a6d2b8264345f71f7eca3bad648"
+    },
+    "Data/avito_runs/moscow-prodavec-medbook-no-20261114-b01-novel/raw/8070182359.json": {
+      "bytes": 11680,
+      "sha256": "cae01973ee651d34f16a185e792cb30166053bca544f7987132a6f48e2ab0ab9"
+    },
+    "Data/avito_runs/moscow-prodavec-medbook-no-20261114-b01-novel/raw/8072891711.json": {
+      "bytes": 12071,
+      "sha256": "f4550caa4ef59acc3c06a3568791a7bb6cbe2f1286904215cc1497299dbd1b5c"
+    },
+    "Data/avito_runs/moscow-prodavec-medbook-no-20261114-b01-novel/raw/8136826586.json": {
+      "bytes": 16387,
+      "sha256": "a4138fc44f36f4c4e955804c36462efc9c66b2fd4a21d447c2c01100f17ee05c"
+    },
+    "Data/avito_runs/moscow-prodavec-medbook-no-20261114-b01-novel/raw/8153687085.json": {
+      "bytes": 13608,
+      "sha256": "ba9325a7422fdbfb1e8ac7302d18661ad3b489b4cda4ddfdf49ee7ff5414b25e"
+    },
+    "Data/avito_runs/moscow-prodavec-medbook-no-20261114-b01-novel/raw/8160336679.json": {
+      "bytes": 7430,
+      "sha256": "316950a83408f74a0d415f52fe2cf485a052a6b75fd2521f6c1ba5fabe689ad7"
+    },
+    "Data/avito_runs/moscow-prodavec-medbook-no-20261114-b01-novel/raw/8180031642.json": {
+      "bytes": 15564,
+      "sha256": "9eae42a217f9396cdbbd24e0544f969a2de4908c792b98bf54a4a995c483ecd2"
+    },
+    "Data/avito_runs/moscow-prodavec-medbook-no-20261114-b01-novel/raw/8203967566.json": {
+      "bytes": 8516,
+      "sha256": "4b85cd18cab9f1211bf48001b81908e5eda2d44f5f2d942d19a722972ca2de05"
+    },
+    "Data/avito_runs/moscow-prodavec-medbook-no-20261114-b01-novel/raw/8270513604.json": {
+      "bytes": 18031,
+      "sha256": "a22a801d159ff29689995d34caa3b9414bc4e2093ab1f34e40e131764f3300b2"
+    },
+    "Data/avito_runs/moscow-prodavec-medbook-no-20261114-b01-novel/raw/8286533600.json": {
+      "bytes": 13178,
+      "sha256": "ecfdd38a9f00ec659555d981c8f559bdf7f7785c82850db11ed5af3d97aac3f6"
+    },
+    "Data/avito_runs/moscow-prodavec-medbook-no-20261114-b01-novel/raw/8322294942.json": {
+      "bytes": 12066,
+      "sha256": "643ab6db7ef20a002eb379e4c99a23fc4fbf26157bbca633d1c9ea719a13beaa"
+    },
+    "Data/avito_runs/moscow-prodavec-medbook-no-20261114-b01-novel/raw/8332447766.json": {
+      "bytes": 11688,
+      "sha256": "1212fa99874baa0434800a0c70fdf134a8b544174ee170a84f9ac4ea1dac61f0"
+    },
+    "Data/avito_runs/moscow-prodavec-medbook-no-20261114-b01-novel/raw/8337617100.json": {
+      "bytes": 12492,
+      "sha256": "d72aae8f1018b04d7ef6bfd1cc821431e887d58ee138e183641ab61635f4986c"
+    },
+    "Data/avito_runs/moscow-prodavec-medbook-no-20261114-b01-novel/raw/8340942262.json": {
+      "bytes": 12905,
+      "sha256": "36e59407643dd8c14ae5705dc14752d31561304e4052fa877ee3fc075b7ace84"
+    },
+    "Data/avito_runs/moscow-prodavec-medbook-no-20261114-b01-novel/raw/8343312678.json": {
+      "bytes": 13601,
+      "sha256": "0742b5ecfe1295d654cff936a04466e4ffefd67a554df3136418f33075b804f8"
+    },
+    "Data/avito_runs/moscow-prodavec-medbook-no-20261114-b01-novel/raw/8347522810.json": {
+      "bytes": 13948,
+      "sha256": "d38a325ef182475ee6f50fd8e58d68438ff3e9472214a03446caf61469640ff0"
+    },
+    "Data/avito_runs/moscow-prodavec-medbook-no-20261114-b01-novel/raw/8376735633.json": {
+      "bytes": 15381,
+      "sha256": "d8150c0f40159d7245a44bbd031487620aeaac7ea25369a46b0e7014101102b7"
+    },
+    "Data/avito_runs/moscow-prodavec-medbook-no-20261114-b01-novel/raw/8379839298.json": {
+      "bytes": 13863,
+      "sha256": "8e946897650b95f8794f7591b5d6491ada8cd0bc22c3421af3a9d3169ee592f0"
+    },
+    "Data/avito_runs/moscow-prodavec-medbook-no-20261114-b01-novel/raw/8382172863.json": {
+      "bytes": 14473,
+      "sha256": "9469fff72601230247976121e2c52e4bfbac8dc737fdf1219356173157c50f44"
+    },
+    "Data/avito_runs/moscow-prodavec-medbook-no-20261114-b01-novel/raw/8383548831.json": {
+      "bytes": 11326,
+      "sha256": "81e70c9c2972691c62fa6774779f1e753fe90389147b2f1d5b87e437b55fc331"
+    },
+    "Data/avito_runs/moscow-prodavec-medbook-no-20261114-b01-novel/raw/8393393304.json": {
+      "bytes": 10462,
+      "sha256": "8ced77bdce7a61c54f140a692db09bc3a2549fb8b06da7fe21d4718d7c5a377f"
+    },
+    "Data/avito_runs/moscow-prodavec-medbook-no-20261114-b01-novel/raw/8393765989.json": {
+      "bytes": 15405,
+      "sha256": "39d2d62dd9cb26a3c7a1f524080998711051719e9e84c057c641d7acaacfb0e5"
+    },
+    "Data/avito_runs/moscow-prodavec-medbook-no-20261114-b01-novel/raw/8396028061.json": {
+      "bytes": 6223,
+      "sha256": "bacb337079965573f88b912d895c03522dc5f7d5a0264e468f790eaf6efaa9ba"
+    },
+    "Data/avito_runs/moscow-prodavec-medbook-no-20261114-b01-novel/raw/8396789979.json": {
+      "bytes": 15148,
+      "sha256": "6191665d8ccb8be0f6838dfc7e7b3f1507b0ae85725bc217ff74342aab14b520"
+    },
+    "Data/avito_runs/moscow-prodavec-medbook-no-20261114-b01-novel/raw/8402558074.json": {
+      "bytes": 11822,
+      "sha256": "635ceba89ef993d9015b4e56f1fbab8a44b0e644cac1c10c87f48d59492644d8"
+    },
+    "Data/avito_runs/moscow-prodavec-medbook-no-20261114-b01-novel/raw/8433097309.json": {
+      "bytes": 11068,
+      "sha256": "d38eabe4e5c40068b5f5b2d75c1e3f82482f94e2c9389a128c7efcf769066cb6"
+    },
+    "Data/avito_runs/moscow-prodavec-medbook-no-20261114-b01-novel/raw/8439868880.json": {
+      "bytes": 12415,
+      "sha256": "8e9935c5ce6b82246490b3e38361f7fcbb82f91e413d21287b68792b0c9844d1"
+    },
+    "Data/avito_runs/moscow-prodavec-medbook-no-20261114-b01-novel/raw/8439924600.json": {
+      "bytes": 11115,
+      "sha256": "7c26ca9dcad715fc85c92403fd87ffcc39a928513e9b275f0ebd580ee4a7bdec"
+    },
+    "Data/avito_runs/moscow-prodavec-medbook-no-20261114-b01-novel/raw/8441059145.json": {
+      "bytes": 15976,
+      "sha256": "3c819a3535997c47af1ad7d82aea5b9a15154b94b2b1961b8c224532275d9e4b"
+    },
+    "Data/avito_runs/moscow-prodavec-medbook-no-20261114-b01-novel/raw/8449210631.json": {
+      "bytes": 9710,
+      "sha256": "6e54534aa4a284a64a6f9dea63a4dfcf26cd1bbb8ae8fe2096e240a56d252b2e"
+    },
+    "Data/avito_runs/moscow-prodavec-medbook-no-20261114-b01-novel/raw/8450855934.json": {
+      "bytes": 9769,
+      "sha256": "b27a105c511448331a54ebd38f0fbab0e3a8a8f04902addaf73db795e69930cf"
+    },
+    "Data/avito_runs/moscow-prodavec-medbook-no-20261114-b01-novel/raw/8470201051.json": {
+      "bytes": 13933,
+      "sha256": "0fdd2fa3430d5830791ad05055a0f68fa6f631729b7ef5bf5f79cc22cb0856ac"
+    },
+    "Data/avito_runs/moscow-prodavec-medbook-no-20261114-b01-novel/raw/8477433931.json": {
+      "bytes": 5036,
+      "sha256": "697f10bb14f927a1a32856dd0efef5747c5e9fccf7bbc3333e7d09ec67aa674e"
+    },
+    "Data/avito_runs/moscow-prodavec-medbook-no-20261114-b01-novel/raw/8490010737.json": {
+      "bytes": 13391,
+      "sha256": "358030d04415a9b271e6105e0c71c41274fe77462995f7203e26c4350491e971"
+    },
+    "Data/avito_runs/moscow-prodavec-medbook-no-20261114-b01-novel/raw/8503170692.json": {
+      "bytes": 11846,
+      "sha256": "93d2f1198c6317ef3a2e3879245adb3534593dc45b2a331b4f92fa67fea6542d"
+    },
+    "Data/avito_runs/moscow-prodavec-medbook-no-20261114-b01-novel/raw/8523561383.json": {
+      "bytes": 6853,
+      "sha256": "69ab6e19fd868164500ba232da78ca17d7eecd3a8303b860b4a271a40d8a3205"
+    },
+    "Data/avito_runs/moscow-prodavec-medbook-no-20261114-b01-novel/raw/8535452773.json": {
+      "bytes": 14241,
+      "sha256": "2cfd83016929952d34696a218281b4c6f99a886caba6be62a13be7a61671a169"
+    },
+    "Data/avito_runs/moscow-prodavec-medbook-no-20261114-b01-novel/raw/8544861546.json": {
+      "bytes": 17433,
+      "sha256": "88f16750542efe4b426da1993110caf3a2593254d1e49cbe83656a395482e151"
+    },
+    "Data/avito_runs/moscow-prodavec-medbook-no-20261114-b01-novel/raw/8549474887.json": {
+      "bytes": 12030,
+      "sha256": "39b4d7907a7ddf4bf23e29f665292851796e5bed04a8ff202d8db945177595cd"
+    },
+    "Data/avito_runs/moscow-prodavec-medbook-no-20261114-b01-novel/raw/8589121105.json": {
+      "bytes": 12991,
+      "sha256": "49afac20b49e72ff4c78d7181a1113ec0b4a218bc43fd3f92ac987b3ba761d33"
+    },
+    "Data/avito_runs/moscow-prodavec-medbook-no-20261114-b01-novel/reviewed/2174746497.json": {
+      "bytes": 864,
+      "sha256": "e6287f5a2adb56675053f36826e15677cc951827ae6159c63f215f5dbc4f8088"
+    },
+    "Data/avito_runs/moscow-prodavec-medbook-no-20261114-b01-novel/reviewed/2748834109.json": {
+      "bytes": 850,
+      "sha256": "08f1ecb193a07cbdbd0d02cd12f96d402a0ec927ce8014af1dae62c81e1c5564"
+    },
+    "Data/avito_runs/moscow-prodavec-medbook-no-20261114-b01-novel/reviewed/3440504923.json": {
+      "bytes": 771,
+      "sha256": "ea6b9ae27abfb21b91e1a5e6964a5fd3468d8aaac4ce25c99f4ebdc3718c38b1"
+    },
+    "Data/avito_runs/moscow-prodavec-medbook-no-20261114-b01-novel/reviewed/4057445923.json": {
+      "bytes": 838,
+      "sha256": "37e25d465a1bdf509e20e4f4b66e0dd257d89e4def0cef61faec9cd11ba5a428"
+    },
+    "Data/avito_runs/moscow-prodavec-medbook-no-20261114-b01-novel/reviewed/4425804786.json": {
+      "bytes": 877,
+      "sha256": "12c34d0b2cb48375fd65182f2bdce52bf83f1ef518d2f8aa916844645df178bb"
+    },
+    "Data/avito_runs/moscow-prodavec-medbook-no-20261114-b01-novel/reviewed/4561445725.json": {
+      "bytes": 789,
+      "sha256": "bdd60c83e48db845a97eae451f88b5c32ab26d8f292610f014791c24ec35bac4"
+    },
+    "Data/avito_runs/moscow-prodavec-medbook-no-20261114-b01-novel/reviewed/4570203197.json": {
+      "bytes": 770,
+      "sha256": "1b92251910458f3593a3ea89bf93532f93b292b56f534e92dc5526d2ff310eb6"
+    },
+    "Data/avito_runs/moscow-prodavec-medbook-no-20261114-b01-novel/reviewed/4631293640.json": {
+      "bytes": 794,
+      "sha256": "6fa72659b077f66c0cc77918443a086148a8d64f9f771e6666858bf70e1dc4ef"
+    },
+    "Data/avito_runs/moscow-prodavec-medbook-no-20261114-b01-novel/reviewed/4865715498.json": {
+      "bytes": 791,
+      "sha256": "8286b4e3fa462d80e13b9c8a7f99bae847f665276cb16c9b0743fdff1ea0bfc1"
+    },
+    "Data/avito_runs/moscow-prodavec-medbook-no-20261114-b01-novel/reviewed/7215799033.json": {
+      "bytes": 859,
+      "sha256": "d42fed717aaf5e1cdd6b42f838ca312e4b85d03a9b53a11ec64c3b62f061f2a0"
+    },
+    "Data/avito_runs/moscow-prodavec-medbook-no-20261114-b01-novel/reviewed/7481501696.json": {
+      "bytes": 756,
+      "sha256": "5b58769f2976b28bc0e03886166cab21ff714d028f264fc6d915902a26a78f6d"
+    },
+    "Data/avito_runs/moscow-prodavec-medbook-no-20261114-b01-novel/reviewed/7613370768.json": {
+      "bytes": 792,
+      "sha256": "39dc4289cc1075f7621d7e119b3c07e4847d9e949704eb352b1fb6fda326674d"
+    },
+    "Data/avito_runs/moscow-prodavec-medbook-no-20261114-b01-novel/reviewed/7628034966.json": {
+      "bytes": 787,
+      "sha256": "f1f31311a57c9728c30be05f9a39cd407d451c4a13bda354ac2d7e46119fda64"
+    },
+    "Data/avito_runs/moscow-prodavec-medbook-no-20261114-b01-novel/reviewed/7637921380.json": {
+      "bytes": 771,
+      "sha256": "b8ed0e4ae1ada85e9f31fa16dd00e16821b3eaa7b30f27b00af95d76a7c6fb6b"
+    },
+    "Data/avito_runs/moscow-prodavec-medbook-no-20261114-b01-novel/reviewed/7876164467.json": {
+      "bytes": 772,
+      "sha256": "2a27f9568a51f72c5e45aeebeb406289e9606bca08da77e14d0f69440d2a8811"
+    },
+    "Data/avito_runs/moscow-prodavec-medbook-no-20261114-b01-novel/reviewed/8016792745.json": {
+      "bytes": 830,
+      "sha256": "801110ccf779051370c33fcc439fad891d4546aa9038ca50b5631461a5fb2439"
+    },
+    "Data/avito_runs/moscow-prodavec-medbook-no-20261114-b01-novel/reviewed/8066087692.json": {
+      "bytes": 841,
+      "sha256": "ac94c3c6bb6adda061ba069a1cfe335b95d63592171c89a9e0a83960e802a6b5"
+    },
+    "Data/avito_runs/moscow-prodavec-medbook-no-20261114-b01-novel/reviewed/8070182359.json": {
+      "bytes": 845,
+      "sha256": "5f74db781b1df600d8cd965c902aa73b90f81ab4642c2ca7fe8633b9677f1537"
+    },
+    "Data/avito_runs/moscow-prodavec-medbook-no-20261114-b01-novel/reviewed/8072891711.json": {
+      "bytes": 873,
+      "sha256": "8f4cac9fb136006143bff90156fd23acf5e14efa803ff732a9b6f03cb98729b1"
+    },
+    "Data/avito_runs/moscow-prodavec-medbook-no-20261114-b01-novel/reviewed/8136826586.json": {
+      "bytes": 785,
+      "sha256": "e29b164e98f24f8e8504d6b20d960ac5105b4e386438d12e4e1fd0029a751699"
+    },
+    "Data/avito_runs/moscow-prodavec-medbook-no-20261114-b01-novel/reviewed/8153687085.json": {
+      "bytes": 858,
+      "sha256": "1b72a5aa9353436cab8ebacc035f82dfdbb3d1039b818949431979fd7316cb6e"
+    },
+    "Data/avito_runs/moscow-prodavec-medbook-no-20261114-b01-novel/reviewed/8160336679.json": {
+      "bytes": 787,
+      "sha256": "dfe9dd66972f7b1546c4f980baad653890e0de2f234b52883342236cd900add2"
+    },
+    "Data/avito_runs/moscow-prodavec-medbook-no-20261114-b01-novel/reviewed/8180031642.json": {
+      "bytes": 787,
+      "sha256": "29155249c8bdbcff23cd4c9e11b5e7356c79f8b056d476f476d575da93c9dd22"
+    },
+    "Data/avito_runs/moscow-prodavec-medbook-no-20261114-b01-novel/reviewed/8203967566.json": {
+      "bytes": 774,
+      "sha256": "8f969811fb715572754201ae6f9a340657d1d00241b8bfe9f5d5342d6264d0c5"
+    },
+    "Data/avito_runs/moscow-prodavec-medbook-no-20261114-b01-novel/reviewed/8270513604.json": {
+      "bytes": 791,
+      "sha256": "c56d1dba8834b999ce712aa1ae61cdd1a260a20fc2a1d6c1dea11c66edeceffa"
+    },
+    "Data/avito_runs/moscow-prodavec-medbook-no-20261114-b01-novel/reviewed/8286533600.json": {
+      "bytes": 801,
+      "sha256": "701ed6fc187341ff39f0916252af510a6d46dbc485c846e6c640b62384972db6"
+    },
+    "Data/avito_runs/moscow-prodavec-medbook-no-20261114-b01-novel/reviewed/8322294942.json": {
+      "bytes": 851,
+      "sha256": "dc4ff39559a87e7d5216e60bc485e9a74cdb608a3e94e7979846115ba3950ed1"
+    },
+    "Data/avito_runs/moscow-prodavec-medbook-no-20261114-b01-novel/reviewed/8332447766.json": {
+      "bytes": 764,
+      "sha256": "bd25ff2c2d41b36decd9bdcb5fd2efc78f7f1e4ebbcbf5fcc305b69fcde666af"
+    },
+    "Data/avito_runs/moscow-prodavec-medbook-no-20261114-b01-novel/reviewed/8337617100.json": {
+      "bytes": 810,
+      "sha256": "6e180e135dbd4873ec1eaacf4770176b0e35cf2e433f388875084ee083407b30"
+    },
+    "Data/avito_runs/moscow-prodavec-medbook-no-20261114-b01-novel/reviewed/8340942262.json": {
+      "bytes": 804,
+      "sha256": "54d91ff0123a642ea74dd4682dc230662b3f7cd8e1d09dadcd147f8dbd2fdf5b"
+    },
+    "Data/avito_runs/moscow-prodavec-medbook-no-20261114-b01-novel/reviewed/8343312678.json": {
+      "bytes": 787,
+      "sha256": "b9c25a2137929c0b85a4ab83c825dc8ba84c398ea1e49690b67df9940173bfc1"
+    },
+    "Data/avito_runs/moscow-prodavec-medbook-no-20261114-b01-novel/reviewed/8347522810.json": {
+      "bytes": 774,
+      "sha256": "40742242af9dcc72a6ee6bf3d6c483c5f1cbda7b1c8820acb7813061a36affed"
+    },
+    "Data/avito_runs/moscow-prodavec-medbook-no-20261114-b01-novel/reviewed/8376735633.json": {
+      "bytes": 789,
+      "sha256": "53ed7ce575e969fd7a4923fdef41fd9ab7fc7a3b3272cd74288cee8cb38c34e3"
+    },
+    "Data/avito_runs/moscow-prodavec-medbook-no-20261114-b01-novel/reviewed/8379839298.json": {
+      "bytes": 806,
+      "sha256": "1e88a70a0834d24c0b165701e814e7a851682c28d79cf8b2d8aaaddfdae2309f"
+    },
+    "Data/avito_runs/moscow-prodavec-medbook-no-20261114-b01-novel/reviewed/8382172863.json": {
+      "bytes": 757,
+      "sha256": "3bcb9fa3dca9ddd06d11b0610baf61c5d0a7cf191883c82e7806afeafcb38d95"
+    },
+    "Data/avito_runs/moscow-prodavec-medbook-no-20261114-b01-novel/reviewed/8383548831.json": {
+      "bytes": 778,
+      "sha256": "a5a64c6f6b0c2b8931fdb01ab143ecbf61d1c76daf12c0e77a0961b3267eab61"
+    },
+    "Data/avito_runs/moscow-prodavec-medbook-no-20261114-b01-novel/reviewed/8393393304.json": {
+      "bytes": 797,
+      "sha256": "c78a7c4d78d93b2e278992be015cd93acac5f7e31cca521b8df91a7711596ce8"
+    },
+    "Data/avito_runs/moscow-prodavec-medbook-no-20261114-b01-novel/reviewed/8393765989.json": {
+      "bytes": 795,
+      "sha256": "e299fd5f254b7bd5e828765815ff14354c6927606f456e0cf8026e13996ac5f5"
+    },
+    "Data/avito_runs/moscow-prodavec-medbook-no-20261114-b01-novel/reviewed/8396028061.json": {
+      "bytes": 869,
+      "sha256": "413b33bc886444c3d9fa089bc750162d503cc1b35935951ef31e01335ca9773c"
+    },
+    "Data/avito_runs/moscow-prodavec-medbook-no-20261114-b01-novel/reviewed/8396789979.json": {
+      "bytes": 991,
+      "sha256": "a3bbe45e49cabe8aeb76e80751b4ccd640ec9ef8780616a8006beb401115fb16"
+    },
+    "Data/avito_runs/moscow-prodavec-medbook-no-20261114-b01-novel/reviewed/8402558074.json": {
+      "bytes": 855,
+      "sha256": "dc5115a0edcab1bd489deb92b954ccf9075da71a50ecbe044cec4cdfc900f1fa"
+    },
+    "Data/avito_runs/moscow-prodavec-medbook-no-20261114-b01-novel/reviewed/8433097309.json": {
+      "bytes": 799,
+      "sha256": "01f41bf6b9ec79f0eef8f9809ab6fd006e21e27e1d687769c17fa470d423e225"
+    },
+    "Data/avito_runs/moscow-prodavec-medbook-no-20261114-b01-novel/reviewed/8439868880.json": {
+      "bytes": 785,
+      "sha256": "a38dccc02ae9d5dacdb57c73c2becb344b2e40cc6265b17058796e8dcf835a49"
+    },
+    "Data/avito_runs/moscow-prodavec-medbook-no-20261114-b01-novel/reviewed/8439924600.json": {
+      "bytes": 774,
+      "sha256": "70a5aa4b78f67d546111d28e43d8a0e4ede812abce3546806922fb8d6a1f4bc5"
+    },
+    "Data/avito_runs/moscow-prodavec-medbook-no-20261114-b01-novel/reviewed/8441059145.json": {
+      "bytes": 877,
+      "sha256": "f0ec4e4a2bfd53f90a7defd7b6f29dfba4187cf7411feea833560614d0ea5c1d"
+    },
+    "Data/avito_runs/moscow-prodavec-medbook-no-20261114-b01-novel/reviewed/8449210631.json": {
+      "bytes": 781,
+      "sha256": "db81b3cdbf46b22e5a83de5820318d2a9b0681e68b5dddead8615f51b29676b4"
+    },
+    "Data/avito_runs/moscow-prodavec-medbook-no-20261114-b01-novel/reviewed/8450855934.json": {
+      "bytes": 775,
+      "sha256": "2850b14bc6811112697d286bd82005e4ffeb2bdf2c8e8396157f73acaa525b7a"
+    },
+    "Data/avito_runs/moscow-prodavec-medbook-no-20261114-b01-novel/reviewed/8470201051.json": {
+      "bytes": 855,
+      "sha256": "d44dfd0cfa106170d136d9a89420d5218ba572eb5bce584f3b5a370fee04e403"
+    },
+    "Data/avito_runs/moscow-prodavec-medbook-no-20261114-b01-novel/reviewed/8477433931.json": {
+      "bytes": 820,
+      "sha256": "50ab6a81331202cc8490182fe087a0c12ae150d1c6024331ee549922b054b479"
+    },
+    "Data/avito_runs/moscow-prodavec-medbook-no-20261114-b01-novel/reviewed/8490010737.json": {
+      "bytes": 898,
+      "sha256": "70eccb7079e56c45d3ec8e43370b649a32dd0c880d3dcbd02b28af2ad123b918"
+    },
+    "Data/avito_runs/moscow-prodavec-medbook-no-20261114-b01-novel/reviewed/8503170692.json": {
+      "bytes": 813,
+      "sha256": "384e64050b3df5509ee6d5cdc6edf85d5c72804616695b4bc38980e25b64b623"
+    },
+    "Data/avito_runs/moscow-prodavec-medbook-no-20261114-b01-novel/reviewed/8523561383.json": {
+      "bytes": 784,
+      "sha256": "fb65fb4ede74d8e9fe349aeea1bb4a89f999fb43f9e2d829f3b98aee6ce48eff"
+    },
+    "Data/avito_runs/moscow-prodavec-medbook-no-20261114-b01-novel/reviewed/8535452773.json": {
+      "bytes": 805,
+      "sha256": "01277e1f93b9ee792e91b3504735d58fa422b3a2a21b26c137b52a31cb55e371"
+    },
+    "Data/avito_runs/moscow-prodavec-medbook-no-20261114-b01-novel/reviewed/8544861546.json": {
+      "bytes": 821,
+      "sha256": "e098cf88cbff3329f73d227197c0a87c730e0f3e8f03f40af2f7867f986c7ce0"
+    },
+    "Data/avito_runs/moscow-prodavec-medbook-no-20261114-b01-novel/reviewed/8549474887.json": {
+      "bytes": 769,
+      "sha256": "99cc4db4ec28d2769a2c740e826f358b99077420f905b40daf02ce7015cbd613"
+    },
+    "Data/avito_runs/moscow-prodavec-medbook-no-20261114-b01-novel/reviewed/8589121105.json": {
+      "bytes": 864,
+      "sha256": "cd6eaea1f8b0bbd43c4b8ce3b1b3d4e6bfbcf050a4b2db89e05d9f533ebd776d"
+    },
+    "Data/avito_runs/moscow-prodavec-medbook-no-20261114-b01-novel/standing_unavailable_policy.json": {
+      "bytes": 1011,
+      "sha256": "7a1c18520dc10340252a4933e92bb851f78d800b32c33c1017ede17529393381"
+    },
+    "Scraper/runs/moscow-prodavec-medbook-no-20261114-b01-novel/plan.json": {
+      "bytes": 5795,
+      "sha256": "2acc911f52a0f26bdf88bbb9ac0c6d49196217384da4fdd01063ea7826d3735c"
+    },
+    "Scraper/runs/moscow-prodavec-medbook-no-20261114-b01-novel/shared-ledger.json": {
+      "bytes": 65,
+      "sha256": "3e57140c430f853707d2a931bbc95e55256278efab03e8247a2924689de59f7e"
+    }
+  }
+}

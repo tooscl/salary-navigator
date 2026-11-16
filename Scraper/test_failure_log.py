@@ -12,6 +12,54 @@ spec.loader.exec_module(failure_log)
 
 
 class FailureBudgetTests(unittest.TestCase):
+    def test_resume_after_immediate_stop_retains_prior_unbounded_scope_only_with_fresh_instruction(self):
+        with tempfile.TemporaryDirectory() as directory:
+            diag = Path(directory)
+            failure_log.record(diag, 'filters', 'technical', 'click')
+            failure_log.record(diag, 'filters', 'technical', 'click')
+            failure_log.authorize_browser(diag, 'unlimited technical retries', 'first', unbounded_retries=True)
+            failure_log.record(diag, 'filters', 'IP restriction', 'stop', immediate=True)
+            with self.assertRaises(failure_log.HumanRequired):
+                failure_log.authorize_browser(diag, 'continue', 'second', unbounded_retries=True)
+            failure_log.authorize_browser(diag, 'continue sequentially', 'second', retain_unbounded=True)
+            ledger = failure_log.load(diag)
+            self.assertTrue(ledger['unbounded_retries'])
+            self.assertEqual(ledger['failures'], 3)
+            self.assertTrue(ledger['events'][-1]['retained_unbounded'])
+            failure_log.record(diag, 'filters', 'IP restriction again', 'stop', immediate=True)
+            with self.assertRaises(failure_log.HumanRequired):
+                failure_log.authorize_browser(diag, 'continue sequentially', 'second', retain_unbounded=True)
+        with tempfile.TemporaryDirectory() as directory:
+            diag = Path(directory)
+            failure_log.record(diag, 'filters', 'IP restriction', 'stop', immediate=True)
+            with self.assertRaises(failure_log.HumanRequired):
+                failure_log.authorize_browser(diag, 'continue', 'new', retain_unbounded=True)
+
+    def test_administrative_immediate_correction_preserves_events_and_rejects_site_stops(self):
+        message = 'Попытка записать первую ошибку завершилась argparse usage error: отсутствовали обязательные --message и --action; запись не была создана.'
+        action = 'Вызов record-error с неполными аргументами после RefStaleError'
+        for protected in (False, True):
+            with self.subTest(protected=protected), tempfile.TemporaryDirectory() as directory:
+                diag = Path(directory)
+                failure_log.record(diag, 'filters', 'CAPTCHA' if protected else 'RefStaleError', 'click', immediate=protected)
+                failure_log.record(diag, 'filters', message, action, immediate=True)
+                before = failure_log.load(diag)
+                if protected:
+                    with self.assertRaises(failure_log.HumanRequired):
+                        failure_log.authorize_browser(diag, 'Continue technical retries', 'auth', unbounded_retries=True, correct_record_error=True)
+                    self.assertEqual(failure_log.load(diag), before)
+                else:
+                    failure_log.authorize_browser(diag, 'Continue technical retries', 'auth', unbounded_retries=True, correct_record_error=True)
+                    after = failure_log.load(diag)
+                    self.assertEqual(after['events'][:2], before['events'])
+                    self.assertEqual(after['events'][2]['event'], 'administrative_immediate_correction')
+                    self.assertEqual(after['events'][2]['failure_attempt'], 2)
+                    self.assertEqual(after['events'][3]['authorization_id'], 'auth')
+                    self.assertEqual(after['failures'], 2)
+                    failure_log.record(diag, 'capture', 'IP restriction', 'read', immediate=True)
+                    with self.assertRaises(failure_log.HumanRequired):
+                        failure_log.authorize_browser(diag, 'Continue', 'auth-2', unbounded_retries=True, correct_record_error=True)
+
     def test_unbounded_authorization_preserves_history_and_access_stops(self):
         with tempfile.TemporaryDirectory() as directory:
             diag = Path(directory)

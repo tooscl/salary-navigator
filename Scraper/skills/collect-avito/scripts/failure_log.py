@@ -241,18 +241,20 @@ def authorize_offline(diag, instruction):
         save(diag, ledger)
 
 
-def authorize_browser(diag, instruction, authorization_id, *, unbounded_retries=False):
+def authorize_browser(diag, instruction, authorization_id, *, unbounded_retries=False, correct_record_error=False, retain_unbounded=False):
     """Explicit human consent starts a bounded new budget, never erases history."""
     if unbounded_retries and ledger_dir(diag) != diag:
         raise HumanRequired('Unbounded authorization cannot apply to a shared ledger')
     diag = ledger_dir(diag)
     if not instruction.strip() or not authorization_id.strip():
         raise ValueError('Fresh human instruction and a stable authorization-id are required')
+    if retain_unbounded and (unbounded_retries or correct_record_error):
+        raise ValueError('Retaining and creating unbounded authorization are mutually exclusive')
     with locked(diag):
         ledger = load(diag)
         prior = next((e for e in ledger['events'] if e.get('event') == 'human_browser_authorization' and e.get('authorization_id') == authorization_id), None)
         if prior:
-            if bool(prior.get('unbounded_retries')) != unbounded_retries:
+            if bool(prior.get('unbounded_retries')) != (unbounded_retries or retain_unbounded) or bool(prior.get('retained_unbounded')) != retain_unbounded:
                 raise HumanRequired('Authorization ID already used for a different scope')
             if ledger['state'] == 'NEEDS_HUMAN':
                 raise HumanRequired('This human authorization was already used; a fresh instruction is required')
@@ -268,26 +270,52 @@ def authorize_browser(diag, instruction, authorization_id, *, unbounded_retries=
                     break
                 if event.get('event') == 'failure':
                     since_auth.append(event)
-            if ledger['state'] == 'NEEDS_HUMAN' and (not failures or not since_auth or any(e.get('immediate') is not False for e in since_auth)):
+            correction = None
+            if correct_record_error:
+                # Only the documented administrative argparse failure is eligible;
+                # never reclassify a site response, an unknown stop, or another event.
+                immediate = [e for e in since_auth if e.get('immediate') is not False]
+                expected_message = 'Попытка записать первую ошибку завершилась argparse usage error: отсутствовали обязательные --message и --action; запись не была создана.'
+                expected_action = 'Вызов record-error с неполными аргументами после RefStaleError'
+                if (len(immediate) != 1 or immediate[0] is not failures[-1]
+                    or immediate[0].get('immediate') is not True
+                    or immediate[0].get('stage') != 'filters'
+                    or immediate[0].get('message') != expected_message
+                    or immediate[0].get('action') != expected_action
+                    or immediate[0].get('url') is not None):
+                    raise HumanRequired('Administrative correction does not match the recorded error')
+                correction = immediate[0]
+            if ledger['state'] == 'NEEDS_HUMAN' and (not failures or not since_auth or any(e.get('immediate') is not False and e is not correction for e in since_auth)):
                 raise HumanRequired('Immediate or unclassified stop cannot be overridden by unbounded retries')
+            if correction:
+                ledger['events'].append(dict(at=datetime.now(timezone.utc).isoformat(), event='administrative_immediate_correction',
+                    failure_attempt=correction['attempt'], original_event_at=correction['at'], authorization_id=authorization_id,
+                    reason='record-error argparse failure was marked immediate to enforce the two-error threshold; no site response was involved'))
             ledger['unbounded_retries'] = True
+        elif correct_record_error:
+            raise ValueError('Administrative correction requires unbounded technical retries')
         elif ledger['state'] != 'NEEDS_HUMAN':
             raise ValueError('Browser resume requires a stopped run')
+        elif retain_unbounded:
+            prior_auth = next((e for e in reversed(ledger['events']) if e.get('event') == 'human_browser_authorization'), None)
+            if not ledger.get('unbounded_retries') or not prior_auth or not prior_auth.get('unbounded_retries'):
+                raise HumanRequired('No existing unbounded technical authorization to retain')
         else:
             ledger.pop('unbounded_retries', None)
         ledger.pop('offline_authorization', None)
         ledger.pop('active_retry_stage', None)
         ledger.pop('retry_action_started', None)
         ledger['budget_start_failures'] = ledger['failures']
-        if not unbounded_retries:
+        if not unbounded_retries and not retain_unbounded:
             ledger['retries_started'] = 0
         ledger['retry_limit'] = 1 if (diag / 'retry-limit.json').exists() else 5
         ledger['retry_started'] = False
         ledger['state'] = 'READY'
         ledger['events'].append(dict(at=datetime.now(timezone.utc).isoformat(),
             event='human_browser_authorization', instruction=instruction,
-            authorization_id=authorization_id, budget_start_failures=ledger['failures'], retry_limit=ledger['retry_limit'], unbounded_retries=unbounded_retries))
+            authorization_id=authorization_id, budget_start_failures=ledger['failures'], retry_limit=ledger['retry_limit'], unbounded_retries=unbounded_retries or retain_unbounded, retained_unbounded=retain_unbounded,
+            resumed_failure_attempt=ledger['failures'] if retain_unbounded else None))
         save(diag, ledger)
         (diag/'failure-report.md').write_text(
             'RESUMED_BY_HUMAN\n\nИстория ошибок сохранена. Разрешены повторы: '
-            f'{"без ограничения числа" if unbounded_retries else ledger["retry_limit"]}; ограничения сайта требуют немедленной остановки.\n', encoding='utf-8')
+            f'{"без ограничения числа" if unbounded_retries or retain_unbounded else ledger["retry_limit"]}; ограничения сайта требуют немедленной остановки.\n', encoding='utf-8')
