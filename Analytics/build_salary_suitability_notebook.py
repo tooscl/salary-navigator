@@ -716,7 +716,7 @@ summary_text = f'''# Итоги зарплатного исследования
 - Вахта требует длительности вахты и периода отдыха. Удалёнка требует отдельной проверки роли географии.
 - Односторонние границы должны использоваться в моделях цензурированных данных либо как отдельный формат, но не как точная зарплата.
 '''
-(OUTPUT_DIR / "SUMMARY.md").write_text(summary_text, encoding="utf-8")
+(OUTPUT_DIR / "README.md").write_text(summary_text, encoding="utf-8")
 
 print(f"Сохранено файлов: {len(list(OUTPUT_DIR.iterdir()))}")
 display(Markdown(summary_text))
