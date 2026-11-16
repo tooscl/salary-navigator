@@ -245,6 +245,14 @@ def page_number(url):
     return int(values[0])
 
 
+def visible_pagination_geography(requested, first_page):
+    if requested == 'По всей России' and first_page.get('listing_context', {}).get('geography') == 'Во всех регионах':
+        if any(control.get('label') == requested and control.get('marker') == 'params[127818]/3054249'
+               for control in first_page.get('selected_controls', [])):
+            return 'Во всех регионах'
+    return requested
+
+
 def validate_ui_transition(first, previous, page):
     validate_page_filters(first, page)
     if str(page_number(page['source_url'])) not in page.get('pagination', {}).get('current_pages', []):
@@ -854,6 +862,10 @@ def freeze(args):
     if branch_only:
         request.update(branch_only=True, max_pages=max_pages)
     ui_next = getattr(args, 'ui_next', False)
+    visible_page_only = getattr(args, 'visible_page_only', False)
+    if visible_page_only and (not args.resume or not getattr(args, 'tab_id', None) or ui_next
+                              or branch_only or accept_saved or candidate_limit is not None):
+        raise ValueError('Visible-page recovery requires an ordinary freeze resume in the existing tab')
     if ui_next:
         if not getattr(args, 'tab_id', None): raise ValueError('UI Next requires an explicit --tab-id')
         request['ui_next'] = True
@@ -903,6 +915,12 @@ def freeze(args):
     if [p.name for p in page_paths] != [f'{i:04d}.json' for i in range(1, len(page_paths)+1)]:
         raise ValueError('Listing page sequence is incomplete')
     pages = [read(path) for path in page_paths]
+    if visible_page_only:
+        checkpoint = read(diag/'checkpoint.json')
+        if (pages or read(diag/'pending_listing.json') != {'url': args.url}
+                or checkpoint.get('state') != 'BROWSER_ERROR'
+                or 'Listing did not stabilize' not in (checkpoint.get('stop_reason') or '')):
+            raise ValueError('Visible-page recovery requires an untouched first-page stabilization failure')
     for index, page in enumerate(pages):
         expected_url = args.url if index == 0 else pages[index-1].get('pagination', {}).get('next_url')
         if index and ui_next:
@@ -973,7 +991,8 @@ def freeze(args):
             for name in ('sandbox.json', 'listing.json', 'checkpoint.json'):
                 (diag/name).unlink(missing_ok=True)
             write(pending, pending_value)
-            cp, _ = browser(dict(mode='freeze', url=url, completed_ids=[], tab_id=getattr(args, 'tab_id', None), allow_navigation=bool(pages), ui_next=ui_next, allow_empty=branch_only, previous=pages[-1] if pages and ui_next else None, first=pages[0] if pages and ui_next else None, geography=args.geography), out, diag)
+            visible_geography = visible_pagination_geography(args.geography, pages[0]) if pages and ui_next else args.geography
+            cp, _ = browser(dict(mode='freeze', url=url, completed_ids=[], tab_id=getattr(args, 'tab_id', None), allow_navigation=bool(pages), ui_next=ui_next, allow_empty=branch_only, previous=pages[-1] if pages and ui_next else None, first=pages[0] if pages and ui_next else None, geography=visible_geography, visible_page_only=visible_page_only), out, diag)
         if cp['state'] != 'READY':
             raise CollectionStopped(f'Stopped: {cp["state"]}; inspect local diagnostics', cp['state'])
         page = read(diag / 'listing.json')
@@ -1007,6 +1026,12 @@ def freeze(args):
         pages.append(page); page_paths.append(path)
         pending.unlink(missing_ok=True)
         release_browser(diag)
+        if visible_page_only:
+            pagination = page.get('pagination') or {}
+            if any(pagination.get(key) for key in ('next_url', 'next_button', 'end_confirmed', 'current_pages')):
+                raise ValueError('Visible-page recovery received paginated evidence')
+            listing_end_reason = 'visible_page_only_no_pagination'
+            break
     listing = pages[0]
     profession = selection_profession(listing, getattr(args, 'profession_scope', None), args.profession)
     if candidate_limit is not None and getattr(args, 'selection_criterion', 'remote') == 'remote' and not any(c.get('label') == 'Удалённо' and 'params[172815]' in (c.get('marker') or '') for c in listing.get('selected_controls', [])):
@@ -1571,6 +1596,11 @@ def mark_unavailable(args):
         raise ValueError('Completed run is immutable')
     ledger = load_failures(diag)
     offline_standing = getattr(args, 'offline_standing', False)
+    standing_source = getattr(args, 'standing_source', None)
+    if standing_source and (not offline_standing or not ledger.get('unbounded_retries') or not any(
+            event.get('event') == 'standing_run_authorization' and event.get('authorization_id') == standing_source
+            for event in ledger['events'])):
+        raise HumanRequired('A pinned standing instruction and offline unavailable evidence are required')
     if offline_standing and args.authorization_id != STANDING_UNAVAILABLE_ID: raise HumanRequired('Offline handling requires the standing project policy')
     if not offline_standing and (ledger['state'] == 'NEEDS_HUMAN' or (ledger['state'] == 'RETRY_STARTED' and not getattr(args, 'automatic', False))):
         raise HumanRequired('Resume browser authorization is required after the stop')
@@ -1661,11 +1691,18 @@ def mark_unavailable(args):
     if offline_standing:
         avito_url(url, args.id)
         plan = read(service/'plan.json'); validate_partition(out, service); validate_plan_profession(plan, out/'listing.json')
-        if not plan.get('listing_pages') or queue_from_pages([read(out/p['file'].replace('\\','/')) for p in plan['listing_pages']], len(queue)) != queue: raise ValueError('Frozen queue differs')
+        if not plan.get('listing_pages') or (not plan.get('deduplication') and queue_from_pages(
+                [read(out/p['file'].replace('\\', '/')) for p in plan['listing_pages']], len(queue)) != queue):
+            raise ValueError('Frozen queue differs')
+        exact_closed_shell = (standing_source and data.get('state') == 'UNKNOWN_PAGE' and markers[0] == CLOSED_MARKERS[0]
+                              and data.get('unresolved_evidence', {}).get('restriction') is False
+                              and data.get('unresolved_evidence', {}).get('known_unavailable') is True
+                              and f'- title: "Ошибка 404. Страница не найдена" [url={url}]' in snapshot.splitlines())
+        exact_detail = data.get('state') == 'DETAIL' and f'- heading "{data["title"]}" [level=1]' in snapshot
         if (not pointer.exists() or (sandbox/'problem.snapshot.txt').read_bytes() != snap.read_bytes() or read(sandbox/'browser-tab.json').get('url') != url
                 or any(read(sandbox/'checkpoint.json').get(k) != cp.get(k) for k in ('state','next_id','stop_reason','completed_ids'))
                 or re.search(r'captcha|капч|доступ ограничен|проблема с ip|too many requests|http\s*429', snapshot, re.I)
-                or data.get('state') != 'DETAIL' or f'- heading "{data["title"]}" [level=1]' not in snapshot):
+                or not (exact_closed_shell or exact_detail)):
             raise ValueError('Stopped evidence, heading, identity or sandbox differs')
         evidence_archive = diag/'observations'/args.id; evidence_archive.mkdir(parents=True, exist_ok=True)
         for source in (snap, sandbox/'browser-tab.json'):
@@ -1694,6 +1731,15 @@ def mark_unavailable(args):
     cp.update(state='READY', next_id=queue[index+1]['id'] if index+1 < len(queue) else None, stop_reason=None)
     write(diag/'checkpoint.json', cp)
     pointer.unlink(missing_ok=True)
+    if standing_source:
+        with locked(diag):
+            current = load_failures(diag)
+            if current != ledger:
+                raise HumanRequired('Standing authorization ledger changed during evidence validation')
+            current['state'] = 'READY'
+            current['events'].append(dict(event='standing_unavailable_recovery', at=datetime.now(timezone.utc).isoformat(),
+                source=standing_source, id=args.id, snapshot_sha256=sha(snap), raw_sha256=sha(raw), no_new_budget=True))
+            save_failures(diag, current)
     print(json.dumps({'unavailable': args.id, 'next_id': cp['next_id']}))
 
 
@@ -2014,6 +2060,27 @@ def dataset_keys(path):
     return sorted(keys)
 
 
+def observed_listing_tail(out, plan, queue):
+    pages = []
+    for item in plan['listing_pages']:
+        path = out/item['file'].replace('\\', '/')
+        if sha(path) != item['sha256']:
+            raise ValueError('Observed tail page differs from frozen evidence')
+        pages.append(read(path))
+    observed = queue_from_pages(pages, None)
+    if observed[:len(queue)] != queue or len(observed) == len(queue):
+        raise ValueError('Expected an unqueued tail after the frozen prefix')
+    return observed[len(queue):]
+
+
+def dedup_comparison_queue(out, service):
+    plan = read(service/'plan.json')
+    if (plan.get('deduplication') or {}).get('observed_tail') is True:
+        validate_deduplication(out, service)
+        return plan, read(out/'queue.json')
+    return verified_frozen_queue(out, service)
+
+
 def validate_deduplication(out, service):
     plan = read(service/'plan.json'); info = plan['deduplication']; prov = out/'dedup-provenance'
     source_out, source_service, _ = paths(ROOT, info['source_run_id'])
@@ -2021,7 +2088,9 @@ def validate_deduplication(out, service):
     if not ledger_pointers or any(read(p) != {'parent_run_id': info['source_run_id']} for p in ledger_pointers):
         raise ValueError('Deduplicated child must use source ledger')
     source_plan_path = prov/'source-plan.json'; source_queue_path = prov/'source-queue.json'
-    originals = (source_service/'plan.json', source_out/'queue.json', source_service/'dedup-child.json')
+    tail = info.get('observed_tail') is True
+    assignment = 'dedup-tail-child.json' if tail else 'dedup-child.json'
+    originals = (source_service/'plan.json', source_out/'queue.json', source_service/assignment)
     present = [p.exists() for p in originals]
     if any(present) and not all(present): raise ValueError('Incomplete dedup source provenance')
     if all(present) and read(originals[2]) != {'child_run_id': plan['run_id']}:
@@ -2032,12 +2101,20 @@ def validate_deduplication(out, service):
     validate_plan_profession(parent, out/'listing.json')
     if queue_from_pages([read(out/x['file'].replace('\\', '/')) for x in parent['listing_pages']], len(source_queue)) != source_queue:
         raise ValueError('Dedup source queue differs from frozen listing')
+    if tail:
+        source_queue = observed_listing_tail(out, parent, source_queue)
     known = set()
     for entry in info['against']:
         known_out, known_service, _ = paths(ROOT, entry['run_id'])
-        for name, original, digest in ((entry['plan_file'],known_service/'plan.json',entry['plan_sha256']), (entry['queue_file'],known_out/'queue.json',entry['queue_sha256'])):
-            if sha(prov/name) != digest or sha(original) != digest: raise ValueError('Dedup known provenance changed')
-        known_plan, known_queue = verified_frozen_queue(known_out, known_service)
+        originals = (known_service/'plan.json', known_out/'queue.json')
+        present = [path.exists() for path in originals]
+        if any(present) and not all(present):
+            raise ValueError('Incomplete dedup known provenance')
+        for name, original, digest in zip((entry['plan_file'], entry['queue_file']),
+                                          originals, (entry['plan_sha256'], entry['queue_sha256'])):
+            if sha(prov/name) != digest or (all(present) and sha(original) != digest):
+                raise ValueError('Dedup known provenance changed')
+        known_queue = dedup_comparison_queue(known_out, known_service)[1] if all(present) else read(prov/entry['queue_file'])
         known.update(x['id'] for x in known_queue)
     dataset = info.get('dataset')
     if dataset:
@@ -2070,7 +2147,9 @@ def deduplicate_queue(args):
     source_out, source_service, source_diag = paths(ROOT, args.source_run_id)
     out, service, diag = paths(ROOT, args.run_id)
     ensure_allowed(source_diag, 'deduplicate-queue')
-    if out.exists() or service.exists() or (source_service/'dedup-child.json').exists(): raise ValueError('Derivative or source assignment already exists')
+    observed_tail = getattr(args, 'observed_tail', False)
+    assignment = source_service/('dedup-tail-child.json' if observed_tail else 'dedup-child.json')
+    if out.exists() or service.exists() or assignment.exists(): raise ValueError('Derivative or source assignment already exists')
     against = args.against_run_id or []
     use_dataset = getattr(args, 'against_dataset', False)
     limit = getattr(args, 'limit', None)
@@ -2083,10 +2162,12 @@ def deduplicate_queue(args):
     cp = read(source_diag/'checkpoint.json')
     if (source_service/'manifest.json').exists() or (source_service/'partition.json').exists() or any((source_out/'raw').glob('*.json')) or cp.get('completed_ids') or cp.get('state') != 'READY':
         raise ValueError('Source must be frozen before any capture')
+    if observed_tail:
+        source_queue = observed_listing_tail(source_out, parent, source_queue)
     known_runs = []; known = set()
     for index, run_id in enumerate(against):
         known_out, known_service, _ = paths(ROOT, run_id)
-        _, queue = verified_frozen_queue(known_out, known_service)
+        _, queue = dedup_comparison_queue(known_out, known_service)
         known.update(item['id'] for item in queue)
         known_runs.append(dict(run_id=run_id,plan_file=f'known-{index:03d}-plan.json',queue_file=f'known-{index:03d}-queue.json',plan_sha256=sha(known_service/'plan.json'),queue_sha256=sha(known_out/'queue.json')))
     dataset_manifest = ROOT/'Data/dataset/manifest.json'; dataset_csv = ROOT/'Data/dataset/vacancies.csv'
@@ -2105,6 +2186,8 @@ def deduplicate_queue(args):
     if use_dataset:
         shutil.copy2(dataset_manifest, prov/'dataset-manifest.json'); write(prov/'dataset-keys.json', keys)
         info['dataset'] = dict(csv_sha256=manifest['sha256'], manifest_sha256=sha(prov/'dataset-manifest.json'), keys_sha256=sha(prov/'dataset-keys.json'), rows=len(keys))
+    if observed_tail:
+        info['observed_tail'] = True
     if limit is not None:
         info.update(selection_limit=limit, eligible_count=len(eligible), deferred_ids=[x['id'] for x in eligible[len(novel):]])
     shutil.copy2(source_service/'plan.json',prov/'source-plan.json'); shutil.copy2(source_out/'queue.json',prov/'source-queue.json')
@@ -2132,7 +2215,7 @@ def deduplicate_queue(args):
     write(diag/'checkpoint.json',dict(state='READY' if novel else 'DEDUP_EMPTY',completed_ids=[],next_id=novel[0]['id'] if novel else None,capture_seconds=0))
     for name in ('automation_changes.json','aside-target.local.json'):
         if (source_diag/name).exists(): shutil.copy2(source_diag/name,diag/name)
-    write(source_service/'dedup-child.json',{'child_run_id':args.run_id})
+    write(assignment, {'child_run_id': args.run_id})
     validate_deduplication(out,service)
     print(json.dumps({'state':'READY' if novel else 'DEDUP_EMPTY','run_id':args.run_id,'source_count':len(source_queue),'duplicate_excluded':len(excluded),'novel_count':len(novel)},ensure_ascii=False))
 
@@ -2309,7 +2392,7 @@ def allowed_capture_changes(plan, changes):
     for c in changes:
         file = c.get('file', '').replace('\\', '/')
         if file == 'Scraper/skills/collect-avito/scripts/preflight.py' and c.get('reason') == 'Explicit pinned Aside target flags' and c.get('validation', '').strip(): permitted.add(file)
-        if c.get('validation', '').strip() and ((file == guard and c.get('reason') in ('Wait for pagination evidence in UI Next mode', 'Bounded readiness for incomplete detail shell', 'Bounded hydration wait for matching detail', 'Record bounded wait for incomplete detail')) or (file == 'Scraper/skills/collect-avito/scripts/failure_log.py' and c.get('reason') in ('Windows cross-platform shared file locking', 'Explicit UTF-8 browser scripts and shared ledger on Windows', 'Guard incomplete shell preservation and authorize one pending capture without new budget'))): permitted.add(file)
+        if c.get('validation', '').strip() and ((file == guard and c.get('reason') in ('Wait for pagination evidence in UI Next mode', 'Bounded readiness for incomplete detail shell', 'Bounded hydration wait for matching detail', 'Record bounded wait for incomplete detail', 'Recover a stable visible listing without pagination evidence')) or (file == 'Scraper/skills/collect-avito/scripts/failure_log.py' and c.get('reason') in ('Windows cross-platform shared file locking', 'Explicit UTF-8 browser scripts and shared ledger on Windows', 'Guard incomplete shell preservation and authorize one pending capture without new budget'))): permitted.add(file)
     if plan.get('partial_suffix') or (plan.get('partition') and any(c.get('file') == guard and c.get('reason') == 'Audited URL identity guard' and c.get('validation', '').strip() for c in changes)):
         permitted.add(guard)
     return permitted
@@ -2821,6 +2904,46 @@ def redact_finalized_provenance(args):
     print(json.dumps({'redacted_provenance':len(pending),'original_manifest_sha256':original_digest}))
 
 
+def reviewed_candidate_selection(out, candidates, evidence):
+    """Bind semantic decisions to the full structurally valid candidate queue."""
+    criteria = evidence['criteria']
+    requirements = evidence['required_fields']
+    decisions = evidence['decisions']
+    if not isinstance(criteria, str) or not criteria.strip():
+        raise ValueError('Reviewed selection requires explicit criteria')
+    if not isinstance(requirements, dict) or any(
+            not isinstance(key, str) or not key.strip() or not isinstance(value, str) or not value.strip()
+            for key, value in requirements.items()):
+        raise ValueError('Reviewed selection field requirements must be nonempty strings')
+    if (not isinstance(decisions, list) or any(not isinstance(decision, dict) for decision in decisions)
+            or [decision.get('id') for decision in decisions] != [item['id'] for item in candidates]):
+        raise ValueError('Reviewed decisions must cover every valid candidate ID in queue order')
+    accepted_ids = []
+    for item, decision in zip(candidates, decisions):
+        identity = item['id']
+        if decision.get('raw_sha256') != sha(out/'raw'/f'{identity}.json'):
+            raise ValueError(f'Reviewed selection raw hash differs for {identity}')
+        if not isinstance(decision.get('accepted'), bool) or not isinstance(decision.get('reason'), str) or not decision['reason'].strip():
+            raise ValueError(f'Reviewed selection requires a reason and a boolean decision for {identity}')
+        if not decision['accepted']:
+            continue
+        data = reviewed_capture(out, item)
+        fields = {norm(field['name']): norm(field['value']) for field in data['fields']}
+        if any(fields.get(key) != value for key, value in requirements.items()):
+            raise ValueError(f'Accepted candidate {identity} fails a required field')
+        quotes = decision.get('description_evidence')
+        description = norm(data.get('description') or '')
+        if not isinstance(quotes, list) or not quotes or any(
+                not isinstance(quote, str) or not norm(quote) or norm(quote) not in description
+                for quote in quotes):
+            raise ValueError(f'Accepted candidate {identity} lacks exact description evidence')
+        accepted_ids.append(identity)
+    if not accepted_ids:
+        raise ValueError('Reviewed selection contains no accepted candidates')
+    return dict(method='reviewed_candidates_v1', criteria=criteria, required_fields=requirements,
+                decisions=decisions, accepted_ids=accepted_ids)
+
+
 def finalize(args):
     out, service, diag = paths(ROOT, args.run_id)
     validate_partition(out, service)
@@ -2904,6 +3027,8 @@ def finalize(args):
                                         'region_unknown': not bool(region),
                                         **({'location_missing': True} if not row['location_observed'] else {})}
     employer_selection_record = None
+    reviewed_selection_record = None
+    selection_path = getattr(args, 'reviewed_selection', None)
     selection_commit = getattr(args, 'exclude_largest_employer_baseline', None)
     if selection_commit:
         if decisions is not None or partial or correction or overrides:
@@ -2919,18 +3044,30 @@ def finalize(args):
         employer_selection_record['regions'] = regions
         employer_selection_record['city_anomaly_policy'] = plan['city_anomaly_policy']
         employer_selection_record['excluded_observation_ids'] = [item['id'] for item in queue if item['id'] in excluded]
-        accepted_ids = set(employer_selection_record['accepted_ids'])
+    elif any(getattr(args, key, None) is not None for key in ('selection_city', 'selection_profession', 'selection_target')):
+        raise ValueError('Selection arguments require a baseline commit')
+    if selection_path:
+        if decisions is not None or partial or correction or overrides or employer_selection_record:
+            raise ValueError('Reviewed selection must use a complete candidate queue without another selection mode or overrides')
+        checkpoint = read(diag/'checkpoint.json')
+        if checkpoint.get('state') != 'CAPTURED' or checkpoint.get('next_id') is not None:
+            raise ValueError('Reviewed selection requires a captured checkpoint')
+        valid_candidates = [item for item in queue if item['id'] not in excluded]
+        reviewed_selection_record = reviewed_candidate_selection(out, valid_candidates, read(selection_path))
+    selection = reviewed_selection_record or employer_selection_record
+    if selection:
+        accepted_ids = set(selection['accepted_ids'])
         rows = [r for r in rows if r['id'] in accepted_ids]
         reviews = [r for r in reviews if r['id'] in accepted_ids]
         unknown_cities = {i: value for i, value in unknown_cities.items() if i in accepted_ids}
         mapping = {city: region for city, region in mapping.items() if city in {r['city'] for r in rows}}
-    elif any(getattr(args, key, None) is not None for key in ('selection_city', 'selection_profession', 'selection_target')):
-        raise ValueError('Selection arguments require a baseline commit')
     columns = list(dict.fromkeys(k for row in rows for k in row))
     exports = out / 'exports'
     exports.mkdir(exist_ok=True)  # unfinished drafts may be retried; completed runs cannot
     if employer_selection_record:
         write(exports/'employer_selection.json', employer_selection_record)
+    if reviewed_selection_record:
+        write(exports/'reviewed_selection.json', reviewed_selection_record)
     if partial:
         write(exports/'partial_selection.json', partial)
     if correction:
@@ -2973,6 +3110,10 @@ def finalize(args):
         review_model=args.review_model, automation_changes=changes,
         profession_correction=correction,
         post_capture_automation_sha256={file: sha(ROOT/file) for file in sorted(changed)}, files={})
+    if reviewed_selection_record:
+        manifest['coverage']['reviewed_selection'] = dict(
+            accepted_ids=reviewed_selection_record['accepted_ids'],
+            sha256=sha(exports/'reviewed_selection.json'))
     service_files = [service / 'plan.json']
     if plan.get('deduplication'):
         # Publish only the ledger pointer; the shared error ledger remains local.
@@ -3376,15 +3517,24 @@ def retry_incomplete_observation(args):
     ledger = load_failures(diag)
     events = ledger['events']
     auth = [i for i, e in enumerate(events) if e.get('event') in ('human_browser_authorization', 'recurring_incomplete_authorization', 'recurring_502_authorization') and e.get('authorization_id') == args.authorization_id]
-    if ledger['state'] in ('NEEDS_HUMAN', 'RETRY_STARTED') or not auth or any(e.get('event') == 'failure' for e in events[auth[-1]+1:]):
+    active = events[auth[-1]] if auth else {}
+    standing_source = getattr(args, 'standing_source', None)
+    standing = next((e for e in events if e.get('event') == 'standing_run_authorization'
+                     and e.get('authorization_id') == standing_source), None)
+    reserve_standing = bool(standing_source and standing and not active and ledger['state'] == 'NEEDS_HUMAN'
+                            and ledger.get('unbounded_retries') and args.authorization_id.strip()
+                            and not any(e.get('authorization_id') == args.authorization_id for e in events))
+    if not reserve_standing and (ledger['state'] in ('NEEDS_HUMAN', 'RETRY_STARTED') or not auth
+                                 or any(e.get('event') == 'failure' for e in events[auth[-1]+1:])):
         raise HumanRequired('Fresh browser authorization after the stop is required')
-    if (events[auth[-1]].get('event') == 'human_browser_authorization'
-            and args.id not in events[auth[-1]].get('instruction', '')
-            and not getattr(args, 'standing_incomplete', False)):
+    if (active.get('event') == 'human_browser_authorization'
+            and args.id not in active.get('instruction', '')
+            and not getattr(args, 'standing_incomplete', False)
+            and not (standing_source and active.get('standing_source') == standing_source and active.get('pending_id') == args.id)):
         raise HumanRequired('Authorization must identify the pending ID')
-    if events[auth[-1]].get('event') in ('recurring_incomplete_authorization', 'recurring_502_authorization') and events[auth[-1]].get('pending_id') != args.id:
+    if active.get('event') in ('recurring_incomplete_authorization', 'recurring_502_authorization') and active.get('pending_id') != args.id:
         raise HumanRequired('Recurring authorization must match the pending ID')
-    if events[auth[-1]].get('no_new_budget') and ledger.get('bounded_pending') != dict(id=args.id, state='reserved', authorization_id=args.authorization_id):
+    if active.get('no_new_budget') and ledger.get('bounded_pending') != dict(id=args.id, state='reserved', authorization_id=args.authorization_id):
         raise HumanRequired('Bounded authorization does not match this pending observation')
     cp, queue = read(diag/'checkpoint.json'), read(out/'queue.json')
     if cp.get('state') != 'REVIEW_REQUIRED' or cp.get('stop_reason') != 'identity_or_template_review' or cp.get('next_id') != args.id:
@@ -3397,7 +3547,7 @@ def retry_incomplete_observation(args):
     validate_partition(out, service)
     validate_plan_profession(plan, out/'listing.json')
     pages = [read(out/p['file'].replace('\\', '/')) for p in plan['listing_pages']]
-    if queue_from_pages(pages, len(queue)) != queue:
+    if not plan.get('deduplication') and queue_from_pages(pages, len(queue)) != queue:
         raise ValueError('Frozen queue differs from listing pages')
     excluded = {r['id'] for r in unavailable_records(out, queue)} | {r['id'] for r in unresolved_records(out, queue)} | {r['id'] for r in user_skipped_records(out, queue)}
     index = queue.index(matches[0])
@@ -3405,8 +3555,8 @@ def retry_incomplete_observation(args):
         raise ValueError('Checkpoint prefix mismatch')
     url = matches[0]['url']; avito_url(url, args.id)
     raw = out/'raw'/f'{args.id}.json'; data = read(raw); evidence = data.get('unresolved_evidence', {})
-    http502 = events[auth[-1]].get('event') == 'recurring_502_authorization'
-    detail = events[auth[-1]].get('detail_hydration') is True
+    http502 = active.get('event') == 'recurring_502_authorization'
+    detail = active.get('detail_hydration') is True
     if detail:
         detail_hydration_evidence(out, diag, cp, matches[0])
     if not http502 and not detail and (data.get('state') != 'UNKNOWN_PAGE' or data.get('source_url') != url
@@ -3416,7 +3566,7 @@ def retry_incomplete_observation(args):
         raise ValueError('Observation is not an unrestricted incomplete page shell')
     snapshot = diag/'problem.snapshot.txt'; pointer = diag/'sandbox.json'
     sandbox = Path(read(pointer)['path']); tab = sandbox/'browser-tab.json'
-    if events[auth[-1]].get('event') in ('recurring_incomplete_authorization', 'recurring_502_authorization') and (sha(raw) != events[auth[-1]].get('raw_sha256') or sha(snapshot) != events[auth[-1]].get('snapshot_sha256')):
+    if active.get('event') in ('recurring_incomplete_authorization', 'recurring_502_authorization') and (sha(raw) != active.get('raw_sha256') or sha(snapshot) != active.get('snapshot_sha256')):
         raise ValueError('Incomplete evidence changed after recurring claim')
     snap = snapshot.read_text(encoding='utf8')
     if http502 and not visible_http_502(data,snap,url): raise ValueError('Not the evidenced visible HTTP 502 page')
@@ -3440,6 +3590,17 @@ def retry_incomplete_observation(args):
         plan_sha256=sha(service/'plan.json'), queue_sha256=sha(out/'queue.json'), checkpoint_sha256=sha(diag/'checkpoint.json'),
         sandbox_path=str(sandbox), preserved_at=datetime.now(timezone.utc).isoformat(),
         reason='detail_hydration' if detail else 'visible_http_502' if http502 else 'unrestricted_incomplete_page_shell'))
+    if reserve_standing:
+        with locked(diag):
+            current = load_failures(diag)
+            if current != ledger:
+                raise HumanRequired('Standing authorization ledger changed during evidence validation')
+            current['state'] = 'READY'
+            current['bounded_pending'] = dict(id=args.id, state='reserved', authorization_id=args.authorization_id)
+            current['events'].append(dict(event='human_browser_authorization', at=datetime.now(timezone.utc).isoformat(),
+                instruction=standing['technical_instruction'], authorization_id=args.authorization_id,
+                pending_id=args.id, no_new_budget=True, standing_source=standing_source, unbounded_retries=True))
+            save_failures(diag, current)
     raw.unlink(); (diag/'sandbox.json').unlink(missing_ok=True)
     cp.update(state='READY', stop_reason=None); write(diag/'checkpoint.json', cp)
     print(json.dumps({'pending_id': args.id, 'incomplete_preserved': str(destination.relative_to(out))}))
@@ -3961,6 +4122,17 @@ def validate_completed_export(out, service):
         if actual != employer_record: raise ValueError('Employer selection decisions differ')
         accepted = set(actual['accepted_ids'])
         expected = [item for item in expected if item['id'] in accepted]
+    reviewed_record = manifest['coverage'].get('reviewed_selection')
+    if reviewed_record:
+        selection_path = out/'exports/reviewed_selection.json'
+        if partial or correction or employer_record or sha(selection_path) != reviewed_record['sha256']:
+            raise ValueError('Reviewed selection artifact differs')
+        evidence = read(selection_path)
+        actual = reviewed_candidate_selection(out, expected, evidence)
+        if actual != evidence or actual['accepted_ids'] != reviewed_record['accepted_ids']:
+            raise ValueError('Reviewed selection decisions differ')
+        accepted = set(actual['accepted_ids'])
+        expected = [item for item in expected if item['id'] in accepted]
     with (out/'exports/vacancies_flat.csv').open(encoding='utf-8-sig', newline='') as stream:
         rows = list(csv.DictReader(stream))
     if [r['id'] for r in rows] != [item['id'] for item in expected] or any(r['profession'] != (correction['corrected_profession'] if correction else plan['profession']) for r in rows):
@@ -4079,7 +4251,7 @@ def publish(args):
     if manifest['status'] != 'complete':
         raise ValueError('Only completed exports can be published')
     validate_provenance_redaction(out,service,manifest)
-    if manifest.get('coverage', {}).get('partial'):
+    if manifest.get('coverage', {}).get('partial') or manifest.get('coverage', {}).get('reviewed_selection'):
         validate_completed_export(out, service)
     def git(*argv):
         return subprocess.check_output(['git', *argv], cwd=ROOT, text=True).strip()
@@ -4290,6 +4462,7 @@ def main():
             command.add_argument('--batch-size', type=int, required=True)
             command.add_argument('--prefix', required=True)
         elif name == 'deduplicate-queue':
+            command.add_argument('--observed-tail', action='store_true', help='Use IDs observed beyond the source queue limit')
             command.add_argument('--source-run-id', required=True)
             command.add_argument('--against-run-id', action='append')
             command.add_argument('--against-dataset', action='store_true')
@@ -4303,6 +4476,7 @@ def main():
         elif name == 'partial-suffix':
             command.add_argument('--source-run-id', required=True)
         elif name == 'freeze':
+            command.add_argument('--visible-page-only', action='store_true', help='Resume an unpaginated visible first page without claiming end')
             command.add_argument('--retry-reason')
             command.add_argument('--ui-next', action='store_true', help='Click observed Next in explicit tab and verify landed page')
             command.add_argument('--resume-route-authorization-id', help='Recorded human browser authorization for switching an unfinished freeze to UI Next')
@@ -4332,6 +4506,7 @@ def main():
             command.add_argument('--retry-reason')
             command.add_argument('--batch-size', type=int, default=30)
         elif name == 'finalize':
+            command.add_argument('--reviewed-selection', type=Path, help='Evidence-backed candidate decisions for a completed queue')
             command.add_argument('--exclude-largest-employer-baseline', help='Git commit with the baseline dataset')
             command.add_argument('--selection-city')
             command.add_argument('--selection-profession')
@@ -4369,6 +4544,7 @@ def main():
             command.add_argument('--authorization-question', help='Exact preceding question when the saved answer confirms it')
         elif name == 'mark-unavailable':
             command.add_argument('--offline-standing', action='store_true')
+            command.add_argument('--standing-source', help='Previously registered goal authorization for exact offline unavailability recovery')
             command.add_argument('--standing-rejected', action='store_true', help='Apply the recorded project unavailable policy to an evidenced rejected 404 using the previous marker set')
             command.add_argument('--id', required=True)
             command.add_argument('--authorization-id', required=True)
@@ -4391,6 +4567,7 @@ def main():
             command.add_argument('--observed-url', required=True)
             command.add_argument('--authorization-id', required=True)
         elif name == 'retry-incomplete-observation':
+            command.add_argument('--standing-source', help='Previously registered goal authorization for evidenced technical shells')
             command.add_argument('--id', required=True)
             command.add_argument('--authorization-id', required=True)
             command.add_argument('--standing-incomplete', action='store_true', help='Use an explicit standing human instruction permitting incomplete-shell technical retries')

@@ -1,0 +1,954 @@
+{
+  "run_id": "remote_operators_20261116_02_new",
+  "dataset_id": "remote_operators_20261116_02_new",
+  "status": "complete",
+  "schema": {
+    "columns": [
+      "id",
+      "city",
+      "profession",
+      "segments",
+      "title",
+      "salary_raw",
+      "source_url",
+      "observed_at",
+      "description",
+      "location_observed",
+      "employer_name_observed",
+      "date_raw",
+      "views_total",
+      "views_today",
+      "listing_rank",
+      "listing_promoted",
+      "full_parameters_read",
+      "analysis_status",
+      "export_eligibility",
+      "read_status_parameters",
+      "read_status_description",
+      "read_status_location",
+      "read_limitations",
+      "enrichment_status",
+      "enriched_fields",
+      "enrichment_version",
+      "military",
+      "military_keywords",
+      "military_rule_version",
+      "city__source",
+      "city__evidence",
+      "city_anomaly",
+      "Формат работы",
+      "График",
+      "Занятость",
+      "Количество рабочих часов в день",
+      "Частота выплат",
+      "Сфера деятельности компании",
+      "Что получают работники",
+      "Режим работы",
+      "Общение с клиентами",
+      "Опыт работы",
+      "Уровень образования",
+      "Способ оформления",
+      "Количество рабочих дней в неделю",
+      "Можно заканчивать в 17:00",
+      "В том числе для кандидатов"
+    ],
+    "unknown_policy": "empty_not_zero"
+  },
+  "collection": {
+    "run_id": "remote_operators_20261116_02_new",
+    "geography": "По всей России",
+    "profession": "Оператор колл-центра",
+    "segments": "",
+    "filter_evidence": "Страница 4 предыдущего freeze: По всей России, Оператор колл-центра, Удалённо; Next сохраняет путь и фильтры",
+    "listing_url": "https://www.avito.ru/all/vakansii/format_raboty/udalenno/operator_koll_centra-ASgBAgICAkTUzBGa7IYDnowVvpWRAw?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6IlhDSDdNRGFtTFhadGJMSzQiO30Z479cJgAAAA&f=ASgBAgICA0SUzQ_S6vQC1MwRmuyGA56MFb6VkQM&p=4",
+    "listing_request_url": "https://www.avito.ru/all/vakansii/format_raboty/udalenno/operator_koll_centra-ASgBAgICAkTUzBGa7IYDnowVvpWRAw?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6IlhDSDdNRGFtTFhadGJMSzQiO30Z479cJgAAAA&f=ASgBAgICA0SUzQ_S6vQC1MwRmuyGA56MFb6VkQM&p=4",
+    "selected_controls": [
+      {
+        "label": "По всей России",
+        "marker": "params[127818]/3054249",
+        "value": null
+      },
+      {
+        "label": "По всей России",
+        "marker": "params[127818]/toggle",
+        "value": "3054249"
+      },
+      {
+        "label": "Оператор колл-центра",
+        "marker": "params[144170]/checkbox/3201805",
+        "value": null
+      },
+      {
+        "label": "Оператор колл-центра",
+        "marker": "params[144170]/checkbox/toggle",
+        "value": "3201805"
+      },
+      {
+        "label": "Любой",
+        "marker": "params[196929]/all",
+        "value": null
+      },
+      {
+        "label": "Любой",
+        "marker": "params[196929]/toggle",
+        "value": "all"
+      },
+      {
+        "label": "Удалённо",
+        "marker": "params[172815]/3286367",
+        "value": null
+      },
+      {
+        "label": "Удалённо",
+        "marker": "params[172815]/toggle",
+        "value": "3286367"
+      },
+      {
+        "label": "Неважно",
+        "marker": null,
+        "value": "all"
+      },
+      {
+        "label": "Все",
+        "marker": null,
+        "value": "all"
+      }
+    ],
+    "listing_sha256": "fc9ec76025e4eff118d45fb0f3c0d468eaaabb4adcc5085010d04d885fb2c4e3",
+    "profession_scope": null,
+    "profession_source": "observed_controls",
+    "listing_pages": [
+      {
+        "file": "listing_pages/0001.json",
+        "sha256": "fc9ec76025e4eff118d45fb0f3c0d468eaaabb4adcc5085010d04d885fb2c4e3",
+        "source_url": "https://www.avito.ru/all/vakansii/format_raboty/udalenno/operator_koll_centra-ASgBAgICAkTUzBGa7IYDnowVvpWRAw?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6IlhDSDdNRGFtTFhadGJMSzQiO30Z479cJgAAAA&f=ASgBAgICA0SUzQ_S6vQC1MwRmuyGA56MFb6VkQM&p=4"
+      },
+      {
+        "file": "listing_pages/0002.json",
+        "sha256": "0202f408dae70ad0f8aaac797b7279b1e4dc24ff0c6de0024b76704ffee41234",
+        "source_url": "https://www.avito.ru/all/vakansii/format_raboty/udalenno/operator_koll_centra-ASgBAgICAkTUzBGa7IYDnowVvpWRAw?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6IlhDSDdNRGFtTFhadGJMSzQiO30Z479cJgAAAA&f=ASgBAgICA0SUzQ_S6vQC1MwRmuyGA56MFb6VkQM&p=5"
+      },
+      {
+        "file": "listing_pages/0003.json",
+        "sha256": "56b65aac9f6e04d3303b35ffc565e8719112613f5dc8ca5ad61a9ce60ed5a6db",
+        "source_url": "https://www.avito.ru/all/vakansii/format_raboty/udalenno/operator_koll_centra-ASgBAgICAkTUzBGa7IYDnowVvpWRAw?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6IlhDSDdNRGFtTFhadGJMSzQiO30Z479cJgAAAA&f=ASgBAgICA0SUzQ_S6vQC1MwRmuyGA56MFb6VkQM&p=6"
+      }
+    ],
+    "selection_mode": "first_N_unique_on_frozen_listing",
+    "limit": 101,
+    "requested_all_pages": false,
+    "saved_selection_authorization": null,
+    "requested_limit": 150,
+    "available_unique": 101,
+    "listing_end_reason": null,
+    "available_listing_exhausted": false,
+    "continuation": null,
+    "branch_only": false,
+    "max_pages": null,
+    "candidate_limit": null,
+    "selection_criterion": "remote",
+    "comparison_sha256": null,
+    "created_at": "2026-11-16T20:57:43.372276+00:00",
+    "instruction_version": "1.8.4",
+    "extractor_sha256": "0c52ba2f821d861083c99ec6bc328456df96b3d179b7fffd47f87aadfda84bdb",
+    "instruction_sha256": "3c644ea0986ae7f2ee631616e871a96340f12b6a2dea75745df86b16e074ee6c",
+    "code_git_commit": "8608af593a1f6a9291eb822d2bb0acb63ae2f4db",
+    "setup_seconds": 11.232264333011699,
+    "live_route_verified": false,
+    "execution_model": "gpt-6-luna",
+    "automation_sha256": {
+      "Scraper/skills/collect-avito/references/top-professions.json": "e3e72638b17b48f825ec6f2fefb963662494f679ae4b0cef1bebedba889610dd",
+      "utils/title_flags.py": "9c9456cb3fb0df5791630049c9c85987381091dbb9ba18bc3fb3314b8cccbeb6",
+      "Scraper/extract.js": "0c52ba2f821d861083c99ec6bc328456df96b3d179b7fffd47f87aadfda84bdb",
+      "Scraper/skills/collect-avito/SKILL.md": "3c644ea0986ae7f2ee631616e871a96340f12b6a2dea75745df86b16e074ee6c",
+      "Scraper/skills/collect-avito/scripts/run.py": "b117c3af0e09e48cf008b049ac56e31160b2d3bc44d3e387a1f6df1acc5dab4e",
+      "Scraper/skills/collect-avito/scripts/employer_selection.py": "52cbd4ceb6ed260b861dde8bb15b9d426d5f18237c0c4146007c65a79725f1f9",
+      "Scraper/skills/collect-avito/scripts/sweep_mode.py": "718a956a316df71c47ee3a4c5d3670fa011a5b16e9948393d68216702b140a56",
+      "Scraper/skills/collect-avito/scripts/browser_batch.js": "8090a7905357a3ee3387009d4b9778f3150556506d319b7f62783bb3594d5733",
+      "Scraper/skills/collect-avito/scripts/check_capture.py": "aa746849317f9768af5aae08b394b9379539f6e268c1fc69e4ed13bd06a4657f",
+      "Scraper/skills/collect-avito/scripts/failure_log.py": "7a2fa9f997ae528969f9a864514f30d76427ae06aafe108344df42ead3fe2291",
+      "Scraper/skills/collect-avito/scripts/preflight.py": "492a0d898990aee198f26bf6577d0876360dcc6ec69e274835cd77cdaa768974"
+    },
+    "uncommitted_automation_files": [
+      "Scraper/skills/collect-avito/SKILL.md",
+      "Scraper/skills/collect-avito/scripts/run.py"
+    ],
+    "deduplication": {
+      "source_run_id": "remote_operators_20261116_02",
+      "source_plan_sha256": "0c475c96bbaae741b7bf1d8dab2578472a5c760ac4a61718e7d8f47313c3b3d5",
+      "source_queue_sha256": "ebf398e8109abbcc075e6b9695ef18de1f665f9249bbe364b41da2a7cac93de8",
+      "against": [
+        {
+          "run_id": "remote_operators_20261116_01",
+          "plan_file": "known-000-plan.json",
+          "queue_file": "known-000-queue.json",
+          "plan_sha256": "e1644e3f3d25f248c27ad97ca068020e39c99b7a97e5d4fb53481b6e8f3c041d",
+          "queue_sha256": "1c1af36b235f9b6d1d6d5ae983009bb535fc9013aa38a6f511c61379e62f1b07"
+        }
+      ],
+      "source_count": 150,
+      "duplicate_excluded": 49,
+      "novel_count": 101,
+      "duplicate_ids": [
+        "8388757394",
+        "8321188096",
+        "8489839320",
+        "8095036148",
+        "4205243570",
+        "8589201889",
+        "8408715891",
+        "8454337964",
+        "8241275251",
+        "7417353719",
+        "8340213822",
+        "8037657201",
+        "8437314355",
+        "7733663974",
+        "8306739703",
+        "8404450715",
+        "8375810702",
+        "3350117751",
+        "8577149935",
+        "8553498921",
+        "3509647642",
+        "8543969078",
+        "7262839999",
+        "8394232499",
+        "8387170721",
+        "2459477803",
+        "8446719061",
+        "8390538870",
+        "7467317854",
+        "7820409420",
+        "8470643611",
+        "8430145645",
+        "8410529961",
+        "8369919772",
+        "8235303995",
+        "3110177048",
+        "7342797960",
+        "8208064077",
+        "8347122893",
+        "4139387146",
+        "8232517681",
+        "8440510767",
+        "7247368923",
+        "2108247782",
+        "8423395673",
+        "8420156673",
+        "8326079543",
+        "7514078178",
+        "4300593269"
+      ],
+      "dataset": {
+        "csv_sha256": "b607c7f0df325bb24537a92cef7c995716878ab314023e0c7548c30367f7f5dc",
+        "manifest_sha256": "a63ca1168cf722aa113ca86e9deb783c2a7ecbd3f64433facce101ded187d043",
+        "keys_sha256": "840cb480882e18b5bf3b0cd4a29b9a7f77e930d02b7284ab48a0604423e13694",
+        "rows": 32087
+      }
+    },
+    "city_anomaly_policy": "blank"
+  },
+  "coverage": {
+    "employer_selection": null,
+    "planned": 101,
+    "accepted": 2,
+    "unavailable": [],
+    "unresolved_observations": [],
+    "user_skipped_observations": [],
+    "user_skipped_count": 0,
+    "user_skip_policy": null,
+    "user_detail_skip_policy": null,
+    "deduplication": {
+      "source_run_id": "remote_operators_20261116_02",
+      "source_plan_sha256": "0c475c96bbaae741b7bf1d8dab2578472a5c760ac4a61718e7d8f47313c3b3d5",
+      "source_queue_sha256": "ebf398e8109abbcc075e6b9695ef18de1f665f9249bbe364b41da2a7cac93de8",
+      "against": [
+        {
+          "run_id": "remote_operators_20261116_01",
+          "plan_file": "known-000-plan.json",
+          "queue_file": "known-000-queue.json",
+          "plan_sha256": "e1644e3f3d25f248c27ad97ca068020e39c99b7a97e5d4fb53481b6e8f3c041d",
+          "queue_sha256": "1c1af36b235f9b6d1d6d5ae983009bb535fc9013aa38a6f511c61379e62f1b07"
+        }
+      ],
+      "source_count": 150,
+      "duplicate_excluded": 49,
+      "novel_count": 101,
+      "duplicate_ids": [
+        "8388757394",
+        "8321188096",
+        "8489839320",
+        "8095036148",
+        "4205243570",
+        "8589201889",
+        "8408715891",
+        "8454337964",
+        "8241275251",
+        "7417353719",
+        "8340213822",
+        "8037657201",
+        "8437314355",
+        "7733663974",
+        "8306739703",
+        "8404450715",
+        "8375810702",
+        "3350117751",
+        "8577149935",
+        "8553498921",
+        "3509647642",
+        "8543969078",
+        "7262839999",
+        "8394232499",
+        "8387170721",
+        "2459477803",
+        "8446719061",
+        "8390538870",
+        "7467317854",
+        "7820409420",
+        "8470643611",
+        "8430145645",
+        "8410529961",
+        "8369919772",
+        "8235303995",
+        "3110177048",
+        "7342797960",
+        "8208064077",
+        "8347122893",
+        "4139387146",
+        "8232517681",
+        "8440510767",
+        "7247368923",
+        "2108247782",
+        "8423395673",
+        "8420156673",
+        "8326079543",
+        "7514078178",
+        "4300593269"
+      ],
+      "dataset": {
+        "csv_sha256": "b607c7f0df325bb24537a92cef7c995716878ab314023e0c7548c30367f7f5dc",
+        "manifest_sha256": "a63ca1168cf722aa113ca86e9deb783c2a7ecbd3f64433facce101ded187d043",
+        "keys_sha256": "840cb480882e18b5bf3b0cd4a29b9a7f77e930d02b7284ab48a0604423e13694",
+        "rows": 32087
+      }
+    },
+    "sweep": null,
+    "unique_ids": [
+      "8469253551",
+      "8589575762"
+    ],
+    "errors": [],
+    "partial": null,
+    "limitations": [
+      "Visible rendered parameters only; enrichment not run; placement on site; live route unverified"
+    ],
+    "reviewed_selection": {
+      "accepted_ids": [
+        "8469253551",
+        "8589575762"
+      ],
+      "sha256": "c30f4ccbcbebc0445683b703ac2f5cf49be445db9aa4c4613648fecff2d3a764"
+    }
+  },
+  "timing": {
+    "setup_seconds": 11.232264333011699,
+    "capture_seconds": 106.96467558501172,
+    "review_export_seconds": 5.8853818330098875,
+    "publication_seconds": null
+  },
+  "review_model": "gpt-6-astra",
+  "automation_changes": [
+    {
+      "file": "Scraper/skills/collect-avito/scripts/run.py",
+      "reason": "UI Next geography and evidence-backed semantic selection",
+      "validation": "python3 -X utf8 -m unittest Scraper.test_aside_runner"
+    },
+    {
+      "file": "Scraper/test_aside_runner.py",
+      "reason": "UI Next geography and evidence-backed semantic selection",
+      "validation": "python3 -X utf8 -m unittest Scraper.test_aside_runner"
+    },
+    {
+      "file": "Scraper/skills/collect-avito/SKILL.md",
+      "reason": "UI Next geography and evidence-backed semantic selection",
+      "validation": "python3 -X utf8 -m unittest Scraper.test_aside_runner"
+    },
+    {
+      "file": "Scraper/skills/collect-avito/scripts/run.py",
+      "reason": "Recover unqueued IDs from pinned pages and keep dedup provenance verifiable in a clean checkout",
+      "validation": "Observed-tail and dedup provenance tamper regressions passed"
+    },
+    {
+      "file": "Scraper/test_aside_runner.py",
+      "reason": "Recover unqueued IDs from pinned pages and keep dedup provenance verifiable in a clean checkout",
+      "validation": "Observed-tail and dedup provenance tamper regressions passed"
+    },
+    {
+      "file": "Scraper/skills/collect-avito/SKILL.md",
+      "reason": "Recover unqueued IDs from pinned pages and keep dedup provenance verifiable in a clean checkout",
+      "validation": "Observed-tail and dedup provenance tamper regressions passed"
+    },
+    {
+      "file": "Scraper/skills/collect-avito/scripts/run.py",
+      "reason": "Recover a stable visible listing without pagination evidence",
+      "validation": "Visible-only, normal pagination, and protection checks passed"
+    },
+    {
+      "file": "Scraper/skills/collect-avito/scripts/browser_batch.js",
+      "reason": "Recover a stable visible listing without pagination evidence",
+      "validation": "Visible-only, normal pagination, and protection checks passed"
+    },
+    {
+      "file": "Scraper/test_aside_runner.py",
+      "reason": "Recover a stable visible listing without pagination evidence",
+      "validation": "Visible-only, normal pagination, and protection checks passed"
+    },
+    {
+      "file": "Scraper/skills/collect-avito/SKILL.md",
+      "reason": "Recover a stable visible listing without pagination evidence",
+      "validation": "Visible-only, normal pagination, and protection checks passed"
+    },
+    {
+      "file": "Scraper/skills/collect-avito/scripts/run.py",
+      "reason": "Recover an evidenced technical shell in a deduplicated queue under a pinned standing instruction without resetting the budget",
+      "validation": "Incomplete shell and recurring recovery guard regressions passed"
+    },
+    {
+      "file": "Scraper/test_aside_runner.py",
+      "reason": "Recover an evidenced technical shell in a deduplicated queue under a pinned standing instruction without resetting the budget",
+      "validation": "Incomplete shell and recurring recovery guard regressions passed"
+    },
+    {
+      "file": "Scraper/skills/collect-avito/SKILL.md",
+      "reason": "Recover an evidenced technical shell in a deduplicated queue under a pinned standing instruction without resetting the budget",
+      "validation": "Incomplete shell and recurring recovery guard regressions passed"
+    },
+    {
+      "file": "Scraper/skills/collect-avito/scripts/run.py",
+      "reason": "Resume after exact closed-card evidence under standing goal and unavailable policies",
+      "validation": "Closed 404 and protection isolation regressions passed"
+    },
+    {
+      "file": "Scraper/test_aside_runner.py",
+      "reason": "Resume after exact closed-card evidence under standing goal and unavailable policies",
+      "validation": "Closed 404 and protection isolation regressions passed"
+    },
+    {
+      "file": "Scraper/skills/collect-avito/SKILL.md",
+      "reason": "Resume after exact closed-card evidence under standing goal and unavailable policies",
+      "validation": "Closed 404 and protection isolation regressions passed"
+    },
+    {
+      "file": "Scraper/skills/collect-avito/scripts/run.py",
+      "reason": "Validate a pinned observed-tail child as a deduplication comparison queue",
+      "validation": "Observed-tail cross-run comparison and tamper regressions passed"
+    },
+    {
+      "file": "Scraper/test_aside_runner.py",
+      "reason": "Validate a pinned observed-tail child as a deduplication comparison queue",
+      "validation": "Observed-tail cross-run comparison and tamper regressions passed"
+    },
+    {
+      "file": "Scraper/skills/collect-avito/SKILL.md",
+      "reason": "Validate a pinned observed-tail child as a deduplication comparison queue",
+      "validation": "Observed-tail cross-run comparison and tamper regressions passed"
+    }
+  ],
+  "profession_correction": null,
+  "post_capture_automation_sha256": {
+    "Scraper/skills/collect-avito/SKILL.md": "9fc928e0e95d17230bbd1d102d2b16643ebc53235174655bd4b3a451b94929df",
+    "Scraper/skills/collect-avito/scripts/browser_batch.js": "f8d61b7c0d4f1b5c45556999f9c611f8584d57ae65c748a3d1fba5a01ab11a96",
+    "Scraper/skills/collect-avito/scripts/run.py": "54484ba71346811161eb78ff2826547c7e52761dd0c2eaef408d5cbdf7ef4a92"
+  },
+  "files": {
+    "Data/avito_runs/remote_operators_20261116_02_new/dedup-provenance/dataset-keys.json": {
+      "bytes": 1251299,
+      "sha256": "840cb480882e18b5bf3b0cd4a29b9a7f77e930d02b7284ab48a0604423e13694"
+    },
+    "Data/avito_runs/remote_operators_20261116_02_new/dedup-provenance/dataset-manifest.json": {
+      "bytes": 3354145,
+      "sha256": "a63ca1168cf722aa113ca86e9deb783c2a7ecbd3f64433facce101ded187d043"
+    },
+    "Data/avito_runs/remote_operators_20261116_02_new/dedup-provenance/known-000-plan.json": {
+      "bytes": 6252,
+      "sha256": "e1644e3f3d25f248c27ad97ca068020e39c99b7a97e5d4fb53481b6e8f3c041d"
+    },
+    "Data/avito_runs/remote_operators_20261116_02_new/dedup-provenance/known-000-queue.json": {
+      "bytes": 80462,
+      "sha256": "1c1af36b235f9b6d1d6d5ae983009bb535fc9013aa38a6f511c61379e62f1b07"
+    },
+    "Data/avito_runs/remote_operators_20261116_02_new/dedup-provenance/source-plan.json": {
+      "bytes": 5839,
+      "sha256": "0c475c96bbaae741b7bf1d8dab2578472a5c760ac4a61718e7d8f47313c3b3d5"
+    },
+    "Data/avito_runs/remote_operators_20261116_02_new/dedup-provenance/source-queue.json": {
+      "bytes": 81773,
+      "sha256": "ebf398e8109abbcc075e6b9695ef18de1f665f9249bbe364b41da2a7cac93de8"
+    },
+    "Data/avito_runs/remote_operators_20261116_02_new/dedup_selection.json": {
+      "bytes": 1865,
+      "sha256": "11449c3403c5fcb2bbca74519f5513d49dc170a3585ee9e16977de4443491273"
+    },
+    "Data/avito_runs/remote_operators_20261116_02_new/exports/reviewed_selection.json": {
+      "bytes": 32612,
+      "sha256": "c30f4ccbcbebc0445683b703ac2f5cf49be445db9aa4c4613648fecff2d3a764"
+    },
+    "Data/avito_runs/remote_operators_20261116_02_new/exports/vacancies.json": {
+      "bytes": 12562,
+      "sha256": "d9c1ef9b05961a141fa29c2932c29f3a75eaab928a0f0f640a7637aa9a2767c0"
+    },
+    "Data/avito_runs/remote_operators_20261116_02_new/exports/vacancies_flat.csv": {
+      "bytes": 10793,
+      "sha256": "8029e5ebc8c2c79d0782a1a519741c55cbac805066fecf025f3ecf3054e075b9"
+    },
+    "Data/avito_runs/remote_operators_20261116_02_new/exports/validation.json": {
+      "bytes": 219,
+      "sha256": "81bb9b092bd4978efa6425ad915790a3ca0b33ed99c7698f831e3e534a7fe01b"
+    },
+    "Data/avito_runs/remote_operators_20261116_02_new/listing.json": {
+      "bytes": 58182,
+      "sha256": "fc9ec76025e4eff118d45fb0f3c0d468eaaabb4adcc5085010d04d885fb2c4e3"
+    },
+    "Data/avito_runs/remote_operators_20261116_02_new/listing_pages/0001.json": {
+      "bytes": 58182,
+      "sha256": "fc9ec76025e4eff118d45fb0f3c0d468eaaabb4adcc5085010d04d885fb2c4e3"
+    },
+    "Data/avito_runs/remote_operators_20261116_02_new/listing_pages/0002.json": {
+      "bytes": 57091,
+      "sha256": "0202f408dae70ad0f8aaac797b7279b1e4dc24ff0c6de0024b76704ffee41234"
+    },
+    "Data/avito_runs/remote_operators_20261116_02_new/listing_pages/0003.json": {
+      "bytes": 53957,
+      "sha256": "56b65aac9f6e04d3303b35ffc565e8719112613f5dc8ca5ad61a9ce60ed5a6db"
+    },
+    "Data/avito_runs/remote_operators_20261116_02_new/queue.json": {
+      "bytes": 56972,
+      "sha256": "a67a01cb0a684ea3e6ead09e8442c5bb9f14893ab0cb08c0431a39c93e9508b2"
+    },
+    "Data/avito_runs/remote_operators_20261116_02_new/raw/3329558893.json": {
+      "bytes": 14439,
+      "sha256": "11e792fab1ce5b6e0ba4475400cae59448ed3833025bdf12dd6ee780704d21a8"
+    },
+    "Data/avito_runs/remote_operators_20261116_02_new/raw/4172915059.json": {
+      "bytes": 11231,
+      "sha256": "db0473d326ad46b043e76081b67108e23e9f964d27d2bc1ed707effe9e9381fa"
+    },
+    "Data/avito_runs/remote_operators_20261116_02_new/raw/7801244114.json": {
+      "bytes": 10863,
+      "sha256": "a3d107d3a118e2bfc41a0f2b4abaf7ca1312ca13237b7c2aef5f3d0e2e5a9e02"
+    },
+    "Data/avito_runs/remote_operators_20261116_02_new/raw/7951778517.json": {
+      "bytes": 18652,
+      "sha256": "9be1761530343b38c43f2563461b58d7aee19b702bf98e352c1f96bf21180685"
+    },
+    "Data/avito_runs/remote_operators_20261116_02_new/raw/8155398807.json": {
+      "bytes": 6923,
+      "sha256": "a6eeb53d7782e596cdacbcd9140b2bae00c0e0efdc5dc5f5926133cb8ada7e0e"
+    },
+    "Data/avito_runs/remote_operators_20261116_02_new/raw/8165334442.json": {
+      "bytes": 12904,
+      "sha256": "a2dedbb6d6e687ba4aa8f5870307c8158360ac225d373fd4b07b2ff03307401e"
+    },
+    "Data/avito_runs/remote_operators_20261116_02_new/raw/8165638168.json": {
+      "bytes": 13131,
+      "sha256": "4fd05f28f18c7401a6ad2436ae10b16e42066c7ea1f463350684dc8c0e7acfda"
+    },
+    "Data/avito_runs/remote_operators_20261116_02_new/raw/8196947019.json": {
+      "bytes": 13017,
+      "sha256": "661c1c5f701be3b5210d003da5c0d15b14c11f1398538c9d65eaafe9984a1a03"
+    },
+    "Data/avito_runs/remote_operators_20261116_02_new/raw/8229191536.json": {
+      "bytes": 13039,
+      "sha256": "5453e750842db34a0a6a7df203287033f1b479f687d8aa60d6347eee573e8aad"
+    },
+    "Data/avito_runs/remote_operators_20261116_02_new/raw/8229465404.json": {
+      "bytes": 13039,
+      "sha256": "07d8d44072aaca73cd3eff8539879bf0f8934b9f7a2f869ae2b66b59e16eddb6"
+    },
+    "Data/avito_runs/remote_operators_20261116_02_new/raw/8276752145.json": {
+      "bytes": 24989,
+      "sha256": "412eded7237aef15acd82a5bb397cd952988921c64bb3e317e85a7912378b349"
+    },
+    "Data/avito_runs/remote_operators_20261116_02_new/raw/8321292555.json": {
+      "bytes": 22624,
+      "sha256": "8e550c389950feee17e0cf05098ffabc0885362b2fc7fa281406c3252858562d"
+    },
+    "Data/avito_runs/remote_operators_20261116_02_new/raw/8325353421.json": {
+      "bytes": 13060,
+      "sha256": "8174f8afc8818a482b18f8d2464a7a0fb3fe307ca295ee13f995a8d98d578201"
+    },
+    "Data/avito_runs/remote_operators_20261116_02_new/raw/8352883028.json": {
+      "bytes": 22419,
+      "sha256": "cd12d3ea56a9b26dcdc1677f50eca77db955727e0161d2264a30583322683fd5"
+    },
+    "Data/avito_runs/remote_operators_20261116_02_new/raw/8352897751.json": {
+      "bytes": 22478,
+      "sha256": "4a69934dd524042e740e9a84398a485671435475135e1615fe7df23624dd6981"
+    },
+    "Data/avito_runs/remote_operators_20261116_02_new/raw/8352977977.json": {
+      "bytes": 22433,
+      "sha256": "f342e365fe452ec72fdcc09fb6c896a7ca7f9f6326874f0584809902d4838068"
+    },
+    "Data/avito_runs/remote_operators_20261116_02_new/raw/8353063351.json": {
+      "bytes": 22618,
+      "sha256": "237ebed8c1cc96ab372fd2de142fb14d87590864403c0b9c8e5710435237601f"
+    },
+    "Data/avito_runs/remote_operators_20261116_02_new/raw/8353181008.json": {
+      "bytes": 22704,
+      "sha256": "1443755a286fc6f909ece78a7854374aa143d5b61e9de093342c313aee956984"
+    },
+    "Data/avito_runs/remote_operators_20261116_02_new/raw/8353198058.json": {
+      "bytes": 22388,
+      "sha256": "6407f243a4ec8915d0da248bc66cc7af799df75631c71763c1ec9bf9ed17f111"
+    },
+    "Data/avito_runs/remote_operators_20261116_02_new/raw/8353199055.json": {
+      "bytes": 22417,
+      "sha256": "4dcdcc82d86334ed6e41ea4f7863fbadea606aa45c58af2c75c194b929dce237"
+    },
+    "Data/avito_runs/remote_operators_20261116_02_new/raw/8353229425.json": {
+      "bytes": 22420,
+      "sha256": "df8882fc07eb18c97f0ba63aa456075bd231f1d75d4173c45419d402751a1019"
+    },
+    "Data/avito_runs/remote_operators_20261116_02_new/raw/8353248797.json": {
+      "bytes": 22426,
+      "sha256": "e64ce9872df4a1af057308a2e5853d62b3011a92a3108f7b6b4d44a7a7517092"
+    },
+    "Data/avito_runs/remote_operators_20261116_02_new/raw/8353481440.json": {
+      "bytes": 22685,
+      "sha256": "be02f3a1c09c36d870f78893f3b9a9a8c8659cda4d17f8a1af5cf0bbb566fb2a"
+    },
+    "Data/avito_runs/remote_operators_20261116_02_new/raw/8353525648.json": {
+      "bytes": 22467,
+      "sha256": "acfaa1b2cb945ad11ef29e70082399f662fd3656e237709b867d27ea224a24d7"
+    },
+    "Data/avito_runs/remote_operators_20261116_02_new/raw/8353594125.json": {
+      "bytes": 22493,
+      "sha256": "7d6606bf09d29e71aef14584f853767a901b4e813c898407f37e4253a5b27b7b"
+    },
+    "Data/avito_runs/remote_operators_20261116_02_new/raw/8353597004.json": {
+      "bytes": 22429,
+      "sha256": "b1664d2bd332c4baabdb5ba07b3a45fcc4acf8c2ae7473231593945bd8605e92"
+    },
+    "Data/avito_runs/remote_operators_20261116_02_new/raw/8353600713.json": {
+      "bytes": 22665,
+      "sha256": "8242020e676760aa7603b0665e0799f3dac6a254f8ac234fa6d213d351f0a8ac"
+    },
+    "Data/avito_runs/remote_operators_20261116_02_new/raw/8353649344.json": {
+      "bytes": 22380,
+      "sha256": "3528531221bf653f6606de0e86d30db96ad35b082ec2d6a30a42b7cedaa8f8d5"
+    },
+    "Data/avito_runs/remote_operators_20261116_02_new/raw/8353714729.json": {
+      "bytes": 22384,
+      "sha256": "a9ea7813df3b569c1a2b18f10c208597e509b35548a630cf1086f5e751b7f3f3"
+    },
+    "Data/avito_runs/remote_operators_20261116_02_new/raw/8353751249.json": {
+      "bytes": 22850,
+      "sha256": "487d9033da6c6f4da9bc9a3037c9705a0800d2d6d0055fecb113377bc8f61b29"
+    },
+    "Data/avito_runs/remote_operators_20261116_02_new/raw/8353770648.json": {
+      "bytes": 22426,
+      "sha256": "17502e53928f0e1035f789da9d4d5e7efd5fe9d98218edf96b768d36f332acbe"
+    },
+    "Data/avito_runs/remote_operators_20261116_02_new/raw/8353781269.json": {
+      "bytes": 22381,
+      "sha256": "504527e453c056c2b3e0c028c41995a7ae1e8d74b39a0e4f525e8acb11b12750"
+    },
+    "Data/avito_runs/remote_operators_20261116_02_new/raw/8353842864.json": {
+      "bytes": 22503,
+      "sha256": "a6ab53d5117dc4e074a8fa7bbeca072feca2603737eecfe46e17e9d312fe09f7"
+    },
+    "Data/avito_runs/remote_operators_20261116_02_new/raw/8359934971.json": {
+      "bytes": 10269,
+      "sha256": "ab991215caeec1e4c76d170e55d2e2a1b6608a694395e4fba587eb2b2c9d0c3c"
+    },
+    "Data/avito_runs/remote_operators_20261116_02_new/raw/8360720419.json": {
+      "bytes": 14089,
+      "sha256": "f10160b79b23b08d06f597776c583d6a4f195ed04be54294b9e446a884c111c6"
+    },
+    "Data/avito_runs/remote_operators_20261116_02_new/raw/8384847064.json": {
+      "bytes": 22612,
+      "sha256": "09fce7d37627b4319d06cb56737845646fab2d31e5b60dc345b6064c4574a740"
+    },
+    "Data/avito_runs/remote_operators_20261116_02_new/raw/8384848927.json": {
+      "bytes": 22576,
+      "sha256": "337e5509154ad5c7fb7f916106d44f60675d700d6e1b47a86e05827b32976e36"
+    },
+    "Data/avito_runs/remote_operators_20261116_02_new/raw/8384856946.json": {
+      "bytes": 22608,
+      "sha256": "4910f7f34faac7a4cf75f91016733db3ce30926594b3eb4d34600dfc426900be"
+    },
+    "Data/avito_runs/remote_operators_20261116_02_new/raw/8384864305.json": {
+      "bytes": 22542,
+      "sha256": "ed7431cb0c7c3980c8bfd59f7ce64fd69445db15f2c9164994ec8cdde300387f"
+    },
+    "Data/avito_runs/remote_operators_20261116_02_new/raw/8384952265.json": {
+      "bytes": 22470,
+      "sha256": "c333bce19c4df9283e9aa97d14d6fca24a094a7b9ff4d85a60ad9527854b22be"
+    },
+    "Data/avito_runs/remote_operators_20261116_02_new/raw/8384965346.json": {
+      "bytes": 22595,
+      "sha256": "74193aaa08c74b93818328021f14a12c5668e7bc44a072f080eb9f5e06f79a86"
+    },
+    "Data/avito_runs/remote_operators_20261116_02_new/raw/8384994586.json": {
+      "bytes": 22617,
+      "sha256": "98b9e7a65920c62579c8a79bf65ff9e04d5bf6cd41a22e9d787b68b8d79c91db"
+    },
+    "Data/avito_runs/remote_operators_20261116_02_new/raw/8385050757.json": {
+      "bytes": 22517,
+      "sha256": "d08c71326ea0844c797863fd85a9ac9fd9f53cae5e69f091b8ca84f540a1781a"
+    },
+    "Data/avito_runs/remote_operators_20261116_02_new/raw/8385104671.json": {
+      "bytes": 22481,
+      "sha256": "fb8e51dab19a2561f6c515c650ca3aeae874e8033d2ddea689afc8286204b58b"
+    },
+    "Data/avito_runs/remote_operators_20261116_02_new/raw/8385109696.json": {
+      "bytes": 22458,
+      "sha256": "5e50d6902ff4a090dc7668de2ab04e37afa0ca9ab8c5ce88aa7b7ef4ca1efb39"
+    },
+    "Data/avito_runs/remote_operators_20261116_02_new/raw/8385118879.json": {
+      "bytes": 22419,
+      "sha256": "beeab63a45202ac264fde6b78b284a88c90d491664799cb04f93f8d2bf141744"
+    },
+    "Data/avito_runs/remote_operators_20261116_02_new/raw/8385126968.json": {
+      "bytes": 22485,
+      "sha256": "254e9463101b29be03617fec0c6cc29a6e912474d3b1ec6c0fa1296631ade2fe"
+    },
+    "Data/avito_runs/remote_operators_20261116_02_new/raw/8385140377.json": {
+      "bytes": 22418,
+      "sha256": "cd3ed8cc3340f97df4d5817086658b0c2ef88eca147ba9daa2f7f237ae19fe48"
+    },
+    "Data/avito_runs/remote_operators_20261116_02_new/raw/8385175992.json": {
+      "bytes": 22462,
+      "sha256": "61611aed5669c32711052f10e8959099d8124a3e4ff5292e134704b44be0c50f"
+    },
+    "Data/avito_runs/remote_operators_20261116_02_new/raw/8385188658.json": {
+      "bytes": 22562,
+      "sha256": "fd837428b15855211f09102400827a1376cae1474fd68affef7089986a757e7e"
+    },
+    "Data/avito_runs/remote_operators_20261116_02_new/raw/8385208867.json": {
+      "bytes": 22389,
+      "sha256": "749aaa4014eb378ae71fbeccb4041e84616b92ce40fd7078aa230b782192390e"
+    },
+    "Data/avito_runs/remote_operators_20261116_02_new/raw/8385229709.json": {
+      "bytes": 22459,
+      "sha256": "51b989c7e6a9a3daf97ca4edf3a018e0a9443599a23ba9f419fb479047fc6612"
+    },
+    "Data/avito_runs/remote_operators_20261116_02_new/raw/8385235052.json": {
+      "bytes": 22552,
+      "sha256": "ba74a99b7a3450c17a39652213d090922471167571cf98a31b240047da9f07df"
+    },
+    "Data/avito_runs/remote_operators_20261116_02_new/raw/8385251644.json": {
+      "bytes": 22403,
+      "sha256": "5cdfc46c0018f32c538dcb008c0c3b7918850c147773930bd0fb94916f15edcd"
+    },
+    "Data/avito_runs/remote_operators_20261116_02_new/raw/8385279336.json": {
+      "bytes": 22542,
+      "sha256": "8ea7d0e04a94969ef2abe86c48b2d7dfe27593cfd7f231c324da742d8a4ba38b"
+    },
+    "Data/avito_runs/remote_operators_20261116_02_new/raw/8385281314.json": {
+      "bytes": 22464,
+      "sha256": "e7425b2f7a0ff0374dc08d41675873b113dd40e74be341699d480ec9da8d9392"
+    },
+    "Data/avito_runs/remote_operators_20261116_02_new/raw/8385284534.json": {
+      "bytes": 22460,
+      "sha256": "e34f946123567fafa38f04f816be5199302ee0eaa8413d01432942db285a4235"
+    },
+    "Data/avito_runs/remote_operators_20261116_02_new/raw/8385303755.json": {
+      "bytes": 22682,
+      "sha256": "e40d7c4d40d7400b03318d9472656621525d47cfee62c40aa099efd9925ae9c0"
+    },
+    "Data/avito_runs/remote_operators_20261116_02_new/raw/8385306054.json": {
+      "bytes": 22433,
+      "sha256": "d3384ed1f3f9b4c7e49839ce189b8d4efd139163a0bc7ff2ba786e9871eaaf14"
+    },
+    "Data/avito_runs/remote_operators_20261116_02_new/raw/8385309590.json": {
+      "bytes": 22577,
+      "sha256": "bb0aab4cca600d2884cddb95de63861d289c9b51fd8c48d2fa411f09c2245b6c"
+    },
+    "Data/avito_runs/remote_operators_20261116_02_new/raw/8385342985.json": {
+      "bytes": 22634,
+      "sha256": "0e877cbccd3e0196557cafaefb42b54465247e7dd4b87f40bdfad8d793186f81"
+    },
+    "Data/avito_runs/remote_operators_20261116_02_new/raw/8385399843.json": {
+      "bytes": 22437,
+      "sha256": "ca2c9928cd4af9cc8a63cc1a296a5502b8865cddfd0aca2e49742d951b0532b6"
+    },
+    "Data/avito_runs/remote_operators_20261116_02_new/raw/8385411881.json": {
+      "bytes": 22481,
+      "sha256": "0deb42a05b9e3e9b2f7a7fabb7ac65471455c96c159890356b70068a1eadca38"
+    },
+    "Data/avito_runs/remote_operators_20261116_02_new/raw/8385417838.json": {
+      "bytes": 22396,
+      "sha256": "36218bfb7aaf931dba3bd24942c1f1deb5c25316c40e2143227010ccadb00e1c"
+    },
+    "Data/avito_runs/remote_operators_20261116_02_new/raw/8385417927.json": {
+      "bytes": 22469,
+      "sha256": "95a524b6cc1da84c9fe69be2716192150e51ee2e2357ac4542c99ee38ccad4d4"
+    },
+    "Data/avito_runs/remote_operators_20261116_02_new/raw/8385452287.json": {
+      "bytes": 22552,
+      "sha256": "04c6a4d2cc1099e88064cba3994440e5858880992a985cceb9c2369af863a8aa"
+    },
+    "Data/avito_runs/remote_operators_20261116_02_new/raw/8385462392.json": {
+      "bytes": 22572,
+      "sha256": "862675c2cf44f21cad0578ab89d7e95aff1e9ac57349d41b60b8688c1a36306c"
+    },
+    "Data/avito_runs/remote_operators_20261116_02_new/raw/8385462875.json": {
+      "bytes": 22456,
+      "sha256": "802e116622e171ebce9f9e2ede461c4b9ffc9595b7e8c31890a576e4f5d89433"
+    },
+    "Data/avito_runs/remote_operators_20261116_02_new/raw/8385497585.json": {
+      "bytes": 22496,
+      "sha256": "493d4c49bf1ba912388688499fe3efedc677d253fa10e4eb8c7994a180f35d87"
+    },
+    "Data/avito_runs/remote_operators_20261116_02_new/raw/8385528696.json": {
+      "bytes": 22518,
+      "sha256": "400b8cfd455d497f95e0e7ab6dfcec60262838530525518b3aa0fd3748e80bc2"
+    },
+    "Data/avito_runs/remote_operators_20261116_02_new/raw/8385553844.json": {
+      "bytes": 22635,
+      "sha256": "c16438a8366e6c361f7aadee0cb5bd02b4d21c3f98a9d32d2c25956de0a97b26"
+    },
+    "Data/avito_runs/remote_operators_20261116_02_new/raw/8385583558.json": {
+      "bytes": 22557,
+      "sha256": "556e3446c14489f63a1313027c2e159c574a3786a650c4e6da7cc2f45894256b"
+    },
+    "Data/avito_runs/remote_operators_20261116_02_new/raw/8385585694.json": {
+      "bytes": 22574,
+      "sha256": "a181c6e4249fb2f88a6052cfa7a6832256c4d9d098efa9a983a4ad486d11b076"
+    },
+    "Data/avito_runs/remote_operators_20261116_02_new/raw/8385598892.json": {
+      "bytes": 22586,
+      "sha256": "a9491c512ed4f48e6a3d808ca9fc55f0ba76ec5c97054205f4a71f5770003a3f"
+    },
+    "Data/avito_runs/remote_operators_20261116_02_new/raw/8385604424.json": {
+      "bytes": 22563,
+      "sha256": "116b189b13ac47d384766b245afc9a78eab09b76ade778156cb223db2b3b0ba1"
+    },
+    "Data/avito_runs/remote_operators_20261116_02_new/raw/8385628092.json": {
+      "bytes": 22396,
+      "sha256": "061a9809db274c3005b2644615bdc2142335a70df657f1e97d64baf61ea8fa86"
+    },
+    "Data/avito_runs/remote_operators_20261116_02_new/raw/8385636826.json": {
+      "bytes": 22581,
+      "sha256": "003f406c61a4f0b2230f4e95fd322493d5c7805a4550b6a6852dd5664479350e"
+    },
+    "Data/avito_runs/remote_operators_20261116_02_new/raw/8385670114.json": {
+      "bytes": 22611,
+      "sha256": "c09cc07e5aa8634a39c3edec0c00882be46b4b7907c805c4e0394081f38ab385"
+    },
+    "Data/avito_runs/remote_operators_20261116_02_new/raw/8385670852.json": {
+      "bytes": 22589,
+      "sha256": "b650f06c873d8fad0a7955272afccadb2f18e28139bac7bc56a6698cb80b0bd2"
+    },
+    "Data/avito_runs/remote_operators_20261116_02_new/raw/8385678869.json": {
+      "bytes": 22408,
+      "sha256": "5896721a079198c1eddd302aca33fc62518ba33827a165e540531e26ffc1ddb1"
+    },
+    "Data/avito_runs/remote_operators_20261116_02_new/raw/8385681220.json": {
+      "bytes": 22512,
+      "sha256": "00f448f08c763d197246d5239a62ce2c75a55eaebf0b9ff661a0960bad763511"
+    },
+    "Data/avito_runs/remote_operators_20261116_02_new/raw/8385697967.json": {
+      "bytes": 22432,
+      "sha256": "9654c4ac0af015b6875eb61910c07f1bc06bd484896097865f2491bad301b758"
+    },
+    "Data/avito_runs/remote_operators_20261116_02_new/raw/8385726550.json": {
+      "bytes": 22618,
+      "sha256": "cdf53a39cbef9d57d32a0e6b7f94fbb8d99414435f0b22e0f423c31589ee643e"
+    },
+    "Data/avito_runs/remote_operators_20261116_02_new/raw/8385731187.json": {
+      "bytes": 22515,
+      "sha256": "67424ab82c7f5126dc297b0affd4e839713c75b8bf09097e65dc1c95262d148a"
+    },
+    "Data/avito_runs/remote_operators_20261116_02_new/raw/8385756770.json": {
+      "bytes": 22485,
+      "sha256": "266426c6a1e6671a62f0b02ded6b1c5903a1ee67c99df728f084dd279dc37a19"
+    },
+    "Data/avito_runs/remote_operators_20261116_02_new/raw/8385781094.json": {
+      "bytes": 22538,
+      "sha256": "8c931e44f8397e69bab45765c6377a269d9849253bf1c4b032b461af9da90dfe"
+    },
+    "Data/avito_runs/remote_operators_20261116_02_new/raw/8385783898.json": {
+      "bytes": 22516,
+      "sha256": "e71f65b98deaf1180a2a77148c39eb9a3afa75e62df588c1952cc121e558072e"
+    },
+    "Data/avito_runs/remote_operators_20261116_02_new/raw/8385802938.json": {
+      "bytes": 22383,
+      "sha256": "3fc3b29cd4a80a099f9723a9fd655f5fa09edf62339ebd2eb9be06935bff32bf"
+    },
+    "Data/avito_runs/remote_operators_20261116_02_new/raw/8385828908.json": {
+      "bytes": 22489,
+      "sha256": "8b29e32befccb14191d5dfc759fac97ddbb5b3fc6ca56167ecf8df4983db1e8f"
+    },
+    "Data/avito_runs/remote_operators_20261116_02_new/raw/8385838315.json": {
+      "bytes": 22620,
+      "sha256": "849cb2db98c8813ea35acf700c3e6bacb9447fc720c2b559364d7c023b4f3c90"
+    },
+    "Data/avito_runs/remote_operators_20261116_02_new/raw/8402620316.json": {
+      "bytes": 14346,
+      "sha256": "561da393448addd88d17ec01756015e79489dd71e6190f756e21e0e4c10fb4af"
+    },
+    "Data/avito_runs/remote_operators_20261116_02_new/raw/8430017306.json": {
+      "bytes": 6193,
+      "sha256": "dda4de4398f5881cf2df8aade500cfe6c6c7321265535c0b2d9950cb69df8653"
+    },
+    "Data/avito_runs/remote_operators_20261116_02_new/raw/8433071753.json": {
+      "bytes": 20092,
+      "sha256": "d029b20a0948c78fbae1b7b8cc1a9d028369381ed7509406a80c6ee7210b8c79"
+    },
+    "Data/avito_runs/remote_operators_20261116_02_new/raw/8433150797.json": {
+      "bytes": 10914,
+      "sha256": "dbe439c21f4b1bc3888983b2997666c110d60192f5ad79aae21ec69e84b65dcc"
+    },
+    "Data/avito_runs/remote_operators_20261116_02_new/raw/8469253551.json": {
+      "bytes": 17704,
+      "sha256": "0d083646406a50392ee0ad11661a6b521d9a8665b3b4923dedd26172bdb7439f"
+    },
+    "Data/avito_runs/remote_operators_20261116_02_new/raw/8480935120.json": {
+      "bytes": 18819,
+      "sha256": "45d8dfc317eda2a440694e56f4d2d3e8bf6ca115f5dc88cc979c3484eae20bf8"
+    },
+    "Data/avito_runs/remote_operators_20261116_02_new/raw/8502540660.json": {
+      "bytes": 14213,
+      "sha256": "402c3de79deb2d3008e16888c60e8913aaaf1752f5c4051ba5beb2fe936d9a8f"
+    },
+    "Data/avito_runs/remote_operators_20261116_02_new/raw/8531473174.json": {
+      "bytes": 11085,
+      "sha256": "459ba285f5d78ec55d7cf9aed95b5c592401fa7ed8dad9c909ab77e7c25a588b"
+    },
+    "Data/avito_runs/remote_operators_20261116_02_new/raw/8553703003.json": {
+      "bytes": 14960,
+      "sha256": "dd6d75c62aa7abda60027ddd49b843903e00207f82c6768a8e9ea0950df3bc39"
+    },
+    "Data/avito_runs/remote_operators_20261116_02_new/raw/8553746064.json": {
+      "bytes": 13373,
+      "sha256": "67ff6bcd27e16ee4e6710b6f262da0897c68941c622d3d5592adb8540fa1932d"
+    },
+    "Data/avito_runs/remote_operators_20261116_02_new/raw/8589575762.json": {
+      "bytes": 18295,
+      "sha256": "7f5bec0bdb9141e52b27d63913a6e0b6a91ca2425507e23e07ac64c091834fbc"
+    },
+    "Data/avito_runs/remote_operators_20261116_02_new/reviewed/8469253551.json": {
+      "bytes": 881,
+      "sha256": "cb2fa7df035da44f2d09f2ca0ffb81580ab2601f3481847b8cc439f3888fe0a6"
+    },
+    "Data/avito_runs/remote_operators_20261116_02_new/reviewed/8589575762.json": {
+      "bytes": 843,
+      "sha256": "4f061cac0754cf90214ab5b458533353a594f6ec279668214ec47844877b3fe8"
+    },
+    "Data/avito_runs/remote_operators_20261116_02_new/standing_unavailable_policy.json": {
+      "bytes": 1011,
+      "sha256": "7a1c18520dc10340252a4933e92bb851f78d800b32c33c1017ede17529393381"
+    },
+    "Scraper/runs/remote_operators_20261116_02_new/plan.json": {
+      "bytes": 7874,
+      "sha256": "13177a7e1821e5b3c0c8c6973e25351bd027f028ede323088e9fe470ad5d43ae"
+    },
+    "Scraper/runs/remote_operators_20261116_02_new/shared-ledger.json": {
+      "bytes": 54,
+      "sha256": "0c4beceefd0a2e65382aeb28c552b76cc2df0d55d35daaf08ca72035641c682e"
+    }
+  }
+}
