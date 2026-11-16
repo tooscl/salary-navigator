@@ -392,3 +392,9 @@ avito_runs/<название_сбора>/
 - [remote_operators_20261116_02_new](avito_runs/remote_operators_20261116_02_new/exports/vacancies_flat.csv): 2 вакансий.
 
 - [remote_operators_20261116_04_new](avito_runs/remote_operators_20261116_04_new/exports/vacancies_flat.csv): 1 вакансий.
+
+- [remote_operators_20261117_tech_capture](avito_runs/remote_operators_20261117_tech_capture/exports/vacancy_observations.csv): 35 наблюдений, 0 принятых.
+
+- [remote_operators_20261117_tech_ui_capture](avito_runs/remote_operators_20261117_tech_ui_capture/exports/vacancy_observations.csv): 29 наблюдений, 0 принятых.
+
+- [remote_operators_20261117_manager_chat_capture](avito_runs/remote_operators_20261117_manager_chat_capture/exports/vacancy_observations.csv): 13 наблюдений, 0 принятых.

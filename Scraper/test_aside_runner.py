@@ -740,12 +740,18 @@ const listBrowserTabs=async()=>[],openTab=async()=>pg,snapshot=async()=>({tree:'
             dataset = root/'Data/dataset/vacancies.csv'; dataset.parent.mkdir(parents=True)
             dataset.write_text('source,id\navito,2\navito,4\nother,1\n', encoding='utf8')
             runner.write(dataset.parent/'manifest.json', {'sha256': runner.sha(dataset), 'rows': 3})
-            args = argparse.Namespace(source_run_id='source', run_id='child', against_run_id=None, against_dataset=True, limit=2)
+            observed = root/'prior-observations.json'
+            runner.write(observed, ['3', '7'])
+            args = argparse.Namespace(source_run_id='source', run_id='child', against_run_id=None,
+                                      against_dataset=True, against_observed_ids=observed, limit=2)
             with patch.object(runner.subprocess, 'check_output', return_value='head'), patch.object(runner, 'dirty_automation', return_value=[]): runner.deduplicate_queue(args)
             child, child_service, _ = runner.paths(root, 'child'); info = runner.read(child/'dedup_selection.json')
-            self.assertEqual([x['id'] for x in runner.read(child/'queue.json')], ['1', '3'])
-            self.assertEqual(info['duplicate_ids'], ['2', '4']); self.assertEqual(info['deferred_ids'], ['5', '6'])
-            self.assertEqual(info['eligible_count'], 4); runner.validate_partition(child, child_service)
+            self.assertEqual([x['id'] for x in runner.read(child/'queue.json')], ['1', '5'])
+            self.assertEqual(info['duplicate_ids'], ['2', '3', '4']); self.assertEqual(info['deferred_ids'], ['6'])
+            self.assertEqual(info['eligible_count'], 3)
+            self.assertEqual(info['observed_ids']['count'], 2)
+            observed.unlink()
+            runner.validate_partition(child, child_service)
             dataset.write_text('changed', encoding='utf8'); runner.validate_partition(child, child_service)
             # Recreate the published layout: no original run and no local diagnostics.
             runner.write(child_service/'shared-ledger.json', {'parent_run_id': 'source'})
@@ -754,6 +760,11 @@ const listBrowserTabs=async()=>[],openTab=async()=>pg,snapshot=async()=>({tree:'
             runner.write(child_service/'shared-ledger.json', {'parent_run_id': 'wrong'})
             with self.assertRaisesRegex(ValueError, 'source ledger'): runner.validate_partition(child, child_service)
             runner.write(child_service/'shared-ledger.json', {'parent_run_id': 'source'})
+            snapshot = child/'dedup-provenance/observed-ids.json'
+            observed_bytes = snapshot.read_bytes()
+            snapshot.write_bytes(observed_bytes + b' ')
+            with self.assertRaisesRegex(ValueError, 'Observed ID provenance'): runner.validate_partition(child, child_service)
+            snapshot.write_bytes(observed_bytes)
             keys = child/'dedup-provenance/dataset-keys.json'; keys.write_bytes(keys.read_bytes() + b' ')
             with self.assertRaisesRegex(ValueError, 'Dataset dedup provenance'): runner.validate_partition(child, child_service)
 
@@ -1001,17 +1012,61 @@ const attachBrowserTab=async()=>pg, snapshot=async()=>({tree:''}), sleep=async()
         local = dict(country, listing_context={'geography': 'Москва', 'search': ''})
         self.assertEqual(runner.visible_pagination_geography(requested, local), requested)
 
+    def test_ui_next_keeps_named_search_when_the_link_has_a_different_path(self):
+        script = (SCRIPTS/'browser_batch.js').read_text()
+        url = 'https://www.avito.ru/all/vakansii/tag/operator'
+        href = '/all/vakansii?p=2'
+        geography = 'Во всех регионах'
+        first = dict(state='LISTING', source_url=url, heading='Оператор поддержки',
+            items=[item('1')], listing_item_audit={'malformed': 0},
+            profession_filter={'observed': True, 'selected_count': 0},
+            listing_context={'geography': geography, 'search': 'оператор поддержки'},
+            selected_controls=[{'label': 'Удалённо', 'marker': 'params[172815]/3286367'}],
+            pagination={'current_pages': ['1'], 'next_url': 'https://www.avito.ru' + href,
+                        'next_button': False, 'evidence': {'href': href}})
+        job = dict(mode='freeze', url='https://www.avito.ru' + href, completed_ids=[],
+            tab_id='own', ui_next=True, previous=first, first=first, geography=geography)
+        for onward_search in ('оператор поддержки', 'оператор продаж'):
+            with self.subTest(search=onward_search), tempfile.TemporaryDirectory() as directory:
+                harness = """const fs=require('fs').promises, pwd=process.cwd();
+const first=FIRST, nextSearch=SEARCH; let afterClick=false;
+const second={...first, source_url:first.source_url+'?p=2',
+  listing_context:{...first.listing_context,search:nextSearch},
+  pagination:{current_pages:['2'],end_confirmed:true}};
+const pg={url:()=>afterClick?second.source_url:first.source_url,
+  evaluate:async()=>afterClick?second:first,
+  locator:ref=>({click:async()=>{if(ref!=='e1') throw Error('incorrect ref'); afterClick=true;}})};
+const attachBrowserTab=async()=>pg, sleep=async()=>{};
+const snapshot=async()=>({tree:'- link "Следующая страница" [ref=e1]'});
+(async()=>{BODY})().catch(e=>{console.error(e);process.exit(1)});
+"""
+                body = script.replace('__JOB__', json.dumps(job), 1).replace('__EXTRACTOR__', '"extract"', 1)
+                harness = harness.replace('FIRST', json.dumps(first)).replace('SEARCH', json.dumps(onward_search)).replace('BODY', body)
+                subprocess.run(['node', '-e', harness], cwd=directory, capture_output=True, text=True, check=True)
+                checkpoint = runner.read(Path(directory)/'checkpoint.json')
+                if onward_search != first['listing_context']['search']:
+                    self.assertEqual(checkpoint['state'], 'BROWSER_ERROR')
+                    continue
+                self.assertEqual(checkpoint['state'], 'READY')
+                page = runner.read(Path(directory)/'listing.json')
+                runner.validate_ui_transition(first, first, page)
+                page['listing_context']['search'] = 'другой запрос'
+                with self.assertRaisesRegex(ValueError, 'changed filters or listing context'):
+                    runner.validate_ui_transition(first, first, page)
+
     def test_direct_freeze_waits_for_complete_controls_and_stops_on_protection(self):
         script = (SCRIPTS/'browser_batch.js').read_text()
         job = {'mode':'freeze','url':'https://www.avito.ru/all/vakansii', 'completed_ids':[], 'tab_id':'own', 'ui_next':False}
-        for scenario in ('delayed', 'short', 'missing', 'protection', 'visible', 'visible_with_next', 'visible_protection'):
+        for scenario in ('delayed', 'short', 'missing', 'protection', 'visible', 'visible_with_next',
+                         'visible_protection', 'visible_ui_next', 'visible_ui_next_with_next'):
             with self.subTest(scenario=scenario), tempfile.TemporaryDirectory() as directory:
-                body = script.replace('__JOB__', json.dumps(dict(job, visible_page_only=scenario.startswith('visible'))), 1).replace('__EXTRACTOR__', '"extract"', 1)
+                case = dict(job, visible_page_only=scenario.startswith('visible'), ui_next='ui_next' in scenario)
+                body = script.replace('__JOB__', json.dumps(case), 1).replace('__EXTRACTOR__', '"extract"', 1)
                 harness = """const fs=require('fs').promises, pwd=process.cwd(); let calls=0; const scenario=SCENARIO;
 const url='https://www.avito.ru/all/vakansii';
 const pg={url:()=>url,evaluate:async()=>{calls++;
   if(scenario.endsWith('protection') && calls===2) return {state:'NEEDS_HUMAN'};
-  const paginated=scenario==='visible_with_next' || (scenario==='delayed' && calls>=5);
+  const paginated=scenario.endsWith('with_next') || (scenario==='delayed' && calls>=5);
   const ready=paginated || scenario==='short' || scenario.startsWith('visible');
   return {state:'LISTING',source_url:url,items:[{id:'1'}],listing_item_audit:{malformed:0},
     selected_controls:ready?[{label:'Удалённо'}]:[],profession_filter:{observed:ready},
@@ -1023,7 +1078,7 @@ const attachBrowserTab=async()=>pg, snapshot=async()=>({tree:''}), sleep=async()
                 result = subprocess.run(['node','-e',harness],cwd=directory,capture_output=True,text=True,check=True)
                 calls = int(result.stdout.split('CALLS=')[-1])
                 checkpoint = json.loads((Path(directory)/'checkpoint.json').read_text(encoding='utf-8'))
-                if scenario in ('delayed', 'short', 'visible'):
+                if scenario in ('delayed', 'short', 'visible', 'visible_ui_next'):
                     self.assertGreaterEqual(calls, 7 if scenario == 'delayed' else 3)
                     self.assertEqual(checkpoint['state'], 'READY')
                 else:
@@ -2812,7 +2867,8 @@ console.log(JSON.stringify(extract()));""".replace('EXTRACTOR', extractor.rstrip
                              required_fields={'Формат работы': 'Удалённо'}, decisions=decisions)
             path = diag/'reviewed-input.json'
             runner.write(path, dict(selection, decisions=decisions[:1]))
-            args = argparse.Namespace(run_id='reviewed', placements=None, review_model='tester', reviewed_selection=path)
+            args = argparse.Namespace(run_id='reviewed', placements=None, review_model='tester',
+                                      reviewed_selection=path, export_all_observations=True)
             with self.assertRaisesRegex(ValueError, 'every valid candidate'):
                 runner.finalize(args)
             runner.write(path, dict(selection, decisions=[dict(decisions[0], description_evidence=['Чужая строка']), decisions[1]]))
@@ -2827,6 +2883,32 @@ console.log(JSON.stringify(extract()));""".replace('EXTRACTOR', extractor.rstrip
             self.assertEqual(manifest['coverage']['reviewed_selection']['accepted_ids'], ['123'])
             self.assertEqual(manifest['coverage']['accepted'], 1)
             self.assertTrue((out/'raw/456.json').exists())
+            audit = out/'exports/vacancy_observations.csv'
+            with audit.open(encoding='utf-8-sig', newline='') as stream:
+                observations = list(csv.DictReader(stream))
+            self.assertEqual([(row['id'], row['selection_status'], row['selection_reason'])
+                              for row in observations],
+                             [('123', 'accepted', 'Подтверждено описанием'), ('456', 'rejected', 'Гибрид')])
+            self.assertEqual(observations[1]['description'], raw('456')['description'])
+            self.assertEqual(observations[1]['observation_sha256'], decisions[1]['raw_sha256'])
+            self.assertEqual(manifest['coverage']['full_observations']['rows'], 2)
+
+            archive, archive_service, archive_diag = runner.paths(root, 'archive')
+            archive.mkdir(parents=True)
+            for name in ('queue.json', 'listing.json'):
+                shutil.copyfile(out/name, archive/name)
+            shutil.copytree(out/'raw', archive/'raw')
+            runner.write(archive_service/'plan.json', runner.read(service/'plan.json'))
+            runner.write(archive_diag/'checkpoint.json', runner.read(diag/'checkpoint.json'))
+            archive_input = archive_diag/'selection.json'
+            runner.write(archive_input, dict(selection, decisions=[dict(decisions[0], accepted=False,
+                reason='Уже есть в датасете'), decisions[1]]))
+            registry = root/'Data/dataset/sources.json'
+            before = registry.read_bytes()
+            runner.finalize(argparse.Namespace(**dict(vars(args), run_id='archive', reviewed_selection=archive_input)))
+            self.assertEqual(registry.read_bytes(), before)
+            self.assertEqual(runner.validate_completed_export(archive, archive_service)['coverage']['accepted'], 0)
+
             saved = out/'exports/reviewed_selection.json'
             runner.write(saved, dict(runner.read(saved), accepted_ids=['456']))
             with self.assertRaisesRegex(ValueError, 'Published artifact changed'):

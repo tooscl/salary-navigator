@@ -59,6 +59,14 @@ class PublicationTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "absent"):
             render("Сбор", before, before, [("avito", [{"id": "2"}])])
 
+    def test_observation_archive_can_be_published_with_no_accepted_candidates(self):
+        current = (["source", "id"], [{"source": "avito", "id": "1"}])
+        with self.assertRaisesRegex(ValueError, "No accepted observations"):
+            render("Сбор", current, current, [])
+        body = render("Сбор", current, current, [], [("archive", 2)])
+        self.assertIn("Приняты ID: нет", body)
+        self.assertIn("Архив `archive`: 2 наблюдений, 0 принятых.", body)
+
     def test_browser_dumps_rejected_but_structured_data_allowed(self):
         for path in ["Data/avito_runs/run/evidence/a.jpg",
                      "Data/avito_runs/run/evidence/filter.txt",
