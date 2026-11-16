@@ -1,0 +1,408 @@
+{
+  "run_id": "hr_remote_20261117_06_child",
+  "dataset_id": "hr_remote_20261117_06_child",
+  "status": "complete",
+  "schema": {
+    "columns": [
+      "id",
+      "profession"
+    ],
+    "unknown_policy": "empty_not_zero"
+  },
+  "collection": {
+    "run_id": "hr_remote_20261117_06_child",
+    "geography": "Во всех регионах",
+    "profession": "",
+    "segments": "Удалённо; По всей России",
+    "filter_evidence": "Запрос рекрутер массовый подбор; Удалённо и По всей России checked; геоконтроль Во всех регионах",
+    "listing_url": "https://www.avito.ru/all/vakansii/format_raboty/udalenno-ASgBAgICAUSejBW~lZED/tag/rekruter-massovyj-podbor?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6IjhQSkcyRlFHVTJZcTBwRTkiO30J3TJWJgAAAA&f=ASgBAgICAkSUzQ_S6vQCnowVvpWRAw",
+    "listing_request_url": "https://www.avito.ru/all/vakansii/format_raboty/udalenno-ASgBAgICAUSejBW~lZED/tag/rekruter-massovyj-podbor?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6IjhQSkcyRlFHVTJZcTBwRTkiO30J3TJWJgAAAA&f=ASgBAgICAkSUzQ_S6vQCnowVvpWRAw",
+    "selected_controls": [
+      {
+        "label": "По всей России",
+        "marker": "params[127818]/3054249",
+        "value": null
+      },
+      {
+        "label": "По всей России",
+        "marker": "params[127818]/toggle",
+        "value": "3054249"
+      },
+      {
+        "label": "Любой",
+        "marker": "params[196929]/all",
+        "value": null
+      },
+      {
+        "label": "Любой",
+        "marker": "params[196929]/toggle",
+        "value": "all"
+      },
+      {
+        "label": "Удалённо",
+        "marker": "params[172815]/3286367",
+        "value": null
+      },
+      {
+        "label": "Удалённо",
+        "marker": "params[172815]/toggle",
+        "value": "3286367"
+      },
+      {
+        "label": "Неважно",
+        "marker": null,
+        "value": "all"
+      },
+      {
+        "label": "Все",
+        "marker": null,
+        "value": "all"
+      }
+    ],
+    "listing_sha256": "de758d471bb5440188ee502bad65c6313b3b339a1c00b36e6090407c614a5c3c",
+    "profession_scope": "all",
+    "profession_source": "selected_ui_context",
+    "listing_pages": [
+      {
+        "file": "listing_pages/0001.json",
+        "sha256": "de758d471bb5440188ee502bad65c6313b3b339a1c00b36e6090407c614a5c3c",
+        "source_url": "https://www.avito.ru/all/vakansii/format_raboty/udalenno-ASgBAgICAUSejBW~lZED/tag/rekruter-massovyj-podbor?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6IjhQSkcyRlFHVTJZcTBwRTkiO30J3TJWJgAAAA&f=ASgBAgICAkSUzQ_S6vQCnowVvpWRAw"
+      }
+    ],
+    "selection_mode": "first_N_unique_on_frozen_listing",
+    "limit": 4,
+    "requested_all_pages": true,
+    "saved_selection_authorization": null,
+    "requested_limit": null,
+    "available_unique": 4,
+    "listing_end_reason": "visible_page_only_no_pagination",
+    "available_listing_exhausted": false,
+    "continuation": null,
+    "branch_only": false,
+    "max_pages": null,
+    "candidate_limit": null,
+    "selection_criterion": "remote",
+    "comparison_sha256": null,
+    "created_at": "2026-11-16T23:00:55.296483+00:00",
+    "instruction_version": "1.8.4",
+    "extractor_sha256": "0c52ba2f821d861083c99ec6bc328456df96b3d179b7fffd47f87aadfda84bdb",
+    "instruction_sha256": "79db7c6d781a31544663cb64f2278ae42570dad10e6f2394fe2db0599324382c",
+    "code_git_commit": "c65727b62cd35fddee5a711234ac9ba30d1270c9",
+    "setup_seconds": 1.8558931250008754,
+    "live_route_verified": false,
+    "execution_model": "gpt-6-luna",
+    "automation_sha256": {
+      "Scraper/skills/collect-avito/references/top-professions.json": "e3e72638b17b48f825ec6f2fefb963662494f679ae4b0cef1bebedba889610dd",
+      "utils/title_flags.py": "9c9456cb3fb0df5791630049c9c85987381091dbb9ba18bc3fb3314b8cccbeb6",
+      "Scraper/extract.js": "0c52ba2f821d861083c99ec6bc328456df96b3d179b7fffd47f87aadfda84bdb",
+      "Scraper/skills/collect-avito/SKILL.md": "79db7c6d781a31544663cb64f2278ae42570dad10e6f2394fe2db0599324382c",
+      "Scraper/skills/collect-avito/scripts/run.py": "987132bf12da911c0f733bce13b758d699cdae945277b77997671c19df94dc7e",
+      "Scraper/skills/collect-avito/scripts/employer_selection.py": "52cbd4ceb6ed260b861dde8bb15b9d426d5f18237c0c4146007c65a79725f1f9",
+      "Scraper/skills/collect-avito/scripts/sweep_mode.py": "718a956a316df71c47ee3a4c5d3670fa011a5b16e9948393d68216702b140a56",
+      "Scraper/skills/collect-avito/scripts/browser_batch.js": "07d6bb6247da750599c6c344aea153ffee592957e68de2dd204b68386f263677",
+      "Scraper/skills/collect-avito/scripts/check_capture.py": "aa746849317f9768af5aae08b394b9379539f6e268c1fc69e4ed13bd06a4657f",
+      "Scraper/skills/collect-avito/scripts/failure_log.py": "7a2fa9f997ae528969f9a864514f30d76427ae06aafe108344df42ead3fe2291",
+      "Scraper/skills/collect-avito/scripts/preflight.py": "492a0d898990aee198f26bf6577d0876360dcc6ec69e274835cd77cdaa768974"
+    },
+    "uncommitted_automation_files": [],
+    "deduplication": {
+      "source_run_id": "hr_remote_20261117_06",
+      "source_plan_sha256": "9b173c0607f72f78e96998b2aa7109f689e5d82f9216afdf20e55af646ff012f",
+      "source_queue_sha256": "0cc13785677b5df69fac63943616cfe179501b465d43d806aee8a8ae8893f0d6",
+      "against": [
+        {
+          "run_id": "hr_remote_20261117_01",
+          "plan_file": "known-000-plan.json",
+          "queue_file": "known-000-queue.json",
+          "plan_sha256": "32a764b1f5d7513e66b5da03603e2d935f3a12847131b6a707b7a39b04728414",
+          "queue_sha256": "9d32f615b9a4cd55d1d5602a9daf01efc4f157b6487042dd6adff7ff52b73cee"
+        },
+        {
+          "run_id": "hr_remote_20261117_02",
+          "plan_file": "known-001-plan.json",
+          "queue_file": "known-001-queue.json",
+          "plan_sha256": "9e3ae8295a844fba767b76d25feb290962539dcc3bdd275a297597cb077eb11d",
+          "queue_sha256": "ad1bafb1126ad8294320604a9ae6cfd9855461c42e2ff10577605dae87ef161d"
+        },
+        {
+          "run_id": "hr_remote_20261117_03",
+          "plan_file": "known-002-plan.json",
+          "queue_file": "known-002-queue.json",
+          "plan_sha256": "d9ddc3f8390052d42d3b93b59cdfd5a5b768adb9b771acf3365fee5c715e169c",
+          "queue_sha256": "97677f7eebd8aff32a2f8ec197c60a8e6583f1d0cac1b8fd270770934600b7a4"
+        }
+      ],
+      "source_count": 43,
+      "duplicate_excluded": 39,
+      "novel_count": 4,
+      "duplicate_ids": [
+        "8379594851",
+        "8339992826",
+        "8294746022",
+        "8163480101",
+        "4142906810",
+        "8350825904",
+        "8100399768",
+        "8461491623",
+        "8347799799",
+        "8553803352",
+        "8402662823",
+        "8332436418",
+        "8379457434",
+        "8332507588",
+        "8346166093",
+        "8393880557",
+        "8609375431",
+        "8404865393",
+        "8024561441",
+        "8549182308",
+        "8055938561",
+        "8520827369",
+        "8419331654",
+        "7910066667",
+        "2814737981",
+        "8608809538",
+        "8379205574",
+        "8557024115",
+        "8397837731",
+        "8468990690",
+        "8499596517",
+        "8400575247",
+        "8543596064",
+        "8380185275",
+        "8440017252",
+        "8577634467",
+        "7628438699",
+        "8368898815",
+        "8188242728"
+      ],
+      "dataset": {
+        "csv_sha256": "466fc29005462f9d4e81bab35fd834e8af89b405ae11c65654ee2f1a73bd91da",
+        "manifest_sha256": "5f5253c4c8dda331cb1bdc1c18b672b36505689f4ed0687438dd14a9a645a3f8",
+        "keys_sha256": "db62174f67a8a9f39adecf825bc919734e0a6d76380aa92bf6df4c0279134cb2",
+        "rows": 32090
+      }
+    },
+    "city_anomaly_policy": "blank"
+  },
+  "coverage": {
+    "employer_selection": null,
+    "planned": 4,
+    "accepted": 0,
+    "unavailable": [],
+    "unresolved_observations": [],
+    "user_skipped_observations": [],
+    "user_skipped_count": 0,
+    "user_skip_policy": null,
+    "user_detail_skip_policy": null,
+    "deduplication": {
+      "source_run_id": "hr_remote_20261117_06",
+      "source_plan_sha256": "9b173c0607f72f78e96998b2aa7109f689e5d82f9216afdf20e55af646ff012f",
+      "source_queue_sha256": "0cc13785677b5df69fac63943616cfe179501b465d43d806aee8a8ae8893f0d6",
+      "against": [
+        {
+          "run_id": "hr_remote_20261117_01",
+          "plan_file": "known-000-plan.json",
+          "queue_file": "known-000-queue.json",
+          "plan_sha256": "32a764b1f5d7513e66b5da03603e2d935f3a12847131b6a707b7a39b04728414",
+          "queue_sha256": "9d32f615b9a4cd55d1d5602a9daf01efc4f157b6487042dd6adff7ff52b73cee"
+        },
+        {
+          "run_id": "hr_remote_20261117_02",
+          "plan_file": "known-001-plan.json",
+          "queue_file": "known-001-queue.json",
+          "plan_sha256": "9e3ae8295a844fba767b76d25feb290962539dcc3bdd275a297597cb077eb11d",
+          "queue_sha256": "ad1bafb1126ad8294320604a9ae6cfd9855461c42e2ff10577605dae87ef161d"
+        },
+        {
+          "run_id": "hr_remote_20261117_03",
+          "plan_file": "known-002-plan.json",
+          "queue_file": "known-002-queue.json",
+          "plan_sha256": "d9ddc3f8390052d42d3b93b59cdfd5a5b768adb9b771acf3365fee5c715e169c",
+          "queue_sha256": "97677f7eebd8aff32a2f8ec197c60a8e6583f1d0cac1b8fd270770934600b7a4"
+        }
+      ],
+      "source_count": 43,
+      "duplicate_excluded": 39,
+      "novel_count": 4,
+      "duplicate_ids": [
+        "8379594851",
+        "8339992826",
+        "8294746022",
+        "8163480101",
+        "4142906810",
+        "8350825904",
+        "8100399768",
+        "8461491623",
+        "8347799799",
+        "8553803352",
+        "8402662823",
+        "8332436418",
+        "8379457434",
+        "8332507588",
+        "8346166093",
+        "8393880557",
+        "8609375431",
+        "8404865393",
+        "8024561441",
+        "8549182308",
+        "8055938561",
+        "8520827369",
+        "8419331654",
+        "7910066667",
+        "2814737981",
+        "8608809538",
+        "8379205574",
+        "8557024115",
+        "8397837731",
+        "8468990690",
+        "8499596517",
+        "8400575247",
+        "8543596064",
+        "8380185275",
+        "8440017252",
+        "8577634467",
+        "7628438699",
+        "8368898815",
+        "8188242728"
+      ],
+      "dataset": {
+        "csv_sha256": "466fc29005462f9d4e81bab35fd834e8af89b405ae11c65654ee2f1a73bd91da",
+        "manifest_sha256": "5f5253c4c8dda331cb1bdc1c18b672b36505689f4ed0687438dd14a9a645a3f8",
+        "keys_sha256": "db62174f67a8a9f39adecf825bc919734e0a6d76380aa92bf6df4c0279134cb2",
+        "rows": 32090
+      }
+    },
+    "sweep": null,
+    "unique_ids": [],
+    "errors": [],
+    "partial": null,
+    "limitations": [
+      "Visible rendered parameters only; enrichment not run; placement on site; live route unverified"
+    ],
+    "reviewed_selection": {
+      "accepted_ids": [],
+      "sha256": "9804a5174a4dff4b17b6b297f1da8cfec3008bf5ca1b7c287510a9ed09b4f68a"
+    },
+    "full_observations": {
+      "rows": 4,
+      "sha256": "7377681050c2459bec7bf0cb396e5ab29162dded750e8ce0229ec89eab788bc2"
+    }
+  },
+  "timing": {
+    "setup_seconds": 1.8558931250008754,
+    "capture_seconds": 4.7601958330051275,
+    "review_export_seconds": 3.037530583998887,
+    "publication_seconds": null
+  },
+  "review_model": "gpt-6.1-terra",
+  "automation_changes": [],
+  "profession_correction": null,
+  "post_capture_automation_sha256": {},
+  "files": {
+    "Data/avito_runs/hr_remote_20261117_06_child/dedup-provenance/dataset-keys.json": {
+      "bytes": 1251416,
+      "sha256": "db62174f67a8a9f39adecf825bc919734e0a6d76380aa92bf6df4c0279134cb2"
+    },
+    "Data/avito_runs/hr_remote_20261117_06_child/dedup-provenance/dataset-manifest.json": {
+      "bytes": 3355746,
+      "sha256": "5f5253c4c8dda331cb1bdc1c18b672b36505689f4ed0687438dd14a9a645a3f8"
+    },
+    "Data/avito_runs/hr_remote_20261117_06_child/dedup-provenance/known-000-plan.json": {
+      "bytes": 5653,
+      "sha256": "32a764b1f5d7513e66b5da03603e2d935f3a12847131b6a707b7a39b04728414"
+    },
+    "Data/avito_runs/hr_remote_20261117_06_child/dedup-provenance/known-000-queue.json": {
+      "bytes": 109871,
+      "sha256": "9d32f615b9a4cd55d1d5602a9daf01efc4f157b6487042dd6adff7ff52b73cee"
+    },
+    "Data/avito_runs/hr_remote_20261117_06_child/dedup-provenance/known-001-plan.json": {
+      "bytes": 4958,
+      "sha256": "9e3ae8295a844fba767b76d25feb290962539dcc3bdd275a297597cb077eb11d"
+    },
+    "Data/avito_runs/hr_remote_20261117_06_child/dedup-provenance/known-001-queue.json": {
+      "bytes": 16248,
+      "sha256": "ad1bafb1126ad8294320604a9ae6cfd9855461c42e2ff10577605dae87ef161d"
+    },
+    "Data/avito_runs/hr_remote_20261117_06_child/dedup-provenance/known-002-plan.json": {
+      "bytes": 5698,
+      "sha256": "d9ddc3f8390052d42d3b93b59cdfd5a5b768adb9b771acf3365fee5c715e169c"
+    },
+    "Data/avito_runs/hr_remote_20261117_06_child/dedup-provenance/known-002-queue.json": {
+      "bytes": 59284,
+      "sha256": "97677f7eebd8aff32a2f8ec197c60a8e6583f1d0cac1b8fd270770934600b7a4"
+    },
+    "Data/avito_runs/hr_remote_20261117_06_child/dedup-provenance/source-plan.json": {
+      "bytes": 4615,
+      "sha256": "9b173c0607f72f78e96998b2aa7109f689e5d82f9216afdf20e55af646ff012f"
+    },
+    "Data/avito_runs/hr_remote_20261117_06_child/dedup-provenance/source-queue.json": {
+      "bytes": 20665,
+      "sha256": "0cc13785677b5df69fac63943616cfe179501b465d43d806aee8a8ae8893f0d6"
+    },
+    "Data/avito_runs/hr_remote_20261117_06_child/dedup_selection.json": {
+      "bytes": 2304,
+      "sha256": "0869a205c5bf473505e00c4a848215f68e3ed4957658ccb839242da238f46ce8"
+    },
+    "Data/avito_runs/hr_remote_20261117_06_child/exports/reviewed_selection.json": {
+      "bytes": 2583,
+      "sha256": "9804a5174a4dff4b17b6b297f1da8cfec3008bf5ca1b7c287510a9ed09b4f68a"
+    },
+    "Data/avito_runs/hr_remote_20261117_06_child/exports/vacancies.json": {
+      "bytes": 3,
+      "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+    },
+    "Data/avito_runs/hr_remote_20261117_06_child/exports/vacancies_flat.csv": {
+      "bytes": 17,
+      "sha256": "5d1cbcac255347a5b4193f3558006723f3a164540824da93962b40f894bb4a1c"
+    },
+    "Data/avito_runs/hr_remote_20261117_06_child/exports/vacancy_observations.csv": {
+      "bytes": 15304,
+      "sha256": "7377681050c2459bec7bf0cb396e5ab29162dded750e8ce0229ec89eab788bc2"
+    },
+    "Data/avito_runs/hr_remote_20261117_06_child/exports/validation.json": {
+      "bytes": 217,
+      "sha256": "ae34d2654296c68ebfb1561571dcd3107887f110611029c1522ce4ba5630a929"
+    },
+    "Data/avito_runs/hr_remote_20261117_06_child/listing.json": {
+      "bytes": 46893,
+      "sha256": "de758d471bb5440188ee502bad65c6313b3b339a1c00b36e6090407c614a5c3c"
+    },
+    "Data/avito_runs/hr_remote_20261117_06_child/listing_pages/0001.json": {
+      "bytes": 46893,
+      "sha256": "de758d471bb5440188ee502bad65c6313b3b339a1c00b36e6090407c614a5c3c"
+    },
+    "Data/avito_runs/hr_remote_20261117_06_child/queue.json": {
+      "bytes": 1986,
+      "sha256": "4d8fe70e769fa87d0669a67b41d3fbfddf34d8432c45eb265500fee03868ef7f"
+    },
+    "Data/avito_runs/hr_remote_20261117_06_child/raw/7643088317.json": {
+      "bytes": 18713,
+      "sha256": "3dafacfbef62afe083ded50ef0ebb67bacb907940c2da486112a424161237c3b"
+    },
+    "Data/avito_runs/hr_remote_20261117_06_child/raw/7745560679.json": {
+      "bytes": 9549,
+      "sha256": "5c797477d1f7e681f45357ab4835da61b9d0cda046df24083b652384410898a4"
+    },
+    "Data/avito_runs/hr_remote_20261117_06_child/raw/8181870635.json": {
+      "bytes": 8659,
+      "sha256": "13aee7e3de41eba27e553fe56fd9ba08ba28b48c3121cc8c18a849ac262c2668"
+    },
+    "Data/avito_runs/hr_remote_20261117_06_child/raw/8370723819.json": {
+      "bytes": 9227,
+      "sha256": "bcf19c9fdb797fb6f1b71f05e97e94abdbba97d92615d7bf6fe1156ab07c44c8"
+    },
+    "Data/avito_runs/hr_remote_20261117_06_child/standing_unavailable_policy.json": {
+      "bytes": 1011,
+      "sha256": "7a1c18520dc10340252a4933e92bb851f78d800b32c33c1017ede17529393381"
+    },
+    "Scraper/runs/hr_remote_20261117_06_child/plan.json": {
+      "bytes": 7097,
+      "sha256": "b7d99ed35a33dc56c2df7ac38ee6b051cacdd210237d32480a3d1047723ae307"
+    },
+    "Scraper/runs/hr_remote_20261117_06_child/shared-ledger.json": {
+      "bytes": 47,
+      "sha256": "12cdbbf3a7226bd2be6ca05b50aa7539ae82ea1f267ef4eed64011224a10afd6"
+    }
+  }
+}

@@ -1,0 +1,533 @@
+{
+  "run_id": "hr_remote_20261117_13_child",
+  "dataset_id": "hr_remote_20261117_13_child",
+  "status": "complete",
+  "schema": {
+    "columns": [
+      "id",
+      "profession"
+    ],
+    "unknown_policy": "empty_not_zero"
+  },
+  "collection": {
+    "run_id": "hr_remote_20261117_13_child",
+    "geography": "Во всех регионах",
+    "profession": "",
+    "segments": "Удалённо; По всей России; Гибкий",
+    "filter_evidence": "Запрос рекрутер; Гибкий, Удалённо и По всей России checked; геоконтроль Во всех регионах",
+    "listing_url": "https://www.avito.ru/all/vakansii/svobodnyy-ASgBAgICAUSQC_j3AQ/tag/rekruter?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6ImU5bmxKaWlQOUxrUVdzTGkiO32ouWwCJgAAAA&f=ASgBAgICA0SQC_j3AZTND9Lq9AKejBW~lZED",
+    "listing_request_url": "https://www.avito.ru/all/vakansii/svobodnyy-ASgBAgICAUSQC_j3AQ/tag/rekruter?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6ImU5bmxKaWlQOUxrUVdzTGkiO32ouWwCJgAAAA&f=ASgBAgICA0SQC_j3AZTND9Lq9AKejBW~lZED",
+    "selected_controls": [
+      {
+        "label": "По всей России",
+        "marker": "params[127818]/3054249",
+        "value": null
+      },
+      {
+        "label": "По всей России",
+        "marker": "params[127818]/toggle",
+        "value": "3054249"
+      },
+      {
+        "label": "Любой",
+        "marker": "params[196929]/all",
+        "value": null
+      },
+      {
+        "label": "Любой",
+        "marker": "params[196929]/toggle",
+        "value": "all"
+      },
+      {
+        "label": "Гибкий",
+        "marker": "params[712]/checkbox/15868",
+        "value": null
+      },
+      {
+        "label": "Гибкий",
+        "marker": "params[712]/checkbox/toggle",
+        "value": "15868"
+      },
+      {
+        "label": "Удалённо",
+        "marker": "params[172815]/3286367",
+        "value": null
+      },
+      {
+        "label": "Удалённо",
+        "marker": "params[172815]/toggle",
+        "value": "3286367"
+      },
+      {
+        "label": "Неважно",
+        "marker": null,
+        "value": "all"
+      },
+      {
+        "label": "Все",
+        "marker": null,
+        "value": "all"
+      }
+    ],
+    "listing_sha256": "24df019a4847eb531fec9129aa9c396f93fa8a7a828e633dfca9cf1cd9e5d3ac",
+    "profession_scope": "all",
+    "profession_source": "selected_ui_context",
+    "listing_pages": [
+      {
+        "file": "listing_pages/0001.json",
+        "sha256": "24df019a4847eb531fec9129aa9c396f93fa8a7a828e633dfca9cf1cd9e5d3ac",
+        "source_url": "https://www.avito.ru/all/vakansii/svobodnyy-ASgBAgICAUSQC_j3AQ/tag/rekruter?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6ImU5bmxKaWlQOUxrUVdzTGkiO32ouWwCJgAAAA&f=ASgBAgICA0SQC_j3AZTND9Lq9AKejBW~lZED"
+      },
+      {
+        "file": "listing_pages/0002.json",
+        "sha256": "8e7b4cd2824ed3dab37b38e469c359cc1368675b372d358c3f81c6ee1c5646b5",
+        "source_url": "https://www.avito.ru/all/vakansii/svobodnyy-ASgBAgICAUSQC_j3AQ/tag/rekruter?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6ImJyS1N5Sm94ZnpBRGpsalQiO33ZSyuiJgAAAA&f=ASgBAgICA0SQC_j3AZTND9Lq9AKejBW~lZED&p=2"
+      }
+    ],
+    "selection_mode": "first_N_unique_on_frozen_listing",
+    "limit": 7,
+    "requested_all_pages": true,
+    "saved_selection_authorization": null,
+    "requested_limit": null,
+    "available_unique": 7,
+    "listing_end_reason": "confirmed_end",
+    "available_listing_exhausted": true,
+    "continuation": null,
+    "branch_only": false,
+    "max_pages": null,
+    "candidate_limit": null,
+    "selection_criterion": "remote",
+    "comparison_sha256": null,
+    "created_at": "2026-11-16T23:32:27.133948+00:00",
+    "instruction_version": "1.8.4",
+    "extractor_sha256": "0c52ba2f821d861083c99ec6bc328456df96b3d179b7fffd47f87aadfda84bdb",
+    "instruction_sha256": "79db7c6d781a31544663cb64f2278ae42570dad10e6f2394fe2db0599324382c",
+    "code_git_commit": "c65727b62cd35fddee5a711234ac9ba30d1270c9",
+    "setup_seconds": 7.615956167006516,
+    "live_route_verified": false,
+    "execution_model": "gpt-6-luna",
+    "automation_sha256": {
+      "Scraper/skills/collect-avito/references/top-professions.json": "e3e72638b17b48f825ec6f2fefb963662494f679ae4b0cef1bebedba889610dd",
+      "utils/title_flags.py": "9c9456cb3fb0df5791630049c9c85987381091dbb9ba18bc3fb3314b8cccbeb6",
+      "Scraper/extract.js": "0c52ba2f821d861083c99ec6bc328456df96b3d179b7fffd47f87aadfda84bdb",
+      "Scraper/skills/collect-avito/SKILL.md": "79db7c6d781a31544663cb64f2278ae42570dad10e6f2394fe2db0599324382c",
+      "Scraper/skills/collect-avito/scripts/run.py": "987132bf12da911c0f733bce13b758d699cdae945277b77997671c19df94dc7e",
+      "Scraper/skills/collect-avito/scripts/employer_selection.py": "52cbd4ceb6ed260b861dde8bb15b9d426d5f18237c0c4146007c65a79725f1f9",
+      "Scraper/skills/collect-avito/scripts/sweep_mode.py": "718a956a316df71c47ee3a4c5d3670fa011a5b16e9948393d68216702b140a56",
+      "Scraper/skills/collect-avito/scripts/browser_batch.js": "07d6bb6247da750599c6c344aea153ffee592957e68de2dd204b68386f263677",
+      "Scraper/skills/collect-avito/scripts/check_capture.py": "aa746849317f9768af5aae08b394b9379539f6e268c1fc69e4ed13bd06a4657f",
+      "Scraper/skills/collect-avito/scripts/failure_log.py": "7a2fa9f997ae528969f9a864514f30d76427ae06aafe108344df42ead3fe2291",
+      "Scraper/skills/collect-avito/scripts/preflight.py": "492a0d898990aee198f26bf6577d0876360dcc6ec69e274835cd77cdaa768974"
+    },
+    "uncommitted_automation_files": [],
+    "deduplication": {
+      "source_run_id": "hr_remote_20261117_13",
+      "source_plan_sha256": "a5fe661267fb49405a7e14479e7fc9d6ecec5991ea2dc8c55d8a66fb3a287551",
+      "source_queue_sha256": "b85f25dbe90f0f037d04befcae8ca24629c9272b6337f7c94d7550976b5e24b6",
+      "against": [
+        {
+          "run_id": "hr_remote_20261117_01",
+          "plan_file": "known-000-plan.json",
+          "queue_file": "known-000-queue.json",
+          "plan_sha256": "32a764b1f5d7513e66b5da03603e2d935f3a12847131b6a707b7a39b04728414",
+          "queue_sha256": "9d32f615b9a4cd55d1d5602a9daf01efc4f157b6487042dd6adff7ff52b73cee"
+        },
+        {
+          "run_id": "hr_remote_20261117_02",
+          "plan_file": "known-001-plan.json",
+          "queue_file": "known-001-queue.json",
+          "plan_sha256": "9e3ae8295a844fba767b76d25feb290962539dcc3bdd275a297597cb077eb11d",
+          "queue_sha256": "ad1bafb1126ad8294320604a9ae6cfd9855461c42e2ff10577605dae87ef161d"
+        },
+        {
+          "run_id": "hr_remote_20261117_03",
+          "plan_file": "known-002-plan.json",
+          "queue_file": "known-002-queue.json",
+          "plan_sha256": "d9ddc3f8390052d42d3b93b59cdfd5a5b768adb9b771acf3365fee5c715e169c",
+          "queue_sha256": "97677f7eebd8aff32a2f8ec197c60a8e6583f1d0cac1b8fd270770934600b7a4"
+        },
+        {
+          "run_id": "hr_remote_20261117_06",
+          "plan_file": "known-003-plan.json",
+          "queue_file": "known-003-queue.json",
+          "plan_sha256": "9b173c0607f72f78e96998b2aa7109f689e5d82f9216afdf20e55af646ff012f",
+          "queue_sha256": "0cc13785677b5df69fac63943616cfe179501b465d43d806aee8a8ae8893f0d6"
+        }
+      ],
+      "source_count": 76,
+      "duplicate_excluded": 69,
+      "novel_count": 7,
+      "duplicate_ids": [
+        "8515067693",
+        "8379594851",
+        "8402662823",
+        "8553803352",
+        "8294746022",
+        "8350825904",
+        "8458218684",
+        "8332507588",
+        "4142906810",
+        "2814737981",
+        "8163480101",
+        "8040344297",
+        "8347799799",
+        "8609375431",
+        "2269292164",
+        "8100399768",
+        "8523382464",
+        "7864757949",
+        "8608809538",
+        "8103133896",
+        "8152095071",
+        "8393880557",
+        "8181661683",
+        "8389264950",
+        "8557024115",
+        "8499596517",
+        "8396713895",
+        "8397837731",
+        "8360595399",
+        "7910066667",
+        "8400575247",
+        "8455539433",
+        "8468990690",
+        "8402134888",
+        "3324147852",
+        "8451894719",
+        "8452638379",
+        "8522220167",
+        "8379742216",
+        "8398714141",
+        "8223505424",
+        "8520827369",
+        "7643893306",
+        "8303508714",
+        "8407688480",
+        "8379205574",
+        "8543596064",
+        "8432202658",
+        "8336898855",
+        "8545141460",
+        "8491117727",
+        "8380185275",
+        "8440017252",
+        "8552836936",
+        "8451647736",
+        "8577634467",
+        "7628438699",
+        "8305485244",
+        "7893991815",
+        "8188242728",
+        "8477367247",
+        "8405373448",
+        "8252340736",
+        "8435244896",
+        "8368898815",
+        "8412874906",
+        "8440539836",
+        "8375810702",
+        "8454352351"
+      ],
+      "observed_ids": {
+        "count": 2,
+        "sha256": "f4e511b9c5f39fc9e641de0e1e68a0b5ef14e200a79324ea743864e99bf76dd1"
+      },
+      "dataset": {
+        "csv_sha256": "466fc29005462f9d4e81bab35fd834e8af89b405ae11c65654ee2f1a73bd91da",
+        "manifest_sha256": "5f5253c4c8dda331cb1bdc1c18b672b36505689f4ed0687438dd14a9a645a3f8",
+        "keys_sha256": "db62174f67a8a9f39adecf825bc919734e0a6d76380aa92bf6df4c0279134cb2",
+        "rows": 32090
+      }
+    },
+    "city_anomaly_policy": "blank"
+  },
+  "coverage": {
+    "employer_selection": null,
+    "planned": 7,
+    "accepted": 0,
+    "unavailable": [],
+    "unresolved_observations": [],
+    "user_skipped_observations": [],
+    "user_skipped_count": 0,
+    "user_skip_policy": null,
+    "user_detail_skip_policy": null,
+    "deduplication": {
+      "source_run_id": "hr_remote_20261117_13",
+      "source_plan_sha256": "a5fe661267fb49405a7e14479e7fc9d6ecec5991ea2dc8c55d8a66fb3a287551",
+      "source_queue_sha256": "b85f25dbe90f0f037d04befcae8ca24629c9272b6337f7c94d7550976b5e24b6",
+      "against": [
+        {
+          "run_id": "hr_remote_20261117_01",
+          "plan_file": "known-000-plan.json",
+          "queue_file": "known-000-queue.json",
+          "plan_sha256": "32a764b1f5d7513e66b5da03603e2d935f3a12847131b6a707b7a39b04728414",
+          "queue_sha256": "9d32f615b9a4cd55d1d5602a9daf01efc4f157b6487042dd6adff7ff52b73cee"
+        },
+        {
+          "run_id": "hr_remote_20261117_02",
+          "plan_file": "known-001-plan.json",
+          "queue_file": "known-001-queue.json",
+          "plan_sha256": "9e3ae8295a844fba767b76d25feb290962539dcc3bdd275a297597cb077eb11d",
+          "queue_sha256": "ad1bafb1126ad8294320604a9ae6cfd9855461c42e2ff10577605dae87ef161d"
+        },
+        {
+          "run_id": "hr_remote_20261117_03",
+          "plan_file": "known-002-plan.json",
+          "queue_file": "known-002-queue.json",
+          "plan_sha256": "d9ddc3f8390052d42d3b93b59cdfd5a5b768adb9b771acf3365fee5c715e169c",
+          "queue_sha256": "97677f7eebd8aff32a2f8ec197c60a8e6583f1d0cac1b8fd270770934600b7a4"
+        },
+        {
+          "run_id": "hr_remote_20261117_06",
+          "plan_file": "known-003-plan.json",
+          "queue_file": "known-003-queue.json",
+          "plan_sha256": "9b173c0607f72f78e96998b2aa7109f689e5d82f9216afdf20e55af646ff012f",
+          "queue_sha256": "0cc13785677b5df69fac63943616cfe179501b465d43d806aee8a8ae8893f0d6"
+        }
+      ],
+      "source_count": 76,
+      "duplicate_excluded": 69,
+      "novel_count": 7,
+      "duplicate_ids": [
+        "8515067693",
+        "8379594851",
+        "8402662823",
+        "8553803352",
+        "8294746022",
+        "8350825904",
+        "8458218684",
+        "8332507588",
+        "4142906810",
+        "2814737981",
+        "8163480101",
+        "8040344297",
+        "8347799799",
+        "8609375431",
+        "2269292164",
+        "8100399768",
+        "8523382464",
+        "7864757949",
+        "8608809538",
+        "8103133896",
+        "8152095071",
+        "8393880557",
+        "8181661683",
+        "8389264950",
+        "8557024115",
+        "8499596517",
+        "8396713895",
+        "8397837731",
+        "8360595399",
+        "7910066667",
+        "8400575247",
+        "8455539433",
+        "8468990690",
+        "8402134888",
+        "3324147852",
+        "8451894719",
+        "8452638379",
+        "8522220167",
+        "8379742216",
+        "8398714141",
+        "8223505424",
+        "8520827369",
+        "7643893306",
+        "8303508714",
+        "8407688480",
+        "8379205574",
+        "8543596064",
+        "8432202658",
+        "8336898855",
+        "8545141460",
+        "8491117727",
+        "8380185275",
+        "8440017252",
+        "8552836936",
+        "8451647736",
+        "8577634467",
+        "7628438699",
+        "8305485244",
+        "7893991815",
+        "8188242728",
+        "8477367247",
+        "8405373448",
+        "8252340736",
+        "8435244896",
+        "8368898815",
+        "8412874906",
+        "8440539836",
+        "8375810702",
+        "8454352351"
+      ],
+      "observed_ids": {
+        "count": 2,
+        "sha256": "f4e511b9c5f39fc9e641de0e1e68a0b5ef14e200a79324ea743864e99bf76dd1"
+      },
+      "dataset": {
+        "csv_sha256": "466fc29005462f9d4e81bab35fd834e8af89b405ae11c65654ee2f1a73bd91da",
+        "manifest_sha256": "5f5253c4c8dda331cb1bdc1c18b672b36505689f4ed0687438dd14a9a645a3f8",
+        "keys_sha256": "db62174f67a8a9f39adecf825bc919734e0a6d76380aa92bf6df4c0279134cb2",
+        "rows": 32090
+      }
+    },
+    "sweep": null,
+    "unique_ids": [],
+    "errors": [],
+    "partial": null,
+    "limitations": [
+      "Visible rendered parameters only; enrichment not run; placement on site; live route unverified"
+    ],
+    "reviewed_selection": {
+      "accepted_ids": [],
+      "sha256": "a556b2e9d3f59ca07a223ec6f780a562b566d36d71ac7492d58300a9e34a89e6"
+    },
+    "full_observations": {
+      "rows": 7,
+      "sha256": "94299d27b2ceb517bb72ea8d9c576f14214b9b19c25786f080c8bd01d083bf80"
+    }
+  },
+  "timing": {
+    "setup_seconds": 7.615956167006516,
+    "capture_seconds": 6.699954875002732,
+    "review_export_seconds": 3.780651915993076,
+    "publication_seconds": null
+  },
+  "review_model": "gpt-6.1-terra",
+  "automation_changes": [],
+  "profession_correction": null,
+  "post_capture_automation_sha256": {},
+  "files": {
+    "Data/avito_runs/hr_remote_20261117_13_child/dedup-provenance/dataset-keys.json": {
+      "bytes": 1251416,
+      "sha256": "db62174f67a8a9f39adecf825bc919734e0a6d76380aa92bf6df4c0279134cb2"
+    },
+    "Data/avito_runs/hr_remote_20261117_13_child/dedup-provenance/dataset-manifest.json": {
+      "bytes": 3355746,
+      "sha256": "5f5253c4c8dda331cb1bdc1c18b672b36505689f4ed0687438dd14a9a645a3f8"
+    },
+    "Data/avito_runs/hr_remote_20261117_13_child/dedup-provenance/known-000-plan.json": {
+      "bytes": 5653,
+      "sha256": "32a764b1f5d7513e66b5da03603e2d935f3a12847131b6a707b7a39b04728414"
+    },
+    "Data/avito_runs/hr_remote_20261117_13_child/dedup-provenance/known-000-queue.json": {
+      "bytes": 109871,
+      "sha256": "9d32f615b9a4cd55d1d5602a9daf01efc4f157b6487042dd6adff7ff52b73cee"
+    },
+    "Data/avito_runs/hr_remote_20261117_13_child/dedup-provenance/known-001-plan.json": {
+      "bytes": 4958,
+      "sha256": "9e3ae8295a844fba767b76d25feb290962539dcc3bdd275a297597cb077eb11d"
+    },
+    "Data/avito_runs/hr_remote_20261117_13_child/dedup-provenance/known-001-queue.json": {
+      "bytes": 16248,
+      "sha256": "ad1bafb1126ad8294320604a9ae6cfd9855461c42e2ff10577605dae87ef161d"
+    },
+    "Data/avito_runs/hr_remote_20261117_13_child/dedup-provenance/known-002-plan.json": {
+      "bytes": 5698,
+      "sha256": "d9ddc3f8390052d42d3b93b59cdfd5a5b768adb9b771acf3365fee5c715e169c"
+    },
+    "Data/avito_runs/hr_remote_20261117_13_child/dedup-provenance/known-002-queue.json": {
+      "bytes": 59284,
+      "sha256": "97677f7eebd8aff32a2f8ec197c60a8e6583f1d0cac1b8fd270770934600b7a4"
+    },
+    "Data/avito_runs/hr_remote_20261117_13_child/dedup-provenance/known-003-plan.json": {
+      "bytes": 4615,
+      "sha256": "9b173c0607f72f78e96998b2aa7109f689e5d82f9216afdf20e55af646ff012f"
+    },
+    "Data/avito_runs/hr_remote_20261117_13_child/dedup-provenance/known-003-queue.json": {
+      "bytes": 20665,
+      "sha256": "0cc13785677b5df69fac63943616cfe179501b465d43d806aee8a8ae8893f0d6"
+    },
+    "Data/avito_runs/hr_remote_20261117_13_child/dedup-provenance/observed-ids.json": {
+      "bytes": 35,
+      "sha256": "f4e511b9c5f39fc9e641de0e1e68a0b5ef14e200a79324ea743864e99bf76dd1"
+    },
+    "Data/avito_runs/hr_remote_20261117_13_child/dedup-provenance/source-plan.json": {
+      "bytes": 5112,
+      "sha256": "a5fe661267fb49405a7e14479e7fc9d6ecec5991ea2dc8c55d8a66fb3a287551"
+    },
+    "Data/avito_runs/hr_remote_20261117_13_child/dedup-provenance/source-queue.json": {
+      "bytes": 36296,
+      "sha256": "b85f25dbe90f0f037d04befcae8ca24629c9272b6337f7c94d7550976b5e24b6"
+    },
+    "Data/avito_runs/hr_remote_20261117_13_child/dedup_selection.json": {
+      "bytes": 3284,
+      "sha256": "48462197e8a43bd41034efe2746c11ed57f44e7dbc3d427ea7b6ab60fc61a943"
+    },
+    "Data/avito_runs/hr_remote_20261117_13_child/exports/reviewed_selection.json": {
+      "bytes": 3148,
+      "sha256": "a556b2e9d3f59ca07a223ec6f780a562b566d36d71ac7492d58300a9e34a89e6"
+    },
+    "Data/avito_runs/hr_remote_20261117_13_child/exports/vacancies.json": {
+      "bytes": 3,
+      "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+    },
+    "Data/avito_runs/hr_remote_20261117_13_child/exports/vacancies_flat.csv": {
+      "bytes": 17,
+      "sha256": "5d1cbcac255347a5b4193f3558006723f3a164540824da93962b40f894bb4a1c"
+    },
+    "Data/avito_runs/hr_remote_20261117_13_child/exports/vacancy_observations.csv": {
+      "bytes": 21154,
+      "sha256": "94299d27b2ceb517bb72ea8d9c576f14214b9b19c25786f080c8bd01d083bf80"
+    },
+    "Data/avito_runs/hr_remote_20261117_13_child/exports/validation.json": {
+      "bytes": 217,
+      "sha256": "87a78e245085b3b2bd79c50c4f6e511e18189a1b52f05f4d9b7fca853c3e2c0b"
+    },
+    "Data/avito_runs/hr_remote_20261117_13_child/listing.json": {
+      "bytes": 50352,
+      "sha256": "24df019a4847eb531fec9129aa9c396f93fa8a7a828e633dfca9cf1cd9e5d3ac"
+    },
+    "Data/avito_runs/hr_remote_20261117_13_child/listing_pages/0001.json": {
+      "bytes": 50352,
+      "sha256": "24df019a4847eb531fec9129aa9c396f93fa8a7a828e633dfca9cf1cd9e5d3ac"
+    },
+    "Data/avito_runs/hr_remote_20261117_13_child/listing_pages/0002.json": {
+      "bytes": 41189,
+      "sha256": "8e7b4cd2824ed3dab37b38e469c359cc1368675b372d358c3f81c6ee1c5646b5"
+    },
+    "Data/avito_runs/hr_remote_20261117_13_child/queue.json": {
+      "bytes": 3512,
+      "sha256": "ce9257b6b5da73998e60cfafddd1bc1b5ec56d52ab9521ebc72ae0679a280a6a"
+    },
+    "Data/avito_runs/hr_remote_20261117_13_child/raw/7745243212.json": {
+      "bytes": 9223,
+      "sha256": "d3841177e1046b80b24c0529f8387a573ce5e25a4c78aab90d22952d887b6539"
+    },
+    "Data/avito_runs/hr_remote_20261117_13_child/raw/7991696214.json": {
+      "bytes": 10205,
+      "sha256": "dc7db8c7b1e181abb4717ef22067d991e0382dc105fac9c31bfba8ef03f3649b"
+    },
+    "Data/avito_runs/hr_remote_20261117_13_child/raw/8414153278.json": {
+      "bytes": 9245,
+      "sha256": "49a68048cbb61ef3b20887488c07c94446fb2136fed4c68ea7204a11e2c66f82"
+    },
+    "Data/avito_runs/hr_remote_20261117_13_child/raw/8452826450.json": {
+      "bytes": 9128,
+      "sha256": "99816afaf428a4cbdebeee7fdeca40f8bccdfb3108f4fcbab31f062148de668e"
+    },
+    "Data/avito_runs/hr_remote_20261117_13_child/raw/8490459411.json": {
+      "bytes": 9162,
+      "sha256": "01c1ba29ed441e9f68b9dc99495a038c4e1cf23dbda559c94eab463404dc7c51"
+    },
+    "Data/avito_runs/hr_remote_20261117_13_child/raw/8563332441.json": {
+      "bytes": 17449,
+      "sha256": "679d1a61bfb747fb763b8476941ae2844fb993c6203016a9df09882558eaff1f"
+    },
+    "Data/avito_runs/hr_remote_20261117_13_child/raw/8589485419.json": {
+      "bytes": 9779,
+      "sha256": "54e896faf40bc1272a4d98bb040d9d196a10f2e05334e061770fc1231f39deee"
+    },
+    "Data/avito_runs/hr_remote_20261117_13_child/standing_unavailable_policy.json": {
+      "bytes": 1011,
+      "sha256": "7a1c18520dc10340252a4933e92bb851f78d800b32c33c1017ede17529393381"
+    },
+    "Scraper/runs/hr_remote_20261117_13_child/plan.json": {
+      "bytes": 8656,
+      "sha256": "cec46292c89ff7f6d24d8f8dd1a986415bf7728f5c8201f20515e532928c878b"
+    },
+    "Scraper/runs/hr_remote_20261117_13_child/shared-ledger.json": {
+      "bytes": 47,
+      "sha256": "f2c7717e03552f921e67ff0ce139c3c92b94f24f5021f42b14971baded1da108"
+    }
+  }
+}

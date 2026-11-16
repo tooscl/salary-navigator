@@ -398,3 +398,13 @@ avito_runs/<название_сбора>/
 - [remote_operators_20261117_tech_ui_capture](avito_runs/remote_operators_20261117_tech_ui_capture/exports/vacancy_observations.csv): 29 наблюдений, 0 принятых.
 
 - [remote_operators_20261117_manager_chat_capture](avito_runs/remote_operators_20261117_manager_chat_capture/exports/vacancy_observations.csv): 13 наблюдений, 0 принятых.
+
+- [hr_remote_20261117_01_child](avito_runs/hr_remote_20261117_01_child/exports/vacancy_observations.csv): 169 наблюдений, 0 принятых.
+
+- [hr_remote_20261117_02_child](avito_runs/hr_remote_20261117_02_child/exports/vacancy_observations.csv): 12 наблюдений, 0 принятых.
+
+- [hr_remote_20261117_03_child](avito_runs/hr_remote_20261117_03_child/exports/vacancy_observations.csv): 33 наблюдений, 0 принятых.
+
+- [hr_remote_20261117_06_child](avito_runs/hr_remote_20261117_06_child/exports/vacancy_observations.csv): 4 наблюдений, 0 принятых.
+
+- [hr_remote_20261117_13_child](avito_runs/hr_remote_20261117_13_child/exports/vacancy_observations.csv): 7 наблюдений, 0 принятых.
