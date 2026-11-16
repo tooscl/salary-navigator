@@ -1,8 +1,10 @@
 """Export valid, previously captured candidates absent from the current dataset."""
 import argparse
 import csv
+import hashlib
 import importlib.util
 import json
+import re
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -10,6 +12,81 @@ SPEC = importlib.util.spec_from_file_location(
     'collector_runner', ROOT / 'Scraper/skills/collect-avito/scripts/run.py')
 runner = importlib.util.module_from_spec(SPEC)
 SPEC.loader.exec_module(runner)
+
+PRIVATE_LOCATOR = re.compile(rb'/Users/|/home/|\.aside[/\\]|TL_ASIDE_|profileId|target_id', re.I)
+
+
+def archive_candidates(source_root, run_ids, output_id, *, root=ROOT):
+    """Preserve saved observations and their selection decisions outside the dataset."""
+    out, _, _ = runner.paths(root, output_id)
+    if out.exists():
+        raise ValueError('Output run already exists')
+    rows, copies = [], {}
+    for run_id in sorted(set(run_ids)):
+        parent, _, _ = runner.paths(source_root, run_id)
+        decisions = {}
+        for name in ('selection.json', 'reviewed_selection.json'):
+            path = parent / 'exports' / name
+            if path.is_file():
+                for item in runner.read(path)['decisions']:
+                    decisions[item['id']] = item
+        raw_paths = sorted((parent / 'raw').glob('[0-9]*.json'))
+        if not raw_paths:
+            raise ValueError(f'No raw observations for {run_id}')
+        for path in raw_paths:
+            raw = path.read_bytes()
+            if PRIVATE_LOCATOR.search(raw):
+                raise ValueError(f'Private locator in observation {run_id}/{path.name}')
+            data = json.loads(raw)
+            identity = path.stem
+            digest = hashlib.sha256(raw).hexdigest()
+            raw_path = path.relative_to(source_root)
+            published_path = root / raw_path
+            if not published_path.is_file() or published_path.read_bytes() != raw:
+                raw_path = out.relative_to(root) / 'raw' / run_id / path.name
+                copies[root / raw_path] = raw
+            decision = decisions.get(identity, {})
+            recorded_hash = decision.get('raw_sha256')
+            if recorded_hash and recorded_hash != digest:
+                raise ValueError(f'Selection hash differs for {run_id}/{identity}')
+            accepted = decision.get('accepted')
+            if data.get('state') != 'DETAIL' or str(data.get('id', '')) != identity:
+                status = 'incomplete_observation'
+            elif accepted is not None:
+                status = 'accepted' if accepted else 'excluded'
+            else:
+                status = 'decision_not_recorded'
+            row = {
+                'source_run_id': run_id, 'id': identity, 'source_url': data.get('source_url', ''),
+                'observed_at': data.get('observed_at', ''), 'capture_state': data.get('state', ''),
+                'selection_status': status, 'selection_reason': decision.get('reason', ''),
+                'raw_path': raw_path.as_posix(), 'raw_sha256': digest,
+                'title': data.get('title', ''), 'salary_raw': data.get('salary_raw', ''),
+                'description': data.get('description', ''),
+                'employer_name_observed': '; '.join(dict.fromkeys(data.get('employer_raw', []))),
+                'location_observed': '; '.join(dict.fromkeys(data.get('location_raw', []))),
+            }
+            for field in data.get('fields', []):
+                if field.get('name') and field.get('value'):
+                    row['Параметр — ' + runner.norm(field['name'])] = runner.norm(field['value'])
+            rows.append(row)
+    columns = list(dict.fromkeys(key for row in rows for key in row))
+    for path, content in copies.items():
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_bytes(content)
+    out.mkdir(parents=True, exist_ok=True)
+    csv_path = out / 'observations.csv'
+    with csv_path.open('x', encoding='utf-8', newline='') as stream:
+        writer = csv.DictWriter(stream, fieldnames=columns, lineterminator='\n')
+        writer.writeheader()
+        writer.writerows(rows)
+    summary = dict(
+        run_id=output_id, source_runs=sorted(set(run_ids)),
+        observations=len(rows), unique_ids=len({row['id'] for row in rows}),
+        raw_files_copied=len(copies), csv_sha256=runner.sha(csv_path),
+    )
+    runner.write(out / 'manifest.json', summary)
+    return summary
 
 
 def verify_parent_file(root, manifest, path):
@@ -123,7 +200,13 @@ def export_candidates(parent_id, output_id):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--parent-run-id', required=True)
+    parser.add_argument('--parent-run-id', required=True, action='append')
     parser.add_argument('--run-id', required=True)
+    parser.add_argument('--archive-from', type=Path, help='Preserve raw observations from this checkout')
     args = parser.parse_args()
-    export_candidates(args.parent_run_id, args.run_id)
+    if args.archive_from:
+        print(json.dumps(archive_candidates(args.archive_from.resolve(), args.parent_run_id, args.run_id)))
+    elif len(args.parent_run_id) == 1:
+        export_candidates(args.parent_run_id[0], args.run_id)
+    else:
+        parser.error('Only archive mode accepts multiple parent runs')
