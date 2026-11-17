@@ -768,6 +768,54 @@ const listBrowserTabs=async()=>[],openTab=async()=>pg,snapshot=async()=>({tree:'
             keys = child/'dedup-provenance/dataset-keys.json'; keys.write_bytes(keys.read_bytes() + b' ')
             with self.assertRaisesRegex(ValueError, 'Dataset dedup provenance'): runner.validate_partition(child, child_service)
 
+    def test_deduplicate_selected_listing_ids_preserves_evidence_and_order(self):
+        original_root = runner.ROOT
+        with tempfile.TemporaryDirectory() as directory, patch.object(runner, 'ROOT', Path(directory)):
+            root = runner.ROOT
+            for file in runner.AUTOMATION_FILES:
+                dest = root/file
+                dest.parent.mkdir(parents=True, exist_ok=True)
+                dest.write_bytes((original_root/file).read_bytes())
+            out, service, diag = runner.paths(root, 'source')
+            page = dict(state='LISTING', source_url='https://www.avito.ru/moskva/vakansii',
+                        selected_controls=[], items=[item(i) for i in ('3', '2', '1', '4')])
+            page_file = out/'listing_pages/0001.json'
+            runner.write(out/'listing.json', page)
+            runner.write(page_file, page)
+            queue = runner.queue_from_pages([page], None)
+            runner.write(out/'queue.json', queue)
+            runner.write(service/'plan.json', dict(run_id='source', profession='', profession_scope='all',
+                selection_mode='first_N_unique_on_frozen_listing', listing_sha256=runner.sha(out/'listing.json'),
+                listing_pages=[dict(file='listing_pages/0001.json', sha256=runner.sha(page_file))]))
+            runner.write(diag/'checkpoint.json', dict(state='READY', completed_ids=[], next_id='3'))
+            include, observed = root/'include.json', root/'observed.json'
+            runner.write(observed, ['2', '4'])
+            args = argparse.Namespace(source_run_id='source', run_id='child', against_run_id=None,
+                                      against_observed_ids=observed, include_listing_ids=include)
+            runner.write(include, ['5'])
+            with self.assertRaisesRegex(ValueError, 'belong to the frozen source queue'):
+                runner.deduplicate_queue(args)
+            runner.write(include, ['1', '2', '3'])
+            with patch.object(runner.subprocess, 'check_output', return_value='head'), patch.object(runner, 'dirty_automation', return_value=[]):
+                runner.deduplicate_queue(args)
+            child, child_service, _ = runner.paths(root, 'child')
+            self.assertEqual(runner.read(child/'queue.json'), [queue[0], queue[2]])
+            info = runner.read(child/'dedup_selection.json')
+            self.assertEqual((info['source_count'], info['listing_selection']['count'], info['duplicate_ids']),
+                             (4, 3, ['2']))
+            include.unlink()
+            runner.validate_partition(child, child_service)
+            selected = child/'dedup-provenance/selected-listing-ids.json'
+            selected_bytes = selected.read_bytes()
+            selected.write_bytes(selected_bytes + b' ')
+            with self.assertRaisesRegex(ValueError, 'Selected listing ID provenance'):
+                runner.validate_partition(child, child_service)
+            selected.write_bytes(selected_bytes)
+            copied_page = child/'listing_pages/0001.json'
+            copied_page.write_bytes(copied_page.read_bytes() + b' ')
+            with self.assertRaisesRegex(ValueError, 'Frozen listing page changed'):
+                runner.validate_partition(child, child_service)
+
     def test_deduplicate_unqueued_observed_tail_preserves_prefix_and_provenance(self):
         original_root = runner.ROOT
         with tempfile.TemporaryDirectory() as directory, patch.object(runner, 'ROOT', Path(directory)):
@@ -958,6 +1006,62 @@ const listBrowserTabs=async()=>[],openTab=async()=>pg,snapshot=async()=>({tree:'
             _,service,_=runner.paths(runner.ROOT,'repeat_branch')
             self.assertEqual(runner.read(service/'plan.json')['listing_end_reason'],'repeated_next_link')
 
+    def test_repeated_ui_next_continues_frozen_prefix_then_validates_selected_child(self):
+        with tempfile.TemporaryDirectory() as directory, patch.object(runner, 'ROOT', Path(directory)):
+            root = runner.ROOT
+            url = 'https://www.avito.ru/all/vakansii'
+            context = {'geography': 'Во всех регионах', 'search': ''}
+            controls = [{'label': 'Удалённо', 'marker': 'params[172815]/3286367'}]
+            first = dict(state='LISTING', source_url=url, heading='Работа', listing_context=context,
+                         selected_controls=controls, items=[item('1')],
+                         profession_filter=dict(observed=True, selected_count=0),
+                         pagination=dict(current_pages=['1'], next_url=url))
+            second = dict(first, source_url=url + '?p=2', items=[item('2')],
+                pagination=dict(current_pages=['2'], next_url=None, end_confirmed=True),
+                ui_transition=dict(method='observed_ui_next', recovered=False, next_snapshot='Next',
+                                   from_url=url, next_href=url, from_page=1, landed_url=url + '?p=2', landed_page=2))
+            out, service, diag = runner.paths(root, 'source')
+            page_file = out/'listing_pages/0001.json'
+            runner.write(page_file, first)
+            runner.write(out/'listing.json', first)
+            runner.write(out/'queue.json', runner.queue_from_pages([first], None))
+            runner.write(service/'plan.json', dict(run_id='source', profession='', profession_scope='all',
+                requested_all_pages=False, requested_limit=5000, listing_end_reason='repeated_next_link',
+                listing_sha256=runner.sha(out/'listing.json'), listing_pages=[
+                    dict(file='listing_pages/0001.json', sha256=runner.sha(page_file), source_url=url)]))
+            args = argparse.Namespace(run_id='continued', url=url, limit=5000, candidate_limit=None,
+                all_pages=False, geography=context['geography'], profession='', profession_scope='all',
+                segments='', filter_evidence='base', ui_next=True, tab_id='own', resume=True, agent_model='test')
+            runner.write(diag/'freeze_request.json', {k: v for k, v in vars(args).items()
+                if k not in {'run_id', 'tab_id', 'resume', 'agent_model'}})
+            source_bytes = page_file.read_bytes()
+            runner.continuation(argparse.Namespace(parent_run_id='source', run_id='continued'))
+            def browser(job, output, diagnostics):
+                self.assertTrue(job['repeated_next'])
+                self.assertEqual(job['previous'], first)
+                runner.write(diagnostics/'listing.json', second)
+                return {'state': 'READY', 'completed_ids': []}, 0.1
+            with patch.object(runner, 'AUTOMATION_FILES', []), patch.object(runner, 'preflight'), \
+                    patch.object(runner, 'browser', side_effect=browser), patch.object(runner, 'release_browser'), \
+                    patch.object(runner, 'instruction_version', return_value='test'), \
+                    patch.object(runner, 'dirty_automation', return_value=[]), \
+                    patch.object(runner.subprocess, 'check_output', return_value='head'):
+                extractor = root/'Scraper/extract.js'
+                extractor.write_text('test', encoding='utf-8')
+                skill = root/'Scraper/skills/collect-avito/SKILL.md'
+                skill.parent.mkdir(parents=True)
+                skill.write_text('test', encoding='utf-8')
+                runner.freeze(args)
+                include = root/'include.json'
+                runner.write(include, ['2'])
+                runner.deduplicate_queue(argparse.Namespace(source_run_id='continued', run_id='child',
+                                                            against_run_id=None, include_listing_ids=include))
+            child, child_service, child_diag = runner.paths(root, 'child')
+            self.assertEqual(runner.read(child/'queue.json')[0]['listing_rank'], 2)
+            self.assertEqual(runner.read(child_diag/'shared-ledger.json'), {'parent_run_id': 'source'})
+            runner.validate_partition(child, child_service)
+            self.assertEqual(page_file.read_bytes(), source_bytes)
+
     def test_partition_url_guard_requires_explicit_audit(self):
         guard = 'Scraper/skills/collect-avito/scripts/browser_batch.js'
         plan = {'partition': {'index': 3}}
@@ -1026,22 +1130,31 @@ const attachBrowserTab=async()=>pg, snapshot=async()=>({tree:''}), sleep=async()
                         'next_button': False, 'evidence': {'href': href}})
         job = dict(mode='freeze', url='https://www.avito.ru' + href, completed_ids=[],
             tab_id='own', ui_next=True, previous=first, first=first, geography=geography)
-        for onward_search in ('оператор поддержки', 'оператор продаж'):
-            with self.subTest(search=onward_search), tempfile.TemporaryDirectory() as directory:
+        cases = [('оператор поддержки', False, False, False), ('оператор продаж', False, False, False),
+                 ('оператор поддержки', True, False, False), ('оператор поддержки', True, True, False),
+                 ('оператор поддержки', True, False, True)]
+        for onward_search, repeated, stays, refreshed in cases:
+            with self.subTest(search=onward_search, repeated=repeated, stays=stays, refreshed=refreshed), tempfile.TemporaryDirectory() as directory:
+                case_first = dict(first, pagination=dict(first['pagination'], next_url=url, evidence={'href': '/all/vakansii/tag/operator'})) if repeated else first
+                case_job = dict(job, previous=case_first, first=case_first, repeated_next=repeated)
                 harness = """const fs=require('fs').promises, pwd=process.cwd();
-const first=FIRST, nextSearch=SEARCH; let afterClick=false;
+const first=FIRST, nextSearch=SEARCH, stays=STAYS; let afterClick=false;
+const live=REFRESHED ? {...first, pagination:{...first.pagination,
+  next_url:first.source_url+'?p=2', evidence:{href:'/all/vakansii/tag/operator?p=2'}}} : first;
 const second={...first, source_url:first.source_url+'?p=2',
   listing_context:{...first.listing_context,search:nextSearch},
   pagination:{current_pages:['2'],end_confirmed:true}};
-const pg={url:()=>afterClick?second.source_url:first.source_url,
-  evaluate:async()=>afterClick?second:first,
+const pg={url:()=>afterClick&&!stays?second.source_url:first.source_url,
+  evaluate:async()=>afterClick&&!stays?second:live,
   locator:ref=>({click:async()=>{if(ref!=='e1') throw Error('incorrect ref'); afterClick=true;}})};
 const attachBrowserTab=async()=>pg, sleep=async()=>{};
 const snapshot=async()=>({tree:'- link "Следующая страница" [ref=e1]'});
 (async()=>{BODY})().catch(e=>{console.error(e);process.exit(1)});
 """
-                body = script.replace('__JOB__', json.dumps(job), 1).replace('__EXTRACTOR__', '"extract"', 1)
-                harness = harness.replace('FIRST', json.dumps(first)).replace('SEARCH', json.dumps(onward_search)).replace('BODY', body)
+                body = script.replace('__JOB__', json.dumps(case_job), 1).replace('__EXTRACTOR__', '"extract"', 1)
+                harness = (harness.replace('FIRST', json.dumps(case_first)).replace('SEARCH', json.dumps(onward_search))
+                           .replace('STAYS', json.dumps(stays)).replace('REFRESHED', json.dumps(refreshed))
+                           .replace('BODY', body))
                 subprocess.run(['node', '-e', harness], cwd=directory, capture_output=True, text=True, check=True)
                 checkpoint = runner.read(Path(directory)/'checkpoint.json')
                 if onward_search != first['listing_context']['search']:
@@ -1049,10 +1162,14 @@ const snapshot=async()=>({tree:'- link "Следующая страница" [re
                     continue
                 self.assertEqual(checkpoint['state'], 'READY')
                 page = runner.read(Path(directory)/'listing.json')
-                runner.validate_ui_transition(first, first, page)
+                if stays:
+                    self.assertEqual(checkpoint['stop_reason'], 'ui_next_no_advance')
+                    self.assertEqual(page['ui_stationary']['next_href'], url)
+                    continue
+                runner.validate_ui_transition(case_first, case_first, page)
                 page['listing_context']['search'] = 'другой запрос'
                 with self.assertRaisesRegex(ValueError, 'changed filters or listing context'):
-                    runner.validate_ui_transition(first, first, page)
+                    runner.validate_ui_transition(case_first, case_first, page)
 
     def test_direct_freeze_waits_for_complete_controls_and_stops_on_protection(self):
         script = (SCRIPTS/'browser_batch.js').read_text()

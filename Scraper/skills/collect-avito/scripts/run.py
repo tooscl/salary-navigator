@@ -804,13 +804,19 @@ def continuation(args):
     validate_plan_profession(plan, parent_out/'listing.json')
     queue = read(parent_out/'queue.json')
     pages = [read(parent_out/p['file'].replace('\\', '/')) for p in plan['listing_pages']]
-    if not plan.get('requested_all_pages') or not pages or queue_from_pages(pages, None) != queue:
-        raise ValueError('Continuation requires a complete saved all-pages parent queue')
+    if not pages or queue_from_pages(pages, None) != queue:
+        raise ValueError('Continuation requires a complete saved parent queue')
     next_url = pages[-1].get('pagination', {}).get('next_url')
-    if not next_url or any(same_observed_url(next_url, page['source_url']) for page in pages):
-        raise ValueError('Parent has no unvisited observed Next')
-    avito_url(next_url)
     request = read(parent_diag/'freeze_request.json')
+    ui_next = request.get('ui_next') is True
+    repeated = next_url and any(same_observed_url(next_url, page['source_url']) for page in pages)
+    continued_ui = ui_next and repeated and plan.get('listing_end_reason') == 'repeated_next_link'
+    if not plan.get('requested_all_pages') and not (
+            continued_ui and isinstance(request.get('limit'), int) and request['limit'] > len(queue)):
+        raise ValueError('Continuation requires all pages or an unfilled repeated UI Next limit')
+    if not next_url or (repeated and not continued_ui) or (ui_next and not continued_ui):
+        raise ValueError('Parent has no supported observed Next continuation')
+    avito_url(next_url)
     with locked(parent_diag):
         save_failures(parent_diag, load_failures(parent_diag))
     out.mkdir(parents=True); diag.mkdir(parents=True)
@@ -827,6 +833,8 @@ def continuation(args):
             shutil.copy2(parent_diag/name, diag/name)
     info = dict(parent_run_id=args.parent_run_id, parent_plan_sha256=sha(provenance/'parent-plan.json'),
                 parent_queue_sha256=sha(provenance/'parent-queue.json'), parent_page_count=len(pages), next_url=next_url)
+    if continued_ui:
+        info['mode'] = 'repeated_ui_next'
     write(diag/'continuation.json', info)
     print(json.dumps(dict(run_id=args.run_id, continuation=info, request=request), ensure_ascii=False))
 
@@ -952,6 +960,7 @@ def freeze(args):
             write(comparison_path, comparison)
     existing_ids = set(comparison['ids']) if comparison else set()
     listing_end_reason = None
+    ui_next_boundary = None
     saved_pending = None
     if accept_saved:
         if candidate_limit is not None or not pages or any((out/'raw').glob('*')):
@@ -979,7 +988,8 @@ def freeze(args):
         avito_url(url)
         if pages and not ui_next:
             validate_page_filters(pages[0], {'source_url': url})
-        if not button_next and any(same_observed_url(url, p['source_url']) for p in pages):
+        repeated_next = not button_next and any(same_observed_url(url, p['source_url']) for p in pages)
+        if repeated_next and not ui_next:
             listing_end_reason = 'repeated_next_link'
             break
         pending_value = {'ui_next_from': url} if button_next else {'url': url}
@@ -995,10 +1005,28 @@ def freeze(args):
                 (diag/name).unlink(missing_ok=True)
             write(pending, pending_value)
             visible_geography = visible_pagination_geography(args.geography, pages[0]) if pages and ui_next else args.geography
-            cp, _ = browser(dict(mode='freeze', url=url, completed_ids=[], tab_id=getattr(args, 'tab_id', None), allow_navigation=bool(pages), ui_next=ui_next, allow_empty=branch_only, previous=pages[-1] if pages and ui_next else None, first=pages[0] if pages and ui_next else None, geography=visible_geography, visible_page_only=visible_page_only), out, diag)
+            cp, _ = browser(dict(mode='freeze', url=url, completed_ids=[], tab_id=getattr(args, 'tab_id', None), allow_navigation=bool(pages), ui_next=ui_next, allow_empty=branch_only, previous=pages[-1] if pages and ui_next else None, first=pages[0] if pages and ui_next else None, geography=visible_geography, visible_page_only=visible_page_only, repeated_next=repeated_next), out, diag)
         if cp['state'] != 'READY':
             raise CollectionStopped(f'Stopped: {cp["state"]}; inspect local diagnostics', cp['state'])
         page = read(diag / 'listing.json')
+        if cp.get('stop_reason') == 'ui_next_no_advance':
+            proof = page.get('ui_stationary', {})
+            if (not ui_next or not repeated_next or page.get('state') != 'LISTING'
+                    or proof.get('from_url') != pages[-1]['source_url']
+                    or proof.get('next_href') != url or not proof.get('next_snapshot')
+                    or not proof.get('observed_href')
+                    or page_number(page['source_url']) != page_number(pages[-1]['source_url'])
+                    or page.get('pagination', {}).get('current_pages') != pages[-1]['pagination']['current_pages']
+                    or page.get('heading') != pages[0].get('heading')
+                    or page.get('listing_context') != pages[0].get('listing_context')
+                    or page.get('selected_controls') != pages[-1].get('selected_controls')):
+                raise ValueError('No-advance observation differs from verified UI Next')
+            validate_page_filters(pages[0], page)
+            ui_next_boundary = dict(proof, landed_url=page['source_url'])
+            listing_end_reason = 'ui_next_no_advance'
+            pending.unlink(missing_ok=True)
+            release_browser(diag)
+            break
         if page.get('state') == 'EMPTY_RESULT':
             if not branch_only or pages or page.get('items') or not page.get('empty_evidence'):
                 raise ValueError('Unexpected or unverified empty listing')
@@ -1050,7 +1078,8 @@ def freeze(args):
         original = read(provenance/'parent-queue.json')
         if queue[:len(original)] != original:
             raise ValueError('Continuation parent queue differs from saved pages')
-        queue = queue[len(original):]
+        if continuation_info.get('mode') != 'repeated_ui_next':
+            queue = queue[len(original):]
     if not queue:
         if continuation_info and listing_end_reason:
             write(service/'continuation-empty.json', dict(continuation=continuation_info, listing_end_reason=listing_end_reason,
@@ -1074,6 +1103,7 @@ def freeze(args):
         saved_selection_authorization={'instruction': instruction, 'at': datetime.now(timezone.utc).isoformat(), 'original_request': request, 'pending': saved_pending} if accept_saved else None,
         requested_limit=args.limit, available_unique=len(queue),
         listing_end_reason=listing_end_reason, available_listing_exhausted=listing_end_reason == 'confirmed_end', continuation=continuation_info,
+        **({'ui_next_boundary': ui_next_boundary} if ui_next_boundary else {}),
         branch_only=branch_only, max_pages=max_pages,
         candidate_limit=candidate_limit, selection_criterion=getattr(args, 'selection_criterion', 'remote'),
         comparison_sha256=sha(out/'comparison_ids.json') if comparison else None,
@@ -2034,13 +2064,46 @@ def supplemental(args):
     print(json.dumps({'run_id':args.run_id, 'queued':len(queue)}, ensure_ascii=False))
 
 
+def validate_repeated_ui_continuation(out, plan, queue):
+    info = plan['continuation']
+    provenance = out/'continuation-provenance'
+    parent, original = (provenance/'parent-plan.json', provenance/'parent-queue.json')
+    if sha(parent) != info['parent_plan_sha256'] or sha(original) != info['parent_queue_sha256']:
+        raise ValueError('UI continuation parent provenance changed')
+    prefix = read(parent)
+    original_queue = read(original)
+    count = info['parent_page_count']
+    entries = plan['listing_pages']
+    if (count < 1 or count > len(entries) or prefix.get('run_id') != info['parent_run_id']
+            or prefix.get('listing_end_reason') != 'repeated_next_link'
+            or entries[:count] != prefix['listing_pages']):
+        raise ValueError('UI continuation prefix differs from parent')
+    pages = [read(out/entry['file'].replace('\\', '/')) for entry in entries[:count]]
+    next_url = info['next_url']
+    if (pages[-1].get('pagination', {}).get('next_url') != next_url
+            or not any(same_observed_url(next_url, page['source_url']) for page in pages)
+            or original_queue != queue_from_pages(pages, None)
+            or queue[:len(original_queue)] != original_queue):
+        raise ValueError('UI continuation does not extend the original queue')
+    if count < len(entries):
+        first_new = read(out/entries[count]['file'].replace('\\', '/'))
+        validate_ui_transition(pages[0], pages[-1], first_new)
+    elif plan.get('listing_end_reason') != 'ui_next_no_advance':
+        raise ValueError('UI continuation did not verify a new page or boundary')
+
+
 def verified_frozen_queue(out, service):
     plan = read(service/'plan.json'); queue = read(out/'queue.json')
-    if plan.get('selection_mode') != 'first_N_unique_on_frozen_listing' or any(plan.get(k) for k in ('partition','continuation','partial_suffix','supplement','deduplication')):
+    continuation = plan.get('continuation')
+    if (plan.get('selection_mode') != 'first_N_unique_on_frozen_listing'
+            or any(plan.get(k) for k in ('partition','partial_suffix','supplement','deduplication'))
+            or (continuation and continuation.get('mode') != 'repeated_ui_next')):
         raise ValueError('Deduplication requires an ordinary frozen queue')
     validate_plan_profession(plan, out/'listing.json')
     if not queue or not plan.get('listing_pages') or queue_from_pages([read(out/p['file'].replace('\\', '/')) for p in plan['listing_pages']], len(queue)) != queue:
         raise ValueError('Frozen queue differs from listing pages')
+    if continuation:
+        validate_repeated_ui_continuation(out, plan, queue)
     if len({x['id'] for x in queue}) != len(queue): raise ValueError('Frozen queue IDs are not unique')
     manifest_path = service/'manifest.json'
     if manifest_path.exists():
@@ -2084,20 +2147,28 @@ def dedup_comparison_queue(out, service):
     return verified_frozen_queue(out, service)
 
 
-def read_observed_ids(path):
+def read_observed_ids(path, *, label='Observed IDs', allow_empty=False):
     ids = read(path)
-    if (not isinstance(ids, list) or not ids
+    if (not isinstance(ids, list) or (not ids and not allow_empty)
             or any(not isinstance(identity, str) or not re.fullmatch(r'[0-9]+', identity) for identity in ids)
             or ids != sorted(set(ids))):
-        raise ValueError('Observed IDs must be a sorted, unique JSON array of decimal ID strings')
+        raise ValueError(f'{label} must be a sorted, unique JSON array of decimal ID strings')
     return ids
+
+
+def select_listing_ids(queue, ids):
+    selected = set(ids)
+    if selected.difference(item['id'] for item in queue):
+        raise ValueError('Selected listing IDs must belong to the frozen source queue')
+    return [item for item in queue if item['id'] in selected]
 
 
 def validate_deduplication(out, service):
     plan = read(service/'plan.json'); info = plan['deduplication']; prov = out/'dedup-provenance'
     source_out, source_service, _ = paths(ROOT, info['source_run_id'])
     ledger_pointers = [p for p in (service/'diagnostics/shared-ledger.json', service/'shared-ledger.json') if p.exists()]
-    if not ledger_pointers or any(read(p) != {'parent_run_id': info['source_run_id']} for p in ledger_pointers):
+    ledger_parent = info.get('ledger_parent_run_id', info['source_run_id'])
+    if not ledger_pointers or any(read(p) != {'parent_run_id': ledger_parent} for p in ledger_pointers):
         raise ValueError('Deduplicated child must use source ledger')
     source_plan_path = prov/'source-plan.json'; source_queue_path = prov/'source-queue.json'
     tail = info.get('observed_tail') is True
@@ -2113,8 +2184,25 @@ def validate_deduplication(out, service):
     validate_plan_profession(parent, out/'listing.json')
     if queue_from_pages([read(out/x['file'].replace('\\', '/')) for x in parent['listing_pages']], len(source_queue)) != source_queue:
         raise ValueError('Dedup source queue differs from frozen listing')
+    continuation = parent.get('continuation')
+    if continuation and continuation.get('mode') == 'repeated_ui_next':
+        if ledger_parent != continuation['parent_run_id']:
+            raise ValueError('Deduplicated continuation must share the original ledger')
+        validate_repeated_ui_continuation(out, parent, source_queue)
+    elif ledger_parent != info['source_run_id']:
+        raise ValueError('Deduplicated child must use source ledger')
     if tail:
         source_queue = observed_listing_tail(out, parent, source_queue)
+    source_count = len(source_queue)
+    listing_selection = info.get('listing_selection')
+    if listing_selection is not None:
+        path = prov/'selected-listing-ids.json'
+        if sha(path) != listing_selection['sha256']:
+            raise ValueError('Selected listing ID provenance changed')
+        ids = read_observed_ids(path, label='Selected listing IDs', allow_empty=True)
+        if len(ids) != listing_selection['count']:
+            raise ValueError('Selected listing ID count differs')
+        source_queue = select_listing_ids(source_queue, ids)
     known = set()
     for entry in info['against']:
         known_out, known_service, _ = paths(ROOT, entry['run_id'])
@@ -2152,14 +2240,14 @@ def validate_deduplication(out, service):
     if 'eligible_count' in info and (info['eligible_count'] != len(eligible) or info['deferred_ids'] != [x['id'] for x in eligible[len(novel):]]):
         raise ValueError('Dedup deferred selection differs')
     if plan.get('run_id') != service.name or plan.get('limit') != len(novel) or len({e['run_id'] for e in info['against']}) != len(info['against']): raise ValueError('Deduplicated child metadata differs')
-    if (len(source_queue) != info['source_count'] or len(novel) != info['novel_count'] or excluded != info['duplicate_ids'] or len(excluded) != info['duplicate_excluded'] or read(out/'queue.json') != novel):
+    if (source_count != info['source_count'] or len(novel) != info['novel_count'] or excluded != info['duplicate_ids'] or len(excluded) != info['duplicate_excluded'] or read(out/'queue.json') != novel):
         raise ValueError('Deduplicated queue or counts differ')
     for field in ('geography','profession','profession_scope','segments','filter_evidence','listing_url','listing_request_url','listing_sha256','listing_pages','selected_controls'):
         if plan.get(field) != parent.get(field): raise ValueError('Deduplicated filters differ from source')
     if read(out/'dedup_selection.json') != info: raise ValueError('Dedup selection differs from plan')
     if not novel:
         empty = read(out/'dedup-empty.json')
-        if empty != {'state':'DEDUP_EMPTY','source_count':len(source_queue),'duplicate_excluded':len(excluded),'novel_count':0}: raise ValueError('Empty dedup result differs')
+        if empty != {'state':'DEDUP_EMPTY','source_count':source_count,'duplicate_excluded':len(excluded),'novel_count':0}: raise ValueError('Empty dedup result differs')
     elif (out/'dedup-empty.json').exists(): raise ValueError('Nonempty dedup queue cannot have empty marker')
     return info
 
@@ -2175,9 +2263,11 @@ def deduplicate_queue(args):
     use_dataset = getattr(args, 'against_dataset', False)
     observed_path = getattr(args, 'against_observed_ids', None)
     observed_ids = read_observed_ids(observed_path) if observed_path is not None else []
+    inclusion_path = getattr(args, 'include_listing_ids', None)
+    listing_ids = read_observed_ids(inclusion_path, label='Selected listing IDs', allow_empty=True) if inclusion_path is not None else None
     limit = getattr(args, 'limit', None)
     if limit is not None and limit <= 0: raise ValueError('Selection limit must be positive')
-    if (not against and not use_dataset and not observed_ids) or len(set(against)) != len(against) or args.source_run_id in against or args.run_id in against or args.run_id == args.source_run_id:
+    if (not against and not use_dataset and not observed_ids and listing_ids is None) or len(set(against)) != len(against) or args.source_run_id in against or args.run_id in against or args.run_id == args.source_run_id:
         raise ValueError('Distinct source, child and known run IDs required')
     parent, source_queue = verified_frozen_queue(source_out, source_service)
     with locked(source_diag):
@@ -2187,6 +2277,15 @@ def deduplicate_queue(args):
         raise ValueError('Source must be frozen before any capture')
     if observed_tail:
         source_queue = observed_listing_tail(source_out, parent, source_queue)
+    continuation = parent.get('continuation')
+    ledger_parent = args.source_run_id
+    if continuation:
+        ledger_parent = continuation['parent_run_id']
+        if read(source_diag/'shared-ledger.json') != {'parent_run_id': ledger_parent}:
+            raise ValueError('Continuation shared ledger pointer changed')
+    source_count = len(source_queue)
+    if listing_ids is not None:
+        source_queue = select_listing_ids(source_queue, listing_ids)
     known_runs = []; known = set(observed_ids)
     for index, run_id in enumerate(against):
         known_out, known_service, _ = paths(ROOT, run_id)
@@ -2204,8 +2303,15 @@ def deduplicate_queue(args):
     eligible = [item for item in source_queue if item['id'] not in known]
     novel = eligible[:limit] if limit is not None else eligible
     excluded = [item['id'] for item in source_queue if item['id'] in known]
-    info = dict(source_run_id=args.source_run_id,source_plan_sha256=sha(source_service/'plan.json'),source_queue_sha256=sha(source_out/'queue.json'),against=known_runs,source_count=len(source_queue),duplicate_excluded=len(excluded),novel_count=len(novel),duplicate_ids=excluded)
+    info = dict(source_run_id=args.source_run_id,source_plan_sha256=sha(source_service/'plan.json'),source_queue_sha256=sha(source_out/'queue.json'),against=known_runs,source_count=source_count,duplicate_excluded=len(excluded),novel_count=len(novel),duplicate_ids=excluded)
     out.mkdir(parents=True); diag.mkdir(parents=True); prov=out/'dedup-provenance'; prov.mkdir()
+    if continuation:
+        shutil.copytree(source_out/'continuation-provenance', out/'continuation-provenance')
+        info['ledger_parent_run_id'] = ledger_parent
+    if listing_ids is not None:
+        selection_copy = prov/'selected-listing-ids.json'
+        write(selection_copy, listing_ids)
+        info['listing_selection'] = dict(count=len(listing_ids), sha256=sha(selection_copy))
     if observed_ids:
         observed_copy = prov/'observed-ids.json'
         write(observed_copy, observed_ids)
@@ -2233,18 +2339,18 @@ def deduplicate_queue(args):
     for page in parent['listing_pages']:
         target = out/page['file'].replace('\\', '/'); target.parent.mkdir(parents=True,exist_ok=True); shutil.copy2(source_out/page['file'].replace('\\', '/'),target)
     write(out/'queue.json',novel); write(out/'dedup_selection.json',info)
-    if not novel: write(out/'dedup-empty.json',dict(state='DEDUP_EMPTY',source_count=len(source_queue),duplicate_excluded=len(excluded),novel_count=0))
+    if not novel: write(out/'dedup-empty.json',dict(state='DEDUP_EMPTY',source_count=source_count,duplicate_excluded=len(excluded),novel_count=0))
     plan = dict(parent,run_id=args.run_id,limit=len(novel),available_unique=len(novel),deduplication=info,
         instruction_version=instruction_version(SCRIPTS.parent/'SKILL.md'),instruction_sha256=sha(SCRIPTS.parent/'SKILL.md'),
         code_git_commit=subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip(),
         automation_sha256={file:sha(ROOT/file) for file in AUTOMATION_FILES},uncommitted_automation_files=dirty_automation(ROOT))
-    write(service/'plan.json',plan); write(diag/'shared-ledger.json',{'parent_run_id':args.source_run_id})
+    write(service/'plan.json',plan); write(diag/'shared-ledger.json',{'parent_run_id':ledger_parent})
     write(diag/'checkpoint.json',dict(state='READY' if novel else 'DEDUP_EMPTY',completed_ids=[],next_id=novel[0]['id'] if novel else None,capture_seconds=0))
     for name in ('automation_changes.json','aside-target.local.json'):
         if (source_diag/name).exists(): shutil.copy2(source_diag/name,diag/name)
     write(assignment, {'child_run_id': args.run_id})
     validate_deduplication(out,service)
-    print(json.dumps({'state':'READY' if novel else 'DEDUP_EMPTY','run_id':args.run_id,'source_count':len(source_queue),'duplicate_excluded':len(excluded),'novel_count':len(novel)},ensure_ascii=False))
+    print(json.dumps({'state':'READY' if novel else 'DEDUP_EMPTY','run_id':args.run_id,'source_count':source_count,'duplicate_excluded':len(excluded),'novel_count':len(novel)},ensure_ascii=False))
 
 
 def validate_partition(out, service):
@@ -2280,6 +2386,8 @@ def validate_partition(out, service):
     if not info:
         continuation_info = plan.get('continuation')
         if continuation_info:
+            if continuation_info.get('mode') == 'repeated_ui_next':
+                raise ValueError('Apply deduplicate-queue before capturing a continued UI Next listing')
             provenance = out/'continuation-provenance'
             if sha(provenance/'parent-plan.json') != continuation_info['parent_plan_sha256'] or sha(provenance/'parent-queue.json') != continuation_info['parent_queue_sha256']:
                 raise ValueError('Continuation parent provenance changed')
@@ -2419,7 +2527,7 @@ def allowed_capture_changes(plan, changes):
     for c in changes:
         file = c.get('file', '').replace('\\', '/')
         if file == 'Scraper/skills/collect-avito/scripts/preflight.py' and c.get('reason') == 'Explicit pinned Aside target flags' and c.get('validation', '').strip(): permitted.add(file)
-        if c.get('validation', '').strip() and ((file == guard and c.get('reason') in ('Wait for pagination evidence in UI Next mode', 'Verify named search during UI Next pagination', 'Bounded readiness for incomplete detail shell', 'Bounded hydration wait for matching detail', 'Record bounded wait for incomplete detail', 'Recover a stable visible listing without pagination evidence')) or (file == 'Scraper/skills/collect-avito/scripts/failure_log.py' and c.get('reason') in ('Windows cross-platform shared file locking', 'Explicit UTF-8 browser scripts and shared ledger on Windows', 'Guard incomplete shell preservation and authorize one pending capture without new budget'))): permitted.add(file)
+        if c.get('validation', '').strip() and ((file == guard and c.get('reason') in ('Wait for pagination evidence in UI Next mode', 'Verify named search during UI Next pagination', 'Bounded readiness for incomplete detail shell', 'Bounded hydration wait for matching detail', 'Record bounded wait for incomplete detail', 'Recover a stable visible listing without pagination evidence', 'Verify UI Next when the observed href repeats')) or (file == 'Scraper/skills/collect-avito/scripts/failure_log.py' and c.get('reason') in ('Windows cross-platform shared file locking', 'Explicit UTF-8 browser scripts and shared ledger on Windows', 'Guard incomplete shell preservation and authorize one pending capture without new budget'))): permitted.add(file)
     if plan.get('partial_suffix') or (plan.get('partition') and any(c.get('file') == guard and c.get('reason') == 'Audited URL identity guard' and c.get('validation', '').strip() for c in changes)):
         permitted.add(guard)
     return permitted
@@ -3193,7 +3301,7 @@ def finalize(args):
     if plan.get('deduplication'):
         # Publish only the ledger pointer; the shared error ledger remains local.
         pointer = read(diag/'shared-ledger.json')
-        if pointer != {'parent_run_id': plan['deduplication']['source_run_id']}:
+        if pointer != {'parent_run_id': plan['deduplication'].get('ledger_parent_run_id', plan['deduplication']['source_run_id'])}:
             raise ValueError('Deduplicated child must use source ledger')
         write(service/'shared-ledger.json', pointer)
         service_files.append(service/'shared-ledger.json')
@@ -4563,6 +4671,8 @@ def main():
             command.add_argument('--against-run-id', action='append')
             command.add_argument('--against-observed-ids', type=Path,
                 help='Sorted JSON array of previously read or confirmed unavailable Avito ID strings')
+            command.add_argument('--include-listing-ids', type=Path,
+                                 help='Sorted JSON array of IDs selected from the frozen listing')
             command.add_argument('--against-dataset', action='store_true')
             command.add_argument('--limit', type=int, help='Select at most this many novel IDs in listing order')
         elif name == 'supplemental':

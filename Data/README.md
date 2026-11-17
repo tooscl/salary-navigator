@@ -446,3 +446,17 @@ avito_runs/<название_сбора>/
 - [tutor_20261117_prepodavatel_all_new](avito_runs/tutor_20261117_prepodavatel_all_new/exports/vacancy_observations.csv): 14 наблюдений, 0 принятых.
 
 - [tutor_20261117_observations](avito_runs/tutor_20261117_observations/observations.csv): общий архив 110 наблюдений, 108 уникальных ID; [паспорт покрытия](avito_runs/tutor_20261117_observations/coverage.json) и [пустая целевая выгрузка](avito_runs/tutor_20261117_observations/target_monthly.csv).
+
+- [remote_operators_wide_20261117_base_selected](avito_runs/remote_operators_wide_20261117_base_selected/exports/vacancy_observations.csv): 12 наблюдений, 0 принятых.
+
+- [remote_operators_wide_20261117_base_cont_selected](avito_runs/remote_operators_wide_20261117_base_cont_selected/exports/vacancy_observations.csv): 8 наблюдений, 0 принятых.
+
+- [remote_operators_wide_20261117_month_selected](avito_runs/remote_operators_wide_20261117_month_selected/exports/vacancy_observations.csv): 4 наблюдений, 0 принятых.
+
+- [remote_operators_wide_20261117_verified_selected](avito_runs/remote_operators_wide_20261117_verified_selected/exports/vacancy_observations.csv): 43 наблюдений, 0 принятых.
+
+- [remote_operators_wide_20261117_large_selected](avito_runs/remote_operators_wide_20261117_large_selected/exports/vacancy_observations.csv): 6 наблюдений, 0 принятых.
+
+- [remote_operators_wide_20261117_min50_selected](avito_runs/remote_operators_wide_20261117_min50_selected/exports/vacancy_observations.csv): 6 наблюдений, 0 принятых.
+
+- [remote_operators_wide_20261117_inbound_selected](avito_runs/remote_operators_wide_20261117_inbound_selected/exports/vacancy_observations.csv): 2 наблюдений, 0 принятых.
