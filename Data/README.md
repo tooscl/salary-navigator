@@ -490,3 +490,5 @@ avito_runs/<название_сбора>/
 - [marketing_followup_20261117_target_child](avito_runs/marketing_followup_20261117_target_child/exports/vacancy_observations.csv): 2 наблюдений, 0 принятых.
 
 - [marketing_followup_20261117_ads_child](avito_runs/marketing_followup_20261117_ads_child/exports/vacancy_observations.csv): 4 наблюдений, 0 принятых.
+
+- [Архив «Маркетолог / SMM-менеджер»](avito_runs/marketing_followup_20261117_observations/observations.csv) объединяет 142 наблюдения по 141 ID. В доборе 18 прочитанных карточек и одна незавершённая попытка. [Квота](avito_runs/marketing_followup_20261117_observations/quota.json), [охват нового поиска](avito_runs/marketing_followup_20261117_observations/browser-coverage.json), [проверка опубликованных страниц](avito_runs/marketing_followup_20261117_observations/saved-listing-coverage.json).
