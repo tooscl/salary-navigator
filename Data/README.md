@@ -460,3 +460,5 @@ avito_runs/<название_сбора>/
 - [remote_operators_wide_20261117_min50_selected](avito_runs/remote_operators_wide_20261117_min50_selected/exports/vacancy_observations.csv): 6 наблюдений, 0 принятых.
 
 - [remote_operators_wide_20261117_inbound_selected](avito_runs/remote_operators_wide_20261117_inbound_selected/exports/vacancy_observations.csv): 2 наблюдений, 0 принятых.
+
+- [archive-remote-operators-wide-20261117](avito_runs/archive-remote-operators-wide-20261117/observations.csv): общий архив 81 наблюдения, 81 уникальный ID; [паспорт](avito_runs/archive-remote-operators-wide-20261117/manifest.json).
