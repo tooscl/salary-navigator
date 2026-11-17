@@ -462,3 +462,17 @@ avito_runs/<название_сбора>/
 - [remote_operators_wide_20261117_inbound_selected](avito_runs/remote_operators_wide_20261117_inbound_selected/exports/vacancy_observations.csv): 2 наблюдений, 0 принятых.
 
 - [archive-remote-operators-wide-20261117](avito_runs/archive-remote-operators-wide-20261117/observations.csv): общий архив 81 наблюдения, 81 уникальный ID; [паспорт](avito_runs/archive-remote-operators-wide-20261117/manifest.json).
+
+- [hr_quota88_20261117_saved](avito_runs/hr_quota88_20261117_saved/exports/vacancy_observations.csv): 1 наблюдений, 0 принятых.
+
+- [hr_quota88_20261117_01_child](avito_runs/hr_quota88_20261117_01_child/exports/vacancy_observations.csv): 2 наблюдений, 0 принятых.
+
+- [hr_quota88_20261117_02_child](avito_runs/hr_quota88_20261117_02_child/exports/vacancy_observations.csv): 1 наблюдений, 0 принятых.
+
+- [hr_quota88_20261117_03_child](avito_runs/hr_quota88_20261117_03_child/exports/vacancy_observations.csv): 1 наблюдений, 0 принятых.
+
+- [hr_quota88_20261117_05_child](avito_runs/hr_quota88_20261117_05_child/exports/vacancy_observations.csv): 1 наблюдений, 0 принятых.
+
+- [hr_quota88_20261117_07_child](avito_runs/hr_quota88_20261117_07_child/exports/vacancy_observations.csv): 2 наблюдений, 0 принятых.
+
+- [archive-hr-quota88-20261117](avito_runs/archive-hr-quota88-20261117/observations.csv): архив 8 наблюдений, 8 уникальных ID, 0 принятых; [охват и ограничения](avito_runs/archive-hr-quota88-20261117/coverage.md), [паспорт](avito_runs/archive-hr-quota88-20261117/manifest.json).
