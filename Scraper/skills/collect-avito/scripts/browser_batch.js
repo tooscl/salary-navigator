@@ -28,8 +28,8 @@ try {
       await p.goto(job.url);
     } else if (!job.ui_next && job.allow_navigation && p.url() !== job.url) await p.goto(job.url);
     await saveTab();
-    const stable = async (accept = () => true) => {
-      let last = null, repeats = 0;
+    const stable = async (accept = () => true, stationary = () => false) => {
+      let last = null, repeats = 0, unchanged = null;
       for (let i = 0; i < 30; i++) {
         const value = await p.evaluate(extractor);
         if (value.state === 'NEEDS_HUMAN') { await save('listing.json', value); throw new Error('NEEDS_HUMAN: access restriction'); }
@@ -40,11 +40,14 @@ try {
         const visibleOnly = job.visible_page_only && !paginationObserved &&
           (value.pagination?.current_pages || []).length === 0 &&
           value.source_url === job.url && p.url() === job.url;
-        if (repeats >= 2 && value.state === 'LISTING' && value.items.length && value.listing_item_audit?.malformed === 0 &&
-            (job.visible_page_only ? visibleOnly : paginationObserved) && accept(value)) return value;
+        const stableListing = repeats >= 2 && value.state === 'LISTING' && value.items.length &&
+          value.listing_item_audit?.malformed === 0 && (job.visible_page_only ? visibleOnly : paginationObserved);
+        if (stableListing && accept(value)) return value;
+        unchanged = stableListing && stationary(value) ? value : null;
         if (repeats >= 2 && value.state === 'EMPTY_RESULT' && value.empty_evidence && !(value.items || []).length && accept(value)) return value;
         await sleep(500);
       }
+      if (unchanged) return unchanged;
       throw new Error('Listing did not stabilize');
     };
     let listing;
@@ -79,10 +82,20 @@ try {
           current_next: current.pagination?.next_url || null, observed_href: observedHref,
           resolved_href: resolvedHref, ref_found: Boolean(ref), scoped_snapshot: snapBefore.tree};
         await save('next-comparison.json', comparison);
-        if (!ref || (button ? (observedHref || current.pagination?.next_url) : (!observedHref || resolvedHref !== current.pagination?.next_url || (!rotated && current.pagination?.next_url !== previous.pagination?.next_url))))
+        const refreshedNext = job.repeated_next && resolvedHref &&
+          safeUrl(resolvedHref) === safeUrl(previous.pagination.next_url) && pageNo(resolvedHref) === n + 1;
+        if (!ref || (button ? (observedHref || current.pagination?.next_url) : (!observedHref || resolvedHref !== current.pagination?.next_url || (!rotated && !refreshedNext && current.pagination?.next_url !== previous.pagination?.next_url))))
           throw new Error('Observed Next differs from saved page; see next-comparison.json');
         await p.locator(ref[1]).click();
-        current = await stable(l => valid(l, n + 1) && (!job.geography || contextValid(l)));
+        current = await stable(l => valid(l, n + 1) && (!job.geography || contextValid(l)),
+          l => job.repeated_next && valid(l, n) && contextValid(l));
+        if (job.repeated_next && valid(current, n)) {
+          await save('listing.json', {...current, ui_stationary: {from_url: previous.source_url,
+            next_href: previous.pagination.next_url, observed_href: observedHref, next_snapshot: nextSnapshot}});
+          await checkpoint('READY', null, 'ui_next_no_advance');
+          console.log('TL_LISTING=' + JSON.stringify({unchanged: true, page: n}));
+          return;
+        }
       }
       if (!valid(current, n + 1) || (job.geography && !contextValid(current))) throw new Error('Tab is not the expected completed next page');
       listing = {...current, ui_transition: {method: 'observed_ui_next', recovered, next_snapshot: nextSnapshot, from_url: previous.source_url, live_from_url: liveFromUrl, live_context: liveContext, from_page: n, next_href: previous.pagination.next_url, next_button: previous.pagination.next_button === true, observed_href: observedHref, live_next_url: observedHref ? new URL(observedHref, liveFromUrl).href : null, landed_url: current.source_url, landed_page: n + 1, stability: 'three_matching_snapshots_500ms'}};
