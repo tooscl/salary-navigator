@@ -420,3 +420,9 @@ avito_runs/<название_сбора>/
 - [marketing_remote_20261117_05_new](avito_runs/marketing_remote_20261117_05_new/exports/vacancy_observations.csv): 13 наблюдений, 0 принятых.
 
 - [marketing_remote_20261117_06_new](avito_runs/marketing_remote_20261117_06_new/exports/vacancy_observations.csv): 5 наблюдений, 0 принятых.
+
+- [designer_remote_20261117_c01](avito_runs/designer_remote_20261117_c01/exports/vacancies_flat.csv): 2 вакансий.
+
+- [designer_remote_20261117_c02](avito_runs/designer_remote_20261117_c02/exports/vacancy_observations.csv): 1 наблюдений, 0 принятых.
+
+- [designer_remote_20261117_c06](avito_runs/designer_remote_20261117_c06/exports/vacancy_observations.csv): 2 наблюдений, 0 принятых.
