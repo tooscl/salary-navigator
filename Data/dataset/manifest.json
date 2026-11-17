@@ -26,7 +26,7 @@
     "source": "title, profession, city, location_observed",
     "policy": "added_next_to_observed_columns_not_replacing"
   },
-  "rows": 32090,
+  "rows": 32093,
   "columns": [
     "source",
     "id",
@@ -160,7 +160,7 @@
     "enriched_fields",
     "enrichment_version"
   ],
-  "sha256": "466fc29005462f9d4e81bab35fd834e8af89b405ae11c65654ee2f1a73bd91da",
+  "sha256": "4501e35e043a2c1ca1adbf0096d41f14be443af8960c093f2207e0a2cd0c326c",
   "inputs": [
     {
       "run_id": "20261028-spb-50-all",
@@ -43023,6 +43023,56 @@
       }
     },
     {
+      "run_id": "marketing_remote_20261117_01_new",
+      "source": "avito",
+      "path": "Data/avito_runs/marketing_remote_20261117_01_new/exports/vacancies_flat.csv",
+      "sha256": "17c751c37ee853477a51f511ad933cfbb84978ef6877f7030274821829769a31",
+      "placement_regions": {
+        "Москва": "Москва"
+      },
+      "enrichment_status": "not_run",
+      "rows": 1,
+      "search_plan": {
+        "path": "Scraper/runs/marketing_remote_20261117_01_new/plan.json",
+        "sha256": "e64319c95bbb375af5397a3a8aaa2523a2ac6d7f0cd7792aaf2bd2ada1b9f279"
+      }
+    },
+    {
+      "run_id": "marketing_remote_20261117_03_new",
+      "source": "avito",
+      "path": "Data/avito_runs/marketing_remote_20261117_03_new/exports/vacancies_flat.csv",
+      "sha256": "f8612fd205197ffda6b66a1edacf872c08e503c4a39c97be90bd3575f6d2b782",
+      "placement_regions": {},
+      "enrichment_status": "not_run",
+      "unknown_city_placements": {
+        "8362466663": {
+          "region": "Москва",
+          "evidence": "Москва, Ленинградское ш. Химки 16–20 мин. Левобережная 21–30 мин. Ховрино от 31 мин.",
+          "region_unknown": false
+        }
+      },
+      "rows": 1,
+      "search_plan": {
+        "path": "Scraper/runs/marketing_remote_20261117_03_new/plan.json",
+        "sha256": "a72bf3e347aaed13201f5c95ed4e759771e1ec5c639c96c1c147b25e617702f3"
+      }
+    },
+    {
+      "run_id": "marketing_remote_20261117_04_new",
+      "source": "avito",
+      "path": "Data/avito_runs/marketing_remote_20261117_04_new/exports/vacancies_flat.csv",
+      "sha256": "515c7ec39638020f0e1df0327d8e5aad0225a1c1793505734a611c427500d34e",
+      "placement_regions": {
+        "Санкт-Петербург": "Санкт-Петербург"
+      },
+      "enrichment_status": "not_run",
+      "rows": 1,
+      "search_plan": {
+        "path": "Scraper/runs/marketing_remote_20261117_04_new/plan.json",
+        "sha256": "be8e3a5eb12df825518a09269a6896bfba4c7414faa1d35026b32c3a2f639eea"
+      }
+    },
+    {
       "run_id": "moscow-all-10000-20261028",
       "source": "avito",
       "path": "Data/avito_runs/moscow-all-10000-20261028/exports/vacancies_flat.csv",
@@ -67817,9 +67867,9 @@
     },
     {
       "path": "parts/part-26.csv",
-      "rows": 520,
-      "bytes": 1907803,
-      "sha256": "615a2d7dddd96ded4b6212fed4a04bc51b1d273d6f6d137131bdb8ce008895a2"
+      "rows": 521,
+      "bytes": 1913835,
+      "sha256": "38e48b019df7cae0ba11dc02d17c93ed317e50a2ec2953c63f61a2912d61cb9c"
     },
     {
       "path": "parts/part-27.csv",
@@ -67877,9 +67927,9 @@
     },
     {
       "path": "parts/part-36.csv",
-      "rows": 440,
-      "bytes": 1583280,
-      "sha256": "2450c4184912c19632aaa4888c72a35c4eb23dfc9bb453090c2e4573c74fedc9"
+      "rows": 441,
+      "bytes": 1586908,
+      "sha256": "f53d7c27d1fa322191f6462cca30c7a3657934529c7b62ad1bf7c194fe76a0a7"
     },
     {
       "path": "parts/part-37.csv",
@@ -67997,9 +68047,9 @@
     },
     {
       "path": "parts/part-56.csv",
-      "rows": 486,
-      "bytes": 1787983,
-      "sha256": "388b061a18aa173926c50b72ba00a60395f4049aa82e55fa95fc9ac3ad33a205"
+      "rows": 487,
+      "bytes": 1791703,
+      "sha256": "bfb392a5bad22acbfad927ab54f240fde0ee545492ab3a3347c584eb3a6d8af5"
     },
     {
       "path": "parts/part-57.csv",
