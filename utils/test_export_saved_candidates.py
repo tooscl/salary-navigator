@@ -47,3 +47,36 @@ class ParentProvenanceTests(unittest.TestCase):
             self.assertEqual((root / excluded['raw_path']).read_bytes(), payload)
             self.assertEqual(excluded['Параметр — Формат работы'], 'Гибрид')
             self.assertEqual(incomplete['selection_status'], 'incomplete_observation')
+
+    def test_archive_preserves_incomplete_attempt_and_later_decision_for_same_id(self):
+        with tempfile.TemporaryDirectory() as directory:
+            source = Path(directory) / 'source'
+            root = Path(directory) / 'archive'
+            batch = source / 'Data/avito_runs/parent'
+            (batch / 'raw').mkdir(parents=True)
+            (batch / 'exports').mkdir()
+            complete = b'{"state":"DETAIL","id":"123"}'
+            (batch / 'raw/123.json').write_bytes(complete)
+            (batch / 'exports/reviewed_selection.json').write_text(json.dumps({'decisions': [
+                {'id': '123', 'accepted': True, 'reason': 'matched criteria',
+                 'raw_sha256': hashlib.sha256(complete).hexdigest()},
+            ]}))
+            attempts = batch / 'observations/123'
+            attempts.mkdir(parents=True)
+            incomplete = b'{"state":"UNKNOWN_PAGE","source_url":"about:blank"}'
+            digest = hashlib.sha256(incomplete).hexdigest()
+            (attempts / f'{digest}.json').write_bytes(incomplete)
+            (attempts / f'{digest}.provenance.json').write_text(json.dumps({
+                'raw_sha256': digest, 'reason': 'blank_tab_before_navigation',
+            }))
+            summary = archive_candidates(source, ['parent'], 'archive', root=root)
+            self.assertEqual((summary['observations'], summary['unique_ids'], summary['raw_files_copied']),
+                             (2, 1, 2))
+            with (root / 'Data/avito_runs/archive/observations.csv').open() as stream:
+                accepted, stopped = list(csv.DictReader(stream))
+            self.assertEqual(accepted['selection_status'], 'accepted')
+            self.assertEqual(stopped['selection_status'], 'incomplete_observation')
+            self.assertEqual(stopped['selection_reason'], 'blank_tab_before_navigation')
+            self.assertEqual((root / stopped['raw_path']).read_bytes(), incomplete)
+            self.assertEqual(hashlib.sha256((root / stopped['observation_provenance_path']).read_bytes()).hexdigest(),
+                             stopped['observation_provenance_sha256'])
