@@ -1,0 +1,376 @@
+{
+  "run_id": "accountant_remote_20261117_02_new",
+  "dataset_id": "accountant_remote_20261117_02_new",
+  "status": "complete",
+  "schema": {
+    "columns": [
+      "id",
+      "profession"
+    ],
+    "unknown_policy": "empty_not_zero"
+  },
+  "collection": {
+    "run_id": "accountant_remote_20261117_02_new",
+    "geography": "По всей России",
+    "profession": "Бухгалтер",
+    "segments": "",
+    "filter_evidence": "Поиск Бухгалтер, профессия Бухгалтер, формат Удалённо и По всей России; все виды занятости; геоконтрол Во всех регионах",
+    "listing_url": "https://www.avito.ru/all/vakansii/format_raboty/udalenno/buxgalter-ASgBAgICAkTUzBHM6oYDnowVvpWRAw?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6IndTZ3NEbDVsaFQ2WVJlNFciO30zQzzxJgAAAA&f=ASgBAgICA0SUzQ_S6vQC1MwRzOqGA56MFb6VkQM&q=%D0%91%D1%83%D1%85%D0%B3%D0%B0%D0%BB%D1%82%D0%B5%D1%80",
+    "listing_request_url": "https://www.avito.ru/all/vakansii/format_raboty/udalenno/buxgalter-ASgBAgICAkTUzBHM6oYDnowVvpWRAw?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6IndTZ3NEbDVsaFQ2WVJlNFciO30zQzzxJgAAAA&f=ASgBAgICA0SUzQ_S6vQC1MwRzOqGA56MFb6VkQM&q=%D0%91%D1%83%D1%85%D0%B3%D0%B0%D0%BB%D1%82%D0%B5%D1%80",
+    "selected_controls": [
+      {
+        "label": "По всей России",
+        "marker": "params[127818]/3054249",
+        "value": null
+      },
+      {
+        "label": "По всей России",
+        "marker": "params[127818]/toggle",
+        "value": "3054249"
+      },
+      {
+        "label": "Бухгалтер",
+        "marker": "params[144170]/checkbox/3201702",
+        "value": null
+      },
+      {
+        "label": "Бухгалтер",
+        "marker": "params[144170]/checkbox/toggle",
+        "value": "3201702"
+      },
+      {
+        "label": "Любой",
+        "marker": "params[196929]/all",
+        "value": null
+      },
+      {
+        "label": "Любой",
+        "marker": "params[196929]/toggle",
+        "value": "all"
+      },
+      {
+        "label": "Удалённо",
+        "marker": "params[172815]/3286367",
+        "value": null
+      },
+      {
+        "label": "Удалённо",
+        "marker": "params[172815]/toggle",
+        "value": "3286367"
+      },
+      {
+        "label": "Неважно",
+        "marker": null,
+        "value": "all"
+      },
+      {
+        "label": "Все",
+        "marker": null,
+        "value": "all"
+      }
+    ],
+    "listing_sha256": "56987476c0e8feb504f1e2a5c15df2ceb56be5a780be55b144848775acb5bc2e",
+    "profession_scope": null,
+    "profession_source": "observed_controls",
+    "listing_pages": [
+      {
+        "file": "listing_pages/0001.json",
+        "sha256": "56987476c0e8feb504f1e2a5c15df2ceb56be5a780be55b144848775acb5bc2e",
+        "source_url": "https://www.avito.ru/all/vakansii/format_raboty/udalenno/buxgalter-ASgBAgICAkTUzBHM6oYDnowVvpWRAw?context=H4sIAAAAAAAA_wEmANn_YToxOntzOjE6InkiO3M6MTY6IndTZ3NEbDVsaFQ2WVJlNFciO30zQzzxJgAAAA&f=ASgBAgICA0SUzQ_S6vQC1MwRzOqGA56MFb6VkQM&q=%D0%91%D1%83%D1%85%D0%B3%D0%B0%D0%BB%D1%82%D0%B5%D1%80"
+      }
+    ],
+    "selection_mode": "first_N_unique_on_frozen_listing",
+    "limit": 4,
+    "requested_all_pages": false,
+    "saved_selection_authorization": null,
+    "requested_limit": 120,
+    "available_unique": 4,
+    "listing_end_reason": "visible_page_only_no_pagination",
+    "available_listing_exhausted": false,
+    "continuation": null,
+    "branch_only": false,
+    "max_pages": null,
+    "candidate_limit": null,
+    "selection_criterion": "remote",
+    "comparison_sha256": null,
+    "created_at": "2026-11-17T01:03:01.631499+00:00",
+    "instruction_version": "1.8.4",
+    "extractor_sha256": "0c52ba2f821d861083c99ec6bc328456df96b3d179b7fffd47f87aadfda84bdb",
+    "instruction_sha256": "79db7c6d781a31544663cb64f2278ae42570dad10e6f2394fe2db0599324382c",
+    "code_git_commit": "7fd47024f13cb13105e3d2d0164a62e1381b85ef",
+    "setup_seconds": 1.9295604580111103,
+    "live_route_verified": false,
+    "execution_model": "gpt-6.1-terra low",
+    "automation_sha256": {
+      "Scraper/skills/collect-avito/references/top-professions.json": "e3e72638b17b48f825ec6f2fefb963662494f679ae4b0cef1bebedba889610dd",
+      "utils/title_flags.py": "9c9456cb3fb0df5791630049c9c85987381091dbb9ba18bc3fb3314b8cccbeb6",
+      "Scraper/extract.js": "0c52ba2f821d861083c99ec6bc328456df96b3d179b7fffd47f87aadfda84bdb",
+      "Scraper/skills/collect-avito/SKILL.md": "79db7c6d781a31544663cb64f2278ae42570dad10e6f2394fe2db0599324382c",
+      "Scraper/skills/collect-avito/scripts/run.py": "987132bf12da911c0f733bce13b758d699cdae945277b77997671c19df94dc7e",
+      "Scraper/skills/collect-avito/scripts/employer_selection.py": "52cbd4ceb6ed260b861dde8bb15b9d426d5f18237c0c4146007c65a79725f1f9",
+      "Scraper/skills/collect-avito/scripts/sweep_mode.py": "718a956a316df71c47ee3a4c5d3670fa011a5b16e9948393d68216702b140a56",
+      "Scraper/skills/collect-avito/scripts/browser_batch.js": "07d6bb6247da750599c6c344aea153ffee592957e68de2dd204b68386f263677",
+      "Scraper/skills/collect-avito/scripts/check_capture.py": "aa746849317f9768af5aae08b394b9379539f6e268c1fc69e4ed13bd06a4657f",
+      "Scraper/skills/collect-avito/scripts/failure_log.py": "7a2fa9f997ae528969f9a864514f30d76427ae06aafe108344df42ead3fe2291",
+      "Scraper/skills/collect-avito/scripts/preflight.py": "492a0d898990aee198f26bf6577d0876360dcc6ec69e274835cd77cdaa768974"
+    },
+    "uncommitted_automation_files": [],
+    "deduplication": {
+      "source_run_id": "accountant_remote_20261117_02",
+      "source_plan_sha256": "57105c74d38fbd35fd62e4d863eee020f50a2b98c0968fc7fcaec63245e63668",
+      "source_queue_sha256": "f9e6d415a6016212ef8ce21db7e995a285f5b62537288fa2b0fdca75aae3b1b0",
+      "against": [],
+      "source_count": 50,
+      "duplicate_excluded": 46,
+      "novel_count": 4,
+      "duplicate_ids": [
+        "7763923963",
+        "8364686616",
+        "8531681632",
+        "8469660120",
+        "8589430451",
+        "3923244933",
+        "8394878947",
+        "8410204108",
+        "8546413312",
+        "8265793322",
+        "8495614446",
+        "8543834166",
+        "8588878150",
+        "8369295769",
+        "8621706418",
+        "7688461164",
+        "8553719373",
+        "8531377678",
+        "8217566515",
+        "4116306926",
+        "8341667202",
+        "8490605021",
+        "3347178033",
+        "7762072333",
+        "8218918800",
+        "8499312120",
+        "8455136485",
+        "8576287786",
+        "8335863793",
+        "8517057721",
+        "8346260522",
+        "8547255004",
+        "4467044150",
+        "8502428049",
+        "8332155827",
+        "8011090371",
+        "3053617986",
+        "8413148036",
+        "7228362093",
+        "7284371535",
+        "8471471373",
+        "8589741652",
+        "2530815368",
+        "8441260527",
+        "739169516",
+        "8543328823"
+      ],
+      "observed_ids": {
+        "count": 31,
+        "sha256": "2db04ba9f69b77a46735505641da3a9526c0673b88c06ee8f64f098777de1c51"
+      },
+      "dataset": {
+        "csv_sha256": "06035346cd81e961b7b79c587da34daa277a2b322e569245c3ba3f3ece499acc",
+        "manifest_sha256": "0cae1e289f777970db77ba35864c1ff3cc4b9fc4427f904bdf44e9346ae39820",
+        "keys_sha256": "75fcfd6519f90aae8c8eb182da97c8db63d686c16c470a9b57e53bbe6a7b2a09",
+        "rows": 32095
+      }
+    },
+    "city_anomaly_policy": "blank"
+  },
+  "coverage": {
+    "employer_selection": null,
+    "planned": 4,
+    "accepted": 0,
+    "unavailable": [],
+    "unresolved_observations": [],
+    "user_skipped_observations": [],
+    "user_skipped_count": 0,
+    "user_skip_policy": null,
+    "user_detail_skip_policy": null,
+    "deduplication": {
+      "source_run_id": "accountant_remote_20261117_02",
+      "source_plan_sha256": "57105c74d38fbd35fd62e4d863eee020f50a2b98c0968fc7fcaec63245e63668",
+      "source_queue_sha256": "f9e6d415a6016212ef8ce21db7e995a285f5b62537288fa2b0fdca75aae3b1b0",
+      "against": [],
+      "source_count": 50,
+      "duplicate_excluded": 46,
+      "novel_count": 4,
+      "duplicate_ids": [
+        "7763923963",
+        "8364686616",
+        "8531681632",
+        "8469660120",
+        "8589430451",
+        "3923244933",
+        "8394878947",
+        "8410204108",
+        "8546413312",
+        "8265793322",
+        "8495614446",
+        "8543834166",
+        "8588878150",
+        "8369295769",
+        "8621706418",
+        "7688461164",
+        "8553719373",
+        "8531377678",
+        "8217566515",
+        "4116306926",
+        "8341667202",
+        "8490605021",
+        "3347178033",
+        "7762072333",
+        "8218918800",
+        "8499312120",
+        "8455136485",
+        "8576287786",
+        "8335863793",
+        "8517057721",
+        "8346260522",
+        "8547255004",
+        "4467044150",
+        "8502428049",
+        "8332155827",
+        "8011090371",
+        "3053617986",
+        "8413148036",
+        "7228362093",
+        "7284371535",
+        "8471471373",
+        "8589741652",
+        "2530815368",
+        "8441260527",
+        "739169516",
+        "8543328823"
+      ],
+      "observed_ids": {
+        "count": 31,
+        "sha256": "2db04ba9f69b77a46735505641da3a9526c0673b88c06ee8f64f098777de1c51"
+      },
+      "dataset": {
+        "csv_sha256": "06035346cd81e961b7b79c587da34daa277a2b322e569245c3ba3f3ece499acc",
+        "manifest_sha256": "0cae1e289f777970db77ba35864c1ff3cc4b9fc4427f904bdf44e9346ae39820",
+        "keys_sha256": "75fcfd6519f90aae8c8eb182da97c8db63d686c16c470a9b57e53bbe6a7b2a09",
+        "rows": 32095
+      }
+    },
+    "sweep": null,
+    "unique_ids": [],
+    "errors": [],
+    "partial": null,
+    "limitations": [
+      "Visible rendered parameters only; enrichment not run; placement on site; live route unverified"
+    ],
+    "reviewed_selection": {
+      "accepted_ids": [],
+      "sha256": "ffc8dd4c82b4765ec2074975030c4349efbdbac636ca92c0d64265663a3463ad"
+    },
+    "full_observations": {
+      "rows": 4,
+      "sha256": "e2aa52539b01e3f68b2f1be4cc4de83e11753754fafd2b2ad6517aebc114b8bc"
+    }
+  },
+  "timing": {
+    "setup_seconds": 1.9295604580111103,
+    "capture_seconds": 4.460235833990737,
+    "review_export_seconds": 3.2731131670007017,
+    "publication_seconds": null
+  },
+  "review_model": "gpt-6.1-terra medium",
+  "automation_changes": [],
+  "profession_correction": null,
+  "post_capture_automation_sha256": {},
+  "files": {
+    "Data/avito_runs/accountant_remote_20261117_02_new/dedup-provenance/dataset-keys.json": {
+      "bytes": 1251611,
+      "sha256": "75fcfd6519f90aae8c8eb182da97c8db63d686c16c470a9b57e53bbe6a7b2a09"
+    },
+    "Data/avito_runs/accountant_remote_20261117_02_new/dedup-provenance/dataset-manifest.json": {
+      "bytes": 3358506,
+      "sha256": "0cae1e289f777970db77ba35864c1ff3cc4b9fc4427f904bdf44e9346ae39820"
+    },
+    "Data/avito_runs/accountant_remote_20261117_02_new/dedup-provenance/observed-ids.json": {
+      "bytes": 498,
+      "sha256": "2db04ba9f69b77a46735505641da3a9526c0673b88c06ee8f64f098777de1c51"
+    },
+    "Data/avito_runs/accountant_remote_20261117_02_new/dedup-provenance/source-plan.json": {
+      "bytes": 5062,
+      "sha256": "57105c74d38fbd35fd62e4d863eee020f50a2b98c0968fc7fcaec63245e63668"
+    },
+    "Data/avito_runs/accountant_remote_20261117_02_new/dedup-provenance/source-queue.json": {
+      "bytes": 23825,
+      "sha256": "f9e6d415a6016212ef8ce21db7e995a285f5b62537288fa2b0fdca75aae3b1b0"
+    },
+    "Data/avito_runs/accountant_remote_20261117_02_new/dedup_selection.json": {
+      "bytes": 1604,
+      "sha256": "b5d2c5e015dd04b21c859dbcfa11bbfdd23c185c3dbdccef9e2bd7d5ac653b95"
+    },
+    "Data/avito_runs/accountant_remote_20261117_02_new/exports/reviewed_selection.json": {
+      "bytes": 2274,
+      "sha256": "ffc8dd4c82b4765ec2074975030c4349efbdbac636ca92c0d64265663a3463ad"
+    },
+    "Data/avito_runs/accountant_remote_20261117_02_new/exports/vacancies.json": {
+      "bytes": 3,
+      "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+    },
+    "Data/avito_runs/accountant_remote_20261117_02_new/exports/vacancies_flat.csv": {
+      "bytes": 17,
+      "sha256": "5d1cbcac255347a5b4193f3558006723f3a164540824da93962b40f894bb4a1c"
+    },
+    "Data/avito_runs/accountant_remote_20261117_02_new/exports/vacancy_observations.csv": {
+      "bytes": 20577,
+      "sha256": "e2aa52539b01e3f68b2f1be4cc4de83e11753754fafd2b2ad6517aebc114b8bc"
+    },
+    "Data/avito_runs/accountant_remote_20261117_02_new/exports/validation.json": {
+      "bytes": 217,
+      "sha256": "ae34d2654296c68ebfb1561571dcd3107887f110611029c1522ce4ba5630a929"
+    },
+    "Data/avito_runs/accountant_remote_20261117_02_new/listing.json": {
+      "bytes": 48728,
+      "sha256": "56987476c0e8feb504f1e2a5c15df2ceb56be5a780be55b144848775acb5bc2e"
+    },
+    "Data/avito_runs/accountant_remote_20261117_02_new/listing_pages/0001.json": {
+      "bytes": 48728,
+      "sha256": "56987476c0e8feb504f1e2a5c15df2ceb56be5a780be55b144848775acb5bc2e"
+    },
+    "Data/avito_runs/accountant_remote_20261117_02_new/queue.json": {
+      "bytes": 1848,
+      "sha256": "14d930f84f43ce81644ddce8e19eb61acdfbdb2e2dc81e460c7d4682d0294ff8"
+    },
+    "Data/avito_runs/accountant_remote_20261117_02_new/raw/3615441748.json": {
+      "bytes": 8800,
+      "sha256": "abcb890b0eeb2ca0100c072c9570d3a0f8b1b37e65894dbe225c6ad60ef09eb2"
+    },
+    "Data/avito_runs/accountant_remote_20261117_02_new/raw/8380226411.json": {
+      "bytes": 20128,
+      "sha256": "5a9c004e2331560ddc93c7f060bdeeb9f17b6ec38c8331649a09c9f188d2375d"
+    },
+    "Data/avito_runs/accountant_remote_20261117_02_new/raw/8452720411.json": {
+      "bytes": 13629,
+      "sha256": "05646b2bcaef5622788c1c525ab915dd50a43da5095b2e6859a90b50f5bdb2b4"
+    },
+    "Data/avito_runs/accountant_remote_20261117_02_new/raw/8502492484.json": {
+      "bytes": 24010,
+      "sha256": "c8bae708fc799f6b0588b1b8ad5736a482760a8eca544251f269bbb395b90d37"
+    },
+    "Data/avito_runs/accountant_remote_20261117_02_new/standing_unavailable_policy.json": {
+      "bytes": 1011,
+      "sha256": "7a1c18520dc10340252a4933e92bb851f78d800b32c33c1017ede17529393381"
+    },
+    "Scraper/runs/accountant_remote_20261117_02_new/plan.json": {
+      "bytes": 6820,
+      "sha256": "19e2c2b2b5389d7d44e741c89773c71ba9bf5202ae7750c282f6996b0bc40841"
+    },
+    "Scraper/runs/accountant_remote_20261117_02_new/shared-ledger.json": {
+      "bytes": 55,
+      "sha256": "1bf0e78920eb0a67544b52615f0aac0b1e9bc28aa8cf94fc9a9257a1c5c9e955"
+    }
+  }
+}

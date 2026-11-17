@@ -26,7 +26,7 @@
     "source": "title, profession, city, location_observed",
     "policy": "added_next_to_observed_columns_not_replacing"
   },
-  "rows": 32095,
+  "rows": 32097,
   "columns": [
     "source",
     "id",
@@ -160,7 +160,7 @@
     "enriched_fields",
     "enrichment_version"
   ],
-  "sha256": "06035346cd81e961b7b79c587da34daa277a2b322e569245c3ba3f3ece499acc",
+  "sha256": "a56e81b2b7f524da57ca93ce4c6fe984dae950d67ec98b9f37429e5fde76983e",
   "inputs": [
     {
       "run_id": "20261028-spb-50-all",
@@ -17798,6 +17798,31 @@
       "search_plan": {
         "path": "Scraper/runs/20261114_moscow_cashier_candidates_other_hours/plan.json",
         "sha256": "4371ef2b1863ebbc3a23c0cda5c9a5c53a3530376880a97c64d257ea2749be78"
+      }
+    },
+    {
+      "run_id": "accountant_remote_20261117_01_new",
+      "source": "avito",
+      "path": "Data/avito_runs/accountant_remote_20261117_01_new/exports/vacancies_flat.csv",
+      "sha256": "bd459ff126777f01d42cacea3d4c3952e8b349bc8a1717f07c734aa3d91bd15a",
+      "placement_regions": {},
+      "enrichment_status": "not_run",
+      "unknown_city_placements": {
+        "8553719373": {
+          "region": "Свердловская область",
+          "evidence": "Свердловская обл., Екатеринбург, Верх-Исетский б-р, 13В Площадь 1905 года 16–20 мин. Динамо 21–30 мин. Геологическая 21–30 мин.",
+          "region_unknown": false
+        },
+        "8346260522": {
+          "region": "Волгоградская область",
+          "evidence": "Волгоградская обл., Волгоград, ш. Авиаторов, 5 р-н Дзержинский",
+          "region_unknown": false
+        }
+      },
+      "rows": 2,
+      "search_plan": {
+        "path": "Scraper/runs/accountant_remote_20261117_01_new/plan.json",
+        "sha256": "1981f1c514965868ca3f4771b6b9d07130e69d6de3cd59b0d0222ee886200d0b"
       }
     },
     {
@@ -67739,9 +67764,9 @@
     },
     {
       "path": "parts/part-02.csv",
-      "rows": 502,
-      "bytes": 1863104,
-      "sha256": "33397002918ef8c744bc467ebdb8f4b6a983e13fffe8e56ea70b7c2109685434"
+      "rows": 503,
+      "bytes": 1866486,
+      "sha256": "8b19c0abfa3c8ab7ae285ab525e1d2b78f6b3dfbe4e38b11eca6c5ed4e659474"
     },
     {
       "path": "parts/part-03.csv",
@@ -67805,9 +67830,9 @@
     },
     {
       "path": "parts/part-13.csv",
-      "rows": 484,
-      "bytes": 1792668,
-      "sha256": "84fae744832a9d628c03d043e7c2d6c0375a9d7925af004af3e2fb850c5847a9"
+      "rows": 485,
+      "bytes": 1798911,
+      "sha256": "e5c70fe86e3dbf30c9fd376fe75a35a0303bacc30d288cce687206780733774a"
     },
     {
       "path": "parts/part-14.csv",
