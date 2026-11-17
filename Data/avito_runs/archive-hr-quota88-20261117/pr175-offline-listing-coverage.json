@@ -1,0 +1,1338 @@
+{
+  "source_main": "b9f5b631698a328fe41355f61ccd8dff8b23f87a",
+  "source_pull_request": 175,
+  "title_pattern_ignore_case": "рекрут|\\bhr\\b|\\bэйчар|сорсер|рес[её]чер|подбор.{0,32}(персонал|кадр|сотрудник)|по (массовому )?подбору|по кадрам|кадровик|talent acquisition|найм[уы]? (персонал|сотрудник)|специалист (отдела|по работе с) персонал|менеджер(?:-координатор)? по персоналу|ассистент кадрового агентства",
+  "source_runs": [
+    {
+      "run_id": "remote_operators_wide_20261117_base_cont",
+      "published_plan": "Data/avito_runs/remote_operators_wide_20261117_base_cont_selected/dedup-provenance/source-plan.json",
+      "plan_sha256": "ebb43acb35448f6cfd32e2c417ea3f4a9a8753c9388537cf4daa36adbecd90be",
+      "published_queue": "Data/avito_runs/remote_operators_wide_20261117_base_cont_selected/dedup-provenance/source-queue.json",
+      "queue_sha256": "8f0d6eb1cbc557b5346457778e14f33ce8adcb7d4cbf2164917b71e00b2ebaad",
+      "pages": 30,
+      "listing_ids": 917,
+      "matching_title_ids": 33,
+      "end_reason": "confirmed_end",
+      "end_confirmed": true
+    },
+    {
+      "run_id": "remote_operators_wide_20261117_base",
+      "published_plan": "Data/avito_runs/remote_operators_wide_20261117_base_selected/dedup-provenance/source-plan.json",
+      "plan_sha256": "099754e145c6e334257d6c3438a75627960408780937fb86b9daeb17540c3b07",
+      "published_queue": "Data/avito_runs/remote_operators_wide_20261117_base_selected/dedup-provenance/source-queue.json",
+      "queue_sha256": "484f6ecab3d6a95a52a8b96719661ba28d507f44c1989838fc298f4690c5c087",
+      "pages": 21,
+      "listing_ids": 859,
+      "matching_title_ids": 32,
+      "end_reason": "repeated_next_link",
+      "end_confirmed": false
+    },
+    {
+      "run_id": "remote_operators_wide_20261117_inbound",
+      "published_plan": "Data/avito_runs/remote_operators_wide_20261117_inbound_selected/dedup-provenance/source-plan.json",
+      "plan_sha256": "5a6f0802fc7ad58b638df6ac60ddfde9ead4a98b82d6c8c54bc6a0cf7ebed30f",
+      "published_queue": "Data/avito_runs/remote_operators_wide_20261117_inbound_selected/dedup-provenance/source-queue.json",
+      "queue_sha256": "83678f75d8fa67d15890be84bb052ace185dffcdf862c3fb96c5a4676971d5ce",
+      "pages": 1,
+      "listing_ids": 13,
+      "matching_title_ids": 0,
+      "end_reason": "visible_page_only_no_pagination",
+      "end_confirmed": false
+    },
+    {
+      "run_id": "remote_operators_wide_20261117_large",
+      "published_plan": "Data/avito_runs/remote_operators_wide_20261117_large_selected/dedup-provenance/source-plan.json",
+      "plan_sha256": "0eb9ba3b5639fcab3a25b08bc755e8510eb35987a3ce423abf3086c1d7d97b84",
+      "published_queue": "Data/avito_runs/remote_operators_wide_20261117_large_selected/dedup-provenance/source-queue.json",
+      "queue_sha256": "5019195e0a5846f9b1e5c9468fad7d414ccb86a37ab32b7d2c1717c944e639a6",
+      "pages": 3,
+      "listing_ids": 141,
+      "matching_title_ids": 0,
+      "end_reason": "confirmed_end",
+      "end_confirmed": true
+    },
+    {
+      "run_id": "remote_operators_wide_20261117_min50",
+      "published_plan": "Data/avito_runs/remote_operators_wide_20261117_min50_selected/dedup-provenance/source-plan.json",
+      "plan_sha256": "df5d46c1a8ba5cd08d7686162debb96c4b2593cd4930db087ae7086053b2bf03",
+      "published_queue": "Data/avito_runs/remote_operators_wide_20261117_min50_selected/dedup-provenance/source-queue.json",
+      "queue_sha256": "82b8e3c09a2fe8681e5a8f5faa25707f415d1ffc1a6659351d2c361b90bd1f06",
+      "pages": 30,
+      "listing_ids": 1117,
+      "matching_title_ids": 53,
+      "end_reason": "confirmed_end",
+      "end_confirmed": true
+    },
+    {
+      "run_id": "remote_operators_wide_20261117_month",
+      "published_plan": "Data/avito_runs/remote_operators_wide_20261117_month_selected/dedup-provenance/source-plan.json",
+      "plan_sha256": "334efde0e504f9878a186526424ed2a01d494e4e9972fc292cceb62d404638cf",
+      "published_queue": "Data/avito_runs/remote_operators_wide_20261117_month_selected/dedup-provenance/source-queue.json",
+      "queue_sha256": "cd9213bf89b31cd912607ab02d9ca06af13188522e91033862eaf6acd24d02a3",
+      "pages": 19,
+      "listing_ids": 837,
+      "matching_title_ids": 38,
+      "end_reason": "repeated_next_link",
+      "end_confirmed": false
+    },
+    {
+      "run_id": "remote_operators_wide_20261117_verified_cont",
+      "published_plan": "Data/avito_runs/remote_operators_wide_20261117_verified_selected/dedup-provenance/source-plan.json",
+      "plan_sha256": "cde687e26db12b66007b3e4ffe8ac278f7ec7a523d5f42e4cd4c2e70ac1c5482",
+      "published_queue": "Data/avito_runs/remote_operators_wide_20261117_verified_selected/dedup-provenance/source-queue.json",
+      "queue_sha256": "487f4de98a0504931461cf7f7d1f308f59cdd31937734739856e4448bf4182a1",
+      "pages": 30,
+      "listing_ids": 357,
+      "matching_title_ids": 14,
+      "end_reason": "confirmed_end",
+      "end_confirmed": true
+    }
+  ],
+  "published_five_routes_unique_ids": 1820,
+  "all_published_routes_unique_ids": 1829,
+  "title_matches_unique_ids": 55,
+  "previously_observed_ids_count": 33817,
+  "current_dataset_avito_ids_count": 32097,
+  "novel_card_ids": [
+    "8274081580"
+  ],
+  "candidates": [
+    {
+      "id": "2814737981",
+      "in_dataset": true,
+      "in_card_archive": true,
+      "listing_memberships": [
+        {
+          "source_run_id": "remote_operators_wide_20261117_min50",
+          "title": "Рекрутер фрилансер удаленно",
+          "listing_rank": 61
+        }
+      ]
+    },
+    {
+      "id": "4176708186",
+      "in_dataset": true,
+      "in_card_archive": true,
+      "listing_memberships": [
+        {
+          "source_run_id": "remote_operators_wide_20261117_base_cont",
+          "title": "Оператор call центра по подбору персонала",
+          "listing_rank": 879
+        },
+        {
+          "source_run_id": "remote_operators_wide_20261117_min50",
+          "title": "Оператор call центра по подбору персонала",
+          "listing_rank": 940
+        },
+        {
+          "source_run_id": "remote_operators_wide_20261117_month",
+          "title": "Оператор call центра по подбору персонала",
+          "listing_rank": 827
+        },
+        {
+          "source_run_id": "remote_operators_wide_20261117_verified_cont",
+          "title": "Оператор call центра по подбору персонала",
+          "listing_rank": 321
+        }
+      ]
+    },
+    {
+      "id": "7502088027",
+      "in_dataset": true,
+      "in_card_archive": true,
+      "listing_memberships": [
+        {
+          "source_run_id": "remote_operators_wide_20261117_base_cont",
+          "title": "Специалист по подбору товара",
+          "listing_rank": 626
+        },
+        {
+          "source_run_id": "remote_operators_wide_20261117_base",
+          "title": "Специалист по подбору товара",
+          "listing_rank": 626
+        },
+        {
+          "source_run_id": "remote_operators_wide_20261117_month",
+          "title": "Специалист по подбору товара",
+          "listing_rank": 532
+        },
+        {
+          "source_run_id": "remote_operators_wide_20261117_verified_cont",
+          "title": "Специалист по подбору товара",
+          "listing_rank": 290
+        }
+      ]
+    },
+    {
+      "id": "7628438699",
+      "in_dataset": true,
+      "in_card_archive": true,
+      "listing_memberships": [
+        {
+          "source_run_id": "remote_operators_wide_20261117_base_cont",
+          "title": "Рекрутер -Менеджер Подбор персонала Фриланс Онлайн",
+          "listing_rank": 490
+        },
+        {
+          "source_run_id": "remote_operators_wide_20261117_base",
+          "title": "Рекрутер -Менеджер Подбор персонала Фриланс Онлайн",
+          "listing_rank": 490
+        },
+        {
+          "source_run_id": "remote_operators_wide_20261117_min50",
+          "title": "Рекрутер -Менеджер Подбор персонала Фриланс Онлайн",
+          "listing_rank": 621
+        },
+        {
+          "source_run_id": "remote_operators_wide_20261117_month",
+          "title": "Рекрутер -Менеджер Подбор персонала Фриланс Онлайн",
+          "listing_rank": 464
+        },
+        {
+          "source_run_id": "remote_operators_wide_20261117_verified_cont",
+          "title": "Рекрутер -Менеджер Подбор персонала Фриланс Онлайн",
+          "listing_rank": 258
+        }
+      ]
+    },
+    {
+      "id": "7658300051",
+      "in_dataset": true,
+      "in_card_archive": true,
+      "listing_memberships": [
+        {
+          "source_run_id": "remote_operators_wide_20261117_base_cont",
+          "title": "Администратор удалённого офиса (подбор персонала)",
+          "listing_rank": 639
+        },
+        {
+          "source_run_id": "remote_operators_wide_20261117_base",
+          "title": "Администратор удалённого офиса (подбор персонала)",
+          "listing_rank": 639
+        },
+        {
+          "source_run_id": "remote_operators_wide_20261117_min50",
+          "title": "Администратор удалённого офиса (подбор персонала)",
+          "listing_rank": 664
+        },
+        {
+          "source_run_id": "remote_operators_wide_20261117_month",
+          "title": "Администратор удалённого офиса (подбор персонала)",
+          "listing_rank": 540
+        },
+        {
+          "source_run_id": "remote_operators_wide_20261117_verified_cont",
+          "title": "Администратор удалённого офиса (подбор персонала)",
+          "listing_rank": 285
+        }
+      ]
+    },
+    {
+      "id": "7658354068",
+      "in_dataset": true,
+      "in_card_archive": true,
+      "listing_memberships": [
+        {
+          "source_run_id": "remote_operators_wide_20261117_min50",
+          "title": "Менеджер-координатор по персоналу (Москва и мо)",
+          "listing_rank": 948
+        }
+      ]
+    },
+    {
+      "id": "7658493812",
+      "in_dataset": true,
+      "in_card_archive": true,
+      "listing_memberships": [
+        {
+          "source_run_id": "remote_operators_wide_20261117_min50",
+          "title": "Диспетчер заявок (подбор сотрудников) Москва и мо",
+          "listing_rank": 802
+        },
+        {
+          "source_run_id": "remote_operators_wide_20261117_month",
+          "title": "Диспетчер заявок (подбор сотрудников) Москва и мо",
+          "listing_rank": 793
+        },
+        {
+          "source_run_id": "remote_operators_wide_20261117_verified_cont",
+          "title": "Диспетчер заявок (подбор сотрудников) Москва и мо",
+          "listing_rank": 346
+        }
+      ]
+    },
+    {
+      "id": "7817098661",
+      "in_dataset": true,
+      "in_card_archive": true,
+      "listing_memberships": [
+        {
+          "source_run_id": "remote_operators_wide_20261117_min50",
+          "title": "Менеджер по персоналу Оплата каждые 10 дней",
+          "listing_rank": 378
+        },
+        {
+          "source_run_id": "remote_operators_wide_20261117_month",
+          "title": "Менеджер по персоналу Оплата каждые 10 дней",
+          "listing_rank": 269
+        },
+        {
+          "source_run_id": "remote_operators_wide_20261117_verified_cont",
+          "title": "Менеджер по персоналу Оплата каждые 10 дней",
+          "listing_rank": 118
+        }
+      ]
+    },
+    {
+      "id": "7893991815",
+      "in_dataset": true,
+      "in_card_archive": true,
+      "listing_memberships": [
+        {
+          "source_run_id": "remote_operators_wide_20261117_base_cont",
+          "title": "Рекрутер удаленно с обучением",
+          "listing_rank": 817
+        },
+        {
+          "source_run_id": "remote_operators_wide_20261117_base",
+          "title": "Рекрутер удаленно с обучением",
+          "listing_rank": 817
+        },
+        {
+          "source_run_id": "remote_operators_wide_20261117_min50",
+          "title": "Рекрутер удаленно с обучением",
+          "listing_rank": 894
+        },
+        {
+          "source_run_id": "remote_operators_wide_20261117_month",
+          "title": "Рекрутер удаленно с обучением",
+          "listing_rank": 669
+        },
+        {
+          "source_run_id": "remote_operators_wide_20261117_verified_cont",
+          "title": "Рекрутер удаленно с обучением",
+          "listing_rank": 340
+        }
+      ]
+    },
+    {
+      "id": "7910066667",
+      "in_dataset": true,
+      "in_card_archive": true,
+      "listing_memberships": [
+        {
+          "source_run_id": "remote_operators_wide_20261117_base_cont",
+          "title": "Рекрутер сво удалённо (Приём инностранцев)",
+          "listing_rank": 154
+        },
+        {
+          "source_run_id": "remote_operators_wide_20261117_base",
+          "title": "Рекрутер сво удалённо (Приём инностранцев)",
+          "listing_rank": 154
+        },
+        {
+          "source_run_id": "remote_operators_wide_20261117_min50",
+          "title": "Рекрутер сво удалённо (Приём инностранцев)",
+          "listing_rank": 58
+        },
+        {
+          "source_run_id": "remote_operators_wide_20261117_month",
+          "title": "Рекрутер сво удалённо (Приём инностранцев)",
+          "listing_rank": 117
+        },
+        {
+          "source_run_id": "remote_operators_wide_20261117_verified_cont",
+          "title": "Рекрутер сво удалённо (Приём инностранцев)",
+          "listing_rank": 43
+        }
+      ]
+    },
+    {
+      "id": "8100879538",
+      "in_dataset": false,
+      "in_card_archive": true,
+      "listing_memberships": [
+        {
+          "source_run_id": "remote_operators_wide_20261117_base_cont",
+          "title": "Менеджер по подбору персонала без опыта",
+          "listing_rank": 81
+        },
+        {
+          "source_run_id": "remote_operators_wide_20261117_base",
+          "title": "Менеджер по подбору персонала без опыта",
+          "listing_rank": 81
+        },
+        {
+          "source_run_id": "remote_operators_wide_20261117_min50",
+          "title": "Менеджер по подбору персонала без опыта",
+          "listing_rank": 102
+        },
+        {
+          "source_run_id": "remote_operators_wide_20261117_month",
+          "title": "Менеджер по подбору персонала без опыта",
+          "listing_rank": 81
+        }
+      ]
+    },
+    {
+      "id": "8247568903",
+      "in_dataset": false,
+      "in_card_archive": true,
+      "listing_memberships": [
+        {
+          "source_run_id": "remote_operators_wide_20261117_base_cont",
+          "title": "Подбор персонала, менеджер удаленно",
+          "listing_rank": 18
+        },
+        {
+          "source_run_id": "remote_operators_wide_20261117_base",
+          "title": "Подбор персонала, менеджер удаленно",
+          "listing_rank": 18
+        },
+        {
+          "source_run_id": "remote_operators_wide_20261117_min50",
+          "title": "Подбор персонала, менеджер удаленно",
+          "listing_rank": 5
+        },
+        {
+          "source_run_id": "remote_operators_wide_20261117_month",
+          "title": "Подбор персонала, менеджер удаленно",
+          "listing_rank": 10
+        },
+        {
+          "source_run_id": "remote_operators_wide_20261117_verified_cont",
+          "title": "Подбор персонала, менеджер удаленно",
+          "listing_rank": 7
+        }
+      ]
+    },
+    {
+      "id": "8252340736",
+      "in_dataset": false,
+      "in_card_archive": true,
+      "listing_memberships": [
+        {
+          "source_run_id": "remote_operators_wide_20261117_min50",
+          "title": "Специалист по подбору персонала",
+          "listing_rank": 678
+        },
+        {
+          "source_run_id": "remote_operators_wide_20261117_month",
+          "title": "Специалист по подбору персонала",
+          "listing_rank": 575
+        }
+      ]
+    },
+    {
+      "id": "8274081580",
+      "in_dataset": false,
+      "in_card_archive": false,
+      "listing_memberships": [
+        {
+          "source_run_id": "remote_operators_wide_20261117_min50",
+          "title": "Рекрутер удаленно массовый подбор",
+          "listing_rank": 7
+        },
+        {
+          "source_run_id": "remote_operators_wide_20261117_month",
+          "title": "Рекрутер удаленно массовый подбор",
+          "listing_rank": 60
+        }
+      ]
+    },
+    {
+      "id": "8289513874",
+      "in_dataset": true,
+      "in_card_archive": true,
+      "listing_memberships": [
+        {
+          "source_run_id": "remote_operators_wide_20261117_base_cont",
+          "title": "Оператор callцентра (подбор персонала, удаленно)",
+          "listing_rank": 126
+        },
+        {
+          "source_run_id": "remote_operators_wide_20261117_base",
+          "title": "Оператор callцентра (подбор персонала, удаленно)",
+          "listing_rank": 126
+        },
+        {
+          "source_run_id": "remote_operators_wide_20261117_min50",
+          "title": "Оператор callцентра (подбор персонала, удаленно)",
+          "listing_rank": 173
+        },
+        {
+          "source_run_id": "remote_operators_wide_20261117_month",
+          "title": "Оператор callцентра (подбор персонала, удаленно)",
+          "listing_rank": 110
+        },
+        {
+          "source_run_id": "remote_operators_wide_20261117_verified_cont",
+          "title": "Оператор callцентра (подбор персонала, удаленно)",
+          "listing_rank": 49
+        }
+      ]
+    },
+    {
+      "id": "8305485244",
+      "in_dataset": true,
+      "in_card_archive": true,
+      "listing_memberships": [
+        {
+          "source_run_id": "remote_operators_wide_20261117_base_cont",
+          "title": "Рекрутер удаленно",
+          "listing_rank": 834
+        },
+        {
+          "source_run_id": "remote_operators_wide_20261117_base",
+          "title": "Рекрутер удаленно",
+          "listing_rank": 834
+        },
+        {
+          "source_run_id": "remote_operators_wide_20261117_min50",
+          "title": "Рекрутер удаленно",
+          "listing_rank": 765
+        },
+        {
+          "source_run_id": "remote_operators_wide_20261117_month",
+          "title": "Рекрутер удаленно",
+          "listing_rank": 682
+        }
+      ]
+    },
+    {
+      "id": "8322839211",
+      "in_dataset": true,
+      "in_card_archive": true,
+      "listing_memberships": [
+        {
+          "source_run_id": "remote_operators_wide_20261117_base_cont",
+          "title": "Менеджер по подбору персонала (удаленно)",
+          "listing_rank": 712
+        },
+        {
+          "source_run_id": "remote_operators_wide_20261117_base",
+          "title": "Менеджер по подбору персонала (удаленно)",
+          "listing_rank": 712
+        },
+        {
+          "source_run_id": "remote_operators_wide_20261117_min50",
+          "title": "Менеджер по подбору персонала (удаленно)",
+          "listing_rank": 695
+        },
+        {
+          "source_run_id": "remote_operators_wide_20261117_month",
+          "title": "Менеджер по подбору персонала (удаленно)",
+          "listing_rank": 647
+        },
+        {
+          "source_run_id": "remote_operators_wide_20261117_verified_cont",
+          "title": "Менеджер по подбору персонала (удаленно)",
+          "listing_rank": 281
+        }
+      ]
+    },
+    {
+      "id": "8325581465",
+      "in_dataset": true,
+      "in_card_archive": true,
+      "listing_memberships": [
+        {
+          "source_run_id": "remote_operators_wide_20261117_base_cont",
+          "title": "Менеджер по подбору туров",
+          "listing_rank": 577
+        },
+        {
+          "source_run_id": "remote_operators_wide_20261117_base",
+          "title": "Менеджер по подбору туров",
+          "listing_rank": 577
+        },
+        {
+          "source_run_id": "remote_operators_wide_20261117_min50",
+          "title": "Менеджер по подбору туров",
+          "listing_rank": 636
+        },
+        {
+          "source_run_id": "remote_operators_wide_20261117_month",
+          "title": "Менеджер по подбору туров",
+          "listing_rank": 491
+        }
+      ]
+    },
+    {
+      "id": "8336898855",
+      "in_dataset": false,
+      "in_card_archive": true,
+      "listing_memberships": [
+        {
+          "source_run_id": "remote_operators_wide_20261117_min50",
+          "title": "Франчайзи-партнер в HR-агентство",
+          "listing_rank": 495
+        },
+        {
+          "source_run_id": "remote_operators_wide_20261117_month",
+          "title": "Франчайзи-партнер в HR-агентство",
+          "listing_rank": 310
+        }
+      ]
+    },
+    {
+      "id": "8340573740",
+      "in_dataset": true,
+      "in_card_archive": true,
+      "listing_memberships": [
+        {
+          "source_run_id": "remote_operators_wide_20261117_base_cont",
+          "title": "Менеджер по работе с кандидатами / рекрутер",
+          "listing_rank": 824
+        },
+        {
+          "source_run_id": "remote_operators_wide_20261117_base",
+          "title": "Менеджер по работе с кандидатами / рекрутер",
+          "listing_rank": 824
+        },
+        {
+          "source_run_id": "remote_operators_wide_20261117_min50",
+          "title": "Менеджер по работе с кандидатами / рекрутер",
+          "listing_rank": 857
+        },
+        {
+          "source_run_id": "remote_operators_wide_20261117_month",
+          "title": "Менеджер по работе с кандидатами / рекрутер",
+          "listing_rank": 671
+        }
+      ]
+    },
+    {
+      "id": "8346166093",
+      "in_dataset": true,
+      "in_card_archive": true,
+      "listing_memberships": [
+        {
+          "source_run_id": "remote_operators_wide_20261117_base_cont",
+          "title": "Рекрутер сво удаленно",
+          "listing_rank": 61
+        },
+        {
+          "source_run_id": "remote_operators_wide_20261117_base",
+          "title": "Рекрутер сво удаленно",
+          "listing_rank": 61
+        },
+        {
+          "source_run_id": "remote_operators_wide_20261117_min50",
+          "title": "Рекрутер сво удаленно",
+          "listing_rank": 107
+        },
+        {
+          "source_run_id": "remote_operators_wide_20261117_month",
+          "title": "Рекрутер сво удаленно",
+          "listing_rank": 56
+        }
+      ]
+    },
+    {
+      "id": "8348734395",
+      "in_dataset": true,
+      "in_card_archive": true,
+      "listing_memberships": [
+        {
+          "source_run_id": "remote_operators_wide_20261117_min50",
+          "title": "Менеджер по подбору персонала удаленно с опытом",
+          "listing_rank": 2
+        },
+        {
+          "source_run_id": "remote_operators_wide_20261117_month",
+          "title": "Менеджер по подбору персонала удаленно с опытом",
+          "listing_rank": 6
+        },
+        {
+          "source_run_id": "remote_operators_wide_20261117_verified_cont",
+          "title": "Менеджер по подбору персонала удаленно с опытом",
+          "listing_rank": 2
+        }
+      ]
+    },
+    {
+      "id": "8370693163",
+      "in_dataset": true,
+      "in_card_archive": true,
+      "listing_memberships": [
+        {
+          "source_run_id": "remote_operators_wide_20261117_min50",
+          "title": "HR-партнер / Привлечение кандидатов (CPA)",
+          "listing_rank": 471
+        }
+      ]
+    },
+    {
+      "id": "8379205574",
+      "in_dataset": false,
+      "in_card_archive": true,
+      "listing_memberships": [
+        {
+          "source_run_id": "remote_operators_wide_20261117_min50",
+          "title": "Рекрутер фрилансер",
+          "listing_rank": 412
+        }
+      ]
+    },
+    {
+      "id": "8379594851",
+      "in_dataset": true,
+      "in_card_archive": true,
+      "listing_memberships": [
+        {
+          "source_run_id": "remote_operators_wide_20261117_base_cont",
+          "title": "Фрилансер-рекрутер (массовый подбор персонала)",
+          "listing_rank": 8
+        },
+        {
+          "source_run_id": "remote_operators_wide_20261117_base",
+          "title": "Фрилансер-рекрутер (массовый подбор персонала)",
+          "listing_rank": 8
+        },
+        {
+          "source_run_id": "remote_operators_wide_20261117_min50",
+          "title": "Фрилансер-рекрутер (массовый подбор персонала)",
+          "listing_rank": 13
+        },
+        {
+          "source_run_id": "remote_operators_wide_20261117_month",
+          "title": "Фрилансер-рекрутер (массовый подбор персонала)",
+          "listing_rank": 13
+        },
+        {
+          "source_run_id": "remote_operators_wide_20261117_verified_cont",
+          "title": "Фрилансер-рекрутер (массовый подбор персонала)",
+          "listing_rank": 12
+        }
+      ]
+    },
+    {
+      "id": "8380185275",
+      "in_dataset": false,
+      "in_card_archive": true,
+      "listing_memberships": [
+        {
+          "source_run_id": "remote_operators_wide_20261117_base_cont",
+          "title": "Менеджер по подбору персонала удаленно",
+          "listing_rank": 193
+        },
+        {
+          "source_run_id": "remote_operators_wide_20261117_base",
+          "title": "Менеджер по подбору персонала удаленно",
+          "listing_rank": 193
+        },
+        {
+          "source_run_id": "remote_operators_wide_20261117_min50",
+          "title": "Менеджер по подбору персонала удаленно",
+          "listing_rank": 209
+        },
+        {
+          "source_run_id": "remote_operators_wide_20261117_month",
+          "title": "Менеджер по подбору персонала удаленно",
+          "listing_rank": 175
+        }
+      ]
+    },
+    {
+      "id": "8380275488",
+      "in_dataset": true,
+      "in_card_archive": true,
+      "listing_memberships": [
+        {
+          "source_run_id": "remote_operators_wide_20261117_min50",
+          "title": "Менеджер по подбору персонала / HR-менеджер",
+          "listing_rank": 624
+        },
+        {
+          "source_run_id": "remote_operators_wide_20261117_month",
+          "title": "Менеджер по подбору персонала / HR-менеджер",
+          "listing_rank": 547
+        }
+      ]
+    },
+    {
+      "id": "8380661506",
+      "in_dataset": false,
+      "in_card_archive": true,
+      "listing_memberships": [
+        {
+          "source_run_id": "remote_operators_wide_20261117_base_cont",
+          "title": "Менеджер по подбору персонала / HR-менеджер",
+          "listing_rank": 523
+        },
+        {
+          "source_run_id": "remote_operators_wide_20261117_base",
+          "title": "Менеджер по подбору персонала / HR-менеджер",
+          "listing_rank": 523
+        },
+        {
+          "source_run_id": "remote_operators_wide_20261117_min50",
+          "title": "Менеджер по подбору персонала / HR-менеджер",
+          "listing_rank": 619
+        },
+        {
+          "source_run_id": "remote_operators_wide_20261117_month",
+          "title": "Менеджер по подбору персонала / HR-менеджер",
+          "listing_rank": 450
+        }
+      ]
+    },
+    {
+      "id": "8396713895",
+      "in_dataset": false,
+      "in_card_archive": true,
+      "listing_memberships": [
+        {
+          "source_run_id": "remote_operators_wide_20261117_base_cont",
+          "title": "Менеджер по подбору персонала, рекрутер",
+          "listing_rank": 227
+        },
+        {
+          "source_run_id": "remote_operators_wide_20261117_base",
+          "title": "Менеджер по подбору персонала, рекрутер",
+          "listing_rank": 227
+        },
+        {
+          "source_run_id": "remote_operators_wide_20261117_min50",
+          "title": "Менеджер по подбору персонала, рекрутер",
+          "listing_rank": 309
+        },
+        {
+          "source_run_id": "remote_operators_wide_20261117_month",
+          "title": "Менеджер по подбору персонала, рекрутер",
+          "listing_rank": 218
+        }
+      ]
+    },
+    {
+      "id": "8400575247",
+      "in_dataset": true,
+      "in_card_archive": true,
+      "listing_memberships": [
+        {
+          "source_run_id": "remote_operators_wide_20261117_min50",
+          "title": "Рекрутер к партнёру сервиса \"Яндекс.Маркет\"",
+          "listing_rank": 210
+        }
+      ]
+    },
+    {
+      "id": "8407688480",
+      "in_dataset": true,
+      "in_card_archive": true,
+      "listing_memberships": [
+        {
+          "source_run_id": "remote_operators_wide_20261117_min50",
+          "title": "Менеджер по подбору персонала HR Менеджер Рекрутер",
+          "listing_rank": 242
+        }
+      ]
+    },
+    {
+      "id": "8419195751",
+      "in_dataset": false,
+      "in_card_archive": true,
+      "listing_memberships": [
+        {
+          "source_run_id": "remote_operators_wide_20261117_base_cont",
+          "title": "Менеджер по подбору персонала удаленно",
+          "listing_rank": 283
+        },
+        {
+          "source_run_id": "remote_operators_wide_20261117_base",
+          "title": "Менеджер по подбору персонала удаленно",
+          "listing_rank": 283
+        },
+        {
+          "source_run_id": "remote_operators_wide_20261117_min50",
+          "title": "Менеджер по подбору персонала удаленно",
+          "listing_rank": 349
+        },
+        {
+          "source_run_id": "remote_operators_wide_20261117_month",
+          "title": "Менеджер по подбору персонала удаленно",
+          "listing_rank": 266
+        }
+      ]
+    },
+    {
+      "id": "8422826611",
+      "in_dataset": true,
+      "in_card_archive": true,
+      "listing_memberships": [
+        {
+          "source_run_id": "remote_operators_wide_20261117_base_cont",
+          "title": "Менеджер по подбору персонала/HR-менеджер",
+          "listing_rank": 766
+        },
+        {
+          "source_run_id": "remote_operators_wide_20261117_base",
+          "title": "Менеджер по подбору персонала/HR-менеджер",
+          "listing_rank": 766
+        },
+        {
+          "source_run_id": "remote_operators_wide_20261117_min50",
+          "title": "Менеджер по подбору персонала/HR-менеджер",
+          "listing_rank": 901
+        },
+        {
+          "source_run_id": "remote_operators_wide_20261117_month",
+          "title": "Менеджер по подбору персонала/HR-менеджер",
+          "listing_rank": 696
+        }
+      ]
+    },
+    {
+      "id": "8435244896",
+      "in_dataset": true,
+      "in_card_archive": true,
+      "listing_memberships": [
+        {
+          "source_run_id": "remote_operators_wide_20261117_min50",
+          "title": "Рекрутер по привлечению водителй такси",
+          "listing_rank": 1037
+        }
+      ]
+    },
+    {
+      "id": "8440017252",
+      "in_dataset": true,
+      "in_card_archive": true,
+      "listing_memberships": [
+        {
+          "source_run_id": "remote_operators_wide_20261117_min50",
+          "title": "Рекрутер на массовый подбор удалённо",
+          "listing_rank": 581
+        },
+        {
+          "source_run_id": "remote_operators_wide_20261117_month",
+          "title": "Рекрутер на массовый подбор удалённо",
+          "listing_rank": 416
+        }
+      ]
+    },
+    {
+      "id": "8440114199",
+      "in_dataset": false,
+      "in_card_archive": true,
+      "listing_memberships": [
+        {
+          "source_run_id": "remote_operators_wide_20261117_min50",
+          "title": "Рекрутер удаленно",
+          "listing_rank": 53
+        },
+        {
+          "source_run_id": "remote_operators_wide_20261117_verified_cont",
+          "title": "Рекрутер удаленно",
+          "listing_rank": 36
+        }
+      ]
+    },
+    {
+      "id": "8440539836",
+      "in_dataset": true,
+      "in_card_archive": true,
+      "listing_memberships": [
+        {
+          "source_run_id": "remote_operators_wide_20261117_min50",
+          "title": "Менеджер по подбору персонала",
+          "listing_rank": 722
+        }
+      ]
+    },
+    {
+      "id": "8452485908",
+      "in_dataset": false,
+      "in_card_archive": true,
+      "listing_memberships": [
+        {
+          "source_run_id": "remote_operators_wide_20261117_base_cont",
+          "title": "Специалист по подбору персонала",
+          "listing_rank": 519
+        },
+        {
+          "source_run_id": "remote_operators_wide_20261117_base",
+          "title": "Специалист по подбору персонала",
+          "listing_rank": 519
+        },
+        {
+          "source_run_id": "remote_operators_wide_20261117_min50",
+          "title": "Специалист по подбору персонала",
+          "listing_rank": 634
+        },
+        {
+          "source_run_id": "remote_operators_wide_20261117_month",
+          "title": "Специалист по подбору персонала",
+          "listing_rank": 448
+        }
+      ]
+    },
+    {
+      "id": "8452826450",
+      "in_dataset": false,
+      "in_card_archive": true,
+      "listing_memberships": [
+        {
+          "source_run_id": "remote_operators_wide_20261117_base_cont",
+          "title": "Рекрутер удаленно",
+          "listing_rank": 548
+        },
+        {
+          "source_run_id": "remote_operators_wide_20261117_base",
+          "title": "Рекрутер удаленно",
+          "listing_rank": 548
+        },
+        {
+          "source_run_id": "remote_operators_wide_20261117_min50",
+          "title": "Рекрутер удаленно",
+          "listing_rank": 665
+        }
+      ]
+    },
+    {
+      "id": "8454352351",
+      "in_dataset": false,
+      "in_card_archive": true,
+      "listing_memberships": [
+        {
+          "source_run_id": "remote_operators_wide_20261117_base_cont",
+          "title": "HR/Менеджер по подбору персонала (удалённо)",
+          "listing_rank": 557
+        },
+        {
+          "source_run_id": "remote_operators_wide_20261117_base",
+          "title": "HR/Менеджер по подбору персонала (удалённо)",
+          "listing_rank": 557
+        },
+        {
+          "source_run_id": "remote_operators_wide_20261117_month",
+          "title": "HR/Менеджер по подбору персонала (удалённо)",
+          "listing_rank": 541
+        }
+      ]
+    },
+    {
+      "id": "8454833371",
+      "in_dataset": false,
+      "in_card_archive": true,
+      "listing_memberships": [
+        {
+          "source_run_id": "remote_operators_wide_20261117_base_cont",
+          "title": "Менеджер по подбору персонала / HR- менеджер",
+          "listing_rank": 487
+        },
+        {
+          "source_run_id": "remote_operators_wide_20261117_base",
+          "title": "Менеджер по подбору персонала / HR- менеджер",
+          "listing_rank": 487
+        },
+        {
+          "source_run_id": "remote_operators_wide_20261117_min50",
+          "title": "Менеджер по подбору персонала / HR- менеджер",
+          "listing_rank": 608
+        },
+        {
+          "source_run_id": "remote_operators_wide_20261117_month",
+          "title": "Менеджер по подбору персонала / HR- менеджер",
+          "listing_rank": 454
+        }
+      ]
+    },
+    {
+      "id": "8455539433",
+      "in_dataset": true,
+      "in_card_archive": true,
+      "listing_memberships": [
+        {
+          "source_run_id": "remote_operators_wide_20261117_min50",
+          "title": "Рекрутер по привлечению водителй такси",
+          "listing_rank": 206
+        },
+        {
+          "source_run_id": "remote_operators_wide_20261117_month",
+          "title": "Рекрутер по привлечению водителй такси",
+          "listing_rank": 141
+        }
+      ]
+    },
+    {
+      "id": "8458218684",
+      "in_dataset": false,
+      "in_card_archive": true,
+      "listing_memberships": [
+        {
+          "source_run_id": "remote_operators_wide_20261117_min50",
+          "title": "Рекрутер удаленно",
+          "listing_rank": 3
+        }
+      ]
+    },
+    {
+      "id": "8477367247",
+      "in_dataset": true,
+      "in_card_archive": true,
+      "listing_memberships": [
+        {
+          "source_run_id": "remote_operators_wide_20261117_min50",
+          "title": "Ассистент отдела подбора персонала",
+          "listing_rank": 572
+        },
+        {
+          "source_run_id": "remote_operators_wide_20261117_month",
+          "title": "Ассистент отдела подбора персонала",
+          "listing_rank": 388
+        }
+      ]
+    },
+    {
+      "id": "8482028210",
+      "in_dataset": true,
+      "in_card_archive": true,
+      "listing_memberships": [
+        {
+          "source_run_id": "remote_operators_wide_20261117_base_cont",
+          "title": "Подбор персонала",
+          "listing_rank": 668
+        },
+        {
+          "source_run_id": "remote_operators_wide_20261117_base",
+          "title": "Подбор персонала",
+          "listing_rank": 668
+        },
+        {
+          "source_run_id": "remote_operators_wide_20261117_min50",
+          "title": "Подбор персонала",
+          "listing_rank": 706
+        }
+      ]
+    },
+    {
+      "id": "8490441800",
+      "in_dataset": true,
+      "in_card_archive": true,
+      "listing_memberships": [
+        {
+          "source_run_id": "remote_operators_wide_20261117_base_cont",
+          "title": "Менеджер по подбору персонала",
+          "listing_rank": 725
+        },
+        {
+          "source_run_id": "remote_operators_wide_20261117_base",
+          "title": "Менеджер по подбору персонала",
+          "listing_rank": 725
+        },
+        {
+          "source_run_id": "remote_operators_wide_20261117_min50",
+          "title": "Менеджер по подбору персонала",
+          "listing_rank": 729
+        },
+        {
+          "source_run_id": "remote_operators_wide_20261117_month",
+          "title": "Менеджер по подбору персонала",
+          "listing_rank": 592
+        }
+      ]
+    },
+    {
+      "id": "8503007923",
+      "in_dataset": true,
+      "in_card_archive": true,
+      "listing_memberships": [
+        {
+          "source_run_id": "remote_operators_wide_20261117_base_cont",
+          "title": "Менеджер по подбору персонала (удаленно)",
+          "listing_rank": 422
+        },
+        {
+          "source_run_id": "remote_operators_wide_20261117_base",
+          "title": "Менеджер по подбору персонала (удаленно)",
+          "listing_rank": 422
+        },
+        {
+          "source_run_id": "remote_operators_wide_20261117_min50",
+          "title": "Менеджер по подбору персонала (удаленно)",
+          "listing_rank": 576
+        }
+      ]
+    },
+    {
+      "id": "8515067693",
+      "in_dataset": false,
+      "in_card_archive": true,
+      "listing_memberships": [
+        {
+          "source_run_id": "remote_operators_wide_20261117_base_cont",
+          "title": "Рекрутер сво / поиск персонала",
+          "listing_rank": 21
+        },
+        {
+          "source_run_id": "remote_operators_wide_20261117_base",
+          "title": "Рекрутер сво / поиск персонала",
+          "listing_rank": 21
+        },
+        {
+          "source_run_id": "remote_operators_wide_20261117_min50",
+          "title": "Рекрутер сво / поиск персонала",
+          "listing_rank": 6
+        }
+      ]
+    },
+    {
+      "id": "8517465005",
+      "in_dataset": true,
+      "in_card_archive": true,
+      "listing_memberships": [
+        {
+          "source_run_id": "remote_operators_wide_20261117_base_cont",
+          "title": "Менеджер по подбору персонала (удалённо)",
+          "listing_rank": 637
+        },
+        {
+          "source_run_id": "remote_operators_wide_20261117_base",
+          "title": "Менеджер по подбору персонала (удалённо)",
+          "listing_rank": 637
+        },
+        {
+          "source_run_id": "remote_operators_wide_20261117_min50",
+          "title": "Менеджер по подбору персонала (удалённо)",
+          "listing_rank": 630
+        },
+        {
+          "source_run_id": "remote_operators_wide_20261117_month",
+          "title": "Менеджер по подбору персонала (удалённо)",
+          "listing_rank": 537
+        }
+      ]
+    },
+    {
+      "id": "8523095189",
+      "in_dataset": false,
+      "in_card_archive": true,
+      "listing_memberships": [
+        {
+          "source_run_id": "remote_operators_wide_20261117_min50",
+          "title": "Рекрутер со знанием английского языка",
+          "listing_rank": 44
+        }
+      ]
+    },
+    {
+      "id": "8549182308",
+      "in_dataset": false,
+      "in_card_archive": true,
+      "listing_memberships": [
+        {
+          "source_run_id": "remote_operators_wide_20261117_base_cont",
+          "title": "Рекрутер без опыта (удаленно)",
+          "listing_rank": 249
+        },
+        {
+          "source_run_id": "remote_operators_wide_20261117_base",
+          "title": "Рекрутер без опыта (удаленно)",
+          "listing_rank": 249
+        },
+        {
+          "source_run_id": "remote_operators_wide_20261117_min50",
+          "title": "Рекрутер без опыта (удаленно)",
+          "listing_rank": 352
+        },
+        {
+          "source_run_id": "remote_operators_wide_20261117_month",
+          "title": "Рекрутер без опыта (удаленно)",
+          "listing_rank": 245
+        }
+      ]
+    },
+    {
+      "id": "8552836936",
+      "in_dataset": true,
+      "in_card_archive": true,
+      "listing_memberships": [
+        {
+          "source_run_id": "remote_operators_wide_20261117_base_cont",
+          "title": "Рекрутер на удалёнке",
+          "listing_rank": 768
+        },
+        {
+          "source_run_id": "remote_operators_wide_20261117_base",
+          "title": "Рекрутер на удалёнке",
+          "listing_rank": 768
+        },
+        {
+          "source_run_id": "remote_operators_wide_20261117_min50",
+          "title": "Рекрутер на удалёнке",
+          "listing_rank": 832
+        },
+        {
+          "source_run_id": "remote_operators_wide_20261117_month",
+          "title": "Рекрутер на удалёнке",
+          "listing_rank": 628
+        }
+      ]
+    },
+    {
+      "id": "8553803352",
+      "in_dataset": false,
+      "in_card_archive": true,
+      "listing_memberships": [
+        {
+          "source_run_id": "remote_operators_wide_20261117_min50",
+          "title": "Рекрутер в команду",
+          "listing_rank": 101
+        }
+      ]
+    },
+    {
+      "id": "8588815141",
+      "in_dataset": true,
+      "in_card_archive": true,
+      "listing_memberships": [
+        {
+          "source_run_id": "remote_operators_wide_20261117_base_cont",
+          "title": "Менеджер по подбору персонала/HR-менеджер",
+          "listing_rank": 636
+        },
+        {
+          "source_run_id": "remote_operators_wide_20261117_base",
+          "title": "Менеджер по подбору персонала/HR-менеджер",
+          "listing_rank": 636
+        },
+        {
+          "source_run_id": "remote_operators_wide_20261117_min50",
+          "title": "Менеджер по подбору персонала/HR-менеджер",
+          "listing_rank": 652
+        },
+        {
+          "source_run_id": "remote_operators_wide_20261117_month",
+          "title": "Менеджер по подбору персонала/HR-менеджер",
+          "listing_rank": 534
+        }
+      ]
+    },
+    {
+      "id": "8589485419",
+      "in_dataset": false,
+      "in_card_archive": true,
+      "listing_memberships": [
+        {
+          "source_run_id": "remote_operators_wide_20261117_base_cont",
+          "title": "Онлайн-ассистент кадрового агентства",
+          "listing_rank": 395
+        },
+        {
+          "source_run_id": "remote_operators_wide_20261117_base",
+          "title": "Онлайн-ассистент кадрового агентства",
+          "listing_rank": 395
+        },
+        {
+          "source_run_id": "remote_operators_wide_20261117_min50",
+          "title": "Онлайн-ассистент кадрового агентства",
+          "listing_rank": 588
+        }
+      ]
+    }
+  ],
+  "coverage_limit": "В описании PR #175 сообщены 30 страниц и 890 ID для month continuation. В опубликованном дереве main доступны страницы 1–19, 837 ID; Next на странице 19 повторяет href и не отключён. 1 827 уникальных ID пяти полных выдач остаются заявленным охватом PR, а не воспроизведённой по опубликованным страницам цифрой.",
+  "scope_note": "«Управляющий персоналом пвз» — неоднозначное управление ПВЗ без прямого указания на подбор. Остальные неоднозначные совпадения по частям слов исключены по заголовку."
+}
