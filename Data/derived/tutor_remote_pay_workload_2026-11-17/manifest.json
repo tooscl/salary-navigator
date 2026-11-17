@@ -1,0 +1,42 @@
+{
+  "input_path": "Data/dataset/vacancies.csv",
+  "input_sha256": "a56e81b2b7f524da57ca93ce4c6fe984dae950d67ec98b9f37429e5fde76983e",
+  "input_commit": "b715458207a252596ec43907fa76253bf5c78df1",
+  "stages": {
+    "dataset_rebuild": "utils/build_dataset.py (deterministic Python)",
+    "feature_extraction": "Codex lead with local Python patterns and source-evidence review"
+  },
+  "input_rebuild": "python3 utils/build_dataset.py",
+  "scope": {
+    "work_format": "Удалённо",
+    "role": "Репетитор / преподаватель",
+    "title_matches": "репетитор|преподавател|учител|педагог",
+    "additional_teaching_ids_confirmed_by_duties": [
+      "8228202226",
+      "8360046249"
+    ],
+    "excluded_sales_or_recruiting_ids": [
+      "8366082332",
+      "8379379813",
+      "8480333619"
+    ]
+  },
+  "units": {
+    "rate": "hour, lesson, duration (original number of minutes in rate_duration_minutes)",
+    "workload": "hour or lesson, with the period as stated. The context column distinguishes wording about examples and availability from stated workload and structured work-hour options.",
+    "missing": "1 when no explicit fact was extracted for that vacancy and feature; blank feature columns on the other feature's rows are structural",
+    "bounds": "Open ends are blank. Exact values are repeated in both bounds. Listed options use the original field with empty bounds."
+  },
+  "rows": "Rates and workloads are independent observations. Example or availability language remains in evidence and should not be interpreted as a guarantee. A vacancy may have multiple rate or workload rows.",
+  "output_path": "Data/derived/tutor_remote_pay_workload_2026-11-17/features.csv",
+  "output_sha256": "744cd6e545a0008c4ebdb8a2ead137e2cc9ec65ad227f262c37145c2094550b5",
+  "counts": {
+    "ids": 196,
+    "rows": 554,
+    "rate_ids": 118,
+    "workload_ids": 129,
+    "description_workload_ids": 72,
+    "structured_or_non_example_workload_ids": 128,
+    "both_ids": 77
+  }
+}
