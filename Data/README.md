@@ -476,3 +476,19 @@ avito_runs/<название_сбора>/
 - [hr_quota88_20261117_07_child](avito_runs/hr_quota88_20261117_07_child/exports/vacancy_observations.csv): 2 наблюдений, 0 принятых.
 
 - [archive-hr-quota88-20261117](avito_runs/archive-hr-quota88-20261117/observations.csv): архив 8 наблюдений, 8 уникальных ID, 0 принятых; [охват и ограничения](avito_runs/archive-hr-quota88-20261117/coverage.md), [паспорт](avito_runs/archive-hr-quota88-20261117/manifest.json).
+
+- [marketing_followup_20261117_pr175](avito_runs/marketing_followup_20261117_pr175/exports/vacancy_observations.csv): 1 наблюдений, 0 принятых.
+
+- [marketing_followup_20261117_pr176](avito_runs/marketing_followup_20261117_pr176/exports/vacancy_observations.csv): 1 наблюдений, 0 принятых.
+
+- [marketing_followup_20261117_pr175_synonyms](avito_runs/marketing_followup_20261117_pr175_synonyms/exports/vacancy_observations.csv): 6 наблюдений, 0 принятых.
+
+- [marketing_followup_20261117_pr176_synonyms](avito_runs/marketing_followup_20261117_pr176_synonyms/exports/vacancy_observations.csv): 1 наблюдений, 0 принятых.
+
+- [marketing_followup_20261117_internet_child](avito_runs/marketing_followup_20261117_internet_child/exports/vacancy_observations.csv): 3 наблюдений, 0 принятых.
+
+- [marketing_followup_20261117_target_child](avito_runs/marketing_followup_20261117_target_child/exports/vacancy_observations.csv): 2 наблюдений, 0 принятых.
+
+- [marketing_followup_20261117_ads_child](avito_runs/marketing_followup_20261117_ads_child/exports/vacancy_observations.csv): 4 наблюдений, 0 принятых.
+
+- [Архив «Маркетолог / SMM-менеджер»](avito_runs/marketing_followup_20261117_observations/observations.csv) объединяет 142 наблюдения по 141 ID. В доборе 18 прочитанных карточек и одна незавершённая попытка. [Квота](avito_runs/marketing_followup_20261117_observations/quota.json), [охват нового поиска](avito_runs/marketing_followup_20261117_observations/browser-coverage.json), [проверка опубликованных страниц](avito_runs/marketing_followup_20261117_observations/saved-listing-coverage.json).

@@ -2094,6 +2094,18 @@ def validate_repeated_ui_continuation(out, plan, queue):
 
 def verified_frozen_queue(out, service):
     plan = read(service/'plan.json'); queue = read(out/'queue.json')
+    validate_frozen_queue(out, plan, queue)
+    manifest_path = service/'manifest.json'
+    if manifest_path.exists():
+        manifest = read(manifest_path); files = {k.replace('\\', '/'): v for k,v in manifest['files'].items()}
+        for f in (service/'plan.json', out/'queue.json'):
+            key = f.relative_to(ROOT).as_posix(); record = files.get(key)
+            if not record or record['sha256'] != sha(f) or record['bytes'] != f.stat().st_size:
+                raise ValueError('Frozen artifact does not match its completed manifest')
+    return plan, queue
+
+
+def validate_frozen_queue(out, plan, queue):
     continuation = plan.get('continuation')
     if (plan.get('selection_mode') != 'first_N_unique_on_frozen_listing'
             or any(plan.get(k) for k in ('partition','partial_suffix','supplement','deduplication'))
@@ -2105,14 +2117,34 @@ def verified_frozen_queue(out, service):
     if continuation:
         validate_repeated_ui_continuation(out, plan, queue)
     if len({x['id'] for x in queue}) != len(queue): raise ValueError('Frozen queue IDs are not unique')
-    manifest_path = service/'manifest.json'
-    if manifest_path.exists():
-        manifest = read(manifest_path); files = {k.replace('\\', '/'): v for k,v in manifest['files'].items()}
-        for f in (service/'plan.json', out/'queue.json'):
-            key = f.relative_to(ROOT).as_posix(); record = files.get(key)
-            if not record or record['sha256'] != sha(f) or record['bytes'] != f.stat().st_size:
-                raise ValueError('Frozen artifact does not match its completed manifest')
-    return plan, queue
+
+def published_listing_source(run_id, commit):
+    """Recover an ordinary frozen parent from a published selection's evidence."""
+    out, service, _ = paths(ROOT, run_id)
+    provenance = out/'dedup-provenance'
+    plan_path, queue_path = provenance/'source-plan.json', provenance/'source-queue.json'
+
+    def verify(path):
+        rel = path.relative_to(ROOT).as_posix()
+        recorded = subprocess.check_output(['git', 'show', f'{commit}:{rel}'], cwd=ROOT)
+        if hashlib.sha256(recorded).hexdigest() != sha(path):
+            raise ValueError('Archived listing artifact differs from published Git tree')
+
+    for path in (service/'plan.json', plan_path, queue_path, out/'listing.json'):
+        verify(path)
+    published = read(service/'plan.json')
+    info = published.get('deduplication') or {}
+    parent, queue = read(plan_path), read(queue_path)
+    if (published.get('run_id') != run_id or info.get('source_run_id') != parent.get('run_id')
+            or info.get('source_plan_sha256') != sha(plan_path)
+            or info.get('source_queue_sha256') != sha(queue_path)
+            or parent.get('continuation')):
+        raise ValueError('Archived listing source requires an ordinary parent pinned by its published child')
+    for entry in parent['listing_pages']:
+        verify(out/entry['file'].replace('\\', '/'))
+    validate_frozen_queue(out, parent, queue)
+    return parent, queue
+
 
 
 def dataset_keys(path):
@@ -2168,16 +2200,31 @@ def validate_deduplication(out, service):
     source_out, source_service, _ = paths(ROOT, info['source_run_id'])
     ledger_pointers = [p for p in (service/'diagnostics/shared-ledger.json', service/'shared-ledger.json') if p.exists()]
     ledger_parent = info.get('ledger_parent_run_id', info['source_run_id'])
-    if not ledger_pointers or any(read(p) != {'parent_run_id': ledger_parent} for p in ledger_pointers):
-        raise ValueError('Deduplicated child must use source ledger')
     source_plan_path = prov/'source-plan.json'; source_queue_path = prov/'source-queue.json'
     tail = info.get('observed_tail') is True
-    assignment = 'dedup-tail-child.json' if tail else 'dedup-child.json'
-    originals = (source_service/'plan.json', source_out/'queue.json', source_service/assignment)
-    present = [p.exists() for p in originals]
-    if any(present) and not all(present): raise ValueError('Incomplete dedup source provenance')
-    if all(present) and read(originals[2]) != {'child_run_id': plan['run_id']}:
-        raise ValueError('Source child assignment differs')
+    archived = info.get('archived_listing_source')
+    if archived:
+        commit = archived['commit']
+        if not re.fullmatch(r'[0-9a-f]{40}', commit):
+            raise ValueError('Invalid archived listing commit')
+        published, _ = published_listing_source(archived['run_id'], commit)
+        if (ledger_pointers or published.get('run_id') != info['source_run_id']
+                or published != read(source_plan_path) or tail):
+            raise ValueError('Archived listing provenance or independent ledger differs')
+        published_out, _, _ = paths(ROOT, archived['run_id'])
+        originals = (published_out/'dedup-provenance/source-plan.json',
+                     published_out/'dedup-provenance/source-queue.json')
+        present = [True, True]
+    else:
+        if not ledger_pointers or any(read(p) != {'parent_run_id': ledger_parent} for p in ledger_pointers):
+            raise ValueError('Deduplicated child must use source ledger')
+        assignment = 'dedup-tail-child.json' if tail else 'dedup-child.json'
+        originals = (source_service/'plan.json', source_out/'queue.json', source_service/assignment)
+        present = [p.exists() for p in originals]
+        if any(present) and not all(present):
+            raise ValueError('Incomplete dedup source provenance')
+        if all(present) and read(originals[2]) != {'child_run_id': plan['run_id']}:
+            raise ValueError('Source child assignment differs')
     for local, original, expected in ((source_plan_path, originals[0], info['source_plan_sha256']), (source_queue_path, originals[1], info['source_queue_sha256'])):
         if sha(local) != expected or (all(present) and sha(original) != expected): raise ValueError('Dedup source provenance changed')
     parent = read(source_plan_path); source_queue = read(source_queue_path)
@@ -2255,10 +2302,14 @@ def validate_deduplication(out, service):
 def deduplicate_queue(args):
     source_out, source_service, source_diag = paths(ROOT, args.source_run_id)
     out, service, diag = paths(ROOT, args.run_id)
-    ensure_allowed(source_diag, 'deduplicate-queue')
+    from_archive = getattr(args, 'from_published_child', False)
+    if not from_archive:
+        ensure_allowed(source_diag, 'deduplicate-queue')
     observed_tail = getattr(args, 'observed_tail', False)
     assignment = source_service/('dedup-tail-child.json' if observed_tail else 'dedup-child.json')
-    if out.exists() or service.exists() or assignment.exists(): raise ValueError('Derivative or source assignment already exists')
+    service_exists = (service/'plan.json').exists() if from_archive else service.exists()
+    if out.exists() or service_exists or (not from_archive and assignment.exists()):
+        raise ValueError('Derivative or source assignment already exists')
     against = args.against_run_id or []
     use_dataset = getattr(args, 'against_dataset', False)
     observed_path = getattr(args, 'against_observed_ids', None)
@@ -2269,12 +2320,25 @@ def deduplicate_queue(args):
     if limit is not None and limit <= 0: raise ValueError('Selection limit must be positive')
     if (not against and not use_dataset and not observed_ids and listing_ids is None) or len(set(against)) != len(against) or args.source_run_id in against or args.run_id in against or args.run_id == args.source_run_id:
         raise ValueError('Distinct source, child and known run IDs required')
-    parent, source_queue = verified_frozen_queue(source_out, source_service)
-    with locked(source_diag):
-        if not (source_diag/'failures.json').exists(): save_failures(source_diag, load_failures(source_diag))
-    cp = read(source_diag/'checkpoint.json')
-    if (source_service/'manifest.json').exists() or (source_service/'partition.json').exists() or any((source_out/'raw').glob('*.json')) or cp.get('completed_ids') or cp.get('state') != 'READY':
-        raise ValueError('Source must be frozen before any capture')
+    archived = None
+    if from_archive:
+        if listing_ids is None or not use_dataset or observed_tail or not args.agent_model:
+            raise ValueError('Archived listing selection requires explicit listing IDs, dataset dedup and capture model')
+        commit = subprocess.check_output(['git', 'rev-parse', 'origin/main'], cwd=ROOT, text=True).strip()
+        parent, source_queue = published_listing_source(args.source_run_id, commit)
+        archived = {'run_id': args.source_run_id, 'commit': commit}
+        original_plan = source_out/'dedup-provenance/source-plan.json'
+        original_queue = source_out/'dedup-provenance/source-queue.json'
+        original_run_id = parent['run_id']
+    else:
+        parent, source_queue = verified_frozen_queue(source_out, source_service)
+        with locked(source_diag):
+            if not (source_diag/'failures.json').exists(): save_failures(source_diag, load_failures(source_diag))
+        cp = read(source_diag/'checkpoint.json')
+        if (source_service/'manifest.json').exists() or (source_service/'partition.json').exists() or any((source_out/'raw').glob('*.json')) or cp.get('completed_ids') or cp.get('state') != 'READY':
+            raise ValueError('Source must be frozen before any capture')
+        original_plan, original_queue = source_service/'plan.json', source_out/'queue.json'
+        original_run_id = args.source_run_id
     if observed_tail:
         source_queue = observed_listing_tail(source_out, parent, source_queue)
     continuation = parent.get('continuation')
@@ -2303,11 +2367,13 @@ def deduplicate_queue(args):
     eligible = [item for item in source_queue if item['id'] not in known]
     novel = eligible[:limit] if limit is not None else eligible
     excluded = [item['id'] for item in source_queue if item['id'] in known]
-    info = dict(source_run_id=args.source_run_id,source_plan_sha256=sha(source_service/'plan.json'),source_queue_sha256=sha(source_out/'queue.json'),against=known_runs,source_count=source_count,duplicate_excluded=len(excluded),novel_count=len(novel),duplicate_ids=excluded)
-    out.mkdir(parents=True); diag.mkdir(parents=True); prov=out/'dedup-provenance'; prov.mkdir()
+    info = dict(source_run_id=original_run_id,source_plan_sha256=sha(original_plan),source_queue_sha256=sha(original_queue),against=known_runs,source_count=source_count,duplicate_excluded=len(excluded),novel_count=len(novel),duplicate_ids=excluded)
+    out.mkdir(parents=True); diag.mkdir(parents=True, exist_ok=True); prov=out/'dedup-provenance'; prov.mkdir()
     if continuation:
         shutil.copytree(source_out/'continuation-provenance', out/'continuation-provenance')
         info['ledger_parent_run_id'] = ledger_parent
+    if archived:
+        info['archived_listing_source'] = archived
     if listing_ids is not None:
         selection_copy = prov/'selected-listing-ids.json'
         write(selection_copy, listing_ids)
@@ -2323,7 +2389,7 @@ def deduplicate_queue(args):
         info['observed_tail'] = True
     if limit is not None:
         info.update(selection_limit=limit, eligible_count=len(eligible), deferred_ids=[x['id'] for x in eligible[len(novel):]])
-    shutil.copy2(source_service/'plan.json',prov/'source-plan.json'); shutil.copy2(source_out/'queue.json',prov/'source-queue.json')
+    shutil.copy2(original_plan, prov/'source-plan.json'); shutil.copy2(original_queue, prov/'source-queue.json')
     for archive in sorted(source_service.glob('superseded-freeze*')):
         if not archive.is_dir(): continue
         target = prov/'rejected-freezes'/archive.name
@@ -2344,11 +2410,16 @@ def deduplicate_queue(args):
         instruction_version=instruction_version(SCRIPTS.parent/'SKILL.md'),instruction_sha256=sha(SCRIPTS.parent/'SKILL.md'),
         code_git_commit=subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip(),
         automation_sha256={file:sha(ROOT/file) for file in AUTOMATION_FILES},uncommitted_automation_files=dirty_automation(ROOT))
-    write(service/'plan.json',plan); write(diag/'shared-ledger.json',{'parent_run_id':ledger_parent})
+    if archived:
+        plan['execution_model'] = args.agent_model
+    else:
+        write(diag/'shared-ledger.json', {'parent_run_id': ledger_parent})
+    write(service/'plan.json', plan)
     write(diag/'checkpoint.json',dict(state='READY' if novel else 'DEDUP_EMPTY',completed_ids=[],next_id=novel[0]['id'] if novel else None,capture_seconds=0))
-    for name in ('automation_changes.json','aside-target.local.json'):
-        if (source_diag/name).exists(): shutil.copy2(source_diag/name,diag/name)
-    write(assignment, {'child_run_id': args.run_id})
+    if not archived:
+        for name in ('automation_changes.json', 'aside-target.local.json'):
+            if (source_diag/name).exists(): shutil.copy2(source_diag/name, diag/name)
+        write(assignment, {'child_run_id': args.run_id})
     validate_deduplication(out,service)
     print(json.dumps({'state':'READY' if novel else 'DEDUP_EMPTY','run_id':args.run_id,'source_count':source_count,'duplicate_excluded':len(excluded),'novel_count':len(novel)},ensure_ascii=False))
 
@@ -3298,7 +3369,7 @@ def finalize(args):
     if full_observations is not None:
         manifest['coverage']['full_observations'] = full_observations
     service_files = [service / 'plan.json']
-    if plan.get('deduplication'):
+    if plan.get('deduplication') and not plan['deduplication'].get('archived_listing_source'):
         # Publish only the ledger pointer; the shared error ledger remains local.
         pointer = read(diag/'shared-ledger.json')
         if pointer != {'parent_run_id': plan['deduplication'].get('ledger_parent_run_id', plan['deduplication']['source_run_id'])}:
@@ -3711,6 +3782,11 @@ def retry_incomplete_observation(args):
     reserve_standing = bool(standing_source and standing and not active and ledger['state'] == 'NEEDS_HUMAN'
                             and ledger.get('unbounded_retries') and args.authorization_id.strip()
                             and not any(e.get('authorization_id') == args.authorization_id for e in events))
+    blank_tab = getattr(args, 'blank_tab', False)
+    last_failure = next((e for e in reversed(events) if e.get('event') == 'failure'), {})
+    if blank_tab and (not reserve_standing or last_failure.get('stage') != 'capture'
+                      or last_failure.get('state') != 'NEEDS_HUMAN'):
+        raise HumanRequired('Blank-tab retry requires a fresh registered standing authorization')
     if not reserve_standing and (ledger['state'] in ('NEEDS_HUMAN', 'RETRY_STARTED') or not auth
                                  or any(e.get('event') == 'failure' for e in events[auth[-1]+1:])):
         raise HumanRequired('Fresh browser authorization after the stop is required')
@@ -3746,7 +3822,7 @@ def retry_incomplete_observation(args):
     detail = active.get('detail_hydration') is True
     if detail:
         detail_hydration_evidence(out, diag, cp, matches[0])
-    if not http502 and not detail and (data.get('state') != 'UNKNOWN_PAGE' or data.get('source_url') != url
+    if not blank_tab and not http502 and not detail and (data.get('state') != 'UNKNOWN_PAGE' or data.get('source_url') != url
             or evidence.get('complete') is not False or evidence.get('restriction') is not False
             or evidence.get('known_unavailable') is not False or data.get('heading') is not None
             or data.get('title') or data.get('fields') or data.get('items') != []):
@@ -3757,11 +3833,22 @@ def retry_incomplete_observation(args):
         raise ValueError('Incomplete evidence changed after recurring claim')
     snap = snapshot.read_text(encoding='utf8')
     if http502 and not visible_http_502(data,snap,url): raise ValueError('Not the evidenced visible HTTP 502 page')
-    if (f'[url={url}]' not in snap or re.search(r'captcha|429|доступ ограничен|подозрительн|объявление (?:закрыто|удалено|недоступно)', snap, re.I)
-            or (not detail and '\n- heading ' in snap) or (sandbox/'raw'/raw.name).read_bytes() != raw.read_bytes()
+    if blank_tab:
+        empty_snapshot = '# note: interactive (clickable / focusable) elements only.\n- title: "" [url=]'
+        local_tab = diag/'browser-tab.json'
+        if (data.get('state') != 'UNKNOWN_PAGE' or data.get('source_url') != 'about:blank'
+                or data.get('heading') is not None or data.get('title') or data.get('fields')
+                or data.get('items') != [] or data.get('empty_evidence') is not None
+                or evidence.get('complete') is not False or evidence.get('restriction') is not False
+                or evidence.get('known_unavailable') is not False or snap.strip() != empty_snapshot
+                or read(tab).get('url') not in (None, '') or read(tab).get('target_id') is not None
+                or local_tab.read_bytes() != tab.read_bytes()):
+            raise ValueError('Not an evidenced blank-tab observation')
+    if ((not blank_tab and (f'[url={url}]' not in snap or re.search(r'captcha|429|доступ ограничен|подозрительн|объявление (?:закрыто|удалено|недоступно)', snap, re.I)
+            or (not detail and '\n- heading ' in snap))) or (sandbox/'raw'/raw.name).read_bytes() != raw.read_bytes()
             or (sandbox/'problem.snapshot.txt').read_bytes() != snapshot.read_bytes()
             or any(read(sandbox/'checkpoint.json').get(k) != cp.get(k) for k in ('state', 'next_id', 'stop_reason', 'completed_ids'))
-            or read(tab).get('url') != url):
+            or (not blank_tab and read(tab).get('url') != url)):
         raise ValueError('Incomplete shell evidence or sandbox differs')
     archive = out/'observations'/args.id; archive.mkdir(parents=True, exist_ok=True)
     destination = archive/(sha(raw)+'.json')
@@ -3776,7 +3863,7 @@ def retry_incomplete_observation(args):
         original_url=url, raw_sha256=sha(raw), snapshot_sha256=sha(snapshot), browser_tab_sha256=sha(tab),
         plan_sha256=sha(service/'plan.json'), queue_sha256=sha(out/'queue.json'), checkpoint_sha256=sha(diag/'checkpoint.json'),
         sandbox_path=str(sandbox), preserved_at=datetime.now(timezone.utc).isoformat(),
-        reason='detail_hydration' if detail else 'visible_http_502' if http502 else 'unrestricted_incomplete_page_shell'))
+        reason='blank_tab_before_navigation' if blank_tab else 'detail_hydration' if detail else 'visible_http_502' if http502 else 'unrestricted_incomplete_page_shell'))
     if reserve_standing:
         with locked(diag):
             current = load_failures(diag)
@@ -4485,7 +4572,8 @@ def publish(args):
     files = [str(out.relative_to(ROOT)), str((service/'plan.json').relative_to(ROOT)),
         str((service/'manifest.json').relative_to(ROOT)), 'Data/dataset/sources.json',
         'Data/dataset/parts', 'Data/dataset/manifest.json', 'Data/README.md', 'Data/dataset/README.md']
-    if manifest['collection'].get('deduplication'):
+    deduplication = manifest['collection'].get('deduplication') or {}
+    if deduplication and not deduplication.get('archived_listing_source'):
         pointer = service/'shared-ledger.json'
         if str(pointer.relative_to(ROOT)) not in manifest['files']:
             raise ValueError('Dedup public ledger pointer missing from manifest')
@@ -4666,6 +4754,9 @@ def main():
             command.add_argument('--batch-size', type=int, required=True)
             command.add_argument('--prefix', required=True)
         elif name == 'deduplicate-queue':
+            command.add_argument('--from-published-child', action='store_true',
+                                 help='Select IDs from an original listing pinned by a child in origin/main')
+            command.add_argument('--agent-model', help='Capture model for selection from a published child')
             command.add_argument('--observed-tail', action='store_true', help='Use IDs observed beyond the source queue limit')
             command.add_argument('--source-run-id', required=True)
             command.add_argument('--against-run-id', action='append')
@@ -4778,6 +4869,7 @@ def main():
             command.add_argument('--authorization-id', required=True)
         elif name == 'retry-incomplete-observation':
             command.add_argument('--standing-source', help='Previously registered goal authorization for evidenced technical shells')
+            command.add_argument('--blank-tab', action='store_true', help='Preserve an evidenced blank tab under a registered standing authorization')
             command.add_argument('--id', required=True)
             command.add_argument('--authorization-id', required=True)
             command.add_argument('--standing-incomplete', action='store_true', help='Use an explicit standing human instruction permitting incomplete-shell technical retries')
@@ -4825,6 +4917,8 @@ def main():
                 stack.enter_context(operation_locked(paths(ROOT, args.run_id)[2]))
             if args.command in ('redact-finalized-provenance', 'archive-partial-pending', 'recapture-cleared-restriction', 'user-detail-skip-policy', 'user-skip-policy', 'mark-policy-skipped', 'mark-user-skipped', 'public-provenance', 'review-address-button', 'recurring-reviewed-continuation', 'recurring-unavailable-continuation', 'recurring-incomplete-policy', 'recurring-incomplete-attempt', 'recurring-ip-after-preflight', 'recurring-ip-policy', 'recurring-ip-attempt', 'archive-uncertain-freeze', 'archive-partial-listing', 'partition', 'partial-suffix', 'deduplicate-queue', 'continuation', 'supplemental', 'freeze', 'capture', 'finalize', 'post-finalize-review', 'publish', 'reselect', 'standing-unavailable-policy', 'closed-policy', 'review-policy', 'blocked-listing-policy', 'salary-review-policy', 'review-salary-line', 'mark-unavailable', 'mark-redirect-unavailable', 'unresolved-policy', 'upgrade-unresolved-extractor', 'mark-unresolved', 'preserve-stopped-observation', 'retry-redirect-observation', 'retry-incomplete-observation', 'record-error', 'stage-ok', 'resume-browser', 'resume-offline', 'diagnostic-authorization', 'external-threshold-authorization', 'diagnostic-pending-capture'):
                 lock_run_id = args.parent_run_id if args.command in ('continuation', 'supplemental') else args.source_run_id if args.command in ('partial-suffix', 'deduplicate-queue') else args.run_id
+                if args.command == 'deduplicate-queue' and args.from_published_child:
+                    lock_run_id = args.run_id
                 stack.enter_context(operation_locked(paths(ROOT, lock_run_id)[2]))
             globals()[args.command.replace('-', '_')](args)
             if args.command in ('freeze', 'capture', 'finalize', 'publish') and not (paths(ROOT, args.run_id)[0]/'dedup-empty.json').exists():

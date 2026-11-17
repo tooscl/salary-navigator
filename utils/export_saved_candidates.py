@@ -22,6 +22,22 @@ def archive_candidates(source_root, run_ids, output_id, *, root=ROOT):
     if out.exists():
         raise ValueError('Output run already exists')
     rows, copies = [], {}
+
+    def preserve(path, run_id, content):
+        if PRIVATE_LOCATOR.search(content):
+            raise ValueError(f'Private locator in observation {run_id}/{path.name}')
+        source_path = path.relative_to(source_root)
+        published_path = root / source_path
+        if published_path.is_file() and published_path.read_bytes() == content:
+            return source_path.as_posix()
+        parent, _, _ = runner.paths(source_root, run_id)
+        relative = path.relative_to(parent)
+        if relative.parts[0] == 'raw':
+            relative = Path(path.name)
+        archive_path = out / 'raw' / run_id / relative
+        copies[archive_path] = content
+        return archive_path.relative_to(root).as_posix()
+
     for run_id in sorted(set(run_ids)):
         parent, _, _ = runner.paths(source_root, run_id)
         decisions = {}
@@ -30,41 +46,52 @@ def archive_candidates(source_root, run_ids, output_id, *, root=ROOT):
             if path.is_file():
                 for item in runner.read(path)['decisions']:
                     decisions[item['id']] = item
-        raw_paths = sorted((parent / 'raw').glob('[0-9]*.json'))
+        raw_paths = [(path.stem, path, None) for path in sorted((parent / 'raw').glob('*.json'))
+                     if path.stem.isdecimal()]
+        for path in sorted((parent / 'observations').glob('*/*.json')):
+            if path.name.endswith('.provenance.json') or not path.parent.name.isdecimal():
+                continue
+            raw_paths.append((path.parent.name, path, path.with_suffix('.provenance.json')))
         if not raw_paths:
             raise ValueError(f'No raw observations for {run_id}')
-        for path in raw_paths:
+        for identity, path, provenance_path in raw_paths:
             raw = path.read_bytes()
-            if PRIVATE_LOCATOR.search(raw):
-                raise ValueError(f'Private locator in observation {run_id}/{path.name}')
             data = json.loads(raw)
-            identity = path.stem
             digest = hashlib.sha256(raw).hexdigest()
-            raw_path = path.relative_to(source_root)
-            published_path = root / raw_path
-            if not published_path.is_file() or published_path.read_bytes() != raw:
-                raw_path = out.relative_to(root) / 'raw' / run_id / path.name
-                copies[root / raw_path] = raw
-            decision = decisions.get(identity, {})
+            raw_path = preserve(path, run_id, raw)
+            decision = decisions.get(identity, {}) if provenance_path is None else {}
             recorded_hash = decision.get('raw_sha256')
             if recorded_hash and recorded_hash != digest:
                 raise ValueError(f'Selection hash differs for {run_id}/{identity}')
             accepted = decision.get('accepted')
-            if data.get('state') != 'DETAIL' or str(data.get('id', '')) != identity:
-                status = 'incomplete_observation'
+            provenance_fields = {}
+            if provenance_path is not None:
+                content = provenance_path.read_bytes()
+                provenance = json.loads(content)
+                if (digest != path.stem or digest != provenance.get('raw_sha256', provenance.get('sha256'))
+                        or not provenance.get('reason')):
+                    raise ValueError(f'Preserved attempt provenance differs for {run_id}/{identity}')
+                status, reason = 'incomplete_observation', provenance['reason']
+                provenance_fields = {
+                    'observation_provenance_path': preserve(provenance_path, run_id, content),
+                    'observation_provenance_sha256': hashlib.sha256(content).hexdigest(),
+                }
+            elif data.get('state') != 'DETAIL' or str(data.get('id', '')) != identity:
+                status, reason = 'incomplete_observation', data.get('reason', '')
             elif accepted is not None:
-                status = 'accepted' if accepted else 'excluded'
+                status, reason = ('accepted' if accepted else 'excluded'), decision['reason']
             else:
-                status = 'decision_not_recorded'
+                status, reason = 'decision_not_recorded', ''
             row = {
                 'source_run_id': run_id, 'id': identity, 'source_url': data.get('source_url', ''),
                 'observed_at': data.get('observed_at', ''), 'capture_state': data.get('state', ''),
-                'selection_status': status, 'selection_reason': decision.get('reason', ''),
-                'raw_path': raw_path.as_posix(), 'raw_sha256': digest,
+                'selection_status': status, 'selection_reason': reason,
+                'raw_path': raw_path, 'raw_sha256': digest,
                 'title': data.get('title', ''), 'salary_raw': data.get('salary_raw', ''),
                 'description': data.get('description', ''),
                 'employer_name_observed': '; '.join(dict.fromkeys(data.get('employer_raw', []))),
                 'location_observed': '; '.join(dict.fromkeys(data.get('location_raw', []))),
+                **provenance_fields,
             }
             for field in data.get('fields', []):
                 if field.get('name') and field.get('value'):
@@ -83,7 +110,8 @@ def archive_candidates(source_root, run_ids, output_id, *, root=ROOT):
     summary = dict(
         run_id=output_id, source_runs=sorted(set(run_ids)),
         observations=len(rows), unique_ids=len({row['id'] for row in rows}),
-        raw_files_copied=len(copies), csv_sha256=runner.sha(csv_path),
+        raw_files_copied=sum(not path.name.endswith('.provenance.json') for path in copies),
+        csv_sha256=runner.sha(csv_path),
     )
     runner.write(out / 'manifest.json', summary)
     return summary

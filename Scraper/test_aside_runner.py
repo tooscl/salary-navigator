@@ -507,6 +507,41 @@ const listBrowserTabs=async()=>[],openTab=async()=>pg,snapshot=async()=>({tree:'
                     self.assertEqual(ledger['retries_started'], 0)
                     self.assertEqual(ledger.get('bounded_pending'), {'id': '456', 'state': 'reserved', 'authorization_id': 'auth'} if scenario == 'goal' else None)
 
+    def test_standing_blank_tab_requires_exact_evidence(self):
+        for scenario in ('ok', 'no_standing', 'snapshot', 'restriction', 'tab', 'wrong_url'):
+            with self.subTest(scenario=scenario), tempfile.TemporaryDirectory() as directory, patch.object(runner, 'ROOT', Path(directory)):
+                root=runner.ROOT; out,service,diag=runner.paths(root,'case'); sandbox=root/'sandbox'
+                if scenario != 'no_standing':
+                    runner.register_standing_run(argparse.Namespace(run_id='case', goal_source='goal', authorization_id='standing', technical_instruction='Повторять технические ошибки', ip_instruction='Ждать IP'))
+                queue=[item('123')]; runner.write(out/'queue.json',queue); runner.write(out/'listing.json',{}); runner.write(out/'listing_pages/0001.json',{})
+                runner.write(service/'plan.json',dict(run_id='case',listing_pages=[dict(file='listing_pages/0001.json')],listing_sha256='pinned',deduplication={'checked':True}))
+                cp=dict(state='REVIEW_REQUIRED',stop_reason='identity_or_template_review',next_id='123',completed_ids=[])
+                runner.write(diag/'checkpoint.json',cp); runner.write(sandbox/'checkpoint.json',cp); runner.write(diag/'sandbox.json',{'path':str(sandbox)})
+                tab={'target_id':None,'ownership':'collector','url':queue[0]['url'] if scenario=='tab' else None}
+                runner.write(diag/'browser-tab.json',tab); runner.write(sandbox/'browser-tab.json',tab)
+                data=dict(state='UNKNOWN_PAGE',source_url=queue[0]['url'] if scenario=='wrong_url' else 'about:blank',heading=None,items=[],empty_evidence=None,unresolved_evidence=dict(complete=False,restriction=scenario=='restriction',known_unavailable=False))
+                runner.write(out/'raw/123.json',data); runner.write(sandbox/'raw/123.json',data)
+                snap='# note: interactive (clickable / focusable) elements only.\n- title: "" [url=]\n'
+                (diag/'problem.snapshot.txt').write_text(snap,encoding='utf8'); (sandbox/'problem.snapshot.txt').write_text(snap+('tampered' if scenario=='snapshot' else ''),encoding='utf8')
+                runner.record_failure(diag,'capture','stopped','capture',immediate=True)
+                original=(out/'raw/123.json').read_bytes(); before=runner.load_failures(diag)
+                args=argparse.Namespace(run_id='case',id='123',authorization_id='attempt',standing_source='standing',blank_tab=True)
+                with patch.object(runner,'validate_partition'), patch.object(runner,'validate_plan_profession'), patch.object(runner,'unavailable_records',return_value=[]), patch.object(runner,'unresolved_records',return_value=[]), patch.object(runner,'user_skipped_records',return_value=[]):
+                    if scenario=='ok': runner.retry_incomplete_observation(args)
+                    else:
+                        with self.assertRaises((ValueError,runner.HumanRequired)): runner.retry_incomplete_observation(args)
+                ledger=runner.load_failures(diag)
+                self.assertEqual((ledger['failures'],ledger['retries_started']),(before['failures'],before['retries_started']))
+                if scenario=='ok':
+                    digest=hashlib.sha256(original).hexdigest(); archive=out/'observations/123'
+                    self.assertEqual((archive/(digest+'.json')).read_bytes(),original)
+                    self.assertEqual(runner.read(archive/(digest+'.provenance.json'))['reason'],'blank_tab_before_navigation')
+                    self.assertEqual(runner.read(diag/'checkpoint.json')['next_id'],'123')
+                    self.assertEqual(ledger['bounded_pending'],dict(id='123',state='reserved',authorization_id='attempt'))
+                    self.assertFalse((out/'raw/123.json').exists()); self.assertEqual((sandbox/'raw/123.json').read_bytes(),original)
+                else:
+                    self.assertEqual((out/'raw/123.json').read_bytes(),original); self.assertEqual(ledger,before)
+
     def test_detail_hydration_one_authorized_retry_preserves_evidence(self):
         for scenario in ('ok', 'restriction', 'wrong_id', 'snapshot'):
             with self.subTest(scenario=scenario), tempfile.TemporaryDirectory() as directory, patch.object(runner, 'ROOT', Path(directory)):
@@ -815,6 +850,63 @@ const listBrowserTabs=async()=>[],openTab=async()=>pg,snapshot=async()=>({tree:'
             copied_page.write_bytes(copied_page.read_bytes() + b' ')
             with self.assertRaisesRegex(ValueError, 'Frozen listing page changed'):
                 runner.validate_partition(child, child_service)
+
+    def test_select_from_published_child_uses_original_listing_without_modifying_archive(self):
+        original_root = runner.ROOT
+        with tempfile.TemporaryDirectory() as directory, patch.object(runner, 'ROOT', Path(directory)):
+            root = runner.ROOT
+            for file in runner.AUTOMATION_FILES:
+                dest = root/file
+                dest.parent.mkdir(parents=True, exist_ok=True)
+                dest.write_bytes((original_root/file).read_bytes())
+            archive, service, diag = runner.paths(root, 'published')
+            listing = dict(state='LISTING', source_url='https://www.avito.ru/moskva/vakansii',
+                           selected_controls=[], items=[item('2'), item('1')])
+            page = archive/'listing_pages/0001.json'
+            runner.write(archive/'listing.json', listing)
+            runner.write(page, listing)
+            provenance = archive/'dedup-provenance'
+            source_plan = provenance/'source-plan.json'
+            source_queue = provenance/'source-queue.json'
+            queue = runner.queue_from_pages([listing], None)
+            runner.write(source_plan, dict(run_id='original', profession='', profession_scope='all',
+                selection_mode='first_N_unique_on_frozen_listing', listing_sha256=runner.sha(archive/'listing.json'),
+                listing_pages=[dict(file='listing_pages/0001.json', sha256=runner.sha(page))]))
+            runner.write(source_queue, queue)
+            runner.write(archive/'queue.json', queue[:1])
+            runner.write(service/'plan.json', dict(run_id='published', deduplication=dict(source_run_id='original',
+                source_plan_sha256=runner.sha(source_plan), source_queue_sha256=runner.sha(source_queue))))
+            runner.write(service/'shared-ledger.json', {'parent_run_id': 'original'})
+            def git(*args):
+                return runner.subprocess.check_output(['git', *args], cwd=root, text=True).strip()
+            git('init', '-q')
+            git('add', 'Data', 'Scraper/runs')
+            git('-c', 'user.name=Fixture', '-c', 'user.email=fixture@example.org',
+                'commit', '-qm', 'Published listing evidence')
+            git('update-ref', 'refs/remotes/origin/main', git('rev-parse', 'HEAD'))
+            csv_path = root/'Data/dataset/vacancies.csv'
+            csv_path.parent.mkdir()
+            csv_path.write_text('source,id\navito,2\n', encoding='utf-8')
+            runner.write(root/'Data/dataset/manifest.json', {'rows': 1, 'sha256': runner.sha(csv_path)})
+            include = root/'selected.json'
+            runner.write(include, ['1', '2'])
+            args = argparse.Namespace(source_run_id='published', run_id='new', against_run_id=None,
+                include_listing_ids=include, against_dataset=True, from_published_child=True, agent_model='capture')
+            original = page.read_bytes()
+            page.write_bytes(original + b' ')
+            with self.assertRaisesRegex(ValueError, 'differs from published Git tree'):
+                runner.deduplicate_queue(args)
+            page.write_bytes(original)
+            runner.deduplicate_queue(args)
+            out, target, new_diag = runner.paths(root, 'new')
+            self.assertEqual(runner.read(out/'queue.json'), queue[1:])
+            self.assertEqual(runner.read(target/'plan.json')['execution_model'], 'capture')
+            self.assertFalse((new_diag/'shared-ledger.json').exists())
+            self.assertFalse(diag.exists())
+            runner.validate_partition(out, target)
+            page.write_bytes(original + b' ')
+            with self.assertRaisesRegex(ValueError, 'differs from published Git tree'):
+                runner.validate_partition(out, target)
 
     def test_deduplicate_unqueued_observed_tail_preserves_prefix_and_provenance(self):
         original_root = runner.ROOT
