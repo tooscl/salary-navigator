@@ -434,3 +434,15 @@ avito_runs/<название_сбора>/
 - [accountant_remote_20261117_04_new](avito_runs/accountant_remote_20261117_04_new/exports/vacancy_observations.csv): 5 наблюдений, 0 принятых.
 
 - [accountant_remote_20261117_09_new](avito_runs/accountant_remote_20261117_09_new/exports/vacancy_observations.csv): 2 наблюдений, 0 принятых.
+
+- [tutor_20261117_repetitor_new](avito_runs/tutor_20261117_repetitor_new/exports/vacancy_observations.csv): 38 наблюдений, 0 принятых.
+
+- [tutor_20261117_prepodavatel_new](avito_runs/tutor_20261117_prepodavatel_new/exports/vacancy_observations.csv): 44 наблюдений, 0 принятых.
+
+- [tutor_20261117_search_repetitor_new](avito_runs/tutor_20261117_search_repetitor_new/exports/vacancy_observations.csv): 12 наблюдений, 0 принятых.
+
+- [tutor_20261117_search_repetitor_tail](avito_runs/tutor_20261117_search_repetitor_tail/exports/vacancy_observations.csv): 2 наблюдений, 0 принятых.
+
+- [tutor_20261117_prepodavatel_all_new](avito_runs/tutor_20261117_prepodavatel_all_new/exports/vacancy_observations.csv): 14 наблюдений, 0 принятых.
+
+- [tutor_20261117_observations](avito_runs/tutor_20261117_observations/observations.csv): общий архив 110 наблюдений, 108 уникальных ID; [паспорт покрытия](avito_runs/tutor_20261117_observations/coverage.json) и [пустая целевая выгрузка](avito_runs/tutor_20261117_observations/target_monthly.csv).
