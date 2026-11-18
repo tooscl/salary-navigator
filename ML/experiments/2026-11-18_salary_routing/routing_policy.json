@@ -1,0 +1,48 @@
+{
+  "version": 1,
+  "rules": [
+    {
+      "id": "spb_cashier_statistic",
+      "when": {
+        "mode": "ordinary",
+        "unit": "shift",
+        "tax": "net",
+        "profession_resolved": "Кассир",
+        "city_resolved": "Санкт-Петербург"
+      },
+      "approach": "empirical",
+      "why": "Квартили как рабочий ориентир до независимой проверки модели на новых работодателях.",
+      "evidence": "../2026-11-18_priority_salary_gold/README.md"
+    },
+    {
+      "id": "spb_seller_statistic",
+      "when": {
+        "mode": "ordinary",
+        "unit": "shift",
+        "tax": "net",
+        "profession_resolved": "Продавец",
+        "city_resolved": "Санкт-Петербург"
+      },
+      "approach": "empirical",
+      "why": "Квартили как рабочий ориентир до независимой проверки модели на новых работодателях.",
+      "evidence": "../2026-11-18_priority_salary_gold/README.md"
+    },
+    {
+      "id": "spb_picker_statistic",
+      "when": {
+        "mode": "ordinary",
+        "unit": "shift",
+        "tax": "net",
+        "profession_resolved": "Комплектовщик",
+        "city_resolved": "Санкт-Петербург"
+      },
+      "approach": "empirical",
+      "why": "Квартили как рабочий ориентир до независимой проверки модели на новых работодателях.",
+      "evidence": "../2026-11-18_priority_salary_gold/README.md"
+    }
+  ],
+  "default": "global",
+  "fallback": [
+    "empirical"
+  ]
+}

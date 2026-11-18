@@ -1,0 +1,407 @@
+{
+  "version": 1,
+  "trained_on_fold": 0,
+  "models": {
+    "global": {
+      "artifact": "global.joblib",
+      "scope": {},
+      "method": "catboost",
+      "contexts": [
+        [
+          "ordinary",
+          "hour",
+          "net"
+        ],
+        [
+          "ordinary",
+          "shift",
+          "net"
+        ],
+        [
+          "ordinary",
+          "week",
+          "net"
+        ],
+        [
+          "remote",
+          "hour",
+          "net"
+        ],
+        [
+          "remote",
+          "shift",
+          "net"
+        ],
+        [
+          "watch",
+          "shift",
+          "net"
+        ]
+      ],
+      "fit_points": 1720,
+      "evidence": "../../experiments/2026-11-18_salary_routing/README.md"
+    },
+    "empirical": {
+      "artifact": "empirical.joblib",
+      "scope": {},
+      "method": "empirical",
+      "contexts": [
+        [
+          "ordinary",
+          "hour",
+          "net"
+        ],
+        [
+          "ordinary",
+          "shift",
+          "net"
+        ],
+        [
+          "ordinary",
+          "week",
+          "net"
+        ],
+        [
+          "remote",
+          "hour",
+          "net"
+        ],
+        [
+          "remote",
+          "shift",
+          "net"
+        ],
+        [
+          "watch",
+          "shift",
+          "net"
+        ]
+      ],
+      "fit_points": 1720,
+      "evidence": "../../experiments/2026-11-18_salary_routing/README.md"
+    },
+    "mode_ordinary": {
+      "artifact": "mode_ordinary.joblib",
+      "scope": {
+        "mode": "ordinary"
+      },
+      "method": "catboost",
+      "contexts": [
+        [
+          "ordinary",
+          "hour",
+          "net"
+        ],
+        [
+          "ordinary",
+          "shift",
+          "net"
+        ],
+        [
+          "ordinary",
+          "week",
+          "net"
+        ]
+      ],
+      "fit_points": 1272,
+      "evidence": "../../experiments/2026-11-18_salary_routing/README.md"
+    },
+    "mode_watch": {
+      "artifact": "mode_watch.joblib",
+      "scope": {
+        "mode": "watch"
+      },
+      "method": "catboost",
+      "contexts": [
+        [
+          "watch",
+          "shift",
+          "net"
+        ]
+      ],
+      "fit_points": 359,
+      "evidence": "../../experiments/2026-11-18_salary_routing/README.md"
+    },
+    "mode_remote": {
+      "artifact": "mode_remote.joblib",
+      "scope": {
+        "mode": "remote"
+      },
+      "method": "catboost",
+      "contexts": [
+        [
+          "remote",
+          "hour",
+          "net"
+        ],
+        [
+          "remote",
+          "shift",
+          "net"
+        ]
+      ],
+      "fit_points": 89,
+      "evidence": "../../experiments/2026-11-18_salary_routing/README.md"
+    },
+    "segment_17fa6ea3bf72": {
+      "artifact": "segment_17fa6ea3bf72.joblib",
+      "scope": {
+        "mode": "ordinary",
+        "unit": "shift",
+        "tax": "net",
+        "profession_resolved": "Грузчик",
+        "city_resolved": "Москва"
+      },
+      "method": "catboost",
+      "contexts": [
+        [
+          "ordinary",
+          "shift",
+          "net"
+        ]
+      ],
+      "fit_points": 38,
+      "evidence": "../../experiments/2026-11-18_salary_routing/README.md"
+    },
+    "segment_624001cf5ad1": {
+      "artifact": "segment_624001cf5ad1.joblib",
+      "scope": {
+        "mode": "ordinary",
+        "unit": "shift",
+        "tax": "net",
+        "profession_resolved": "Грузчик",
+        "city_resolved": "Санкт-Петербург"
+      },
+      "method": "catboost",
+      "contexts": [
+        [
+          "ordinary",
+          "shift",
+          "net"
+        ]
+      ],
+      "fit_points": 35,
+      "evidence": "../../experiments/2026-11-18_salary_routing/README.md"
+    },
+    "segment_cb1c79cab67f": {
+      "artifact": "segment_cb1c79cab67f.joblib",
+      "scope": {
+        "mode": "ordinary",
+        "unit": "shift",
+        "tax": "net",
+        "profession_resolved": "Кассир",
+        "city_resolved": "Екатеринбург"
+      },
+      "method": "catboost",
+      "contexts": [
+        [
+          "ordinary",
+          "shift",
+          "net"
+        ]
+      ],
+      "fit_points": 48,
+      "evidence": "../../experiments/2026-11-18_salary_routing/README.md"
+    },
+    "segment_5e81ccbe361e": {
+      "artifact": "segment_5e81ccbe361e.joblib",
+      "scope": {
+        "mode": "ordinary",
+        "unit": "shift",
+        "tax": "net",
+        "profession_resolved": "Комплектовщик",
+        "city_resolved": "Москва"
+      },
+      "method": "catboost",
+      "contexts": [
+        [
+          "ordinary",
+          "shift",
+          "net"
+        ]
+      ],
+      "fit_points": 67,
+      "evidence": "../../experiments/2026-11-18_salary_routing/README.md"
+    },
+    "segment_0b15d24fbe19": {
+      "artifact": "segment_0b15d24fbe19.joblib",
+      "scope": {
+        "mode": "ordinary",
+        "unit": "shift",
+        "tax": "net",
+        "profession_resolved": "Комплектовщик",
+        "city_resolved": "Санкт-Петербург"
+      },
+      "method": "catboost",
+      "contexts": [
+        [
+          "ordinary",
+          "shift",
+          "net"
+        ]
+      ],
+      "fit_points": 55,
+      "evidence": "../../experiments/2026-11-18_salary_routing/README.md"
+    },
+    "segment_fd88bd7e5c5d": {
+      "artifact": "segment_fd88bd7e5c5d.joblib",
+      "scope": {
+        "mode": "ordinary",
+        "unit": "shift",
+        "tax": "net",
+        "profession_resolved": "Курьер",
+        "city_resolved": "Екатеринбург"
+      },
+      "method": "catboost",
+      "contexts": [
+        [
+          "ordinary",
+          "shift",
+          "net"
+        ]
+      ],
+      "fit_points": 74,
+      "evidence": "../../experiments/2026-11-18_salary_routing/README.md"
+    },
+    "segment_2026eba783a6": {
+      "artifact": "segment_2026eba783a6.joblib",
+      "scope": {
+        "mode": "ordinary",
+        "unit": "shift",
+        "tax": "net",
+        "profession_resolved": "Курьер",
+        "city_resolved": "Краснодар"
+      },
+      "method": "catboost",
+      "contexts": [
+        [
+          "ordinary",
+          "shift",
+          "net"
+        ]
+      ],
+      "fit_points": 68,
+      "evidence": "../../experiments/2026-11-18_salary_routing/README.md"
+    },
+    "segment_00846eac06ae": {
+      "artifact": "segment_00846eac06ae.joblib",
+      "scope": {
+        "mode": "ordinary",
+        "unit": "shift",
+        "tax": "net",
+        "profession_resolved": "Курьер",
+        "city_resolved": "Москва"
+      },
+      "method": "catboost",
+      "contexts": [
+        [
+          "ordinary",
+          "shift",
+          "net"
+        ]
+      ],
+      "fit_points": 69,
+      "evidence": "../../experiments/2026-11-18_salary_routing/README.md"
+    },
+    "segment_bab117d488e8": {
+      "artifact": "segment_bab117d488e8.joblib",
+      "scope": {
+        "mode": "ordinary",
+        "unit": "shift",
+        "tax": "net",
+        "profession_resolved": "Курьер",
+        "city_resolved": "Рязань"
+      },
+      "method": "catboost",
+      "contexts": [
+        [
+          "ordinary",
+          "shift",
+          "net"
+        ]
+      ],
+      "fit_points": 44,
+      "evidence": "../../experiments/2026-11-18_salary_routing/README.md"
+    },
+    "segment_e877f617886b": {
+      "artifact": "segment_e877f617886b.joblib",
+      "scope": {
+        "mode": "ordinary",
+        "unit": "shift",
+        "tax": "net",
+        "profession_resolved": "Курьер",
+        "city_resolved": "Санкт-Петербург"
+      },
+      "method": "catboost",
+      "contexts": [
+        [
+          "ordinary",
+          "shift",
+          "net"
+        ]
+      ],
+      "fit_points": 113,
+      "evidence": "../../experiments/2026-11-18_salary_routing/README.md"
+    },
+    "segment_860ef74b47e1": {
+      "artifact": "segment_860ef74b47e1.joblib",
+      "scope": {
+        "mode": "ordinary",
+        "unit": "shift",
+        "tax": "net",
+        "profession_resolved": "Продавец",
+        "city_resolved": "Москва"
+      },
+      "method": "catboost",
+      "contexts": [
+        [
+          "ordinary",
+          "shift",
+          "net"
+        ]
+      ],
+      "fit_points": 38,
+      "evidence": "../../experiments/2026-11-18_salary_routing/README.md"
+    },
+    "segment_c679666ee900": {
+      "artifact": "segment_c679666ee900.joblib",
+      "scope": {
+        "mode": "ordinary",
+        "unit": "shift",
+        "tax": "net",
+        "profession_resolved": "Продавец",
+        "city_resolved": "Санкт-Петербург"
+      },
+      "method": "catboost",
+      "contexts": [
+        [
+          "ordinary",
+          "shift",
+          "net"
+        ]
+      ],
+      "fit_points": 50,
+      "evidence": "../../experiments/2026-11-18_salary_routing/README.md"
+    },
+    "segment_8312bcb21588": {
+      "artifact": "segment_8312bcb21588.joblib",
+      "scope": {
+        "mode": "watch",
+        "unit": "shift",
+        "tax": "net",
+        "profession_resolved": "Комплектовщик",
+        "city_resolved": "Рязань"
+      },
+      "method": "catboost",
+      "contexts": [
+        [
+          "watch",
+          "shift",
+          "net"
+        ]
+      ],
+      "fit_points": 39,
+      "evidence": "../../experiments/2026-11-18_salary_routing/README.md"
+    }
+  }
+}
