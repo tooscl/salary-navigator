@@ -1,0 +1,24 @@
+{
+  "dataset_sha256": "a56e81b2b7f524da57ca93ce4c6fe984dae950d67ec98b9f37429e5fde76983e",
+  "rows": 32097,
+  "targets": [
+    "shift_then_divide",
+    "direct_hour",
+    "previous_full_then_divide",
+    "hour_plus_native"
+  ],
+  "policies": {
+    "exact": [
+      "exact"
+    ],
+    "single_range": [
+      "closed_range",
+      "exact"
+    ]
+  },
+  "folds": {
+    "gold_models": "PR #179",
+    "routing": "PR #180"
+  },
+  "scoring": "RUB per hour net on paired IDs"
+}
