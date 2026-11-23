@@ -1,0 +1,41 @@
+{
+  "client_date": "2026-11-23",
+  "unit_test_methods": 23,
+  "original_cases": 59,
+  "additional_cases": 32,
+  "original_definitions_ast_match": true,
+  "reproduction": "full extraction/normalization rerun after v1.1 repairs; NLP reused unchanged text/model/code cache; original27 feature table unchanged",
+  "artifact_validation": "python3 Analytics/vahta_extraction_20261123/validate_artifacts.py: pass",
+  "external_facts_or_employer_independence": "not_verified",
+  "passport_period_controls": "both distributions reconcile to ads for all28; role schema candidates explicit; regenerated output equals independent destination",
+  "coverage_percent": "not_measured",
+  "review_repairs": {
+    "paid_hours_total_candidates": 9,
+    "work_duration_resolved": 1094,
+    "rest_duration_resolved": 90,
+    "technical_candidates": 199,
+    "direct_text_candidates": 107,
+    "manual_repair_examples": 11
+  },
+  "recomputed_outputs_version": "vahta-additions-1.1",
+  "final_outputs_match_computed_directory": true,
+  "root_manual_docs_check": {
+    "files": [
+      "README.md",
+      "REPORT.md",
+      "TEAM_SUMMARY.md",
+      "CRITERIA.md"
+    ],
+    "kind": "manual cross-check against final_summary, role tables and source group counts; not an independent child audit",
+    "headline": "199 technical;107 direct text;2 paid;92 need period review;9 paid-hour statements;1094 work durations;90 rest durations",
+    "source_counts": "199:117 names/111 proxy groups;107:68 names/66 proxy groups"
+  },
+  "lower_bound_round_trip_ids": [
+    "8287683019",
+    "8388323517",
+    "8404796280",
+    "8420819428",
+    "8479338678"
+  ],
+  "lower_bound_round_trip": "salary_shape remains from, not exact, validated on all five strict candidates"
+}
