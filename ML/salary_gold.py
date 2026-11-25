@@ -57,10 +57,14 @@ CHEWBY = KEY + [
     "Тип предприятия", "Тип работ", "Ассортимент", "Способ доставки", "Автомобиль",
 ]
 TEXT = ["title", "description", "Что получают работники"]
+TEXT_COMPONENTS = 32
 
 
-def load_snapshot():
+def load_snapshot(csv_path=None):
     """Use the canonical CSV or reconstruct its exact bytes from verified parts."""
+    if csv_path is not None:
+        data = Path(csv_path).read_bytes()
+        return read_snapshot(data), hashlib.sha256(data).hexdigest()
     directory = ROOT / "Data/dataset"
     manifest = json.loads((directory / "manifest.json").read_text(encoding="utf-8"))
     parts = {entry["path"]: entry["sha256"] for entry in manifest["parts"]}
@@ -73,9 +77,13 @@ def load_snapshot():
     data = location.read_bytes() if location.is_file() else b""
     if hashlib.sha256(data).hexdigest() != manifest["sha256"]:
         data = assemble(manifest, read_part)
+    return read_snapshot(data), manifest["sha256"]
+
+
+def read_snapshot(data):
     raw = pd.read_csv(io.BytesIO(data), dtype=str, keep_default_na=False)
     assert not raw.duplicated(["source", "id"]).any()
-    return raw, manifest["sha256"]
+    return raw
 
 
 def make_groups(raw):
@@ -255,10 +263,15 @@ def grouped_anchors(train):
     return result
 
 
-def fit(train, val, *, method, columns, text=False, relative=False, iterations=250):
+def catboost_params(iterations, depth):
+    return {**ssr.CATBOOST_PARAMS, "iterations": iterations, "depth": depth, "od_wait": 40,
+            "verbose": False, "thread_count": 5}
+
+
+def fit(train, val, *, method, columns, text=False, relative=False, iterations=250, depth=6):
     bundle = {"method": method, "columns": columns, "text_encoder": None, "scale": None, "shifts": None}
     if text:
-        bundle["text_encoder"] = ssr.fit_text_encoder(texts(train), 32)
+        bundle["text_encoder"] = ssr.fit_text_encoder(texts(train), TEXT_COMPONENTS)
     if relative:
         bundle["scale"] = reference_table(train, quantiles=[.5])
         denominator = grouped_anchors(train)
@@ -278,8 +291,7 @@ def fit(train, val, *, method, columns, text=False, relative=False, iterations=2
             pipeline.fit(x, label)
             bundle["models"].append(pipeline)
     else:
-        model = CatBoostRegressor(**{**ssr.CATBOOST_PARAMS, "iterations": iterations, "depth": 6, "od_wait": 40,
-                                    "verbose": False, "thread_count": 5})
+        model = CatBoostRegressor(**catboost_params(iterations, depth))
         good = val_target.notna()
         validation = dict(eval_set=(v.loc[good], np.log1p(val_target.loc[good])), use_best_model=True) if good.sum() >= 5 else {}
         model.fit(x, np.log1p(label.to_numpy(dtype=float)), cat_features=columns, **validation)

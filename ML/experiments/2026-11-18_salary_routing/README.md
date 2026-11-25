@@ -94,7 +94,7 @@ CatBoost режима повышает ошибку на 16,7%, эффект с�
 
 ## Как применить и обновить соответствия
 
-[Ноутбук](../../05_salary_routing.ipynb) загружает [готовые пакеты](../../models/2026-11-18_salary_routing/README.md)
+[Ноутбук исследования](https://github.com/tooscl/salary-navigator/blob/2d9a65561f61f892dc6e5b05ece290d71bb95671/ML/05_salary_routing.ipynb) загружает [готовые пакеты](../../models/2026-11-18_salary_routing/README.md)
 и применяет [карту правил](routing_policy.json) без обучения. Для демонстрации
 взяты [11 архивных вакансий](example_vacancies.csv) из отложенной части
 разбиения, для них сохранены [решения и прогнозы](example_routes.csv).
