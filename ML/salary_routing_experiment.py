@@ -4,11 +4,15 @@ from __future__ import annotations
 import hashlib
 from importlib.metadata import version
 import json
+import os
 from pathlib import Path
 import platform
 import re
+from shutil import copyfile
 import subprocess
 from tempfile import TemporaryDirectory
+from time import perf_counter, process_time
+from urllib.parse import urlsplit
 
 import joblib
 import numpy as np
@@ -27,8 +31,11 @@ ARCHIVED_WEIGHTS = r.MODEL_DIR / "global.joblib"
 ARCHIVED_WEIGHTS_SHA256 = "242d36a8fc63f855ba130156594eb1690c2c8320004375de155c4951eb08c71b"
 KEY = ["source", "id"]
 RULES = ("native_exact_or_range_v1", "native_exact_only_v1")
+JOURNAL_VERSION = 3
+JOURNAL_SOURCE = "ML/salary_routing_experiment.py"
+V2_JOURNAL_SHA256 = "bc06a34d4313683aa8b4ade333a1f1bbdcafb65e4655417cbc8bbe06770768e6"
 SOURCES = [
-    "ML/salary_routing_experiment.py", "ML/run_salary_routing.py",
+    JOURNAL_SOURCE, "ML/run_salary_routing.py",
     "ML/salary_routing.py", "ML/salary_gold.py", "ML/experiments/expiriemnts.py",
     "ML/korchagin_salary_research.ipynb", "Analytics/analyze_priority_salary_formats.py",
     "Analytics/build_priority_segment_passports.py", "Analytics/segment_normality.py",
@@ -56,6 +63,39 @@ def code_version():
     except (OSError, subprocess.CalledProcessError):
         head = commit = None
     return {"notebook": NOTEBOOK, "commit": commit, "checkout_head": head, "files_sha256_lf": files}
+
+
+def compatible_replay_code(record, current):
+    prior = record["code"]["files_sha256_lf"]
+    if record["version"] == JOURNAL_VERSION:
+        return prior == current
+    # Version 3 adds a passport for execution. The frozen version 2 uses the same model and evaluation code.
+    if record["version"] == 2 and prior.get(JOURNAL_SOURCE) == V2_JOURNAL_SHA256:
+        return prior == {**current, JOURNAL_SOURCE: V2_JOURNAL_SHA256}
+    return False
+
+
+def machine_details():
+    system = platform.system()
+    cpu = platform.processor()
+    if system == "Windows":
+        import winreg
+
+        try:
+            with winreg.OpenKey(winreg.HKEY_LOCAL_MACHINE, r"HARDWARE\DESCRIPTION\System\CentralProcessor\0") as key:
+                cpu = winreg.QueryValueEx(key, "ProcessorNameString")[0].strip()
+        except OSError:
+            pass
+    elif system == "Linux":
+        try:
+            fields = Path("/proc/cpuinfo").read_text(encoding="utf-8").splitlines()
+            cpu = next((line.partition(":")[2].strip() for line in fields if line.partition(":")[0].strip() == "model name"), cpu)
+        except OSError:
+            pass
+    return {
+        "os": system, "os_release": platform.release(), "os_version": platform.version(),
+        "architecture": platform.machine(), "cpu_model": cpu or None, "logical_cpus": os.cpu_count(),
+    }
 
 
 def hypothesis(config, change):
@@ -185,6 +225,7 @@ def inventory(bundles, train, val, weights):
             "training_groups": train.loc[r.match(train, bundle["filters"]), "group"].nunique(),
             "validation_rows": valid, "calibration_rows": valid if is_cat and bundle["model"]["shifts"] is not None else 0,
             "hyperparameters": model.get_all_params() if is_cat else None,
+            "fit_parameters": model.get_params() if is_cat else None,
             "iteration_limit": model.get_params()["iterations"] if is_cat else None,
             "tree_count": model.tree_count_ if is_cat else None,
             "description_derived_columns": text_columns,
@@ -232,6 +273,7 @@ def run_case(name, config, folds, policy, weight_stage, weight_destination, *, r
         if config["training_target_rule"] != RULES[0]:
             training_ids[str(fold)] = {"train": train.id.tolist(), "validation": val.id.tolist()}
         weights = {}
+        training_time = None
         if archived:
             weights["global"] = {"format": "joblib", "storage": "repository",
                                  "path": ARCHIVED_WEIGHTS.relative_to(ROOT).as_posix(), "sha256": ARCHIVED_WEIGHTS_SHA256}
@@ -241,8 +283,10 @@ def run_case(name, config, folds, policy, weight_stage, weight_destination, *, r
         if archived or replay is not None:
             bundles = {model: load_weights(ref, weights_root) for model, ref in weights.items()}
         else:
+            start_wall, start_cpu = perf_counter(), process_time()
             bundles, _ = routing.fit_routes(train, val, fold, (scheme,), global_iterations=config["global_iterations"],
                                             depth=config["depth"], text=config["text_features"])
+            training_time = {"process_cpu_seconds": process_time() - start_cpu, "wall_seconds": perf_counter() - start_wall}
             if weight_stage is not None:
                 for model, bundle in bundles.items():
                     path = weight_stage / f"{name}_fold_{fold}_{model}.joblib"
@@ -256,7 +300,7 @@ def run_case(name, config, folds, policy, weight_stage, weight_destination, *, r
         rows = test.loc[eligible, [*KEY, "group", "priority", "unit", "tax", "y", "scale"]].copy()
         rows[r.QUANTILES] = values[eligible]
         predictions.append(rows.assign(fold=fold))
-        fit.append({"fold": fold, "models": inventory(bundles, train, val, weights)})
+        fit.append({"fold": fold, "training_time": training_time, "models": inventory(bundles, train, val, weights)})
         print(f"{name}, fold {fold}: {len(train)} train, {len(val)} validation, {len(rows)} test", flush=True)
 
     rows = pd.concat(predictions).sort_values(KEY).reset_index(drop=True)
@@ -275,8 +319,10 @@ def run_case(name, config, folds, policy, weight_stage, weight_destination, *, r
             keys = list(result["quality"])
             np.testing.assert_allclose([result["quality"][key] for key in keys],
                                        [prior["quality"][key] for key in keys], rtol=1e-9, atol=1e-10)
+    times = [fold["training_time"] for fold in fit if fold["training_time"] is not None]
     result = {
         "config": config, "sample": sample, "routing": route, "fit": fit, "metrics": measured,
+        "training_time": {metric: sum(fold[metric] for fold in times) for metric in times[0]} if times else None,
         "features": {
             "catboost_columns": r.FEATURES if scheme != "empirical" else [],
             "description_derived_columns": text_columns, "description_used_for_duplicate_grouping": True,
@@ -292,22 +338,27 @@ def run_case(name, config, folds, policy, weight_stage, weight_destination, *, r
     return result, rows
 
 
-def run_experiment(name, baseline, *, change=None, replay_path=None, dataset=None, save_weights=True,
+def run_experiment(name, baseline, *, change=None, replay_path=None, dataset=None, save_weights=True, table_row_url=None,
                    output_root=OUTPUT, weights_root=WEIGHTS_ROOT):
     """Execute the notebook cases on one pinned snapshot and publish one JSON record."""
     if not re.fullmatch(r"[A-Za-z0-9][A-Za-z0-9_-]*", name):
         raise ValueError("Use an experiment ID consisting of letters, digits, dashes and underscores.")
+    if table_row_url is not None:
+        url = urlsplit(table_row_url)
+        if url.scheme not in {"http", "https"} or not url.hostname:
+            raise ValueError("Use the full URL of the experiment's row in the shared table.")
     output_root = Path(output_root).resolve()
     weights_root = Path(weights_root).resolve()
     destination, weights_destination = output_root / name, weights_root / name
     if destination.exists() or weights_destination.exists():
         raise FileExistsError(f"Choose a new experiment ID: {name}")
     code = code_version()
+    machine = machine_details()
     libraries = {p: version(p) for p in ("catboost", "joblib", "numpy", "pandas", "scikit-learn", "statsmodels")}
     replay = None
     if replay_path is not None:
         replay = json.loads(Path(replay_path).read_text(encoding="utf-8"))
-        if (replay["version"] != 2 or code["files_sha256_lf"] != replay["code"]["files_sha256_lf"]
+        if (not compatible_replay_code(replay, code["files_sha256_lf"])
                 or libraries != {key: replay["libraries"][key] for key in libraries}):
             raise ValueError("Use the code and library versions recorded in the source JSON to restore weights.")
         baseline = replay["runs"]["baseline"]["config"]
@@ -352,8 +403,16 @@ def run_experiment(name, baseline, *, change=None, replay_path=None, dataset=Non
         comparison = paired(predictions["hypothesis"], predictions["baseline"], runs["hypothesis"]["metrics"],
                             runs["baseline"]["metrics"]) if delta is not None else None
         report = {
-            "version": 2, "experiment_id": name, "change": delta, "code": code,
+            "version": JOURNAL_VERSION, "experiment_id": name, "change": delta, "code": code,
             "libraries": {**libraries, "python": platform.python_version()},
+            "machine": machine,
+            "training_time_scope": "Feature encoding, model fitting and calibration, measured around fit_routes. "
+                                   "Excludes loading, snapshot preparation, evaluation and saving packages.",
+            "experiment_table": {"experiment_id": name, "row_url": table_row_url},
+            "reference_baseline": {
+                "experiment_id": r.RUN, "fold": 0,
+                "package": runs["archived_global"]["fit"][0]["models"][0]["weights"],
+            },
             "replayed_from": {"experiment_id": replay["experiment_id"],
                               "sha256": file_ref(Path(replay_path), relative_to=Path(replay_path).parent)["sha256"]}
             if replay else None,
@@ -377,11 +436,13 @@ def run_experiment(name, baseline, *, change=None, replay_path=None, dataset=Non
             "runs": runs, "comparison": comparison,
         }
         folder = Path(journal)
-        (folder / "experiment.json").write_text(
+        journal_path = folder / "experiment.json"
+        journal_path.write_text(
             json.dumps(report, ensure_ascii=False, indent=2, allow_nan=False, default=lambda value: value.item()) + "\n",
             encoding="utf-8",
         )
         if write_weights:
+            copyfile(journal_path, Path(staging) / journal_path.name)
             Path(staging).rename(weights_destination)
         folder.rename(destination)
     return destination / "experiment.json"
