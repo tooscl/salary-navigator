@@ -14,7 +14,7 @@
 ## Применение
 
 Установите [зависимости предыдущего эксперимента](../2026-11-18_priority_salary_gold/requirements.txt).
-Запустите [исследовательский ноутбук](../../05_salary_routing.ipynb) или используйте функцию:
+Запустите [исследовательский ноутбук](https://github.com/tooscl/salary-navigator/blob/2d9a65561f61f892dc6e5b05ece290d71bb95671/ML/05_salary_routing.ipynb) или используйте функцию:
 
 ~~~python
 import json

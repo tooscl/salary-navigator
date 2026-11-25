@@ -24,7 +24,7 @@ import salary_routing as r
 ROOT = r.ROOT
 OUTPUT = ROOT / "ML/experiments"
 WEIGHTS_ROOT = ROOT / "ML/.cache/salary_routing_weights"
-NOTEBOOK = "ML/05_salary_routing.ipynb"
+NOTEBOOK = "ML/salary_experiment_pipeline.ipynb"
 SPLIT = r.EXPERIMENT_DIR / "split_ids.csv"
 POLICY = r.EXPERIMENT_DIR / "routing_policy.json"
 ARCHIVED_WEIGHTS = r.MODEL_DIR / "global.joblib"
@@ -33,7 +33,10 @@ KEY = ["source", "id"]
 RULES = ("native_exact_or_range_v1", "native_exact_only_v1")
 JOURNAL_VERSION = 3
 JOURNAL_SOURCE = "ML/salary_routing_experiment.py"
-V2_JOURNAL_SHA256 = "bc06a34d4313683aa8b4ade333a1f1bbdcafb65e4655417cbc8bbe06770768e6"
+PREVIOUS_JOURNAL_SHA256 = {
+    2: "bc06a34d4313683aa8b4ade333a1f1bbdcafb65e4655417cbc8bbe06770768e6",
+    3: "91489737487c36a39f9d0fb10a25a55ad4003894aa7d1a276e2ffadc8aa869c8",
+}
 SOURCES = [
     JOURNAL_SOURCE, "ML/run_salary_routing.py",
     "ML/salary_routing.py", "ML/salary_gold.py", "ML/experiments/expiriemnts.py",
@@ -67,12 +70,11 @@ def code_version():
 
 def compatible_replay_code(record, current):
     prior = record["code"]["files_sha256_lf"]
-    if record["version"] == JOURNAL_VERSION:
-        return prior == current
-    # Version 3 adds a passport for execution. The frozen version 2 uses the same model and evaluation code.
-    if record["version"] == 2 and prior.get(JOURNAL_SOURCE) == V2_JOURNAL_SHA256:
-        return prior == {**current, JOURNAL_SOURCE: V2_JOURNAL_SHA256}
-    return False
+    if record["version"] == JOURNAL_VERSION and prior == current:
+        return True
+    # These journal revisions used the same model and evaluation code.
+    previous = PREVIOUS_JOURNAL_SHA256.get(record["version"])
+    return previous is not None and prior == {**current, JOURNAL_SOURCE: previous}
 
 
 def machine_details():
