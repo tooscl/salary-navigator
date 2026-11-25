@@ -107,8 +107,8 @@ def catalog_item(folder, name, bundle, evidence):
     }
 
 
-def make_model(train, validation, filters, iteration_limit):
-    bundle = gold.fit(train, validation, method="cat", columns=FEATURES, iterations=iteration_limit)
+def make_model(train, validation, filters, iteration_limit, *, depth=6, text=False):
+    bundle = gold.fit(train, validation, method="cat", columns=FEATURES, iterations=iteration_limit, depth=depth, text=text)
     return {
         "kind": "catboost", "filters": filters, "model": bundle,
         "contexts": list(support(train, CONTEXT, *MIN_CONTEXT).index),
@@ -327,7 +327,7 @@ def specialty_name(key):
     return f"segment_{digest}"
 
 
-def specialists(train, validation, fold):
+def specialists(train, validation, fold, *, depth=6, text=False):
     """Train every sufficiently supported exact segment without consulting the test."""
     trained, records = {}, []
     candidates = train[(train.profession_resolved.ne("")) & (train.city_resolved.ne(""))]
@@ -340,5 +340,5 @@ def specialists(train, validation, fold):
         records.append(dict(fold=fold, approach=name, **filters, train=len(t), train_groups=row.groups,
                             validation=len(v), trained=ready))
         if ready:
-            trained[name] = make_model(t, v, filters, iteration_limit=100)
+            trained[name] = make_model(t, v, filters, iteration_limit=100, depth=depth, text=text)
     return trained, records

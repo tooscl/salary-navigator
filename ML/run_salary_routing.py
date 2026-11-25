@@ -94,17 +94,26 @@ def comparisons(pred):
             if wide.empty:
                 continue
             diff = wide[scheme] - wide["global"]
-            groups = diff.groupby(level="group").agg(["sum", "size"])
-            indices = np.random.default_rng(171).integers(len(groups), size=(1500, len(groups)))
-            boot = groups["sum"].to_numpy()[indices].sum(axis=1) / groups["size"].to_numpy()[indices].sum(axis=1)
-            lo, hi = np.quantile(boot, [.025, .975]) if len(groups) >= 5 else (np.nan, np.nan)
-            records.append(dict(scheme=scheme, reference="global", scope=scope, n=len(diff), groups=len(groups),
+            n_groups = diff.index.get_level_values("group").nunique()
+            interval = paired_group_interval(diff, diff.index.get_level_values("group"))
+            lo, hi = interval if interval is not None else (np.nan, np.nan)
+            records.append(dict(scheme=scheme, reference="global", scope=scope, n=len(diff), groups=n_groups,
                                 scaled_delta=diff.mean(), ci_low=lo, ci_high=hi,
                                 relative_change_pct=100 * diff.mean() / wide["global"].mean()))
     return pd.DataFrame(records)
 
 
-def run_fold(d, fold, policy):
+def paired_group_interval(delta, groups):
+    """Bootstrap the mean difference while resampling whole employer groups."""
+    grouped = pd.Series(delta.to_numpy(), index=groups).groupby(level=0).agg(["sum", "size"])
+    if len(grouped) < 5:
+        return None
+    indices = np.random.default_rng(171).integers(len(grouped), size=(1500, len(grouped)))
+    boot = grouped["sum"].to_numpy()[indices].sum(axis=1) / grouped["size"].to_numpy()[indices].sum(axis=1)
+    return np.quantile(boot, [.025, .975]).tolist()
+
+
+def split_fold(d, fold):
     train, val, test = r.gold.split(d, fold)
     assert not set(train.group) & set(val.group)
     assert not set(train.group) & set(test.group)
@@ -113,18 +122,31 @@ def run_fold(d, fold, policy):
     test = test.copy()
     scales = train.groupby(["unit", "tax"]).y.median()
     test["scale"] = pd.MultiIndex.from_frame(test[["unit", "tax"]]).map(scales)
-    bundles = {"global": r.make_model(train, val, {}, 240), "empirical": r.make_empirical(train)}
-    for mode in r.MODES:
-        t, v = (df[df["mode"].eq(mode)] for df in (train, val))
-        bundles[f"mode_{mode}"] = r.make_model(t, v, {"mode": mode}, 200)
-    local, support = r.specialists(train, val, fold)
-    bundles.update(local)
-    print("fold", fold, "train/validation/test labels", len(train), len(val), test.eligible.sum(),
-          "specialists", len(local), flush=True)
+    return train, val, test
+
+
+def fit_routes(train, val, fold, schemes, *, global_iterations=240, depth=6, text=False):
+    bundles, support = {}, []
+    if set(schemes) & {"global", "hybrid", "manual"}:
+        bundles["global"] = r.make_model(train, val, {}, global_iterations, depth=depth, text=text)
+    if set(schemes) & {"empirical", "manual"}:
+        bundles["empirical"] = r.make_empirical(train)
+    if "by_mode" in schemes:
+        for mode in r.MODES:
+            t, v = (df[df["mode"].eq(mode)] for df in (train, val))
+            bundles[f"mode_{mode}"] = r.make_model(t, v, {"mode": mode}, 200, depth=depth, text=text)
+    if set(schemes) & {"by_segment", "hybrid"}:
+        local, support = r.specialists(train, val, fold, depth=depth, text=text)
+        bundles.update(local)
+    return bundles, support
+
+
+def predict_routes(test, bundles, policy, schemes):
     preds = {name: r.predict_bundle(test, model) for name, model in bundles.items()}
     by_segment = pd.Series("abstain", index=test.index)
-    for name, model in local.items():
-        by_segment.loc[r.match(test, model["filters"])] = name
+    for name, model in bundles.items():
+        if name.startswith("segment_"):
+            by_segment.loc[r.match(test, model["filters"])] = name
     _, requested = r.planned_rules(test, policy)
     choices = {
         "global": (pd.Series("global", index=test.index), []),
@@ -134,11 +156,20 @@ def run_fold(d, fold, policy):
         "empirical": (pd.Series("empirical", index=test.index), []),
         "manual": (requested, policy["fallback"]),
     }
+    for scheme in schemes:
+        preference, fallback = choices[scheme]
+        yield scheme, r.routable(test, preds, preference, fallback)
+
+
+def run_fold(d, fold, policy):
+    train, val, test = split_fold(d, fold)
+    bundles, support = fit_routes(train, val, fold, SCHEMES)
+    print("fold", fold, "train/validation/test labels", len(train), len(val), test.eligible.sum(),
+          "specialists", sum(name.startswith("segment_") for name in bundles), flush=True)
     labelled_predictions, coverage, unresolved = [], [], []
     rule_fields = sorted((r.RULE_FIELDS - set(r.CORE_COLUMNS)) & set(test.columns))
     fields = r.CORE_COLUMNS + ["mode_evidence", "mode_conflict", "group", "priority", "y", "shape", "date", "scale", *rule_fields]
-    for scheme, (preference, fallback) in choices.items():
-        values, names, reason = r.routable(test, preds, preference, fallback)
+    for scheme, (values, names, reason) in predict_routes(test, bundles, policy, SCHEMES):
         coverage.extend(full_coverage(test, scheme, names))
         eligible = test.eligible.to_numpy(dtype=bool)
         part = test.loc[eligible, fields].copy()
